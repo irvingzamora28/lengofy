@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Game;
+use App\Models\GamePlayer;
+use App\Models\GermanWord;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+class GameService
+{
+    public function createGame(?User $user, string $language = 'en'): Game
+    {
+        return DB::transaction(function () use ($user, $language) {
+            $game = Game::create([
+                'status' => 'waiting',
+                'max_players' => 8,
+                'total_rounds' => 10,
+                'language' => $language,
+            ]);
+
+            $this->addPlayer($game, $user);
+
+            return $game;
+        });
+    }
+
+    public function joinGame(Game $game, ?User $user): void
+    {
+        if ($game->players()->count() >= $game->max_players) {
+            throw new \Exception('Game is full');
+        }
+
+        $this->addPlayer($game, $user);
+    }
+
+    private function addPlayer(Game $game, ?User $user): void
+    {
+        $game->players()->create([
+            'user_id' => $user?->id,
+            'guest_id' => $user ? null : Str::uuid(),
+            'player_name' => $user?->name ?? 'Guest ' . Str::random(6),
+            'score' => 0,
+            'is_ready' => false,
+        ]);
+    }
+
+    public function markPlayerReady(Game $game, int $userId): void
+    {
+        $player = $game->players()->where('user_id', $userId)->firstOrFail();
+        $player->update(['is_ready' => true]);
+
+        if ($game->players()->count() >= 2 && $game->players()->where('is_ready', true)->count() === $game->players()->count()) {
+            $this->startGame($game);
+        }
+    }
+
+    private function startGame(Game $game): void
+    {
+        $game->update([
+            'status' => 'in_progress',
+            'current_round' => 1,
+            'current_word' => $this->getRandomWord($game->language),
+        ]);
+
+        broadcast(new GameStarted($game));
+    }
+
+    public function submitAnswer(Game $game, int $userId, string $answer): array
+    {
+        $player = $game->players()->where('user_id', $userId)->firstOrFail();
+        $currentWord = $game->current_word;
+
+        $isCorrect = $currentWord['gender'] === $answer;
+        $points = $isCorrect ? 10 : -5;
+
+        $player->increment('score', $points);
+
+        $answeredCount = $game->players()->where('answered_round', $game->current_round)->count();
+        if ($answeredCount === $game->players()->count()) {
+            $this->nextRound($game);
+        }
+
+        return [
+            'correct' => $isCorrect,
+            'points' => $points,
+            'newScore' => $player->score,
+            'translation' => $currentWord['translation'], // Show translation after answering
+        ];
+    }
+
+    private function nextRound(Game $game): void
+    {
+        if ($game->current_round >= $game->total_rounds) {
+            $this->endGame($game);
+            return;
+        }
+
+        $game->increment('current_round');
+        $game->update(['current_word' => $this->getRandomWord($game->language)]);
+
+        broadcast(new NextRound($game));
+    }
+
+    private function endGame(Game $game): void
+    {
+        $game->update(['status' => 'completed']);
+        
+        broadcast(new GameEnded($game));
+    }
+
+    private function getRandomWord(string $language): array
+    {
+        $word = GermanWord::inRandomOrder()->first();
+        return [
+            'id' => $word->id,
+            'word' => $word->word,
+            'gender' => $word->gender,
+            'translation' => $word->getTranslation($language),
+        ];
+    }
+}

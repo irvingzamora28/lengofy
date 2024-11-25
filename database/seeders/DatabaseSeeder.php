@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\GermanWordSeeder;
+use Database\Seeders\LanguageSeeder;
+use Database\Seeders\LanguagePairSeeder;
+use Database\Seeders\NounSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +22,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $this->call([
+            LanguageSeeder::class,
+            LanguagePairSeeder::class,
+            NounSeeder::class,
         ]);
     }
 }

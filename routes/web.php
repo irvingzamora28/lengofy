@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GameController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,5 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Game routes
+Route::get('/games', [GameController::class, 'lobby'])->name('games.lobby');
+Route::post('/games', [GameController::class, 'create'])->name('games.create');
+Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
+Route::post('/games/{game}/join', [GameController::class, 'join'])->name('games.join');
+Route::post('/games/{game}/ready', [GameController::class, 'ready'])->name('games.ready');
+Route::post('/games/{game}/submit', [GameController::class, 'submit'])->name('games.submit');
 
 require __DIR__.'/auth.php';
