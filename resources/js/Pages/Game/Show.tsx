@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Echo from 'laravel-echo';
@@ -80,25 +80,15 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
     }, [game.id]);
 
     const markReady = () => {
-        fetch(`/games/${game.id}/ready`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
-            },
-        }).then(() => {
-            setIsReady(true);
+        router.post(`/games/${game.id}/ready`, {}, {
+            preserveScroll: true,
+            onSuccess: () => setIsReady(true),
         });
     };
 
     const submitAnswer = (gender: string) => {
-        fetch(`/games/${game.id}/submit`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
-            },
-            body: JSON.stringify({ gender }),
+        router.post(`/games/${game.id}/submit`, { gender }, {
+            preserveScroll: true,
         });
     };
 
