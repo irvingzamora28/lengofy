@@ -11,6 +11,7 @@ use App\Models\Language;
 use App\Models\LanguagePair;
 use App\Services\GameService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -81,12 +82,20 @@ class GameController extends Controller
 
     public function show(Game $game): Response
     {
-        $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
-        
+        $game->load(['players' => function($query) {
+            $query->select('id', 'game_id', 'user_id', 'player_name', 'score', 'is_ready');
+        }, 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+
         return Inertia::render('Game/Show', [
             'game' => [
                 'id' => $game->id,
-                'players' => $game->players,
+                'players' => $game->players->map(fn($player) => [
+                    'id' => $player->id,
+                    'user_id' => $player->user_id,
+                    'player_name' => $player->player_name,
+                    'score' => $player->score,
+                    'is_ready' => $player->is_ready,
+                ]),
                 'max_players' => $game->max_players,
                 'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
                 'current_word' => $game->current_word,
@@ -103,6 +112,12 @@ class GameController extends Controller
         if ($game->players->count() >= $game->max_players) {
             return back()->with('error', 'Game is full');
         }
+        // log player info
+        Log::info('Player joined game', [
+            'game_id' => $game->id,
+            'user_id' => $request->user()->id,
+            'player_name' => $request->user()->name,
+        ]);
 
         $player = GamePlayer::create([
             'game_id' => $game->id,
@@ -121,7 +136,7 @@ class GameController extends Controller
         $player = $game->players()->where('user_id', auth()->id())->first();
         if ($player) {
             $player->update(['is_ready' => true]);
-            broadcast(new PlayerReady($game, $player->id));
+            broadcast(new PlayerReady($game, $player));
         }
 
         // If all players are ready, start the game

@@ -19,18 +19,35 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         // Handle presence events
         channel.here((users: any) => {
             console.log('Users currently in the channel:', users);
+            // Map user IDs to players
+            users.forEach((user: any) => {
+                const player = game.players.find(p => p.user_id === user.id);
+                if (player) {
+                    console.log('Found player for user:', player);
+                }
+            });
         });
 
         channel.joining((user: any) => {
-            console.log('User joined:', user);
+            console.log('User joined presence:', user);
+            // Find the corresponding game player
+            const player = game.players.find(p => p.user_id === user.id);
+            if (player) {
+                console.log('Found corresponding player:', player);
+            }
         });
 
         channel.leaving((user: any) => {
-            console.log('User left:', user);
+            console.log('User left presence:', user);
+            // Find the corresponding game player
+            const player = game.players.find(p => p.user_id === user.id);
+            if (player) {
+                console.log('Player left game:', player);
+            }
         });
 
         // Listen for game events
-        channel.listen('.player-joined', (e: { player: Player; game_id: number }) => {
+        channel.listen('player-joined', (e: { player: Player; game_id: number }) => {
             console.log('Player joined event received:', e);
             if (e.game_id === game.id) {
                 setGame(prevGame => ({
@@ -40,7 +57,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             }
         });
 
-        channel.listen('.player-ready', (e: { player_id: number; game_id: number }) => {
+        channel.listen('player-ready', (e: { player_id: number; game_id: number }) => {
             console.log('Player ready event received:', e);
             if (e.game_id === game.id) {
                 setGame(prevGame => ({
@@ -54,7 +71,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             }
         });
 
-        channel.listen('.game-started', (e: { game: Game }) => {
+        channel.listen('game-started', (e: { game: Game }) => {
             console.log('Game started:', e);
             setGame(e.game);
         });

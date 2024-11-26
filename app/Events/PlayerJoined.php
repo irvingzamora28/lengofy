@@ -22,7 +22,8 @@ class PlayerJoined implements ShouldBroadcast
     ) {
         Log::info('PlayerJoined event constructed', [
             'game_id' => $game->id,
-            'player_id' => $player->id
+            'player_id' => $player->id,
+            'user_id' => $player->user_id
         ]);
     }
 
@@ -44,9 +45,21 @@ class PlayerJoined implements ShouldBroadcast
 
     public function broadcastWith(): array
     {
+        Log::info('PlayerJoined broadcasting data', [
+            'player' => [
+                'id' => $this->player->id,
+                'user_id' => $this->player->user_id,
+                'player_name' => $this->player->player_name,
+                'score' => $this->player->score,
+                'is_ready' => $this->player->is_ready,
+            ],
+            'game_id' => $this->game->id
+        ]);
+
         return [
             'player' => [
                 'id' => $this->player->id,
+                'user_id' => $this->player->user_id,
                 'player_name' => $this->player->player_name,
                 'score' => $this->player->score,
                 'is_ready' => $this->player->is_ready,
