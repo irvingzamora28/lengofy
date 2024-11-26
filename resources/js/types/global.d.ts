@@ -1,7 +1,6 @@
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
 import { AxiosInstance } from 'axios';
 import { route as ziggyRoute } from 'ziggy-js';
-import { PageProps as AppPageProps } from './';
+import { InertiaPageProps } from './';
 
 declare global {
     interface Window {
@@ -13,5 +12,7 @@ declare global {
 }
 
 declare module '@inertiajs/core' {
-    interface PageProps extends InertiaPageProps, AppPageProps {}
+    interface Page<T = Record<string, unknown>> {
+        props: InertiaPageProps<T>;
+    }
 }

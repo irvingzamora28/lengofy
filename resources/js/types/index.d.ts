@@ -7,11 +7,29 @@ export interface User {
     email_verified_at?: string;
 }
 
-export type PageProps<
-    T extends Record<string, unknown> = Record<string, unknown>,
-> = T & {
+export interface PageProps<T extends Record<string, unknown> = Record<string, unknown>> {
     auth: {
         user: User;
     };
     ziggy: Config & { location: string };
-};
+}
+
+export interface InertiaPage<T = Record<string, unknown>> {
+    props: T & {
+        auth: {
+            user: User;
+        };
+        ziggy: Config & { location: string };
+    };
+}
+
+declare module '@inertiajs/core' {
+    interface Page<T = Record<string, unknown>> {
+        props: T & {
+            auth: {
+                user: User;
+            };
+            ziggy: Config & { location: string };
+        };
+    }
+}

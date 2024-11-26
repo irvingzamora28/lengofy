@@ -1,4 +1,4 @@
-import { Game } from '@/types';
+import { Game } from './types';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';

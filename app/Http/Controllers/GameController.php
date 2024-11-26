@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GameStarted;
+use App\Events\PlayerJoined;
+use App\Events\PlayerReady;
 use App\Models\Game;
 use App\Models\GamePlayer;
 use App\Models\Language;
@@ -64,12 +67,14 @@ class GameController extends Controller
             'total_rounds' => 10,
         ]);
 
-        GamePlayer::create([
+        $player = GamePlayer::create([
             'game_id' => $game->id,
             'user_id' => $request->user()->id,
             'player_name' => $request->user()->name,
             'score' => 0,
         ]);
+
+        broadcast(new PlayerJoined($game, $player));
 
         return redirect()->route('games.show', $game);
     }
@@ -99,12 +104,14 @@ class GameController extends Controller
             return back()->with('error', 'Game is full');
         }
 
-        GamePlayer::create([
+        $player = GamePlayer::create([
             'game_id' => $game->id,
             'user_id' => $request->user()->id,
             'player_name' => $request->user()->name,
             'score' => 0,
         ]);
+
+        broadcast(new PlayerJoined($game, $player));
 
         return redirect()->route('games.show', $game);
     }
@@ -114,12 +121,13 @@ class GameController extends Controller
         $player = $game->players()->where('user_id', auth()->id())->first();
         if ($player) {
             $player->update(['is_ready' => true]);
+            broadcast(new PlayerReady($game, $player->id));
         }
 
         // If all players are ready, start the game
         if ($game->players->count() > 1 && $game->players->every(fn($p) => $p->is_ready)) {
             $game->update(['status' => 'in_progress']);
-            // TODO: Select first word
+            broadcast(new GameStarted($game));
         }
 
         return back();

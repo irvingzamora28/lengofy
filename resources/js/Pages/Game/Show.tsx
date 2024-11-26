@@ -3,24 +3,7 @@ import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
-
-interface Player {
-    id: number;
-    player_name: string;
-    score: number;
-    is_ready: boolean;
-}
-
-interface Game {
-    id: number;
-    players: Player[];
-    max_players: number;
-    language_name: string;
-    current_word: any;
-    status: string;
-    current_round: number;
-    total_rounds: number;
-}
+import { Game, Player } from './types';
 
 interface Props {
     game: Game;
@@ -45,32 +28,48 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         });
 
         // Subscribe to the game channel
-        const channel = echo.private(`game.${game.id}`);
+        const channel = echo.join(`game.${game.id}`);
 
-        // Listen for player updates
-        channel.listen('PlayerJoined', (e: { player: Player }) => {
-            setGame(prevGame => ({
-                ...prevGame,
-                players: [...prevGame.players, e.player]
-            }));
+        // Handle presence events
+        channel.here((users: any) => {
+            console.log('Users currently in the channel:', users);
         });
 
-        channel.listen('PlayerReady', (e: { player_id: number }) => {
-            setGame(prevGame => ({
-                ...prevGame,
-                players: prevGame.players.map(player =>
-                    player.id === e.player_id
-                        ? { ...player, is_ready: true }
-                        : player
-                )
-            }));
+        channel.joining((user: any) => {
+            console.log('User joined:', user);
         });
 
-        channel.listen('GameStarted', (e: { game: Game }) => {
-            setGame(e.game);
+        channel.leaving((user: any) => {
+            console.log('User left:', user);
         });
 
-        channel.listen('RoundEnded', (e: { game: Game }) => {
+        // Listen for game events
+        channel.listen('.player-joined', (e: { player: Player; game_id: number }) => {
+            console.log('Player joined event received:', e);
+            if (e.game_id === game.id) {
+                setGame(prevGame => ({
+                    ...prevGame,
+                    players: [...prevGame.players, e.player]
+                }));
+            }
+        });
+
+        channel.listen('.player-ready', (e: { player_id: number; game_id: number }) => {
+            console.log('Player ready event received:', e);
+            if (e.game_id === game.id) {
+                setGame(prevGame => ({
+                    ...prevGame,
+                    players: prevGame.players.map(player =>
+                        player.id === e.player_id
+                            ? { ...player, is_ready: true }
+                            : player
+                    )
+                }));
+            }
+        });
+
+        channel.listen('.game-started', (e: { game: Game }) => {
+            console.log('Game started:', e);
             setGame(e.game);
         });
 
