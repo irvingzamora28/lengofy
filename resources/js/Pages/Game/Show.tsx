@@ -1,8 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
 import { Game, Player } from './types';
 
 interface Props {
@@ -15,20 +13,8 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
     const [isReady, setIsReady] = useState<boolean>(initialIsReady);
 
     useEffect(() => {
-        // Initialize Laravel Echo
-        const echo = new Echo({
-            broadcaster: 'pusher',
-            key: import.meta.env.VITE_PUSHER_APP_KEY,
-            cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
-            wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-            wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-            wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-            forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-            enabledTransports: ['ws', 'wss'],
-        });
-
         // Subscribe to the game channel
-        const channel = echo.join(`game.${game.id}`);
+        const channel = window.Echo.join(`game.${game.id}`);
 
         // Handle presence events
         channel.here((users: any) => {
@@ -74,7 +60,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         });
 
         return () => {
-            echo.leave(`game.${game.id}`);
+            window.Echo.leave(`game.${game.id}`);
         };
     }, [game.id]);
 
@@ -158,7 +144,9 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="text-center">Game Ended</div>
+                                    <div className="text-center">
+                                        <p>Game Over!</p>
+                                    </div>
                                 )}
                             </div>
                         </div>
