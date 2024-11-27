@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Events\GameEnded;
 use App\Events\GameStarted;
 use App\Events\NextRound;
+use App\Events\PlayerLeft;
 use App\Models\Game;
 use App\Models\Noun;
 use App\Models\User;
@@ -114,6 +115,44 @@ class GameService
         $game->update(['status' => 'completed']);
 
         broadcast(new GameEnded($game));
+    }
+
+    public function leaveGame(Game $game, User $user): void
+    {
+        Log::info('Player leaving game', [
+            'game_id' => $game->id,
+            'user_id' => $user->id
+        ]);
+
+        $player = $game->players()->where('user_id', $user->id)->first();
+        
+        if (!$player) {
+            Log::warning('Player not found in game', [
+                'game_id' => $game->id,
+                'user_id' => $user->id
+            ]);
+            return;
+        }
+
+        // Store player info before deletion for the event
+        $playerInfo = clone $player;
+
+        // Remove the player
+        $player->delete();
+
+        // Broadcast that the player has left
+        broadcast(new PlayerLeft($game, $playerInfo));
+
+        // If this was the last player, end the game
+        if ($game->players()->count() === 0) {
+            $game->update(['status' => 'completed']);
+            broadcast(new GameEnded($game));
+        }
+        // If game was in progress and not enough players, end it
+        else if ($game->status === 'in_progress' && $game->players()->count() < 2) {
+            $game->update(['status' => 'completed']);
+            broadcast(new GameEnded($game));
+        }
     }
 
     private function getRandomWord(string $language_pair_id): array

@@ -1,6 +1,7 @@
 import { Head, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 import { Game, Player } from './types';
 
 interface Props {
@@ -71,9 +72,24 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             }
         });
 
+        channel.listen('.player-left', (e: { game_id: number; player_id: number }) => {
+            console.log('Player left event received:', e);
+            if (e.game_id === game.id) {
+                setGame(prevGame => ({
+                    ...prevGame,
+                    players: prevGame.players.filter(player => player.id !== e.player_id)
+                }));
+            }
+        });
+
         channel.listen('.game-started', (e: { game: Game }) => {
             console.log('Game started:', e);
             setGame(e.game);
+        });
+
+        channel.listen('.game-ended', () => {
+            console.log('Game ended');
+            router.visit('/games');
         });
 
         return () => {
@@ -88,6 +104,10 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         });
     };
 
+    const leaveGame = () => {
+        router.delete(`/games/${game.id}/leave`);
+    };
+
     const submitAnswer = (gender: string) => {
         router.post(`/games/${game.id}/submit`, { gender }, {
             preserveScroll: true,
@@ -99,72 +119,101 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             <Head title={`Game #${game.id}`} />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-semibold">Game #{game.id}</h2>
-                            <div>
-                                <span className="mr-4">Language: {game.language_name}</span>
-                                <span>Round: {game.current_round}/{game.total_rounds}</span>
-                            </div>
-                        </div>
-
-                        {/* Players List */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-4">Players</h3>
-                                <div className="space-y-2">
-                                    {game.players.map((player) => (
-                                        <div
-                                            key={player.id}
-                                            className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded"
-                                        >
-                                            <span>{player.player_name}</span>
-                                            <div>
-                                                <span className="mr-4">Score: {player.score}</span>
-                                                {player.is_ready && (
-                                                    <span className="text-green-500">Ready</span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-semibold">Game #{game.id}</h2>
+                                <div className="flex items-center gap-4">
+                                    {!isReady && game.status === 'waiting' && (
+                                        <PrimaryButton onClick={markReady}>
+                                            Ready
+                                        </PrimaryButton>
+                                    )}
+                                    <SecondaryButton onClick={leaveGame}>
+                                        Leave Game
+                                    </SecondaryButton>
                                 </div>
                             </div>
 
-                            {/* Game Area */}
-                            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
-                                {game.status === 'waiting' ? (
-                                    <div className="text-center">
-                                        <p className="mb-4">
-                                            Waiting for players...
-                                            {game.players.length < game.max_players &&
-                                                ` (${game.players.length}/${game.max_players})`}
-                                        </p>
-                                        {!isReady && (
-                                            <PrimaryButton onClick={markReady}>
-                                                Mark as Ready
-                                            </PrimaryButton>
-                                        )}
+                            {/* Game Info */}
+                            <div className="flex justify-between items-center mb-6 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="flex items-center gap-6">
+                                    <div>
+                                        <span className="text-gray-500 dark:text-gray-400">Language:</span>
+                                        <span className="ml-2 font-medium">{game.language_name}</span>
                                     </div>
-                                ) : game.status === 'in_progress' && game.current_word ? (
-                                    <div className="text-center">
-                                        <h3 className="text-xl mb-4">{game.current_word.word}</h3>
-                                        <div className="flex justify-center gap-4">
-                                            <PrimaryButton onClick={() => submitAnswer('der')}>
-                                                der
-                                            </PrimaryButton>
-                                            <PrimaryButton onClick={() => submitAnswer('die')}>
-                                                die
-                                            </PrimaryButton>
-                                            <PrimaryButton onClick={() => submitAnswer('das')}>
-                                                das
-                                            </PrimaryButton>
+                                    {game.status === 'in_progress' && (
+                                        <div>
+                                            <span className="text-gray-500 dark:text-gray-400">Round:</span>
+                                            <span className="ml-2 font-medium">{game.current_round}/{game.total_rounds}</span>
                                         </div>
+                                    )}
+                                </div>
+                                <div>
+                                    <span className="text-gray-500 dark:text-gray-400">Status:</span>
+                                    <span className={`ml-2 font-medium ${
+                                        game.status === 'waiting' ? 'text-yellow-500' :
+                                        game.status === 'in_progress' ? 'text-green-500' :
+                                        'text-red-500'
+                                    }`}>
+                                        {game.status.charAt(0).toUpperCase() + game.status.slice(1).replace('_', ' ')}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Players List */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                    <h3 className="text-lg font-semibold mb-4">Players</h3>
+                                    <div className="space-y-2">
+                                        {game.players.map((player) => (
+                                            <div
+                                                key={player.id}
+                                                className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded"
+                                            >
+                                                <span>{player.player_name}</span>
+                                                <div>
+                                                    <span className="mr-4">Score: {player.score}</span>
+                                                    {player.is_ready && (
+                                                        <span className="text-green-500">Ready</span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ) : (
-                                    <div className="text-center">
-                                        <p>Game Over!</p>
-                                    </div>
-                                )}
+                                </div>
+
+                                {/* Game Area */}
+                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                    {game.status === 'waiting' ? (
+                                        <div className="text-center">
+                                            <p className="mb-4">
+                                                Waiting for players...
+                                                {game.players.length < game.max_players &&
+                                                    ` (${game.players.length}/${game.max_players})`}
+                                            </p>
+                                        </div>
+                                    ) : game.status === 'in_progress' && game.current_word ? (
+                                        <div className="text-center">
+                                            <h3 className="text-xl mb-4">{game.current_word.word}</h3>
+                                            <div className="flex justify-center gap-4">
+                                                <PrimaryButton onClick={() => submitAnswer('der')}>
+                                                    der
+                                                </PrimaryButton>
+                                                <PrimaryButton onClick={() => submitAnswer('die')}>
+                                                    die
+                                                </PrimaryButton>
+                                                <PrimaryButton onClick={() => submitAnswer('das')}>
+                                                    das
+                                                </PrimaryButton>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="text-center">
+                                            <p>Game Over!</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

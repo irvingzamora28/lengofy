@@ -32,5 +32,6 @@ Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show')
 Route::post('/games/{game}/join', [GameController::class, 'join'])->name('games.join');
 Route::post('/games/{game}/ready', [GameController::class, 'ready'])->name('games.ready');
 Route::post('/games/{game}/submit', [GameController::class, 'submit'])->name('games.submit');
+Route::delete('/games/{game}/leave', [GameController::class, 'leave'])->name('games.leave');
 
 require __DIR__.'/auth.php';

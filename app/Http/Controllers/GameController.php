@@ -72,13 +72,18 @@ class GameController extends Controller
 
     public function show(Game $game): Response
     {
-        $game->load(['players' => function($query) {
+        $game->load(['players' => function ($query) {
             $query->select('id', 'game_id', 'user_id', 'player_name', 'score', 'is_ready');
         }, 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
 
         return Inertia::render('Game/Show', [
             'game' => [
                 'id' => $game->id,
+                'status' => $game->status,
+                'current_round' => $game->current_round,
+                'total_rounds' => $game->total_rounds,
+                'current_word' => $game->current_word,
+                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
                 'players' => $game->players->map(fn($player) => [
                     'id' => $player->id,
                     'user_id' => $player->user_id,
@@ -87,11 +92,6 @@ class GameController extends Controller
                     'is_ready' => $player->is_ready,
                 ]),
                 'max_players' => $game->max_players,
-                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
-                'current_word' => $game->current_word,
-                'status' => $game->status,
-                'current_round' => $game->current_round,
-                'total_rounds' => $game->total_rounds,
             ],
             'isReady' => $game->players->where('user_id', auth()->id())->first()?->is_ready ?? false,
         ]);
@@ -130,6 +130,16 @@ class GameController extends Controller
             return response()->json($result);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
+
+    public function leave(Game $game, Request $request)
+    {
+        try {
+            $this->gameService->leaveGame($game, $request->user());
+            return redirect()->route('games.lobby');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 }
