@@ -72,28 +72,27 @@ class GameController extends Controller
 
     public function show(Game $game): Response
     {
-        $game->load(['players' => function ($query) {
-            $query->select('id', 'game_id', 'user_id', 'player_name', 'score', 'is_ready');
-        }, 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+        $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
 
         return Inertia::render('Game/Show', [
             'game' => [
                 'id' => $game->id,
-                'status' => $game->status,
-                'current_round' => $game->current_round,
-                'total_rounds' => $game->total_rounds,
-                'current_word' => $game->current_word,
-                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
                 'players' => $game->players->map(fn($player) => [
                     'id' => $player->id,
                     'user_id' => $player->user_id,
                     'player_name' => $player->player_name,
-                    'score' => $player->score,
                     'is_ready' => $player->is_ready,
+                    'score' => $player->score,
                 ]),
+                'status' => $game->status,
                 'max_players' => $game->max_players,
+                'current_round' => $game->current_round,
+                'total_rounds' => $game->total_rounds,
+                'current_word' => $game->current_word,
+                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
             ],
             'isReady' => $game->players->where('user_id', auth()->id())->first()?->is_ready ?? false,
+            'answer' => session('answer'),
         ]);
     }
 
@@ -119,18 +118,15 @@ class GameController extends Controller
         }
     }
 
-    public function submitAnswer(Game $game, Request $request)
+    public function submit(Request $request, Game $game)
     {
-        try {
-            $validated = $request->validate([
-                'answer' => ['required', 'string'],
-            ]);
+        $request->validate([
+            'answer' => ['required', 'string'],
+        ]);
 
-            $result = $this->gameService->submitAnswer($game, $request->user()->id, $validated['answer']);
-            return response()->json($result);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
-        }
+        $result = $this->gameService->submitAnswer($game, auth()->id(), $request->answer);
+
+        return back()->with('answer', $result);
     }
 
     public function leave(Game $game, Request $request)

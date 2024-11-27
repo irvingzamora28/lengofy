@@ -1,4 +1,4 @@
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
@@ -7,13 +7,21 @@ import { Game, Player } from './types';
 interface Props {
     game: Game;
     isReady: boolean;
+    answer?: any;
 }
 
-export default function Show({ game: initialGame, isReady: initialIsReady }: Props) {
+export default function Show({ game: initialGame, isReady: initialIsReady, answer }: Props) {
     const [game, setGame] = useState<Game>(initialGame);
     const [isReady, setIsReady] = useState<boolean>(initialIsReady);
     const [connectedUsers, setConnectedUsers] = useState<number[]>([]);
-    const [lastAnswer, setLastAnswer] = useState<any>(null);
+    const [lastAnswer, setLastAnswer] = useState<any>(answer);
+
+    // Update lastAnswer when flash data changes
+    useEffect(() => {
+        if (answer) {
+            setLastAnswer(answer);
+        }
+    }, [answer]);
 
     useEffect(() => {
         // Subscribe to the game channel
@@ -102,7 +110,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
     };
 
     const submitAnswer = (gender: string) => {
-        router.post(`/games/${game.id}/submit`, { gender }, {
+        router.post(`/games/${game.id}/submit`, { answer: gender }, {
             preserveScroll: true,
         });
     };
