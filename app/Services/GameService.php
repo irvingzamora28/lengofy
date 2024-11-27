@@ -44,7 +44,7 @@ class GameService
 
     private function addPlayer(Game $game, ?User $user): void
     {
-        Log::info('Adding player to game: ' . $game->id. ' for user: ' . ($user ? $user->name : 'guest'));
+        Log::info('Adding player to game: ' . $game->id . ' for user: ' . ($user ? $user->name : 'guest'));
         $game->players()->create([
             'user_id' => $user?->id,
             'guest_id' => $user ? null : Str::uuid(),
@@ -143,13 +143,11 @@ class GameService
 
         // If this was the last player, end the game
         if ($game->players()->count() === 0) {
-            $game->update(['status' => 'completed']);
-            broadcast(new GameEnded($game));
+            $this->endGame($game);
         }
         // If game was in progress and not enough players, end it
         else if ($game->status === 'in_progress' && $game->players()->count() < 2) {
-            $game->update(['status' => 'completed']);
-            broadcast(new GameEnded($game));
+            $this->endGame($game);
         }
     }
 

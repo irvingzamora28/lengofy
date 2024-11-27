@@ -87,11 +87,6 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             setGame(e.game);
         });
 
-        channel.listen('.game-ended', () => {
-            console.log('Game ended');
-            router.visit('/games');
-        });
-
         return () => {
             window.Echo.leave(`game.${game.id}`);
         };

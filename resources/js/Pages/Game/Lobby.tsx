@@ -21,9 +21,15 @@ export default function Lobby({ activeGames: initialGames, languagePairs }: Prop
             setGames(prevGames => [...prevGames, e.game]);
         });
 
+        channel.listen('.game-ended', (e: { game: Game }) => {
+            console.log('Game ended:', e);
+            setGames(prevGames => prevGames.filter(game => game.id !== e.game.id));
+        });
+
         // Clean up subscription when component unmounts
         return () => {
             channel.stopListening('.game-created');
+            channel.stopListening('.game-ended');
         };
     }, []);
 

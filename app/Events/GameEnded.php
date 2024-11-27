@@ -3,11 +3,12 @@
 namespace App\Events;
 
 use App\Models\Game;
-use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class GameEnded implements ShouldBroadcast
 {
@@ -20,7 +21,22 @@ class GameEnded implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('game.' . $this->game->id),
+            new PresenceChannel('games'),
+        ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'game-ended';
+    }
+
+    public function broadcastWith(): array
+    {
+        Log::info('GameEnded broadcasting data', [
+            'game_id' => $this->game->id,
+        ]);
+        return [
+            'game' => $this->game,
         ];
     }
 }
