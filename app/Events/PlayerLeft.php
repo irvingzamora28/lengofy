@@ -3,8 +3,6 @@
 namespace App\Events;
 
 use App\Models\Game;
-use App\Models\GamePlayer;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -18,12 +16,13 @@ class PlayerLeft implements ShouldBroadcast
 
     public function __construct(
         public Game $game,
-        public GamePlayer $player
+        public int $playerId,
+        public int $userId
     ) {
         Log::info('PlayerLeft event constructed', [
             'game_id' => $game->id,
-            'player_id' => $player->id,
-            'user_id' => $player->user_id
+            'player_id' => $playerId,
+            'user_id' => $userId
         ]);
     }
 
@@ -41,10 +40,15 @@ class PlayerLeft implements ShouldBroadcast
 
     public function broadcastWith(): array
     {
+        Log::info('PlayerLeft broadcasting data', [
+            'game_id' => $this->game->id,
+            'player_id' => $this->playerId,
+            'user_id' => $this->userId
+        ]);
         return [
             'game_id' => $this->game->id,
-            'player_id' => $this->player->id,
-            'user_id' => $this->player->user_id
+            'player_id' => $this->playerId,
+            'user_id' => $this->userId
         ];
     }
 }

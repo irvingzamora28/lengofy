@@ -7,6 +7,7 @@ use App\Events\GameStarted;
 use App\Events\NextRound;
 use App\Events\PlayerLeft;
 use App\Models\Game;
+use App\Models\GamePlayer;
 use App\Models\Noun;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -125,7 +126,7 @@ class GameService
         ]);
 
         $player = $game->players()->where('user_id', $user->id)->first();
-        
+
         if (!$player) {
             Log::warning('Player not found in game', [
                 'game_id' => $game->id,
@@ -134,14 +135,11 @@ class GameService
             return;
         }
 
-        // Store player info before deletion for the event
-        $playerInfo = clone $player;
-
         // Remove the player
         $player->delete();
 
-        // Broadcast that the player has left
-        broadcast(new PlayerLeft($game, $playerInfo));
+        // Create and dispatch the event with just the IDs
+        broadcast(new PlayerLeft($game, $player->id, $player->user_id));
 
         // If this was the last player, end the game
         if ($game->players()->count() === 0) {
