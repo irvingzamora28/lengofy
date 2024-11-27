@@ -12,6 +12,7 @@ interface Props {
 export default function Show({ game: initialGame, isReady: initialIsReady }: Props) {
     const [game, setGame] = useState<Game>(initialGame);
     const [isReady, setIsReady] = useState<boolean>(initialIsReady);
+    const [connectedUsers, setConnectedUsers] = useState<number[]>([]);
 
     useEffect(() => {
         // Subscribe to the game channel
@@ -20,31 +21,17 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         // Handle presence events
         channel.here((users: any) => {
             console.log('Users currently in the channel:', users);
-            // Map user IDs to players
-            users.forEach((user: any) => {
-                const player = game.players.find(p => p.user_id === user.id);
-                if (player) {
-                    console.log('Found player for user:', player);
-                }
-            });
+            setConnectedUsers(users.map((user: any) => user.id));
         });
 
         channel.joining((user: any) => {
             console.log('User joined presence:', user);
-            // Find the corresponding game player
-            const player = game.players.find(p => p.user_id === user.id);
-            if (player) {
-                console.log('Found corresponding player:', player);
-            }
+            setConnectedUsers(prev => [...prev, user.id]);
         });
 
         channel.leaving((user: any) => {
             console.log('User left presence:', user);
-            // Find the corresponding game player
-            const player = game.players.find(p => p.user_id === user.id);
-            if (player) {
-                console.log('Player left game:', player);
-            }
+            setConnectedUsers(prev => prev.filter(id => id !== user.id));
         });
 
         // Listen for game events
@@ -53,7 +40,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             if (e.game_id === game.id) {
                 setGame(prevGame => ({
                     ...prevGame,
-                    players: [...prevGame.players, e.player]
+                    players: [...prevGame.players.filter(p => p.id !== e.player.id), e.player]
                 }));
             }
         });
@@ -85,6 +72,11 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         channel.listen('.game-started', (e: { game: Game }) => {
             console.log('Game started:', e);
             setGame(e.game);
+        });
+
+        channel.listen('.game-ended', () => {
+            console.log('Game ended');
+            router.visit('/games');
         });
 
         return () => {
