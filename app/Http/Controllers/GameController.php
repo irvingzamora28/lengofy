@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\GameCreated;
-use App\Events\GameStarted;
-use App\Events\GameStarted as GameStartedAlias;
 use App\Events\PlayerJoined;
 use App\Events\PlayerReady;
 use App\Models\Game;
-use App\Models\GamePlayer;
-use App\Models\Language;
 use App\Models\LanguagePair;
 use App\Services\GameService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -61,24 +56,16 @@ class GameController extends Controller
                 'required',
                 Rule::exists('language_pairs', 'id')->where('is_active', true),
             ],
+            'max_players' => ['required', 'integer', 'min:2', 'max:8'],
         ]);
 
-        $game = Game::create([
-            'language_pair_id' => $validated['language_pair_id'],
-            'status' => 'waiting',
-            'max_players' => 8,
-            'total_rounds' => 10,
-        ]);
+        $game = $this->gameService->createGame(
+            $request->user(),
+            $validated['language_pair_id'],
+            $validated['max_players']
+        );
 
-        $player = GamePlayer::create([
-            'game_id' => $game->id,
-            'user_id' => $request->user()->id,
-            'player_name' => $request->user()->name,
-            'score' => 0,
-        ]);
-
-        broadcast(new PlayerJoined($game, $player));
-        broadcast(new GameCreated($game));
+        broadcast(new GameCreated($game->load('languagePair.sourceLanguage', 'languagePair.targetLanguage')));
 
         return redirect()->route('games.show', $game);
     }
@@ -112,64 +99,37 @@ class GameController extends Controller
 
     public function join(Game $game, Request $request)
     {
-        if ($game->players->count() >= $game->max_players) {
-            return back()->with('error', 'Game is full');
+        try {
+            $this->gameService->joinGame($game, $request->user());
+            broadcast(new PlayerJoined($game, $game->players->last()));
+            return redirect()->route('games.show', $game);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
-        // log player info
-        Log::info('Player joined game', [
-            'game_id' => $game->id,
-            'user_id' => $request->user()->id,
-            'player_name' => $request->user()->name,
-        ]);
-
-        $player = GamePlayer::create([
-            'game_id' => $game->id,
-            'user_id' => $request->user()->id,
-            'player_name' => $request->user()->name,
-            'score' => 0,
-        ]);
-
-        broadcast(new PlayerJoined($game, $player));
-
-        return redirect()->route('games.show', $game);
     }
 
-    public function ready(Game $game)
+    public function ready(Game $game, Request $request)
     {
-        $player = $game->players()->where('user_id', auth()->id())->first();
-        if ($player) {
-            $player->update(['is_ready' => true]);
-            broadcast(new PlayerReady($game, $player));
+        try {
+            $this->gameService->markPlayerReady($game, $request->user()->id);
+            broadcast(new PlayerReady($game, $game->players->where('user_id', $request->user()->id)->first()));
+            return back();
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
-
-        // If all players are ready, start the game
-        if ($game->players->count() > 1 && $game->players->every(fn($p) => $p->is_ready)) {
-            $game->update(['status' => 'in_progress']);
-            broadcast(new GameStartedAlias($game));
-        }
-
-        return back();
     }
 
-    public function submit(Game $game, Request $request)
+    public function submitAnswer(Game $game, Request $request)
     {
-        $validated = $request->validate([
-            'gender' => ['required', 'string'],
-        ]);
+        try {
+            $validated = $request->validate([
+                'answer' => ['required', 'string'],
+            ]);
 
-        $player = $game->players()->where('user_id', auth()->id())->first();
-        if (!$player) {
-            return response()->json(['error' => 'Player not found'], 404);
+            $result = $this->gameService->submitAnswer($game, $request->user()->id, $validated['answer']);
+            return response()->json($result);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
         }
-
-        $isCorrect = $game->current_word['gender'] === $validated['gender'];
-        if ($isCorrect) {
-            $player->increment('score');
-        }
-
-        return response()->json([
-            'correct' => $isCorrect,
-            'score' => $player->score,
-        ]);
     }
 }

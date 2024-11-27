@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Events\GameEnded;
+use App\Events\GameStarted;
+use App\Events\NextRound;
 use App\Models\Game;
-use App\Models\GamePlayer;
-use App\Models\GermanWord;
+use App\Models\Noun;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class GameService
@@ -39,6 +42,7 @@ class GameService
 
     private function addPlayer(Game $game, ?User $user): void
     {
+        Log::info('Adding player to game: ' . $game->id. ' for user: ' . ($user ? $user->name : 'guest'));
         $game->players()->create([
             'user_id' => $user?->id,
             'guest_id' => $user ? null : Str::uuid(),
@@ -108,13 +112,13 @@ class GameService
     private function endGame(Game $game): void
     {
         $game->update(['status' => 'completed']);
-        
+
         broadcast(new GameEnded($game));
     }
 
     private function getRandomWord(string $language_pair_id): array
     {
-        $word = GermanWord::inRandomOrder()->first();
+        $word = Noun::inRandomOrder()->first();
         return [
             'id' => $word->id,
             'word' => $word->word,

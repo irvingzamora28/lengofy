@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('total_rounds')->default(10);
             $table->json('current_word')->nullable();
             $table->foreignId('language_pair_id')->constrained(); // Reference to the language pair being practiced
+            $table->foreignId('creator_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }
