@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('noun_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('noun_id')->constrained()->onDelete('cascade');
-            $table->foreignId('language_pair_id')->constrained()->onDelete('cascade');
+            $table->foreignId('noun_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('language_id')->constrained('languages');
             $table->string('translation');
             $table->timestamps();
 
-            // Ensure we don't have duplicate translations for the same noun and language pair
-            $table->unique(['noun_id', 'language_pair_id']);
+            // Ensure a noun can only have one translation per language
+            $table->unique(['noun_id', 'language_id']);
         });
     }
 

@@ -29,10 +29,10 @@ class Noun extends Model
         return $this->hasMany(NounTranslation::class, 'noun_id');
     }
 
-    public function getTranslation(string $languagePairId): ?string
+    public function getTranslation(string $translation_language_id): ?string
     {
         return $this->translations()
-            ->where('language_pair_id', $languagePairId)
+            ->where('language_id', $translation_language_id)
             ->first()
             ?->translation;
     }

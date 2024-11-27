@@ -9,7 +9,7 @@ class NounTranslation extends Model
 {
     protected $fillable = [
         'noun_id',
-        'language_pair_id',
+        'language_id',
         'translation',
     ];
 
@@ -18,8 +18,8 @@ class NounTranslation extends Model
         return $this->belongsTo(Noun::class);
     }
 
-    public function languagePair(): BelongsTo
+    public function language(): BelongsTo
     {
-        return $this->belongsTo(LanguagePair::class);
+        return $this->belongsTo(Language::class);
     }
 }

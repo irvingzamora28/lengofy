@@ -186,7 +186,7 @@ class GameService
             'id' => $word->id,
             'word' => $word->word,
             'gender' => $word->gender,
-            'translation' => $word->getTranslation($language_pair_id),
+            'translation' => $word->getTranslation($languagePair->source_language_id),
         ];
     }
 }
