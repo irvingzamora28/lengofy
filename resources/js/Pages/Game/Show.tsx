@@ -13,6 +13,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
     const [game, setGame] = useState<Game>(initialGame);
     const [isReady, setIsReady] = useState<boolean>(initialIsReady);
     const [connectedUsers, setConnectedUsers] = useState<number[]>([]);
+    const [lastAnswer, setLastAnswer] = useState<any>(null);
 
     useEffect(() => {
         // Subscribe to the game channel
@@ -77,6 +78,11 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         channel.listen('.game-ended', () => {
             console.log('Game ended');
             router.visit('/games');
+        });
+
+        channel.listen('.answer-submitted', (e: { answer: any }) => {
+            console.log('Answer submitted:', e);
+            setLastAnswer(e.answer);
         });
 
         return () => {
@@ -182,8 +188,9 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
                                         </div>
                                     ) : game.status === 'in_progress' && game.current_word ? (
                                         <div className="text-center">
-                                            <h3 className="text-xl mb-4">{game.current_word.word}</h3>
-                                            <div className="flex justify-center gap-4">
+                                            <h3 className="text-xl mb-2">Round {game.current_round} of {game.total_rounds}</h3>
+                                            <h4 className="text-lg mb-4">{game.current_word.word}</h4>
+                                            <div className="flex justify-center gap-4 mb-4">
                                                 <PrimaryButton onClick={() => submitAnswer('der')}>
                                                     der
                                                 </PrimaryButton>
@@ -194,12 +201,26 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
                                                     das
                                                 </PrimaryButton>
                                             </div>
+                                            {lastAnswer && (
+                                                <div className={`mt-4 p-2 rounded ${lastAnswer.correct ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                                    <p>{lastAnswer.correct ? 'Correct!' : 'Wrong!'} ({lastAnswer.points} points)</p>
+                                                    <p className="mt-2">Translation: {lastAnswer.translation}</p>
+                                                </div>
+                                            )}
                                         </div>
-                                    ) : (
+                                    ) : game.status === 'completed' ? (
                                         <div className="text-center">
-                                            <p>Game Over!</p>
+                                            <h3 className="text-xl mb-4">Game Over!</h3>
+                                            <div className="space-y-2">
+                                                {game.players.sort((a, b) => b.score - a.score).map((player, index) => (
+                                                    <div key={player.id} className="flex justify-between items-center">
+                                                        <span>{index + 1}. {player.player_name}</span>
+                                                        <span>{player.score} points</span>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
                             </div>
                         </div>

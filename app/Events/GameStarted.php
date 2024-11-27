@@ -42,6 +42,8 @@ class GameStarted implements ShouldBroadcast
                     'player_name' => $player->player_name,
                     'is_ready' => $player->is_ready,
                 ]),
+                'current_round' => $game->current_round,
+                'current_word' => $game->current_word,
                 'status' => $game->status,
                 'max_players' => $game->max_players,
                 'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",

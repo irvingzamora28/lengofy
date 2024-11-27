@@ -11,14 +11,15 @@ class LanguagePairSeeder extends Seeder
     public function run(): void
     {
         $languages = Language::all();
-        
+
         // Create language pairs for initial supported combinations
         $supportedPairs = [
-            ['source' => 'de', 'target' => 'en', 'rules' => ['gender_options' => ['der', 'die', 'das']]],
-            ['source' => 'de', 'target' => 'es', 'rules' => ['gender_options' => ['der', 'die', 'das']]],
-            ['source' => 'es', 'target' => 'en', 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
-            ['source' => 'fr', 'target' => 'en', 'rules' => ['gender_options' => ['le', 'la', 'les']]],
-            ['source' => 'fr', 'target' => 'es', 'rules' => ['gender_options' => ['le', 'la', 'les']]],
+            ['source' => 'en', 'target' => 'de', 'rules' => ['gender_options' => ['der', 'die', 'das']]],
+            ['source' => 'de', 'target' => 'en', 'rules' => ['gender_options' => []]],
+            ['source' => 'de', 'target' => 'es', 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
+            ['source' => 'es', 'target' => 'en', 'rules' => ['gender_options' => []]],
+            ['source' => 'fr', 'target' => 'en', 'rules' => ['gender_options' => []]],
+            ['source' => 'fr', 'target' => 'es', 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
         ];
 
         foreach ($supportedPairs as $pair) {

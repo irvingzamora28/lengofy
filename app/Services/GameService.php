@@ -2,12 +2,14 @@
 
 namespace App\Services;
 
+use App\Events\AnswerSubmitted;
 use App\Events\GameEnded;
 use App\Events\GameStarted;
 use App\Events\NextRound;
 use App\Events\PlayerLeft;
 use App\Models\Game;
 use App\Models\GamePlayer;
+use App\Models\LanguagePair;
 use App\Models\Noun;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +53,7 @@ class GameService
             'player_name' => $user?->name ?? 'Guest ' . Str::random(6),
             'score' => 0,
             'is_ready' => false,
+            'answered_round' => 0,
         ]);
     }
 
@@ -80,22 +83,37 @@ class GameService
         $player = $game->players()->where('user_id', $userId)->firstOrFail();
         $currentWord = $game->current_word;
 
+        // Don't allow answering if already answered this round
+        if ($player->answered_round >= $game->current_round) {
+            return [
+                'error' => 'Already answered this round',
+                'newScore' => $player->score
+            ];
+        }
+
         $isCorrect = $currentWord['gender'] === $answer;
         $points = $isCorrect ? 10 : -5;
 
         $player->increment('score', $points);
+        $player->update(['answered_round' => $game->current_round]);
+
+        $result = [
+            'correct' => $isCorrect,
+            'points' => $points,
+            'newScore' => $player->score,
+            'translation' => $currentWord['translation'],
+            'player_id' => $player->id,
+            'player_name' => $player->player_name,
+        ];
+
+        broadcast(new AnswerSubmitted($game, $result));
 
         $answeredCount = $game->players()->where('answered_round', $game->current_round)->count();
         if ($answeredCount === $game->players()->count()) {
             $this->nextRound($game);
         }
 
-        return [
-            'correct' => $isCorrect,
-            'points' => $points,
-            'newScore' => $player->score,
-            'translation' => $currentWord['translation'], // Show translation after answering
-        ];
+        return $result;
     }
 
     private function nextRound(Game $game): void
@@ -153,7 +171,17 @@ class GameService
 
     private function getRandomWord(string $language_pair_id): array
     {
-        $word = Noun::inRandomOrder()->first();
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($language_pair_id);
+
+        // Get a random noun from the target language
+        $word = Noun::where('language_id', $languagePair->target_language_id)
+                   ->inRandomOrder()
+                   ->first();
+
+        if (!$word) {
+            throw new \RuntimeException("No words found for target language");
+        }
+
         return [
             'id' => $word->id,
             'word' => $word->word,
