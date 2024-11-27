@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\User;
+use App\Models\LanguagePair;
+use App\Models\GamePlayer;
 
 class Game extends Model
 {
@@ -15,6 +18,7 @@ class Game extends Model
         'total_rounds',
         'current_word',
         'language_pair_id',
+        'creator_id',
     ];
 
     protected $casts = [
@@ -29,5 +33,10 @@ class Game extends Model
     public function players(): HasMany
     {
         return $this->hasMany(GamePlayer::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id');
     }
 }

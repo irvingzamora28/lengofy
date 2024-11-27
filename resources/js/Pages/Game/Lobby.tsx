@@ -1,6 +1,6 @@
 import { Game } from './types';
-import { Head, Link, router } from '@inertiajs/react';
-import { useState } from 'react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 interface Props {
@@ -8,12 +8,29 @@ interface Props {
     languagePairs: Record<string, string>;
 }
 
-export default function Lobby({ activeGames, languagePairs }: Props) {
+export default function Lobby({ activeGames: initialGames, languagePairs }: Props) {
     const [selectedPair, setSelectedPair] = useState(Object.keys(languagePairs)[0] || '');
+    const [games, setGames] = useState(initialGames);
+    const { auth } = usePage().props as any;
+
+    useEffect(() => {
+        const channel = window.Echo.join('games');
+
+        channel.listen('.game-created', (e: { game: Game }) => {
+            console.log('Game created:', e);
+            setGames(prevGames => [...prevGames, e.game]);
+        });
+
+        // Clean up subscription when component unmounts
+        return () => {
+            channel.stopListening('.game-created');
+        };
+    }, []);
 
     const createGame = () => {
         router.post('/games', {
             language_pair_id: selectedPair,
+            max_players: 8, // You might want to make this configurable
         });
     };
 
@@ -27,7 +44,7 @@ export default function Lobby({ activeGames, languagePairs }: Props) {
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-2xl font-semibold">Game Lobby</h2>
                                 <div className="flex items-center gap-4">
-                                    <select 
+                                    <select
                                         value={selectedPair}
                                         onChange={(e) => setSelectedPair(e.target.value)}
                                         className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -43,7 +60,7 @@ export default function Lobby({ activeGames, languagePairs }: Props) {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {activeGames.map((game) => (
+                                {games.map((game) => (
                                     <div key={game.id} className="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
                                         <div className="mb-4">
                                             <h3 className="text-lg font-semibold mb-2">Game #{game.id}</h3>

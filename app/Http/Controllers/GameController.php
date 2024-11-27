@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GameCreated;
 use App\Events\GameStarted;
+use App\Events\GameStarted as GameStartedAlias;
 use App\Events\PlayerJoined;
 use App\Events\PlayerReady;
 use App\Models\Game;
@@ -76,6 +78,7 @@ class GameController extends Controller
         ]);
 
         broadcast(new PlayerJoined($game, $player));
+        broadcast(new GameCreated($game));
 
         return redirect()->route('games.show', $game);
     }
@@ -142,7 +145,7 @@ class GameController extends Controller
         // If all players are ready, start the game
         if ($game->players->count() > 1 && $game->players->every(fn($p) => $p->is_ready)) {
             $game->update(['status' => 'in_progress']);
-            broadcast(new GameStarted($game));
+            broadcast(new GameStartedAlias($game));
         }
 
         return back();

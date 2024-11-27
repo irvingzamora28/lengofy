@@ -35,3 +35,7 @@ Broadcast::channel('game.{gameId}', function ($user, $gameId) {
         'player_id' => $player->id // Also include the player_id if needed
     ];
 });
+
+Broadcast::channel('games', function ($user) {
+    return true; // Public channel that any authenticated user can access
+});

@@ -11,14 +11,15 @@ use Illuminate\Support\Str;
 
 class GameService
 {
-    public function createGame(?User $user, string $language = 'en'): Game
+    public function createGame(?User $user, string $language_pair_id, int $max_players): Game
     {
-        return DB::transaction(function () use ($user, $language) {
+        return DB::transaction(function () use ($user, $language_pair_id, $max_players) {
             $game = Game::create([
                 'status' => 'waiting',
-                'max_players' => 8,
+                'max_players' => $max_players,
                 'total_rounds' => 10,
-                'language' => $language,
+                'language_pair_id' => $language_pair_id,
+                'creator_id' => $user?->id,
             ]);
 
             $this->addPlayer($game, $user);
@@ -62,7 +63,7 @@ class GameService
         $game->update([
             'status' => 'in_progress',
             'current_round' => 1,
-            'current_word' => $this->getRandomWord($game->language),
+            'current_word' => $this->getRandomWord($game->language_pair_id),
         ]);
 
         broadcast(new GameStarted($game));
@@ -99,7 +100,7 @@ class GameService
         }
 
         $game->increment('current_round');
-        $game->update(['current_word' => $this->getRandomWord($game->language)]);
+        $game->update(['current_word' => $this->getRandomWord($game->language_pair_id)]);
 
         broadcast(new NextRound($game));
     }
@@ -111,14 +112,14 @@ class GameService
         broadcast(new GameEnded($game));
     }
 
-    private function getRandomWord(string $language): array
+    private function getRandomWord(string $language_pair_id): array
     {
         $word = GermanWord::inRandomOrder()->first();
         return [
             'id' => $word->id,
             'word' => $word->word,
             'gender' => $word->gender,
-            'translation' => $word->getTranslation($language),
+            'translation' => $word->getTranslation($language_pair_id),
         ];
     }
 }
