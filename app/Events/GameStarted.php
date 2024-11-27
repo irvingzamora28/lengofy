@@ -29,4 +29,24 @@ class GameStarted implements ShouldBroadcast
         return 'game-started';
     }
 
+    public function broadcastWith(): array
+    {
+        $game = $this->game->load('players.user');
+
+        return [
+            'game' => [
+                'id' => $game->id,
+                'players' => $game->players->map(fn($player) => [
+                    'id' => $player->id,
+                    'user_id' => $player->user_id,
+                    'player_name' => $player->player_name,
+                    'is_ready' => $player->is_ready,
+                ]),
+                'status' => $game->status,
+                'max_players' => $game->max_players,
+                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
+            ]
+        ];
+    }
+
 }
