@@ -93,6 +93,16 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
             setLastAnswer(e.answer);
         });
 
+        channel.listen('.score-updated', (e: { player: any }) => {
+            console.log('Score updated:', e);
+            setGame(prevGame => ({
+                ...prevGame,
+                players: prevGame.players.map(p => 
+                    p.id === e.player.id ? { ...p, score: e.player.score } : p
+                )
+            }));
+        });
+
         return () => {
             window.Echo.leave(`game.${game.id}`);
         };

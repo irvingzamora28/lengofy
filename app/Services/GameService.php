@@ -7,6 +7,7 @@ use App\Events\GameEnded;
 use App\Events\GameStarted;
 use App\Events\NextRound;
 use App\Events\PlayerLeft;
+use App\Events\ScoreUpdated;
 use App\Models\Game;
 use App\Models\GamePlayer;
 use App\Models\LanguagePair;
@@ -80,8 +81,8 @@ class GameService
 
     public function submitAnswer(Game $game, int $userId, string $answer): array
     {
-        $player = $game->players()->where('user_id', $userId)->firstOrFail();
-        $currentWord = $game->current_word;
+        $player = $game->players()->where('user_id', $userId)->first();
+        $word = $game->current_word;
 
         // Don't allow answering if already answered this round
         if ($player->answered_round >= $game->current_round) {
@@ -91,17 +92,26 @@ class GameService
             ];
         }
 
-        $isCorrect = $currentWord['gender'] === $answer;
-        $points = $isCorrect ? 10 : -5;
+        $isCorrect = strtolower($answer) === strtolower($word['gender']);
+        $points = $isCorrect ? 10 : 0;
 
         $player->increment('score', $points);
-        $player->update(['answered_round' => $game->current_round]);
+        $player->save();
+
+        // Broadcast score update
+        broadcast(new ScoreUpdated($game, [
+            'id' => $player->id,
+            'user_id' => $player->user_id,
+            'player_name' => $player->player_name,
+            'score' => $player->score,
+            'is_ready' => $player->is_ready,
+        ]));
 
         $result = [
             'correct' => $isCorrect,
             'points' => $points,
             'newScore' => $player->score,
-            'translation' => $currentWord['translation'],
+            'translation' => $word['translation'],
             'player_id' => $player->id,
             'player_name' => $player->player_name,
         ];
