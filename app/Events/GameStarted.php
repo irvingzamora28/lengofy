@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use App\Models\Game;
-use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -20,7 +20,13 @@ class GameStarted implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('game.' . $this->game->id),
+            new PresenceChannel('game.' . $this->game->id),
         ];
     }
+
+    public function broadcastAs(): string
+    {
+        return 'game-started';
+    }
+
 }

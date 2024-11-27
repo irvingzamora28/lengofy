@@ -47,7 +47,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
         });
 
         // Listen for game events
-        channel.listen('player-joined', (e: { player: Player; game_id: number }) => {
+        channel.listen('.player-joined', (e: { player: Player; game_id: number }) => {
             console.log('Player joined event received:', e);
             if (e.game_id === game.id) {
                 setGame(prevGame => ({
@@ -57,7 +57,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             }
         });
 
-        channel.listen('player-ready', (e: { player_id: number; game_id: number }) => {
+        channel.listen('.player-ready', (e: { player_id: number; game_id: number }) => {
             console.log('Player ready event received:', e);
             if (e.game_id === game.id) {
                 setGame(prevGame => ({
@@ -71,7 +71,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady }: Pro
             }
         });
 
-        channel.listen('game-started', (e: { game: Game }) => {
+        channel.listen('.game-started', (e: { game: Game }) => {
             console.log('Game started:', e);
             setGame(e.game);
         });
