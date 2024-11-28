@@ -95,8 +95,9 @@ class GameService
         $isCorrect = strtolower($answer) === strtolower($word['gender']);
         $points = $isCorrect ? 10 : 0;
 
+        // Update score and mark round as answered
         $player->increment('score', $points);
-        $player->save();
+        $player->update(['answered_round' => $game->current_round]);
 
         // Broadcast score update
         broadcast(new ScoreUpdated($game, [
@@ -118,7 +119,11 @@ class GameService
 
         broadcast(new AnswerSubmitted($game, $result));
 
-        $answeredCount = $game->players()->where('answered_round', $game->current_round)->count();
+        // Check if all players have answered
+        $answeredCount = $game->players()
+            ->where('answered_round', $game->current_round)
+            ->count();
+
         if ($answeredCount === $game->players()->count()) {
             $this->nextRound($game);
         }
@@ -129,12 +134,18 @@ class GameService
     private function nextRound(Game $game): void
     {
         if ($game->current_round >= $game->total_rounds) {
-            $this->endGame($game);
+            $game->update(['status' => GameStatus::ENDED]);
+            broadcast(new GameEnded($game));
             return;
         }
 
-        $game->increment('current_round');
-        $game->update(['current_word' => $this->getRandomWord($game->language_pair_id)]);
+        // Reset answered_round for all players
+        $game->players()->update(['answered_round' => 0]);
+
+        // Get new word and increment round
+        $game->current_word = $this->getRandomWord($game->language_pair_id);
+        $game->current_round += 1;
+        $game->save();
 
         broadcast(new NextRound($game));
     }

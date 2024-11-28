@@ -14,6 +14,7 @@ class GamePlayer extends Model
         'player_name',
         'score',
         'is_ready',
+        'answered_round',
     ];
 
     protected $casts = [

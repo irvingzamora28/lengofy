@@ -103,6 +103,16 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
             }));
         });
 
+        channel.listen('.next-round', (e: { round: number, word: any }) => {
+            console.log('Next round:', e);
+            setGame(prevGame => ({
+                ...prevGame,
+                current_round: e.round,
+                current_word: e.word,
+            }));
+            setLastAnswer(null); // Reset last answer for new round
+        });
+
         return () => {
             window.Echo.leave(`game.${game.id}`);
         };
