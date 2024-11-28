@@ -19,6 +19,9 @@ use Illuminate\Support\Str;
 
 class GameService
 {
+    private const POINTS_CORRECT = 10;
+    private const POINTS_INCORRECT = -5;
+
     public function createGame(?User $user, string $language_pair_id, int $max_players): Game
     {
         return DB::transaction(function () use ($user, $language_pair_id, $max_players) {
@@ -86,16 +89,16 @@ class GameService
         // Get a fresh copy of the game to prevent race conditions
         $game->refresh();
 
-        // Don't allow answering if word has changed (meaning someone already answered)
+        // Don't allow answering if word has changed (meaning someone already answered correctly)
         if ($word !== $game->current_word) {
             return [
-                'error' => 'Someone already answered this word',
+                'error' => 'Someone already answered this word correctly',
                 'newScore' => $player->score
             ];
         }
 
         $isCorrect = strtolower($answer) === strtolower($word['gender']);
-        $points = $isCorrect ? 10 : 0;
+        $points = $isCorrect ? self::POINTS_CORRECT : self::POINTS_INCORRECT;
 
         // Update score
         $player->increment('score', $points);
@@ -120,8 +123,10 @@ class GameService
 
         broadcast(new AnswerSubmitted($game, $result));
 
-        // Move to next round immediately
-        $this->nextRound($game);
+        // Only move to next round if answer was correct
+        if ($isCorrect) {
+            $this->nextRound($game);
+        }
 
         return $result;
     }
