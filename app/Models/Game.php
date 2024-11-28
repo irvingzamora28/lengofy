@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\User;
 use App\Models\LanguagePair;
 use App\Models\GamePlayer;
+use App\Enums\GameStatus;
 
 class Game extends Model
 {
@@ -23,6 +24,7 @@ class Game extends Model
 
     protected $casts = [
         'current_word' => 'array',
+        'status' => GameStatus::class,
     ];
 
     public function languagePair(): BelongsTo

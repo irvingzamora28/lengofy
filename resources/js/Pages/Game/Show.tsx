@@ -83,7 +83,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
             setGame(e.game);
         });
 
-        channel.listen('.game-ended', () => {
+        channel.listen('.game-ended', (e: { game: Game }) => {
             console.log('Game ended');
             router.visit('/games');
         });
@@ -97,7 +97,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
             console.log('Score updated:', e);
             setGame(prevGame => ({
                 ...prevGame,
-                players: prevGame.players.map(p => 
+                players: prevGame.players.map(p =>
                     p.id === e.player.id ? { ...p, score: e.player.score } : p
                 )
             }));

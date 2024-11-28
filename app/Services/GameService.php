@@ -8,6 +8,7 @@ use App\Events\GameStarted;
 use App\Events\NextRound;
 use App\Events\PlayerLeft;
 use App\Events\ScoreUpdated;
+use App\Enums\GameStatus;
 use App\Models\Game;
 use App\Models\GamePlayer;
 use App\Models\LanguagePair;
@@ -26,7 +27,7 @@ class GameService
     {
         return DB::transaction(function () use ($user, $language_pair_id, $max_players) {
             $game = Game::create([
-                'status' => 'waiting',
+                'status' => GameStatus::WAITING,
                 'max_players' => $max_players,
                 'total_rounds' => 10,
                 'language_pair_id' => $language_pair_id,
@@ -72,10 +73,21 @@ class GameService
 
     private function startGame(Game $game): void
     {
+
+        // Only start games that are in waiting status
+        if ($game->status !== GameStatus::WAITING) {
+            return;
+        }
+
         $game->update([
-            'status' => 'in_progress',
+            'status' => GameStatus::IN_PROGRESS,
             'current_round' => 1,
             'current_word' => $this->getRandomWord($game->language_pair_id),
+        ]);
+
+        Log::info('Game started successfully', [
+            'game_id' => $game->id,
+            'new_status' => GameStatus::IN_PROGRESS
         ]);
 
         broadcast(new GameStarted($game));
@@ -149,7 +161,7 @@ class GameService
 
     private function endGame(Game $game): void
     {
-        $game->update(['status' => 'completed']);
+        $game->update(['status' => GameStatus::ENDED]);
 
         broadcast(new GameEnded($game));
     }
@@ -182,7 +194,7 @@ class GameService
             $this->endGame($game);
         }
         // If game was in progress and not enough players, end it
-        else if ($game->status === 'in_progress' && $game->players()->count() < 2) {
+        else if ($game->status === GameStatus::IN_PROGRESS && $game->players()->count() < 2) {
             $this->endGame($game);
         }
     }

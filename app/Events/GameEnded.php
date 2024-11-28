@@ -22,6 +22,7 @@ class GameEnded implements ShouldBroadcast
     {
         return [
             new PresenceChannel('games'),
+            new PresenceChannel('game.' . $this->game->id),
         ];
     }
 

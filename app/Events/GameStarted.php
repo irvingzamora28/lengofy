@@ -41,6 +41,7 @@ class GameStarted implements ShouldBroadcast
                     'user_id' => $player->user_id,
                     'player_name' => $player->player_name,
                     'is_ready' => $player->is_ready,
+                    'score' => $player->score
                 ]),
                 'current_round' => $game->current_round,
                 'current_word' => $game->current_word,
