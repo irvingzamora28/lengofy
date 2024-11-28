@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('game_players', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->uuid('guest_id')->nullable();
             $table->string('player_name');
             $table->integer('score')->default(0);
