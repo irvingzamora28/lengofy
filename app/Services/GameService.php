@@ -84,10 +84,10 @@ class GameService
         $player = $game->players()->where('user_id', $userId)->first();
         $word = $game->current_word;
 
-        // Don't allow answering if already answered this round
-        if ($player->answered_round >= $game->current_round) {
+        // Don't allow answering if someone already answered this round
+        if ($game->players()->where('answered_round', $game->current_round)->exists()) {
             return [
-                'error' => 'Already answered this round',
+                'error' => 'Someone already answered this round',
                 'newScore' => $player->score
             ];
         }
@@ -119,14 +119,8 @@ class GameService
 
         broadcast(new AnswerSubmitted($game, $result));
 
-        // Check if all players have answered
-        $answeredCount = $game->players()
-            ->where('answered_round', $game->current_round)
-            ->count();
-
-        if ($answeredCount === $game->players()->count()) {
-            $this->nextRound($game);
-        }
+        // Move to next round immediately since only one player can answer
+        $this->nextRound($game);
 
         return $result;
     }

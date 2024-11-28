@@ -135,6 +135,19 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
         });
     };
 
+    const renderLastAnswer = () => {
+        if (!lastAnswer) return null;
+        if (lastAnswer.error) return <div className="text-red-500">{lastAnswer.error}</div>;
+
+        return (
+            <div className={`text-lg ${lastAnswer.correct ? 'text-green-500' : 'text-red-500'}`}>
+                <p><strong>{lastAnswer.player_name}</strong> answered {lastAnswer.correct ? 'correctly' : 'incorrectly'}!</p>
+                <p>The translation was: {lastAnswer.translation}</p>
+                <p>{lastAnswer.player_name} {lastAnswer.correct ? 'gained' : 'lost'} {lastAnswer.points} points</p>
+            </div>
+        );
+    };
+
     return (
         <>
             <Head title={`Game #${game.id}`} />
@@ -229,12 +242,7 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
                                                     das
                                                 </PrimaryButton>
                                             </div>
-                                            {lastAnswer && (
-                                                <div className={`mt-4 p-2 rounded ${lastAnswer.correct ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                                    <p>{lastAnswer.correct ? 'Correct!' : 'Wrong!'} ({lastAnswer.points} points)</p>
-                                                    <p className="mt-2">Translation: {lastAnswer.translation}</p>
-                                                </div>
-                                            )}
+                                            {renderLastAnswer()}
                                         </div>
                                     ) : game.status === 'completed' ? (
                                         <div className="text-center">
