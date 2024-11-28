@@ -54,7 +54,6 @@ class GameService
             'player_name' => $user?->name ?? 'Guest ' . Str::random(6),
             'score' => 0,
             'is_ready' => false,
-            'answered_round' => 0,
         ]);
     }
 
@@ -84,10 +83,13 @@ class GameService
         $player = $game->players()->where('user_id', $userId)->first();
         $word = $game->current_word;
 
-        // Don't allow answering if someone already answered this round
-        if ($game->players()->where('answered_round', $game->current_round)->exists()) {
+        // Get a fresh copy of the game to prevent race conditions
+        $game->refresh();
+
+        // Don't allow answering if word has changed (meaning someone already answered)
+        if ($word !== $game->current_word) {
             return [
-                'error' => 'Someone already answered this round',
+                'error' => 'Someone already answered this word',
                 'newScore' => $player->score
             ];
         }
@@ -95,9 +97,8 @@ class GameService
         $isCorrect = strtolower($answer) === strtolower($word['gender']);
         $points = $isCorrect ? 10 : 0;
 
-        // Update score and mark round as answered
+        // Update score
         $player->increment('score', $points);
-        $player->update(['answered_round' => $game->current_round]);
 
         // Broadcast score update
         broadcast(new ScoreUpdated($game, [
@@ -119,7 +120,7 @@ class GameService
 
         broadcast(new AnswerSubmitted($game, $result));
 
-        // Move to next round immediately since only one player can answer
+        // Move to next round immediately
         $this->nextRound($game);
 
         return $result;
@@ -132,9 +133,6 @@ class GameService
             broadcast(new GameEnded($game));
             return;
         }
-
-        // Reset answered_round for all players
-        $game->players()->update(['answered_round' => 0]);
 
         // Get new word and increment round
         $game->current_word = $this->getRandomWord($game->language_pair_id);

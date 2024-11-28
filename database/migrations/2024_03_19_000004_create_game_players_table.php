@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('player_name');
             $table->integer('score')->default(0);
             $table->boolean('is_ready')->default(false);
-            $table->integer('answered_round')->default(0);
             $table->timestamps();
         });
     }
