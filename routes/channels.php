@@ -18,24 +18,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('game.{gameId}', function ($user, $gameId) {
-    $game = Game::with('players')->find($gameId);
-    if (!$game) {
-        return false;
-    }
-
-    $player = $game->players->where('user_id', $user->id)->first();
-    if (!$player) {
-        return false;
-    }
-
-    return [
-        'id' => $user->id, // Use user_id for consistency
-        'name' => $player->player_name,
-        'player_id' => $player->id // Also include the player_id if needed
-    ];
-});
-
 Broadcast::channel('games', function ($user) {
-    return true; // Public channel that any authenticated user can access
+    return $user; // Public channel that any authenticated user can access
 });
