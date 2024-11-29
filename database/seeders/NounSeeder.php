@@ -12,7 +12,7 @@ class NounSeeder extends Seeder
     public function run(): void
     {
         $languages = Language::all()->keyBy('code');
-        
+
         // German nouns with translations
         $germanNouns = [
             ['word' => 'Haus', 'gender' => 'das', 'translations' => [
@@ -25,6 +25,38 @@ class NounSeeder extends Seeder
             ]],
             ['word' => 'Tisch', 'gender' => 'der', 'translations' => [
                 'en' => 'table',
+                'es' => 'mesa',
+            ]],
+            ['word' => 'Auto', 'gender' => 'das', 'translations' => [
+                'en' => 'car',
+                'es' => 'coche',
+            ]],
+            ['word' => 'Buch', 'gender' => 'das', 'translations' => [
+                'en' => 'book',
+                'es' => 'libro',
+            ]],
+            ['word' => 'Maus', 'gender' => 'die', 'translations' => [
+                'en' => 'mouse',
+                'es' => 'raton',
+            ]],
+            ['word' => 'Bild', 'gender' => 'das', 'translations' => [
+                'en' => 'picture',
+                'es' => 'imagen',
+            ]],
+            ['word' => 'Hund', 'gender' => 'der', 'translations' => [
+                'en' => 'dog',
+                'es' => 'perro',
+            ]],
+            ['word' => 'Klavier', 'gender' => 'das', 'translations' => [
+                'en' => 'piano',
+                'es' => 'piano',
+            ]],
+            ['word' => 'Schlafzimmer', 'gender' => 'der', 'translations' => [
+                'en' => 'bedroom',
+                'es' => 'habitacion',
+            ]],
+            ['word' => 'Schreibtisch', 'gender' => 'das', 'translations' => [
+                'en' => 'desk',
                 'es' => 'mesa',
             ]],
             // Add more German nouns here
