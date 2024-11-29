@@ -49,7 +49,8 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                 gameId: game.id,
                 userId: auth.user.id,
                 data: {
-                    words: game.words
+                    words: game.words,
+                    players: game.players
                 }
             }));
         };

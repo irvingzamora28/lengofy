@@ -62,6 +62,18 @@ const server = serve({
                         }
                         gameRooms.get(data.gameId)?.add(ws);
                         console.log(`Player joined game ${data.gameId}`);
+
+                        // Broadcast updated player list to all clients in the room
+                        if (gameRoom) {
+                            for (const client of gameRoom) {
+                                client.send(JSON.stringify({
+                                    type: 'game_state_updated',
+                                    data: {
+                                        players: data.data.players
+                                    }
+                                }));
+                            }
+                        }
                         break;
 
                     case 'player_ready':
