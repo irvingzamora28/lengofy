@@ -52,7 +52,7 @@ class GameService
     private function addPlayer(Game $game, ?User $user): void
     {
         Log::info('Adding player to game: ' . $game->id . ' for user: ' . ($user ? $user->name : 'guest'));
-        $game->players()->create([
+        $player = $game->players()->create([
             'user_id' => $user?->id,
             'guest_id' => $user ? null : Str::uuid(),
             'player_name' => $user?->name ?? 'Guest ' . Str::random(6),
@@ -63,34 +63,43 @@ class GameService
 
     public function markPlayerReady(Game $game, int $userId): void
     {
-        $player = $game->players()->where('user_id', $userId)->firstOrFail();
+        $player = $game->players()->where('user_id', $userId)->first();
+
+        if (!$player) {
+            throw new \Exception('Player not found in this game');
+        }
+
         $player->update(['is_ready' => true]);
 
-        if ($game->players()->count() >= 2 && $game->players()->where('is_ready', true)->count() === $game->players()->count()) {
+        // Check if all players are ready to start the game
+        if ($this->areAllPlayersReady($game)) {
             $this->startGame($game);
         }
     }
 
+    private function areAllPlayersReady(Game $game): bool
+    {
+        return !$game->players()->where('is_ready', false)->exists();
+    }
+
     private function startGame(Game $game): void
     {
-
         // Only start games that are in waiting status
         if ($game->status !== GameStatus::WAITING) {
             return;
         }
 
+        // Start the game
         $game->update([
             'status' => GameStatus::IN_PROGRESS,
             'current_round' => 1,
-            'current_word' => $this->getRandomWord($game->language_pair_id),
         ]);
 
-        Log::info('Game started successfully', [
-            'game_id' => $game->id,
-            'new_status' => GameStatus::IN_PROGRESS
-        ]);
+        // Get first word for the game
+        $word = $this->getNextWord($game);
+        $game->update(['current_word' => $word]);
 
-        broadcast(new GameStarted($game));
+        return;
     }
 
     public function submitAnswer(Game $game, int $userId, string $answer): array
@@ -152,7 +161,7 @@ class GameService
         }
 
         // Get new word and increment round
-        $game->current_word = $this->getRandomWord($game->language_pair_id);
+        $game->current_word = $this->getNextWord($game);
         $game->current_round += 1;
         $game->save();
 
@@ -184,10 +193,8 @@ class GameService
         }
 
         // Remove the player
+        $playerId = $player->id;
         $player->delete();
-
-        // Create and dispatch the event with just the IDs
-        broadcast(new PlayerLeft($game, $player->id, $player->user_id));
 
         // If this was the last player, end the game
         if ($game->players()->count() === 0) {
@@ -199,9 +206,9 @@ class GameService
         }
     }
 
-    private function getRandomWord(string $language_pair_id): array
+    private function getNextWord(Game $game): array
     {
-        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($language_pair_id);
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($game->language_pair_id);
 
         // Get a random noun from the target language
         $word = Noun::where('language_id', $languagePair->target_language_id)
@@ -218,5 +225,22 @@ class GameService
             'gender' => $word->gender,
             'translation' => $word->getTranslation($languagePair->source_language_id),
         ];
+    }
+
+    public function getGameWords(Game $game): array
+    {
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($game->language_pair_id);
+
+        return Noun::where('language_id', $languagePair->target_language_id)
+            ->inRandomOrder()
+            ->limit($game->total_rounds)
+            ->get()
+            ->map(fn($noun) => [
+                'id' => $noun->id,
+                'word' => $noun->word,
+                'gender' => $noun->gender,
+                'translation' => $noun->translation,
+            ])
+            ->toArray();
     }
 }

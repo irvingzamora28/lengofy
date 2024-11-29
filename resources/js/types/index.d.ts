@@ -4,10 +4,11 @@ export interface User {
     id: number;
     name: string;
     email: string;
-    email_verified_at?: string;
+    email_verified_at: string;
+    is_guest: boolean;
 }
 
-export interface PageProps<T extends Record<string, unknown> = Record<string, unknown>> {
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;
     };
@@ -30,6 +31,20 @@ declare module '@inertiajs/core' {
                 user: User;
             };
             ziggy: Config & { location: string };
+        };
+    }
+}
+
+declare global {
+    interface Window {
+        Echo: {
+            join: (channel: string) => {
+                here: (callback: (users: any[]) => void) => void;
+                joining: (callback: (user: any) => void) => void;
+                leaving: (callback: (user: any) => void) => void;
+                listen: (event: string, callback: (e: any) => void) => void;
+            };
+            leave: (channel: string) => void;
         };
     }
 }

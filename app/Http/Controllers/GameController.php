@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Events\GameCreated;
-use App\Events\PlayerJoined;
-use App\Events\PlayerReady;
+use App\Events\GameStateUpdated;
+use App\Events\NextRound;
 use App\Models\Game;
 use App\Models\LanguagePair;
 use App\Services\GameService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class GameController extends Controller
 {
-    public function __construct(
-        private GameService $gameService
-    ) {
+    public function __construct(private GameService $gameService)
+    {
     }
 
     public function lobby(): Response
@@ -53,90 +51,93 @@ class GameController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
-            'language_pair_id' => [
-                'required',
-                Rule::exists('language_pairs', 'id')->where('is_active', true),
-            ],
-            'max_players' => ['required', 'integer', 'min:2', 'max:8'],
+            'language_pair_id' => 'required|exists:language_pairs,id',
+            'max_players' => 'required|integer|min:2|max:10',
         ]);
 
         $game = $this->gameService->createGame(
-            $request->user(),
+            auth()->user(),
             $validated['language_pair_id'],
             $validated['max_players']
         );
-
         broadcast(new GameCreated($game->load('languagePair.sourceLanguage', 'languagePair.targetLanguage')));
+
 
         return redirect()->route('games.show', $game);
     }
 
-    public function show(Game $game): Response
+    public function show(Game $game)
     {
+        // Load game data with relationships
         $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+
+        // Get words for the game
+        $words = $this->gameService->getGameWords($game);
+
+        // Refresh the game instance to get the latest state
+        $game->refresh();
 
         return Inertia::render('Game/Show', [
             'game' => [
                 'id' => $game->id,
+                'status' => $game->status,
                 'players' => $game->players->map(fn($player) => [
                     'id' => $player->id,
                     'user_id' => $player->user_id,
                     'player_name' => $player->player_name,
-                    'is_ready' => $player->is_ready,
                     'score' => $player->score,
+                    'is_ready' => $player->is_ready,
+                    'is_guest' => $player->guest_id !== null,
                 ]),
-                'status' => $game->status,
                 'max_players' => $game->max_players,
                 'current_round' => $game->current_round,
                 'total_rounds' => $game->total_rounds,
                 'current_word' => $game->current_word,
                 'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
+                'words' => $words,
             ],
-            'isReady' => $game->players->where('user_id', auth()->id())->first()?->is_ready ?? false,
-            'answer' => session('answer'),
+            'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
     }
 
-    public function join(Game $game, Request $request)
+    public function join(Game $game)
     {
         try {
-            $this->gameService->joinGame($game, $request->user());
-            broadcast(new PlayerJoined($game, $game->players->last()));
+            $this->gameService->joinGame($game, auth()->user());
             return redirect()->route('games.show', $game);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function ready(Game $game, Request $request)
+    public function ready(Game $game)
     {
         try {
-            $this->gameService->markPlayerReady($game, $request->user()->id);
-            broadcast(new PlayerReady($game, $game->players->where('user_id', $request->user()->id)->first()));
-            return back();
+            $this->gameService->markPlayerReady($game, auth()->id());
+            return to_route('games.show', $game);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function submit(Request $request, Game $game)
+    public function submitAnswer(Request $request, Game $game)
     {
-        $request->validate([
-            'answer' => ['required', 'string'],
+        $validated = $request->validate([
+            'answer' => 'required|string|in:der,die,das',
         ]);
 
-        $result = $this->gameService->submitAnswer($game, auth()->id(), $request->answer);
+        try {
+            $result = $this->gameService->submitAnswer($game, auth()->id(), $validated['answer']);
 
-        return back()->with('answer', $result);
+            return response()->json($result);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
-    public function leave(Game $game, Request $request)
+    public function leave(Game $game)
     {
-        try {
-            $this->gameService->leaveGame($game, $request->user());
-            return redirect()->route('games.lobby');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
-        }
+        $this->gameService->leaveGame($game, auth()->user());
+        return redirect()->route('games.lobby');
     }
 }

@@ -3,7 +3,10 @@
     "type": "module",
     "scripts": {
         "build": "tsc && vite build && vite build --ssr",
-        "dev": "vite"
+        "dev": "vite",
+        "ws": "bun run websocket-server.ts",
+        "ws:build": "bun build websocket-server.ts --outfile dist/websocket-server.js",
+        "ws:prod": "bun run dist/websocket-server.js"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
@@ -12,6 +15,7 @@
         "@types/node": "^18.13.0",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.10",
+        "@types/ws": "^8.5.10",
         "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.7.4",
@@ -26,6 +30,7 @@
     },
     "dependencies": {
         "laravel-echo": "^1.17.0",
-        "pusher-js": "^8.4.0-rc2"
+        "pusher-js": "^8.4.0-rc2",
+        "ws": "^8.18.0"
     }
 }

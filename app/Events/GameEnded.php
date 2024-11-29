@@ -37,7 +37,7 @@ class GameEnded implements ShouldBroadcast
             'game_id' => $this->game->id,
         ]);
         return [
-            'game' => $this->game,
+            'gameId' => $this->game->id,
         ];
     }
 }

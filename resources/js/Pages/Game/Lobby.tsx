@@ -5,55 +5,58 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useGuestUser } from '@/Hooks/useGuestUser';
 import GuestConversionModal from '@/Components/GuestConversionModal';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import CreateGameModal from '@/Components/CreateGameModal';
+import useEchoChannel from '@/Hooks/useEchoChannel';
 
 interface Props {
     activeGames: Game[];
-    languagePairs: Record<string, string>;
+    languagePairs: { [key: string]: string };
 }
 
 export default function Lobby({ activeGames: initialGames, languagePairs, auth }: Props) {
-    const [selectedPair, setSelectedPair] = useState(Object.keys(languagePairs)[0] || '');
-    const [games, setGames] = useState(initialGames);
-    const [isCreateGameModalOpen, setIsCreateGameModalOpen] = useState(false);
-    const { isGuestModalOpen, showConversionModal, hideConversionModal, createGuestSession } = useGuestUser();
+    const [selectedPair, setSelectedPair] = useState<string>('');
+    const [games, setGames] = useState<Game[]>(initialGames);
+
+    // Subscribe to game events
+    useEchoChannel('games', {
+        'game-created': (data: { game: Game }) => {
+            console.log('New game created:', data.game);
+            setGames(prevGames => [...prevGames, data.game]);
+        },
+        'game-ended': (data: { gameId: number }) => {
+            console.log('Game ended:', data.gameId);
+            setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
+        }
+    });
 
     useEffect(() => {
-        const channel = window.Echo.join('games');
+        // Set initial selected pair only if we have language pairs
+        if (Object.keys(languagePairs).length > 0) {
+            setSelectedPair(Object.keys(languagePairs)[0]);
+        }
+    }, [languagePairs]);
 
-        channel.listen('.game-created', (e: { game: Game }) => {
-            console.log('Game created:', e);
-            setGames(prevGames => [...prevGames, e.game]);
-        });
+    const handleCreateGame = () => {
+        console.log('selectedPair', selectedPair);
 
-        channel.listen('.game-ended', (e: { game: Game }) => {
-            console.log('Game ended:', e);
-            setGames(prevGames => prevGames.filter(game => game.id !== e.game.id));
-        });
+        if (!selectedPair) return;
 
-        // Clean up subscription when component unmounts
-        return () => {
-            channel.stopListening('.game-created');
-            channel.stopListening('.game-ended');
-        };
-    }, []);
-
-    const createGame = () => {
         router.post('/games', {
             language_pair_id: selectedPair,
-            max_players: 8, // You might want to make this configurable
+            max_players: 8,
         });
     };
+
+    const { isGuestModalOpen, showConversionModal, hideConversionModal, createGuestSession } = useGuestUser();
 
     const handlePlayClick = async () => {
         if (!auth.user) {
             // Create guest session if user is not logged in
             const guestUser = await createGuestSession();
             if (guestUser) {
-                setIsCreateGameModalOpen(true);
+                handleCreateGame();
             }
         } else {
-            setIsCreateGameModalOpen(true);
+            handleCreateGame();
         }
     };
 
@@ -67,55 +70,63 @@ export default function Lobby({ activeGames: initialGames, languagePairs, auth }
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-lg font-semibold">Available Games</h3>
-                            <div className="flex items-center gap-4">
-                                {auth.user?.is_guest && (
-                                    <button
-                                        onClick={showConversionModal}
-                                        className="text-sm text-blue-600 hover:text-blue-800"
-                                    >
-                                        Create Account
-                                    </button>
-                                )}
-                                <PrimaryButton onClick={handlePlayClick}>
+                        <div className="mb-6">
+                            <h3 className="text-lg font-medium mb-4">Create New Game</h3>
+                            <div className="flex gap-4">
+                                <select
+                                    value={selectedPair}
+                                    onChange={(e) => setSelectedPair(e.target.value)}
+                                    className="rounded-md border-gray-300"
+                                >
+                                    <option value="">Select a language pair</option>
+                                    {Object.entries(languagePairs).map(([id, name]) => (
+                                        <option key={id} value={id}>
+                                            {name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <PrimaryButton
+                                    onClick={handlePlayClick}
+                                    disabled={!selectedPair}
+                                >
                                     Create Game
                                 </PrimaryButton>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {games.map((game) => (
-                                <div key={game.id} className="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
-                                    <div className="mb-4">
-                                        <h3 className="text-lg font-semibold mb-2">Game #{game.id}</h3>
-                                        <p className="mb-2">
-                                            Players: {game.players.length}/{game.max_players}
-                                        </p>
-                                        <p className="mb-4">
-                                            Language: {game.language_name}
-                                        </p>
-                                        <PrimaryButton
-                                            onClick={() =>
-                                                router.post(`/games/${game.id}/join`)
-                                            }
-                                            disabled={game.players.length >= game.max_players}
+                        <div>
+                            <h3 className="text-lg font-medium mb-4">Available Games</h3>
+                            {games.length === 0 ? (
+                                <p>No games available. Create one!</p>
+                            ) : (
+                                <div className="grid gap-4">
+                                    {games.map((game) => (
+                                        <div
+                                            key={game.id}
+                                            className="flex items-center justify-between border rounded-lg p-4"
                                         >
-                                            Join Game
-                                        </PrimaryButton>
-                                    </div>
+                                            <div>
+                                                <h4 className="font-medium">{game.language_name}</h4>
+                                                <p className="text-sm text-gray-600">
+                                                    Players: {game.players.length}/{game.max_players}
+                                                </p>
+                                            </div>
+                                            <Link
+                                                href={`/games/${game.id}/join`}
+                                                method="post"
+                                                as="button"
+                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                            >
+                                                Join Game
+                                            </Link>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <CreateGameModal
-                show={isCreateGameModalOpen}
-                onClose={() => setIsCreateGameModalOpen(false)}
-                languagePairs={languagePairs}
-            />
 
             <GuestConversionModal
                 show={isGuestModalOpen}
