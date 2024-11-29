@@ -17,7 +17,8 @@ class GameController extends Controller
 {
     public function __construct(
         private GameService $gameService
-    ) {}
+    ) {
+    }
 
     public function lobby(): Response
     {

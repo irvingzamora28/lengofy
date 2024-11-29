@@ -1,3 +1,4 @@
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -149,8 +150,11 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
     };
 
     return (
-        <>
+        <AuthenticatedLayout
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Game Room</h2>}
+        >
             <Head title={`Game #${game.id}`} />
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -263,6 +267,6 @@ export default function Show({ game: initialGame, isReady: initialIsReady, answe
                     </div>
                 </div>
             </div>
-        </>
+        </AuthenticatedLayout>
     );
 }

@@ -9,7 +9,7 @@ export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const { auth } = usePage<{ auth: { user: { name: string; email: string } } }>().props;
+    const { auth } = usePage<{ auth: { user: { name: string; email: string; is_guest: boolean } } }>().props;
     const user = auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -71,11 +71,11 @@ export default function Authenticated({
                                             Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href={route('logout')}
-                                            method="post"
+                                            href={user?.is_guest ? route('guest.logout') : route('logout')}
+                                            method={user?.is_guest ? 'delete' : 'post'}
                                             as="button"
                                         >
-                                            Log Out
+                                            {user?.is_guest ? 'Logout Guest' : 'Log Out'}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -155,11 +155,11 @@ export default function Authenticated({
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
-                                method="post"
-                                href={route('logout')}
+                                method={user?.is_guest ? 'delete' : 'post'}
+                                href={user?.is_guest ? route('guest.logout') : route('logout')}
                                 as="button"
                             >
-                                Log Out
+                                {user?.is_guest ? 'Logout Guest' : 'Log Out'}
                             </ResponsiveNavLink>
                         </div>
                     </div>

@@ -2,16 +2,21 @@ import { Game } from './types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { useGuestUser } from '@/Hooks/useGuestUser';
+import GuestConversionModal from '@/Components/GuestConversionModal';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import CreateGameModal from '@/Components/CreateGameModal';
 
 interface Props {
     activeGames: Game[];
     languagePairs: Record<string, string>;
 }
 
-export default function Lobby({ activeGames: initialGames, languagePairs }: Props) {
+export default function Lobby({ activeGames: initialGames, languagePairs, auth }: Props) {
     const [selectedPair, setSelectedPair] = useState(Object.keys(languagePairs)[0] || '');
     const [games, setGames] = useState(initialGames);
-    const { auth } = usePage().props as any;
+    const [isCreateGameModalOpen, setIsCreateGameModalOpen] = useState(false);
+    const { isGuestModalOpen, showConversionModal, hideConversionModal, createGuestSession } = useGuestUser();
 
     useEffect(() => {
         const channel = window.Echo.join('games');
@@ -40,58 +45,82 @@ export default function Lobby({ activeGames: initialGames, languagePairs }: Prop
         });
     };
 
+    const handlePlayClick = async () => {
+        if (!auth.user) {
+            // Create guest session if user is not logged in
+            const guestUser = await createGuestSession();
+            if (guestUser) {
+                setIsCreateGameModalOpen(true);
+            }
+        } else {
+            setIsCreateGameModalOpen(true);
+        }
+    };
+
     return (
-        <>
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Game Lobby</h2>}
+        >
             <Head title="Game Lobby" />
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-semibold">Game Lobby</h2>
-                                <div className="flex items-center gap-4">
-                                    <select
-                                        value={selectedPair}
-                                        onChange={(e) => setSelectedPair(e.target.value)}
-                                        className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-lg font-semibold">Available Games</h3>
+                            <div className="flex items-center gap-4">
+                                {auth.user?.is_guest && (
+                                    <button
+                                        onClick={showConversionModal}
+                                        className="text-sm text-blue-600 hover:text-blue-800"
                                     >
-                                        {Object.entries(languagePairs).map(([id, name]) => (
-                                            <option key={id} value={id}>
-                                                {name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <PrimaryButton onClick={createGame}>Create New Game</PrimaryButton>
-                                </div>
+                                        Create Account
+                                    </button>
+                                )}
+                                <PrimaryButton onClick={handlePlayClick}>
+                                    Create Game
+                                </PrimaryButton>
                             </div>
+                        </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {games.map((game) => (
-                                    <div key={game.id} className="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
-                                        <div className="mb-4">
-                                            <h3 className="text-lg font-semibold mb-2">Game #{game.id}</h3>
-                                            <p className="mb-2">
-                                                Players: {game.players.length}/{game.max_players}
-                                            </p>
-                                            <p className="mb-4">
-                                                Language: {game.language_name}
-                                            </p>
-                                            <PrimaryButton
-                                                onClick={() =>
-                                                    router.post(`/games/${game.id}/join`)
-                                                }
-                                                disabled={game.players.length >= game.max_players}
-                                            >
-                                                Join Game
-                                            </PrimaryButton>
-                                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {games.map((game) => (
+                                <div key={game.id} className="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
+                                    <div className="mb-4">
+                                        <h3 className="text-lg font-semibold mb-2">Game #{game.id}</h3>
+                                        <p className="mb-2">
+                                            Players: {game.players.length}/{game.max_players}
+                                        </p>
+                                        <p className="mb-4">
+                                            Language: {game.language_name}
+                                        </p>
+                                        <PrimaryButton
+                                            onClick={() =>
+                                                router.post(`/games/${game.id}/join`)
+                                            }
+                                            disabled={game.players.length >= game.max_players}
+                                        >
+                                            Join Game
+                                        </PrimaryButton>
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+
+            <CreateGameModal
+                show={isCreateGameModalOpen}
+                onClose={() => setIsCreateGameModalOpen(false)}
+                languagePairs={languagePairs}
+            />
+
+            <GuestConversionModal
+                show={isGuestModalOpen}
+                onClose={hideConversionModal}
+            />
+        </AuthenticatedLayout>
     );
 }

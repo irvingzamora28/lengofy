@@ -1,7 +1,10 @@
 export interface User {
     id: number;
     name: string;
-    email: string;
+    email: string | null;
+    is_guest: boolean;
+    guest_token?: string;
+    last_active_at?: string;
 }
 
 export interface Game {
