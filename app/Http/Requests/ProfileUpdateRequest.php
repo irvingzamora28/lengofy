@@ -17,6 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
+            'language_pair_id' => ['required', 'exists:language_pairs,id'],
         ];
 
         if (!$this->user()->is_guest) {

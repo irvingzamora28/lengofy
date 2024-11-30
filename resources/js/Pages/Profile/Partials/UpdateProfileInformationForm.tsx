@@ -1,34 +1,44 @@
+import { useForm, usePage, Link } from '@inertiajs/react';
+import { Transition } from '@headlessui/react';
+import { FormEventHandler } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import { FormEventHandler } from 'react';
-import { PageProps } from '@/types';
+import LanguagePairSelect from './LanguagePairSelect';
 
-interface User {
-    name: string;
-    email: string;
-    email_verified_at: string | null;
+interface Props {
+    mustVerifyEmail: boolean;
+    status?: string;
+    className?: string;
+    isGuest?: boolean;
+}
+
+interface PageProps {
+    auth: {
+        user: {
+            name: string;
+            email: string;
+            email_verified_at: string | null;
+            language_pair_id: string | null;
+        };
+    };
+    languagePairs: Record<string, string>;
 }
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
-    className = '',
-    isGuest = false,
-}: {
-    mustVerifyEmail: boolean;
-    status?: string;
-    className?: string;
-    isGuest?: boolean;
-}) {
-    const user = usePage<PageProps>().props.auth.user;
+    className,
+    isGuest,
+}: Props) {
+    const { auth, languagePairs } = usePage<PageProps>().props;
+    const user = auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         ...(isGuest ? {} : { email: user.email }),
+        language_pair_id: user.language_pair_id || '',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -93,14 +103,14 @@ export default function UpdateProfileInformation({
                                         href={route('verification.send')}
                                         method="post"
                                         as="button"
-                                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-white"
+                                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                     >
                                         Click here to re-send the verification email.
                                     </Link>
                                 </p>
 
                                 {status === 'verification-link-sent' && (
-                                    <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                                    <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
                                         A new verification link has been sent to your email address.
                                     </div>
                                 )}
@@ -108,6 +118,13 @@ export default function UpdateProfileInformation({
                         )}
                     </>
                 )}
+
+                <LanguagePairSelect
+                    value={data.language_pair_id}
+                    onChange={(value) => setData('language_pair_id', value)}
+                    error={errors.language_pair_id}
+                    languagePairs={languagePairs}
+                />
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>

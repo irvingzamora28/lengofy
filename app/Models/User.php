@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\LanguagePair;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'language_pair_id',
         'is_guest',
         'guest_token',
         'last_active_at',
@@ -49,5 +51,10 @@ class User extends Authenticatable
             'is_guest' => 'boolean',
             'last_active_at' => 'datetime',
         ];
+    }
+
+    public function languagePair()
+    {
+        return $this->belongsTo(LanguagePair::class);
     }
 }
