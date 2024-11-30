@@ -1,29 +1,7 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Select from '@/Components/Select';
-
-interface LanguagePair {
-    id: string;
-    sourceLanguage: {
-        code: string;
-        name: string;
-        flag: string;
-    };
-    targetLanguage: {
-        code: string;
-        name: string;
-        flag: string;
-    };
-}
-
-// Translations for "I am learning" in different languages
-const learningPhrases: Record<string, string> = {
-    'de': 'Ich lerne',
-    'en': 'I am learning',
-    'es': 'Estoy aprendiendo',
-    'fr': 'J\'apprends',
-    'it': 'Sto imparando',
-};
+import { LanguagePair, learningPhrases } from '@/types/language';
 
 interface Props {
     value: string;

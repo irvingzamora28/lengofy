@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import LanguagePairSelect from './LanguagePairSelect';
+import { LanguagePair } from '@/types/language';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -23,7 +24,7 @@ interface PageProps {
             language_pair_id: string | null;
         };
     };
-    languagePairs: Record<string, string>;
+    languagePairs: Record<string, LanguagePair>;
 }
 
 export default function UpdateProfileInformation({

@@ -1,3 +1,5 @@
+export * from './language';
+
 export interface User {
     id: number;
     name: string;

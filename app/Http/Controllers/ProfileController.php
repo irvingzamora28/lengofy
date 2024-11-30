@@ -40,9 +40,9 @@ class ProfileController extends Controller
                                 'name' => $pair->targetLanguage->name,
                                 'flag' => $this->getLanguageFlag($pair->targetLanguage->code),
                             ],
-                        ]
+                        ],
                     ];
-                })
+                })->all()
         ]);
     }
 
