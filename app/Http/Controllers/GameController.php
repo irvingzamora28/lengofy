@@ -20,18 +20,6 @@ class GameController extends Controller
 
     public function lobby(): Response
     {
-        // Get active language pairs and format them for the frontend
-        $languagePairs = LanguagePair::where('is_active', true)
-            ->with(['sourceLanguage', 'targetLanguage'])
-            ->get()
-            ->map(function ($pair) {
-                return [
-                    'id' => $pair->id,
-                    'name' => "{$pair->sourceLanguage->name} → {$pair->targetLanguage->name}",
-                ];
-            })
-            ->pluck('name', 'id');
-
         return Inertia::render('Game/Lobby', [
             'activeGames' => Game::where('status', 'waiting')
                 ->with(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage'])
@@ -44,7 +32,6 @@ class GameController extends Controller
                         'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
                     ];
                 }),
-            'languagePairs' => $languagePairs,
         ]);
     }
 

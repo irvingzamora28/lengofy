@@ -8,13 +8,18 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import useEchoChannel from '@/Hooks/useEchoChannel';
 
 interface Props {
+    auth: {
+        user: {
+            id: number;
+            name: string;
+            language_pair_id: string;
+        };
+    };
     activeGames: Game[];
-    languagePairs: { [key: string]: string };
 }
 
-export default function Lobby({ activeGames: initialGames, languagePairs, auth }: Props) {
-    const [selectedPair, setSelectedPair] = useState<string>('');
-    const [games, setGames] = useState<Game[]>(initialGames);
+export default function Lobby({ auth, activeGames }: Props) {
+    const [games, setGames] = useState<Game[]>(activeGames);
 
     // Subscribe to game events
     useEchoChannel('games', {
@@ -28,20 +33,9 @@ export default function Lobby({ activeGames: initialGames, languagePairs, auth }
         }
     });
 
-    useEffect(() => {
-        // Set initial selected pair only if we have language pairs
-        if (Object.keys(languagePairs).length > 0) {
-            setSelectedPair(Object.keys(languagePairs)[0]);
-        }
-    }, [languagePairs]);
-
     const handleCreateGame = () => {
-        console.log('selectedPair', selectedPair);
-
-        if (!selectedPair) return;
-
         router.post('/games', {
-            language_pair_id: selectedPair,
+            language_pair_id: auth.user.language_pair_id,
             max_players: 8,
         });
     };
@@ -73,21 +67,8 @@ export default function Lobby({ activeGames: initialGames, languagePairs, auth }
                         <div className="mb-6">
                             <h3 className="text-lg font-medium mb-4">Create New Game</h3>
                             <div className="flex gap-4">
-                                <select
-                                    value={selectedPair}
-                                    onChange={(e) => setSelectedPair(e.target.value)}
-                                    className="rounded-md border-gray-300"
-                                >
-                                    <option value="">Select a language pair</option>
-                                    {Object.entries(languagePairs).map(([id, name]) => (
-                                        <option key={id} value={id}>
-                                            {name}
-                                        </option>
-                                    ))}
-                                </select>
                                 <PrimaryButton
                                     onClick={handlePlayClick}
-                                    disabled={!selectedPair}
                                 >
                                     Create Game
                                 </PrimaryButton>
