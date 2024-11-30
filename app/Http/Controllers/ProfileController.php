@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\LanguagePair;
+use App\Services\LanguageService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    public function __construct(
+        private LanguageService $languageService,
+    ) {
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -33,31 +38,17 @@ class ProfileController extends Controller
                             'sourceLanguage' => [
                                 'code' => $pair->sourceLanguage->code,
                                 'name' => $pair->sourceLanguage->name,
-                                'flag' => $this->getLanguageFlag($pair->sourceLanguage->code),
+                                'flag' => $this->languageService->getFlag($pair->sourceLanguage->code),
                             ],
                             'targetLanguage' => [
                                 'code' => $pair->targetLanguage->code,
                                 'name' => $pair->targetLanguage->name,
-                                'flag' => $this->getLanguageFlag($pair->targetLanguage->code),
+                                'flag' => $this->languageService->getFlag($pair->targetLanguage->code),
                             ],
                         ],
                     ];
                 })->all()
         ]);
-    }
-
-    private function getLanguageFlag(string $code): string
-    {
-        // Map language codes to flag emojis
-        $flagMap = [
-            'de' => '🇩🇪',
-            'en' => '🇬🇧',
-            'es' => '🇪🇸',
-            'fr' => '🇫🇷',
-            'it' => '🇮🇹',
-        ];
-
-        return $flagMap[$code] ?? '🏳️';
     }
 
     /**

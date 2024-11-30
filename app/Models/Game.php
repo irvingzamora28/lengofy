@@ -12,6 +12,18 @@ use App\Enums\GameStatus;
 
 class Game extends Model
 {
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'status',
         'max_players',

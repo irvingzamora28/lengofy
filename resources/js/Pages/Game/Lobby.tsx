@@ -1,11 +1,12 @@
+import { Link } from '@inertiajs/react';
+import { useState } from 'react';
+import { router } from '@inertiajs/core';
 import { Game } from './types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { useGuestUser } from '@/Hooks/useGuestUser';
-import GuestConversionModal from '@/Components/GuestConversionModal';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import useEchoChannel from '@/Hooks/useEchoChannel';
+import { useGuestUser } from '@/Hooks/useGuestUser';
+import GuestConversionModal from '@/Components/GuestConversionModal';
 
 interface Props {
     auth: {
@@ -59,44 +60,63 @@ export default function Lobby({ auth, activeGames }: Props) {
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Game Lobby</h2>}
         >
-            <Head title="Game Lobby" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div className="mb-6">
-                            <h3 className="text-lg font-medium mb-4">Create New Game</h3>
-                            <div className="flex gap-4">
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900">
+                            <div className="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 className="text-2xl font-bold">Active Games</h2>
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        Showing games for your selected language pair only
+                                    </p>
+                                </div>
                                 <PrimaryButton
                                     onClick={handlePlayClick}
                                 >
-                                    Create Game
+                                    Create New Game
                                 </PrimaryButton>
                             </div>
-                        </div>
 
-                        <div>
-                            <h3 className="text-lg font-medium mb-4">Available Games</h3>
                             {games.length === 0 ? (
-                                <p>No games available. Create one!</p>
+                                <div className="text-center py-8">
+                                    <p className="text-gray-500 mb-4">No active games for your language pair.</p>
+                                    <p className="text-sm text-gray-400">
+                                        Create a new game or change your language pair in your profile settings.
+                                    </p>
+                                </div>
                             ) : (
-                                <div className="grid gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     {games.map((game) => (
                                         <div
                                             key={game.id}
-                                            className="flex items-center justify-between border rounded-lg p-4"
+                                            className="border rounded-lg p-4 hover:shadow-lg transition-shadow"
                                         >
-                                            <div>
-                                                <h4 className="font-medium">{game.language_name}</h4>
-                                                <p className="text-sm text-gray-600">
-                                                    Players: {game.players.length}/{game.max_players}
-                                                </p>
+                                            <div className="flex justify-between items-center mb-4">
+                                                <h3 className="text-lg font-semibold">
+                                                    Game #{game.id}
+                                                </h3>
+                                                <span className="text-sm text-gray-500">
+                                                    {game.players.length}/{game.max_players} Players
+                                                </span>
                                             </div>
+
+                                            <div className="mb-4 p-2 bg-gray-50 rounded">
+                                                <div className="flex items-center justify-center space-x-2">
+                                                    <span className="text-xl">{game.source_language.flag}</span>
+                                                    <span className="text-gray-600">{game.source_language.name}</span>
+                                                    <span className="text-gray-400">→</span>
+                                                    <span className="text-xl">{game.target_language.flag}</span>
+                                                    <span className="text-gray-600">{game.target_language.name}</span>
+                                                </div>
+                                            </div>
+
                                             <Link
                                                 href={`/games/${game.id}/join`}
                                                 method="post"
                                                 as="button"
-                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                                className="mt-2 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-center"
                                             >
                                                 Join Game
                                             </Link>

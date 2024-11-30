@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Game;
+use App\Services\LanguageService;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -16,7 +17,8 @@ class GameCreated implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public function __construct(
-        public Game $game
+        public Game $game,
+        private LanguageService $languageService = new LanguageService(),
     ) {
         Log::info('GameCreated event constructed', [
             'game_id' => $game->id
@@ -50,7 +52,17 @@ class GameCreated implements ShouldBroadcast
                 ]),
                 'max_players' => $game->max_players,
                 'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
-            ]
+                'source_language' => [
+                    'code' => $game->languagePair->sourceLanguage->code,
+                    'name' => $game->languagePair->sourceLanguage->name,
+                    'flag' => $this->languageService->getFlag($game->languagePair->sourceLanguage->code),
+                ],
+                'target_language' => [
+                    'code' => $game->languagePair->targetLanguage->code,
+                    'name' => $game->languagePair->targetLanguage->name,
+                    'flag' => $this->languageService->getFlag($game->languagePair->targetLanguage->code),
+                ],
+            ],
         ];
     }
 }
