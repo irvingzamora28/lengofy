@@ -2,11 +2,34 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Select from '@/Components/Select';
 
+interface LanguagePair {
+    id: string;
+    sourceLanguage: {
+        code: string;
+        name: string;
+        flag: string;
+    };
+    targetLanguage: {
+        code: string;
+        name: string;
+        flag: string;
+    };
+}
+
+// Translations for "I am learning" in different languages
+const learningPhrases: Record<string, string> = {
+    'de': 'Ich lerne',
+    'en': 'I am learning',
+    'es': 'Estoy aprendiendo',
+    'fr': 'J\'apprends',
+    'it': 'Sto imparando',
+};
+
 interface Props {
     value: string;
     onChange: (value: string) => void;
     error?: string;
-    languagePairs: Record<string, string>;
+    languagePairs: Record<string, LanguagePair>;
     className?: string;
 }
 
@@ -20,24 +43,45 @@ export default function LanguagePairSelect({
     // Get the first language pair ID if available for default value
     const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
     const currentValue = value || defaultLanguagePairId;
+    const currentPair = languagePairs[currentValue];
+
+    const getLearningPhrase = (sourceCode: string, targetLanguage: string) => {
+        return `${learningPhrases[sourceCode] || 'I am learning'} ${targetLanguage}`;
+    };
 
     return (
         <div className={className}>
-            <InputLabel htmlFor="language_pair_id" value="Language Pair" />
+            <InputLabel
+                htmlFor="language_pair_id"
+                value={currentPair
+                    ? getLearningPhrase(currentPair.sourceLanguage.code, currentPair.targetLanguage.name)
+                    : 'Select your language pair'
+                }
+            />
 
-            <Select
-                id="language_pair_id"
-                className="mt-1 block w-full"
-                value={currentValue}
-                onChange={(e) => onChange(e.target.value)}
-                required
-            >
-                {Object.entries(languagePairs).map(([id, name]) => (
-                    <option key={id} value={id}>
-                        {name}
-                    </option>
-                ))}
-            </Select>
+            <div className="mt-1 relative">
+                <Select
+                    id="language_pair_id"
+                    className="block w-full pl-10 pr-10"
+                    value={currentValue}
+                    onChange={(e) => onChange(e.target.value)}
+                    required
+                >
+                    {Object.entries(languagePairs).map(([id, pair]) => (
+                        <option key={id} value={id}>
+                            {pair.sourceLanguage.flag} {pair.sourceLanguage.name} → {pair.targetLanguage.flag} {pair.targetLanguage.name}
+                        </option>
+                    ))}
+                </Select>
+            </div>
+
+            {/* Helper Text */}
+            <p className="mt-2 text-sm text-gray-500">
+                {currentPair
+                    ? `You speak ${currentPair.sourceLanguage.name} and want to learn ${currentPair.targetLanguage.name}`
+                    : 'Select the language you speak and the language you want to learn'
+                }
+            </p>
 
             {error && <InputError className="mt-2" message={error} />}
         </div>

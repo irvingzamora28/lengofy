@@ -28,10 +28,36 @@ class ProfileController extends Controller
                 ->get()
                 ->mapWithKeys(function ($pair) {
                     return [
-                        $pair->id => "{$pair->sourceLanguage->name} → {$pair->targetLanguage->name}"
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $this->getLanguageFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $this->getLanguageFlag($pair->targetLanguage->code),
+                            ],
+                        ]
                     ];
                 })
         ]);
+    }
+
+    private function getLanguageFlag(string $code): string
+    {
+        // Map language codes to flag emojis
+        $flagMap = [
+            'de' => '🇩🇪',
+            'en' => '🇬🇧',
+            'es' => '🇪🇸',
+            'fr' => '🇫🇷',
+            'it' => '🇮🇹',
+        ];
+
+        return $flagMap[$code] ?? '🏳️';
     }
 
     /**
