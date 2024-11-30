@@ -16,6 +16,7 @@ interface GameState {
     players: Array<{
         id: number;
         is_ready: boolean;
+        connectionId: number;
     }>;
     current_round: number;
     words: Array<{
@@ -60,8 +61,22 @@ const server = serve({
                                 words: data.data.words || [],
                             });
                         }
+
+                        // Add connection ID to track this specific client
+                        ws.id = data.userId;
+
                         gameRooms.get(data.gameId)?.add(ws);
                         console.log(`Player joined game ${data.gameId}`);
+
+                        // Update game state with new player
+                        const gameState = gameStates.get(data.gameId);
+                        if (gameState) {
+                            const players = data.data.players || [];
+                            gameState.players = players.map(player => ({
+                                ...player,
+                                id: player.user_id // Map user_id to id for consistency
+                            }));
+                        }
 
                         // Broadcast updated player list to all clients in the room
                         if (gameRoom) {
@@ -69,7 +84,7 @@ const server = serve({
                                 client.send(JSON.stringify({
                                     type: 'game_state_updated',
                                     data: {
-                                        players: data.data.players
+                                        players: gameState?.players || []
                                     }
                                 }));
                             }
@@ -182,14 +197,42 @@ const server = serve({
             }
         },
         close(ws: WebSocket) {
-            // Remove the connection from all game rooms
-            for (const [gameId, room] of gameRooms.entries()) {
-                if (room.has(ws)) {
-                    room.delete(ws);
-                    if (room.size === 0) {
-                        gameRooms.delete(gameId);
-                    }
+            // Handle client disconnection
+            console.log('Client disconnected');
+
+            // Find and remove client from their game room
+            for (const [gameId, clients] of gameRooms.entries()) {
+                if (clients.has(ws)) {
+                    clients.delete(ws);
                     console.log(`Player left game ${gameId}`);
+
+                    // Get current game state
+                    const gameState = gameStates.get(gameId);
+                    if (gameState && gameState.players) {
+                        // Remove the disconnected player
+                        const updatedPlayers = gameState.players.filter(
+                            player => player.id !== ws.id
+                        );
+                        gameState.players = updatedPlayers;
+
+                        // Broadcast updated player list to remaining clients
+                        for (const client of clients) {
+                            client.send(JSON.stringify({
+                                type: 'game_state_updated',
+                                data: {
+                                    players: updatedPlayers
+                                }
+                            }));
+                        }
+                    }
+
+                    // If no players left, clean up the game room
+                    if (clients.size === 0) {
+                        gameRooms.delete(gameId);
+                        gameStates.delete(gameId);
+                        console.log(`Game ${gameId} cleaned up - no players remaining`);
+                    }
+                    break;
                 }
             }
         }

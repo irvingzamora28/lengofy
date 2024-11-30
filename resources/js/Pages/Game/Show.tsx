@@ -94,8 +94,15 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                     console.log('Game state update received:', data.data);
                     setGameState(prev => ({
                         ...prev,
-                        ...data.data
+                        ...data.data,
+                        players: data.data.players || prev.players
                     }));
+                    
+                    // If player list is empty, redirect to lobby
+                    if (data.data.players && data.data.players.length === 0) {
+                        router.visit('/game/lobby');
+                        return;
+                    }
                     break;
 
                 case 'answer_submitted':
