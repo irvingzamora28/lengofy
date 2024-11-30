@@ -30,6 +30,7 @@ interface Props extends PageProps {
 export default function Show({ auth, game, wsEndpoint }: Props) {
     const [gameState, setGameState] = useState(game);
     const [lastAnswer, setLastAnswer] = useState<any>(null);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
     const wsRef = useRef<WebSocket | null>(null);
 
     useEffect(() => {
@@ -97,7 +98,12 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                         ...data.data,
                         players: data.data.players || prev.players
                     }));
-                    
+
+                    // If game is completed, show winner
+                    if (data.data.status === 'completed' && data.data.winner) {
+                        setFeedbackMessage(`Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
+                    }
+
                     // If player list is empty, redirect to lobby
                     if (data.data.players && data.data.players.length === 0) {
                         router.visit('/game/lobby');
@@ -107,7 +113,14 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                 case 'answer_submitted':
                     console.log('Answer submitted:', data.data);
-                    setLastAnswer(data.data);
+                    const { playerId, player_name, word, answer, correct } = data.data;
+                    setLastAnswer({
+                        playerId,
+                        player_name,
+                        word,
+                        answer,
+                        correct
+                    });
                     break;
 
                 case 'score_updated':
@@ -129,7 +142,9 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                         current_round: data.data.round,
                         current_word: data.data.word
                     }));
+                    // Clear previous answer and feedback
                     setLastAnswer(null);
+                    setFeedbackMessage('');
                     break;
             }
         };
@@ -204,8 +219,6 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
         return (
             <div className={`text-lg ${lastAnswer.correct ? 'text-green-500' : 'text-red-500'}`}>
                 <p><strong>{lastAnswer.player_name}</strong> answered {lastAnswer.correct ? 'correctly' : 'incorrectly'}!</p>
-                <p>The translation was: {lastAnswer.translation}</p>
-                <p>{lastAnswer.player_name} {lastAnswer.correct ? 'gained' : 'lost'} {lastAnswer.points} points</p>
             </div>
         );
     };
@@ -325,11 +338,17 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                                         </button>
                                     </div>
                                     {renderLastAnswer()}
+                                    {feedbackMessage && (
+                                        <div className="text-lg text-gray-500">{feedbackMessage}</div>
+                                    )}
                                 </div>
                             ) : gameState.status === 'completed' ? (
                                 <div className="text-center">
                                     <h3 className="text-xl mb-4">Game Over!</h3>
                                     <div className="space-y-2">
+                                        {feedbackMessage && (
+                                            <div className="text-lg text-gray-500">{feedbackMessage}</div>
+                                        )}
                                         {gameState.players.sort((a, b) => b.score - a.score).map((player, index) => (
                                             <div key={player.id} className="flex justify-between items-center">
                                                 <span>{index + 1}. {player.player_name}</span>
