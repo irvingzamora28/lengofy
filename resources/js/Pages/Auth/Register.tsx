@@ -3,15 +3,19 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import LanguagePairSelect from '../Profile/Partials/LanguagePairSelect';
 
 export default function Register() {
+    const { languagePairs } = usePage<PageProps>().props;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
+        language_pair_id: '',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -100,6 +104,15 @@ export default function Register() {
                     <InputError
                         message={errors.password_confirmation}
                         className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <LanguagePairSelect
+                        languagePairs={languagePairs}
+                        value={data.language_pair_id}
+                        onChange={(value) => setData('language_pair_id', value)}
+                        error={errors.language_pair_id}
                     />
                 </div>
 
