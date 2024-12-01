@@ -177,10 +177,16 @@ cp .env.example .env.testing
 php artisan key:generate --env=testing
 ```
 
-### 4. Run Tests
+### 4. Run Database Test Migrations
 
 ```bash
-php artisan test
+php artisan migrate --env=testing
+```
+
+### 5. Run Tests
+
+```bash
+php artisan test --env=testing
 ```
 
 ## License
