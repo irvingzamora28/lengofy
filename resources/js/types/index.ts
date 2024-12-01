@@ -1,3 +1,5 @@
+import { Language } from './language';
+
 export * from './language';
 
 export interface User {
@@ -15,10 +17,14 @@ export interface Game {
     max_players: number;
     current_round: number;
     total_rounds: number;
+    language_name: string;
+    source_language: Language;
+    target_language: Language;
+    language_pair_id: number;
     current_word?: {
         id: number;
         word: string;
-        gender: 'der' | 'die' | 'das';
+        gender: string;
     };
     players: GamePlayer[];
 }
@@ -31,4 +37,5 @@ export interface GamePlayer {
     player_name: string;
     score: number;
     is_ready: boolean;
+    is_host: boolean;
 }

@@ -1,29 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { PageProps } from '@/types';
+import { Game, PageProps } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 interface Props extends PageProps {
     auth: any;
-    game: {
-        id: number;
-        status: string;
-        players: Array<{
-            id: number;
-            user_id: number;
-            player_name: string;
-            score: number;
-            is_ready: boolean;
-            is_guest: boolean;
-        }>;
-        max_players: number;
-        current_round: number;
-        total_rounds: number;
-        current_word: any;
-        language_name: string;
-        words: any;
-    };
+    game: Game;
     wsEndpoint: string;
 }
 

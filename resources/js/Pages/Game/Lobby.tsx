@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { router } from '@inertiajs/core';
-import { Game } from './types';
+import { Game } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import useEchoChannel from '@/Hooks/useEchoChannel';
