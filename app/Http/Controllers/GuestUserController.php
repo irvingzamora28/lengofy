@@ -17,9 +17,13 @@ class GuestUserController extends Controller
         $this->guestUserService = $guestUserService;
     }
 
-    public function createAndLogin()
+    public function createAndLogin(Request $request)
     {
-        $user = $this->guestUserService->createGuestUser();
+        $request->validate([
+            'language_pair_id' => 'required|exists:language_pairs,id',
+        ]);
+
+        $user = $this->guestUserService->createGuestUser($request->language_pair_id);
         Auth::login($user);
 
         return redirect()->route('games.lobby');
@@ -68,22 +72,22 @@ class GuestUserController extends Controller
     public function logout()
     {
         $user = Auth::user();
-        
+
         if ($user && $user->is_guest) {
             // Store the user ID before logging out
             $userId = $user->id;
-            
+
             // Logout the user
             Auth::logout();
-            
+
             // Delete the guest user
             User::where('id', $userId)->delete();
-            
+
             // Clear session
             request()->session()->invalidate();
             request()->session()->regenerateToken();
         }
-        
+
         return redirect()->route('welcome');
     }
 }

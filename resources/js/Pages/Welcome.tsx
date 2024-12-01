@@ -1,10 +1,13 @@
-import { Link, Head, useForm } from '@inertiajs/react';
+import { Link, Head, usePage } from '@inertiajs/react';
+import { useState } from 'react';
+import GuestLanguageModal from '@/Components/GuestLanguageModal';
 
 export default function Welcome() {
-    const { post, processing } = useForm({});
+    const { languagePairs } = usePage<PageProps>().props;
+    const [showLanguageModal, setShowLanguageModal] = useState(false);
 
     const handleGuestPlay = () => {
-        post(route('guest.create'));
+        setShowLanguageModal(true);
     };
 
     return (
@@ -24,10 +27,9 @@ export default function Welcome() {
                     <div className="mt-16 flex flex-col items-center gap-6">
                         <button
                             onClick={handleGuestPlay}
-                            disabled={processing}
                             className="px-8 py-4 bg-red-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-red-600 transition-colors w-64 text-center disabled:opacity-75 disabled:cursor-not-allowed"
                         >
-                            {processing ? 'Creating Guest Account...' : 'Play as Guest'}
+                            Play as Guest
                         </button>
 
                         <Link
@@ -74,6 +76,12 @@ export default function Welcome() {
                     </div>
                 </div>
             </div>
+
+            <GuestLanguageModal
+                show={showLanguageModal}
+                onClose={() => setShowLanguageModal(false)}
+                languagePairs={languagePairs}
+            />
         </>
     );
 }

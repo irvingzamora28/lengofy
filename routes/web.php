@@ -3,18 +3,41 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GuestUserController;
+use App\Http\Controllers\Auth\GuestController;
+use App\Models\LanguagePair;
+use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/', function (LanguageService $languageService) {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'languagePairs' => LanguagePair::where('is_active', true)
+            ->with(['sourceLanguage', 'targetLanguage'])
+            ->get()
+            ->mapWithKeys(function ($pair) use ($languageService) {
+                return [
+                    $pair->id => [
+                        'id' => $pair->id,
+                        'sourceLanguage' => [
+                            'code' => $pair->sourceLanguage->code,
+                            'name' => $pair->sourceLanguage->name,
+                            'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                        ],
+                        'targetLanguage' => [
+                            'code' => $pair->targetLanguage->code,
+                            'name' => $pair->targetLanguage->name,
+                            'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                        ],
+                    ],
+                ];
+            })->all(),
     ]);
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class GuestUserService
 {
-    public function createGuestUser(): User
+    public function createGuestUser(int $languagePairId = null): User
     {
         $guestToken = Str::random(32);
         $guestId = Str::random(8);
@@ -19,6 +19,7 @@ class GuestUserService
             'password' => Hash::make(Str::random(8)),
             'is_guest' => true,
             'guest_token' => $guestToken,
+            'language_pair_id' => $languagePairId,
             'last_active_at' => now(),
         ]);
     }
