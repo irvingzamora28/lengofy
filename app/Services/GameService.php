@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\AnswerSubmitted;
+use App\Events\GameCreated;
 use App\Events\GameEnded;
 use App\Events\GameStarted;
 use App\Events\NextRound;
@@ -35,6 +36,8 @@ class GameService
             ]);
 
             $this->addPlayer($game, $user);
+            $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+            broadcast(new GameCreated($game));
 
             return $game;
         });

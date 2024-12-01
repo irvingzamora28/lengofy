@@ -63,8 +63,6 @@ class GameController extends Controller
             $validated['language_pair_id'],
             $validated['max_players']
         );
-        $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
-        broadcast(new GameCreated($game));
 
         return redirect()->route('games.show', $game);
     }

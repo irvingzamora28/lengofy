@@ -4,11 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Language;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class LanguageSeeder extends Seeder
 {
     public function run(): void
     {
+        Log::info('LanguageSeeder is running');
         $languages = [
             ['code' => 'en', 'name' => 'English'],
             ['code' => 'es', 'name' => 'Español'],

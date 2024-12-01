@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use App\Models\LanguagePair;
 use App\Models\GamePlayer;
@@ -12,6 +13,8 @@ use App\Enums\GameStatus;
 
 class Game extends Model
 {
+    use HasFactory;
+
     /**
      * The relationships that should always be loaded.
      *
