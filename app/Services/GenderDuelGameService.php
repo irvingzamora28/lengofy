@@ -3,15 +3,15 @@
 namespace App\Services;
 
 use App\Events\AnswerSubmitted;
-use App\Events\GameCreated;
-use App\Events\GameEnded;
-use App\Events\GameStarted;
+use App\Events\GenderDuelGameCreated;
+use App\Events\GenderDuelGameEnded;
+use App\Events\GenderDuelGameStarted;
 use App\Events\NextRound;
 use App\Events\PlayerLeft;
 use App\Events\ScoreUpdated;
-use App\Enums\GameStatus;
-use App\Models\Game;
-use App\Models\GamePlayer;
+use App\Enums\GenderDuelGameStatus;
+use App\Models\GenderDuelGame;
+use App\Models\GenderDuelGamePlayer;
 use App\Models\LanguagePair;
 use App\Models\Noun;
 use App\Models\User;
@@ -19,43 +19,43 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class GameService
+class GenderDuelGameService
 {
     private const POINTS_CORRECT = 10;
     private const POINTS_INCORRECT = -5;
 
-    public function createGame(?User $user, string $language_pair_id, int $max_players): Game
+    public function createGame(?User $user, string $language_pair_id, int $max_players): GenderDuelGame
     {
         return DB::transaction(function () use ($user, $language_pair_id, $max_players) {
-            $game = Game::create([
-                'status' => GameStatus::WAITING,
+            $genderDuelGame = GenderDuelGame::create([
+                'status' => GenderDuelGameStatus::WAITING,
                 'max_players' => $max_players,
                 'total_rounds' => 10,
                 'language_pair_id' => $language_pair_id,
                 'creator_id' => $user?->id,
             ]);
 
-            $this->addPlayer($game, $user);
-            $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
-            broadcast(new GameCreated($game));
+            $this->addPlayer($genderDuelGame, $user);
+            $genderDuelGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+            broadcast(new GenderDuelGameCreated($genderDuelGame));
 
-            return $game;
+            return $genderDuelGame;
         });
     }
 
-    public function joinGame(Game $game, ?User $user): void
+    public function joinGame(GenderDuelGame $genderDuelGame, ?User $user): void
     {
-        if ($game->players()->count() >= $game->max_players) {
+        if ($genderDuelGame->players()->count() >= $genderDuelGame->max_players) {
             throw new \Exception('Game is full');
         }
 
-        $this->addPlayer($game, $user);
+        $this->addPlayer($genderDuelGame, $user);
     }
 
-    private function addPlayer(Game $game, ?User $user): void
+    private function addPlayer(GenderDuelGame $genderDuelGame, ?User $user): void
     {
-        Log::info('Adding player to game: ' . $game->id . ' for user: ' . ($user ? $user->name : 'guest'));
-        $player = $game->players()->create([
+        Log::info('Adding player to game: ' . $genderDuelGame->id . ' for user: ' . ($user ? $user->name : 'guest'));
+        $player = $genderDuelGame->players()->create([
             'user_id' => $user?->id,
             'guest_id' => $user ? null : Str::uuid(),
             'player_name' => $user?->name ?? 'Guest ' . Str::random(6),
@@ -64,9 +64,9 @@ class GameService
         ]);
     }
 
-    public function markPlayerReady(Game $game, int $userId): void
+    public function markPlayerReady(GenderDuelGame $genderDuelGame, int $userId): void
     {
-        $player = $game->players()->where('user_id', $userId)->first();
+        $player = $genderDuelGame->players()->where('user_id', $userId)->first();
 
         if (!$player) {
             throw new \Exception('Player not found in this game');
@@ -75,46 +75,46 @@ class GameService
         $player->update(['is_ready' => true]);
 
         // Check if all players are ready to start the game
-        if ($this->areAllPlayersReady($game)) {
-            $this->startGame($game);
+        if ($this->areAllPlayersReady($genderDuelGame)) {
+            $this->startGame($genderDuelGame);
         }
     }
 
-    private function areAllPlayersReady(Game $game): bool
+    private function areAllPlayersReady(GenderDuelGame $genderDuelGame): bool
     {
-        return !$game->players()->where('is_ready', false)->exists();
+        return !$genderDuelGame->players()->where('is_ready', false)->exists();
     }
 
-    private function startGame(Game $game): void
+    private function startGame(GenderDuelGame $genderDuelGame): void
     {
         // Only start games that are in waiting status
-        if ($game->status !== GameStatus::WAITING) {
+        if ($genderDuelGame->status !== GenderDuelGameStatus::WAITING) {
             return;
         }
 
         // Start the game
-        $game->update([
-            'status' => GameStatus::IN_PROGRESS,
+        $genderDuelGame->update([
+            'status' => GenderDuelGameStatus::IN_PROGRESS,
             'current_round' => 1,
         ]);
 
         // Get first word for the game
-        $word = $this->getNextWord($game);
-        $game->update(['current_word' => $word]);
+        $word = $this->getNextWord($genderDuelGame);
+        $genderDuelGame->update(['current_word' => $word]);
 
         return;
     }
 
-    public function submitAnswer(Game $game, int $userId, string $answer): array
+    public function submitAnswer(GenderDuelGame $genderDuelGame, int $userId, string $answer): array
     {
-        $player = $game->players()->where('user_id', $userId)->first();
-        $word = $game->current_word;
+        $player = $genderDuelGame->players()->where('user_id', $userId)->first();
+        $word = $genderDuelGame->current_word;
 
         // Get a fresh copy of the game to prevent race conditions
-        $game->refresh();
+        $genderDuelGame->refresh();
 
         // Don't allow answering if word has changed (meaning someone already answered correctly)
-        if ($word !== $game->current_word) {
+        if ($word !== $genderDuelGame->current_word) {
             return [
                 'error' => 'Someone already answered this word correctly',
                 'newScore' => $player->score
@@ -128,7 +128,7 @@ class GameService
         $player->increment('score', $points);
 
         // Broadcast score update
-        broadcast(new ScoreUpdated($game, [
+        broadcast(new ScoreUpdated($genderDuelGame, [
             'id' => $player->id,
             'user_id' => $player->user_id,
             'player_name' => $player->player_name,
@@ -145,51 +145,51 @@ class GameService
             'player_name' => $player->player_name,
         ];
 
-        broadcast(new AnswerSubmitted($game, $result));
+        broadcast(new AnswerSubmitted($genderDuelGame, $result));
 
         // Only move to next round if answer was correct
         if ($isCorrect) {
-            $this->nextRound($game);
+            $this->nextRound($genderDuelGame);
         }
 
         return $result;
     }
 
-    private function nextRound(Game $game): void
+    private function nextRound(GenderDuelGame $genderDuelGame): void
     {
-        if ($game->current_round >= $game->total_rounds) {
-            $game->update(['status' => GameStatus::ENDED]);
-            broadcast(new GameEnded($game));
+        if ($genderDuelGame->current_round >= $genderDuelGame->total_rounds) {
+            $genderDuelGame->update(['status' => GenderDuelGameStatus::ENDED]);
+            broadcast(new GenderDuelGameEnded($genderDuelGame));
             return;
         }
 
         // Get new word and increment round
-        $game->current_word = $this->getNextWord($game);
-        $game->current_round += 1;
-        $game->save();
+        $genderDuelGame->current_word = $this->getNextWord($genderDuelGame);
+        $genderDuelGame->current_round += 1;
+        $genderDuelGame->save();
 
-        broadcast(new NextRound($game));
+        broadcast(new NextRound($genderDuelGame));
     }
 
-    private function endGame(Game $game): void
+    private function endGame(GenderDuelGame $genderDuelGame): void
     {
-        $game->update(['status' => GameStatus::ENDED]);
+        $genderDuelGame->update(['status' => GenderDuelGameStatus::ENDED]);
 
-        broadcast(new GameEnded($game));
+        broadcast(new GenderDuelGameEnded($genderDuelGame));
     }
 
-    public function leaveGame(Game $game, User $user): void
+    public function leaveGame(GenderDuelGame $genderDuelGame, User $user): void
     {
         Log::info('Player leaving game', [
-            'game_id' => $game->id,
+            'game_id' => $genderDuelGame->id,
             'user_id' => $user->id
         ]);
 
-        $player = $game->players()->where('user_id', $user->id)->first();
+        $player = $genderDuelGame->players()->where('user_id', $user->id)->first();
 
         if (!$player) {
             Log::warning('Player not found in game', [
-                'game_id' => $game->id,
+                'game_id' => $genderDuelGame->id,
                 'user_id' => $user->id
             ]);
             return;
@@ -200,18 +200,18 @@ class GameService
         $player->delete();
 
         // If this was the last player, end the game
-        if ($game->players()->count() === 0) {
-            $this->endGame($game);
+        if ($genderDuelGame->players()->count() === 0) {
+            $this->endGame($genderDuelGame);
         }
         // If game was in progress and not enough players, end it
-        else if ($game->status === GameStatus::IN_PROGRESS && $game->players()->count() < 2) {
-            $this->endGame($game);
+        else if ($genderDuelGame->status === GenderDuelGameStatus::IN_PROGRESS && $genderDuelGame->players()->count() < 2) {
+            $this->endGame($genderDuelGame);
         }
     }
 
-    private function getNextWord(Game $game): array
+    private function getNextWord(GenderDuelGame $genderDuelGame): array
     {
-        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($game->language_pair_id);
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($genderDuelGame->language_pair_id);
 
         // Get a random noun from the target language
         $word = Noun::where('language_id', $languagePair->target_language_id)
@@ -230,13 +230,13 @@ class GameService
         ];
     }
 
-    public function getGameWords(Game $game): array
+    public function getGameWords(GenderDuelGame $genderDuelGame): array
     {
-        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($game->language_pair_id);
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($genderDuelGame->language_pair_id);
 
         return Noun::where('language_id', $languagePair->target_language_id)
             ->inRandomOrder()
-            ->limit($game->total_rounds)
+            ->limit($genderDuelGame->total_rounds)
             ->get()
             ->map(fn($noun) => [
                 'id' => $noun->id,

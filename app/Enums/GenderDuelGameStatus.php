@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum GameStatus: string
+enum GenderDuelGameStatus: string
 {
     case WAITING = 'waiting';
     case IN_PROGRESS = 'in_progress';

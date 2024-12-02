@@ -25,7 +25,7 @@ class GenderDuelGameController extends Controller
     {
         $user = auth()->user();
 
-        return Inertia::render('Game/Lobby', [
+        return Inertia::render('GenderDuelGame/Lobby', [
             'activeGames' => GenderDuelGame::where('status', 'waiting')
                 ->where('language_pair_id', $user->language_pair_id)
                 ->with(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage'])
@@ -58,31 +58,30 @@ class GenderDuelGameController extends Controller
             'max_players' => 'required|integer|min:2|max:10',
         ]);
 
-        $game = $this->genderDuelGameService->createGame(
+        $genderDuelGame = $this->genderDuelGameService->createGame(
             auth()->user(),
             $validated['language_pair_id'],
             $validated['max_players']
         );
-
-        return redirect()->route('gender-duel-game.show', $game);
+        dd($genderDuelGame);
+        return redirect()->route('gender-duel-game.show', $genderDuelGame);
     }
 
-    public function show(GenderDuelGame $game)
+    public function show(GenderDuelGame $genderDuelGame)
     {
-        // Load game data with relationships
-        $game->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+        // Load genderDuelGame data with relationships
+        $genderDuelGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
 
-        // Get words for the game
-        $words = $this->genderDuelGameService->getGameWords($game);
+        // Get words for the genderDuelGame
+        $words = $this->genderDuelGameService->getGameWords($genderDuelGame);
 
-        // Refresh the game instance to get the latest state
-        $game->refresh();
-
-        return Inertia::render('Game/Show', [
-            'game' => [
-                'id' => $game->id,
-                'status' => $game->status,
-                'players' => $game->players->map(fn($player) => [
+        // Refresh the genderDuelGame instance to get the latest state
+        $genderDuelGame->refresh();
+        return Inertia::render('GenderDuelGame/Show', [
+            'gender_duel_game' => [
+                'id' => $genderDuelGame->id,
+                'status' => $genderDuelGame->status,
+                'players' => $genderDuelGame->players->map(fn($player) => [
                     'id' => $player->id,
                     'user_id' => $player->user_id,
                     'player_name' => $player->player_name,
@@ -90,59 +89,59 @@ class GenderDuelGameController extends Controller
                     'is_ready' => $player->is_ready,
                     'is_guest' => $player->guest_id !== null,
                 ]),
-                'max_players' => $game->max_players,
-                'current_round' => $game->current_round,
-                'total_rounds' => $game->total_rounds,
-                'current_word' => $game->current_word,
-                'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
+                'max_players' => $genderDuelGame->max_players,
+                'current_round' => $genderDuelGame->current_round,
+                'total_rounds' => $genderDuelGame->total_rounds,
+                'current_word' => $genderDuelGame->current_word,
+                'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
                 'words' => $words,
             ],
             'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
     }
 
-    public function join(GenderDuelGame $game)
+    public function join(GenderDuelGame $genderDuelGame)
     {
         $user = auth()->user();
 
-        if ($game->language_pair_id !== $user->language_pair_id) {
+        if ($genderDuelGame->language_pair_id !== $user->language_pair_id) {
             return back()->with('error', 'You can only join games that match your selected language pair.');
         }
 
-        if ($game->players()->count() >= $game->max_players) {
-            return back()->with('error', 'This game is full.');
+        if ($genderDuelGame->players()->count() >= $genderDuelGame->max_players) {
+            return back()->with('error', 'This genderDuelGame is full.');
         }
 
-        if ($game->players()->where('user_id', $user->id)->exists()) {
-            return back()->with('error', 'You are already in this game.');
+        if ($genderDuelGame->players()->where('user_id', $user->id)->exists()) {
+            return back()->with('error', 'You are already in this genderDuelGame.');
         }
 
         try {
-            $this->genderDuelGameService->joinGame($game, auth()->user());
-            return redirect()->route('gender-duel-game.show', $game);
+            $this->genderDuelGameService->joinGame($genderDuelGame, auth()->user());
+            return redirect()->route('gender-duel-game.show', $genderDuelGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function ready(GenderDuelGame $game)
+    public function ready(GenderDuelGame $genderDuelGame)
     {
         try {
-            $this->genderDuelGameService->markPlayerReady($game, auth()->id());
-            return to_route('gender-duel-game.show', $game);
+            $this->genderDuelGameService->markPlayerReady($genderDuelGame, auth()->id());
+            return to_route('gender-duel-game.show', $genderDuelGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function submitAnswer(Request $request, GenderDuelGame $game)
+    public function submitAnswer(Request $request, GenderDuelGame $genderDuelGame)
     {
         $validated = $request->validate([
             'answer' => 'required|string|in:der,die,das',
         ]);
 
         try {
-            $result = $this->genderDuelGameService->submitAnswer($game, auth()->id(), $validated['answer']);
+            $result = $this->genderDuelGameService->submitAnswer($genderDuelGame, auth()->id(), $validated['answer']);
 
             return response()->json($result);
         } catch (\Exception $e) {
@@ -150,9 +149,9 @@ class GenderDuelGameController extends Controller
         }
     }
 
-    public function leave(GenderDuelGame $game)
+    public function leave(GenderDuelGame $genderDuelGame)
     {
-        $this->genderDuelGameService->leaveGame($game, auth()->user());
+        $this->genderDuelGameService->leaveGame($genderDuelGame, auth()->user());
         return redirect()->route('gender-duel-game.lobby');
     }
 }

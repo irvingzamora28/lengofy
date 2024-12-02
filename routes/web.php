@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GameController;
+use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\Auth\GuestController;
 use App\Models\LanguagePair;
@@ -49,13 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Game routes
-    Route::get('/games', [GameController::class, 'lobby'])->name('games.lobby');
-    Route::post('/games', [GameController::class, 'create'])->name('games.create');
-    Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
-    Route::post('/games/{game}/ready', [GameController::class, 'ready'])->name('games.ready');
-    Route::post('/games/{game}/submit', [GameController::class, 'submit'])->name('games.submit');
-    Route::post('/games/{game}/join', [GameController::class, 'join'])->name('games.join');
-    Route::delete('/games/{game}/leave', [GameController::class, 'leave'])->name('games.leave');
+    Route::get('/gender-duel-game', [GenderDuelGameController::class, 'lobby'])->name('gender-duel-game.lobby');
+    Route::post('/gender-duel-game', [GenderDuelGameController::class, 'create'])->name('gender-duel-game.create');
+    Route::get('/gender-duel-game/{game}', [GenderDuelGameController::class, 'show'])->name('gender-duel-game.show');
+    Route::post('/gender-duel-game/{game}/ready', [GenderDuelGameController::class, 'ready'])->name('gender-duel-game.ready');
+    Route::post('/gender-duel-game/{game}/submit', [GenderDuelGameController::class, 'submit'])->name('gender-duel-game.submit');
+    Route::post('/gender-duel-game/{game}/join', [GenderDuelGameController::class, 'join'])->name('gender-duel-game.join');
+    Route::delete('/gender-duel-game/{game}/leave', [GenderDuelGameController::class, 'leave'])->name('gender-duel-game.leave');
 });
 
 // Guest user routes

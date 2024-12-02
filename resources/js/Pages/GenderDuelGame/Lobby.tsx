@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { router } from '@inertiajs/core';
-import { Game } from '@/types';
+import { GenderDuelGame } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import useEchoChannel from '@/Hooks/useEchoChannel';
@@ -16,26 +16,26 @@ interface Props {
             language_pair_id: string;
         };
     };
-    activeGames: Game[];
+    activeGames: GenderDuelGame[];
 }
 
 export default function Lobby({ auth, activeGames }: Props) {
-    const [games, setGames] = useState<Game[]>(activeGames);
+    const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
 
     // Subscribe to game events
-    useEchoChannel('games', {
-        'game-created': (data: { game: Game }) => {
+    useEchoChannel('gender-duel-game', {
+        'gender-duel-game-created': (data: { game: GenderDuelGame }) => {
             console.log('New game created:', data.game);
             setGames(prevGames => [...prevGames, data.game]);
         },
-        'game-ended': (data: { gameId: number }) => {
+        'gender-duel-game-ended': (data: { gameId: number }) => {
             console.log('Game ended:', data.gameId);
             setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
         }
     });
 
     const handleCreateGame = () => {
-        router.post('/games', {
+        router.post('/gender-duel-game', {
             language_pair_id: auth.user.language_pair_id,
             max_players: 8,
         });
@@ -113,7 +113,7 @@ export default function Lobby({ auth, activeGames }: Props) {
                                             </div>
 
                                             <Link
-                                                href={`/games/${game.id}/join`}
+                                                href={`/gender-duel-game/${game.id}/join`}
                                                 method="post"
                                                 as="button"
                                                 className="mt-2 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-center"

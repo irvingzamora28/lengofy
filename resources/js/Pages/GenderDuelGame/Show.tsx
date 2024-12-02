@@ -1,24 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Game, PageProps } from '@/types';
+import { GenderDuelGame, PageProps } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 interface Props extends PageProps {
     auth: any;
-    game: Game;
+    gender_duel_game: GenderDuelGame;
     wsEndpoint: string;
 }
 
-export default function Show({ auth, game, wsEndpoint }: Props) {
-    const [gameState, setGameState] = useState(game);
+export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
+    const [genderDuelGameState, setGenderDuelGameState] = useState(gender_duel_game);
     const [lastAnswer, setLastAnswer] = useState<any>(null);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const wsRef = useRef<WebSocket | null>(null);
 
     useEffect(() => {
-        console.log(game);
-        console.log(gameState);
+        console.log(gender_duel_game);
+        console.log(genderDuelGameState);
 
     }, []);
 
@@ -29,12 +29,12 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
         ws.onopen = () => {
             console.log('WebSocket connected');
             ws.send(JSON.stringify({
-                type: 'join_game',
-                gameId: game.id,
+                type: 'join_gender_duel_game',
+                genderDuelGameId: gender_duel_game.id,
                 userId: auth.user.id,
                 data: {
-                    words: game.words,
-                    players: game.players
+                    words: gender_duel_game.words,
+                    players: gender_duel_game.players
                 }
             }));
         };
@@ -46,7 +46,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
             switch (data.type) {
                 case 'player_ready':
                     console.log('Player ready update received:', data);
-                    setGameState(prev => {
+                    setGenderDuelGameState(prev => {
                         const newState = {
                             ...prev,
                             players: prev.players.map(player =>
@@ -64,8 +64,8 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                             console.log('onMessage: All players are ready, starting game');
                             // Send game start request
                             ws.send(JSON.stringify({
-                                type: 'start_game',
-                                gameId: game.id,
+                                type: 'start_gender_duel_game',
+                                genderDuelGameId: gender_duel_game.id,
                                 userId: auth.user.id
                             }));
                         }
@@ -74,9 +74,9 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                     });
                     break;
 
-                case 'game_state_updated':
+                case 'gender_duel_game_state_updated':
                     console.log('Game state update received:', data.data);
-                    setGameState(prev => ({
+                    setGenderDuelGameState(prev => ({
                         ...prev,
                         ...data.data,
                         players: data.data.players || prev.players
@@ -89,7 +89,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                     // If player list is empty, redirect to lobby
                     if (data.data.players && data.data.players.length === 0) {
-                        router.visit('/game/lobby');
+                        router.visit('/gender-duel-game/lobby');
                         return;
                     }
                     break;
@@ -108,7 +108,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                 case 'score_updated':
                     console.log('Score updated:', data.data);
-                    setGameState(prev => ({
+                    setGenderDuelGameState(prev => ({
                         ...prev,
                         players: prev.players.map(p =>
                             p.id === data.data.player.id
@@ -120,7 +120,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                 case 'next_round':
                     console.log('Next round:', data.data);
-                    setGameState(prev => ({
+                    setGenderDuelGameState(prev => ({
                         ...prev,
                         current_round: data.data.round,
                         current_word: data.data.word
@@ -141,13 +141,13 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                 ws.close();
             }
         };
-    }, [game.id]);
+    }, [gender_duel_game.id]);
 
     const submitAnswer = (gender: string) => {
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
                 type: 'submit_answer',
-                gameId: gameState.id,
+                genderDuelGameId: genderDuelGameState.id,
                 data: {
                     answer: gender,
                     userId: auth.user.id
@@ -158,7 +158,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
     const markReady = () => {
         // First, update the database through HTTP
-        router.post(`/games/${gameState.id}/ready`, {}, {
+        router.post(`/gender-duel-game/${genderDuelGameState.id}/ready`, {}, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -168,7 +168,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                     wsRef.current.send(JSON.stringify({
                         type: 'player_ready',
-                        gameId: gameState.id,
+                        genderDuelGameId: genderDuelGameState.id,
                         data: {
                             player_id: currentPlayer?.id,
                             user_id: auth.user.id
@@ -176,7 +176,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                     }));
 
                     // Update local state immediately
-                    setGameState(prev => ({
+                    setGenderDuelGameState(prev => ({
                         ...prev,
                         players: prev.players.map(player =>
                             player.id === currentPlayer?.id
@@ -190,10 +190,10 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
     };
 
     const leaveGame = () => {
-        router.delete(`/games/${gameState.id}/leave`);
+        router.delete(`/gender-duel-game/${genderDuelGameState.id}/leave`);
     };
 
-    const currentPlayer = gameState.players.find(player => player.user_id === auth.user.id);
+    const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);
 
     const renderLastAnswer = () => {
         if (!lastAnswer) return null;
@@ -217,9 +217,9 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-semibold">Game #{gameState.id}</h2>
+                            <h2 className="text-2xl font-semibold">Game #{genderDuelGameState.id}</h2>
                             <div className="flex items-center gap-4">
-                            {gameState.status === 'waiting' && !currentPlayer?.is_ready && (
+                            {genderDuelGameState.status === 'waiting' && !currentPlayer?.is_ready && (
                                 <PrimaryButton onClick={markReady}>
                                     Ready
                                 </PrimaryButton>
@@ -239,23 +239,23 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                             <div className="flex items-center gap-6">
                                 <div>
                                     <span className="text-gray-500 dark:text-gray-400">Language:</span>
-                                    <span className="ml-2 font-medium">{gameState.language_name}</span>
+                                    <span className="ml-2 font-medium">{genderDuelGameState.language_name}</span>
                                 </div>
-                                {gameState.status === 'in_progress' && (
+                                {genderDuelGameState.status === 'in_progress' && (
                                     <div>
                                         <span className="text-gray-500 dark:text-gray-400">Round:</span>
-                                        <span className="ml-2 font-medium">{gameState.current_round}/{gameState.total_rounds}</span>
+                                        <span className="ml-2 font-medium">{genderDuelGameState.current_round}/{genderDuelGameState.total_rounds}</span>
                                     </div>
                                 )}
                             </div>
                             <div>
                                 <span className="text-gray-500 dark:text-gray-400">Status:</span>
                                 <span className={`ml-2 font-medium ${
-                                    gameState.status === 'waiting' ? 'text-yellow-500' :
-                                    gameState.status === 'in_progress' ? 'text-green-500' :
+                                    genderDuelGameState.status === 'waiting' ? 'text-yellow-500' :
+                                    genderDuelGameState.status === 'in_progress' ? 'text-green-500' :
                                     'text-red-500'
                                 }`}>
-                                    {gameState.status.charAt(0).toUpperCase() + gameState.status.slice(1).replace('_', ' ')}
+                                    {genderDuelGameState.status.charAt(0).toUpperCase() + genderDuelGameState.status.slice(1).replace('_', ' ')}
                                 </span>
                             </div>
                         </div>
@@ -265,7 +265,7 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                             <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
                                 <h3 className="text-lg font-semibold mb-4">Players</h3>
                                 <div className="space-y-2">
-                                    {gameState.players.map((player: any) => (
+                                    {genderDuelGameState.players.map((player: any) => (
                                         <div
                                             key={player.id}
                                             className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded"
@@ -285,18 +285,18 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
 
                         {/* Game Area */}
                         <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
-                            {gameState.status === 'waiting' ? (
+                            {genderDuelGameState.status === 'waiting' ? (
                                 <div className="text-center">
                                     <p className="mb-4">
                                         Waiting for players...
-                                        {gameState.players.length < gameState.max_players &&
-                                            ` (${gameState.players.length}/${gameState.max_players})`}
+                                        {genderDuelGameState.players.length < genderDuelGameState.max_players &&
+                                            ` (${genderDuelGameState.players.length}/${genderDuelGameState.max_players})`}
                                     </p>
                                 </div>
-                            ) : gameState.status === 'in_progress' && gameState.current_word ? (
+                            ) : genderDuelGameState.status === 'in_progress' && genderDuelGameState.current_word ? (
                                 <div className="text-center">
-                                    <h3 className="text-xl mb-2">Round {gameState.current_round} of {gameState.total_rounds}</h3>
-                                    <h4 className="text-lg mb-4">{gameState.current_word.word}</h4>
+                                    <h3 className="text-xl mb-2">Round {genderDuelGameState.current_round} of {genderDuelGameState.total_rounds}</h3>
+                                    <h4 className="text-lg mb-4">{genderDuelGameState.current_word.word}</h4>
                                     <div className="flex justify-center gap-4 mb-4">
                                         <button
                                             type="button"
@@ -325,14 +325,14 @@ export default function Show({ auth, game, wsEndpoint }: Props) {
                                         <div className="text-lg text-gray-500">{feedbackMessage}</div>
                                     )}
                                 </div>
-                            ) : gameState.status === 'completed' ? (
+                            ) : genderDuelGameState.status === 'completed' ? (
                                 <div className="text-center">
                                     <h3 className="text-xl mb-4">Game Over!</h3>
                                     <div className="space-y-2">
                                         {feedbackMessage && (
                                             <div className="text-lg text-gray-500">{feedbackMessage}</div>
                                         )}
-                                        {gameState.players.sort((a, b) => b.score - a.score).map((player, index) => (
+                                        {genderDuelGameState.players.sort((a, b) => b.score - a.score).map((player, index) => (
                                             <div key={player.id} className="flex justify-between items-center">
                                                 <span>{index + 1}. {player.player_name}</span>
                                                 <span>{player.score} points</span>

@@ -40,6 +40,6 @@ class LanguagePair extends Model
 
     public function games(): HasMany
     {
-        return $this->hasMany(Game::class);
+        return $this->hasMany(GenderDuelGame::class);
     }
 }

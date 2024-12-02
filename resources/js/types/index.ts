@@ -11,7 +11,7 @@ export interface User {
     last_active_at?: string;
 }
 
-export interface Game {
+export interface GenderDuelGame {
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
     max_players: number;
@@ -26,12 +26,12 @@ export interface Game {
         word: string;
         gender: string;
     };
-    players: GamePlayer[];
+    players: GenderDuelGamePlayer[];
 }
 
-export interface GamePlayer {
+export interface GenderDuelGamePlayer {
     id: number;
-    game_id: number;
+    gender_duel_game_id: number;
     user_id?: number;
     guest_id?: string;
     player_name: string;

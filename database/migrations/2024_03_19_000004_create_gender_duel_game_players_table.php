@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('game_players', function (Blueprint $table) {
+        Schema::create('gender_duel_game_players', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('game_id')->constrained('gender_duel_games')->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->uuid('guest_id')->nullable();
             $table->string('player_name');
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('game_players');
+        Schema::dropIfExists('gender_duel_game_players');
     }
 };

@@ -1,20 +1,20 @@
 import { serve } from 'bun';
-import { Game, GamePlayer } from './resources/js/types';
+import { GenderDuelGame, GenderDuelGamePlayer } from './resources/js/types';
 
-interface GameRoom {
+interface GenderDuelGameRoom {
     players: Set<WebSocket>;
 }
 
-interface GameMessage {
-    type: 'join_game' | 'submit_answer' | 'game_state_update' | 'player_ready' | 'start_game';
-    gameId: string;
+interface GenderDuelGameMessage {
+    type: 'join_gender_duel_game' | 'submit_answer' | 'gender_duel_game_state_update' | 'player_ready' | 'start_gender_duel_game';
+    genderDuelGameId: string;
     userId?: string;
     data?: any;
 }
 
-interface GameState {
+interface GenderDuelGameState {
     status: string;
-    players: GamePlayer[];
+    players: GenderDuelGamePlayer[];
     current_round: number;
     words: Array<{
         id: number;
@@ -25,8 +25,8 @@ interface GameState {
 }
 
 // Store active game rooms and their states
-const gameRooms = new Map<string, Set<WebSocket>>();
-const gameStates = new Map<string, GameState>();
+const genderDuelGameRooms = new Map<string, Set<WebSocket>>();
+const genderDuelGameStates = new Map<string, GenderDuelGameState>();
 
 const server = serve({
     port: 6001,
@@ -43,15 +43,15 @@ const server = serve({
         },
         message(ws: WebSocket, message: string) {
             try {
-                const data = JSON.parse(message) as GameMessage;
-                const gameRoom = gameRooms.get(data.gameId);
+                const data = JSON.parse(message) as GenderDuelGameMessage;
+                const gameRoom = genderDuelGameRooms.get(data.genderDuelGameId);
 
                 switch (data.type) {
-                    case 'join_game':
-                        if (!gameRooms.has(data.gameId)) {
-                            gameRooms.set(data.gameId, new Set());
+                    case 'join_gender_duel_game':
+                        if (!genderDuelGameRooms.has(data.genderDuelGameId)) {
+                            genderDuelGameRooms.set(data.genderDuelGameId, new Set());
                             // Initialize game state
-                            gameStates.set(data.gameId, {
+                            genderDuelGameStates.set(data.genderDuelGameId, {
                                 status: 'waiting',
                                 players: [],
                                 current_round: 0,
@@ -62,14 +62,14 @@ const server = serve({
                         // Add connection ID to track this specific client
                         ws.id = data.userId;
 
-                        gameRooms.get(data.gameId)?.add(ws);
-                        console.log(`Player joined game ${data.gameId}`);
+                        genderDuelGameRooms.get(data.genderDuelGameId)?.add(ws);
+                        console.log(`Player joined game ${data.genderDuelGameId}`);
 
                         // Update game state with new player
-                        const gameState = gameStates.get(data.gameId);
+                        const gameState = genderDuelGameStates.get(data.genderDuelGameId);
                         if (gameState) {
                             const players = data.data.players || [];
-                            gameState.players = players.map((player: GamePlayer) => ({
+                            gameState.players = players.map((player: GenderDuelGamePlayer) => ({
                                 ...player,
                                 user_id: player.user_id || null,
                                 guest_id: player.guest_id || null,
@@ -85,7 +85,7 @@ const server = serve({
                         if (gameRoom) {
                             for (const client of gameRoom) {
                                 client.send(JSON.stringify({
-                                    type: 'game_state_updated',
+                                    type: 'gender_duel_game_state_updated',
                                     data: {
                                         players: gameState?.players || []
                                     }
@@ -107,20 +107,20 @@ const server = serve({
                         }
                         break;
 
-                    case 'start_game':
-                        console.log('Starting game:', data.gameId);
+                    case 'start_gender_duel_game':
+                        console.log('Starting game:', data.genderDuelGameId);
 
                         if (gameRoom) {
-                            const gameState = gameStates.get(data.gameId);
+                            const gameState = genderDuelGameStates.get(data.genderDuelGameId);
                             if (gameState) {
                                 gameState.status = 'in_progress';
                                 gameState.current_round = 0; // Start from index 0
 
-                                console.log('Starting game:', data.gameId);
+                                console.log('Starting game:', data.genderDuelGameId);
                                 // Broadcast game start to all players with first word
                                 for (const client of gameRoom) {
                                     client.send(JSON.stringify({
-                                        type: 'game_state_updated',
+                                        type: 'gender_duel_game_state_updated',
                                         data: {
                                             status: 'in_progress',
                                             current_round: 1, // Display as round 1
@@ -134,9 +134,9 @@ const server = serve({
 
                     case 'submit_answer':
                         console.log('Answer submitted:', data);
-                        const answerGameRoom = gameRooms.get(data.gameId);
-                        const currentGameState = gameStates.get(data.gameId);
-                        
+                        const answerGameRoom = genderDuelGameRooms.get(data.genderDuelGameId);
+                        const currentGameState = genderDuelGameStates.get(data.genderDuelGameId);
+
                         if (!currentGameState || !answerGameRoom) {
                             console.log('Game state or room not found');
                             return;
@@ -186,7 +186,7 @@ const server = serve({
 
                             // Send updated game state with new scores
                             client.send(JSON.stringify({
-                                type: 'game_state_updated',
+                                type: 'gender_duel_game_state_updated',
                                 data: {
                                     players: currentGameState.players
                                 }
@@ -204,7 +204,7 @@ const server = serve({
                                 // Broadcast next round to all players
                                 for (const client of answerGameRoom) {
                                     client.send(JSON.stringify({
-                                        type: 'game_state_updated',
+                                        type: 'gender_duel_game_state_updated',
                                         data: {
                                             current_round: currentGameState.current_round + 1, // Display as 1-based
                                             current_word: nextWord
@@ -222,7 +222,7 @@ const server = serve({
                                 // Broadcast game completion to all players
                                 for (const client of answerGameRoom) {
                                     client.send(JSON.stringify({
-                                        type: 'game_state_updated',
+                                        type: 'gender_duel_game_state_updated',
                                         data: {
                                             status: 'completed',
                                             players: sortedPlayers,
@@ -234,13 +234,13 @@ const server = serve({
                         }
                         break;
 
-                    case 'game_state_update':
+                    case 'gender_duel_game_state_update':
                         if (gameRoom) {
                             console.log('Broadcasting game state update:', data);
                             // Broadcast to all players in the game room
                             for (const client of gameRoom) {
                                 client.send(JSON.stringify({
-                                    type: 'game_state_updated',
+                                    type: 'gender_duel_game_state_updated',
                                     data: data.data
                                 }));
                             }
@@ -256,13 +256,13 @@ const server = serve({
             console.log('Client disconnected');
 
             // Find and remove client from their game room
-            for (const [gameId, clients] of gameRooms.entries()) {
+            for (const [gameId, clients] of genderDuelGameRooms.entries()) {
                 if (clients.has(ws)) {
                     clients.delete(ws);
                     console.log(`Player left game ${gameId}`);
 
                     // Get current game state
-                    const gameState = gameStates.get(gameId);
+                    const gameState = genderDuelGameStates.get(gameId);
                     if (gameState && gameState.players) {
                         // Remove the disconnected player
                         const updatedPlayers = gameState.players.filter(
@@ -273,7 +273,7 @@ const server = serve({
                         // Broadcast updated player list to remaining clients
                         for (const client of clients) {
                             client.send(JSON.stringify({
-                                type: 'game_state_updated',
+                                type: 'gender_duel_game_state_updated',
                                 data: {
                                     players: updatedPlayers
                                 }
@@ -283,8 +283,8 @@ const server = serve({
 
                     // If no players left, clean up the game room
                     if (clients.size === 0) {
-                        gameRooms.delete(gameId);
-                        gameStates.delete(gameId);
+                        genderDuelGameRooms.delete(gameId);
+                        genderDuelGameStates.delete(gameId);
                         console.log(`Game ${gameId} cleaned up - no players remaining`);
                     }
                     break;

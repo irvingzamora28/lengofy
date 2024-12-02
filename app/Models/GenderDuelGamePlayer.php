@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class GamePlayer extends Model
+class GenderDuelGamePlayer extends Model
 {
+
+    protected $table = 'gender_duel_game_players';
+
     protected $fillable = [
         'game_id',
         'user_id',
@@ -21,9 +24,9 @@ class GamePlayer extends Model
         'score' => 'integer',
     ];
 
-    public function game(): BelongsTo
+    public function genderDuelGame(): BelongsTo
     {
-        return $this->belongsTo(Game::class);
+        return $this->belongsTo(GenderDuelGame::class);
     }
 
     public function user(): BelongsTo

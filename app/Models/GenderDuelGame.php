@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use App\Models\LanguagePair;
-use App\Models\GamePlayer;
-use App\Enums\GameStatus;
+use App\Models\GenderDuelGamePlayer;
+use App\Enums\GenderDuelGameStatus;
 
-class Game extends Model
+class GenderDuelGame extends Model
 {
     use HasFactory;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'gender_duel_games';
 
     /**
      * The relationships that should always be loaded.
@@ -39,7 +46,7 @@ class Game extends Model
 
     protected $casts = [
         'current_word' => 'array',
-        'status' => GameStatus::class,
+        'status' => GenderDuelGameStatus::class,
     ];
 
     public function languagePair(): BelongsTo
@@ -49,7 +56,7 @@ class Game extends Model
 
     public function players(): HasMany
     {
-        return $this->hasMany(GamePlayer::class);
+        return $this->hasMany(GenderDuelGamePlayer::class, 'game_id');
     }
 
     public function creator(): BelongsTo

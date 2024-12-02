@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('gender_duel_games', function (Blueprint $table) {
             $table->id();
             $table->foreignId('creator_id')->constrained('users');
             $table->foreignId('language_pair_id')->constrained('language_pairs');
@@ -23,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('gender_duel_games');
     }
 };

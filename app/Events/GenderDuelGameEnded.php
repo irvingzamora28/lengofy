@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Game;
+use App\Models\GenderDuelGame;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -10,34 +10,33 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class GameEnded implements ShouldBroadcast
+class GenderDuelGameEnded implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public function __construct(
-        public Game $game
+        public GenderDuelGame $genderDuelGame
     ) {}
 
     public function broadcastOn(): array
     {
         return [
-            new PresenceChannel('games'),
-            new PresenceChannel('game.' . $this->game->id),
+            new PresenceChannel('gender-duel-game'),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'game-ended';
+        return 'gender-duel-game-ended';
     }
 
     public function broadcastWith(): array
     {
-        Log::info('GameEnded broadcasting data', [
-            'game_id' => $this->game->id,
+        Log::info('GenderDuelGameEnded broadcasting data', [
+            'game_id' => $this->genderDuelGame->id,
         ]);
         return [
-            'gameId' => $this->game->id,
+            'gameId' => $this->genderDuelGame->id,
         ];
     }
 }
