@@ -2,16 +2,10 @@
 
 namespace App\Services;
 
-use App\Events\AnswerSubmitted;
 use App\Events\GenderDuelGameCreated;
 use App\Events\GenderDuelGameEnded;
-use App\Events\GenderDuelGameStarted;
-use App\Events\NextRound;
-use App\Events\PlayerLeft;
-use App\Events\ScoreUpdated;
 use App\Enums\GenderDuelGameStatus;
 use App\Models\GenderDuelGame;
-use App\Models\GenderDuelGamePlayer;
 use App\Models\LanguagePair;
 use App\Models\Noun;
 use App\Models\User;
@@ -103,72 +97,6 @@ class GenderDuelGameService
         $genderDuelGame->update(['current_word' => $word]);
 
         return;
-    }
-
-    public function submitAnswer(GenderDuelGame $genderDuelGame, int $userId, string $answer): array
-    {
-        $player = $genderDuelGame->players()->where('user_id', $userId)->first();
-        $word = $genderDuelGame->current_word;
-
-        // Get a fresh copy of the game to prevent race conditions
-        $genderDuelGame->refresh();
-
-        // Don't allow answering if word has changed (meaning someone already answered correctly)
-        if ($word !== $genderDuelGame->current_word) {
-            return [
-                'error' => 'Someone already answered this word correctly',
-                'newScore' => $player->score
-            ];
-        }
-
-        $isCorrect = strtolower($answer) === strtolower($word['gender']);
-        $points = $isCorrect ? self::POINTS_CORRECT : self::POINTS_INCORRECT;
-
-        // Update score
-        $player->increment('score', $points);
-
-        // Broadcast score update
-        broadcast(new ScoreUpdated($genderDuelGame, [
-            'id' => $player->id,
-            'user_id' => $player->user_id,
-            'player_name' => $player->player_name,
-            'score' => $player->score,
-            'is_ready' => $player->is_ready,
-        ]));
-
-        $result = [
-            'correct' => $isCorrect,
-            'points' => $points,
-            'newScore' => $player->score,
-            'translation' => $word['translation'],
-            'player_id' => $player->id,
-            'player_name' => $player->player_name,
-        ];
-
-        broadcast(new AnswerSubmitted($genderDuelGame, $result));
-
-        // Only move to next round if answer was correct
-        if ($isCorrect) {
-            $this->nextRound($genderDuelGame);
-        }
-
-        return $result;
-    }
-
-    private function nextRound(GenderDuelGame $genderDuelGame): void
-    {
-        if ($genderDuelGame->current_round >= $genderDuelGame->total_rounds) {
-            $genderDuelGame->update(['status' => GenderDuelGameStatus::ENDED]);
-            broadcast(new GenderDuelGameEnded($genderDuelGame));
-            return;
-        }
-
-        // Get new word and increment round
-        $genderDuelGame->current_word = $this->getNextWord($genderDuelGame);
-        $genderDuelGame->current_round += 1;
-        $genderDuelGame->save();
-
-        broadcast(new NextRound($genderDuelGame));
     }
 
     private function endGame(GenderDuelGame $genderDuelGame): void

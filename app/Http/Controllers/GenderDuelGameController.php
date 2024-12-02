@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\GenderDuelGameCreated;
-use App\Events\GenderDuelGameStateUpdated;
-use App\Events\NextRound;
 use App\Models\GenderDuelGame;
-use App\Models\LanguagePair;
 use App\Services\GenderDuelGameService;
 use App\Services\LanguageService;
 use Illuminate\Http\Request;
@@ -130,21 +126,6 @@ class GenderDuelGameController extends Controller
             return to_route('gender-duel-game.show', $genderDuelGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
-        }
-    }
-
-    public function submitAnswer(Request $request, GenderDuelGame $genderDuelGame)
-    {
-        $validated = $request->validate([
-            'answer' => 'required|string|in:der,die,das',
-        ]);
-
-        try {
-            $result = $this->genderDuelGameService->submitAnswer($genderDuelGame, auth()->id(), $validated['answer']);
-
-            return response()->json($result);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
         }
     }
 
