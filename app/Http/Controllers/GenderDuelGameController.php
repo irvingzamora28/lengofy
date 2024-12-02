@@ -63,8 +63,7 @@ class GenderDuelGameController extends Controller
             $validated['language_pair_id'],
             $validated['max_players']
         );
-        dd($genderDuelGame);
-        return redirect()->route('gender-duel-game.show', $genderDuelGame);
+        return redirect()->route('gender-duel-game.show', ['genderDuelGame' => $genderDuelGame]);
     }
 
     public function show(GenderDuelGame $genderDuelGame)
