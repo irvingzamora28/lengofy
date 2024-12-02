@@ -1,4 +1,5 @@
 import { serve } from 'bun';
+import { Game, GamePlayer } from './resources/js/types';
 
 interface GameRoom {
     players: Set<WebSocket>;
@@ -13,13 +14,7 @@ interface GameMessage {
 
 interface GameState {
     status: string;
-    players: Array<{
-        id: number;
-        is_ready: boolean;
-        connectionId: number;
-        score?: number;
-        player_name?: string;
-    }>;
+    players: GamePlayer[];
     current_round: number;
     words: Array<{
         id: number;
@@ -74,10 +69,16 @@ const server = serve({
                         const gameState = gameStates.get(data.gameId);
                         if (gameState) {
                             const players = data.data.players || [];
-                            gameState.players = players.map(player => ({
+                            gameState.players = players.map((player: GamePlayer) => ({
                                 ...player,
-                                id: player.user_id // Map user_id to id for consistency
+                                user_id: player.user_id || null,
+                                guest_id: player.guest_id || null,
+                                score: player.score || 0,
+                                is_ready: player.is_ready || false,
+                                is_host: player.is_host || false,
                             }));
+
+                            console.log('Updated players:', gameState.players);
                         }
 
                         // Broadcast updated player list to all clients in the room
@@ -113,7 +114,7 @@ const server = serve({
                             const gameState = gameStates.get(data.gameId);
                             if (gameState) {
                                 gameState.status = 'in_progress';
-                                gameState.current_round = 1;
+                                gameState.current_round = 0; // Start from index 0
 
                                 console.log('Starting game:', data.gameId);
                                 // Broadcast game start to all players with first word
@@ -122,8 +123,8 @@ const server = serve({
                                         type: 'game_state_updated',
                                         data: {
                                             status: 'in_progress',
-                                            current_round: 1,
-                                            current_word: gameState.words[0]
+                                            current_round: 1, // Display as round 1
+                                            current_word: gameState.words[0] // Use index 0
                                         }
                                     }));
                                 }
@@ -135,81 +136,99 @@ const server = serve({
                         console.log('Answer submitted:', data);
                         const answerGameRoom = gameRooms.get(data.gameId);
                         const currentGameState = gameStates.get(data.gameId);
-                        const currentWord = currentGameState?.words[currentGameState?.current_round || 0];
+                        
+                        if (!currentGameState || !answerGameRoom) {
+                            console.log('Game state or room not found');
+                            return;
+                        }
 
-                        if (currentWord && currentGameState && answerGameRoom) {
-                            const isCorrect = data.data.answer.toLowerCase() === currentWord.gender.toLowerCase();
+                        const currentWord = currentGameState.words[currentGameState.current_round];
+                        if (!currentWord) {
+                            console.log('Current word not found for round:', currentGameState.current_round);
+                            return;
+                        }
 
-                            // Update player score
-                            const playerIndex = currentGameState.players.findIndex(
-                                player => player.id === ws.id
-                            );
+                        console.log('Current word:', currentWord);
+                        console.log('Submitted answer:', data.data.answer);
+                        console.log('Expected gender:', currentWord.gender);
 
-                            if (playerIndex !== -1 && isCorrect) {
-                                currentGameState.players[playerIndex].score =
-                                    (currentGameState.players[playerIndex].score || 0) + 1;
-                            }
+                        const isCorrect = data.data.answer.toLowerCase() === currentWord.gender.toLowerCase();
+                        console.log('Answer is correct:', isCorrect);
 
-                            // Broadcast answer result and updated scores
-                            for (const client of answerGameRoom) {
-                                const answeringPlayer = currentGameState.players.find(p => p.id === ws.id);
-                                client.send(JSON.stringify({
-                                    type: 'answer_submitted',
-                                    data: {
-                                        playerId: ws.id,
-                                        player_name: answeringPlayer?.player_name || 'Unknown Player',
-                                        word: currentWord.word,
-                                        answer: data.data.answer,
-                                        correct: isCorrect
-                                    }
-                                }));
+                        // Find the answering player
+                        const answeringPlayer = currentGameState.players.find(
+                            p => p.user_id === Number(data.data.userId)
+                        );
 
-                                // Send updated game state with new scores
-                                client.send(JSON.stringify({
-                                    type: 'game_state_updated',
-                                    data: {
-                                        players: currentGameState.players
-                                    }
-                                }));
-                            }
+                        if (!answeringPlayer) {
+                            console.log('Player not found:', data.data.userId);
+                            return;
+                        }
 
-                            // If answer was correct, move to next round
-                            if (isCorrect) {
-                                // Check if there are more rounds
-                                if (currentGameState.current_round < currentGameState.words.length - 1) {
-                                    // Move to next round
-                                    currentGameState.current_round++;
-                                    const nextWord = currentGameState.words[currentGameState.current_round];
+                        // Update player score
+                        if (isCorrect) {
+                            answeringPlayer.score = (answeringPlayer.score || 0) + 1;
+                        }
 
-                                    // Broadcast next round to all players
-                                    for (const client of answerGameRoom) {
-                                        client.send(JSON.stringify({
-                                            type: 'next_round',
-                                            data: {
-                                                round: currentGameState.current_round,
-                                                word: nextWord
-                                            }
-                                        }));
-                                    }
-                                } else {
-                                    // Game is finished
-                                    currentGameState.status = 'completed';
+                        // Broadcast answer result and updated scores
+                        for (const client of answerGameRoom) {
+                            client.send(JSON.stringify({
+                                type: 'answer_submitted',
+                                data: {
+                                    playerId: answeringPlayer.id,
+                                    userId: answeringPlayer.user_id,
+                                    player_name: answeringPlayer.player_name,
+                                    word: currentWord.word,
+                                    answer: data.data.answer,
+                                    correct: isCorrect
+                                }
+                            }));
 
-                                    // Sort players by score to determine winner
-                                    const sortedPlayers = [...currentGameState.players]
-                                        .sort((a, b) => (b.score || 0) - (a.score || 0));
+                            // Send updated game state with new scores
+                            client.send(JSON.stringify({
+                                type: 'game_state_updated',
+                                data: {
+                                    players: currentGameState.players
+                                }
+                            }));
+                        }
 
-                                    // Broadcast game completion to all players
-                                    for (const client of answerGameRoom) {
-                                        client.send(JSON.stringify({
-                                            type: 'game_state_updated',
-                                            data: {
-                                                status: 'completed',
-                                                players: sortedPlayers,
-                                                winner: sortedPlayers[0]
-                                            }
-                                        }));
-                                    }
+                        // If answer was correct, move to next round
+                        if (isCorrect) {
+                            // Check if there are more rounds
+                            if (currentGameState.current_round < currentGameState.words.length - 1) {
+                                // Move to next round
+                                currentGameState.current_round++;
+                                const nextWord = currentGameState.words[currentGameState.current_round];
+
+                                // Broadcast next round to all players
+                                for (const client of answerGameRoom) {
+                                    client.send(JSON.stringify({
+                                        type: 'game_state_updated',
+                                        data: {
+                                            current_round: currentGameState.current_round + 1, // Display as 1-based
+                                            current_word: nextWord
+                                        }
+                                    }));
+                                }
+                            } else {
+                                // Game is finished
+                                currentGameState.status = 'completed';
+
+                                // Sort players by score to determine winner
+                                const sortedPlayers = [...currentGameState.players]
+                                    .sort((a, b) => (b.score || 0) - (a.score || 0));
+
+                                // Broadcast game completion to all players
+                                for (const client of answerGameRoom) {
+                                    client.send(JSON.stringify({
+                                        type: 'game_state_updated',
+                                        data: {
+                                            status: 'completed',
+                                            players: sortedPlayers,
+                                            winner: sortedPlayers[0]
+                                        }
+                                    }));
                                 }
                             }
                         }
