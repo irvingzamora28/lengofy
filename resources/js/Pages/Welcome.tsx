@@ -1,5 +1,6 @@
 import { Link, Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import GuestLanguageModal from '@/Components/GuestLanguageModal';
 
 export default function Welcome() {
@@ -14,7 +15,6 @@ export default function Welcome() {
     });
 
     useEffect(() => {
-        // Apply dark mode class on mount and when darkMode changes
         if (darkMode) {
             document.documentElement.classList.add('dark');
         } else {
@@ -32,11 +32,47 @@ export default function Welcome() {
         setShowLanguageModal(true);
     };
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const buttonVariants = {
+        hover: {
+            scale: 1.05,
+            transition: { duration: 0.2 }
+        },
+        tap: { scale: 0.95 }
+    };
+
     return (
         <>
             <Head title="Welcome to Lengofy" />
             {/* Navigation Bar */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+            <motion.nav
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700"
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center">
@@ -75,45 +111,77 @@ export default function Welcome() {
                         </div>
                     </div>
                 </div>
-            </nav>
-
-            <div className="relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-                {/* Hero Section */}
-                <div className="relative overflow-hidden">
+            </motion.nav>
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+                className="relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800"
+            >
+                <motion.div
+                    variants={itemVariants}
+                    className="relative overflow-hidden"
+                >
                     <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                         <div className="pt-20 pb-16 text-center lg:pt-32">
-                            <div className="mx-auto max-w-7xl">
-                                <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
+                            <motion.div
+                                variants={containerVariants}
+                                className="mx-auto max-w-7xl"
+                            >
+                                <motion.h1
+                                    variants={itemVariants}
+                                    className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl"
+                                >
                                     Learn Languages
-                                    <span className="block text-primary-500">Through Social Gaming</span>
-                                </h1>
-                                <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300">
+                                    <motion.span
+                                        variants={itemVariants}
+                                        className="block text-primary-600"
+                                    >
+                                        Through Social Gaming
+                                    </motion.span>
+                                </motion.h1>
+                                <motion.p
+                                    variants={itemVariants}
+                                    className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300"
+                                >
                                     Join a community of language learners who master new languages by playing interactive games together.
                                     Challenge friends, track progress, and make learning fun!
-                                </p>
+                                </motion.p>
                                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                                    <button
+                                    <motion.button
+                                        whileHover="hover"
+                                        whileTap="tap"
+                                        variants={buttonVariants}
                                         onClick={handleGuestPlay}
-                                        className="group relative inline-flex items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-lg font-semibold text-white hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-64 sm:w-auto overflow-hidden"
+                                        className="group relative inline-flex items-center justify-center rounded-full bg-primary-600 px-8 py-4 text-lg font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-64 sm:w-auto overflow-hidden"
                                     >
                                         <span className="absolute inset-y-0 left-0 w-[2px] bg-primary-400 transition-all group-hover:w-full"></span>
                                         <span className="relative">Try Gender Duel Now</span>
-                                    </button>
-                                    <Link
-                                        href={route('register')}
-                                        className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-white dark:ring-white/10 dark:hover:ring-white/20 transition-all w-64 sm:w-auto"
+                                    </motion.button>
+                                    <motion.div
+                                        variants={itemVariants}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
-                                        Join Our Community
-                                    </Link>
+                                        <Link
+                                            href={route('register')}
+                                            className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-white dark:ring-white/10 dark:hover:ring-white/20 transition-all w-64 sm:w-auto"
+                                        >
+                                            Join Our Community
+                                        </Link>
+                                    </motion.div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Social Proof */}
-                <div className="border-y border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                <motion.div
+                    variants={itemVariants}
+                    className="border-y border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+                >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             <div className="flex flex-col items-center">
@@ -134,10 +202,13 @@ export default function Welcome() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Features Grid */}
-                <div className="py-24 sm:py-32">
+                <motion.div
+                    variants={itemVariants}
+                    className="py-24 sm:py-32"
+                >
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
@@ -192,7 +263,7 @@ export default function Welcome() {
                             </dl>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Featured Game Section */}
                 <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
@@ -206,25 +277,25 @@ export default function Welcome() {
                         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
                             <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Real-time battles</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Instant feedback</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Competitive scoring</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Daily challenges</span>
@@ -233,7 +304,7 @@ export default function Welcome() {
                             <div className="mt-10 flex items-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                                    className="rounded-md bg-primary-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"
                                 >
                                     Try it Now
                                 </button>
@@ -307,13 +378,17 @@ export default function Welcome() {
                         </defs>
                     </svg>
                 </div>
-            </div>
+            </motion.div>
 
-            <GuestLanguageModal
-                show={showLanguageModal}
-                onClose={() => setShowLanguageModal(false)}
-                languagePairs={languagePairs}
-            />
+            <AnimatePresence>
+                {showLanguageModal && (
+                    <GuestLanguageModal
+                        show={showLanguageModal}
+                        onClose={() => setShowLanguageModal(false)}
+                        languagePairs={languagePairs}
+                    />
+                )}
+            </AnimatePresence>
         </>
     );
 }

@@ -29,6 +29,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "framer-motion": "^11.13.1",
         "laravel-echo": "^1.17.0",
         "pusher-js": "^8.4.0-rc2",
         "ws": "^8.18.0"
