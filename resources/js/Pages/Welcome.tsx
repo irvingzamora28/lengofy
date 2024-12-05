@@ -1,10 +1,32 @@
 import { Link, Head, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GuestLanguageModal from '@/Components/GuestLanguageModal';
 
 export default function Welcome() {
     const { languagePairs } = usePage<PageProps>().props;
     const [showLanguageModal, setShowLanguageModal] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('darkMode') === 'true' ||
+                   window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        return false;
+    });
+
+    useEffect(() => {
+        // Apply dark mode class on mount and when darkMode changes
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [darkMode]);
+
+    const toggleDarkMode = () => {
+        const newDarkMode = !darkMode;
+        setDarkMode(newDarkMode);
+        localStorage.setItem('darkMode', newDarkMode.toString());
+    };
 
     const handleGuestPlay = () => {
         setShowLanguageModal(true);
@@ -13,6 +35,48 @@ export default function Welcome() {
     return (
         <>
             <Head title="Welcome to Lengofy" />
+            {/* Navigation Bar */}
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-16">
+                        <div className="flex items-center">
+                            <Link href="/" className="flex items-center">
+                                <span className="text-2xl font-bold text-red-600">Lengofy</span>
+                            </Link>
+                        </div>
+                        <div className="flex items-center gap-6">
+                            <button
+                                onClick={toggleDarkMode}
+                                className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-lg"
+                                aria-label="Toggle dark mode"
+                            >
+                                {darkMode ? (
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                    </svg>
+                                )}
+                            </button>
+                            <Link
+                                href={route('login')}
+                                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-semibold"
+                            >
+                                Log in
+                            </Link>
+                            <Link
+                                href={route('register')}
+                                className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                            >
+                                Sign up
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
             <div className="relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
                 {/* Hero Section */}
                 <div className="relative overflow-hidden">
@@ -89,7 +153,7 @@ export default function Welcome() {
                                     <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-gray-900 dark:text-white">
                                         <div className="rounded-lg bg-red-600/10 p-2 ring-1 ring-inset ring-red-600/20">
                                             <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857 3 3 0 014.438 0 3 3 0 001.946.806 3 3 0 013.138 3.138 3 3 0 00.806 1.946 3 3 0 010 4.438 3 3 0 00-.806 1.946 3 3 0 01-3.138 3.138 3 3 0 00-1.946.806 3 3 0 01-4.438 0 3 3 0 00-1.946-.806 3 3 0 01-3.138-3.138 3 3 0 00-.806-1.946 3 3 0 010-4.438 3 3 0 00.806-1.946 3 3 0 013.138-3.138z" />
                                             </svg>
                                         </div>
                                         Social Learning
