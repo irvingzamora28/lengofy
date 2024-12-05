@@ -89,7 +89,7 @@ export default function Welcome() {
                                     <span className="block text-red-600">Through Social Gaming</span>
                                 </h1>
                                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-                                    Join a community of language learners who master new languages by playing interactive games together. 
+                                    Join a community of language learners who master new languages by playing interactive games together.
                                     Challenge friends, track progress, and make learning fun!
                                 </p>
                                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -117,20 +117,20 @@ export default function Welcome() {
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">10k+</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Active Learners</div>
+                                <div className="text-4xl font-bold text-red-600">2000+</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">German Nouns</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">50k+</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Games Played</div>
+                                <div className="text-4xl font-bold text-red-600">10</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Gender Categories</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">15+</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Language Games</div>
+                                <div className="text-4xl font-bold text-red-600">100%</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Free to Play</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">4.9/5</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">User Rating</div>
+                                <div className="text-4xl font-bold text-red-600">24/7</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Available Online</div>
                             </div>
                         </div>
                     </div>
