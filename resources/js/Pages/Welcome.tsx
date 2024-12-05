@@ -41,13 +41,13 @@ export default function Welcome() {
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center">
                             <Link href="/" className="flex items-center">
-                                <span className="text-2xl font-bold text-red-600">Lengofy</span>
+                                <span className="text-2xl font-bold text-primary-500">Lengofy</span>
                             </Link>
                         </div>
                         <div className="flex items-center gap-6">
                             <button
                                 onClick={toggleDarkMode}
-                                className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-lg"
+                                className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
                                 aria-label="Toggle dark mode"
                             >
                                 {darkMode ? (
@@ -68,7 +68,7 @@ export default function Welcome() {
                             </Link>
                             <Link
                                 href={route('register')}
-                                className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                className="inline-flex items-center justify-center rounded-full bg-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                             >
                                 Sign up
                             </Link>
@@ -86,7 +86,7 @@ export default function Welcome() {
                             <div className="mx-auto max-w-7xl">
                                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
                                     Learn Languages
-                                    <span className="block text-red-600">Through Social Gaming</span>
+                                    <span className="block text-primary-500">Through Social Gaming</span>
                                 </h1>
                                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300">
                                     Join a community of language learners who master new languages by playing interactive games together.
@@ -95,9 +95,9 @@ export default function Welcome() {
                                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                                     <button
                                         onClick={handleGuestPlay}
-                                        className="group relative inline-flex items-center justify-center rounded-full bg-red-600 px-8 py-4 text-lg font-semibold text-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all w-64 sm:w-auto overflow-hidden"
+                                        className="group relative inline-flex items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-lg font-semibold text-white hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-64 sm:w-auto overflow-hidden"
                                     >
-                                        <span className="absolute inset-y-0 left-0 w-[2px] bg-red-400 transition-all group-hover:w-full"></span>
+                                        <span className="absolute inset-y-0 left-0 w-[2px] bg-primary-400 transition-all group-hover:w-full"></span>
                                         <span className="relative">Try Gender Duel Now</span>
                                     </button>
                                     <Link
@@ -117,19 +117,19 @@ export default function Welcome() {
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">2000+</div>
+                                <div className="text-4xl font-bold text-primary-500">2000+</div>
                                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">German Nouns</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">10</div>
+                                <div className="text-4xl font-bold text-primary-500">10</div>
                                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Gender Categories</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">100%</div>
+                                <div className="text-4xl font-bold text-primary-500">100%</div>
                                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Free to Play</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-red-600">24/7</div>
+                                <div className="text-4xl font-bold text-primary-500">24/7</div>
                                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Available Online</div>
                             </div>
                         </div>
@@ -151,8 +151,8 @@ export default function Welcome() {
                             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
                                 <div className="flex flex-col">
                                     <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-gray-900 dark:text-white">
-                                        <div className="rounded-lg bg-red-600/10 p-2 ring-1 ring-inset ring-red-600/20">
-                                            <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
+                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857 3 3 0 014.438 0 3 3 0 001.946.806 3 3 0 013.138 3.138 3 3 0 00.806 1.946 3 3 0 010 4.438 3 3 0 00-.806 1.946 3 3 0 01-3.138 3.138 3 3 0 00-1.946.806 3 3 0 01-4.438 0 3 3 0 00-1.946-.806 3 3 0 01-3.138-3.138 3 3 0 00-.806-1.946 3 3 0 010-4.438 3 3 0 00.806-1.946 3 3 0 013.138-3.138z" />
                                             </svg>
                                         </div>
@@ -164,8 +164,8 @@ export default function Welcome() {
                                 </div>
                                 <div className="flex flex-col">
                                     <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-gray-900 dark:text-white">
-                                        <div className="rounded-lg bg-red-600/10 p-2 ring-1 ring-inset ring-red-600/20">
-                                            <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
+                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
@@ -178,8 +178,8 @@ export default function Welcome() {
                                 </div>
                                 <div className="flex flex-col">
                                     <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-gray-900 dark:text-white">
-                                        <div className="rounded-lg bg-red-600/10 p-2 ring-1 ring-inset ring-red-600/20">
-                                            <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
+                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path fillRule="evenodd" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                                             </svg>
                                         </div>
@@ -206,25 +206,25 @@ export default function Welcome() {
                         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
                             <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Real-time battles</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Instant feedback</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Competitive scoring</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg className="h-5 w-5 flex-none text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
                                     <span className="ml-2">Daily challenges</span>
@@ -233,7 +233,7 @@ export default function Welcome() {
                             <div className="mt-10 flex items-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-red-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400"
+                                    className="rounded-md bg-blue-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
                                 >
                                     Try it Now
                                 </button>
@@ -268,19 +268,19 @@ export default function Welcome() {
                 </div>
 
                 {/* Final CTA */}
-                <div className="relative isolate overflow-hidden bg-red-500">
+                <div className="relative isolate overflow-hidden bg-primary-500">
                     <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                                 Ready to Start Learning?
                             </h2>
-                            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-red-100">
+                            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
                                 Join thousands of learners who are already mastering languages through play.
                             </p>
                             <div className="mt-10 flex items-center justify-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-red-600 shadow-sm hover:bg-red-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                    className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-primary-500 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
                                     Try Gender Duel
                                 </button>
