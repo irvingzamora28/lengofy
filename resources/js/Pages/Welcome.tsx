@@ -10,6 +10,7 @@ export default function Welcome() {
         translations,
         locale = 'en'
     } = usePage<PageProps>().props;
+
     const [showLanguageModal, setShowLanguageModal] = useState(false);
     const [darkMode, setDarkMode] = useState(() => {
         if (typeof window !== 'undefined') {
@@ -18,6 +19,43 @@ export default function Welcome() {
         }
         return false;
     });
+
+    // Define language cycling arrays based on locale
+    const languageWords = (() => {
+        switch (locale) {
+            case 'en':
+                return ["Languages", "Spanish", "English", "German"];
+            case 'es':
+                return ["Idiomas", "Español", "Inglés", "Alemán"];
+            case 'de':
+                return ["Sprachen", "Spanisch", "Englisch", "Deutsch"];
+            default:
+                return ["Languages", "Spanish", "English", "German"];
+        }
+    })();
+
+    // Extract the heroTitle and split "Learn" + last word
+    // Assuming heroTitle in translations is something like "Learn Languages"
+    const heroTitle = translations.welcome.heroTitle || 'Learn Languages';
+    const [firstPart, ...restParts] = heroTitle.split(' ');
+    const staticPart = firstPart; // "Learn"
+    // The last part "Languages" will be replaced by the animated words
+    // In case heroTitle has more than two words, we handle accordingly:
+    const otherStaticParts = restParts.slice(0, restParts.length - 1).join(' ');
+    const initialWord = restParts[restParts.length - 1] || '';
+
+    // If there's a middle part, rejoin it so we get "Learn (something) <AnimatedWord>"
+    const prefix = otherStaticParts ? `${staticPart} ${otherStaticParts}` : staticPart;
+
+    // State for cycling words
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % languageWords.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [languageWords.length]);
 
     useEffect(() => {
         if (darkMode) {
@@ -66,6 +104,12 @@ export default function Welcome() {
             transition: { duration: 0.2 }
         },
         tap: { scale: 0.95 }
+    };
+
+    const wordVariants = {
+        enter: { opacity: 0, y: 20 },
+        center: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -20 }
     };
 
     return (
@@ -135,7 +179,7 @@ export default function Welcome() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.7 }}
                             animate={{ opacity: 0.7, scale: 1 }}
-                            transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
+                            transition={{ duration: 8, repeat: Infinity, repeatType: 'reverse' }}
                             className="w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 blur-3xl"
                         ></motion.div>
                     </div>
@@ -161,7 +205,22 @@ export default function Welcome() {
                             transition={{ duration: 0.7 }}
                             className="text-5xl font-extrabold tracking-tight text-primary-600 dark:text-white sm:text-6xl md:text-9xl"
                         >
-                            {translations.welcome.heroTitle}
+                            {prefix}{prefix && ' '}
+                            <span className="inline-block relative w-[200px] md:w-[300px]">
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={languageWords[currentIndex]}
+                                        variants={wordVariants}
+                                        initial="enter"
+                                        animate="center"
+                                        exit="exit"
+                                        transition={{ duration: 0.5 }}
+                                        className="absolute left-0 right-0 -bottom-5"
+                                    >
+                                        {languageWords[currentIndex]}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
