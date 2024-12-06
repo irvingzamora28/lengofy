@@ -3,6 +3,15 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GuestLanguageModal from '@/Components/GuestLanguageModal';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import {
+    FaUserFriends,
+    FaPlay,
+    FaCheckCircle,
+    FaMoon,
+    FaSun,
+    FaArrowRight
+} from 'react-icons/fa';
+import { MdGroups, MdOndemandVideo } from 'react-icons/md';
 
 export default function Welcome() {
     const {
@@ -138,13 +147,9 @@ export default function Welcome() {
                                 aria-label={translations.welcome.toggle_dark_mode}
                             >
                                 {darkMode ? (
-                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
+                                    <FaMoon className="w-6 h-6" />
                                 ) : (
-                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
+                                    <FaSun className="w-6 h-6" />
                                 )}
                             </button>
                             <Link
@@ -305,11 +310,9 @@ export default function Welcome() {
                         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
                             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
                                 <div className="flex flex-col">
-                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-primary-400">
+                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-white">
                                         <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
-                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                            </svg>
+                                            <FaUserFriends className="h-6 w-6 text-primary-500" />
                                         </div>
                                         {translations.welcome.feature1}
                                     </dt>
@@ -318,12 +321,9 @@ export default function Welcome() {
                                     </dd>
                                 </div>
                                 <div className="flex flex-col">
-                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-primary-400">
+                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-white">
                                         <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
-                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
+                                            <MdOndemandVideo className="h-6 w-6 text-primary-500" />
                                         </div>
                                         {translations.welcome.feature2}
                                     </dt>
@@ -332,11 +332,9 @@ export default function Welcome() {
                                     </dd>
                                 </div>
                                 <div className="flex flex-col">
-                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-primary-400">
+                                    <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-white">
                                         <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
-                                            <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path fillRule="evenodd" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                            </svg>
+                                            <FaCheckCircle className="h-6 w-6 text-primary-500" />
                                         </div>
                                         {translations.welcome.feature3}
                                     </dt>
@@ -363,27 +361,19 @@ export default function Welcome() {
                         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
                             <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
+                                    <FaCheckCircle className="h-5 w-5 flex-none text-primary-500" />
                                     <span className="ml-2">{translations.welcome.featuredGameFeature1}</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
+                                    <FaCheckCircle className="h-5 w-5 flex-none text-primary-500" />
                                     <span className="ml-2">{translations.welcome.featuredGameFeature2}</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
+                                    <FaCheckCircle className="h-5 w-5 flex-none text-primary-500" />
                                     <span className="ml-2">{translations.welcome.featuredGameFeature3}</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
+                                    <FaCheckCircle className="h-5 w-5 flex-none text-primary-500" />
                                     <span className="ml-2">{translations.welcome.featuredGameFeature4}</span>
                                 </div>
                             </div>
@@ -396,9 +386,9 @@ export default function Welcome() {
                                 </button>
                                 <Link
                                     href={route('register')}
-                                    className="text-lg font-semibold leading-6 text-white hover:underline"
+                                    className="flex items-center gap-x-2 text-lg font-semibold leading-6 text-white hover:underline"
                                 >
-                                    {translations.welcome.learnMoreButton} <span aria-hidden="true">→</span>
+                                    {translations.welcome.learnMoreButton} <FaArrowRight className="inline-block w-6 h-6" />
                                 </Link>
                             </div>
                         </div>
@@ -447,9 +437,9 @@ export default function Welcome() {
                                 </button>
                                 <Link
                                     href={route('register')}
-                                    className="text-lg font-semibold leading-6 hover:underline"
+                                    className="flex items-center gap-x-2 text-lg font-semibold leading-6 hover:underline"
                                 >
-                                    {translations.welcome.createAccountButton} <span aria-hidden="true">→</span>
+                                    {translations.welcome.createAccountButton} <FaArrowRight className="inline-block w-6 h-6" />
                                 </Link>
                             </div>
                         </div>
