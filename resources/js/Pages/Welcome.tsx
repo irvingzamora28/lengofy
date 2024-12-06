@@ -2,9 +2,14 @@ import { Link, Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GuestLanguageModal from '@/Components/GuestLanguageModal';
+import LanguageSwitcher from '@/Components/LanguageSwitcher';
 
 export default function Welcome() {
-    const { languagePairs } = usePage<PageProps>().props;
+    const {
+        languagePairs,
+        translations,
+        locale = 'en'
+    } = usePage<PageProps>().props;
     const [showLanguageModal, setShowLanguageModal] = useState(false);
     const [darkMode, setDarkMode] = useState(() => {
         if (typeof window !== 'undefined') {
@@ -65,7 +70,7 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="Welcome to Lengofy" />
+            <Head title={translations.welcome.title} />
             {/* Navigation Bar */}
             <motion.nav
                 initial={{ opacity: 0, y: -50 }}
@@ -81,10 +86,11 @@ export default function Welcome() {
                             </Link>
                         </div>
                         <div className="flex items-center gap-6">
+                            <LanguageSwitcher currentLocale={locale} />
                             <button
                                 onClick={toggleDarkMode}
                                 className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
-                                aria-label="Toggle dark mode"
+                                aria-label={translations.welcome.toggle_dark_mode}
                             >
                                 {darkMode ? (
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,13 +106,13 @@ export default function Welcome() {
                                 href={route('login')}
                                 className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-semibold"
                             >
-                                Log in
+                                {translations.welcome.login}
                             </Link>
                             <Link
                                 href={route('register')}
                                 className="inline-flex items-center justify-center rounded-full bg-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                             >
-                                Sign up
+                                {translations.welcome.signup}
                             </Link>
                         </div>
                     </div>
@@ -130,23 +136,20 @@ export default function Welcome() {
                                 className="mx-auto max-w-7xl"
                             >
                                 <motion.h1
-                                    variants={itemVariants}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5 }}
                                     className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl"
                                 >
-                                    Learn Languages
-                                    <motion.span
-                                        variants={itemVariants}
-                                        className="block text-primary-600"
-                                    >
-                                        Through Social Gaming
-                                    </motion.span>
+                                    {translations.welcome.heroTitle}
                                 </motion.h1>
                                 <motion.p
-                                    variants={itemVariants}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.2 }}
                                     className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300"
                                 >
-                                    Join a community of language learners who master new languages by playing interactive games together.
-                                    Challenge friends, track progress, and make learning fun!
+                                    {translations.welcome.heroSubtitle}
                                 </motion.p>
                                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                                     <motion.button
@@ -157,7 +160,7 @@ export default function Welcome() {
                                         className="group relative inline-flex items-center justify-center rounded-full bg-primary-600 px-8 py-4 text-lg font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-64 sm:w-auto overflow-hidden"
                                     >
                                         <span className="absolute inset-y-0 left-0 w-[2px] bg-primary-400 transition-all group-hover:w-full"></span>
-                                        <span className="relative">Try Gender Duel Now</span>
+                                        <span className="relative">{translations.welcome.playNowButton}</span>
                                     </motion.button>
                                     <motion.div
                                         variants={itemVariants}
@@ -168,7 +171,7 @@ export default function Welcome() {
                                             href={route('register')}
                                             className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-white dark:ring-white/10 dark:hover:ring-white/20 transition-all w-64 sm:w-auto"
                                         >
-                                            Join Our Community
+                                            {translations.welcome.learnMoreButton}
                                         </Link>
                                     </motion.div>
                                 </div>
@@ -186,19 +189,19 @@ export default function Welcome() {
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             <div className="flex flex-col items-center">
                                 <div className="text-4xl font-bold text-primary-500">2000+</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">German Nouns</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">{translations.welcome.stats1}</div>
                             </div>
                             <div className="flex flex-col items-center">
                                 <div className="text-4xl font-bold text-primary-500">10</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Gender Categories</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">{translations.welcome.stats2}</div>
                             </div>
                             <div className="flex flex-col items-center">
                                 <div className="text-4xl font-bold text-primary-500">100%</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Free to Play</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">{translations.welcome.stats3}</div>
                             </div>
                             <div className="flex flex-col items-center">
                                 <div className="text-4xl font-bold text-primary-500">24/7</div>
-                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">Available Online</div>
+                                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">{translations.welcome.stats4}</div>
                             </div>
                         </div>
                     </div>
@@ -212,10 +215,10 @@ export default function Welcome() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                                Why Learn with Lengofy?
+                                {translations.welcome.featuresTitle}
                             </h2>
                             <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                                Experience a new way of language learning that's social, interactive, and actually fun
+                                {translations.welcome.featuresDescription}
                             </p>
                         </div>
                         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -227,10 +230,10 @@ export default function Welcome() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857 3 3 0 014.438 0 3 3 0 001.946.806 3 3 0 013.138 3.138 3 3 0 00.806 1.946 3 3 0 010 4.438 3 3 0 00-.806 1.946 3 3 0 01-3.138 3.138 3 3 0 00-1.946.806 3 3 0 01-4.438 0 3 3 0 00-1.946-.806 3 3 0 01-3.138-3.138 3 3 0 00-.806-1.946 3 3 0 010-4.438 3 3 0 00.806-1.946 3 3 0 013.138-3.138z" />
                                             </svg>
                                         </div>
-                                        Social Learning
+                                        {translations.welcome.feature1}
                                     </dt>
                                     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-300">
-                                        <p className="flex-auto">Learn together with friends or meet new language partners. Challenge each other and grow together.</p>
+                                        <p className="flex-auto">{translations.welcome.feature1Description}</p>
                                     </dd>
                                 </div>
                                 <div className="flex flex-col">
@@ -241,10 +244,10 @@ export default function Welcome() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        Interactive Games
+                                        {translations.welcome.feature2}
                                     </dt>
                                     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-300">
-                                        <p className="flex-auto">Engage in fun, competitive games designed to reinforce language concepts naturally.</p>
+                                        <p className="flex-auto">{translations.welcome.feature2Description}</p>
                                     </dd>
                                 </div>
                                 <div className="flex flex-col">
@@ -254,10 +257,10 @@ export default function Welcome() {
                                                 <path fillRule="evenodd" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                                             </svg>
                                         </div>
-                                        Track Progress
+                                        {translations.welcome.feature3}
                                     </dt>
                                     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-300">
-                                        <p className="flex-auto">Monitor your improvement, earn achievements, and compete on leaderboards.</p>
+                                        <p className="flex-auto">{translations.welcome.feature3Description}</p>
                                     </dd>
                                 </div>
                             </dl>
@@ -269,9 +272,11 @@ export default function Welcome() {
                 <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl lg:mx-0">
-                            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Gender Duel</h2>
+                            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                                {translations.welcome.featuredGameTitle}
+                            </h2>
                             <p className="mt-6 text-lg leading-8 text-gray-300">
-                                Master German noun genders through an exciting multiplayer game. Challenge friends to a duel and see who can master der, die, das the fastest!
+                                {translations.welcome.featuredGameDescription}
                             </p>
                         </div>
                         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
@@ -280,25 +285,25 @@ export default function Welcome() {
                                     <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="ml-2">Real-time battles</span>
+                                    <span className="ml-2">{translations.welcome.featuredGameFeature1}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="ml-2">Instant feedback</span>
+                                    <span className="ml-2">{translations.welcome.featuredGameFeature2}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="ml-2">Competitive scoring</span>
+                                    <span className="ml-2">{translations.welcome.featuredGameFeature3}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <svg className="h-5 w-5 flex-none text-primary-500" viewBox="0 0 20 20" fill="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="ml-2">Daily challenges</span>
+                                    <span className="ml-2">{translations.welcome.featuredGameFeature4}</span>
                                 </div>
                             </div>
                             <div className="mt-10 flex items-center gap-x-6">
@@ -306,13 +311,13 @@ export default function Welcome() {
                                     onClick={handleGuestPlay}
                                     className="rounded-md bg-primary-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"
                                 >
-                                    Try it Now
+                                    {translations.welcome.tryNowButton}
                                 </button>
                                 <Link
                                     href={route('register')}
                                     className="text-lg font-semibold leading-6 text-white"
                                 >
-                                    Learn more <span aria-hidden="true">→</span>
+                                    {translations.welcome.learnMoreButton} <span aria-hidden="true">→</span>
                                 </Link>
                             </div>
                         </div>
@@ -324,10 +329,10 @@ export default function Welcome() {
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                                Join Our Growing Community
+                                {translations.welcome.communityTitle}
                             </h2>
                             <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                                Connect with language learners from around the world
+                                {translations.welcome.communityDescription}
                             </p>
                         </div>
                         <div className="mx-auto mt-12 max-w-2xl sm:mt-16 lg:mt-20">
@@ -343,23 +348,23 @@ export default function Welcome() {
                     <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
                             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                                Ready to Start Learning?
+                                {translations.welcome.finalCTATitle}
                             </h2>
                             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
-                                Join thousands of learners who are already mastering languages through play.
+                                {translations.welcome.finalCTADescription}
                             </p>
                             <div className="mt-10 flex items-center justify-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
                                     className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-primary-500 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                                 >
-                                    Try Gender Duel
+                                    {translations.welcome.tryNowButton}
                                 </button>
                                 <Link
                                     href={route('register')}
                                     className="text-lg font-semibold leading-6 text-white"
                                 >
-                                    Create Free Account <span aria-hidden="true">→</span>
+                                    {translations.welcome.createAccountButton} <span aria-hidden="true">→</span>
                                 </Link>
                             </div>
                         </div>

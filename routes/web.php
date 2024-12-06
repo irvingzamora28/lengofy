@@ -9,8 +9,10 @@ use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 Route::get('/', function (LanguageService $languageService) {
+    $locale = app()->getLocale();
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -36,6 +38,10 @@ Route::get('/', function (LanguageService $languageService) {
                     ],
                 ];
             })->all(),
+        'translations' => [
+            'welcome' => __('welcome', [], $locale)
+        ],
+        'locale' => $locale
     ]);
 })->name('welcome');
 
@@ -62,5 +68,18 @@ Route::post('/guest/create', [GuestUserController::class, 'createAndLogin'])->na
 Route::post('/guest/convert', [GuestUserController::class, 'convertToRegular'])->name('guest.convert');
 Route::post('/guest/reclaim', [GuestUserController::class, 'reclaim'])->name('guest.reclaim');
 Route::delete('/guest/logout', [GuestUserController::class, 'logout'])->name('guest.logout');
+
+// Language switcher route
+Route::post('/language/switch', function (Request $request) {
+    $request->validate([
+        'locale' => 'required|in:en,es,de'
+    ]);
+
+    // Store the language preference in the session
+    session(['locale' => $request->locale]);
+
+    // Optional: Store in a cookie for persistence
+    return redirect()->back()->cookie('locale', $request->locale, 60 * 24 * 365);
+})->name('language.switch');
 
 require __DIR__.'/auth.php';
