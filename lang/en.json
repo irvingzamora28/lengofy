@@ -1,5 +1,6 @@
 {
     "welcome": {
+        "title": "Learn Languages with Lengofy",
         "heroTitle": "Learn Languages",
         "heroSubtitle": "Through Social Gaming",
         "heroDescription": "Join a community of language learners who master new languages by playing interactive games together. Challenge friends, track progress, and make learning fun!",
@@ -7,7 +8,7 @@
         "learnMoreButton": "Join Our Community",
         "createAccountButton": "Create Free Account",
         "stats1": "German Nouns",
-        "stats2": "Gender Categories", 
+        "stats2": "Gender Categories",
         "stats3": "Free to Play",
         "stats4": "Available Online",
         "featuresTitle": "Why Learn with Lengofy?",

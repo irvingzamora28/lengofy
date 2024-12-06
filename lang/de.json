@@ -1,5 +1,6 @@
 {
     "welcome": {
+        "title": "Sprachenlernen mit Lengofy",
         "heroTitle": "Sprachen Lernen",
         "heroSubtitle": "Durch Soziale Spiele",
         "heroDescription": "Tritt einer Gemeinschaft von Sprachlernenden bei, die neue Sprachen durch gemeinsames Spielen meistern. Fordere Freunde heraus, verfolge deinen Fortschritt und mache das Lernen spaßig!",
@@ -7,7 +8,7 @@
         "learnMoreButton": "Tritt Unserer Community Bei",
         "createAccountButton": "Kostenlosen Account Erstellen",
         "stats1": "Deutsche Substantive",
-        "stats2": "Geschlechtskategorien", 
+        "stats2": "Geschlechtskategorien",
         "stats3": "Kostenlos Spielen",
         "stats4": "Rund um die Uhr Verfügbar",
         "featuresTitle": "Warum mit Lengofy Lernen?",
