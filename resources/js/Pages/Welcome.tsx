@@ -202,8 +202,8 @@ export default function Welcome() {
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7 }}
-                            className="text-5xl font-extrabold tracking-tight text-primary-600 dark:text-white sm:text-6xl md:text-9xl"
+                            transition={{ duration: 0.5 }}
+                            className="text-5xl font-extrabold tracking-tight text-primary-600 dark:text-white sm:text-6xl md:text-9xl font-display"
                         >
                             {prefix}{prefix && ' '}
                             <span className="inline-block relative w-[200px] md:w-[300px]">
@@ -226,7 +226,7 @@ export default function Welcome() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: 0.3 }}
-                            className="mx-auto mt-6 max-w-2xl text-xl md:text-4xl leading-8 text-gray-600 dark:text-gray-300"
+                            className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300 font-sans"
                         >
                             {translations.welcome.heroSubtitle}
                         </motion.p>
@@ -295,10 +295,10 @@ export default function Welcome() {
                 >
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-2xl text-center">
-                            <h2 className="text-3xl font-extrabold tracking-tight text-primary-600 dark:text-primary-400 sm:text-4xl">
+                            <h2 className="text-3xl font-bold tracking-tight text-primary-600 dark:text-white sm:text-4xl font-display">
                                 {translations.welcome.featuresTitle}
                             </h2>
-                            <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-200">
+                            <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300 font-sans">
                                 {translations.welcome.featuresDescription}
                             </p>
                         </div>
@@ -308,7 +308,7 @@ export default function Welcome() {
                                     <dt className="flex items-center gap-x-3 text-xl font-semibold leading-7 text-primary-600 dark:text-primary-400">
                                         <div className="rounded-lg bg-primary-500/10 p-2 ring-1 ring-inset ring-primary-500/20">
                                             <svg className="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857 3 3 0 014.438 0 3 3 0 001.946.806 3 3 0 013.138 3.138 3 3 0 00.806 1.946 3 3 0 010 4.438 3 3 0 00-.806 1.946 3 3 0 01-3.138 3.138 3 3 0 00-1.946.806 3 3 0 01-4.438 0 3 3 0 00-1.946-.806 3 3 0 01-3.138-3.138 3 3 0 00-.806-1.946 3 3 0 010-4.438 3 3 0 00.806-1.946 3 3 0 013.138-3.138z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                                             </svg>
                                         </div>
                                         {translations.welcome.feature1}
