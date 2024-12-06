@@ -22,12 +22,32 @@ export default function Welcome() {
 
     const [showLanguageModal, setShowLanguageModal] = useState(false);
     const [darkMode, setDarkMode] = useState(() => {
-        if (typeof window !== 'undefined') {
-            return localStorage.getItem('darkMode') === 'true' ||
-                window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Check localStorage first
+        const savedDarkMode = localStorage.getItem('darkMode');
+
+        // If explicitly set in localStorage, use that value
+        if (savedDarkMode !== null) {
+            return savedDarkMode === 'true';
         }
-        return false;
+
+        // Otherwise, use system preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
     });
+
+    useEffect(() => {
+        // Apply dark mode class to html element
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('darkMode', 'false');
+        }
+    }, [darkMode]);
+
+    const toggleDarkMode = () => {
+        setDarkMode(prevMode => !prevMode);
+    };
 
     // Define language cycling arrays based on locale
     const languageWords = (() => {
@@ -65,20 +85,6 @@ export default function Welcome() {
         }, 3000);
         return () => clearInterval(interval);
     }, [languageWords.length]);
-
-    useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [darkMode]);
-
-    const toggleDarkMode = () => {
-        const newDarkMode = !darkMode;
-        setDarkMode(newDarkMode);
-        localStorage.setItem('darkMode', newDarkMode.toString());
-    };
 
     const handleGuestPlay = () => {
         setShowLanguageModal(true);
