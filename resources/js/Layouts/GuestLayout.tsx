@@ -1,44 +1,15 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link, usePage } from '@inertiajs/react';
-import { PropsWithChildren, useState, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 import { motion } from 'framer-motion';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 
 export default function Guest({ children }: PropsWithChildren) {
     const { locale = 'en' } = usePage<PageProps>().props;
 
-    const [darkMode, setDarkMode] = useState(() => {
-        // Check localStorage first
-        const savedDarkMode = localStorage.getItem('darkMode');
-
-        // If explicitly set in localStorage, use that value
-        if (savedDarkMode !== null) {
-            return savedDarkMode === 'true';
-        }
-
-        // Otherwise, use system preference
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    });
-
-    useEffect(() => {
-        // Apply dark mode class to html element
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('darkMode', 'true');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('darkMode', 'false');
-        }
-    }, [darkMode]);
-
-    const toggleDarkMode = () => {
-        setDarkMode(prevMode => !prevMode);
-    };
-
     return (
         <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0 dark:bg-gray-900">
-            <div>
             <motion.nav
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -55,17 +26,7 @@ export default function Guest({ children }: PropsWithChildren) {
                         </div>
                         <div className="flex items-center gap-6">
                             <LanguageSwitcher currentLocale={locale} />
-                            <button
-                                onClick={toggleDarkMode}
-                                className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
-                                aria-label="Toggle Dark Mode"
-                            >
-                                {darkMode ? (
-                                    <FaMoon className="w-6 h-6" />
-                                ) : (
-                                    <FaSun className="w-6 h-6" />
-                                )}
-                            </button>
+                            <DarkModeToggle />
                             <Link
                                 href={route('login')}
                                 className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white font-semibold"
@@ -82,7 +43,6 @@ export default function Guest({ children }: PropsWithChildren) {
                     </div>
                 </div>
             </motion.nav>
-            </div>
 
             <div className="w-full">
                 {children}
