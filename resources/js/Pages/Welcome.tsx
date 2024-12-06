@@ -226,7 +226,7 @@ export default function Welcome() {
                                         animate="center"
                                         exit="exit"
                                         transition={{ duration: 0.5 }}
-                                        className="absolute left-0 right-0 -bottom-5"
+                                        className="absolute left-0 right-0 -bottom-2 md:-bottom-5"
                                     >
                                         {languageWords[currentIndex]}
                                     </motion.span>
@@ -237,7 +237,7 @@ export default function Welcome() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: 0.3 }}
-                            className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300 font-sans"
+                            className="mx-auto mt-6 max-w-2xl text-2xl md:text-4xl leading-8 text-gray-600 dark:text-gray-300 font-sans"
                         >
                             {translations.welcome.heroSubtitle}
                         </motion.p>
@@ -247,7 +247,7 @@ export default function Welcome() {
                                 whileTap="tap"
                                 variants={buttonVariants}
                                 onClick={handleGuestPlay}
-                                className="group relative inline-flex items-center justify-center rounded-full bg-primary-600 px-8 py-4 text-lg font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-64 sm:w-auto overflow-hidden"
+                                className="group relative inline-flex items-center justify-center rounded-full bg-primary-600 px-8 py-4 md:py-12 text-2xl md:text-3xl font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-all w-80 md:w-96 sm:w-auto overflow-hidden"
                             >
                                 <span className="absolute inset-y-0 left-0 w-[2px] bg-primary-400 transition-all group-hover:w-full"></span>
                                 <span className="relative">{translations.welcome.playNowButton}</span>
@@ -259,7 +259,7 @@ export default function Welcome() {
                             >
                                 <Link
                                     href={route('register')}
-                                    className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-primary-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-white dark:ring-white/10 dark:hover:ring-white/20 transition-all w-64 sm:w-auto"
+                                    className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm mt-4 md:mt-0 md:ml-20 px-8 py-4 md:py-12 text-2xl md:text-3xl font-semibold text-primary-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-white dark:ring-white/10 dark:hover:ring-white/20 transition-all w-80 md:w-96 sm:w-auto"
                                 >
                                     {translations.welcome.learnMoreButton}
                                 </Link>
@@ -278,20 +278,20 @@ export default function Welcome() {
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-primary-500">2000+</div>
-                                <div className="mt-2 text-sm">{translations.welcome.stats1}</div>
+                                <div className="text-4xl md:text-6xl font-bold text-primary-500">2000+</div>
+                                <div className="mt-2 text-sm md:text-xl">{translations.welcome.stats1}</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-primary-500">10</div>
-                                <div className="mt-2 text-sm">{translations.welcome.stats2}</div>
+                                <div className="text-4xl md:text-6xl font-bold text-primary-500">10</div>
+                                <div className="mt-2 text-sm md:text-xl">{translations.welcome.stats2}</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-primary-500">100%</div>
-                                <div className="mt-2 text-sm">{translations.welcome.stats3}</div>
+                                <div className="text-4xl md:text-6xl font-bold text-primary-500">100%</div>
+                                <div className="mt-2 text-sm md:text-xl">{translations.welcome.stats3}</div>
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="text-4xl font-bold text-primary-500">24/7</div>
-                                <div className="mt-2 text-sm">{translations.welcome.stats4}</div>
+                                <div className="text-4xl md:text-6xl font-bold text-primary-500">24/7</div>
+                                <div className="mt-2 text-sm md:text-xl">{translations.welcome.stats4}</div>
                             </div>
                         </div>
                     </div>
