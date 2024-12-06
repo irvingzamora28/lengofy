@@ -1,42 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import { useDarkMode } from '@/Hooks/useDarkMode';
 
 interface DarkModeToggleProps {
   className?: string;
+  onToggle?: (newMode: boolean) => void;
 }
 
-const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ className }) => {
-  const [darkMode, setDarkMode] = useState(() => {
-    // Check localStorage first
-    const savedDarkMode = localStorage.getItem('darkMode');
+const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
+  className,
+  onToggle,
+}) => {
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
-    // If explicitly set in localStorage, use that value
-    if (savedDarkMode !== null) {
-      return savedDarkMode === 'true';
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event from bubbling up
+    toggleDarkMode();
+    
+    // Call the onToggle callback if provided
+    if (onToggle) {
+      onToggle(!darkMode);
     }
-
-    // Otherwise, use system preference
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
-
-  useEffect(() => {
-    // Apply dark mode class to html element
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => !prevMode);
   };
 
   return (
     <button
-      onClick={toggleDarkMode}
+      onClick={handleToggle}
       className={`p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg ${className}`}
       aria-label="Toggle Dark Mode"
     >

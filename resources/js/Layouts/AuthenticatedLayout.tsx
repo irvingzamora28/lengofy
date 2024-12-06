@@ -4,6 +4,8 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
+import DarkModeToggle from '@/Components/UI/DarkModeToggle';
+import { useDarkMode } from '@/Hooks/useDarkMode';
 
 export default function Authenticated({
     header,
@@ -12,8 +14,8 @@ export default function Authenticated({
     const { auth } = usePage<{ auth: { user: { name: string; email: string; is_guest: boolean } } }>().props;
     const user = auth.user;
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
+    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const { darkMode, setDarkMode } = useDarkMode();
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -23,7 +25,7 @@ export default function Authenticated({
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <ApplicationLogo className="h-10 w-10 fill-current text-primary-500" />
                                 </Link>
                             </div>
 
@@ -65,11 +67,27 @@ export default function Authenticated({
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
+                                        <Dropdown.Link href={route('profile.edit')}>
                                             Profile
                                         </Dropdown.Link>
+                                        <div
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+
+                                                const darkModeToggle = document.querySelector('[aria-label="Toggle Dark Mode"]') as HTMLButtonElement;
+                                                if (darkModeToggle) {
+                                                    darkModeToggle.click();
+                                                }
+                                            }}
+                                            className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                                        >
+                                            <span>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+                                            <DarkModeToggle
+                                                onToggle={(newMode) => {
+                                                    setDarkMode(newMode);
+                                                }}
+                                            />
+                                        </div>
                                         <Dropdown.Link
                                             href={user?.is_guest ? route('guest.logout') : route('logout')}
                                             method={user?.is_guest ? 'delete' : 'post'}
