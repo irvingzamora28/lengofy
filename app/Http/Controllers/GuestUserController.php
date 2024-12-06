@@ -26,7 +26,7 @@ class GuestUserController extends Controller
         $user = $this->guestUserService->createGuestUser($request->language_pair_id);
         Auth::login($user);
 
-        return redirect()->route('games.lobby');
+        return redirect()->route('gender-duel-game.lobby');
     }
 
     public function convertToRegular(Request $request)
@@ -66,7 +66,7 @@ class GuestUserController extends Controller
         }
 
         Auth::login($user);
-        return redirect()->route('games.lobby');
+        return redirect()->route('gender-duel-game.lobby');
     }
 
     public function logout()
