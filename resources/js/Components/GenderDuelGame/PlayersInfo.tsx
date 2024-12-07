@@ -1,4 +1,4 @@
-import { FaUser, FaCheckCircle } from 'react-icons/fa';
+import { FaUser, FaCheckCircle, FaTrophy } from 'react-icons/fa';
 
 interface Player {
     id: number;
@@ -15,28 +15,36 @@ interface PlayersInfoProps {
 export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoProps) {
     if (players.length === 0) return null;
 
+    const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+
     return (
-        <div className="mt-6 text-sm text-gray-700 dark:text-gray-300 bg-white/70 dark:bg-gray-800/70 rounded-lg p-4">
-            <h3 className="text-gray-800 dark:text-gray-200 font-semibold flex items-center gap-2 mb-2 text-base">
-                <FaUser /> Players
+        <div className="mt-6 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-xl p-6 shadow-lg">
+            <h3 className="hidden md:flex text-indigo-800 dark:text-indigo-200 font-bold items-center gap-2 mb-4 text-xl">
+                <FaUser className="text-indigo-600 dark:text-indigo-400" /> Players
             </h3>
-            <div className="space-y-2">
-                {players.map((player) => (
+            <div className="space-y-3">
+                {sortedPlayers.map((player, index) => (
                     <div
                         key={player.id}
-                        className={`flex items-center justify-between rounded px-3 py-2
-                            ${player.is_ready ? 'bg-green-50 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'}`}
+                        className={`flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 ease-in-out
+                            ${player.is_ready ? 'bg-green-200 dark:bg-green-800' : 'bg-white dark:bg-gray-800'}
+                            ${currentPlayerId === player.id ? 'ring-2 ring-indigo-500 dark:ring-indigo-400' : ''}`}
                     >
-                        <span className={`
-                            ${currentPlayerId === player.id ? 'underline font-bold' : 'font-medium'}
-                            text-gray-800 dark:text-gray-100`
-                        }>
-                            {player.player_name}
-                        </span>
-                        <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 text-sm">
-                            <span>Score: {player.score}</span>
+                        <div className="flex items-center gap-3">
+                            {index === 0 && <FaTrophy className="text-yellow-500" />}
+                            <span className={`
+                                ${currentPlayerId === player.id ? 'font-extrabold text-gray-800 dark:text-white' : 'font-semibold text-gray-600 dark:text-gray-300'}
+                                text-md md:text-lg`
+                            }>
+                                {player.player_name}
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+                            <span className="bg-indigo-200 dark:bg-indigo-700 px-3 py-1 rounded-full font-bold">
+                                {player.score}
+                            </span>
                             {player.is_ready && (
-                                <span className="flex items-center gap-1 text-green-600 dark:text-green-300 font-semibold">
+                                <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-semibold animate-pulse">
                                     <FaCheckCircle/>
                                     Ready
                                 </span>

@@ -10,15 +10,22 @@ interface GameInfoProps {
 const gameStatusIcon = (status: string) => {
     switch(status) {
         case 'waiting':
-            return <FaHourglassHalf className="inline-block mr-1" />;
+            return <FaHourglassHalf className="animate-pulse" />;
         case 'in_progress':
-            return <FaPlay className="inline-block mr-1" />;
+            return <FaPlay className="animate-bounce" />;
         case 'completed':
-            return <FaFlagCheckered className="inline-block mr-1" />;
+            return <FaFlagCheckered className="animate-wave" />;
         default:
             return null;
     }
 };
+
+const statusColors = {
+    waiting: 'bg-yellow-400 dark:bg-yellow-600',
+    in_progress: 'bg-green-500 dark:bg-green-600',
+    completed: 'bg-blue-500 dark:bg-blue-600'
+};
+
 
 export default function GameInfo({ languageName, currentRound, totalRounds, status }: GameInfoProps) {
     return (
@@ -31,9 +38,9 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
                     </span>
                 )}
             </div>
-            <div className="inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-semibold bg-gray-400 dark:bg-gray-700">
+            <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-white text-sm font-semibold ${statusColors[status as keyof typeof statusColors]} transition-all duration-300 ease-in-out transform hover:scale-105`}>
                 {gameStatusIcon(status)}
-                {status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}
+                <span>{status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}</span>
             </div>
         </div>
     );

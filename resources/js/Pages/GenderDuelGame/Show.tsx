@@ -198,7 +198,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                 <Head title="Game Room" />
 
                 <div className="py-6 bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-black dark:to-black">
-                    <div className="max-w-7xl min-h-[26rem] md:h-[32rem] mx-auto px-4">
+                    <div className="max-w-7xl min-h-[26rem] md:h-[30rem] mx-auto px-4">
                         <GameInfo
                             languageName={genderDuelGameState.language_name}
                             currentRound={genderDuelGameState.current_round}

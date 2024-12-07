@@ -1,4 +1,5 @@
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import { FaTrophy, FaHourglassHalf } from 'react-icons/fa';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 interface GameAreaProps {
@@ -19,60 +20,62 @@ interface GameAreaProps {
 const renderLastAnswer = (lastAnswer: any) => {
     if (!lastAnswer) return null;
     return (
-        <div className={`mt-4 flex items-center justify-center gap-2 text-lg font-bold ${
-            lastAnswer.correct ? 'text-green-600 dark:text-green-300' : 'text-red-600 dark:text-red-300'
+        <div className={`mt-6 flex items-center justify-center gap-3 text-lg md:text-xl font-bold animate-fade-in ${
+            lastAnswer.correct ? 'text-green-500 dark:text-green-400' : 'text-red-500 dark:text-red-400'
         }`}>
-            {lastAnswer.correct ? <AiOutlineCheckCircle size={24}/> : <AiOutlineCloseCircle size={24}/>}
-            <strong>{lastAnswer.player_name}</strong> {lastAnswer.correct ? 'got it right!' : 'was incorrect'}
+            {lastAnswer.correct ? <AiOutlineCheckCircle size={28}/> : <AiOutlineCloseCircle size={28}/>}
+            <strong>{lastAnswer.player_name}</strong> {lastAnswer.correct ? 'nailed it!' : 'missed this one'}
         </div>
     );
 };
 
-export default function GameArea({ 
-    status, 
-    currentWord, 
-    lastAnswer, 
-    feedbackMessage, 
+export default function GameArea({
+    status,
+    currentWord,
+    currentRound,
+    totalRounds,
+    lastAnswer,
+    feedbackMessage,
     onAnswer,
     onReady,
     isCurrentPlayerReady,
     players
 }: GameAreaProps) {
     return (
-        <div className="bg-white/90 dark:bg-gray-800/90 rounded-lg p-6 shadow-lg transition-colors h-full flex flex-col items-center justify-center">
+        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
             {status === 'waiting' ? (
-                <>
-                    <div className="text-center text-gray-600 dark:text-gray-300">
+                <div className="text-center space-y-6">
+                    <FaHourglassHalf className="text-5xl text-indigo-500 dark:text-indigo-400 animate-pulse mx-auto" />
+                    <div className="text-xl text-gray-700 dark:text-gray-300 font-medium">
                         Waiting for all players to be ready...
                     </div>
                     {!isCurrentPlayerReady && (
-                        <div className="text-center mb-6">
-                            <PrimaryButton
-                                onClick={onReady}
-                                className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 px-4 py-2 text-sm font-semibold"
-                            >
-                                Ready to Start
-                            </PrimaryButton>
-                        </div>
+                        <PrimaryButton
+                            onClick={onReady}
+                            className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-500 px-6 py-3 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                        >
+                            I'm Ready!
+                        </PrimaryButton>
                     )}
-                </>
+                </div>
             ) : status === 'in_progress' && currentWord ? (
-                <div className="text-center w-full">
-                    <h1 className="text-4xl md:text-6xl lg:text-9xl font-extrabold text-gray-900 dark:text-gray-100 mb-8 transition-all">
+                <div className="text-center w-full space-y-8">
+                    <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
                         {currentWord.word}
                     </h1>
 
-                    <div className="flex flex-col sm:flex-row justify-center gap-8 mb-4">
+                    <div className="flex flex-col sm:flex-row justify-center gap-6">
                         {['der', 'die', 'das'].map((g) => (
                             <button
                                 key={g}
                                 type="button"
                                 className="inline-flex items-center justify-center
-                                px-6 py-6 md:px-8 md:py-4
-                                text-2xl md:text-4xl lg:text-6xl font-bold uppercase tracking-wide
-                                rounded-lg shadow-lg
-                                bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600
-                                active:scale-95 transition transform w-full sm:w-auto"
+                                px-8 py-4 md:px-10 md:py-5
+                                text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wider
+                                rounded-2xl shadow-lg
+                                bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white
+                                hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-500 dark:hover:to-indigo-600
+                                active:scale-95 transition-all duration-300 transform w-full sm:w-auto"
                                 onClick={() => onAnswer(g)}
                             >
                                 {g}
@@ -81,28 +84,33 @@ export default function GameArea({
                     </div>
                     {renderLastAnswer(lastAnswer)}
                     {feedbackMessage && (
-                        <div className="text-lg text-gray-700 dark:text-gray-200 mt-4 font-medium">
+                        <div className="text-xl text-gray-700 dark:text-gray-200 mt-6 font-medium animate-fade-in">
                             {feedbackMessage}
                         </div>
                     )}
                 </div>
             ) : status === 'completed' ? (
-                <div className="text-center">
-                    <h3 className="text-2xl mb-4 font-extrabold text-purple-600 dark:text-purple-300">🎉 Game Over! 🎉</h3>
+                <div className="text-center space-y-8">
+                    <FaTrophy className="text-6xl text-yellow-500 mx-auto animate-bounce" />
+                    <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
+                        Game Over!
+                    </h3>
                     {feedbackMessage && (
-                        <div className="text-lg text-gray-700 dark:text-gray-200 mb-6 font-medium">
+                        <div className="text-xl text-gray-700 dark:text-gray-200 font-medium">
                             {feedbackMessage}
                         </div>
                     )}
-                    <div className="space-y-2 text-base text-gray-700 dark:text-gray-200">
+                    <div className="space-y-3 text-lg text-gray-700 dark:text-gray-200 max-w-md mx-auto">
                         {players
                             .sort((a, b) => b.score - a.score)
                             .map((player, index) => (
-                                <div key={player.id} className="flex justify-between items-center border-b border-gray-200 dark:border-gray-600 pb-2">
-                                    <span className="font-medium">
+                                <div key={player.id} className="flex justify-between items-center border-b border-gray-300 dark:border-gray-600 pb-3 transition-all duration-300 hover:bg-white/30 dark:hover:bg-gray-700/30 rounded-lg px-4 py-2">
+                                    <span className="font-bold">
                                         {index + 1}. {player.player_name}
                                     </span>
-                                    <span>{player.score} pts</span>
+                                    <span className="font-medium bg-indigo-100 dark:bg-indigo-800 px-3 py-1 rounded-full">
+                                        {player.score} pts
+                                    </span>
                                 </div>
                             ))}
                     </div>
