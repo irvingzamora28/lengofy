@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Modal from '@/Components/Modal';
-import InputLabel from '@/Components/InputLabel';
 import { useForm } from '@inertiajs/react';
 import LanguagePairSelect from '@/Pages/Profile/Partials/LanguagePairSelect';
 import InputError from '@/Components/InputError';
@@ -13,8 +12,11 @@ interface Props {
 }
 
 export default function GuestLanguageModal({ show, onClose, languagePairs }: Props) {
+    // Initialize with the first language pair
+    const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
+
     const { data, setData, post, processing, errors } = useForm({
-        language_pair_id: '',
+        language_pair_id: defaultLanguagePairId,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -28,22 +30,22 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
     };
 
     const modalVariants = {
-        hidden: { 
-            opacity: 0, 
+        hidden: {
+            opacity: 0,
             scale: 0.9,
             transition: { duration: 0.3 }
         },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             scale: 1,
-            transition: { 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 20 
+            transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20
             }
         },
-        exit: { 
-            opacity: 0, 
+        exit: {
+            opacity: 0,
             scale: 0.9,
             transition: { duration: 0.2 }
         }
@@ -57,8 +59,8 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
     return (
         <AnimatePresence>
             {show && (
-                <Modal 
-                    show={show} 
+                <Modal
+                    show={show}
                     onClose={onClose}
                     maxWidth="md"
                 >
@@ -70,7 +72,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                         className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden"
                     >
                         <div className="bg-primary-500/10 p-6 border-b border-gray-200 dark:border-gray-700">
-                            <motion.h2 
+                            <motion.h2
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-2xl font-bold text-primary-600 dark:text-primary-400"
@@ -98,7 +100,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                 <InputError message={errors.language_pair_id} className="mt-2" />
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 className="flex justify-end space-x-4"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -121,9 +123,9 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                     whileHover="hover"
                                     whileTap="tap"
                                     className={`
-                                        px-6 py-2 rounded-full text-white font-semibold 
-                                        ${processing || !data.language_pair_id 
-                                            ? 'bg-primary-300 cursor-not-allowed' 
+                                        px-6 py-2 rounded-full text-white font-semibold
+                                        ${processing || !data.language_pair_id
+                                            ? 'bg-primary-300 cursor-not-allowed'
                                             : 'bg-primary-600 hover:bg-primary-500'}
                                         transition-colors duration-300 ease-in-out
                                     `}
