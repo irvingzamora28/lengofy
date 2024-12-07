@@ -59,11 +59,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) =>
             ref={dropdownRef}
             className="relative inline-block text-left w-full sm:w-auto"
         >
-            <div>
                 <button
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
-                    className="inline-flex justify-center items-center w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-lg"
+                    className={`inline-flex justify-center items-center w-full bg-white/0 dark:bg-white/0 sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-lg`}
                 >
                     <span className="text-2xl mr-2">{languageData[currentLocale].flag}</span>
                     <span className="hidden sm:inline">{languageData[currentLocale].name}</span>
@@ -81,7 +80,6 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) =>
                         />
                     </svg>
                 </button>
-            </div>
 
             <AnimatePresence>
                 {isOpen && (

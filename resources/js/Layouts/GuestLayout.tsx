@@ -20,12 +20,12 @@ export default function Guest({ children }: PropsWithChildren) {
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700"
+                className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-sm"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
-                        <div className="flex items-center">
+                        <div className="flex-1 flex items-center">
                             <Link href="/" className="flex items-center">
                                 <ApplicationLogo className="h-10 w-10 fill-current text-primary-500" />
                                 <span className="ml-2 text-2xl font-bold text-primary-500 hidden sm:block">Lengofy</span>
@@ -33,7 +33,7 @@ export default function Guest({ children }: PropsWithChildren) {
                         </div>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden sm:flex items-center gap-6">
+                        <div className="hidden sm:flex items-center gap-6 ml-auto">
                             <LanguageSwitcher currentLocale={locale} />
                             <DarkModeToggle />
                             <Link
