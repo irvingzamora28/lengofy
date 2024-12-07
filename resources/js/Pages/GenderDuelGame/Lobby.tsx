@@ -35,7 +35,7 @@ export default function Lobby({ auth, activeGames }: Props) {
     });
 
     const handleCreateGame = () => {
-        router.post('/gender-duel-game', {
+        router.post(route('games.gender-duel.create'), {
             language_pair_id: auth.user.language_pair_id,
             max_players: 8,
         });
@@ -113,7 +113,7 @@ export default function Lobby({ auth, activeGames }: Props) {
                                             </div>
 
                                             <Link
-                                                href={`/gender-duel-game/${game.id}/join`}
+                                                href={`/games/gender-duel/${game.id}/join`}
                                                 method="post"
                                                 as="button"
                                                 className="mt-2 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full text-center"

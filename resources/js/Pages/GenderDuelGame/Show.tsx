@@ -89,7 +89,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
                     // If player list is empty, redirect to lobby
                     if (data.data.players && data.data.players.length === 0) {
-                        router.visit('/gender-duel-game/lobby');
+                        router.visit('/games/gender-duel');
                         return;
                     }
                     break;
@@ -158,7 +158,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
     const markReady = () => {
         // First, update the database through HTTP
-        router.post(`/gender-duel-game/${genderDuelGameState.id}/ready`, {}, {
+        router.post(route(`games.gender-duel.ready`, `${genderDuelGameState.id}`), {}, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -190,7 +190,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
     };
 
     const leaveGame = () => {
-        router.delete(`/gender-duel-game/${genderDuelGameState.id}/leave`);
+        router.delete(route(`games.gender-duel.leave`, `${genderDuelGameState.id}`));
     };
 
     const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);

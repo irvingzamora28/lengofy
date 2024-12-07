@@ -59,7 +59,7 @@ class GenderDuelGameController extends Controller
             $validated['language_pair_id'],
             $validated['max_players']
         );
-        return redirect()->route('gender-duel-game.show', ['genderDuelGame' => $genderDuelGame]);
+        return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $genderDuelGame]);
     }
 
     public function show(GenderDuelGame $genderDuelGame)
@@ -113,7 +113,7 @@ class GenderDuelGameController extends Controller
 
         try {
             $this->genderDuelGameService->joinGame($genderDuelGame, auth()->user());
-            return redirect()->route('gender-duel-game.show', $genderDuelGame);
+            return redirect()->route('games.gender-duel.show', $genderDuelGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -123,7 +123,7 @@ class GenderDuelGameController extends Controller
     {
         try {
             $this->genderDuelGameService->markPlayerReady($genderDuelGame, auth()->id());
-            return to_route('gender-duel-game.show', $genderDuelGame);
+            return to_route('games.gender-duel.show', $genderDuelGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -132,6 +132,6 @@ class GenderDuelGameController extends Controller
     public function leave(GenderDuelGame $genderDuelGame)
     {
         $this->genderDuelGameService->leaveGame($genderDuelGame, auth()->user());
-        return redirect()->route('gender-duel-game.lobby');
+        return redirect()->route('games.gender-duel.lobby');
     }
 }
