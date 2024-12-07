@@ -4,6 +4,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame, PageProps } from '@/types';
 import PrimaryButton from '@/Components/PrimaryButton';
 
+import { MdClose } from 'react-icons/md';
+import { FaHourglassHalf, FaPlay, FaFlagCheckered } from 'react-icons/fa';
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import { FaUser, FaCheckCircle } from 'react-icons/fa';
+
 interface Props extends PageProps {
     auth: any;
     gender_duel_game: GenderDuelGame;
@@ -14,20 +19,14 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
     const [genderDuelGameState, setGenderDuelGameState] = useState(gender_duel_game);
     const [lastAnswer, setLastAnswer] = useState<any>(null);
     const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const wsRef = useRef<WebSocket | null>(null);
-
-    useEffect(() => {
-        console.log(gender_duel_game);
-        console.log(genderDuelGameState);
-
-    }, []);
 
     useEffect(() => {
         const ws = new WebSocket(wsEndpoint);
         wsRef.current = ws;
 
         ws.onopen = () => {
-            console.log('WebSocket connected');
             ws.send(JSON.stringify({
                 type: 'join_gender_duel_game',
                 genderDuelGameId: gender_duel_game.id,
@@ -41,11 +40,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            console.log('WebSocket message received:', data);
-
             switch (data.type) {
                 case 'player_ready':
-                    console.log('Player ready update received:', data);
                     setGenderDuelGameState(prev => {
                         const newState = {
                             ...prev,
@@ -55,39 +51,31 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                                     : player
                             )
                         };
-
-                        // Check if all players are ready
                         const allReady = newState.players.length >= 2 &&
                             newState.players.every(player => player.is_ready);
 
                         if (allReady && newState.status === 'waiting') {
-                            console.log('onMessage: All players are ready, starting game');
-                            // Send game start request
                             ws.send(JSON.stringify({
                                 type: 'start_gender_duel_game',
                                 genderDuelGameId: gender_duel_game.id,
                                 userId: auth.user.id
                             }));
                         }
-
                         return newState;
                     });
                     break;
 
                 case 'gender_duel_game_state_updated':
-                    console.log('Game state update received:', data.data);
                     setGenderDuelGameState(prev => ({
                         ...prev,
                         ...data.data,
                         players: data.data.players || prev.players
                     }));
 
-                    // If game is completed, show winner
                     if (data.data.status === 'completed' && data.data.winner) {
-                        setFeedbackMessage(`Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
+                        setFeedbackMessage(`🎉 Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
                     }
 
-                    // If player list is empty, redirect to lobby
                     if (data.data.players && data.data.players.length === 0) {
                         router.visit('/games/gender-duel');
                         return;
@@ -95,19 +83,14 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                     break;
 
                 case 'answer_submitted':
-                    console.log('Answer submitted:', data.data);
-                    const { playerId, player_name, word, answer, correct } = data.data;
+                    const { player_name, correct } = data.data;
                     setLastAnswer({
-                        playerId,
                         player_name,
-                        word,
-                        answer,
                         correct
                     });
                     break;
 
                 case 'score_updated':
-                    console.log('Score updated:', data.data);
                     setGenderDuelGameState(prev => ({
                         ...prev,
                         players: prev.players.map(p =>
@@ -119,13 +102,11 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                     break;
 
                 case 'next_round':
-                    console.log('Next round:', data.data);
                     setGenderDuelGameState(prev => ({
                         ...prev,
                         current_round: data.data.round,
                         current_word: data.data.word
                     }));
-                    // Clear previous answer and feedback
                     setLastAnswer(null);
                     setFeedbackMessage('');
                     break;
@@ -157,15 +138,11 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
     };
 
     const markReady = () => {
-        // First, update the database through HTTP
         router.post(route(`games.gender-duel.ready`, `${genderDuelGameState.id}`), {}, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                // Then, notify other players through WebSocket
                 if (wsRef.current?.readyState === WebSocket.OPEN) {
-                    console.log(`Player ${auth.user.id} is ready. Sending WebSocket message...`);
-
                     wsRef.current.send(JSON.stringify({
                         type: 'player_ready',
                         genderDuelGameId: genderDuelGameState.id,
@@ -175,7 +152,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                         }
                     }));
 
-                    // Update local state immediately
                     setGenderDuelGameState(prev => ({
                         ...prev,
                         players: prev.players.map(player =>
@@ -193,158 +169,220 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
         router.delete(route(`games.gender-duel.leave`, `${genderDuelGameState.id}`));
     };
 
+    const handleExitClick = () => {
+        if (genderDuelGameState.status === 'in_progress') {
+            setShowExitConfirmation(true);
+        } else {
+            leaveGame();
+        }
+    };
+
     const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);
 
     const renderLastAnswer = () => {
         if (!lastAnswer) return null;
-        if (lastAnswer.error) return <div className="text-red-500">{lastAnswer.error}</div>;
-
         return (
-            <div className={`text-lg ${lastAnswer.correct ? 'text-green-500' : 'text-red-500'}`}>
-                <p><strong>{lastAnswer.player_name}</strong> answered {lastAnswer.correct ? 'correctly' : 'incorrectly'}!</p>
+            <div className={`mt-4 flex items-center justify-center gap-2 text-lg font-bold ${
+                lastAnswer.correct ? 'text-green-600 dark:text-green-300' : 'text-red-600 dark:text-red-300'
+            }`}>
+                {lastAnswer.correct ? <AiOutlineCheckCircle size={24}/> : <AiOutlineCloseCircle size={24}/>}
+                <strong>{lastAnswer.player_name}</strong> {lastAnswer.correct ? 'got it right!' : 'was incorrect'}
             </div>
         );
     };
 
+    const gameStatusIcon = () => {
+        switch(genderDuelGameState.status) {
+            case 'waiting':
+                return <FaHourglassHalf className="inline-block mr-1" />;
+            case 'in_progress':
+                return <FaPlay className="inline-block mr-1" />;
+            case 'completed':
+                return <FaFlagCheckered className="inline-block mr-1" />;
+            default:
+                return null;
+        }
+    };
+
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Game Room</h2>}
-        >
-            <Head title="Game Room" />
+        <>
+            <AuthenticatedLayout
+                user={auth.user}
+                header={
+                    <div className="flex items-center">
+                        <button
+                            onClick={handleExitClick}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                        >
+                            <MdClose size={24} />
+                        </button>
+                        <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300 leading-tight">
+                            Gender Duel
+                        </h2>
+                    </div>
+                }
+            >
+                <Head title="Game Room" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-semibold">Game #{genderDuelGameState.id}</h2>
-                            <div className="flex items-center gap-4">
-                            {genderDuelGameState.status === 'waiting' && !currentPlayer?.is_ready && (
-                                <PrimaryButton onClick={markReady}>
-                                    Ready
-                                </PrimaryButton>
-                                )}
-                                <button
-                                    type="button"
-                                    className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-                                    onClick={leaveGame}
-                                >
-                                    Leave Game
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Game Info */}
-                        <div className="flex justify-between items-center mb-6 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                            <div className="flex items-center gap-6">
-                                <div>
-                                    <span className="text-gray-500 dark:text-gray-400">Language:</span>
-                                    <span className="ml-2 font-medium">{genderDuelGameState.language_name}</span>
-                                </div>
+                <div className="py-6 bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-black dark:to-black">
+                    <div className="max-w-7xl min-h-[26rem] md:h-[32rem] mx-auto px-4">
+                        {/* Secondary Info (Top) */}
+                        <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <div className="flex items-center space-x-2">
+                                <span className="font-medium">{genderDuelGameState.language_name}</span>
                                 {genderDuelGameState.status === 'in_progress' && (
-                                    <div>
-                                        <span className="text-gray-500 dark:text-gray-400">Round:</span>
-                                        <span className="ml-2 font-medium">{genderDuelGameState.current_round}/{genderDuelGameState.total_rounds}</span>
-                                    </div>
+                                    <span className="text-xs opacity-75">
+                                        Round {genderDuelGameState.current_round}/{genderDuelGameState.total_rounds}
+                                    </span>
                                 )}
                             </div>
-                            <div>
-                                <span className="text-gray-500 dark:text-gray-400">Status:</span>
-                                <span className={`ml-2 font-medium ${
-                                    genderDuelGameState.status === 'waiting' ? 'text-yellow-500' :
-                                    genderDuelGameState.status === 'in_progress' ? 'text-green-500' :
-                                    'text-red-500'
-                                }`}>
-                                    {genderDuelGameState.status.charAt(0).toUpperCase() + genderDuelGameState.status.slice(1).replace('_', ' ')}
-                                </span>
+                            <div className="inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-semibold
+                                bg-gray-400 dark:bg-gray-700"
+                            >
+                                {gameStatusIcon()}
+                                {genderDuelGameState.status.charAt(0).toUpperCase() + genderDuelGameState.status.slice(1).replace('_', ' ')}
                             </div>
                         </div>
 
-                        {/* Players List */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-4">Players</h3>
+                        {/* Ready Button if waiting */}
+                        {genderDuelGameState.status === 'waiting' && !currentPlayer?.is_ready && (
+                            <div className="text-center mb-6">
+                                <PrimaryButton
+                                    onClick={markReady}
+                                    className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 px-4 py-2 text-sm font-semibold"
+                                >
+                                    Ready to Start
+                                </PrimaryButton>
+                            </div>
+                        )}
+
+                        {/* Main Game Area */}
+                        <div className="bg-white/90 dark:bg-gray-800/90 rounded-lg p-6 shadow-lg transition-colors h-full flex flex-col items-center justify-center">
+                            {genderDuelGameState.status === 'waiting' ? (
+                                <div className="text-center text-gray-600 dark:text-gray-300">
+                                    Waiting for all players to be ready...
+                                </div>
+                            ) : genderDuelGameState.status === 'in_progress' && genderDuelGameState.current_word ? (
+                                <div className="text-center w-full">
+                                    {/* The main highlight: The word */}
+                                    <h1 className="text-4xl md:text-6xl lg:text-9xl font-extrabold text-gray-900 dark:text-gray-100 mb-8 transition-all">
+                                        {genderDuelGameState.current_word.word}
+                                    </h1>
+
+                                    {/* The primary action buttons - larger on desktop */}
+                                    <div className="flex flex-col sm:flex-row justify-center gap-8 mb-4">
+                                        {['der', 'die', 'das'].map((g) => (
+                                            <button
+                                                key={g}
+                                                type="button"
+                                                className="inline-flex items-center justify-center
+                                                px-6 py-6 md:px-8 md:py-4
+
+                                                text-2xl md:text-4xl lg:text-6xl font-bold uppercase tracking-wide
+                                                rounded-lg shadow-lg
+                                                bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600
+                                                active:scale-95 transition transform w-full sm:w-auto"
+                                                onClick={() => submitAnswer(g)}
+                                            >
+                                                {g}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {renderLastAnswer()}
+                                    {feedbackMessage && (
+                                        <div className="text-lg text-gray-700 dark:text-gray-200 mt-4 font-medium">
+                                            {feedbackMessage}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : genderDuelGameState.status === 'completed' ? (
+                                <div className="text-center">
+                                    <h3 className="text-2xl mb-4 font-extrabold text-purple-600 dark:text-purple-300">🎉 Game Over! 🎉</h3>
+                                    {feedbackMessage && (
+                                        <div className="text-lg text-gray-700 dark:text-gray-200 mb-6 font-medium">
+                                            {feedbackMessage}
+                                        </div>
+                                    )}
+                                    <div className="space-y-2 text-base text-gray-700 dark:text-gray-200">
+                                        {genderDuelGameState.players
+                                            .sort((a, b) => b.score - a.score)
+                                            .map((player, index) => (
+                                                <div key={player.id} className="flex justify-between items-center border-b border-gray-200 dark:border-gray-600 pb-2">
+                                                    <span className="font-medium">
+                                                        {index + 1}. {player.player_name}
+                                                    </span>
+                                                    <span>{player.score} pts</span>
+                                                </div>
+                                            ))}
+                                    </div>
+                                </div>
+                            ) : null}
+                        </div>
+
+                        {/* Players Info - Low Key */}
+                        {genderDuelGameState.players.length > 0 && (
+                            <div className="mt-6 text-sm text-gray-700 dark:text-gray-300 bg-white/70 dark:bg-gray-800/70 rounded-lg p-4">
+                                <h3 className="text-gray-800 dark:text-gray-200 font-semibold flex items-center gap-2 mb-2 text-base">
+                                    <FaUser /> Players
+                                </h3>
                                 <div className="space-y-2">
                                     {genderDuelGameState.players.map((player: any) => (
                                         <div
                                             key={player.id}
-                                            className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-600 rounded"
+                                            className={`flex items-center justify-between rounded px-3 py-2
+                                                ${player.is_ready ? 'bg-green-50 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'}`}
                                         >
-                                            <span>{player.player_name}</span>
-                                            <div>
-                                                <span className="mr-4">Score: {player.score}</span>
+                                            <span className={`
+                                                ${currentPlayer?.id === player.id ? 'underline font-bold' : 'font-medium'}
+                                                text-gray-800 dark:text-gray-100`
+                                            }>
+                                                {player.player_name}
+                                            </span>
+                                            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 text-sm">
+                                                <span>Score: {player.score}</span>
                                                 {player.is_ready && (
-                                                    <span className="text-green-500">Ready</span>
+                                                    <span className="flex items-center gap-1 text-green-600 dark:text-green-300 font-semibold">
+                                                        <FaCheckCircle/>
+                                                        Ready
+                                                    </span>
                                                 )}
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        )}
+                    </div>
+                </div>
+            </AuthenticatedLayout>
 
-                        {/* Game Area */}
-                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
-                            {genderDuelGameState.status === 'waiting' ? (
-                                <div className="text-center">
-                                    <p className="mb-4">
-                                        Waiting for players...
-                                        {genderDuelGameState.players.length < genderDuelGameState.max_players &&
-                                            ` (${genderDuelGameState.players.length}/${genderDuelGameState.max_players})`}
-                                    </p>
-                                </div>
-                            ) : genderDuelGameState.status === 'in_progress' && genderDuelGameState.current_word ? (
-                                <div className="text-center">
-                                    <h3 className="text-xl mb-2">Round {genderDuelGameState.current_round} of {genderDuelGameState.total_rounds}</h3>
-                                    <h4 className="text-lg mb-4">{genderDuelGameState.current_word.word}</h4>
-                                    <div className="flex justify-center gap-4 mb-4">
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-                                            onClick={() => submitAnswer('der')}
-                                        >
-                                            der
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-                                            onClick={() => submitAnswer('die')}
-                                        >
-                                            die
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150"
-                                            onClick={() => submitAnswer('das')}
-                                        >
-                                            das
-                                        </button>
-                                    </div>
-                                    {renderLastAnswer()}
-                                    {feedbackMessage && (
-                                        <div className="text-lg text-gray-500">{feedbackMessage}</div>
-                                    )}
-                                </div>
-                            ) : genderDuelGameState.status === 'completed' ? (
-                                <div className="text-center">
-                                    <h3 className="text-xl mb-4">Game Over!</h3>
-                                    <div className="space-y-2">
-                                        {feedbackMessage && (
-                                            <div className="text-lg text-gray-500">{feedbackMessage}</div>
-                                        )}
-                                        {genderDuelGameState.players.sort((a, b) => b.score - a.score).map((player, index) => (
-                                            <div key={player.id} className="flex justify-between items-center">
-                                                <span>{index + 1}. {player.player_name}</span>
-                                                <span>{player.score} points</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : null}
+            {/* Confirmation Modal */}
+            {showExitConfirmation && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-sm shadow-lg">
+                        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+                            Leave Game?
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-300 mb-6">
+                            The game is still in progress. Are you sure you want to leave?
+                        </p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => setShowExitConfirmation(false)}
+                                className="px-4 py-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded font-semibold text-gray-700 dark:text-gray-200"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={leaveGame}
+                                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold"
+                            >
+                                Leave
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </AuthenticatedLayout>
+            )}
+        </>
     );
 }
