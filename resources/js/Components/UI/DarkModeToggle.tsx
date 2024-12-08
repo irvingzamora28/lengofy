@@ -16,7 +16,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent event from bubbling up
     toggleDarkMode();
-    
+
     // Call the onToggle callback if provided
     if (onToggle) {
       onToggle(!darkMode);
@@ -30,9 +30,9 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
       aria-label="Toggle Dark Mode"
     >
       {darkMode ? (
-        <FaMoon className="w-6 h-6" />
-      ) : (
         <FaSun className="w-6 h-6" />
+    ) : (
+        <FaMoon className="w-6 h-6" />
       )}
     </button>
   );
