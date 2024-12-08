@@ -20,7 +20,7 @@ interface Props {
       language_pair_id: string;
       level: string;
       streak: number;
-      gender_duel_game_difficulty?: 'easy' | 'medium' | 'hard';
+      gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
     };
   };
   activeGames: GenderDuelGame[];
@@ -31,7 +31,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
   const [showDifficultyModal, setShowDifficultyModal] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(
-    auth.user.gender_duel_game_difficulty || 'medium'
+    auth.user.gender_duel_difficulty || 'medium'
   );
 
   const handleCreateGame = () => {
@@ -47,14 +47,16 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
 
   const startSinglePlayerGame = () => {
     // Save the selected difficulty to user settings
-    router.post(route('user.settings.update'), {
-      key: 'gender_duel_difficulty',
-      value: selectedDifficulty
+    router.post(route('profile.game-settings.update'), {
+      gender_duel_difficulty: selectedDifficulty
     }, {
       onSuccess: () => {
         // Navigate to single-player game
-        router.post(route('games.gender-duel.practice'), {
-          difficulty: selectedDifficulty,
+        router.visit(route('games.gender-duel.practice'), {
+          method: 'post',
+          data: {
+            difficulty: selectedDifficulty,
+          },
         });
         setShowDifficultyModal(false);
       }
@@ -188,7 +190,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                   }`}
                 >
-                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} 
+                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
                   <span className="block text-sm mt-1">
                     {difficulty === 'easy' && '5 seconds per word'}
                     {difficulty === 'medium' && '3 seconds per word'}

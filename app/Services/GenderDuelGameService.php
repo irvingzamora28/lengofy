@@ -37,6 +37,26 @@ class GenderDuelGameService
         });
     }
 
+    public function createPracticeGame(?User $user, string $language_pair_id, string $difficulty): GenderDuelGame
+    {
+        return DB::transaction(function () use ($user, $language_pair_id, $difficulty) {
+            // Create a practice game with a single player
+            $genderDuelGame = GenderDuelGame::create([
+                'status' => GenderDuelGameStatus::WAITING,
+                'max_players' => 1,
+                'total_rounds' => 10,
+                'language_pair_id' => $language_pair_id,
+                'creator_id' => $user?->id,
+                'difficulty' => $difficulty,
+            ]);
+
+            $this->addPlayer($genderDuelGame, $user);
+            $this->markPlayerReady($genderDuelGame, $user->id);
+
+            return $genderDuelGame;
+        });
+    }
+
     public function joinGame(GenderDuelGame $genderDuelGame, ?User $user): void
     {
         if ($genderDuelGame->players()->count() >= $genderDuelGame->max_players) {
@@ -94,7 +114,10 @@ class GenderDuelGameService
 
         // Get first word for the game
         $word = $this->getNextWord($genderDuelGame);
-        $genderDuelGame->update(['current_word' => $word]);
+        $genderDuelGame->update([
+            'current_word' => $word,
+            'time_per_word' => $word['time_per_word']
+        ]);
 
         return;
     }
@@ -150,11 +173,20 @@ class GenderDuelGameService
             throw new \RuntimeException("No words found for target language");
         }
 
+        // Set time based on difficulty
+        $timePerWord = match($genderDuelGame->difficulty ?? 'medium') {
+            'easy' => 5,
+            'medium' => 3,
+            'hard' => 1,
+            default => 3
+        };
+
         return [
             'id' => $word->id,
             'word' => $word->word,
             'gender' => $word->gender,
             'translation' => $word->getTranslation($languagePair->source_language_id),
+            'time_per_word' => $timePerWord
         ];
     }
 

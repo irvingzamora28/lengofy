@@ -76,16 +76,25 @@ class ProfileController extends Controller
     {
         try {
             $request->validate([
-                'gender_duel_difficulty' => 'required|in:easy,medium,hard',
-                'gender_duel_sound' => 'required|boolean',
-                'gender_duel_timer' => 'required|boolean',
+                'gender_duel_difficulty' => 'sometimes|in:easy,medium,hard',
+                'gender_duel_sound' => 'sometimes|boolean',
+                'gender_duel_timer' => 'sometimes|boolean',
             ]);
 
-            $request->user()->userSetting()->update([
-                'gender_duel_difficulty' => $request->input('gender_duel_difficulty'),
-                'gender_duel_sound' => $request->input('gender_duel_sound'),
-                'gender_duel_timer' => $request->input('gender_duel_timer')
-            ]);
+            $userSettings = $request->user()->userSetting;
+
+            // Update only the provided settings
+            if ($request->has('gender_duel_difficulty')) {
+                $userSettings->gender_duel_difficulty = $request->input('gender_duel_difficulty');
+            }
+            if ($request->has('gender_duel_sound')) {
+                $userSettings->gender_duel_sound = $request->input('gender_duel_sound');
+            }
+            if ($request->has('gender_duel_timer')) {
+                $userSettings->gender_duel_timer = $request->input('gender_duel_timer');
+            }
+
+            $userSettings->save();
 
             return Redirect::route('profile.edit')
                 ->with('status', 'Game settings updated successfully.');

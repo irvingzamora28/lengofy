@@ -88,6 +88,7 @@ class GenderDuelGameController extends Controller
                 'current_round' => $genderDuelGame->current_round,
                 'total_rounds' => $genderDuelGame->total_rounds,
                 'current_word' => $genderDuelGame->current_word,
+                'difficulty' => $genderDuelGame->difficulty ?? 'medium',
                 'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
                 'words' => $words,
             ],
@@ -133,5 +134,24 @@ class GenderDuelGameController extends Controller
     {
         $this->genderDuelGameService->leaveGame($genderDuelGame, auth()->user());
         return redirect()->route('games.gender-duel.lobby');
+    }
+
+    public function practice(Request $request)
+    {
+        $validated = $request->validate([
+            'difficulty' => 'required|in:easy,medium,hard',
+        ]);
+
+        $user = auth()->user();
+
+        // Create a practice game
+        $practiceGame = $this->genderDuelGameService->createPracticeGame(
+            $user, 
+            $user->language_pair_id, 
+            $validated['difficulty']
+        );
+
+        // Redirect to the game show page
+        return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $practiceGame]);
     }
 }
