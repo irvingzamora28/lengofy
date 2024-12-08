@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { Link } from '@inertiajs/react';
-import { router } from '@inertiajs/core';
+import { Link, router } from '@inertiajs/react';
 import {
   FaGlobe,
   FaUsers,
   FaPlay,
   FaBook,
   FaFlag,
+  FaDumbbell,
 } from 'react-icons/fa';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame } from '@/types';
+import Modal from '@/Components/Modal';
 
 interface Props {
   auth: {
@@ -19,6 +20,7 @@ interface Props {
       language_pair_id: string;
       level: string;
       streak: number;
+      gender_duel_game_difficulty?: 'easy' | 'medium' | 'hard';
     };
   };
   activeGames: GenderDuelGame[];
@@ -27,11 +29,35 @@ interface Props {
 export default function LanguageLobby({ auth, activeGames }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
+  const [showDifficultyModal, setShowDifficultyModal] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(
+    auth.user.gender_duel_game_difficulty || 'medium'
+  );
 
   const handleCreateGame = () => {
     router.post(route('games.gender-duel.create'), {
       language_pair_id: auth.user.language_pair_id,
       max_players: 8,
+    });
+  };
+
+  const handlePracticeAlone = () => {
+    setShowDifficultyModal(true);
+  };
+
+  const startSinglePlayerGame = () => {
+    // Save the selected difficulty to user settings
+    router.post(route('user.settings.update'), {
+      key: 'gender_duel_difficulty',
+      value: selectedDifficulty
+    }, {
+      onSuccess: () => {
+        // Navigate to single-player game
+        router.post(route('games.gender-duel.practice'), {
+          difficulty: selectedDifficulty,
+        });
+        setShowDifficultyModal(false);
+      }
     });
   };
 
@@ -45,13 +71,12 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   return (
     <AuthenticatedLayout
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Language Game Lobby</h2>}
+      header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Language Game Lobby</h2>}
     >
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-3 sm:p-6">
-
               {/* Game Lobby Section */}
               <div className="bg-white dark:bg-gray-700 shadow-xl rounded-xl overflow-hidden">
                 <div className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-600">
@@ -64,14 +89,22 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
                       </h2>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Connect, Learn, and Challenge Yourself!</p>
                     </div>
-                    <div className="w-full sm:w-auto">
+                    <div className="flex space-x-3">
                       <button
                         onClick={handleCreateGame}
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
                       >
                         <FaPlay className="mr-2" />
-                        <span className="hidden sm:inline">Start New Game</span>
-                        <span className="sm:hidden">New Game</span>
+                        <span className="hidden sm:inline">Create New Room</span>
+                        <span className="sm:hidden">New Room</span>
+                      </button>
+                      <button
+                        onClick={handlePracticeAlone}
+                        className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
+                      >
+                        <FaDumbbell className="mr-2" />
+                        <span className="hidden sm:inline">Practice Alone</span>
+                        <span className="sm:hidden">Practice</span>
                       </button>
                     </div>
                   </div>
@@ -138,6 +171,43 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Difficulty Selection Modal */}
+      {showDifficultyModal && (
+        <Modal show={showDifficultyModal} onClose={() => setShowDifficultyModal(false)}>
+          <div className="p-6 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Select Difficulty</h2>
+            <div className="space-y-4">
+              {(['easy', 'medium', 'hard'] as const).map((difficulty) => (
+                <button
+                  key={difficulty}
+                  onClick={() => setSelectedDifficulty(difficulty)}
+                  className={`w-full py-3 rounded-lg transition-colors ${
+                    selectedDifficulty === difficulty
+                      ? 'bg-primary-500 text-white'
+                      : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} 
+                  <span className="block text-sm mt-1">
+                    {difficulty === 'easy' && '5 seconds per word'}
+                    {difficulty === 'medium' && '3 seconds per word'}
+                    {difficulty === 'hard' && '1 second per word'}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="mt-6">
+              <button
+                onClick={startSinglePlayerGame}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg"
+              >
+                Start Practice
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </AuthenticatedLayout>
   );
 }

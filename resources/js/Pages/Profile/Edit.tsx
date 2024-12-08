@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
+import UpdateGameSettingsForm from './Partials/UpdateGameSettingsForm';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 
@@ -23,9 +24,17 @@ export default function Edit({ auth, mustVerifyEmail, status }: PageProps<{ must
                     </div>
 
                     {!auth.user.is_guest && (
-                        <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                            <UpdatePasswordForm className="max-w-xl" />
-                        </div>
+                        <>
+                            <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                                <UpdatePasswordForm className="max-w-xl" />
+                            </div>
+
+                            <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                                <UpdateGameSettingsForm
+                                    className="max-w-xl"
+                                />
+                            </div>
+                        </>
                     )}
                 </div>
             </div>

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\LanguagePair;
+use App\Models\UserSetting;
 use App\Services\LanguageService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -47,7 +49,7 @@ class ProfileController extends Controller
                             ],
                         ],
                     ];
-                })->all()
+                })->all(),
         ]);
     }
 
@@ -65,6 +67,38 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit');
+    }
+
+    /**
+     * Update game settings
+     */
+    public function updateGameSettings(Request $request): RedirectResponse
+    {
+        try {
+            $request->validate([
+                'gender_duel_difficulty' => 'required|in:easy,medium,hard',
+                'gender_duel_sound' => 'required|boolean',
+                'gender_duel_timer' => 'required|boolean',
+            ]);
+
+            $request->user()->userSetting()->update([
+                'gender_duel_difficulty' => $request->input('gender_duel_difficulty'),
+                'gender_duel_sound' => $request->input('gender_duel_sound'),
+                'gender_duel_timer' => $request->input('gender_duel_timer')
+            ]);
+
+            return Redirect::route('profile.edit')
+                ->with('status', 'Game settings updated successfully.');
+        } catch (\Exception $e) {
+            // Log any errors
+            Log::error('Failed to update game settings', [
+                'user_id' => $request->user()->id,
+                'error' => $e->getMessage()
+            ]);
+
+            return Redirect::route('profile.edit')
+                ->withErrors(['error' => 'Failed to update game settings. Please try again.']);
+        }
     }
 
     /**

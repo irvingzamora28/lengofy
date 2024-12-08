@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/game-settings', [ProfileController::class, 'updateGameSettings'])
+        ->name('profile.game-settings.update');
 
     // Game routes
     Route::get('/games/gender-duel', [GenderDuelGameController::class, 'lobby'])->name('games.gender-duel.lobby');

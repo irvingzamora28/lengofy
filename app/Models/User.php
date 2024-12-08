@@ -4,9 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\LanguagePair;
+use App\Models\UserSetting;
 
 class User extends Authenticatable
 {
@@ -39,9 +41,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
     protected function casts(): array
     {
@@ -56,5 +58,55 @@ class User extends Authenticatable
     public function languagePair()
     {
         return $this->belongsTo(LanguagePair::class);
+    }
+
+    // Relationship with user settings
+    public function userSetting()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
+    // Helper method to get all settings
+    public function getAllSettings()
+    {
+        return UserSetting::getAllSettings($this);
+    }
+
+    public function getGenderDuelDifficultyAttribute()
+    {
+        return $this->userSetting?->gender_duel_difficulty ?? 'medium';
+    }
+
+    public function getGenderDuelSoundAttribute()
+    {
+        return $this->userSetting?->gender_duel_sound ?? true;
+    }
+
+    public function getGenderDuelTimerAttribute()
+    {
+        return $this->userSetting?->gender_duel_timer ?? true;
+    }
+
+    public function toArray()
+    {
+        $attributes = parent::toArray();
+
+        $attributes['gender_duel_difficulty'] = $this->gender_duel_difficulty;
+        $attributes['gender_duel_sound'] = $this->gender_duel_sound;
+        $attributes['gender_duel_timer'] = $this->gender_duel_timer;
+
+        return $attributes;
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            // Create default user settings when a new user is created
+            $user->userSetting()->create([
+                'gender_duel_difficulty' => 'medium',
+                'gender_duel_sound' => true,
+                'gender_duel_timer' => true,
+            ]);
+        });
     }
 }
