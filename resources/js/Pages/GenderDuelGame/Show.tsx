@@ -215,6 +215,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                             onReady={markReady}
                             isCurrentPlayerReady={currentPlayer?.is_ready || false}
                             players={genderDuelGameState.players}
+                            difficulty={auth.user.gender_duel_difficulty || 'medium'}
                         />
 
                         <PlayersInfo

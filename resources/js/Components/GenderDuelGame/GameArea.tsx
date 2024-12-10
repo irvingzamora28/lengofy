@@ -1,6 +1,7 @@
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaTrophy, FaHourglassHalf } from 'react-icons/fa';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { useEffect, useState } from 'react';
 
 interface GameAreaProps {
     status: string;
@@ -15,7 +16,14 @@ interface GameAreaProps {
     onReady: () => void;
     isCurrentPlayerReady: boolean;
     players: any[];
+    difficulty: 'easy' | 'medium' | 'hard';
 }
+
+const DIFFICULTY_TIMES = {
+    easy: 5,
+    medium: 3,
+    hard: 1
+};
 
 const renderLastAnswer = (lastAnswer: any) => {
     if (!lastAnswer) return null;
@@ -39,8 +47,37 @@ export default function GameArea({
     onAnswer,
     onReady,
     isCurrentPlayerReady,
-    players
+    players,
+    difficulty
 }: GameAreaProps) {
+    const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout | null = null;
+
+        if (status === 'in_progress' && currentWord) {
+            // Reset timer when word changes
+            console.log('DIFFICULTY_TIMES[difficulty]', DIFFICULTY_TIMES[difficulty]);
+
+            setTimeLeft(DIFFICULTY_TIMES[difficulty]);
+
+            timer = setInterval(() => {
+                setTimeLeft((prevTime) => {
+                    if (prevTime <= 1) {
+                        // Time's up - send an empty answer to indicate timeout
+                        onAnswer('timeout');
+                        return DIFFICULTY_TIMES[difficulty];
+                    }
+                    return prevTime - 1;
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (timer) clearInterval(timer);
+        };
+    }, [status, currentWord, difficulty]);
+
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
             {status === 'waiting' ? (
@@ -60,6 +97,9 @@ export default function GameArea({
                 </div>
             ) : status === 'in_progress' && currentWord ? (
                 <div className="text-center w-full space-y-8">
+                    <div className="text-2xl font-bold text-gray-700 dark:text-gray-300">
+                        Time left: {timeLeft}s
+                    </div>
                     <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
                         {currentWord.word}
                     </h1>

@@ -152,7 +152,9 @@ const server = serve({
                         console.log('Submitted answer:', data.data.answer);
                         console.log('Expected gender:', currentWord.gender);
 
-                        const isCorrect = data.data.answer.toLowerCase() === currentWord.gender.toLowerCase();
+                        // Check if this is a timeout or a regular answer
+                        const isTimeout = data.data.answer === 'timeout';
+                        const isCorrect = !isTimeout && data.data.answer.toLowerCase() === currentWord.gender.toLowerCase();
                         console.log('Answer is correct:', isCorrect);
 
                         // Find the answering player
@@ -165,24 +167,27 @@ const server = serve({
                             return;
                         }
 
-                        // Update player score
+                        // Update player score only if the answer is correct (not timeout)
                         if (isCorrect) {
                             answeringPlayer.score = (answeringPlayer.score || 0) + 1;
                         }
 
                         // Broadcast answer result and updated scores
                         for (const client of answerGameRoom) {
-                            client.send(JSON.stringify({
-                                type: 'answer_submitted',
-                                data: {
-                                    playerId: answeringPlayer.id,
-                                    userId: answeringPlayer.user_id,
-                                    player_name: answeringPlayer.player_name,
-                                    word: currentWord.word,
-                                    answer: data.data.answer,
-                                    correct: isCorrect
-                                }
-                            }));
+                            // Only send answer_submitted event if it's not a timeout
+                            if (!isTimeout) {
+                                client.send(JSON.stringify({
+                                    type: 'answer_submitted',
+                                    data: {
+                                        playerId: answeringPlayer.id,
+                                        userId: answeringPlayer.user_id,
+                                        player_name: answeringPlayer.player_name,
+                                        word: currentWord.word,
+                                        answer: data.data.answer,
+                                        correct: isCorrect
+                                    }
+                                }));
+                            }
 
                             // Send updated game state with new scores
                             client.send(JSON.stringify({
@@ -193,8 +198,8 @@ const server = serve({
                             }));
                         }
 
-                        // If answer was correct, move to next round
-                        if (isCorrect) {
+                        // Move to next round if answer was correct or if it was a timeout
+                        if (isCorrect || isTimeout) {
                             // Check if there are more rounds
                             if (currentGameState.current_round < currentGameState.words.length - 1) {
                                 // Move to next round
