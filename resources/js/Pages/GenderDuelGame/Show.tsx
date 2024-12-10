@@ -73,6 +73,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                         ...data.data,
                         players: data.data.players || prev.players
                     }));
+                    console.log("Game status: ", data.data.status);
 
                     if (data.data.status === 'completed' && data.data.winner) {
                         setFeedbackMessage(`🎉 Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);

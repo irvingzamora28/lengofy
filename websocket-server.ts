@@ -143,7 +143,7 @@ const server = serve({
                             console.log('Game state or room not found');
                             return;
                         }
-
+                        console.log('Current round:', currentGameState.current_round);
                         const currentWord = currentGameState.words[currentGameState.current_round];
                         if (!currentWord) {
                             console.log('Current word not found for round:', currentGameState.current_round);
@@ -176,20 +176,18 @@ const server = serve({
 
                         // Broadcast answer result and updated scores
                         for (const client of answerGameRoom) {
-                            // Only send answer_submitted event if it's not a timeout
-                            if (!isTimeout) {
-                                client.send(JSON.stringify({
-                                    type: 'answer_submitted',
-                                    data: {
-                                        playerId: answeringPlayer.id,
-                                        userId: answeringPlayer.user_id,
-                                        player_name: answeringPlayer.player_name,
-                                        word: currentWord.word,
-                                        answer: data.data.answer,
-                                        correct: isCorrect
-                                    }
-                                }));
-                            }
+                            // Send answer_submitted event regardless of correctness
+                            client.send(JSON.stringify({
+                                type: 'answer_submitted',
+                                data: {
+                                    playerId: answeringPlayer.id,
+                                    userId: answeringPlayer.user_id,
+                                    player_name: answeringPlayer.player_name,
+                                    word: currentWord.word,
+                                    answer: data.data.answer,
+                                    correct: isCorrect
+                                }
+                            }));
 
                             // Send updated game state with new scores
                             client.send(JSON.stringify({
@@ -200,25 +198,24 @@ const server = serve({
                             }));
                         }
 
-                        // Move to next round if answer was correct or if it was a timeout
+                        // Move to next round only if the answer was correct or if it was a timeout
                         if (isCorrect || isTimeout) {
-                            // Check if there are more rounds
                             if (currentGameState.current_round < currentGameState.words.length - 1) {
-                                // Move to next round
-                                currentGameState.current_round++;
+                                currentGameState.current_round += 1; // Move to the next round
                                 const nextWord = currentGameState.words[currentGameState.current_round];
-
-                                // Broadcast next round to all players
+                                // Broadcast the next word
                                 for (const client of answerGameRoom) {
                                     client.send(JSON.stringify({
                                         type: 'gender_duel_game_state_updated',
                                         data: {
-                                            current_round: currentGameState.current_round + 1, // Display as 1-based
-                                            current_word: nextWord
+                                            current_word: nextWord,
+                                            current_round: currentGameState.current_round + 1 // Display as round 1
                                         }
                                     }));
                                 }
                             } else {
+                                console.log("Game is finished");
+
                                 // Game is finished
                                 currentGameState.status = 'completed';
 
