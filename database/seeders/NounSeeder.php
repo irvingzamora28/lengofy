@@ -37,7 +37,7 @@ class NounSeeder extends Seeder
             ]],
             ['word' => 'Maus', 'gender' => 'die', 'translations' => [
                 'en' => 'mouse',
-                'es' => 'raton',
+                'es' => 'ratón',
             ]],
             ['word' => 'Bild', 'gender' => 'das', 'translations' => [
                 'en' => 'picture',
@@ -51,11 +51,11 @@ class NounSeeder extends Seeder
                 'en' => 'piano',
                 'es' => 'piano',
             ]],
-            ['word' => 'Schlafzimmer', 'gender' => 'der', 'translations' => [
+            ['word' => 'Schlafzimmer', 'gender' => 'das', 'translations' => [
                 'en' => 'bedroom',
-                'es' => 'habitacion',
+                'es' => 'habitación',
             ]],
-            ['word' => 'Schreibtisch', 'gender' => 'das', 'translations' => [
+            ['word' => 'Schreibtisch', 'gender' => 'der', 'translations' => [
                 'en' => 'desk',
                 'es' => 'mesa',
             ]],
