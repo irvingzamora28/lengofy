@@ -14,9 +14,7 @@ return new class extends Migration
             $table->foreignId('language_pair_id')->constrained('language_pairs');
             $table->string('status')->default('waiting'); // waiting, in_progress, completed
             $table->integer('max_players')->default(8);
-            $table->integer('current_round')->default(0);
             $table->integer('total_rounds')->default(10);
-            $table->json('current_word')->nullable();
             $table->timestamps();
         });
     }

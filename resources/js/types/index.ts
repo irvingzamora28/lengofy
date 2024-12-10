@@ -12,6 +12,7 @@ export interface User {
 }
 
 export interface GenderDuelGame {
+    hostId: any;
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
     max_players: number;

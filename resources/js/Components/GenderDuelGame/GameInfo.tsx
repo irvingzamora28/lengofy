@@ -2,7 +2,7 @@ import { FaHourglassHalf, FaPlay, FaFlagCheckered } from 'react-icons/fa';
 
 interface GameInfoProps {
     languageName: string;
-    currentRound?: number;
+    currentRound: number;
     totalRounds?: number;
     status: string;
 }
@@ -34,7 +34,7 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
                 <span className="font-medium">{languageName}</span>
                 {status === 'in_progress' && (
                     <span className="text-xs opacity-75">
-                        Round {currentRound}/{totalRounds}
+                        Round {++currentRound}/{totalRounds}
                     </span>
                 )}
             </div>

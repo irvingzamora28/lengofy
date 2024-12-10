@@ -82,7 +82,7 @@ export default function GameArea({
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [status, currentWord, difficulty, isHost]);
+    }, [status, currentWord, difficulty, isHost, timeoutProcessed]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
@@ -104,7 +104,8 @@ export default function GameArea({
             ) : status === 'in_progress' && currentWord ? (
                 <div className="text-center w-full space-y-8">
                     <div className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                        Time left: {timeLeft}s
+                        {/* Display round as one-based: currentRound is zero-based */}
+                        Round {currentRound !== undefined ? currentRound + 1 : ''} - Time left: {timeLeft}s
                     </div>
                     <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
                         {currentWord.word}

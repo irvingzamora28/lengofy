@@ -33,11 +33,22 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                 type: 'join_gender_duel_game',
                 genderDuelGameId: gender_duel_game.id,
                 userId: auth.user.id,
+                max_players: gender_duel_game.max_players,
                 data: {
                     words: gender_duel_game.words,
                     players: gender_duel_game.players
                 }
             }));
+            if (gender_duel_game.max_players === 1) {
+                ws.send(JSON.stringify({
+                    type: 'player_ready',
+                    genderDuelGameId: genderDuelGameState.id,
+                    data: {
+                        player_id: currentPlayer?.id,
+                        user_id: auth.user.id
+                    }
+                }));
+            }
         };
 
         ws.onmessage = (event) => {
@@ -53,10 +64,12 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                                     : player
                             )
                         };
-                        const allReady = newState.players.length >= 2 &&
-                            newState.players.every(player => player.is_ready);
+                        const allReady = newState.max_players === 1 || (newState.players.length >= 2 &&
+                            newState.players.every(player => player.is_ready));
 
                         if (allReady && newState.status === 'waiting') {
+                            console.log('All players are ready');
+
                             ws.send(JSON.stringify({
                                 type: 'start_gender_duel_game',
                                 genderDuelGameId: gender_duel_game.id,
@@ -222,6 +235,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                             players={genderDuelGameState.players}
                             difficulty={auth.user.gender_duel_difficulty || 'medium'}
                             isHost={hostId === auth.user.id} // Pass host information
+                            currentRound={genderDuelGameState.current_round} // zero-based
                         />
 
                         <PlayersInfo

@@ -37,9 +37,7 @@ class GenderDuelGame extends Model
     protected $fillable = [
         'status',
         'max_players',
-        'current_round',
         'total_rounds',
-        'current_word',
         'language_pair_id',
         'creator_id',
     ];

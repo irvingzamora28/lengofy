@@ -87,39 +87,6 @@ class GenderDuelGameService
         }
 
         $player->update(['is_ready' => true]);
-
-        // Check if all players are ready to start the game
-        if ($this->areAllPlayersReady($genderDuelGame)) {
-            $this->startGame($genderDuelGame);
-        }
-    }
-
-    private function areAllPlayersReady(GenderDuelGame $genderDuelGame): bool
-    {
-        return !$genderDuelGame->players()->where('is_ready', false)->exists();
-    }
-
-    private function startGame(GenderDuelGame $genderDuelGame): void
-    {
-        // Only start games that are in waiting status
-        if ($genderDuelGame->status !== GenderDuelGameStatus::WAITING) {
-            return;
-        }
-
-        // Start the game
-        $genderDuelGame->update([
-            'status' => GenderDuelGameStatus::IN_PROGRESS,
-            'current_round' => 1,
-        ]);
-
-        // Get first word for the game
-        $word = $this->getNextWord($genderDuelGame);
-        $genderDuelGame->update([
-            'current_word' => $word,
-            'time_per_word' => $word['time_per_word']
-        ]);
-
-        return;
     }
 
     private function endGame(GenderDuelGame $genderDuelGame): void
@@ -158,36 +125,6 @@ class GenderDuelGameService
         else if ($genderDuelGame->status === GenderDuelGameStatus::IN_PROGRESS && $genderDuelGame->players()->count() < 2) {
             $this->endGame($genderDuelGame);
         }
-    }
-
-    private function getNextWord(GenderDuelGame $genderDuelGame): array
-    {
-        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($genderDuelGame->language_pair_id);
-
-        // Get a random noun from the target language
-        $word = Noun::where('language_id', $languagePair->target_language_id)
-                   ->inRandomOrder()
-                   ->first();
-
-        if (!$word) {
-            throw new \RuntimeException("No words found for target language");
-        }
-
-        // Set time based on difficulty
-        $timePerWord = match($genderDuelGame->difficulty ?? 'medium') {
-            'easy' => 5,
-            'medium' => 3,
-            'hard' => 1,
-            default => 3
-        };
-
-        return [
-            'id' => $word->id,
-            'word' => $word->word,
-            'gender' => $word->gender,
-            'translation' => $word->getTranslation($languagePair->source_language_id),
-            'time_per_word' => $timePerWord
-        ];
     }
 
     public function getGameWords(GenderDuelGame $genderDuelGame): array
