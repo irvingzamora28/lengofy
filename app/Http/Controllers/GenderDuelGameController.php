@@ -91,6 +91,7 @@ class GenderDuelGameController extends Controller
                 'difficulty' => $genderDuelGame->difficulty ?? 'medium',
                 'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
                 'words' => $words,
+                'hostId' => $genderDuelGame->creator_id,
             ],
             'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
@@ -146,8 +147,8 @@ class GenderDuelGameController extends Controller
 
         // Create a practice game
         $practiceGame = $this->genderDuelGameService->createPracticeGame(
-            $user, 
-            $user->language_pair_id, 
+            $user,
+            $user->language_pair_id,
             $validated['difficulty']
         );
 

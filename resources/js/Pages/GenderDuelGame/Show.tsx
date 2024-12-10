@@ -20,6 +20,10 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const wsRef = useRef<WebSocket | null>(null);
 
+    // Determine the host player
+    const hostId = genderDuelGameState.hostId;
+    console.log("Show hostId:", hostId);
+
     useEffect(() => {
         const ws = new WebSocket(wsEndpoint);
         wsRef.current = ws;
@@ -216,6 +220,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                             isCurrentPlayerReady={currentPlayer?.is_ready || false}
                             players={genderDuelGameState.players}
                             difficulty={auth.user.gender_duel_difficulty || 'medium'}
+                            isHost={hostId === auth.user.id} // Pass host information
                         />
 
                         <PlayersInfo

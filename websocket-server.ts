@@ -22,6 +22,7 @@ interface GenderDuelGameState {
         gender: string;
         translation: string;
     }>;
+    hostId?: string;
 }
 
 // Store active game rooms and their states
@@ -56,6 +57,7 @@ const server = serve({
                                 players: [],
                                 current_round: 0,
                                 words: data.data.words || [],
+                                hostId: data.userId // Register the host
                             });
                         }
 
@@ -75,7 +77,7 @@ const server = serve({
                                 guest_id: player.guest_id || null,
                                 score: player.score || 0,
                                 is_ready: player.is_ready || false,
-                                is_host: player.is_host || false,
+                                is_host: player.user_id === gameState.hostId // Set host flag
                             }));
 
                             console.log('Updated players:', gameState.players);

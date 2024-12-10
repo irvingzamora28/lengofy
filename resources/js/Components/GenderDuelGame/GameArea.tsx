@@ -17,6 +17,7 @@ interface GameAreaProps {
     isCurrentPlayerReady: boolean;
     players: any[];
     difficulty: 'easy' | 'medium' | 'hard';
+    isHost: boolean;
 }
 
 const DIFFICULTY_TIMES = {
@@ -48,24 +49,29 @@ export default function GameArea({
     onReady,
     isCurrentPlayerReady,
     players,
-    difficulty
+    difficulty,
+    isHost
 }: GameAreaProps) {
     const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
+    const [timeoutProcessed, setTimeoutProcessed] = useState<boolean>(false);
 
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
+        console.log("isHost:", isHost);
 
-        if (status === 'in_progress' && currentWord) {
+        if (status === 'in_progress' && currentWord && isHost) {
             // Reset timer when word changes
-            console.log('DIFFICULTY_TIMES[difficulty]', DIFFICULTY_TIMES[difficulty]);
-
             setTimeLeft(DIFFICULTY_TIMES[difficulty]);
+            setTimeoutProcessed(false); // Reset the timeout processed flag
 
             timer = setInterval(() => {
                 setTimeLeft((prevTime) => {
                     if (prevTime <= 1) {
                         // Time's up - send an empty answer to indicate timeout
-                        onAnswer('timeout');
+                        if (!timeoutProcessed) {
+                            onAnswer('timeout');
+                            setTimeoutProcessed(true); // Mark timeout as processed
+                        }
                         return DIFFICULTY_TIMES[difficulty];
                     }
                     return prevTime - 1;
@@ -76,7 +82,7 @@ export default function GameArea({
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [status, currentWord, difficulty]);
+    }, [status, currentWord, difficulty, isHost]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
