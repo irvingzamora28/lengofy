@@ -11,6 +11,7 @@ import {
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame } from '@/types';
 import Modal from '@/Components/Modal';
+import useEchoChannel from '@/Hooks/useEchoChannel';
 
 interface Props {
   auth: {
@@ -33,6 +34,18 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(
     auth.user.gender_duel_difficulty || 'medium'
   );
+
+  // Subscribe to game events
+  useEchoChannel('gender-duel-game', {
+    'gender-duel-game-created': (data: { game: GenderDuelGame }) => {
+        console.log('New game created:', data.game);
+        setGames(prevGames => [...prevGames, data.game]);
+    },
+    'gender-duel-game-ended': (data: { gameId: number }) => {
+        console.log('Game ended:', data.gameId);
+        setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
+    }
+});
 
   const handleCreateGame = () => {
     router.post(route('games.gender-duel.create'), {
