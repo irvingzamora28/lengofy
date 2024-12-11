@@ -2,11 +2,14 @@ import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaTrophy, FaHourglassHalf } from 'react-icons/fa';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect, useState } from 'react';
+import correctSound from '@/assets/audio/correct.mp3';
+import incorrectSound from '@/assets/audio/incorrect.mp3';
 
 interface GameAreaProps {
     status: string;
     currentWord?: {
         word: string;
+        gender: string;
     };
     currentRound?: number;
     totalRounds?: number;
@@ -54,6 +57,21 @@ export default function GameArea({
 }: GameAreaProps) {
     const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
     const [timeoutProcessed, setTimeoutProcessed] = useState<boolean>(false);
+    const [shake, setShake] = useState(false);
+
+    const handleAnswer = (answer: string) => {
+        const isCorrect = answer === currentWord?.gender;
+        if (isCorrect) {
+            const audio = new Audio(correctSound);
+            audio.play();
+        } else {
+            const audio = new Audio(incorrectSound);
+            audio.play();
+            setShake(true);
+            setTimeout(() => setShake(false), 500); // Reset shake after 500ms
+        }
+        onAnswer(answer);
+    };
 
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
@@ -102,7 +120,7 @@ export default function GameArea({
                     )}
                 </div>
             ) : status === 'in_progress' && currentWord ? (
-                <div className="text-center w-full space-y-8">
+                <div className={`text-center w-full space-y-8 ${shake ? 'animate-shake' : ''}`}>
                     <div className="text-2xl font-bold text-gray-700 dark:text-gray-300">
                         {/* Display round as one-based: currentRound is zero-based */}
                         Round {currentRound !== undefined ? currentRound + 1 : ''} - Time left: {timeLeft}s
@@ -123,7 +141,7 @@ export default function GameArea({
                                 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white
                                 hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-500 dark:hover:to-indigo-600
                                 active:scale-95 transition-all duration-300 transform w-full sm:w-auto"
-                                onClick={() => onAnswer(g)}
+                                onClick={() => handleAnswer(g)}
                             >
                                 {g}
                             </button>
