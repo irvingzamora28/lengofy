@@ -6,7 +6,7 @@ interface GenderDuelGameRoom {
 }
 
 interface GenderDuelGameMessage {
-    type: 'join_gender_duel_game' | 'submit_answer' | 'gender_duel_game_state_update' | 'player_ready' | 'start_gender_duel_game';
+    type: 'join_gender_duel_game' | 'submit_answer' | 'gender_duel_game_state_update' | 'player_ready' | 'start_gender_duel_game' | 'restart_gender_duel_game';
     genderDuelGameId: string;
     userId?: string;
     data?: any;
@@ -132,12 +132,39 @@ const server = serve({
                                     client.send(JSON.stringify({
                                         type: 'gender_duel_game_state_updated',
                                         data: {
-                                            status: 'in_progress',
-                                            current_round: gameState.current_round, // zero-based
-                                            current_word: gameState.words[0] // Use index 0
+                                            ...gameState,
+                                            current_word: gameState.words[gameState.current_round]
                                         }
                                     }));
                                 }
+                            }
+                        }
+                        break;
+
+                    case 'restart_gender_duel_game':
+                        if (gameRoom) {
+                            // Reset game state
+                            const gameState = genderDuelGameStates.get(data.genderDuelGameId);
+                            if (gameState) {
+                                gameState.status = 'in_progress';
+                                gameState.current_round = 0; // Reset to the first round (zero-based)
+                                // Notify all players in the game room about the updated game state
+                                console.log('Restarting game:', data.genderDuelGameId);
+                                console.log("Notifying all players in the game room about the updated game state");
+                                console.log(gameRoom.size + " players in the game room");
+
+
+                                gameRoom.forEach(client => {
+                                    client.send(JSON.stringify({
+                                        type: 'gender_duel_game_state_updated',
+                                        genderDuelGameId: data.genderDuelGameId,
+                                        // Append to data current_word
+                                        data: {
+                                            ...gameState,
+                                            current_word: gameState.words[gameState.current_round]
+                                        }
+                                    }));
+                                });
                             }
                         }
                         break;

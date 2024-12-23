@@ -21,6 +21,7 @@ interface GameAreaProps {
     players: any[];
     difficulty: 'easy' | 'medium' | 'hard';
     isHost: boolean;
+    onRestart: () => void;
 }
 
 const DIFFICULTY_TIMES = {
@@ -41,7 +42,7 @@ const renderLastAnswer = (lastAnswer: any) => {
     );
 };
 
-export default function GameArea({
+const GameArea = ({
     status,
     currentWord,
     currentRound,
@@ -53,11 +54,14 @@ export default function GameArea({
     isCurrentPlayerReady,
     players,
     difficulty,
-    isHost
-}: GameAreaProps) {
+    isHost,
+    onRestart
+}: GameAreaProps) => {
     const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
     const [timeoutProcessed, setTimeoutProcessed] = useState<boolean>(false);
     const [shake, setShake] = useState(false);
+    const [showCountdown, setShowCountdown] = useState(false);
+    const [countdown, setCountdown] = useState(3);
 
     const handleAnswer = (answer: string) => {
         const isCorrect = answer === currentWord?.gender;
@@ -73,12 +77,44 @@ export default function GameArea({
         onAnswer(answer);
     };
 
+    const handleRestart = () => {
+        setShowCountdown(true);
+        setCountdown(3);
+    };
+
+    useEffect(() => {
+        let countdownInterval: NodeJS.Timeout | undefined;
+
+        if (showCountdown && countdown > 0) {
+            countdownInterval = setInterval(() => {
+                setCountdown((prev) => {
+                    if (prev <= 1) {
+                        setShowCountdown(false);
+                        onRestart(); // Start the game immediately
+                        console.log('Game restarted (GameArea) after countdown');
+                        console.log("status:", status);
+                        console.log("currentWord:", currentWord);
+
+
+                        return 3; // Reset countdown
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
+
+        return () => {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+        };
+    }, [showCountdown, countdown, onRestart]);
+
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
-        console.log("isHost:", isHost);
 
         if (status === 'in_progress' && currentWord && isHost) {
-            // Reset timer when word changes
+            // Reset timer when word changes or game restarts
             setTimeLeft(DIFFICULTY_TIMES[difficulty]);
             setTimeoutProcessed(false); // Reset the timeout processed flag
 
@@ -90,7 +126,7 @@ export default function GameArea({
                             onAnswer('timeout');
                             setTimeoutProcessed(true); // Mark timeout as processed
                         }
-                        return DIFFICULTY_TIMES[difficulty];
+                        return DIFFICULTY_TIMES[difficulty]; // Reset timer
                     }
                     return prevTime - 1;
                 });
@@ -100,7 +136,7 @@ export default function GameArea({
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [status, currentWord, difficulty, isHost, timeoutProcessed]);
+    }, [status, currentWord, difficulty, isHost, timeoutProcessed, onAnswer]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
@@ -179,8 +215,18 @@ export default function GameArea({
                                 </div>
                             ))}
                     </div>
+                    <PrimaryButton onClick={handleRestart} className="mt-4">Restart Game</PrimaryButton>
                 </div>
             ) : null}
+            {showCountdown && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow">
+                        <h2 className="text-4xl font-bold">Starting in {countdown}...</h2>
+                    </div>
+                </div>
+            )}
         </div>
     );
-}
+};
+
+export default GameArea;

@@ -86,6 +86,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                         ...data.data,
                         players: data.data.players || prev.players
                     }));
+                    console.log("gender_duel_game_state_updated: ", data);
+                    console.log("Game status: ", data.status);
                     console.log("Game status: ", data.data.status);
 
                     if (data.data.status === 'completed' && data.data.winner) {
@@ -193,6 +195,25 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
         }
     };
 
+    const onRestart = () => {
+        if (genderDuelGameState.status === 'completed') {
+            console.log("Send restart message to WebSocket server");
+
+            // Send restart message to WebSocket server
+            wsRef.current?.send(JSON.stringify({
+                type: 'restart_gender_duel_game',
+                genderDuelGameId: genderDuelGameState.id,
+            }));
+            setLastAnswer(null);
+            setFeedbackMessage('');
+            setShowExitConfirmation(false);
+        }
+    };
+
+    useEffect(() => {
+        console.log("Show: genderDuelGameState:", genderDuelGameState);
+    }, [genderDuelGameState]);
+
     const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);
 
     return (
@@ -236,6 +257,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                             difficulty={auth.user.gender_duel_difficulty || 'medium'}
                             isHost={hostId === auth.user.id} // Pass host information
                             currentRound={genderDuelGameState.current_round} // zero-based
+                            onRestart={onRestart}
                         />
 
                         <PlayersInfo
