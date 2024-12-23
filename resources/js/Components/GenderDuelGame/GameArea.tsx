@@ -68,13 +68,15 @@ const GameArea = ({
         if (isCorrect) {
             const audio = new Audio(correctSound);
             audio.play();
+            onAnswer(answer); // Call onAnswer for correct answer
+            setTimeLeft(DIFFICULTY_TIMES[difficulty]); // Reset timer only on correct answer
         } else {
             const audio = new Audio(incorrectSound);
             audio.play();
             setShake(true);
             setTimeout(() => setShake(false), 500); // Reset shake after 500ms
+            // Timer remains unchanged for incorrect answers, allowing continuous gameplay
         }
-        onAnswer(answer);
     };
 
     const handleRestart = () => {
