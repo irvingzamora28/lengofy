@@ -42,6 +42,37 @@ const renderLastAnswer = (lastAnswer: any) => {
     );
 };
 
+import { FaChartBar, FaInfoCircle } from 'react-icons/fa';
+
+const renderFeedback = (message: string) => {
+    if (!message) return null;
+
+    const [mainFeedback, stats] = message.split('\n\n');
+
+    return (
+        <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 shadow-md">
+            <div className="flex items-center gap-2 text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                {mainFeedback}
+            </div>
+
+            {stats && (
+                <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {stats.split('\n').map((line, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center gap-2 p-2 rounded-md bg-white/50 dark:bg-gray-800/50 hover:shadow-sm transition-all"
+                        >
+                            <FaInfoCircle className="w-4 h-4 text-purple-500 dark:text-purple-400 flex-shrink-0" />
+                            <span className="text-sm text-gray-700 dark:text-gray-300">{line}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+
 const GameArea = ({
     status,
     currentWord,
@@ -186,11 +217,7 @@ const GameArea = ({
                         ))}
                     </div>
                     {renderLastAnswer(lastAnswer)}
-                    {feedbackMessage && (
-                        <div className="text-xl text-gray-700 dark:text-gray-200 mt-6 font-medium animate-fade-in">
-                            {feedbackMessage}
-                        </div>
-                    )}
+                    {feedbackMessage && renderFeedback(feedbackMessage)}
                 </div>
             ) : status === 'completed' ? (
                 <div className="text-center space-y-8">
@@ -198,11 +225,7 @@ const GameArea = ({
                     <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
                         Game Over!
                     </h3>
-                    {feedbackMessage && (
-                        <div className="text-xl text-gray-700 dark:text-gray-200 font-medium">
-                            {feedbackMessage}
-                        </div>
-                    )}
+                    {feedbackMessage && renderFeedback(feedbackMessage)}
                     <div className="space-y-3 text-lg text-gray-700 dark:text-gray-200 max-w-md mx-auto">
                         {players
                             .sort((a, b) => b.score - a.score)

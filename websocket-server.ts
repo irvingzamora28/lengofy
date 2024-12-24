@@ -1,5 +1,5 @@
 import { serve } from 'bun';
-import { GenderDuelGame, GenderDuelGamePlayer } from './resources/js/types';
+import { GenderDuelGame, GenderDuelGamePlayer, GenderDuelGameState } from './resources/js/types';
 
 interface GenderDuelGameRoom {
     players: Set<WebSocket>;
@@ -11,21 +11,6 @@ interface GenderDuelGameMessage {
     userId?: string;
     data?: any;
 }
-
-interface GenderDuelGameState {
-    status: string;
-    players: GenderDuelGamePlayer[];
-    current_round: number;
-    words: Array<{
-        id: number;
-        word: string;
-        gender: string;
-        translation: string;
-    }>;
-    hostId?: string;
-    max_players?: number;
-}
-
 // Store active game rooms and their states
 const genderDuelGameRooms = new Map<string, Set<WebSocket>>();
 const genderDuelGameStates = new Map<string, GenderDuelGameState>();
@@ -62,6 +47,7 @@ const server = serve({
                                 words: data.data.words || [],
                                 hostId: data.userId, // Register the host
                                 max_players: data.data.max_players,
+                                winner: null
                             });
                         }
 

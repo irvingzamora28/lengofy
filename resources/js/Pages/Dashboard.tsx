@@ -1,9 +1,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { PageProps, Score } from '@/types';
+
 import GameStats from '@/Components/Games/GameStats';
 import FeaturedGames from '@/Components/Games/FeaturedGames';
+import Leaderboard from '@/Components/Games/Leaderboard';
 
-export default function Dashboard() {
+interface DashboardProps extends PageProps {
+    scores: Score[];
+}
+
+export default function Dashboard({ scores }: DashboardProps) {
     return (
         <AuthenticatedLayout
 
@@ -16,6 +23,8 @@ export default function Dashboard() {
                     <div className="overflow-hidden sm:rounded-lg">
                         <GameStats />
                     </div>
+
+                    <Leaderboard scores={scores} />
 
                     {/* Featured Games Section */}
                     <div className="overflow-hidden bg-gray-50 dark:bg-gray-900 shadow-sm sm:rounded-lg p-3 sm:p-6">

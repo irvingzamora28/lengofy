@@ -4,7 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\Auth\GuestController;
+use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
+use App\Models\Score;
 use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +48,14 @@ Route::get('/', function (LanguageService $languageService) {
 })->name('welcome');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $scores = Score::with(['user', 'game'])->orderBy('highest_score', 'desc')
+        ->orderBy('total_points', 'desc')
+        ->orderBy('winning_streak', 'desc')
+        ->limit(10)
+        ->get();
+    return Inertia::render('Dashboard', [
+        'scores' => $scores,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -66,6 +75,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
         Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
     });
+
+    // Score routes
+    Route::post('/scores/update', [ScoreController::class, 'update']);
 });
 
 // Guest user routes

@@ -87,6 +87,11 @@ class User extends Authenticatable
         return $this->userSetting?->gender_duel_timer ?? true;
     }
 
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
+
     public function toArray()
     {
         $attributes = parent::toArray();

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             LanguagePairSeeder::class,
             NounSeeder::class,
+            GameSeeder::class,
         ]);
     }
 }

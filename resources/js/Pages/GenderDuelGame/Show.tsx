@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { GenderDuelGame, PageProps } from '@/types';
+import { GenderDuelGame, GenderDuelGameState, PageProps } from '@/types';
 import { MdClose } from 'react-icons/md';
 import GameInfo from '@/Components/GenderDuelGame/GameInfo';
 import GameArea from '@/Components/GenderDuelGame/GameArea';
 import PlayersInfo from '@/Components/GenderDuelGame/PlayersInfo';
+import axios from 'axios';
 
 interface Props extends PageProps {
     auth: any;
@@ -92,6 +93,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
                     if (data.data.status === 'completed' && data.data.winner) {
                         setFeedbackMessage(`🎉 Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
+                        handleGameCompletion(data.data);
                     }
 
                     if (data.data.players && data.data.players.length === 0) {
@@ -141,6 +143,50 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
             }
         };
     }, [gender_duel_game.id]);
+
+    // Function to handle game completion
+    const handleGameCompletion = async (data: GenderDuelGameState) => {
+        console.log("handleGameCompletion data: ", data);
+        const currentPlayer = data.players.find(player => player.user_id === auth.user.id);
+        if (!currentPlayer) return;
+
+        // Calculate scores
+        const currentScore = currentPlayer.score || 0;
+        const isWinner = data.winner?.user_id === auth.user.id;
+
+        // Get previous scores from localStorage or default to initial values
+        const prevScores = JSON.parse(localStorage.getItem(`genderDuelScores_${auth.user.id}`) || '{"highestScore": 0, "totalPoints": 0, "winningStreak": 0}');
+
+        const calculatedHighestScore = Math.max(currentScore, prevScores.highestScore);
+        const calculatedTotalPoints = (prevScores.totalPoints || 0) + currentScore;
+        const currentWinningStreak = isWinner ? (prevScores.winningStreak || 0) + 1 : 0;
+
+        const scoreData = {
+            user_id: auth.user.id,
+            game_id: 3, // GenderDuel game ID
+            highest_score: calculatedHighestScore,
+            total_points: calculatedTotalPoints,
+            winning_streak: currentWinningStreak,
+        };
+
+        try {
+            const response = await axios.post('/scores/update', scoreData);
+            console.log('Score updated successfully');
+
+            // Save updated scores to localStorage
+            localStorage.setItem(`genderDuelScores_${auth.user.id}`, JSON.stringify({
+                highestScore: calculatedHighestScore,
+                totalPoints: calculatedTotalPoints,
+                winningStreak: currentWinningStreak,
+            }));
+
+            // Update feedback message with scores
+            setFeedbackMessage(`🎉 Game Over! ${data.winner?.player_name} wins with ${data.winner?.score} points!\n
+                Score: ${currentScore}\nHighest Score: ${calculatedHighestScore}\nTotal Points: ${calculatedTotalPoints}\nWinning Streak: ${currentWinningStreak}`);
+        } catch (error) {
+            console.error('Error updating score:', error);
+        }
+    };
 
     const submitAnswer = (gender: string) => {
         if (wsRef.current?.readyState === WebSocket.OPEN) {

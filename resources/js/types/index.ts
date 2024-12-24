@@ -40,3 +40,33 @@ export interface GenderDuelGamePlayer {
     is_ready: boolean;
     is_host: boolean;
 }
+
+export interface GenderDuelGameState {
+    status: string;
+    players: GenderDuelGamePlayer[];
+    current_round: number;
+    words: Array<{
+        id: number;
+        word: string;
+        gender: string;
+        translation: string;
+    }>;
+    hostId?: string;
+    winner: GenderDuelGamePlayer | null;
+    max_players?: number;
+}
+
+
+export interface Score {
+    id: number;
+    user_id: number;
+    game_id: number;
+    highest_score: number;
+    total_points: number;
+    winning_streak: number;
+    user: User;
+    game: {
+        id: number;
+        name: string; // Include any other relevant game fields
+    };
+}
