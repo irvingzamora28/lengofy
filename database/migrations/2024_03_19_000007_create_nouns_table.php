@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('word');
             $table->foreignId('language_id')->constrained();
             $table->string('gender')->nullable(); // Only used for languages with grammatical gender
-            $table->enum('difficulty_level', ['beginner', 'intermediate', 'advanced'])->default('beginner');
+            $table->tinyInteger('difficulty_level')->comment('the difficulty level of the noun (1 for beginner, 2 for intermediate, 3 for advanced)');
             $table->timestamps();
 
             // Index for faster lookups
