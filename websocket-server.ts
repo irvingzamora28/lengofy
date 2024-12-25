@@ -134,6 +134,9 @@ const server = serve({
                             if (gameState) {
                                 gameState.status = 'in_progress';
                                 gameState.current_round = 0; // Reset to the first round (zero-based)
+                                gameState.players.forEach(player => {
+                                    player.score = 0;
+                                });
                                 // Notify all players in the game room about the updated game state
                                 console.log('Restarting game:', data.genderDuelGameId);
                                 console.log("Notifying all players in the game room about the updated game state");
