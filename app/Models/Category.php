@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['key'];
+
+    public function nouns()
+    {
+        return $this->belongsToMany(Noun::class, 'noun_category', 'category_id', 'noun_id');
+    }
 
     public function getName(string $locale = null): string
     {

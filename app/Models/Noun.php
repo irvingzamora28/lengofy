@@ -27,6 +27,11 @@ class Noun extends Model
         return $this->belongsTo(Language::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'noun_category', 'noun_id', 'category_id');
+    }
+
     public function translations(): HasMany
     {
         return $this->hasMany(NounTranslation::class, 'noun_id');

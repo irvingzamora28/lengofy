@@ -169,7 +169,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
         const scoreData = {
             user_id: auth.user.id,
-            game_id: 3, // GenderDuel game ID
+            game_id: 1, // GenderDuel game ID
             highest_score: calculatedHighestScore,
             total_points: calculatedTotalPoints,
             winning_streak: currentWinningStreak,
