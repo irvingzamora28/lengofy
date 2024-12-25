@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Database\Seeders\LanguageSeeder;
 use Database\Seeders\LanguagePairSeeder;
 use Database\Seeders\NounSeeder;
+use Database\Seeders\CategorySeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LanguageSeeder::class,
             LanguagePairSeeder::class,
+            CategorySeeder::class,
             NounSeeder::class,
             GameSeeder::class,
         ]);
