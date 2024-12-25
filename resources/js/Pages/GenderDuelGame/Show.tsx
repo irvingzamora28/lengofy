@@ -92,7 +92,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                     console.log("Game status: ", data.data.status);
 
                     if (data.data.status === 'completed' && data.data.winner) {
-                        setFeedbackMessage(`🎉 Game Over! ${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
+                        setFeedbackMessage(`${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
                         handleGameCompletion(data.data);
                     }
 
@@ -144,6 +144,12 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
         };
     }, [gender_duel_game.id]);
 
+    useEffect(() => {
+        console.log("lastAnswer: ", lastAnswer);
+        console.log("feedbackMessage: ", feedbackMessage);
+
+    }, [lastAnswer, feedbackMessage]);
+
     // Function to handle game completion
     const handleGameCompletion = async (data: GenderDuelGameState) => {
         console.log("handleGameCompletion data: ", data);
@@ -181,8 +187,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
             }));
 
             // Update feedback message with scores
-            setFeedbackMessage(`🎉 Game Over! ${data.winner?.player_name} wins with ${data.winner?.score} points!\n
-                Score: ${currentScore}\nHighest Score: ${calculatedHighestScore}\nTotal Points: ${calculatedTotalPoints}\nWinning Streak: ${currentWinningStreak}`);
+            setFeedbackMessage(`${data.winner?.player_name} wins with ${data.winner?.score} points!\n
+                Highest Score: ${calculatedHighestScore}\nTotal Points: ${calculatedTotalPoints}\nWinning Streak: ${currentWinningStreak}`);
         } catch (error) {
             console.error('Error updating score:', error);
         }
@@ -307,6 +313,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                         />
 
                         <PlayersInfo
+                            status={genderDuelGameState.status}
                             players={genderDuelGameState.players}
                             currentPlayerId={currentPlayer?.id}
                         />

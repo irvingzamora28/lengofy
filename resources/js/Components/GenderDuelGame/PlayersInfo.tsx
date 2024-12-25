@@ -8,6 +8,7 @@ interface Player {
 }
 
 interface PlayersInfoProps {
+    status: string;
     players: Player[];
     currentPlayerId?: number;
 }
@@ -43,7 +44,7 @@ export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoPro
                             <span className="bg-indigo-200 dark:bg-indigo-700 px-3 py-1 rounded-full font-bold">
                                 {player.score}
                             </span>
-                            {player.is_ready && (
+                            {player.is_ready && status === 'waiting' && (
                                 <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-semibold animate-pulse">
                                     <FaCheckCircle/>
                                     Ready

@@ -1,7 +1,7 @@
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaTrophy, FaHourglassHalf } from 'react-icons/fa';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 
@@ -51,12 +51,12 @@ const renderFeedback = (message: string) => {
 
     return (
         <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 shadow-md">
-            <div className="flex items-center gap-2 text-lg font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="flex items-center self-center gap-2 text-lg font-bold text-indigo-600 dark:text-indigo-400">
                 {mainFeedback}
             </div>
 
             {stats && (
-                <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2">
                     {stats.split('\n').map((line, index) => (
                         <div
                             key={index}
@@ -71,6 +71,63 @@ const renderFeedback = (message: string) => {
         </div>
     );
 };
+
+const CircularTimer = ({ timeLeft, totalTime }: { timeLeft: number; totalTime: number }) => {
+    const radius = 20;
+    const circumference = 2 * Math.PI * radius;
+    const prevTimeLeft = useRef(timeLeft);
+    const [shouldAnimate, setShouldAnimate] = useState(true);
+
+    useEffect(() => {
+      // If time has increased (reset), disable animation temporarily
+      if (timeLeft > prevTimeLeft.current) {
+        setShouldAnimate(false);
+        // Re-enable animation after the next render
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setShouldAnimate(true);
+          });
+        });
+      }
+      prevTimeLeft.current = timeLeft;
+    }, [timeLeft]);
+
+    const strokeDashoffset = circumference * (1 - timeLeft / totalTime);
+
+    return (
+      <div className="self-end mb-4">
+        <div className="relative w-14 h-14">
+          <svg className="transform -rotate-90 w-14 h-14">
+            <circle
+              cx="28"
+              cy="28"
+              r={radius}
+              stroke="currentColor"
+              strokeWidth="4"
+              fill="transparent"
+              className="text-gray-200 dark:text-gray-700"
+            />
+            <circle
+              cx="28"
+              cy="28"
+              r={radius}
+              stroke="currentColor"
+              strokeWidth="4"
+              fill="transparent"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              className={`text-indigo-600 dark:text-indigo-400 ${
+                shouldAnimate ? 'transition-all duration-1000 ease-linear' : 'transition-none'
+              }`}
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center font-bold text-lg text-gray-700 dark:text-gray-300">
+            {timeLeft}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
 
 const GameArea = ({
@@ -172,10 +229,10 @@ const GameArea = ({
     }, [status, currentWord, difficulty, isHost, timeoutProcessed, onAnswer]);
 
     return (
-        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col items-center justify-center">
+        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
             {status === 'waiting' ? (
-                <div className="text-center space-y-6">
-                    <FaHourglassHalf className="text-5xl text-indigo-500 dark:text-indigo-400 animate-pulse mx-auto" />
+                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
+                    <FaHourglassHalf className="text-5xl text-indigo-500 dark:text-indigo-400 animate-pulse" />
                     <div className="text-xl text-gray-700 dark:text-gray-300 font-medium">
                         Waiting for all players to be ready...
                     </div>
@@ -189,35 +246,52 @@ const GameArea = ({
                     )}
                 </div>
             ) : status === 'in_progress' && currentWord ? (
-                <div className={`text-center w-full space-y-8 ${shake ? 'animate-shake' : ''}`}>
-                    <div className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-                        {/* Display round as one-based: currentRound is zero-based */}
-                        Round {currentRound !== undefined ? currentRound + 1 : ''} - Time left: {timeLeft}s
-                    </div>
-                    <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
-                        {currentWord.word}
-                    </h1>
+                <div className={`flex-1 flex flex-col h-full text-center ${shake ? 'animate-shake' : ''}`}>
+                    {/* Fixed height header */}
+                    <CircularTimer timeLeft={timeLeft} totalTime={DIFFICULTY_TIMES[difficulty]} />
 
-                    <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        {['der', 'die', 'das'].map((g) => (
-                            <button
-                                key={g}
-                                type="button"
-                                className="inline-flex items-center justify-center
-                                px-8 py-4 md:px-10 md:py-5
-                                text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wider
-                                rounded-2xl shadow-lg
-                                bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white
-                                hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-500 dark:hover:to-indigo-600
-                                active:scale-95 transition-all duration-300 transform w-full sm:w-auto"
-                                onClick={() => handleAnswer(g)}
-                            >
-                                {g}
-                            </button>
-                        ))}
+                    {/* Flexible space for word display */}
+                    <div className="flex-1 flex flex-col">
+                        {/* Word display with minimum height */}
+                        <div className="flex-none mb-2 md:mb-8">
+                            <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
+                                {currentWord.word}
+                            </h1>
+                        </div>
+
+                        {/* Fixed position buttons at bottom */}
+                        <div className="flex-none mt-4">
+                            <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                {['der', 'die', 'das'].map((g) => (
+                                    <button
+                                        key={g}
+                                        type="button"
+                                        className="inline-flex items-center justify-center
+                                        px-8 py-4 md:px-10 md:py-5
+                                        text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wider
+                                        rounded-2xl shadow-lg
+                                        bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white
+                                        hover:from-blue-600 hover:to-indigo-700 dark:hover:from-blue-500 dark:hover:to-indigo-600
+                                        active:scale-95 transition-all duration-300 transform w-full sm:w-auto"
+                                        onClick={() => handleAnswer(g)}
+                                    >
+                                        {g}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Fixed height space for feedback */}
+                        <div className="flex-1 min-h-[100px] flex flex-col justify-center">
+                            {renderLastAnswer(lastAnswer)}
+                        </div>
+
+
+                        {/* Feedback messages below buttons */}
+                        <div className="flex-none mt-2 md:mt-4">
+                            {feedbackMessage && renderFeedback(feedbackMessage)}
+                        </div>
                     </div>
-                    {renderLastAnswer(lastAnswer)}
-                    {feedbackMessage && renderFeedback(feedbackMessage)}
                 </div>
             ) : status === 'completed' ? (
                 <div className="text-center space-y-8">
@@ -243,6 +317,7 @@ const GameArea = ({
                     <PrimaryButton onClick={handleRestart} className="mt-4">Restart Game</PrimaryButton>
                 </div>
             ) : null}
+
             {showCountdown && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow">
