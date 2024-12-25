@@ -14,7 +14,6 @@ class NounSeeder extends Seeder
     {
         $nouns = json_decode(file_get_contents(database_path('seeds/nouns_seed.json')), true);
         $language = Language::where('name', 'Deutsch')->firstOrFail();
-        $languageTranslation = Language::where('name', 'English')->firstOrFail();
 
         foreach ($nouns as $noun) {
 
@@ -30,9 +29,12 @@ class NounSeeder extends Seeder
             $newNoun->categories()->attach($category->id);
 
             // Associate english translation
-            foreach ($noun['translations'] as $translation) {
+            $translationLanguages = Language::whereIn('code', array_keys($noun['translations']))->get()->keyBy('code');
+
+            foreach ($noun['translations'] as $languageCode => $translation) {
+                $translationLanguage = $translationLanguages[$languageCode];
                 DB::table('noun_translations')->insert([
-                    'language_id' => $languageTranslation->id,
+                    'language_id' => $translationLanguage->id,
                     'translation' => $translation,
                     'noun_id' => $newNoun->id
                 ]);
