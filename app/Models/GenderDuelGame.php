@@ -40,11 +40,13 @@ class GenderDuelGame extends Model
         'total_rounds',
         'language_pair_id',
         'creator_id',
+        'difficulty',
     ];
 
     protected $casts = [
         'current_word' => 'array',
         'status' => GenderDuelGameStatus::class,
+        'difficulty' => 'string',
     ];
 
     public function languagePair(): BelongsTo

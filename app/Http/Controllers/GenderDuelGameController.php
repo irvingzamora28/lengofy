@@ -52,12 +52,14 @@ class GenderDuelGameController extends Controller
         $validated = $request->validate([
             'language_pair_id' => 'required|exists:language_pairs,id',
             'max_players' => 'required|integer|min:2|max:10',
+            'difficulty' => 'required|in:easy,medium,hard',
         ]);
 
         $genderDuelGame = $this->genderDuelGameService->createGame(
             auth()->user(),
             $validated['language_pair_id'],
-            $validated['max_players']
+            $validated['max_players'],
+            $validated['difficulty']
         );
         return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $genderDuelGame]);
     }

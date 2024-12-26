@@ -10,8 +10,8 @@ import {
 } from 'react-icons/fa';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame } from '@/types';
-import Modal from '@/Components/Modal';
 import useEchoChannel from '@/Hooks/useEchoChannel';
+import DifficultyModal from '@/Components/Games/DifficultyModal';
 
 interface Props {
   auth: {
@@ -31,6 +31,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
   const [showDifficultyModal, setShowDifficultyModal] = useState(false);
+  const [isSinglePlayer, setIsSinglePlayer] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(
     auth.user.gender_duel_difficulty || 'medium'
   );
@@ -47,15 +48,39 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
     }
 });
 
-  const handleCreateGame = () => {
-    router.post(route('games.gender-duel.create'), {
-      language_pair_id: auth.user.language_pair_id,
-      max_players: 8,
-    });
+  const startCreateRoom = () => {
+    // Save the selected difficulty to user settings
+    router.post(route('profile.game-settings.update'), {
+        gender_duel_difficulty: selectedDifficulty
+      }, {
+        onSuccess: () => {
+            router.post(route('games.gender-duel.create'), {
+            language_pair_id: auth.user.language_pair_id,
+            max_players: 8,
+            difficulty: selectedDifficulty
+            });
+          setShowDifficultyModal(false);
+        }
+      });
+
+  };
+
+  const startGame = () => {
+    if (isSinglePlayer) {
+      startSinglePlayerGame();
+    } else {
+        startCreateRoom();
+    }
+  };
+
+  const handleCreateRoom = () => {
+    setShowDifficultyModal(true);
+    setIsSinglePlayer(false);
   };
 
   const handlePracticeAlone = () => {
     setShowDifficultyModal(true);
+    setIsSinglePlayer(true);
   };
 
   const startSinglePlayerGame = () => {
@@ -106,7 +131,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
                     </div>
                     <div className="flex space-x-3">
                       <button
-                        onClick={handleCreateGame}
+                        onClick={handleCreateRoom}
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
                       >
                         <FaPlay className="mr-2" />
@@ -189,39 +214,13 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
 
       {/* Difficulty Selection Modal */}
       {showDifficultyModal && (
-        <Modal show={showDifficultyModal} onClose={() => setShowDifficultyModal(false)}>
-          <div className="p-6 text-center">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Select Difficulty</h2>
-            <div className="space-y-4">
-              {(['easy', 'medium', 'hard'] as const).map((difficulty) => (
-                <button
-                  key={difficulty}
-                  onClick={() => setSelectedDifficulty(difficulty)}
-                  className={`w-full py-3 rounded-lg transition-colors ${
-                    selectedDifficulty === difficulty
-                      ? 'bg-primary-500 text-white'
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
-                  <span className="block text-sm mt-1">
-                    {difficulty === 'easy' && '5 seconds per word'}
-                    {difficulty === 'medium' && '3 seconds per word'}
-                    {difficulty === 'hard' && '1 second per word'}
-                  </span>
-                </button>
-              ))}
-            </div>
-            <div className="mt-6">
-              <button
-                onClick={startSinglePlayerGame}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg"
-              >
-                Start Practice
-              </button>
-            </div>
-          </div>
-        </Modal>
+        <DifficultyModal
+        showDifficultyModal={showDifficultyModal}
+        setShowDifficultyModal={setShowDifficultyModal}
+        selectedDifficulty={selectedDifficulty}
+        setSelectedDifficulty={setSelectedDifficulty}
+        startGame={startGame}
+        gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>
   );

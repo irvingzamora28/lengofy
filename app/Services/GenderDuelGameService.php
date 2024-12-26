@@ -18,15 +18,16 @@ class GenderDuelGameService
     private const POINTS_CORRECT = 10;
     private const POINTS_INCORRECT = -5;
 
-    public function createGame(?User $user, string $language_pair_id, int $max_players): GenderDuelGame
+    public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty): GenderDuelGame
     {
-        return DB::transaction(function () use ($user, $language_pair_id, $max_players) {
+        return DB::transaction(function () use ($user, $language_pair_id, $max_players, $difficulty) {
             $genderDuelGame = GenderDuelGame::create([
                 'status' => GenderDuelGameStatus::WAITING,
                 'max_players' => $max_players,
                 'total_rounds' => 10,
                 'language_pair_id' => $language_pair_id,
                 'creator_id' => $user?->id,
+                'difficulty' => $difficulty,
             ]);
 
             $this->addPlayer($genderDuelGame, $user);
