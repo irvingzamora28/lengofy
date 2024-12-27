@@ -49,20 +49,24 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
 });
 
   const startCreateRoom = () => {
-    // Save the selected difficulty to user settings
-    router.post(route('profile.game-settings.update'), {
-        gender_duel_difficulty: selectedDifficulty
-      }, {
-        onSuccess: () => {
+    router.post(
+        route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
+        {
+          gender_duel_difficulty: selectedDifficulty,
+        },
+        {
+          preserveScroll: true, // Ensure scroll position is preserved
+          onSuccess: () => {
+            // Navigate to single-player game
             router.post(route('games.gender-duel.create'), {
-            language_pair_id: auth.user.language_pair_id,
-            max_players: 8,
-            difficulty: selectedDifficulty
+                language_pair_id: auth.user.language_pair_id,
+                max_players: 8,
+                difficulty: selectedDifficulty
             });
-          setShowDifficultyModal(false);
+            setShowDifficultyModal(false);
+          },
         }
-      });
-
+      );
   };
 
   const startGame = () => {
@@ -85,20 +89,25 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
 
   const startSinglePlayerGame = () => {
     // Save the selected difficulty to user settings
-    router.post(route('profile.game-settings.update'), {
-      gender_duel_difficulty: selectedDifficulty
-    }, {
-      onSuccess: () => {
-        // Navigate to single-player game
-        router.visit(route('games.gender-duel.practice'), {
-          method: 'post',
-          data: {
-            difficulty: selectedDifficulty,
+    router.post(
+        route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
+        {
+          gender_duel_difficulty: selectedDifficulty,
+        },
+        {
+          preserveScroll: true, // Ensure scroll position is preserved
+          onSuccess: () => {
+            // Navigate to single-player game
+            router.visit(route('games.gender-duel.practice'), {
+              method: 'post',
+              data: {
+                difficulty: selectedDifficulty,
+              },
+            });
+            setShowDifficultyModal(false);
           },
-        });
-        setShowDifficultyModal(false);
-      }
-    });
+        }
+      );
   };
 
   const filteredGames = selectedLanguagePair

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdateGameSettingsRequest;
 use App\Models\LanguagePair;
 use App\Models\UserSetting;
 use App\Services\LanguageService;
@@ -19,8 +20,7 @@ class ProfileController extends Controller
 {
     public function __construct(
         private LanguageService $languageService,
-    ) {
-    }
+    ) {}
 
     /**
      * Display the user's profile form.
@@ -70,44 +70,37 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update game settings
+     * Update game settings with redirect response.
      */
-    public function updateGameSettings(Request $request): RedirectResponse
+    public function updateGameSettings(UpdateGameSettingsRequest $request, string $redirectRoute = 'profile.edit')
     {
         try {
-            $request->validate([
-                'gender_duel_difficulty' => 'sometimes|in:easy,medium,hard',
-                'gender_duel_sound' => 'sometimes|boolean',
-                'gender_duel_timer' => 'sometimes|boolean',
-            ]);
+            $this->updateUserSettings($request->validated(), $request->user()->userSetting);
 
-            $userSettings = $request->user()->userSetting;
-
-            // Update only the provided settings
-            if ($request->has('gender_duel_difficulty')) {
-                $userSettings->gender_duel_difficulty = $request->input('gender_duel_difficulty');
-            }
-            if ($request->has('gender_duel_sound')) {
-                $userSettings->gender_duel_sound = $request->input('gender_duel_sound');
-            }
-            if ($request->has('gender_duel_timer')) {
-                $userSettings->gender_duel_timer = $request->input('gender_duel_timer');
-            }
-
-            $userSettings->save();
-
-            return Redirect::route('profile.edit')
+            return Redirect::route($redirectRoute)
                 ->with('status', 'Game settings updated successfully.');
         } catch (\Exception $e) {
-            // Log any errors
             Log::error('Failed to update game settings', [
                 'user_id' => $request->user()->id,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
 
-            return Redirect::route('profile.edit')
+            return Redirect::route($redirectRoute)
                 ->withErrors(['error' => 'Failed to update game settings. Please try again.']);
         }
+    }
+
+    /**
+     * Common logic for updating user settings.
+     */
+    protected function updateUserSettings(array $settings, $userSettings)
+    {
+        foreach ($settings as $key => $value) {
+            if ($value !== null) {
+                $userSettings->{$key} = $value;
+            }
+        }
+        $userSettings->save();
     }
 
     /**
