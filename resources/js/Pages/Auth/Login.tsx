@@ -6,6 +6,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
+import axios from "axios";
 
 export default function Login({
     status,
@@ -21,6 +22,11 @@ export default function Login({
     });
 
     useEffect(() => {
+        // Call CSRF cookie endpoint when component mounts
+        axios.get('/sanctum/csrf-cookie').then(() => {
+            // CSRF cookie is set; now we can make authenticated requests
+        });
+
         return () => {
             reset("password");
         };

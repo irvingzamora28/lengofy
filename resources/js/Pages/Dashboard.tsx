@@ -5,12 +5,23 @@ import { PageProps, Score } from '@/types';
 import GameStats from '@/Components/Games/GameStats';
 import FeaturedGames from '@/Components/Games/FeaturedGames';
 import Leaderboard from '@/Components/Games/Leaderboard';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 interface DashboardProps extends PageProps {
     scores: Score[];
 }
 
 export default function Dashboard({ scores }: DashboardProps) {
+
+    useEffect(() => {
+        // Call CSRF cookie endpoint when component mounts
+        axios.get('/sanctum/csrf-cookie').then(() => {
+            // CSRF cookie is set; now we can make authenticated requests
+        });
+
+    }, []);
+
     return (
         <AuthenticatedLayout
 
