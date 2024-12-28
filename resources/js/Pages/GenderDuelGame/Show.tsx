@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { GenderDuelGame, GenderDuelGameState, PageProps } from '@/types';
+import { GenderDuelGame, GenderDuelGameState, PageProps, Translations } from '@/types';
 import { MdClose } from 'react-icons/md';
 import GameInfo from '@/Components/GenderDuelGame/GameInfo';
 import GameArea from '@/Components/GenderDuelGame/GameArea';
@@ -12,9 +12,10 @@ interface Props extends PageProps {
     auth: any;
     gender_duel_game: GenderDuelGame;
     wsEndpoint: string;
+    translations: Translations;
 }
 
-export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
+export default function Show({ auth, gender_duel_game, wsEndpoint, translations }: Props) {
     const [genderDuelGameState, setGenderDuelGameState] = useState(gender_duel_game);
     const [lastAnswer, setLastAnswer] = useState<any>(null);
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -295,6 +296,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                             currentRound={genderDuelGameState.current_round}
                             totalRounds={genderDuelGameState.total_rounds}
                             status={genderDuelGameState.status}
+                            category={genderDuelGameState.category}
+                            translations={translations}
                         />
 
                         <GameArea

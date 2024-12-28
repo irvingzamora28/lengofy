@@ -9,7 +9,7 @@ import {
   FaDumbbell,
 } from 'react-icons/fa';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { GenderDuelGame } from '@/types';
+import { GenderDuelGame, Translations } from '@/types';
 import useEchoChannel from '@/Hooks/useEchoChannel';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 
@@ -25,9 +25,10 @@ interface Props {
     };
   };
   activeGames: GenderDuelGame[];
+  translations: Translations;
 }
 
-export default function LanguageLobby({ auth, activeGames }: Props) {
+export default function LanguageLobby({ auth, activeGames, translations }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
   const [showDifficultyModal, setShowDifficultyModal] = useState(false);
@@ -35,6 +36,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(
     auth.user.gender_duel_difficulty || 'medium'
   );
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
   // Subscribe to game events
   useEchoChannel('gender-duel-game', {
@@ -61,7 +63,8 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
             router.post(route('games.gender-duel.create'), {
                 language_pair_id: auth.user.language_pair_id,
                 max_players: 8,
-                difficulty: selectedDifficulty
+                difficulty: selectedDifficulty,
+                category: selectedCategory
             });
             setShowDifficultyModal(false);
           },
@@ -102,6 +105,7 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
               method: 'post',
               data: {
                 difficulty: selectedDifficulty,
+                category: selectedCategory
               },
             });
             setShowDifficultyModal(false);
@@ -228,7 +232,10 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
         setShowDifficultyModal={setShowDifficultyModal}
         selectedDifficulty={selectedDifficulty}
         setSelectedDifficulty={setSelectedDifficulty}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
         startGame={startGame}
+        translations={translations}
         gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>

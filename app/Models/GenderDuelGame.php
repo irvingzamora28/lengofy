@@ -41,6 +41,7 @@ class GenderDuelGame extends Model
         'language_pair_id',
         'creator_id',
         'difficulty',
+        'category_id',
     ];
 
     protected $casts = [

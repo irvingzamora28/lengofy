@@ -18,9 +18,9 @@ class GenderDuelGameService
     private const POINTS_CORRECT = 10;
     private const POINTS_INCORRECT = -5;
 
-    public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty): GenderDuelGame
+    public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty, string $category): GenderDuelGame
     {
-        return DB::transaction(function () use ($user, $language_pair_id, $max_players, $difficulty) {
+        return DB::transaction(function () use ($user, $language_pair_id, $max_players, $difficulty, $category) {
             $genderDuelGame = GenderDuelGame::create([
                 'status' => GenderDuelGameStatus::WAITING,
                 'max_players' => $max_players,
@@ -28,6 +28,7 @@ class GenderDuelGameService
                 'language_pair_id' => $language_pair_id,
                 'creator_id' => $user?->id,
                 'difficulty' => $difficulty,
+                'category_id' => $category,
             ]);
 
             $this->addPlayer($genderDuelGame, $user);
@@ -38,9 +39,9 @@ class GenderDuelGameService
         });
     }
 
-    public function createPracticeGame(?User $user, string $language_pair_id, string $difficulty): GenderDuelGame
+    public function createPracticeGame(?User $user, string $language_pair_id, string $difficulty, string $category): GenderDuelGame
     {
-        return DB::transaction(function () use ($user, $language_pair_id, $difficulty) {
+        return DB::transaction(function () use ($user, $language_pair_id, $difficulty, $category) {
             // Create a practice game with a single player
             $genderDuelGame = GenderDuelGame::create([
                 'status' => GenderDuelGameStatus::WAITING,
@@ -49,6 +50,7 @@ class GenderDuelGameService
                 'language_pair_id' => $language_pair_id,
                 'creator_id' => $user?->id,
                 'difficulty' => $difficulty,
+                'category_id' => $category,
             ]);
 
             $this->addPlayer($genderDuelGame, $user);
@@ -132,8 +134,13 @@ class GenderDuelGameService
     {
         $languagePair = LanguagePair::with('targetLanguage')->findOrFail($genderDuelGame->language_pair_id);
 
-        return Noun::where('language_id', $languagePair->target_language_id)
-            ->inRandomOrder()
+        $query = Noun::where('language_id', $languagePair->target_language_id);
+        if ($genderDuelGame->category_id !== 0) {
+            $query->whereHas('categories', function ($query) use ($genderDuelGame) {
+                $query->where('category_id', $genderDuelGame->category_id);
+            });
+        }
+        return $query->inRandomOrder()
             ->limit($genderDuelGame->total_rounds)
             ->get()
             ->map(fn($noun) => [

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\GenderDuelGame;
 use App\Services\GenderDuelGameService;
 use App\Services\LanguageService;
@@ -20,6 +21,7 @@ class GenderDuelGameController extends Controller
     public function lobby(): Response
     {
         $user = auth()->user();
+        $locale = app()->getLocale();
 
         return Inertia::render('GenderDuelGame/Lobby', [
             'activeGames' => GenderDuelGame::where('status', 'waiting')
@@ -44,8 +46,12 @@ class GenderDuelGameController extends Controller
                         ],
                     ];
                 }),
+            'translations' => [
+                'categories' => __('categories', [], $locale),
+            ],
         ]);
     }
+
 
     public function create(Request $request)
     {
@@ -53,13 +59,15 @@ class GenderDuelGameController extends Controller
             'language_pair_id' => 'required|exists:language_pairs,id',
             'max_players' => 'required|integer|min:2|max:10',
             'difficulty' => 'required|in:easy,medium,hard',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
         $genderDuelGame = $this->genderDuelGameService->createGame(
             auth()->user(),
             $validated['language_pair_id'],
             $validated['max_players'],
-            $validated['difficulty']
+            $validated['difficulty'],
+            $validated['category'],
         );
         return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $genderDuelGame]);
     }
@@ -74,6 +82,8 @@ class GenderDuelGameController extends Controller
 
         // Refresh the genderDuelGame instance to get the latest state
         $genderDuelGame->refresh();
+        $locale = app()->getLocale();
+
         return Inertia::render('GenderDuelGame/Show', [
             'gender_duel_game' => [
                 'id' => $genderDuelGame->id,
@@ -92,6 +102,12 @@ class GenderDuelGameController extends Controller
                 'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
                 'words' => $words,
                 'hostId' => $genderDuelGame->creator_id,
+                'category' => $genderDuelGame->category_id === 0
+                    ? (object) ['id' => 0, 'key' => 'all']
+                    : Category::find($genderDuelGame->category_id)
+            ],
+            'translations' => [
+                'categories' => __('categories', [], $locale),
             ],
             'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
@@ -141,6 +157,7 @@ class GenderDuelGameController extends Controller
     {
         $validated = $request->validate([
             'difficulty' => 'required|in:easy,medium,hard',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
         $user = auth()->user();
@@ -149,7 +166,8 @@ class GenderDuelGameController extends Controller
         $practiceGame = $this->genderDuelGameService->createPracticeGame(
             $user,
             $user->language_pair_id,
-            $validated['difficulty']
+            $validated['difficulty'],
+            $validated['category']
         );
 
         // Redirect to the game show page

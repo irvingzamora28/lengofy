@@ -1,3 +1,5 @@
+import { Category, Translations } from '@/types';
+import { useEffect } from 'react';
 import { FaHourglassHalf, FaPlay, FaFlagCheckered } from 'react-icons/fa';
 
 interface GameInfoProps {
@@ -5,6 +7,8 @@ interface GameInfoProps {
     currentRound: number;
     totalRounds?: number;
     status: string;
+    category: Category;
+    translations: Translations;
 }
 
 const gameStatusIcon = (status: string) => {
@@ -27,15 +31,26 @@ const statusColors = {
 };
 
 
-export default function GameInfo({ languageName, currentRound, totalRounds, status }: GameInfoProps) {
+export default function GameInfo({ languageName, currentRound, totalRounds, status, category, translations }: GameInfoProps) {
+
+    useEffect(() => {
+        console.log("GameInfo translations: ", translations);
+        console.log("GameInfo category: ", category);
+
+     }, []);
     return (
         <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
             <div className="flex items-center space-x-2">
                 <span className="font-medium">{languageName}</span>
                 {status === 'in_progress' && (
-                    <span className="text-xs opacity-75">
-                        Round {++currentRound}/{totalRounds}
-                    </span>
+                    <>
+                        <span className="text-xs opacity-75">
+                            Round {currentRound}/{totalRounds}
+                        </span>
+                        {category && (
+                            <span className="text-xs opacity-75">Category: {translations.categories[category.key]}</span>
+                        )}
+                    </>
                 )}
             </div>
             <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-white text-sm font-semibold ${statusColors[status as keyof typeof statusColors]} transition-all duration-300 ease-in-out transform hover:scale-105`}>

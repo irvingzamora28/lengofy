@@ -2,6 +2,11 @@ import { Language } from './language';
 
 export * from './language';
 
+export interface Translations {
+    [key: string]: {
+        [subKey: string]: string;
+    };
+}
 export interface User {
     id: number;
     name: string;
@@ -9,6 +14,11 @@ export interface User {
     is_guest: boolean;
     guest_token?: string;
     last_active_at?: string;
+}
+
+export interface Category {
+    id: number;
+    key: string;
 }
 
 export interface GenderDuelGame {
@@ -28,6 +38,7 @@ export interface GenderDuelGame {
         gender: string;
     };
     players: GenderDuelGamePlayer[];
+    category: Category;
 }
 
 export interface GenderDuelGamePlayer {

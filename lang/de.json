@@ -33,5 +33,29 @@
         "login": "Anmelden",
         "signup": "Registrieren",
         "toggle_dark_mode": "Dunkelmodus umschalten"
+    },
+    "categories": {
+        "all": "Alle",
+        "animals": "Tiere",
+        "food_drinks": "Nahrung & Getränke",
+        "transportation": "Verkehrsmittel",
+        "technology": "Technologie",
+        "nature": "Natur",
+        "clothing": "Kleidung",
+        "furniture": "Moebel",
+        "sports": "Sport",
+        "household": "Haushalt",
+        "body": "Koerpereignis",
+        "school": "Schule",
+        "professions": "Berufe",
+        "people_family": "Menschen & Familie",
+        "health": "Gesundheit",
+        "weather": "Wetter",
+        "time": "Zeit",
+        "numbers": "Zahlen",
+        "colors": "Farben",
+        "shapes": "Formen",
+        "seasons": "Saison",
+        "miscellaneous": "Sonstiges"
     }
 }

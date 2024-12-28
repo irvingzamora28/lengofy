@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
-use App\Http\Controllers\Auth\GuestController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
@@ -78,6 +78,11 @@ Route::middleware('auth')->group(function () {
 
     // Score routes
     Route::post('/scores/update', [ScoreController::class, 'update']);
+
+    // Category routes
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    });
 });
 
 // Guest user routes
