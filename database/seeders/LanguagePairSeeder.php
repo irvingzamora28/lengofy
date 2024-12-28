@@ -14,12 +14,13 @@ class LanguagePairSeeder extends Seeder
 
         // Create language pairs for initial supported combinations
         $supportedPairs = [
-            ['source' => 'en', 'target' => 'de', 'rules' => ['gender_options' => ['der', 'die', 'das']]],
-            ['source' => 'de', 'target' => 'en', 'rules' => ['gender_options' => []]],
-            ['source' => 'de', 'target' => 'es', 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
-            ['source' => 'es', 'target' => 'en', 'rules' => ['gender_options' => []]],
-            ['source' => 'fr', 'target' => 'en', 'rules' => ['gender_options' => []]],
-            ['source' => 'fr', 'target' => 'es', 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
+            ['source' => 'en', 'target' => 'de', 'active' => true, 'rules' => ['gender_options' => ['der', 'die', 'das']]],
+            ['source' => 'es', 'target' => 'de', 'active' => true, 'rules' => ['gender_options' => ['der', 'die', 'das']]],
+            ['source' => 'de', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
+            ['source' => 'de', 'target' => 'es', 'active' => false, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
+            ['source' => 'es', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
+            ['source' => 'fr', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
+            ['source' => 'fr', 'target' => 'es', 'active' => false, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
         ];
 
         foreach ($supportedPairs as $pair) {
@@ -30,7 +31,7 @@ class LanguagePairSeeder extends Seeder
                 LanguagePair::create([
                     'source_language_id' => $sourceLanguage->id,
                     'target_language_id' => $targetLanguage->id,
-                    'is_active' => true,
+                    'is_active' => $pair['active'],
                     'grammar_rules' => $pair['rules'],
                 ]);
             }
