@@ -1,7 +1,7 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Select from '@/Components/Select';
-import { LanguagePair, learningPhrases } from '@/types/language';
+import { LanguagePair, learningPhrases, selectLanguagePairs, helperLanguagePairSelectText, helperLanguagePairSelectTextP1, helperLanguagePairSelectTextP2 } from '@/types/language';
 
 interface Props {
     value: string;
@@ -27,13 +27,17 @@ export default function LanguagePairSelect({
         return `${learningPhrases[sourceCode] || 'I am learning'} ${targetLanguage}`;
     };
 
+    const getHelperText = (sourceCode: string, sourceLanguage: string, targetLanguage: string) => {
+        return `${helperLanguagePairSelectTextP1[sourceCode] || 'You speak'} ${sourceLanguage} ${helperLanguagePairSelectTextP2[sourceCode] || 'and want to learn'} ${targetLanguage}`;
+    };
+
     return (
         <div className={className}>
             <InputLabel
                 htmlFor="language_pair_id"
                 value={currentPair
                     ? getLearningPhrase(currentPair.sourceLanguage.code, currentPair.targetLanguage.name)
-                    : 'Select your language pair'
+                    : selectLanguagePairs[currentValue]
                 }
             />
 
@@ -56,8 +60,8 @@ export default function LanguagePairSelect({
             {/* Helper Text */}
             <p className="mt-2 text-sm text-gray-500">
                 {currentPair
-                    ? `You speak ${currentPair.sourceLanguage.name} and want to learn ${currentPair.targetLanguage.name}`
-                    : 'Select the language you speak and the language you want to learn'
+                    ? getHelperText(currentPair.sourceLanguage.code, currentPair.sourceLanguage.name, currentPair.targetLanguage.name)
+                    : helperLanguagePairSelectText[currentValue]
                 }
             </p>
 
