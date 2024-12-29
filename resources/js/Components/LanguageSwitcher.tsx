@@ -3,21 +3,21 @@ import { router } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import i18n from 'i18next';
 
-const languageData = {
+const languageData: Record<string, { flag: string; name: string; fullName: string }> = {
     en: {
         flag: '🇬🇧',
         name: 'English',
-        fullName: 'English (United States)'
+        fullName: 'English (United States)',
     },
     es: {
         flag: '🇪🇸',
         name: 'Español',
-        fullName: 'Español (España)'
+        fullName: 'Español (España)',
     },
     de: {
         flag: '🇩🇪',
         name: 'Deutsch',
-        fullName: 'Deutsch (Deutschland)'
+        fullName: 'Deutsch (Deutschland)',
     },
 };
 
@@ -28,6 +28,13 @@ interface LanguageSwitcherProps {
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    // Ensure currentLocale exists in languageData
+    const currentLanguage = languageData[currentLocale];
+    if (!currentLanguage) {
+        console.error(`Invalid locale '${currentLocale}' passed to LanguageSwitcher.`);
+        return null;
+    }
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -44,45 +51,49 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) =>
     }, []);
 
     const switchLanguage = (newLocale: string) => {
-        router.post(route('language.switch'), { locale: newLocale }, {
-            preserveState: true,
-            preserveScroll: true,
-            onSuccess: () => {
-                setIsOpen(false);
-                i18n.changeLanguage(newLocale);
-                localStorage.setItem('I18N_LANGUAGE', newLocale); // Save selected language to localStorage
+        router.post(
+            route('language.switch'),
+            { locale: newLocale },
+            {
+                preserveState: true,
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsOpen(false);
+                    i18n.changeLanguage(newLocale);
+                    localStorage.setItem('I18N_LANGUAGE', newLocale); // Save selected language to localStorage
+                },
             }
-        });
+        );
     };
 
-    const availableLocales = Object.keys(languageData).filter(locale => locale !== currentLocale);
+    const availableLocales = Object.keys(languageData).filter((locale) => locale !== currentLocale);
 
     return (
         <div
             ref={dropdownRef}
             className="relative inline-block text-left w-full sm:w-auto"
         >
-                <button
-                    type="button"
-                    onClick={() => setIsOpen(!isOpen)}
-                    className={`inline-flex justify-center items-center w-full bg-white/0 dark:bg-white/0 sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-lg`}
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className="inline-flex justify-center items-center w-full bg-white/0 dark:bg-white/0 sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-lg"
+            >
+                <span className="text-2xl mr-2">{currentLanguage.flag}</span>
+                <span className="hidden sm:inline">{currentLanguage.name}</span>
+                <svg
+                    className="-mr-1 ml-2 h-5 w-5 transform transition-transform"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
                 >
-                    <span className="text-2xl mr-2">{languageData[currentLocale].flag}</span>
-                    <span className="hidden sm:inline">{languageData[currentLocale].name}</span>
-                    <svg
-                        className="-mr-1 ml-2 h-5 w-5 transform transition-transform"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                </button>
+                    <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </button>
 
             <AnimatePresence>
                 {isOpen && (
