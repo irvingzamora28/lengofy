@@ -57,5 +57,22 @@
         "shapes": "Formen",
         "seasons": "Saison",
         "miscellaneous": "Sonstiges"
-    }
+    },
+    "search": "Suche",
+    "clearSearch": "Suche leeren",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "warning": "Warnung",
+    "info": "Info",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "yes": "Ja",
+    "no": "Nein",
+    "ok": "Ok",
+    "close": "Schließen",
+    "language": "Sprache",
+    "selectLanguagePair": "Sprachpaar auswählen",
+    "chooseLanguageJourney": "Waehlen Sie Ihre Sprachreise",
+    "startLearning": "Lernen beginnen",
+    "selectLanguagePairDescription": "Waehlen Sie die Sprache, die Sie lernen wollen und beginnen Sie Ihre Abenteuer!"
 }

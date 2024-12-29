@@ -31,8 +31,10 @@
     },
     "dependencies": {
         "framer-motion": "^11.13.1",
+        "i18next": "^24.2.0",
         "laravel-echo": "^1.17.0",
         "pusher-js": "^8.4.0-rc2",
+        "react-i18next": "^15.2.0",
         "ws": "^8.18.0"
     }
 }

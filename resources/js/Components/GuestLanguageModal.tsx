@@ -4,6 +4,7 @@ import Modal from '@/Components/Modal';
 import { useForm } from '@inertiajs/react';
 import LanguagePairSelect from '@/Pages/Profile/Partials/LanguagePairSelect';
 import InputError from '@/Components/InputError';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     show: boolean;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export default function GuestLanguageModal({ show, onClose, languagePairs }: Props) {
+    const { t } = useTranslation();
+
     // Initialize with the first language pair
     const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
 
@@ -77,10 +80,10 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-2xl font-bold text-primary-600 dark:text-primary-400"
                             >
-                                Choose Your Language Journey
+                                {t('chooseLanguageJourney')}
                             </motion.h2>
                             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                Select the language pair you want to learn and start your adventure!
+                                {t('selectLanguagePairDescription')}
                             </p>
                         </div>
 
@@ -114,7 +117,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                     whileTap="tap"
                                     className="px-4 py-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                                 >
-                                    Cancel
+                                    {t('cancel')}
                                 </motion.button>
                                 <motion.button
                                     type="submit"
@@ -130,7 +133,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                         transition-colors duration-300 ease-in-out
                                     `}
                                 >
-                                    {processing ? 'Starting...' : 'Start Learning'}
+                                    {processing ? t('starting') : t('startLearning')}
                                 </motion.button>
                             </motion.div>
                         </form>

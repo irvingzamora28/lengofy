@@ -57,5 +57,22 @@
         "shapes": "Shapes",
         "seasons": "Seasons",
         "miscellaneous": "Miscellaneous"
-    }
+    },
+    "search": "Search",
+    "clearSearch": "Clear Search",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "Ok",
+    "close": "Close",
+    "language": "Language",
+    "selectLanguagePair": "Select Language Pair",
+    "chooseLanguageJourney": "Choose Your Language Journey",
+    "startLearning": "Start Learning",
+    "selectLanguagePairDescription": "Select the language pair you want to learn and start your adventure!"
 }

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { router } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
+import i18n from 'i18next';
 
 const languageData = {
     en: {
@@ -48,6 +49,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) =>
             preserveScroll: true,
             onSuccess: () => {
                 setIsOpen(false);
+                i18n.changeLanguage(newLocale);
             }
         });
     };

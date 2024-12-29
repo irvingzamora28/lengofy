@@ -57,5 +57,22 @@
         "shapes": "Formas",
         "seasons": "Temporadas",
         "miscellaneous": "Misceláneos"
-    }
+    },
+    "search": "Buscar",
+    "clearSearch": "Limpiar búsqueda",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "yes": "Sí",
+    "no": "No",
+    "ok": "Aceptar",
+    "close": "Cerrar",
+    "language": "Idioma",
+    "selectLanguagePair": "Seleccionar par de idiomas",
+    "chooseLanguageJourney": "Elige tu viaje de aprendizaje",
+    "startLearning": "Comenzar a aprender",
+    "selectLanguagePairDescription": "Selecciona el idioma que deseas aprender y empeza tu aventura!"
 }
