@@ -6,6 +6,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import LanguagePairSelect from "../Profile/Partials/LanguagePairSelect";
+import i18n from 'i18next';
 
 export default function Register() {
     const { languagePairs } = usePage<PageProps>().props;
@@ -23,7 +24,8 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
+        i18n.changeLanguage(languagePairs[data.language_pair_id].sourceLanguage.code);
+        localStorage.setItem('I18N_LANGUAGE', languagePairs[data.language_pair_id].sourceLanguage.code);
         post(route("register"), {
             onFinish: () => reset("password", "password_confirmation"),
         });

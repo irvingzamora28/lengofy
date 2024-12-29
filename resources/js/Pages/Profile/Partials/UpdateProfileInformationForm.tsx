@@ -7,6 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import LanguagePairSelect from './LanguagePairSelect';
 import { LanguagePair } from '@/types/language';
+import i18n from 'i18next';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -44,6 +45,8 @@ export default function UpdateProfileInformation({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+        i18n.changeLanguage(languagePairs[data.language_pair_id].sourceLanguage.code);
+        localStorage.setItem('I18N_LANGUAGE', languagePairs[data.language_pair_id].sourceLanguage.code);
         patch(route('profile.update'));
     };
 

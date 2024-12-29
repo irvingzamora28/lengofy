@@ -5,6 +5,7 @@ import { useForm } from '@inertiajs/react';
 import LanguagePairSelect from '@/Pages/Profile/Partials/LanguagePairSelect';
 import InputError from '@/Components/InputError';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 interface Props {
     show: boolean;
@@ -27,6 +28,8 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
         post(route('guest.create'), {
             preserveScroll: true,
             onSuccess: () => {
+                i18n.changeLanguage(languagePairs[data.language_pair_id].sourceLanguage.code);
+                localStorage.setItem('I18N_LANGUAGE', languagePairs[data.language_pair_id].sourceLanguage.code);
                 onClose();
             },
         });
