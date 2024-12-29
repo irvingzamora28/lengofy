@@ -7,9 +7,11 @@ import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import LanguagePairSelect from "../Profile/Partials/LanguagePairSelect";
 import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
     const { languagePairs } = usePage<PageProps>().props;
+    const { t: trans } = useTranslation();
 
     // Initialize with the first language pair
     const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
@@ -38,7 +40,7 @@ export default function Register() {
                 <div className="w-full max-w-md px-6 py-8 space-y-8 bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
                     <form onSubmit={submit}>
                         <div>
-                            <InputLabel htmlFor="name" value="Name" />
+                            <InputLabel htmlFor="name" value={trans('register.name')} />
 
                             <TextInput
                                 id="name"
@@ -60,7 +62,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="email" value="Email" />
+                            <InputLabel htmlFor="email" value={trans('register.email')} />
 
                             <TextInput
                                 id="email"
@@ -82,7 +84,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password" value="Password" />
+                            <InputLabel htmlFor="password" value={trans('register.password')} />
 
                             <TextInput
                                 id="password"
@@ -106,7 +108,7 @@ export default function Register() {
                         <div className="mt-4">
                             <InputLabel
                                 htmlFor="password_confirmation"
-                                value="Confirm Password"
+                                value={trans('register.password_confirmation')}
                             />
 
                             <TextInput
@@ -147,14 +149,14 @@ export default function Register() {
                                 href={route("login")}
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                             >
-                                Already registered?
+                                {trans("register.already_registered")}
                             </Link>
 
                             <PrimaryButton
                                 className="ms-4"
                                 disabled={processing}
                             >
-                                Register
+                                {trans("register.register")}
                             </PrimaryButton>
                         </div>
                     </form>

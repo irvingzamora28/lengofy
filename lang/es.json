@@ -21,6 +21,22 @@
         "close": "Cerrar",
         "language": "Idioma"
     },
+    "login": {
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "remember_me": "Recordarme",
+        "forgot_password": "¿Olvidaste tu contraseña?",
+        "login": "Iniciar sesión",
+        "signup": "Registrarse"
+    },
+    "register": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "password_confirmation": "Confirmar Contraseña",
+        "already_registered": "Ya registrado?",
+        "register": "Registrarse"
+    },
     "welcome": {
         "title": "Aprender Idiomas con Lengofy",
         "heroTitle": "Aprende Idiomas",
@@ -63,6 +79,11 @@
         "logout_guest": "Cerrar sesión de invitado",
         "light_mode": "Modo claro",
         "dark_mode": "Modo oscuro"
+    },
+    "public_layout": {
+        "dashboard": "Tablero",
+        "login": "Iniciar sesión",
+        "signup": "Registrarse"
     },
     "dashboard": {
         "game_stats": {

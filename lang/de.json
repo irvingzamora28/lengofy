@@ -21,6 +21,22 @@
         "close": "Schließen",
         "language": "Sprache"
     },
+    "login": {
+        "email": "Email",
+        "password": "Passwort",
+        "remember_me": "Erinnerung",
+        "forgot_password": "Passwort vergessen?",
+        "login": "Anmeldung",
+        "signup": "Registrierung"
+    },
+    "register": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Passwort",
+        "password_confirmation": "Passwort bestätigen",
+        "already_registered": "Bereits registriert?",
+        "register": "Registrierung"
+    },
     "welcome": {
         "title": "Sprachenlernen mit Lengofy",
         "heroTitle": "Sprachen Lernen",
@@ -63,6 +79,11 @@
         "logout_guest": "Ausloggen als Gast",
         "light_mode": "Lichtmodus umschalten",
         "dark_mode": "Dunkelmodus umschalten"
+    },
+    "public_layout": {
+        "dashboard": "Dashboard",
+        "login": "Anmelden",
+        "signup": "Registrieren"
     },
     "dashboard": {
         "game_stats": {

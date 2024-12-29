@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 export default function Guest({ children }: PropsWithChildren) {
     const { locale = 'en' } = usePage<PageProps>().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { t: trans } = useTranslation();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -40,13 +42,13 @@ export default function Guest({ children }: PropsWithChildren) {
                                 href={route('login')}
                                 className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white font-semibold"
                             >
-                                Login
+                                {trans('public_layout.login')}
                             </Link>
                             <Link
                                 href={route('register')}
                                 className="inline-flex items-center justify-center rounded-full bg-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                             >
-                                Sign up
+                                {trans('public_layout.signup')}
                             </Link>
                         </div>
 
@@ -57,7 +59,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                 href={route('login')}
                                 className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white font-semibold sm:hidden mr-2"
                             >
-                                Login
+                                {trans('public_layout.login')}
                             </Link>
 
                             {/* Mobile Menu Toggle */}
@@ -98,7 +100,7 @@ export default function Guest({ children }: PropsWithChildren) {
                                     className="w-full text-center rounded-full bg-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Sign up
+                                    {trans('public_layout.signup')}
                                 </Link>
                             </div>
                         </div>

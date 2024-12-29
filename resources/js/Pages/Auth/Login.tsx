@@ -7,6 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 export default function Login({
     status,
@@ -20,6 +21,7 @@ export default function Login({
         password: "",
         remember: false,
     });
+    const { t: trans } = useTranslation();
 
     useEffect(() => {
         // Call CSRF cookie endpoint when component mounts
@@ -50,7 +52,7 @@ export default function Login({
 
                     <form onSubmit={submit}>
                         <div>
-                            <InputLabel htmlFor="email" value="Email" />
+                            <InputLabel htmlFor="email" value={trans("login.email")} />
 
                             <TextInput
                                 id="email"
@@ -72,7 +74,7 @@ export default function Login({
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password" value="Password" />
+                            <InputLabel htmlFor="password" value={trans("login.password")} />
 
                             <TextInput
                                 id="password"
@@ -102,7 +104,7 @@ export default function Login({
                                     }
                                 />
                                 <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-                                    Remember me
+                                    {trans("login.remember_me")}
                                 </span>
                             </label>
                         </div>
@@ -113,7 +115,7 @@ export default function Login({
                                     href={route("password.request")}
                                     className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                                 >
-                                    Forgot your password?
+                                    {trans("login.forgot_password")}
                                 </Link>
                             )}
 
@@ -121,7 +123,7 @@ export default function Login({
                                 className="ms-4"
                                 disabled={processing}
                             >
-                                Log in
+                                {trans("login.login")}
                             </PrimaryButton>
                         </div>
                     </form>

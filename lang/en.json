@@ -21,6 +21,21 @@
         "close": "Close",
         "language": "Language"
     },
+    "login": {
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Confirm Password",
+        "login": "Log In",
+        "signup": "Sign Up"
+    },
+    "register": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Confirm Password",
+        "already_registered": "Already registered?",
+        "register": "Register"
+    },
     "welcome": {
         "title": "Learn Languages with Lengofy",
         "heroTitle": "Learn Languages",
@@ -63,6 +78,11 @@
         "logout_guest": "Logout Guest",
         "light_mode": "Light Mode",
         "dark_mode": "Dark Mode"
+    },
+    "public_layout": {
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "signup": "Sign Up"
     },
     "dashboard": {
         "game_stats": {
