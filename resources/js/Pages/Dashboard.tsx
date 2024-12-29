@@ -7,12 +7,14 @@ import FeaturedGames from '@/Components/Games/FeaturedGames';
 import Leaderboard from '@/Components/Games/Leaderboard';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface DashboardProps extends PageProps {
     scores: Score[];
 }
 
 export default function Dashboard({ scores }: DashboardProps) {
+    const { t: trans } = useTranslation();
 
     useEffect(() => {
         // Call CSRF cookie endpoint when component mounts
@@ -26,7 +28,7 @@ export default function Dashboard({ scores }: DashboardProps) {
         <AuthenticatedLayout
 
         >
-            <Head title="Dashboard" />
+            <Head title={trans('auth_layout.dashboard')} />
 
             <div className="py-6 sm:py-12">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 space-y-4 sm:space-y-6">

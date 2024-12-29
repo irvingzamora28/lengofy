@@ -1,6 +1,7 @@
 import { Category, Translations } from '@/types';
 import { useEffect } from 'react';
 import { FaHourglassHalf, FaPlay, FaFlagCheckered } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface GameInfoProps {
     languageName: string;
@@ -32,7 +33,7 @@ const statusColors = {
 
 
 export default function GameInfo({ languageName, currentRound, totalRounds, status, category, translations }: GameInfoProps) {
-
+    const { t: trans } = useTranslation();
     useEffect(() => {
         console.log("GameInfo translations: ", translations);
         console.log("GameInfo category: ", category);
@@ -45,17 +46,17 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
                 {status === 'in_progress' && (
                     <>
                         <span className="text-xs opacity-75">
-                            Round {currentRound}/{totalRounds}
+                            {trans('gender_duel.round')} {currentRound}/{totalRounds}
                         </span>
                         {category && (
-                            <span className="text-xs opacity-75">Category: {translations.categories[category.key]}</span>
+                            <span className="text-xs opacity-75">{trans('gender_duel.category')}: {translations.categories[category.key]}</span>
                         )}
                     </>
                 )}
             </div>
             <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full text-white text-sm font-semibold ${statusColors[status as keyof typeof statusColors]} transition-all duration-300 ease-in-out transform hover:scale-105`}>
                 {gameStatusIcon(status)}
-                <span>{status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}</span>
+                <span>{trans(`gender_duel.status.${status}`)}</span>
             </div>
         </div>
     );

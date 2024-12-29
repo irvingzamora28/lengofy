@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function GuestLanguageModal({ show, onClose, languagePairs }: Props) {
-    const { t } = useTranslation();
+    const { t: trans } = useTranslation();
 
     // Initialize with the first language pair
     const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
@@ -80,10 +80,10 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-2xl font-bold text-primary-600 dark:text-primary-400"
                             >
-                                {t('chooseLanguageJourney')}
+                                {trans('chooseLanguageJourney')}
                             </motion.h2>
                             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                {t('selectLanguagePairDescription')}
+                                {trans('selectLanguagePairDescription')}
                             </p>
                         </div>
 
@@ -117,7 +117,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                     whileTap="tap"
                                     className="px-4 py-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                                 >
-                                    {t('generals.cancel')}
+                                    {trans('generals.cancel')}
                                 </motion.button>
                                 <motion.button
                                     type="submit"
@@ -133,7 +133,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
                                         transition-colors duration-300 ease-in-out
                                     `}
                                 >
-                                    {processing ? t('starting') : t('startLearning')}
+                                    {processing ? trans('starting') : trans('startLearning')}
                                 </motion.button>
                             </motion.div>
                         </form>

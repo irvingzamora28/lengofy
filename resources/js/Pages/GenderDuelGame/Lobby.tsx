@@ -12,6 +12,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame, Translations } from '@/types';
 import useEchoChannel from '@/Hooks/useEchoChannel';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   auth: {
@@ -37,6 +38,7 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
     auth.user.gender_duel_difficulty || 'medium'
   );
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const { t: trans } = useTranslation();
 
   // Subscribe to game events
   useEchoChannel('gender-duel-game', {
@@ -124,7 +126,7 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
   return (
     <AuthenticatedLayout
       user={auth.user}
-      header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Language Game Lobby</h2>}
+      header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">{trans('gender_duel.lobby')}</h2>}
     >
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -137,10 +139,10 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
                     <div>
                       <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
                         <FaGlobe className="mr-2 sm:mr-3 text-indigo-600 dark:text-indigo-400" />
-                        <span className="hidden sm:inline">Active Gender Duel Games</span>
-                        <span className="sm:hidden">Active Games</span>
+                        <span className="hidden sm:inline">{trans('gender_duel.active_games_plural')}</span>
+                        <span className="sm:hidden">{trans('gender_duel.active_games')}</span>
                       </h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">Connect, Learn, and Challenge Yourself!</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">{trans('gender_duel.connect_learn_challenge')}</p>
                     </div>
                     <div className="flex space-x-3">
                       <button
@@ -148,16 +150,16 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
                       >
                         <FaPlay className="mr-2" />
-                        <span className="hidden sm:inline">Create New Room</span>
-                        <span className="sm:hidden">New Room</span>
+                        <span className="hidden sm:inline">{trans('gender_duel.btn_create_new_room')}</span>
+                        <span className="sm:hidden">{trans('gender_duel.btn_sm_create_new_room')}</span>
                       </button>
                       <button
                         onClick={handlePracticeAlone}
                         className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
                       >
                         <FaDumbbell className="mr-2" />
-                        <span className="hidden sm:inline">Practice Alone</span>
-                        <span className="sm:hidden">Practice</span>
+                        <span className="hidden sm:inline">{trans('gender_duel.btn_practice_alone')}</span>
+                        <span className="sm:hidden">{trans('gender_duel.btn_sm_practice_alone')}</span>
                       </button>
                     </div>
                   </div>
@@ -167,10 +169,10 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
                   <div className="text-center py-8 sm:py-12 px-4 sm:px-6">
                     <FaBook className="mx-auto w-12 h-12 sm:w-16 sm:h-16 text-gray-400 dark:text-gray-500 mb-3 sm:mb-4" />
                     <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-2 sm:mb-4">
-                      No active games right now
+                      {trans('gender_duel.no_active_games')}
                     </p>
                     <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
-                      Be the first to create a game and start learning!
+                      {trans('gender_duel.be_the_first')}
                     </p>
                   </div>
                 ) : (
@@ -185,7 +187,7 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
                             <div className="flex items-center space-x-2">
                               <FaFlag className="text-blue-500 dark:text-blue-400 w-4 h-4" />
                               <span className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200">
-                                Game #{game.id}
+                                {trans('gender_duel.game')} #{game.id}
                               </span>
                             </div>
                             <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm sm:text-base">
@@ -212,7 +214,7 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
                             as="button"
                             className="w-full bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-bold py-2 sm:py-3 rounded-lg transition-colors flex items-center justify-center text-sm sm:text-base"
                           >
-                            <FaPlay className="mr-2 w-4 h-4" /> Join Game
+                            <FaPlay className="mr-2 w-4 h-4" /> {trans('gender_duel.btn_join_game')}
                           </Link>
                         </div>
                       </div>

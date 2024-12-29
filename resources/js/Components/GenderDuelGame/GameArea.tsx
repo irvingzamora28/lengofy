@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
+import { useTranslation } from 'react-i18next';
 
 interface GameAreaProps {
     status: string;
@@ -150,6 +151,7 @@ const GameArea = ({
     const [shake, setShake] = useState(false);
     const [showCountdown, setShowCountdown] = useState(false);
     const [countdown, setCountdown] = useState(3);
+    const { t: trans } = useTranslation();
 
     const handleAnswer = (answer: string) => {
         const isCorrect = answer === currentWord?.gender;
@@ -234,14 +236,14 @@ const GameArea = ({
                 <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
                     <FaHourglassHalf className="text-5xl text-indigo-500 dark:text-indigo-400 animate-pulse" />
                     <div className="text-xl text-gray-700 dark:text-gray-300 font-medium">
-                        Waiting for all players to be ready...
+                        {trans('gender_duel.waiting_for_players')}
                     </div>
                     {!isCurrentPlayerReady && (
                         <PrimaryButton
                             onClick={onReady}
                             className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-500 px-6 py-3 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
                         >
-                            I'm Ready!
+                            {trans('gender_duel.i_am_ready')}
                         </PrimaryButton>
                     )}
                 </div>
@@ -297,7 +299,7 @@ const GameArea = ({
                 <div className="text-center space-y-8">
                     <FaTrophy className="text-6xl text-yellow-500 mx-auto animate-bounce" />
                     <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
-                        Game Over!
+                        {trans('gender_duel.game_over')}
                     </h3>
                     {feedbackMessage && renderFeedback(feedbackMessage)}
                     <div className="space-y-3 text-lg text-gray-700 dark:text-gray-200 max-w-md mx-auto">
@@ -314,14 +316,14 @@ const GameArea = ({
                                 </div>
                             ))}
                     </div>
-                    <PrimaryButton onClick={handleRestart} className="mt-4">Restart Game</PrimaryButton>
+                    <PrimaryButton onClick={handleRestart} className="mt-4">{trans('gender_duel.restart_game')}</PrimaryButton>
                 </div>
             ) : null}
 
             {showCountdown && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow">
-                        <h2 className="text-4xl font-bold">Starting in {countdown}...</h2>
+                        <h2 className="text-4xl font-bold">{trans('gender_duel.starting_in')} {countdown}...</h2>
                     </div>
                 </div>
             )}

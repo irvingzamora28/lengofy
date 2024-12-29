@@ -2,6 +2,7 @@ import React from 'react';
 import GameCard from './GameCard';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 const sampleGames = [
     {
@@ -34,15 +35,16 @@ const sampleGames = [
 ];
 
 export default function FeaturedGames() {
+    const { t: trans } = useTranslation();
     return (
         <div className="space-y-4 sm:space-y-6">
             <div className="flex justify-between items-center">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Featured Games</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{trans('dashboard.featured_games.title')}</h2>
                 <Link
                     href={route('welcome')}
                     className="text-sm sm:text-base text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
                 >
-                    View All Games <FaArrowRight className="inline-block w-4 h-4" />
+                    {trans('dashboard.featured_games.view_all')} <FaArrowRight className="inline-block w-4 h-4" />
                 </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">

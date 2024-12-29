@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaTrophy, FaGamepad, FaFire } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface StatCardProps {
     icon: React.ReactNode;
@@ -55,6 +56,7 @@ export default function GameStats() {
         currentStreak: 7,
         totalScore: 1250
     };
+    const { t: trans } = useTranslation();
 
     return (
         <>
@@ -64,19 +66,19 @@ export default function GameStats() {
                     <StatCard
                         isMobile
                         icon={<FaGamepad className="w-full h-full" />}
-                        title="Games"
+                        title={trans('dashboard.game_stats.games')}
                         value={stats.gamesPlayed}
                     />
                     <StatCard
                         isMobile
                         icon={<FaFire className="w-full h-full" />}
-                        title="Streak"
+                        title={trans('dashboard.streak')}
                         value={`${stats.currentStreak}d`}
                     />
                     <StatCard
                         isMobile
                         icon={<FaTrophy className="w-full h-full" />}
-                        title="Score"
+                        title={trans('dashboard.game_stats.score')}
                         value={stats.totalScore}
                     />
                 </div>
@@ -86,21 +88,21 @@ export default function GameStats() {
             <div className="hidden sm:grid sm:grid-cols-3 gap-3">
                 <StatCard
                     icon={<FaGamepad className="w-full h-full" />}
-                    title="Games"
+                    title={trans('dashboard.game_stats.games')}
                     value={stats.gamesPlayed}
-                    description="Total completed"
+                    description={trans('dashboard.game_stats.games_description')}
                 />
                 <StatCard
                     icon={<FaFire className="w-full h-full" />}
-                    title="Streak"
+                    title={trans('dashboard.streak')}
                     value={`${stats.currentStreak} days`}
-                    description="Current run"
+                    description={trans('dashboard.game_stats.streak_description')}
                 />
                 <StatCard
                     icon={<FaTrophy className="w-full h-full" />}
-                    title="Score"
+                    title={trans('dashboard.game_stats.score')}
                     value={stats.totalScore}
-                    description="Total points"
+                    description={trans('dashboard.game_stats.score_description')}
                 />
             </div>
         </>

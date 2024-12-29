@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Score } from '@/types';
 import { FaTrophy, FaMedal, FaCrown, FaStar, FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface LeaderboardProps {
     scores: Score[];
@@ -12,6 +13,7 @@ type SortOrder = 'asc' | 'desc';
 const Leaderboard: React.FC<LeaderboardProps> = ({ scores }) => {
     const [sortField, setSortField] = useState<SortField>('highest_score');
     const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+    const { t: trans } = useTranslation();
 
     const getPosition = (index: number) => {
         switch (index) {
@@ -56,20 +58,20 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ scores }) => {
     return (
         <div className="w-full rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-6 shadow-lg">
             <h2 className="text-2xl font-bold text-center text-indigo-900 dark:text-indigo-200 mb-6">
-                🏆 Leaderboard Champions 🏆
+                {trans('dashboard.leaderboard.title')} 🏆
             </h2>
             <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead>
                         <tr className="border-b border-indigo-200 dark:border-gray-700">
-                            <th className="p-4 text-left text-indigo-600 dark:text-indigo-300">Rank</th>
-                            <th className="p-4 text-left text-indigo-600 dark:text-indigo-300">Game</th>
+                            <th className="p-4 text-left text-indigo-600 dark:text-indigo-300">{trans('dashboard.leaderboard.rank')}</th>
+                            <th className="p-4 text-left text-indigo-600 dark:text-indigo-300">{trans('dashboard.leaderboard.game')}</th>
                             <th
                                 className="p-4 text-left text-indigo-600 dark:text-indigo-300 cursor-pointer hover:bg-indigo-100 dark:hover:bg-gray-700"
                                 onClick={() => handleSort('user.name')}
                             >
                                 <div className="flex items-center gap-2">
-                                    Player {getSortIcon('user.name')}
+                                    {trans('dashboard.leaderboard.player')} {getSortIcon('user.name')}
                                 </div>
                             </th>
                             <th
@@ -77,7 +79,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ scores }) => {
                                 onClick={() => handleSort('highest_score')}
                             >
                                 <div className="flex items-center justify-end gap-2">
-                                    High Score {getSortIcon('highest_score')}
+                                    {trans('dashboard.leaderboard.high_score')} {getSortIcon('highest_score')}
                                 </div>
                             </th>
                             <th
@@ -85,7 +87,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ scores }) => {
                                 onClick={() => handleSort('total_points')}
                             >
                                 <div className="flex items-center justify-end gap-2">
-                                    Total {getSortIcon('total_points')}
+                                    {trans('dashboard.total_points')} {getSortIcon('total_points')}
                                 </div>
                             </th>
                             <th
@@ -93,7 +95,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ scores }) => {
                                 onClick={() => handleSort('winning_streak')}
                             >
                                 <div className="flex items-center justify-end gap-2">
-                                    Streak {getSortIcon('winning_streak')}
+                                    {trans('dashboard.streak')} {getSortIcon('winning_streak')}
                                 </div>
                             </th>
                         </tr>

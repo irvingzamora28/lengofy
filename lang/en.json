@@ -56,6 +56,91 @@
         "signup": "Sign up",
         "toggle_dark_mode": "Toggle dark mode"
     },
+    "auth_layout": {
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "logout": "Logout",
+        "logout_guest": "Logout Guest",
+        "light_mode": "Light Mode",
+        "dark_mode": "Dark Mode"
+    },
+    "dashboard": {
+        "game_stats": {
+            "games": "Games",
+            "games_description": "Total games played",
+            "streak_description": "Current run",
+            "score": "Score",
+            "score_description": "Total points"
+        },
+        "leaderboard": {
+            "title": "Leaderboard",
+            "rank": "Rank",
+            "game": "Game",
+            "player": "Player",
+            "high_score": "High Score"
+        },
+        "featured_games": {
+            "title": "Featured Games",
+            "view_all": "View All Games"
+        },
+        "game_card": {
+            "featured": "Featured",
+            "play_count": "Played",
+            "success_rate": "Success",
+            "play_now": "Play Now"
+        },
+        "total_points": "Total Points",
+        "streak": "Streak"
+    },
+    "gender_duel": {
+        "lobby": "Gender Duel Lobby",
+        "active_games": "Active Gender Duel Games",
+        "active_games_plural": "Active Games",
+        "connect_learn_challenge": "Connect, Learn, and Challenge Yourself!",
+        "btn_create_new_room": "Create New Room",
+        "btn_sm_create_new_room": "New Room",
+        "btn_practice_alone": "Practice Alone",
+        "btn_sm_practice_alone": "Practice",
+        "no_active_games": "No active games right now",
+        "be_the_first": "Be the first to create a game and start learning!",
+        "wins_with": "Wins with",
+        "points": "Points",
+        "highest_score": "Highest Score",
+        "total_points": "Total Points",
+        "winning_streak": "Winning Streak",
+        "players": "Players",
+        "ready": "Ready",
+        "game": "Game",
+        "btn_join_game": "Join Game",
+        "round": "Round",
+        "category": "Category",
+        "waiting_for_players": "Waiting for all players to be ready...",
+        "i_am_ready": "I'm Ready",
+        "game_over": "Game Over",
+        "restart_game": "Restart Game",
+        "starting_in": "Starting in",
+        "status": {
+            "waiting": "Waiting",
+            "in_progress": "In Progress",
+            "completed": "Completed"
+        },
+        "modal_difficulty": {
+            "title": "Select Difficulty",
+            "easy": "Easy",
+            "medium": "Medium",
+            "hard": "Hard",
+            "select_word_category": "Select Word Category",
+            "choose": "Choose",
+            "for_words_from_every_category": "for words from every category",
+            "start_practice": "Start Practice",
+            "create_room": "Create Room"
+        },
+        "modal_exit": {
+            "title": "Leave Game?",
+            "message": "The game is still in progress. Are you sure you want to leave?",
+            "btn_leave": "Leave Game"
+        }
+    },
     "categories": {
         "all": "All",
         "animals": "Animals",

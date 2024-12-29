@@ -4,6 +4,7 @@ import axios from 'axios';
 import InputLabel from '../InputLabel';
 import Select from '../Select';
 import { Category, Translations } from '@/types';
+import { useTranslation } from 'react-i18next';
 
 interface DifficultyModalProps {
     showDifficultyModal: boolean;
@@ -29,6 +30,7 @@ export default function DifficultyModal({
     gameType
 }: DifficultyModalProps) {
     const [categories, setCategories] = useState<Category[]>([]);
+    const { t: trans } = useTranslation();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -54,13 +56,13 @@ export default function DifficultyModal({
     return (
         <Modal show={showDifficultyModal} onClose={() => setShowDifficultyModal(false)}>
             <div className="p-6 text-center">
-                <h2 className="text-2xl font-bold mb-4 dark:text-white">Select Difficulty</h2>
+                <h2 className="text-2xl font-bold mb-4 dark:text-white">{trans('gender_duel.modal_difficulty.title')}</h2>
 
                 <div className="mb-6">
                     <div className="flex flex-col items-start mb-2">
                         <InputLabel
                             htmlFor="select_category"
-                            value="Select Word Category"
+                            value={trans('gender_duel.modal_difficulty.select_word_category')}
                         />
 
                     </div>
@@ -80,7 +82,7 @@ export default function DifficultyModal({
                             ))}
                         </Select>
                         <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
-                            Choose '{translations.categories.all}' for words from every category
+                            {trans('gender_duel.modal_difficulty.choose')} '{translations.categories.all}' {trans('gender_duel.modal_difficulty.for_words_from_every_category')}
                         </p>
                     </div>
                 </div>
@@ -96,7 +98,7 @@ export default function DifficultyModal({
                                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                             }`}
                         >
-                            {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                            {trans(`gender_duel.modal_difficulty.${difficulty}`)}
                             <span className="block text-sm mt-1 opacity-80">
                                 {difficulty === 'easy' && '5 seconds per word'}
                                 {difficulty === 'medium' && '3 seconds per word'}
@@ -113,7 +115,7 @@ export default function DifficultyModal({
                                  dark:hover:bg-green-700 text-white font-bold py-2 px-6
                                  rounded-lg transition-colors duration-200"
                     >
-                        {gameType === 'singlePlayer' ? 'Start Practice' : 'Create Room'}
+                        {gameType === 'singlePlayer' ? trans('gender_duel.modal_difficulty.start_practice') : trans('gender_duel.modal_difficulty.create_room')}
                     </button>
                 </div>
             </div>

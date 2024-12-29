@@ -1,4 +1,5 @@
 import { FaUser, FaCheckCircle, FaTrophy } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface Player {
     id: number;
@@ -17,11 +18,12 @@ export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoPro
     if (players.length === 0) return null;
 
     const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+    const { t: trans } = useTranslation();
 
     return (
         <div className="mt-6 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-xl p-6 shadow-lg">
             <h3 className="hidden md:flex text-indigo-800 dark:text-indigo-200 font-bold items-center gap-2 mb-4 text-xl">
-                <FaUser className="text-indigo-600 dark:text-indigo-400" /> Players
+                <FaUser className="text-indigo-600 dark:text-indigo-400" /> {trans('gender_duel.players')}
             </h3>
             <div className="space-y-3">
                 {sortedPlayers.map((player, index) => (
@@ -47,7 +49,7 @@ export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoPro
                             {player.is_ready && status === 'waiting' && (
                                 <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-semibold animate-pulse">
                                     <FaCheckCircle/>
-                                    Ready
+                                    {trans('gender_duel.ready')}
                                 </span>
                             )}
                         </div>

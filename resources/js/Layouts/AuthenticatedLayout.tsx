@@ -6,6 +6,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { useDarkMode } from '@/Hooks/useDarkMode';
+import { useTranslation } from 'react-i18next';
 
 export default function Authenticated({
     header,
@@ -13,6 +14,7 @@ export default function Authenticated({
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const { auth } = usePage<{ auth: { user: { name: string; email: string; is_guest: boolean } } }>().props;
     const user = auth.user;
+    const { t: trans } = useTranslation();
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const { darkMode, setDarkMode } = useDarkMode();
@@ -34,7 +36,7 @@ export default function Authenticated({
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    Dashboard
+                                    {trans('auth_layout.dashboard')}
                                 </NavLink>
                             </div>
                         </div>
@@ -68,7 +70,7 @@ export default function Authenticated({
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>
-                                            Profile
+                                            {trans('auth_layout.profile')}
                                         </Dropdown.Link>
                                         <div
                                             onClick={(e) => {
@@ -81,7 +83,7 @@ export default function Authenticated({
                                             }}
                                             className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
                                         >
-                                            <span>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+                                            <span>{darkMode ? trans('auth_layout.light_mode') : trans('auth_layout.dark_mode')}</span>
                                             <DarkModeToggle
                                                 onToggle={(newMode) => {
                                                     setDarkMode(newMode);
@@ -93,7 +95,7 @@ export default function Authenticated({
                                             method={user?.is_guest ? 'delete' : 'post'}
                                             as="button"
                                         >
-                                            {user?.is_guest ? 'Logout Guest' : 'Log Out'}
+                                            {user?.is_guest ? trans('auth_layout.logout_guest') : trans('auth_layout.logout')}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -154,7 +156,7 @@ export default function Authenticated({
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
-                            Dashboard
+                            {trans('auth_layout.dashboard')}
                         </ResponsiveNavLink>
                     </div>
 
@@ -170,14 +172,14 @@ export default function Authenticated({
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                                {trans('auth_layout.profile')}
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method={user?.is_guest ? 'delete' : 'post'}
                                 href={user?.is_guest ? route('guest.logout') : route('logout')}
                                 as="button"
                             >
-                                {user?.is_guest ? 'Logout Guest' : 'Log Out'}
+                                {user?.is_guest ? trans('auth_layout.logout_guest') : trans('auth_layout.logout')}
                             </ResponsiveNavLink>
                         </div>
                     </div>

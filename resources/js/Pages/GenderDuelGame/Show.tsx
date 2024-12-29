@@ -7,6 +7,7 @@ import GameInfo from '@/Components/GenderDuelGame/GameInfo';
 import GameArea from '@/Components/GenderDuelGame/GameArea';
 import PlayersInfo from '@/Components/GenderDuelGame/PlayersInfo';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends PageProps {
     auth: any;
@@ -21,6 +22,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, translations 
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const wsRef = useRef<WebSocket | null>(null);
+    const { t: trans } = useTranslation();
 
     // Determine the host player
     const hostId = genderDuelGameState.hostId;
@@ -188,8 +190,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, translations 
             }));
 
             // Update feedback message with scores
-            setFeedbackMessage(`${data.winner?.player_name} wins with ${data.winner?.score} points!\n
-                Highest Score: ${calculatedHighestScore}\nTotal Points: ${calculatedTotalPoints}\nWinning Streak: ${currentWinningStreak}`);
+            setFeedbackMessage(`${data.winner?.player_name} ${trans('gender_duel.wins_with')} ${data.winner?.score} ${trans('gender_duel.points')}!\n
+                ${trans('gender_duel.highest_score')}: ${calculatedHighestScore}\n${trans('gender_duel.total_points')}: ${calculatedTotalPoints}\n${trans('gender_duel.winning_streak')}: ${currentWinningStreak}`);
         } catch (error) {
             console.error('Error updating score:', error);
         }
@@ -329,23 +331,23 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, translations 
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
                     <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-sm shadow-lg">
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
-                            Leave Game?
+                            {trans('gender_duel.modal_exit.title')}
                         </h2>
                         <p className="text-gray-600 dark:text-gray-300 mb-6">
-                            The game is still in progress. Are you sure you want to leave?
+                            {trans('gender_duel.modal_exit.message')}
                         </p>
                         <div className="flex justify-end gap-3">
                             <button
                                 onClick={() => setShowExitConfirmation(false)}
                                 className="px-4 py-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded font-semibold text-gray-700 dark:text-gray-200"
                             >
-                                Cancel
+                                {trans('generals.cancel')}
                             </button>
                             <button
                                 onClick={leaveGame}
                                 className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold"
                             >
-                                Leave
+                                {trans('gender_duel.modal_exit.btn_leave')}
                             </button>
                         </div>
                     </div>
