@@ -19,7 +19,7 @@ i18n
         translation: de,
       },
     },
-    lng: 'en', // default language
+    lng: localStorage.getItem('I18N_LANGUAGE') || 'en', // Use stored language or default to 'en'
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // react already safes from xss

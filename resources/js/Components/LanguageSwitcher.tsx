@@ -50,6 +50,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLocale }) =>
             onSuccess: () => {
                 setIsOpen(false);
                 i18n.changeLanguage(newLocale);
+                localStorage.setItem('I18N_LANGUAGE', newLocale); // Save selected language to localStorage
             }
         });
     };
