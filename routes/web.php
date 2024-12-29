@@ -13,39 +13,41 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-Route::get('/', function (LanguageService $languageService) {
-    $locale = app()->getLocale();
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'languagePairs' => LanguagePair::where('is_active', true)
-            ->with(['sourceLanguage', 'targetLanguage'])
-            ->get()
-            ->mapWithKeys(function ($pair) use ($languageService) {
-                return [
-                    $pair->id => [
-                        'id' => $pair->id,
-                        'sourceLanguage' => [
-                            'code' => $pair->sourceLanguage->code,
-                            'name' => $pair->sourceLanguage->name,
-                            'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+Route::middleware(['guest'])->group(function () {
+    Route::get('/', function (LanguageService $languageService) {
+        $locale = app()->getLocale();
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
                         ],
-                        'targetLanguage' => [
-                            'code' => $pair->targetLanguage->code,
-                            'name' => $pair->targetLanguage->name,
-                            'flag' => $languageService->getFlag($pair->targetLanguage->code),
-                        ],
-                    ],
-                ];
-            })->all(),
-        'translations' => [
-            'welcome' => __('welcome', [], $locale)
-        ],
-        'locale' => $locale
-    ]);
-})->name('welcome');
+                    ];
+                })->all(),
+            'translations' => [
+                'welcome' => __('welcome', [], $locale)
+            ],
+            'locale' => $locale
+        ]);
+    })->name('welcome');
+});
 
 Route::get('/dashboard', function () {
     $scores = Score::with(['user', 'game'])->orderBy('highest_score', 'desc')
