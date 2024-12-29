@@ -10,12 +10,15 @@ import LanguagePairSelect from "../Profile/Partials/LanguagePairSelect";
 export default function Register() {
     const { languagePairs } = usePage<PageProps>().props;
 
+    // Initialize with the first language pair
+    const defaultLanguagePairId = Object.keys(languagePairs)[0] || '';
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
         password: "",
         password_confirmation: "",
-        language_pair_id: "",
+        language_pair_id: defaultLanguagePairId,
     });
 
     const submit: FormEventHandler = (e) => {
