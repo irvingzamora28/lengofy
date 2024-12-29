@@ -22,19 +22,14 @@ class SetLocale
         $defaultLocale = 'en';
 
         // Determine locale priority:
-        // 1. URL parameter
-        // 2. Session
-        // 3. Cookies
-        // 4. Browser language
-        // 5. Default locale
+        // 1. Session
+        // 2. Cookie
+        // 3. Browser language
+        // 4. Default locale
 
-        $locale = $request->input('locale');
+        $locale = session('locale');
 
-        if (!$locale && $request->session()->has('locale')) {
-            $locale = $request->session()->get('locale');
-        }
-
-        if (!$locale && $request->hasCookie('locale')) {
+        if (!$locale) {
             $locale = $request->cookie('locale');
         }
 
@@ -42,12 +37,13 @@ class SetLocale
             $locale = $request->getPreferredLanguage($supportedLocales);
         }
 
-        // Validate and set locale
-        $locale = in_array($locale, $supportedLocales) ? $locale : $defaultLocale;
+        if (!in_array($locale, $supportedLocales)) {
+            $locale = $defaultLocale;
+        }
 
         // Set the application locale
-        App::setLocale($locale);
-        Session::put('locale', $locale);
+        app()->setLocale($locale);
+        session(['locale' => $locale]);
 
         return $next($request);
     }
