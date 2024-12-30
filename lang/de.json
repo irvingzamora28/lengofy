@@ -113,6 +113,18 @@
         "total_points": "Total Punkte",
         "streak": "Strähne"
     },
+    "gender_duel_landing_page": {
+        "title": "Meistere die deutschen Genres",
+        "description": "Lernen und meistern Sie deutsche Genres mit diesem unterhaltsamen und herausfordernden Spiel!",
+        "play_now": "Jetzt spielen",
+        "features": "Funktionen",
+        "feature_effortless_learning": "Einfaches Lernen",
+        "feature_effortless_learning_description": "Beherrschen Sie die Geschlechter deutscher Substantive mit intuitivem Gameplay",
+        "feature_real_time_multiplayer": "Echtzeitspiel",
+        "feature_real_time_multiplayer_description": "Fordere deine Freunde heraus oder teile deine Erfahrungen mit anderen Spielern auf der ganzen Welt",
+        "feature_progress_tracking": "Fortschrittsverfolgung",
+        "feature_progress_tracking_description": "Verfolgen Sie Ihren Fortschritt mit detaillierten Statistiken"
+    },
     "gender_duel": {
         "lobby": "Gender-Duell-Lobby",
         "active_games": "Aktive Gender-Duell-Spiele",

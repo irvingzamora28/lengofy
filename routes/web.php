@@ -47,6 +47,13 @@ Route::middleware(['guest'])->group(function () {
             'locale' => $locale
         ]);
     })->name('welcome');
+
+    Route::get('/gender-duel', function (LanguageService $languageService) {
+        $locale = app()->getLocale();
+        return Inertia::render('GenderDuelGame/Landing', [
+            'locale' => $locale
+        ]);
+    })->name('gender-duel.play');
 });
 
 Route::get('/dashboard', function () {

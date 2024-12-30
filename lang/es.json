@@ -113,6 +113,18 @@
         "total_points": "Puntos Totales",
         "streak": "Racha"
     },
+    "gender_duel_landing_page": {
+        "title": "Domina los Géneros Alemanes",
+        "description": "¡Aprende y domina los géneros alemanes con este juego divertido y desafiante!",
+        "play_now": "Jugar Ahora",
+        "features": "Características",
+        "feature_effortless_learning": "Aprendizaje Sencillo",
+        "feature_effortless_learning_description": "Domina los géneros de los sustantivos alemanes con un juego intuitivo",
+        "feature_real_time_multiplayer": "Juego en Tiempo Real",
+        "feature_real_time_multiplayer_description": "Desafía a tus amigos o comparte tu experiencia con otros jugadores en todo el mundo",
+        "feature_progress_tracking": "Rastreo de Progreso",
+        "feature_progress_tracking_description": "Mantén un registro de tu progreso con estadísticas detalladas"
+    },
     "gender_duel": {
         "lobby": "Gender Duel Lobby",
         "active_games": "Juegos Activos de Gender Duel",

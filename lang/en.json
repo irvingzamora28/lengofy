@@ -112,6 +112,18 @@
         "total_points": "Total Points",
         "streak": "Streak"
     },
+    "gender_duel_landing_page": {
+        "title": "Master German Gender",
+        "description": "Challenge friends in fast-paced duels. Learn der, die, das while having fun!",
+        "play_now": "Play Now",
+        "features": "Features",
+        "feature_effortless_learning": "Effortless Learning",
+        "feature_effortless_learning_description": "Master German genders with intuitive gameplay",
+        "feature_real_time_multiplayer": "Real-time Multiplayer",
+        "feature_real_time_multiplayer_description": "Challenge friends or match with players globally",
+        "feature_progress_tracking": "Progress Tracking",
+        "feature_progress_tracking_description": "Track your improvement with detailed statistics"
+    },
     "gender_duel": {
         "lobby": "Gender Duel Lobby",
         "active_games": "Active Gender Duel Games",
