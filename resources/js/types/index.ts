@@ -21,6 +21,13 @@ export interface Category {
     key: string;
 }
 
+export interface Noun {
+    id: number;
+    word: string;
+    gender: string;
+    translation?: string;
+}
+
 export interface GenderDuelGame {
     hostId: any;
     id: number;
@@ -32,11 +39,7 @@ export interface GenderDuelGame {
     source_language: Language;
     target_language: Language;
     language_pair_id: number;
-    current_word?: {
-        id: number;
-        word: string;
-        gender: string;
-    };
+    current_word?: Noun;
     players: GenderDuelGamePlayer[];
     category: Category;
 }
@@ -56,12 +59,7 @@ export interface GenderDuelGameState {
     status: string;
     players: GenderDuelGamePlayer[];
     current_round: number;
-    words: Array<{
-        id: number;
-        word: string;
-        gender: string;
-        translation: string;
-    }>;
+    words: Noun[];
     hostId?: string;
     winner: GenderDuelGamePlayer | null;
     max_players?: number;

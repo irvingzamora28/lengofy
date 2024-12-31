@@ -5,13 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
+import { Noun } from '@/types';
 
 interface GameAreaProps {
     status: string;
-    currentWord?: {
-        word: string;
-        gender: string;
-    };
+    currentWord?: Noun;
     currentRound?: number;
     totalRounds?: number;
     lastAnswer: any;
