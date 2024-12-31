@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\GenderDuelGame;
+use App\Models\LanguagePair;
 use App\Services\GenderDuelGameService;
 use App\Services\LanguageService;
+use App\Services\NounService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,6 +17,7 @@ class GenderDuelGameController extends Controller
     public function __construct(
         private GenderDuelGameService $genderDuelGameService,
         private LanguageService $languageService,
+        private NounService $nounService,
     ) {
     }
 
@@ -176,6 +179,10 @@ class GenderDuelGameController extends Controller
 
     public function getPractice()
     {
-        return Inertia::render('GenderDuelGame/Practice');
+        $user = auth()->user();
+        // dd($user->language_pair_id);
+        $languagePair = LanguagePair::findOrFail($user->language_pair_id);
+        $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, 0, 10);
+        return Inertia::render('GenderDuelGame/Practice', compact('nouns'));
     }
 }
