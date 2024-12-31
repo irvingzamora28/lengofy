@@ -173,4 +173,9 @@ class GenderDuelGameController extends Controller
         // Redirect to the game show page
         return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $practiceGame]);
     }
+
+    public function getPractice()
+    {
+        return Inertia::render('GenderDuelGame/Practice');
+    }
 }
