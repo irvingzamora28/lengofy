@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaCrown, FaFire } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { Head, router } from "@inertiajs/react";
@@ -51,6 +51,17 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
     const [isGameOver, setIsGameOver] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<GenderDuelAnswer[]>([]);
     const { t: trans } = useTranslation();
+    const correctAudioRef = useRef<HTMLAudioElement | null>(null);
+    const incorrectAudioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        // Initialize and preload the audio
+        correctAudioRef.current = new Audio(correctSound);
+        incorrectAudioRef.current = new Audio(incorrectSound);
+        correctAudioRef.current.load();
+        incorrectAudioRef.current.load();
+    }, []);
+
 
     const leaveGame = () => {
         // Redirect to the lobby page using Inertia
@@ -92,8 +103,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         const isCorrect = answer === nouns[currentIndex].gender;
 
         if (isCorrect) {
-            const audio = new Audio(correctSound);
-            audio.play();
+            correctAudioRef.current?.play();
             setShowFeedback(true);
             setIsPaused(true);
             setScore((prev) => prev + 1);
@@ -114,8 +124,10 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                 }
             }, 1000);
         } else {
-            const audio = new Audio(incorrectSound);
-            audio.play();
+            if (incorrectAudioRef.current) {
+                incorrectAudioRef.current.currentTime = 0; // Reset to the start allowing to play before the previous one ends
+                incorrectAudioRef.current.play();
+            }
             setStreak(0);
             setShake(true);
             setTimeout(() => setShake(false), 500);
