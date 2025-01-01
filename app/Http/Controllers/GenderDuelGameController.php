@@ -189,4 +189,17 @@ class GenderDuelGameController extends Controller
             'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
     }
+
+    public function getGenderDuelWords(Request $request)
+    {
+        $validated = $request->validate([
+            'difficulty' => 'required|in:easy,medium,hard',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
+        ]);
+
+        $user = auth()->user();
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
+        $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, $validated['category'], 10);
+        return response()->json($nouns);
+    }
 }

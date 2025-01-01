@@ -10,6 +10,7 @@ import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from "./ConfirmationExitModal";
 import WrongAnswersSummary from "./WrongAnswersSummary";
+import axios from "axios";
 
 interface GenderDuelPracticeProps extends PageProps {
     auth: any;
@@ -26,13 +27,13 @@ const DIFFICULTY_TIMES = {
 
 const GENDER_COLORS_MAP = {
     de: {
-        der: 'bg-blue-500',
-        die: 'bg-pink-500',
-        das: 'bg-green-500',
+        der: 'bg-blue-500 dark:bg-blue-900',
+        die: 'bg-pink-500 dark:bg-pink-900',
+        das: 'bg-green-500 dark:bg-green-900',
     },
     es: {
-        el: 'bg-blue-500',
-        la: 'bg-pink-500',
+        el: 'bg-blue-500 dark:bg-blue-900',
+        la: 'bg-pink-500 dark:bg-pink-900',
     },
 } as const;
 
@@ -40,6 +41,7 @@ const GENDER_COLORS_MAP = {
 const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, difficulty = 'medium', targetLanguage = 'de' }) => {
     const GENDER_COLORS = GENDER_COLORS_MAP[targetLanguage];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [words, setWords] = useState<Noun[]>(nouns);
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const [score, setScore] = useState(0);
     const [timeLeft, setTimeLeft] = useState(DIFFICULTY_TIMES[difficulty]);
@@ -83,7 +85,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         const timer = setInterval(() => {
             setTimeLeft((prev) => {
                 if (prev <= 1) {
-                    if (currentIndex + 1 >= nouns.length) {
+                    if (currentIndex + 1 >= words.length) {
                         setIsGameOver(true);
                         return 0;
                     }
@@ -100,7 +102,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
 
     const handleAnswer = (answer: string) => {
         if (isPaused) return; // Prevent multiple clicks during feedback period
-        const isCorrect = answer === nouns[currentIndex].gender;
+        const isCorrect = answer === words[currentIndex].gender;
 
         if (isCorrect) {
             correctAudioRef.current?.play();
@@ -116,7 +118,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
             setTimeout(() => {
                 setShowFeedback(false);
                 setIsPaused(false);
-                if (currentIndex + 1 >= nouns.length) {
+                if (currentIndex + 1 >= words.length) {
                     setIsGameOver(true);
                 } else {
                     setCurrentIndex((prev) => prev + 1);
@@ -131,25 +133,44 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
             setStreak(0);
             setShake(true);
             setTimeout(() => setShake(false), 500);
-            const isAlreadyWrong = wrongAnswers.some(answer => answer.word === nouns[currentIndex].word);
+            const isAlreadyWrong = wrongAnswers.some(answer => answer.word === words[currentIndex].word);
             if (!isAlreadyWrong) {
                 setWrongAnswers(prev => [...prev, {
-                    word: nouns[currentIndex].word,
-                    translation: nouns[currentIndex].translation,
+                    word: words[currentIndex].word,
+                    translation: words[currentIndex].translation,
                     userAnswer: answer,
-                    correctAnswer: nouns[currentIndex].gender,
+                    correctAnswer: words[currentIndex].gender,
                 }]);
             }
         }
     };
 
-    const restartGame = () => {
+    const fetchWords = async () => {
+        // Logic to fetch new words from this route GET 'games.gender-duel.get-words' passing the difficulty and category
+        try {
+            const response = await axios.get(route('games.gender-duel.get-words'), {
+                params: {
+                    difficulty: difficulty,
+                    category: 0,
+                },
+            });
+            setWords(response.data);
+        } catch (error) {
+            console.error('Error fetching words:', error);
+        }
+
+    }
+
+    const restartGame = (fetchNewWords: boolean = false) => {
         setCurrentIndex(0);
         setScore(0);
         setStreak(0);
         setLongestStreak(0);
         setTimeLeft(DIFFICULTY_TIMES[difficulty]);
         setIsGameOver(false);
+        if (fetchNewWords) {
+            fetchWords();
+        }
     };
 
     if (isGameOver) {
@@ -171,8 +192,8 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                 }
             >
                 <Head title="Game Over" />
-                <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
-                    <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                <div className="min-h-screen mt-10 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
                         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                             Game Over!
                         </h1>
@@ -185,12 +206,20 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                         <p className="text-lg text-gray-600 dark:text-gray-300">
                             Final Streak: <span className="font-bold">×{streak}</span>
                         </p>
-                        <button
-                            onClick={restartGame}
-                            className="mt-4 px-6 py-3 bg-indigo-500 text-white font-bold rounded-lg shadow hover:bg-indigo-600"
-                        >
-                            Play Again
-                        </button>
+                        <div className="my-4 flex flex-col sm:flex-row sm:space-x-2">
+                            <button
+                                onClick={() => restartGame(false)}
+                                className="bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
+                            >
+                                Play Again with Same Words
+                            </button>
+                            <button
+                                onClick={() => restartGame(true)}
+                                className="bg-green-500 dark:bg-green-700 text-white py-2 px-4 rounded w-full sm:w-auto"
+                            >
+                                Play Again with Different Words
+                            </button>
+                        </div>
                         {wrongAnswers.length > 0 && (
                             <WrongAnswersSummary wrongAnswers={wrongAnswers} targetLanguage={targetLanguage} />
                         )}
@@ -248,16 +277,16 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                     {showFeedback && (
                         <div
                             className={`absolute inset-0 ${
-                                GENDER_COLORS[nouns[currentIndex].gender as keyof typeof GENDER_COLORS]
+                                GENDER_COLORS[words[currentIndex].gender as keyof typeof GENDER_COLORS]
                             } opacity-20 transition-opacity duration-500`}
                         />
                     )}
                     <div className="flex flex-col items-center mb-8">
                         <div className="text-4xl md:text-8xl font-bold mb-4 text-gray-800 dark:text-slate-200 flex items-center">
-                            {nouns[currentIndex].word}
+                            {words[currentIndex].word}
                         </div>
                         <div className="text-lg md:text-2xl text-gray-600 dark:text-gray-400">
-                            {nouns[currentIndex].translation || 'N/A'}
+                            {words[currentIndex].translation || 'N/A'}
                         </div>
                     </div>
 

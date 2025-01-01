@@ -9,13 +9,13 @@ interface WrongAnswersSummaryProps {
 
 const GENDER_COLORS_MAP = {
     de: {
-        der: 'bg-blue-200',
-        die: 'bg-pink-200',
-        das: 'bg-green-200',
+        der: 'bg-blue-200 dark:bg-blue-800',
+        die: 'bg-pink-200 dark:bg-pink-800',
+        das: 'bg-green-200 dark:bg-green-800',
     },
     es: {
-        el: 'bg-blue-200',
-        la: 'bg-pink-200',
+        el: 'bg-blue-200 dark:bg-blue-800',
+        la: 'bg-pink-200 dark:bg-pink-800',
     },
 } as const;
 
@@ -23,7 +23,7 @@ const WrongAnswersSummary = ({ wrongAnswers, targetLanguage }: WrongAnswersSumma
     const GENDER_COLORS = GENDER_COLORS_MAP[targetLanguage];
 
   return (
-    <div className="mt-8 w-full max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+    <div className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
           Words to Practice
@@ -49,14 +49,14 @@ const WrongAnswersSummary = ({ wrongAnswers, targetLanguage }: WrongAnswersSumma
 
                 <div className="mt-2 flex items-center space-x-4">
                   <div className="flex items-center space-x-2">
-                    <FaTimesCircle className="text-red-600 w-4 h-4" />
-                    <span className="text-sm text-red-600">
+                    <FaTimesCircle className="text-red-600 dark:text-red-400 w-4 h-4" />
+                    <span className="text-sm text-red-600 dark:text-red-400">
                       Your answer: {answer.userAnswer}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <FaCheckCircle className="text-green-600 w-4 h-4" />
-                    <span className="text-sm text-green-600">
+                    <FaCheckCircle className="text-green-600 dark:text-green-400 w-4 h-4" />
+                    <span className="text-sm text-green-600 dark:text-green-400">
                       Correct: {answer.correctAnswer}
                     </span>
                   </div>
