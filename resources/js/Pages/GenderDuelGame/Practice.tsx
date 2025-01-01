@@ -263,18 +263,21 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
 
                     <div className={`grid grid-cols-3 gap-6 ${shake ? 'animate-shake' : ''}`}>
                         <button
+                            aria-label="der"
                             onClick={() => handleAnswer('der')}
                             className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
                             Der
                         </button>
                         <button
+                            aria-label="die"
                             onClick={() => handleAnswer('die')}
                             className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
                             Die
                         </button>
                         <button
+                            aria-label="das"
                             onClick={() => handleAnswer('das')}
                             className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
