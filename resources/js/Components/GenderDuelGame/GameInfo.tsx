@@ -9,7 +9,6 @@ interface GameInfoProps {
     totalRounds?: number;
     status: string;
     category: Category;
-    translations: Translations;
 }
 
 const gameStatusIcon = (status: string) => {
@@ -32,10 +31,9 @@ const statusColors = {
 };
 
 
-export default function GameInfo({ languageName, currentRound, totalRounds, status, category, translations }: GameInfoProps) {
+export default function GameInfo({ languageName, currentRound, totalRounds, status, category }: GameInfoProps) {
     const { t: trans } = useTranslation();
     useEffect(() => {
-        console.log("GameInfo translations: ", translations);
         console.log("GameInfo category: ", category);
 
      }, []);
@@ -49,7 +47,7 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
                             {trans('gender_duel.round')} {currentRound}/{totalRounds}
                         </span>
                         {category && (
-                            <span className="text-xs opacity-75">{trans('gender_duel.category')}: {translations.categories[category.key]}</span>
+                            <span className="text-xs opacity-75">{trans('gender_duel.category')}: {trans('categories.' + category.key)}</span>
                         )}
                     </>
                 )}

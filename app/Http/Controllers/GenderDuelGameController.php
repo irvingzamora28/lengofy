@@ -24,7 +24,6 @@ class GenderDuelGameController extends Controller
     public function lobby(): Response
     {
         $user = auth()->user();
-        $locale = app()->getLocale();
 
         return Inertia::render('GenderDuelGame/Lobby', [
             'activeGames' => GenderDuelGame::where('status', 'waiting')
@@ -49,9 +48,6 @@ class GenderDuelGameController extends Controller
                         ],
                     ];
                 }),
-            'translations' => [
-                'categories' => __('categories', [], $locale),
-            ],
         ]);
     }
 
@@ -85,7 +81,6 @@ class GenderDuelGameController extends Controller
 
         // Refresh the genderDuelGame instance to get the latest state
         $genderDuelGame->refresh();
-        $locale = app()->getLocale();
 
         return Inertia::render('GenderDuelGame/Show', [
             'gender_duel_game' => [
@@ -108,9 +103,6 @@ class GenderDuelGameController extends Controller
                 'category' => $genderDuelGame->category_id === 0
                     ? (object) ['id' => 0, 'key' => 'all']
                     : Category::find($genderDuelGame->category_id)
-            ],
-            'translations' => [
-                'categories' => __('categories', [], $locale),
             ],
             'wsEndpoint' => config('websocket.game_endpoint'),
         ]);

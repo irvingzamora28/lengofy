@@ -233,8 +233,8 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                 }
             >
                 <Head title="Game Over" />
-                <div className="min-h-screen mt-10 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
-                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
+                <div className="w-full mt-10 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
+                    <div className="w-11/12 md:w-1/2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
                         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
                             Game Over!
                         </h1>
@@ -247,16 +247,16 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                         <p className="text-lg text-gray-600 dark:text-gray-300">
                             Final Streak: <span className="font-bold">×{streak}</span>
                         </p>
-                        <div className="my-4 flex flex-col sm:flex-row sm:space-x-2">
+                        <div className="my-4 flex flex-col space-y-4">
                             <button
                                 onClick={() => restartGame(false)}
-                                className="bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
+                                className="bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 self-center rounded-lg mb-2 sm:mb-0 w-full sm:w-1/2"
                             >
-                                Play Again with Same Words
+                                Play Again
                             </button>
                             <button
                                 onClick={() => setShowDifficultyModal(true)}
-                                className="bg-green-500 dark:bg-green-700 text-white py-2 px-4 rounded w-full sm:w-auto"
+                                className="bg-green-500 dark:bg-green-700 text-white py-2 px-4 self-center rounded-lg w-full sm:w-1/2"
                             >
                                 Change difficulty
                             </button>
@@ -336,7 +336,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                 </div>
 
                 {/* Game Area */}
-                <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-200px)]">
+                <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-300px)]">
                     {showFeedback && (
                         <div
                             className={`absolute inset-0 ${
