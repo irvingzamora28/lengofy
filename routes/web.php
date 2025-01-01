@@ -87,7 +87,8 @@ Route::middleware('auth')->group(function () {
     });
 
     // Score routes
-    Route::post('/scores/update', [ScoreController::class, 'update']);
+    Route::post('/scores/update', [ScoreController::class, 'update'])->name('scores.update');
+    Route::post('/scores/update-add-score', [ScoreController::class, 'updateAddScore'])->name('scores.update-add-score');
 
     // Category routes
     Route::prefix('categories')->group(function () {

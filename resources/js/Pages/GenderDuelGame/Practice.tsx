@@ -89,6 +89,12 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
 
 
     useEffect(() => {
+        if (isGameOver) {
+            updateAddScore();
+        }
+    }, [isGameOver]);
+
+    useEffect(() => {
         if (isPaused || isGameOver || countdown > 0) return;
 
         const timer = setInterval(() => {
@@ -168,6 +174,20 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
         }
 
     }
+
+    const updateAddScore = async () => {
+        try {
+            const response = await axios.post(route('scores.update-add-score'), {
+                user_id: auth.user.id,
+                game_id: 1,
+                score: score,
+                correct_streak: longestStreak,
+            });
+            console.log('Score updated successfully');
+        } catch (error) {
+            console.error('Error updating score:', error);
+        }
+    };
 
     const restartGame = (fetchNewWords: boolean = false) => {
         setCurrentIndex(0);
