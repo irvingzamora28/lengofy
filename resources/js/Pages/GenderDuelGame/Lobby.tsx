@@ -104,7 +104,7 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
           onSuccess: () => {
             // Navigate to single-player game
             router.visit(route('games.gender-duel.practice'), {
-              method: 'post',
+              method: 'get',
               data: {
                 difficulty: selectedDifficulty,
                 category: selectedCategory

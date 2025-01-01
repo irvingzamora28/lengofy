@@ -16,6 +16,7 @@ interface GenderDuelPracticeProps extends PageProps {
     auth: any;
     nouns: Noun[];
     difficulty: 'easy' | 'medium' | 'hard';
+    category: number;
     targetLanguage: 'de' | 'es';
 }
 
@@ -38,7 +39,7 @@ const GENDER_COLORS_MAP = {
 } as const;
 
 
-const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, difficulty = 'medium', targetLanguage = 'de' }) => {
+const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, category, difficulty = 'medium', targetLanguage = 'de' }) => {
     const GENDER_COLORS = GENDER_COLORS_MAP[targetLanguage];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [words, setWords] = useState<Noun[]>(nouns);
@@ -150,8 +151,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         try {
             const response = await axios.get(route('games.gender-duel.get-words'), {
                 params: {
-                    difficulty: difficulty,
-                    category: 0,
+                    category: category,
                 },
             });
             setWords(response.data);

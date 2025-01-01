@@ -26,7 +26,10 @@ class GuestUserController extends Controller
         $user = $this->guestUserService->createGuestUser($request->language_pair_id);
         Auth::login($user);
 
-        return redirect()->route('games.gender-duel.practice');
+        return redirect()->route('games.gender-duel.practice', [
+            'difficulty' => 'medium',
+            'category' => 0,
+        ]);
     }
 
     public function convertToRegular(Request $request)

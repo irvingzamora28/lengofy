@@ -164,28 +164,12 @@ class GenderDuelGameController extends Controller
         ]);
 
         $user = auth()->user();
-
-        // Create a practice game
-        $practiceGame = $this->genderDuelGameService->createPracticeGame(
-            $user,
-            $user->language_pair_id,
-            $validated['difficulty'],
-            $validated['category']
-        );
-
-        // Redirect to the game show page
-        return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $practiceGame]);
-    }
-
-    public function getPractice()
-    {
-        $user = auth()->user();
-        // dd($user->language_pair_id);
         $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
-        $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, 0, 10);
+        $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, $validated['category'], 10);
         return Inertia::render('GenderDuelGame/Practice', [
             'nouns' => $nouns,
-            'difficulty' => 'medium',
+            'difficulty' => $validated['difficulty'],
+            'category' => $validated['category'],
             'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
     }
@@ -193,7 +177,6 @@ class GenderDuelGameController extends Controller
     public function getGenderDuelWords(Request $request)
     {
         $validated = $request->validate([
-            'difficulty' => 'required|in:easy,medium,hard',
             'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
