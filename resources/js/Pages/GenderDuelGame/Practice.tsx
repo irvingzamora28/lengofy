@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from "./ConfirmationExitModal";
 import WrongAnswersSummary from "./WrongAnswersSummary";
 import axios from "axios";
+import DifficultyModal from "@/Components/Games/DifficultyModal";
 
 interface GenderDuelPracticeProps extends PageProps {
     auth: any;
@@ -54,6 +55,9 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
     const [isGameOver, setIsGameOver] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<GenderDuelAnswer[]>([]);
     const [countdown, setCountdown] = useState(3);
+    const [showDifficultyModal, setShowDifficultyModal] = useState(false);
+    const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>(difficulty);
+    const [selectedCategory, setSelectedCategory] = useState<number>(category);
     const correctAudioRef = useRef<HTMLAudioElement | null>(null);
     const incorrectAudioRef = useRef<HTMLAudioElement | null>(null);
     const { t: trans } = useTranslation();
@@ -165,7 +169,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
         try {
             const response = await axios.get(route('games.gender-duel.get-words'), {
                 params: {
-                    category: category,
+                    category: selectedCategory,
                 },
             });
             setWords(response.data);
@@ -216,16 +220,16 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                 user={auth.user}
                 header={
                     <div className="flex items-center">
-                    <button
-                        onClick={handleExitClick}
-                        className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                    >
-                        <MdClose size={24} />
-                    </button>
-                    <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
-                        Gender Duel - Results
-                    </h2>
-                </div>
+                        <button
+                            onClick={handleExitClick}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                        >
+                            <MdClose size={24} />
+                        </button>
+                        <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
+                            Gender Duel - Results
+                        </h2>
+                    </div>
                 }
             >
                 <Head title="Game Over" />
@@ -251,10 +255,10 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                                 Play Again with Same Words
                             </button>
                             <button
-                                onClick={() => restartGame(true)}
+                                onClick={() => setShowDifficultyModal(true)}
                                 className="bg-green-500 dark:bg-green-700 text-white py-2 px-4 rounded w-full sm:w-auto"
                             >
-                                Play Again with Different Words
+                                Change difficulty
                             </button>
                         </div>
                         {wrongAnswers.length > 0 && (
@@ -262,6 +266,25 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                         )}
                     </div>
                 </div>
+                {showDifficultyModal && (
+                    <DifficultyModal
+                        showDifficultyModal={showDifficultyModal}
+                        setShowDifficultyModal={setShowDifficultyModal}
+                        selectedDifficulty={selectedDifficulty}
+                        setSelectedDifficulty={setSelectedDifficulty}
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
+                        startGame={() => {
+                            router.visit(route('games.gender-duel.practice', {
+                                difficulty: selectedDifficulty,
+                                category: selectedCategory
+                            }));
+                            setShowDifficultyModal(false);
+                        }}
+                        gameType="singlePlayer"
+                        showCategories={true}
+                    />
+                )}
             </AuthenticatedLayout>
         );
     }
@@ -272,12 +295,6 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
             header={
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center">
-                        <button
-                            onClick={handleExitClick}
-                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                        >
-                            <MdClose size={24} />
-                        </button>
                         <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
                             Gender Duel
                         </h2>
@@ -286,6 +303,15 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                         <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 rounded-full">
                             {difficulty.toUpperCase()}
                         </span>
+                    </div>
+                    <div className="absolute top-4 right-4 flex gap-2">
+                        <button
+                            onClick={handleExitClick}
+                            className="flex items-center justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200"
+                            title={trans('gender_duel.exit_game')}
+                        >
+                            <MdClose className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                        </button>
                     </div>
                 </div>
             }

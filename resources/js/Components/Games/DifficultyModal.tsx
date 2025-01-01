@@ -14,8 +14,9 @@ interface DifficultyModalProps {
     selectedCategory: number;
     setSelectedCategory: React.Dispatch<React.SetStateAction<number>>;
     startGame: () => void;
-    translations: Translations;
-    gameType: 'singlePlayer' | 'multiPlayer';
+    gameType?: 'singlePlayer' | 'multiPlayer';
+    onDifficultyChange?: () => void;
+    showCategories?: boolean;
 }
 
 export default function DifficultyModal({
@@ -26,8 +27,9 @@ export default function DifficultyModal({
     selectedCategory,
     setSelectedCategory,
     startGame,
-    translations,
-    gameType
+    gameType = 'multiPlayer',
+    onDifficultyChange,
+    showCategories = true
 }: DifficultyModalProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const { t: trans } = useTranslation();
@@ -58,40 +60,44 @@ export default function DifficultyModal({
             <div className="p-6 text-center">
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">{trans('gender_duel.modal_difficulty.title')}</h2>
 
-                <div className="mb-6">
-                    <div className="flex flex-col items-start mb-2">
-                        <InputLabel
-                            htmlFor="select_category"
-                            value={trans('gender_duel.modal_difficulty.select_word_category')}
-                        />
+                {showCategories && (
+                    <div className="mb-6">
+                        <div className="flex flex-col items-start mb-2">
+                            <InputLabel
+                                htmlFor="select_category"
+                                value={trans('gender_duel.modal_difficulty.select_word_category')}
+                            />
 
+                        </div>
+                        <div className="mt-1 relative">
+                            <Select
+                                id="select_category"
+                                value={selectedCategory}
+                                onChange={(e) =>
+                                    setSelectedCategory(parseInt(e.target.value, 10))
+                                }
+                                className="block w-full pl-10 pr-10"
+                            >
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {trans('categories.' + category.key)}
+                                    </option>
+                                ))}
+                            </Select>
+                            <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                {trans('gender_duel.modal_difficulty.choose')} '{trans('categories.all')}' {trans('gender_duel.modal_difficulty.for_words_from_every_category')}
+                            </p>
+                        </div>
                     </div>
-                    <div className="mt-1 relative">
-                        <Select
-                            id="select_category"
-                            value={selectedCategory}
-                            onChange={(e) =>
-                                setSelectedCategory(parseInt(e.target.value, 10))
-                            }
-                            className="block w-full pl-10 pr-10"
-                        >
-                            {categories.map((category) => (
-                                <option key={category.id} value={category.id}>
-                                    {translations.categories[category.key]}
-                                </option>
-                            ))}
-                        </Select>
-                        <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
-                            {trans('gender_duel.modal_difficulty.choose')} '{translations.categories.all}' {trans('gender_duel.modal_difficulty.for_words_from_every_category')}
-                        </p>
-                    </div>
-                </div>
-
+                )}
                 <div className="space-y-4">
                     {(['easy', 'medium', 'hard'] as const).map((difficulty) => (
                         <button
                             key={difficulty}
-                            onClick={() => setSelectedDifficulty(difficulty)}
+                            onClick={() => {
+                                setSelectedDifficulty(difficulty);
+                                onDifficultyChange?.();
+                            }}
                             className={`w-full py-3 rounded-lg transition-colors duration-200 ${
                                 selectedDifficulty === difficulty
                                     ? 'bg-blue-500 dark:bg-blue-600 text-white'

@@ -26,10 +26,9 @@ interface Props {
     };
   };
   activeGames: GenderDuelGame[];
-  translations: Translations;
 }
 
-export default function LanguageLobby({ auth, activeGames, translations }: Props) {
+export default function LanguageLobby({ auth, activeGames }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
   const [showDifficultyModal, setShowDifficultyModal] = useState(false);
@@ -237,7 +236,6 @@ export default function LanguageLobby({ auth, activeGames, translations }: Props
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         startGame={startGame}
-        translations={translations}
         gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>
