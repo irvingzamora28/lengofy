@@ -13,6 +13,7 @@ interface GenderDuelPracticeProps extends PageProps {
     auth: any;
     nouns: Noun[];
     difficulty: 'easy' | 'medium' | 'hard';
+    targetLanguage: 'de' | 'es';
 }
 
 const DIFFICULTY_TIMES = {
@@ -21,13 +22,21 @@ const DIFFICULTY_TIMES = {
     hard: 1
 };
 
-const GENDER_COLORS = {
-    der: 'bg-blue-500',
-    die: 'bg-pink-500',
-    das: 'bg-green-500'
-};
+const GENDER_COLORS_MAP = {
+    de: {
+        der: 'bg-blue-500',
+        die: 'bg-pink-500',
+        das: 'bg-green-500',
+    },
+    es: {
+        el: 'bg-blue-500',
+        la: 'bg-pink-500',
+    },
+} as const;
 
-const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, difficulty = 'medium' }) => {
+
+const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, difficulty = 'medium', targetLanguage = 'de' }) => {
+    const GENDER_COLORS = GENDER_COLORS_MAP[targetLanguage];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const [score, setScore] = useState(0);
@@ -209,7 +218,9 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                 <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-200px)]">
                     {showFeedback && (
                         <div
-                            className={`absolute inset-0 ${GENDER_COLORS[nouns[currentIndex].gender]} opacity-20 transition-opacity duration-500`}
+                            className={`absolute inset-0 ${
+                                GENDER_COLORS[nouns[currentIndex].gender as keyof typeof GENDER_COLORS]
+                            } opacity-20 transition-opacity duration-500`}
                         />
                     )}
                     <div className="flex flex-col items-center mb-8">

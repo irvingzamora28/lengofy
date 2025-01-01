@@ -181,8 +181,12 @@ class GenderDuelGameController extends Controller
     {
         $user = auth()->user();
         // dd($user->language_pair_id);
-        $languagePair = LanguagePair::findOrFail($user->language_pair_id);
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
         $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, 0, 10);
-        return Inertia::render('GenderDuelGame/Practice', compact('nouns'));
+        return Inertia::render('GenderDuelGame/Practice', [
+            'nouns' => $nouns,
+            'difficulty' => 'medium',
+            'targetLanguage' => $languagePair->targetLanguage->code,
+        ]);
     }
 }
