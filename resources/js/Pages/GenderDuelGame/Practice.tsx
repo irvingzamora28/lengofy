@@ -53,9 +53,10 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
     const [isPaused, setIsPaused] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState<GenderDuelAnswer[]>([]);
-    const { t: trans } = useTranslation();
+    const [countdown, setCountdown] = useState(3);
     const correctAudioRef = useRef<HTMLAudioElement | null>(null);
     const incorrectAudioRef = useRef<HTMLAudioElement | null>(null);
+    const { t: trans } = useTranslation();
 
     useEffect(() => {
         // Initialize and preload the audio
@@ -64,6 +65,13 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
         correctAudioRef.current.load();
         incorrectAudioRef.current.load();
     }, []);
+
+    useEffect(() => {
+        if (countdown > 0) {
+            const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [countdown]);
 
 
     const leaveGame = () => {
@@ -81,7 +89,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
 
 
     useEffect(() => {
-        if (isPaused || isGameOver) return;
+        if (isPaused || isGameOver || countdown > 0) return;
 
         const timer = setInterval(() => {
             setTimeLeft((prev) => {
@@ -99,10 +107,10 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [difficulty, isPaused, isGameOver, currentIndex]);
+    }, [difficulty, isPaused, isGameOver, countdown, currentIndex]);
 
     const handleAnswer = (answer: string) => {
-        if (isPaused) return; // Prevent multiple clicks during feedback period
+        if (isPaused || countdown > 0) return; // Prevent multiple clicks during feedback period and countdown
         const isCorrect = answer === words[currentIndex].gender;
 
         if (isCorrect) {
@@ -168,10 +176,19 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
         setLongestStreak(0);
         setTimeLeft(DIFFICULTY_TIMES[difficulty]);
         setIsGameOver(false);
+        setCountdown(3);
         if (fetchNewWords) {
             fetchWords();
         }
     };
+
+    if (countdown > 0) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
+                <div className="text-6xl font-bold text-indigo-700 dark:text-indigo-300">{countdown}</div>
+            </div>
+        );
+    }
 
     if (isGameOver) {
         return (
