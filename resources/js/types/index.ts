@@ -44,6 +44,13 @@ export interface GenderDuelGame {
     category: Category;
 }
 
+export interface GenderDuelAnswer {
+    word: string;
+    translation: string | undefined;
+    userAnswer: any;
+    correctAnswer: 'der' | 'die' | 'das' | 'el' | 'la';
+}
+
 export interface GenderDuelGamePlayer {
     id: number;
     gender_duel_game_id: number;

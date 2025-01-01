@@ -4,11 +4,12 @@ import { MdClose } from "react-icons/md";
 import { Head, router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import CircularTimer from "@/Components/Games/CircularTimer";
-import { Noun } from "@/types";
+import { GenderDuelAnswer, Noun } from "@/types";
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from "./ConfirmationExitModal";
+import WrongAnswersSummary from "./WrongAnswersSummary";
 
 interface GenderDuelPracticeProps extends PageProps {
     auth: any;
@@ -48,6 +49,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
     const [showFeedback, setShowFeedback] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [wrongAnswers, setWrongAnswers] = useState<GenderDuelAnswer[]>([]);
     const { t: trans } = useTranslation();
 
     const leaveGame = () => {
@@ -85,8 +87,9 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         return () => clearInterval(timer);
     }, [difficulty, isPaused, isGameOver, currentIndex]);
 
-    const handleAnswer = (isCorrect: boolean) => {
+    const handleAnswer = (answer: string) => {
         if (isPaused) return; // Prevent multiple clicks during feedback period
+        const isCorrect = answer === nouns[currentIndex].gender;
 
         if (isCorrect) {
             const audio = new Audio(correctSound);
@@ -99,6 +102,7 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                 setLongestStreak((longest) => Math.max(longest, newStreak));
                 return newStreak;
             });
+
             setTimeout(() => {
                 setShowFeedback(false);
                 setIsPaused(false);
@@ -115,6 +119,15 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
             setStreak(0);
             setShake(true);
             setTimeout(() => setShake(false), 500);
+            const isAlreadyWrong = wrongAnswers.some(answer => answer.word === nouns[currentIndex].word);
+            if (!isAlreadyWrong) {
+                setWrongAnswers(prev => [...prev, {
+                    word: nouns[currentIndex].word,
+                    translation: nouns[currentIndex].translation,
+                    userAnswer: answer,
+                    correctAnswer: nouns[currentIndex].gender,
+                }]);
+            }
         }
     };
 
@@ -166,6 +179,9 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
                         >
                             Play Again
                         </button>
+                        {wrongAnswers.length > 0 && (
+                            <WrongAnswersSummary wrongAnswers={wrongAnswers} targetLanguage={targetLanguage} />
+                        )}
                     </div>
                 </div>
             </AuthenticatedLayout>
@@ -235,19 +251,19 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
 
                     <div className={`grid grid-cols-3 gap-6 ${shake ? 'animate-shake' : ''}`}>
                         <button
-                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'der')}
+                            onClick={() => handleAnswer('der')}
                             className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
                             Der
                         </button>
                         <button
-                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'die')}
+                            onClick={() => handleAnswer('die')}
                             className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
                             Die
                         </button>
                         <button
-                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'das')}
+                            onClick={() => handleAnswer('das')}
                             className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
                         >
                             Das
