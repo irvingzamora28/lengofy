@@ -8,6 +8,7 @@ import GameArea from '@/Components/GenderDuelGame/GameArea';
 import PlayersInfo from '@/Components/GenderDuelGame/PlayersInfo';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import ConfirmationExitModal from './ConfirmationExitModal';
 
 interface Props extends PageProps {
     auth: any;
@@ -328,30 +329,12 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, translations 
 
             {/* Confirmation Modal */}
             {showExitConfirmation && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-sm shadow-lg">
-                        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
-                            {trans('gender_duel.modal_exit.title')}
-                        </h2>
-                        <p className="text-gray-600 dark:text-gray-300 mb-6">
-                            {trans('gender_duel.modal_exit.message')}
-                        </p>
-                        <div className="flex justify-end gap-3">
-                            <button
-                                onClick={() => setShowExitConfirmation(false)}
-                                className="px-4 py-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 rounded font-semibold text-gray-700 dark:text-gray-200"
-                            >
-                                {trans('generals.cancel')}
-                            </button>
-                            <button
-                                onClick={leaveGame}
-                                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white font-semibold"
-                            >
-                                {trans('gender_duel.modal_exit.btn_leave')}
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <ConfirmationExitModal
+                    title={trans('gender_duel.modal_exit.title')}
+                    message={trans('gender_duel.modal_exit.message')}
+                    onLeave={leaveGame}
+                    onCancel={() => setShowExitConfirmation(false)}
+                />
             )}
         </>
     );
