@@ -42,21 +42,22 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
     const [timeLeft, setTimeLeft] = useState(DIFFICULTY_TIMES[difficulty]);
     const [shake, setShake] = useState(false);
     const [streak, setStreak] = useState(0);
+    const [longestStreak, setLongestStreak] = useState(0);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
+    const [isGameOver, setIsGameOver] = useState(false);
 
     useEffect(() => {
-        console.log("GenderDuelPractice nouns: ", nouns);
-
-    }, []);
-
-    useEffect(() => {
-        if (isPaused) return;
+        if (isPaused || isGameOver) return;
 
         const timer = setInterval(() => {
             setTimeLeft((prev) => {
                 if (prev <= 1) {
-                    setCurrentIndex((prevIndex) => (prevIndex + 1) % nouns.length);
+                    if (currentIndex + 1 >= nouns.length) {
+                        setIsGameOver(true);
+                        return 0;
+                    }
+                    setCurrentIndex((prevIndex) => prevIndex + 1);
                     setStreak(0);
                     return DIFFICULTY_TIMES[difficulty];
                 }
@@ -65,23 +66,31 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [difficulty, isPaused]);
+    }, [difficulty, isPaused, isGameOver, currentIndex]);
 
     const handleAnswer = (isCorrect: boolean) => {
         if (isPaused) return; // Prevent multiple clicks during feedback period
-        
+
         if (isCorrect) {
             const audio = new Audio(correctSound);
             audio.play();
             setShowFeedback(true);
             setIsPaused(true);
             setScore((prev) => prev + 1);
-            setStreak((prev) => prev + 1);
+            setStreak((prev) => {
+                const newStreak = prev + 1;
+                setLongestStreak((longest) => Math.max(longest, newStreak));
+                return newStreak;
+            });
             setTimeout(() => {
                 setShowFeedback(false);
                 setIsPaused(false);
-                setCurrentIndex((prev) => (prev + 1) % nouns.length);
-                setTimeLeft(DIFFICULTY_TIMES[difficulty]);
+                if (currentIndex + 1 >= nouns.length) {
+                    setIsGameOver(true);
+                } else {
+                    setCurrentIndex((prev) => prev + 1);
+                    setTimeLeft(DIFFICULTY_TIMES[difficulty]);
+                }
             }, 1000);
         } else {
             const audio = new Audio(incorrectSound);
@@ -92,16 +101,65 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
         }
     };
 
+    const restartGame = () => {
+        setCurrentIndex(0);
+        setScore(0);
+        setStreak(0);
+        setLongestStreak(0);
+        setTimeLeft(DIFFICULTY_TIMES[difficulty]);
+        setIsGameOver(false);
+    };
+
+    if (isGameOver) {
+        return (
+            <AuthenticatedLayout
+                user={auth.user}
+                header={
+                    <div className="flex justify-between items-center">
+                        <h2 className="font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
+                            Gender Duel - Results
+                        </h2>
+                    </div>
+                }
+            >
+                <Head title="Game Over" />
+                <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
+                    <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+                            Game Over!
+                        </h1>
+                        <p className="text-lg text-gray-600 dark:text-gray-300">
+                            Your Score: <span className="font-bold">{score}</span>
+                        </p>
+                        <p className="text-lg text-gray-600 dark:text-gray-300">
+                            Longest Streak: <span className="font-bold">×{longestStreak}</span>
+                        </p>
+                        <p className="text-lg text-gray-600 dark:text-gray-300">
+                            Final Streak: <span className="font-bold">×{streak}</span>
+                        </p>
+                        <button
+                            onClick={restartGame}
+                            className="mt-4 px-6 py-3 bg-indigo-500 text-white font-bold rounded-lg shadow hover:bg-indigo-600"
+                        >
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+            </AuthenticatedLayout>
+        );
+    }
+
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center">
-                    <button
-                        onClick={handleExitClick}
-                        className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                    >    <MdClose size={24} />
+                        <button
+                            onClick={handleExitClick}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                        >
+                            <MdClose size={24} />
                         </button>
                         <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
                             Gender Duel
@@ -136,38 +194,40 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
 
                 {/* Game Area */}
                 <div className="flex flex-col items-center justify-center p-8 min-h-[calc(100vh-200px)]">
-                {showFeedback && (
-                        <div className={`absolute inset-0 ${GENDER_COLORS[nouns[currentIndex].gender]} opacity-20 transition-opacity duration-500`} />
+                    {showFeedback && (
+                        <div
+                            className={`absolute inset-0 ${GENDER_COLORS[nouns[currentIndex].gender]} opacity-20 transition-opacity duration-500`}
+                        />
                     )}
-                        <div className="flex flex-col items-center mb-8">
-                            <div className="text-4xl md:text-8xl font-bold mb-4 text-gray-800 dark:text-slate-200 flex items-center">
-                                {nouns[currentIndex].word}
-                            </div>
-                            <div className="text-lg md:text-2xl text-gray-600 dark:text-gray-400">
-                                {nouns[currentIndex].translation || 'N/A'}
-                            </div>
+                    <div className="flex flex-col items-center mb-8">
+                        <div className="text-4xl md:text-8xl font-bold mb-4 text-gray-800 dark:text-slate-200 flex items-center">
+                            {nouns[currentIndex].word}
                         </div>
+                        <div className="text-lg md:text-2xl text-gray-600 dark:text-gray-400">
+                            {nouns[currentIndex].translation || 'N/A'}
+                        </div>
+                    </div>
 
-                        <div className={`grid grid-cols-3 gap-6 ${shake ? 'animate-shake' : ''}`}>
-                            <button
-                                onClick={() => handleAnswer(nouns[currentIndex].gender === 'der')}
-                                className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
-                            >
-                                Der
-                            </button>
-                            <button
-                                onClick={() => handleAnswer(nouns[currentIndex].gender === 'die')}
-                                className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
-                            >
-                                Die
-                            </button>
-                            <button
-                                onClick={() => handleAnswer(nouns[currentIndex].gender === 'das')}
-                                className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
-                            >
-                                Das
-                            </button>
-                        </div>
+                    <div className={`grid grid-cols-3 gap-6 ${shake ? 'animate-shake' : ''}`}>
+                        <button
+                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'der')}
+                            className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
+                        >
+                            Der
+                        </button>
+                        <button
+                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'die')}
+                            className="bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
+                        >
+                            Die
+                        </button>
+                        <button
+                            onClick={() => handleAnswer(nouns[currentIndex].gender === 'das')}
+                            className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-2xl md:text-6xl font-bold py-8 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-200"
+                        >
+                            Das
+                        </button>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>
