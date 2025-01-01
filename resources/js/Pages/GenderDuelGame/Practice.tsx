@@ -68,6 +68,8 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, di
     }, [difficulty, isPaused]);
 
     const handleAnswer = (isCorrect: boolean) => {
+        if (isPaused) return; // Prevent multiple clicks during feedback period
+        
         if (isCorrect) {
             const audio = new Audio(correctSound);
             audio.play();
