@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('game_id')->constrained('games')->onDelete('cascade'); // Links to games table
             $table->integer('highest_score')->default(0);
             $table->integer('total_points')->default(0);
+            $table->integer('correct_streak')->default(0);
             $table->integer('winning_streak')->default(0);
             $table->timestamps();
         });
