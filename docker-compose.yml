@@ -7,8 +7,10 @@ services:
     volumes:
       - .:/var/www/html
       - ./storage:/var/www/html/storage
+      - /var/www/html/node_modules
     ports:
       - "9000:9000"
+      - "5173:5173"  # Vite dev server port
     networks:
       - laravel-network
     environment:
@@ -16,6 +18,7 @@ services:
       APP_DEBUG: "true"
       APP_KEY: ${APP_KEY}
       APP_URL: http://localhost
+      VITE_APP_URL: http://localhost:5173
 
   webserver:
     image: nginx:latest
