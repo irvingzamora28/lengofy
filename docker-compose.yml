@@ -11,6 +11,8 @@ services:
     ports:
       - "9000:9000"
       - "5173:5173"  # Vite dev server port
+      - "8080:8080"  # Laravel Reverb WebSocket port
+      - "6001:6001"  # Bun WebSocket port
     networks:
       - laravel-network
     environment:
@@ -27,7 +29,7 @@ services:
       - .:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "8080:80"
+      - "8081:80"
     depends_on:
       - app
     networks:
