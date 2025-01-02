@@ -33,8 +33,9 @@ RUN composer dump-autoload --optimize
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Install Node dependencies
+# Install Node dependencies and build the React app
 RUN bun install
+RUN bun run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
