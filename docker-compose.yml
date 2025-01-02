@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel-app
+    container_name: lengofy-app
     volumes:
       - .:/var/www/html
       - ./storage:/var/www/html/storage
@@ -14,7 +14,7 @@ services:
       - "8080:8080"  # Laravel Reverb WebSocket port
       - "6001:6001"  # Bun WebSocket port
     networks:
-      - laravel-network
+      - lengofy-network
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
@@ -33,7 +33,7 @@ services:
     depends_on:
       - app
     networks:
-      - laravel-network
+      - lengofy-network
 
   db:
     image: mysql:8.0
@@ -49,11 +49,11 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     networks:
-      - laravel-network
+      - lengofy-network
 
 volumes:
   dbdata:
 
 networks:
-  laravel-network:
+  lengofy-network:
     driver: bridge
