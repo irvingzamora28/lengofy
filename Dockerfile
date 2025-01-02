@@ -22,16 +22,16 @@ RUN curl -fsSL https://bun.sh/install | bash && \
     mv /root/.bun/bin/bun /usr/local/bin/bun
 
 # Set the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/lengofy
 
 # Configure Git
-RUN git config --global --add safe.directory /var/www/html
+RUN git config --global --add safe.directory /var/www/lengofy
 
 # Copy composer files first
 COPY composer.json composer.lock ./
 
 # Set proper ownership for the working directory
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/lengofy
 
 # Switch to www-data user for dependency installation
 USER www-data

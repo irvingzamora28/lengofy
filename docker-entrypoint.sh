@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure vendor directory exists and has correct permissions
-if [ ! -d /var/www/html/vendor ]; then
+if [ ! -d /var/www/lengofy/vendor ]; then
     composer install --no-dev --optimize-autoloader
 fi
 

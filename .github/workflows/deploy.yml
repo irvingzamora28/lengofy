@@ -49,9 +49,10 @@ jobs:
             sudo find . -type f -exec chmod 644 {} \;
             sudo find . -type d -exec chmod 755 {} \;
             sudo chmod -R 775 storage bootstrap/cache
+            sudo chmod 666 .env
 
-            # Copy .env.example to .env if not exists
-            [ ! -f .env ] && cp .env.example .env
+            # Copy .env.example to .env if not exists and ensure it's writable
+            [ ! -f .env ] && cp .env.example .env && chmod 666 .env
 
             # Build and start containers
             docker compose -f docker-compose.prod.yml down
@@ -63,6 +64,9 @@ jobs:
 
             # Run Laravel commands
             docker exec -u www-data lengofy-app composer install --no-dev --optimize-autoloader
+            
+            # Generate application key
+            docker exec -u www-data lengofy-app php artisan key:generate
             
             # Run migrations (--force to run in production)
             docker exec -u www-data lengofy-app php artisan migrate --force
