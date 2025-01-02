@@ -3,9 +3,17 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import UpdateGameSettingsForm from './Partials/UpdateGameSettingsForm';
 import { Head } from '@inertiajs/react';
-import { PageProps } from '@/types';
+interface Props {
+    auth: {
+        user: {
+            is_guest: boolean;
+        };
+    };
+    mustVerifyEmail: boolean;
+    status?: string;
+}
 
-export default function Edit({ auth, mustVerifyEmail, status }: PageProps<{ mustVerifyEmail: boolean, status?: string }>) {
+export default function Edit({ auth, mustVerifyEmail, status }: Props) {
     return (
         <AuthenticatedLayout
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}

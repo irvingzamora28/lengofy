@@ -7,12 +7,13 @@ import { PropsWithChildren, ReactNode, useState } from 'react';
 import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { useDarkMode } from '@/Hooks/useDarkMode';
 import { useTranslation } from 'react-i18next';
+import { User } from '@/types';
 
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const { auth } = usePage<{ auth: { user: { name: string; email: string; is_guest: boolean } } }>().props;
+    const { auth } = usePage<{ auth: { user: User } }>().props;
     const user = auth.user;
     const { t: trans } = useTranslation();
 

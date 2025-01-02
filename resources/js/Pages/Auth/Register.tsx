@@ -8,6 +8,7 @@ import { FormEventHandler } from "react";
 import LanguagePairSelect from "../Profile/Partials/LanguagePairSelect";
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { PageProps } from '@/types';
 
 export default function Register() {
     const { languagePairs } = usePage<PageProps>().props;

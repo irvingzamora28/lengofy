@@ -12,6 +12,7 @@ import ConfirmationExitModal from "./ConfirmationExitModal";
 import WrongAnswersSummary from "./WrongAnswersSummary";
 import axios from "axios";
 import DifficultyModal from "@/Components/Games/DifficultyModal";
+import { PageProps } from "@/types";
 
 interface GenderDuelPracticeProps extends PageProps {
     auth: any;
@@ -217,7 +218,6 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
     if (isGameOver) {
         return (
             <AuthenticatedLayout
-                user={auth.user}
                 header={
                     <div className="flex items-center">
                         <button
@@ -291,7 +291,6 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
 
     return (
         <AuthenticatedLayout
-            user={auth.user}
             header={
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-center">

@@ -274,7 +274,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
     return (
         <>
             <AuthenticatedLayout
-                user={auth.user}
                 header={
                     <div className="flex items-center">
                         <button

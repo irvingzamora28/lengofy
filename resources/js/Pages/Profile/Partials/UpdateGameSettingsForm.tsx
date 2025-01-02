@@ -3,6 +3,7 @@ import { FormEventHandler } from 'react';
 import { Switch } from '@headlessui/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Transition } from '@headlessui/react';
+import { PageProps } from '@/types';
 
 export default function UpdateGameSettingsForm({
     className = ''

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, router } from '@inertiajs/react';
 import {
   FaGlobe,
@@ -9,24 +9,17 @@ import {
   FaDumbbell,
 } from 'react-icons/fa';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { GenderDuelGame, Translations } from '@/types';
+import { GenderDuelGame, User } from '@/types';
 import useEchoChannel from '@/Hooks/useEchoChannel';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  auth: {
-    user: {
-      id: number;
-      name: string;
-      language_pair_id: string;
-      level: string;
-      streak: number;
-      gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
+    auth: {
+      user: User;
     };
-  };
-  activeGames: GenderDuelGame[];
-}
+    activeGames: GenderDuelGame[];
+  }
 
 export default function LanguageLobby({ auth, activeGames }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
@@ -124,7 +117,6 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
 
   return (
     <AuthenticatedLayout
-      user={auth.user}
       header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">{trans('gender_duel.lobby')}</h2>}
     >
       <div className="py-12">

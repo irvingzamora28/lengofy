@@ -37,11 +37,13 @@ class GenderDuelGameController extends Controller
                         'max_players' => $genderDuelGame->max_players,
                         'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
                         'source_language' => [
+                            'id' => $genderDuelGame->languagePair->source_language_id,
                             'code' => $genderDuelGame->languagePair->sourceLanguage->code,
                             'name' => $genderDuelGame->languagePair->sourceLanguage->name,
                             'flag' => $this->languageService->getFlag($genderDuelGame->languagePair->sourceLanguage->code),
                         ],
                         'target_language' => [
+                            'id' => $genderDuelGame->languagePair->target_language_id,
                             'code' => $genderDuelGame->languagePair->targetLanguage->code,
                             'name' => $genderDuelGame->languagePair->targetLanguage->name,
                             'flag' => $this->languageService->getFlag($genderDuelGame->languagePair->targetLanguage->code),

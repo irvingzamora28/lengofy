@@ -6,9 +6,14 @@ import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { PageProps } from '@/types';
 
-export default function Guest({ children }: PropsWithChildren) {
-    const { locale = 'en' } = usePage<PageProps>().props;
+interface GuestPageProps extends PageProps {
+    locale?: string;
+}
+
+export default function Guest({ children }: PropsWithChildren<GuestPageProps>) {
+    const { props: { locale = 'en' } } = usePage<PageProps>();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { t: trans } = useTranslation();
 

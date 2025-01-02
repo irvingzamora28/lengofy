@@ -6,26 +6,14 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import LanguagePairSelect from './LanguagePairSelect';
-import { LanguagePair } from '@/types/language';
 import i18n from 'i18next';
+import { PageProps } from '@/types';
 
 interface Props {
     mustVerifyEmail: boolean;
     status?: string;
     className?: string;
     isGuest?: boolean;
-}
-
-interface PageProps {
-    auth: {
-        user: {
-            name: string;
-            email: string;
-            email_verified_at: string | null;
-            language_pair_id: string | null;
-        };
-    };
-    languagePairs: Record<string, LanguagePair>;
 }
 
 export default function UpdateProfileInformation({

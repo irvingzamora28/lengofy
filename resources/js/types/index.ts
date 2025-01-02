@@ -2,6 +2,10 @@ import { Language } from './language';
 
 export * from './language';
 
+export interface PageProps {
+    [key: string]: any; // Add index signature to satisfy @inertiajs/core
+}
+
 export interface Translations {
     [key: string]: {
         [subKey: string]: string;
@@ -14,6 +18,8 @@ export interface User {
     is_guest: boolean;
     guest_token?: string;
     last_active_at?: string;
+    language_pair_id: string;
+    gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
 }
 
 export interface Category {
@@ -39,6 +45,7 @@ export interface GenderDuelGame {
     source_language: Language;
     target_language: Language;
     language_pair_id: number;
+    words: Noun[];
     current_word?: Noun;
     players: GenderDuelGamePlayer[];
     category: Category;
