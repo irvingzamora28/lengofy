@@ -1,24 +1,25 @@
 #!/bin/bash
 
-# Ensure vendor directory exists and has correct permissions
-if [ ! -d /var/www/lengofy/vendor ]; then
-    composer install --no-dev --optimize-autoloader
-fi
-
 # Start PHP-FPM
-php-fpm &
+php-fpm -D
 
-# Check if we're in production mode
-if [ "$APP_ENV" = "production" ]; then
-    echo "Running in production mode, using built assets"
-    # Start WebSocket server
-    bun run websocket-server.ts
+# Start Laravel Reverb WebSocket server
+php artisan reverb:start &
+
+# Start Laravel Queue Worker
+php artisan queue:listen &
+
+# Start Vite dev server in development mode
+if [ "$APP_ENV" = "local" ]; then
+    bun run dev --host &
+    # Start Bun WebSocket server
+    bun run ws &
 else
-    echo "Running in development mode"
-    # Start Vite dev server and WebSocket server
-    bun run dev &
-    bun run websocket-server.ts
+    # In production, we don't need to start the dev server as we already built the assets
+    echo "Running in production mode, using built assets"
+    # Start Bun WebSocket server in production
+    bun run ws &
 fi
 
 # Keep the container running
-wait
+tail -f /dev/null

@@ -1,5 +1,5 @@
 # Stage 1: Build Stage
-FROM php:8.2-fpm
+FROM php:8.2-fpm AS base
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -22,50 +22,33 @@ RUN curl -fsSL https://bun.sh/install | bash && \
     mv /root/.bun/bin/bun /usr/local/bin/bun
 
 # Set the working directory
-WORKDIR /var/www/lengofy
+WORKDIR /var/www/html
 
-# Configure Git
-RUN git config --global --add safe.directory /var/www/lengofy
-
-# Copy composer files first
-COPY composer.json composer.lock ./
-
-# Set proper ownership for the working directory
-RUN chown -R www-data:www-data /var/www/lengofy
-
-# Switch to www-data user for dependency installation
-USER www-data
-
-# Install PHP dependencies
-RUN composer install --no-scripts --no-autoloader
-
-# Switch back to root for copying files
-USER root
-
-# Copy the rest of the application code
+# Copy the application code
 COPY . .
-
-# Set proper permissions
-RUN chown -R www-data:www-data . && \
-    chmod -R 755 . && \
-    chmod -R 775 storage bootstrap/cache && \
-    chmod -R 775 vendor
-
-# Switch back to www-data
-USER www-data
 
 # Generate optimized autoload files
 RUN composer dump-autoload --optimize
 
-# Install Node dependencies and build assets
-RUN bun install && \
-    bun run build
+# Install PHP dependencies
+RUN composer install --optimize-autoloader --no-dev
+
+# Install Node dependencies and build the React app
+RUN bun install
+RUN bun run build
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Generate application key
+RUN php artisan key:generate
+
+# Expose ports for PHP-FPM and Vite
+EXPOSE 9000 5173
 
 # Create a startup script
-COPY --chown=www-data:www-data docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-# Expose ports for PHP-FPM, Laravel Reverb, and Bun WebSocket
-EXPOSE 9000 8080 6001
 
 ENTRYPOINT ["docker-entrypoint.sh"]
