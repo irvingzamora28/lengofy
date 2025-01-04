@@ -101,6 +101,38 @@ php artisan migrate
 php artisan db:seed
 ```
 
+## Running with Docker
+
+### 1. Docker Setup
+Ensure you have Docker and Docker Compose installed on your system:
+```bash
+docker --version
+docker-compose --version
+```
+
+### 2. Environment Configuration
+Make sure your `.env` file is properly configured. The database host should be set to `db` when using Docker:
+```env
+DB_HOST=db
+```
+
+### 3. Build and Run Containers
+Start the application using Docker Compose:
+```bash
+sudo docker-compose up -d
+```
+
+This will start all necessary services:
+- PHP/Laravel Application
+- MySQL Database
+- Nginx Web Server
+
+### 4. Access the Application
+Once the containers are running, you can access the application at:
+```
+http://localhost
+```
+
 ## Running the Application
 
 Lengofy requires multiple services to run simultaneously:
