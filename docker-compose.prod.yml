@@ -23,7 +23,7 @@ services:
 
   webserver:
     image: nginx:latest
-    container_name: nginx
+    container_name: lengofy-nginx
     volumes:
       - .:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
