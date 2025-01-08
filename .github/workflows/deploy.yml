@@ -60,6 +60,7 @@ jobs:
             sed -i "s#^APP_DEBUG=.*#APP_DEBUG=false#" .env
             sed -i "s#^APP_URL=.*#APP_URL=${{ secrets.APP_URL }}#" .env
             sed -i "s#^WEBSOCKET_GAME_ENDPOINT=.*#WEBSOCKET_GAME_ENDPOINT=${{ secrets.WEBSOCKET_GAME_ENDPOINT }}#" .env
+            sed -i "s#^SERVER_NAME=.*#SERVER_NAME=${{ secrets.SERVER_NAME }}#" .env
 
             # Set proper permissions for .env file
             sudo chmod 666 .env
