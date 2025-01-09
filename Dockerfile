@@ -27,26 +27,10 @@ WORKDIR /var/www/html
 # Copy the application code
 COPY . .
 
-# Configure Git to allow unsafe operations
-RUN git config --global --add safe.directory /var/www/html
-
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev
-
-# Generate optimized autoload files
-RUN composer dump-autoload --optimize
-
-# Install Node dependencies and build the React app
-RUN bun install
-RUN bun run build
-
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Generate application key
-RUN php artisan key:generate
 
 # Expose ports for PHP-FPM and Vite
 EXPOSE 9000 5173
