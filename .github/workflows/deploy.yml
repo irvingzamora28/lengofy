@@ -74,31 +74,31 @@ jobs:
             sleep 20
 
             # Set proper permissions
-            docker exec -it lengofy-app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+            docker exec -i lengofy-app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
             # Run Laravel commands
-            docker exec -it lengofy-app composer install
+            docker exec -i lengofy-app composer install
 
             # Install node dependencies
-            docker exec -it lengofy-app bun install
-            docker exec -it lengofy-app bun run build
+            docker exec -i lengofy-app bun install
+            docker exec -i lengofy-app bun run build
 
             # Only generate key if it doesn't exist in .env (Check for empty value)
             if grep -q "^APP_KEY=" .env && [ -z "$(grep "^APP_KEY=" .env | cut -d '=' -f2)" ]; then
-              docker exec -it lengofy-app php artisan key:generate
+              docker exec -i lengofy-app php artisan key:generate
             fi
 
             # Run migrations (--force to run in production)
-            docker exec -it lengofy-app php artisan migrate --force
+            docker exec -i lengofy-app php artisan migrate --force
 
             # Only run seeding if explicitly requested
             if [ "${{ github.event.inputs.seed }}" = "true" ]; then
-              docker exec -it lengofy-app php artisan db:seed --force
+              docker exec -i lengofy-app php artisan db:seed --force
               echo "Database seeding completed"
             fi
 
             # Cache everything
-            docker exec -it lengofy-app php artisan config:cache
-            docker exec -it lengofy-app php artisan route:cache
-            docker exec -it lengofy-app php artisan view:cache
-            docker exec -it lengofy-app php artisan storage:link
+            docker exec -i lengofy-app php artisan config:cache
+            docker exec -i lengofy-app php artisan route:cache
+            docker exec -i lengofy-app php artisan view:cache
+            docker exec -i lengofy-app php artisan storage:link
