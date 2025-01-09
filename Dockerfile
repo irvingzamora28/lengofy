@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -27,10 +26,6 @@ WORKDIR /var/www/html
 
 # Copy the application code
 COPY . .
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html && \
-    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
 
 # Configure Git to allow unsafe operations
 RUN git config --global --add safe.directory /var/www/html
@@ -46,7 +41,8 @@ RUN bun install
 RUN bun run build
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Generate application key

@@ -65,15 +65,6 @@ jobs:
             # Set proper permissions for .env file
             sudo chmod 666 .env
 
-            # Set proper ownership and permissions
-            sudo chown -R www-data:www-data .
-            sudo find . -type f -exec chmod 644 {} \;
-            sudo find . -type d -exec chmod 755 {} \;
-            sudo chmod -R 775 storage bootstrap/cache
-
-            # Set proper ownership before Docker build
-            sudo chown -R $(id -u):$(id -g) /var/www/html
-
             # Build and start containers
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml build --no-cache
