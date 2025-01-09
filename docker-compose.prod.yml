@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: lengofy-app
     volumes:
-      - .:/var/www/lengofy
-      - ./storage:/var/www/lengofy/storage
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
       - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
       - lengofy-network
