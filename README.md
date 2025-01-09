@@ -221,6 +221,44 @@ php artisan migrate --env=testing
 php artisan test --env=testing
 ```
 
+## Deployment
+
+Add to github secrets:
+- VPS_HOST
+- VPS_USERNAME
+- VPS_SSH_KEY
+- DB_CONNECTION
+- DB_HOST
+- DB_PORT
+- DB_DATABASE
+- DB_USERNAME
+- DB_PASSWORD
+- DB_ROOT_PASSWORD
+- APP_NAME
+- APP_URL
+- WEBSOCKET_GAME_ENDPOINT
+- SERVER_NAME
+
+VPS_HOST: VPS IP address
+VPS_USERNAME: VPS username
+VPS_SSH_KEY: SSH key for VPS (Without passphrase)
+DB_CONNECTION: Database connection type (e.g., mysql)
+DB_HOST: Database host (3306 for MySQL)
+DB_PORT: Database port
+DB_DATABASE: Database name
+DB_USERNAME: Database username
+DB_PASSWORD: Database password
+DB_ROOT_PASSWORD: Database root password
+APP_NAME: Application name
+APP_URL: Application URL (localhost or yourdomain.com)
+WEBSOCKET_GAME_ENDPOINT: WebSocket game endpoint (e.g., wss://192.1.0.0:6001 or ws://192.1.0.0:6001)
+SERVER_NAME: Server name (e.g., localhost or yourdomain.com)
+
+Push to main branch:
+```bash
+git push origin main
+```
+
 ## License
 
 Distributed under the Creative Commons Attribution-NonCommercial 4.0 International Public License. See `LICENSE` for more information.
