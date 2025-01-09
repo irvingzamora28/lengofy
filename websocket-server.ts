@@ -6,19 +6,26 @@ interface GenderDuelGameRoom {
 }
 
 interface GenderDuelGameMessage {
-    type: 'join_gender_duel_game' | 'submit_answer' | 'gender_duel_game_state_update' | 'player_ready' | 'start_gender_duel_game' | 'restart_gender_duel_game';
+    type: 'join_gender_duel_game' | 'submit_answer' | 'gender_duel_game_state_update' | 'player_ready' | 'start_gender_duel_game' | 'restart_gender_duel_game' | 'join_lobby';
     genderDuelGameId: string;
     userId?: string;
     data?: any;
 }
+
 // Store active game rooms and their states
 const genderDuelGameRooms = new Map<string, Set<WebSocket>>();
 const genderDuelGameStates = new Map<string, GenderDuelGameState>();
+const lobbyConnections = new Set<WebSocket>();
 
 const server = serve({
     port: 6001,
     fetch(req, server) {
-        // Upgrade the request to a WebSocket connection
+        // Handle HTTP POST requests for broadcasting
+        if (req.method === 'POST' && new URL(req.url).pathname === '/broadcast') {
+            return handleBroadcast(req);
+        }
+
+        // Upgrade WebSocket connections
         if (server.upgrade(req)) {
             return; // Return if upgrade was successful
         }
@@ -36,20 +43,31 @@ const server = serve({
                 console.log('websocket-server: Game room:', gameRoom);
 
                 switch (data.type) {
-                    case 'join_gender_duel_game':
-                        if (!genderDuelGameRooms.has(data.genderDuelGameId)) {
-                            genderDuelGameRooms.set(data.genderDuelGameId, new Set());
-                            // Initialize game state
-                            genderDuelGameStates.set(data.genderDuelGameId, {
-                                status: 'waiting',
-                                players: [],
-                                current_round: 0, // zero-based indexing for current_round
-                                words: data.data.words || [],
-                                hostId: data.userId, // Register the host
-                                max_players: data.data.max_players,
-                                winner: null
-                            });
+                    case 'join_lobby':
+                        // Add to lobby connections if not already there
+                        if (!lobbyConnections.has(ws)) {
+                            lobbyConnections.add(ws);
+                            console.log('Client joined lobby. Total lobby connections:', lobbyConnections.size);
                         }
+                        break;
+
+                        case 'join_gender_duel_game':
+                            if (!genderDuelGameRooms.has(data.genderDuelGameId)) {
+                                genderDuelGameRooms.set(data.genderDuelGameId, new Set());
+                                // Initialize game state
+                                genderDuelGameStates.set(data.genderDuelGameId, {
+                                    status: 'waiting',
+                                    players: [],
+                                    current_round: 0, // zero-based indexing for current_round
+                                    words: data.data.words || [],
+                                    hostId: data.userId, // Register the host
+                                    max_players: data.data.max_players,
+                                    winner: null
+                                });
+                            }
+
+                        // Remove from lobby when joining a game
+                        lobbyConnections.delete(ws);
 
                         // Add connection ID to track this specific client
                         ws.id = data.userId;
@@ -318,6 +336,10 @@ const server = serve({
                         genderDuelGameRooms.delete(gameId);
                         genderDuelGameStates.delete(gameId);
                         console.log(`Game ${gameId} cleaned up - no players remaining`);
+                        broadcastToLobby({
+                            type: 'gender-duel-game-ended',
+                            gameId
+                        });
                     }
                     break;
                 }
@@ -325,5 +347,32 @@ const server = serve({
         }
     }
 });
+
+// Helper function to broadcast to all lobby connections
+function broadcastToLobby(data: any) {
+    console.log('Broadcasting to lobby:', data);
+    console.log('Number of lobby connections:', lobbyConnections.size);
+
+    lobbyConnections.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(data));
+        }
+    });
+}
+
+// Handle broadcast requests from the Laravel backend
+async function handleBroadcast(req: Request) {
+    try {
+        const data = await req.json();
+        console.log('Received broadcast request:', data);
+
+        broadcastToLobby(data);
+
+        return new Response('Broadcast sent successfully', { status: 200 });
+    } catch (error) {
+        console.error('Error handling broadcast:', error);
+        return new Response('Error processing broadcast', { status: 500 });
+    }
+}
 
 console.log('WebSocket server running on port 6001');

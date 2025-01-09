@@ -50,6 +50,7 @@ class GenderDuelGameController extends Controller
                         ],
                     ];
                 }),
+            'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
     }
 

@@ -1,6 +1,4 @@
 import axios from 'axios';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -8,37 +6,7 @@ import Pusher from 'pusher-js';
  * CSRF token as a header based on the value of the "XSRF" token cookie.
 */
 
-window.Pusher = Pusher;
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-declare global {
-    interface Window {
-        axios: typeof axios;
-        Pusher: typeof Pusher;
-        Echo: Echo<'reverb'>;
-    }
-}
-
-window.Echo = new Echo({
-    broadcaster: 'reverb',
-    key: import.meta.env.VITE_REVERB_APP_KEY,
-    wsHost: import.meta.env.VITE_REVERB_HOST,
-    wsPort: import.meta.env.VITE_REVERB_PORT,
-    wssPort: import.meta.env.VITE_REVERB_PORT,
-    forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-    enabledTransports: ['ws', 'wss'],
-    auth: {
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
-        }
-    }
-});

@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Events\GenderDuelGameCreated;
-use App\Events\GenderDuelGameEnded;
 use App\Enums\GenderDuelGameStatus;
 use App\Models\GenderDuelGame;
 use App\Models\LanguagePair;
@@ -12,11 +10,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Services\WebSocketService;
 
 class GenderDuelGameService
 {
     private const POINTS_CORRECT = 10;
     private const POINTS_INCORRECT = -5;
+
+    public function __construct(
+        private WebSocketService $webSocketService
+    ) {
+    }
 
     public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty, string $category): GenderDuelGame
     {
@@ -33,7 +37,7 @@ class GenderDuelGameService
 
             $this->addPlayer($genderDuelGame, $user);
             $genderDuelGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
-            broadcast(new GenderDuelGameCreated($genderDuelGame));
+            $this->webSocketService->broadcastGameCreated($genderDuelGame);
 
             return $genderDuelGame;
         });
@@ -95,8 +99,7 @@ class GenderDuelGameService
     private function endGame(GenderDuelGame $genderDuelGame): void
     {
         $genderDuelGame->update(['status' => GenderDuelGameStatus::ENDED]);
-
-        broadcast(new GenderDuelGameEnded($genderDuelGame));
+        $this->webSocketService->broadcastGameEnded($genderDuelGame);
     }
 
     public function leaveGame(GenderDuelGame $genderDuelGame, User $user): void

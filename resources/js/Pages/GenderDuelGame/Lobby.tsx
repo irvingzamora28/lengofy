@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, router } from '@inertiajs/react';
 import {
   FaGlobe,
@@ -10,18 +10,18 @@ import {
 } from 'react-icons/fa';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame, User } from '@/types';
-import useEchoChannel from '@/Hooks/useEchoChannel';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-    auth: {
-      user: User;
-    };
-    activeGames: GenderDuelGame[];
-  }
+  auth: {
+    user: User;
+  };
+  activeGames: GenderDuelGame[];
+  wsEndpoint: string;
+}
 
-export default function LanguageLobby({ auth, activeGames }: Props) {
+export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) {
   const [games, setGames] = useState<GenderDuelGame[]>(activeGames);
   const [selectedLanguagePair, setSelectedLanguagePair] = useState(null);
   const [showDifficultyModal, setShowDifficultyModal] = useState(false);
@@ -31,46 +31,73 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   );
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const { t: trans } = useTranslation();
+  const wsRef = useRef<WebSocket | null>(null);
 
-  // Subscribe to game events
-  useEchoChannel('gender-duel-game', {
-    'gender-duel-game-created': (data: { game: GenderDuelGame }) => {
+  // Subscribe to game events using WebSocket
+  useEffect(() => {
+    const ws = new WebSocket(wsEndpoint);
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      console.log('Connected to lobby WebSocket');
+      ws.send(JSON.stringify({
+        type: 'join_lobby',
+        userId: auth.user.id
+      }));
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log('WebSocket message received:', data);
+
+
+      if (data.type === 'gender-duel-game-created') {
         console.log('New game created:', data.game);
         setGames(prevGames => [...prevGames, data.game]);
-    },
-    'gender-duel-game-ended': (data: { gameId: number }) => {
+      } else if (data.type === 'gender-duel-game-ended') {
         console.log('Game ended:', data.gameId);
         setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
-    }
-});
+      }
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from lobby WebSocket');
+    };
+
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
+  }, [wsEndpoint, auth.user.id]);
 
   const startCreateRoom = () => {
     router.post(
-        route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
-        {
-          gender_duel_difficulty: selectedDifficulty,
+      route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
+      {
+        gender_duel_difficulty: selectedDifficulty,
+      },
+      {
+        preserveScroll: true, // Ensure scroll position is preserved
+        onSuccess: () => {
+          // Navigate to single-player game
+          router.post(route('games.gender-duel.create'), {
+            language_pair_id: auth.user.language_pair_id,
+            max_players: 8,
+            difficulty: selectedDifficulty,
+            category: selectedCategory
+          });
+          setShowDifficultyModal(false);
         },
-        {
-          preserveScroll: true, // Ensure scroll position is preserved
-          onSuccess: () => {
-            // Navigate to single-player game
-            router.post(route('games.gender-duel.create'), {
-                language_pair_id: auth.user.language_pair_id,
-                max_players: 8,
-                difficulty: selectedDifficulty,
-                category: selectedCategory
-            });
-            setShowDifficultyModal(false);
-          },
-        }
-      );
+      }
+    );
   };
 
   const startGame = () => {
     if (isSinglePlayer) {
       startSinglePlayerGame();
     } else {
-        startCreateRoom();
+      startCreateRoom();
     }
   };
 
@@ -87,25 +114,25 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
   const startSinglePlayerGame = () => {
     // Save the selected difficulty to user settings
     router.post(
-        route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
-        {
-          gender_duel_difficulty: selectedDifficulty,
+      route('profile.game-settings.update', { redirectRoute: 'games.gender-duel.lobby' }),
+      {
+        gender_duel_difficulty: selectedDifficulty,
+      },
+      {
+        preserveScroll: true, // Ensure scroll position is preserved
+        onSuccess: () => {
+          // Navigate to single-player game
+          router.visit(route('games.gender-duel.practice'), {
+            method: 'get',
+            data: {
+              difficulty: selectedDifficulty,
+              category: selectedCategory
+            },
+          });
+          setShowDifficultyModal(false);
         },
-        {
-          preserveScroll: true, // Ensure scroll position is preserved
-          onSuccess: () => {
-            // Navigate to single-player game
-            router.visit(route('games.gender-duel.practice'), {
-              method: 'get',
-              data: {
-                difficulty: selectedDifficulty,
-                category: selectedCategory
-              },
-            });
-            setShowDifficultyModal(false);
-          },
-        }
-      );
+      }
+    );
   };
 
   const filteredGames = selectedLanguagePair
@@ -221,14 +248,14 @@ export default function LanguageLobby({ auth, activeGames }: Props) {
       {/* Difficulty Selection Modal */}
       {showDifficultyModal && (
         <DifficultyModal
-        showDifficultyModal={showDifficultyModal}
-        setShowDifficultyModal={setShowDifficultyModal}
-        selectedDifficulty={selectedDifficulty}
-        setSelectedDifficulty={setSelectedDifficulty}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        startGame={startGame}
-        gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
+          showDifficultyModal={showDifficultyModal}
+          setShowDifficultyModal={setShowDifficultyModal}
+          selectedDifficulty={selectedDifficulty}
+          setSelectedDifficulty={setSelectedDifficulty}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          startGame={startGame}
+          gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>
   );
