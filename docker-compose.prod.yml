@@ -16,7 +16,6 @@ services:
       APP_KEY: ${APP_KEY}
       APP_URL: http://${APP_URL}
     ports:
-      - "8080:8080"  # Laravel Reverb WebSocket port
       - "6001:6001"  # Bun WebSocket port
     depends_on:
       - db

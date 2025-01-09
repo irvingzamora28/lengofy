@@ -11,7 +11,6 @@ services:
     ports:
       - "9000:9000"
       - "5173:5173"  # Vite dev server port
-      - "8080:8080"  # Laravel Reverb WebSocket port
       - "6001:6001"  # Bun WebSocket port
     networks:
       - lengofy-network

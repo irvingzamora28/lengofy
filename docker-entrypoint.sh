@@ -3,12 +3,6 @@
 # Start PHP-FPM
 php-fpm -D
 
-# Start Laravel Reverb WebSocket server
-php artisan reverb:start &
-
-# Start Laravel Queue Worker
-php artisan queue:listen &
-
 # Start Vite dev server in development mode
 if [ "$APP_ENV" = "local" ]; then
     bun run dev --host &
