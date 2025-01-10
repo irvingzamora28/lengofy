@@ -10,6 +10,10 @@ import {
 // Load environment variables from .env file
 config();
 
+// Check if the environment is local
+const isLocal = process.env.APP_ENV === 'local';
+const url = process.env.APP_URL;
+
 interface GenderDuelGameRoom {
     players: Set<WebSocket>;
 }
@@ -33,7 +37,7 @@ const genderDuelGameRooms = new Map<string, Set<WebSocket>>();
 const genderDuelGameStates = new Map<string, GenderDuelGameState>();
 const lobbyConnections = new Set<WebSocket>();
 
-const server = serve({
+const serverConfig = {
     port: 6001,
     fetch(req, server) {
         // Handle HTTP POST requests for broadcasting
@@ -457,15 +461,19 @@ const server = serve({
             }
         },
     },
-    tls: {
-        cert: readFileSync(
-            `/etc/letsencrypt/live/${process.env.SERVER_NAME}/fullchain.pem`
-        ),
-        key: readFileSync(
-            `/etc/letsencrypt/live/${process.env.SERVER_NAME}/privkey.pem`
-        ),
-    },
-});
+    ...(isLocal ? {} : {
+        tls: {
+            cert: readFileSync(
+                `/etc/letsencrypt/live/${process.env.SERVER_NAME}/fullchain.pem`
+            ),
+            key: readFileSync(
+                `/etc/letsencrypt/live/${process.env.SERVER_NAME}/privkey.pem`
+            ),
+        },
+    }),
+};
+
+const server = serve(serverConfig);
 
 // Helper function to broadcast to all lobby connections
 function broadcastToLobby(data: any) {
@@ -494,4 +502,8 @@ async function handleBroadcast(req: Request) {
     }
 }
 
-console.log("WebSocket server running on port 6001");
+console.log(
+    `WebSocket server running on ${
+        serverConfig.tls ? "wss" : "ws"
+    } on port ${serverConfig.port}`
+);
