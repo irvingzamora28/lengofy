@@ -32,8 +32,6 @@ services:
       - "443:443"  # Expose HTTPS port
     environment:
       SERVER_NAME: ${SERVER_NAME}
-      SSL_CERTIFICATE_PATH: /etc/letsencrypt/live/${SERVER_NAME}/fullchain.pem
-      SSL_CERTIFICATE_KEY_PATH: /etc/letsencrypt/live/${SERVER_NAME}/privkey.pem
     depends_on:
       - app
     networks:
