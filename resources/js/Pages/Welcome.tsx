@@ -141,7 +141,7 @@ export default function Welcome() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="text-5xl font-extrabold tracking-tight text-primary-600 dark:text-white sm:text-6xl md:text-9xl font-display"
+                            className="text-4xl font-extrabold tracking-tight text-primary-600 dark:text-white sm:text-6xl md:text-9xl font-display"
                         >
                             {prefix}{prefix && ' '}
                             <span className="inline-block relative w-[200px] md:w-[300px]">
@@ -164,7 +164,7 @@ export default function Welcome() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: 0.3 }}
-                            className="mx-auto mt-6 max-w-2xl text-2xl md:text-4xl leading-8 text-gray-600 dark:text-gray-300 font-sans"
+                            className="mx-auto mt-6 max-w-2xl text-xl md:text-4xl leading-8 text-gray-600 dark:text-gray-300 font-sans"
                         >
                             {translations.welcome.heroSubtitle}
                         </motion.p>
@@ -313,13 +313,13 @@ export default function Welcome() {
                             <div className="mt-10 flex items-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-primary-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 transition"
+                                    className="rounded-md bg-primary-500 px-3 py-2 text-md md:px-6 md:py-3 md:text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 transition"
                                 >
                                     {translations.welcome.tryNowButton}
                                 </button>
                                 <Link
                                     href={route('register')}
-                                    className="flex items-center gap-x-2 text-lg font-semibold leading-6 text-white hover:underline"
+                                    className="flex items-center gap-x-2 text-md md:text-lg font-semibold leading-6 text-white hover:underline"
                                 >
                                     {translations.welcome.learnMoreButton} <FaArrowRight className="inline-block w-6 h-6" />
                                 </Link>
@@ -358,19 +358,19 @@ export default function Welcome() {
                             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
                                 {translations.welcome.finalCTATitle}
                             </h2>
-                            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
+                            <p className="mx-auto mt-6 max-w-xl text-md md:text-lg leading-8 text-primary-100">
                                 {translations.welcome.finalCTADescription}
                             </p>
                             <div className="mt-10 flex items-center justify-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-primary-500 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition"
+                                    className="rounded-md bg-white px-3 py-2 text-md md:px-6 md:py-3 md:text-lg font-semibold text-primary-500 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition"
                                 >
                                     {translations.welcome.tryNowButton}
                                 </button>
                                 <Link
                                     href={route('register')}
-                                    className="flex items-center gap-x-2 text-lg font-semibold leading-6 hover:underline"
+                                    className="flex items-center gap-x-2 text-md md:text-lg font-semibold leading-6 hover:underline"
                                 >
                                     {translations.welcome.createAccountButton} <FaArrowRight className="inline-block w-6 h-6" />
                                 </Link>

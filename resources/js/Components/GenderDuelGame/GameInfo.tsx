@@ -40,14 +40,13 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
     return (
         <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
             <div className="flex items-center space-x-2">
-                <span className="font-medium">{languageName}</span>
                 {status === 'in_progress' && (
                     <>
-                        <span className="text-xs opacity-75">
+                        <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200">
                             {trans('gender_duel.round')} {currentRound}/{totalRounds}
                         </span>
                         {category && (
-                            <span className="text-xs opacity-75">{trans('gender_duel.category')}: {trans('categories.' + category.key)}</span>
+                            <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200">{trans('gender_duel.category')}: {trans('categories.' + category.key)}</span>
                         )}
                     </>
                 )}

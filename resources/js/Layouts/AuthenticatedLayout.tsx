@@ -163,11 +163,8 @@ export default function Authenticated({
 
                     <div className="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
                         <div className="px-4">
-                            <div className="text-base font-medium text-gray-800 dark:text-gray-200">
+                            <div className="text-base font-medium text-gray-500 dark:text-gray-200">
                                 {user.name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
                             </div>
                         </div>
 
@@ -175,6 +172,24 @@ export default function Authenticated({
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 {trans('auth_layout.profile')}
                             </ResponsiveNavLink>
+                            <div
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+
+                                                const darkModeToggle = document.querySelector('[aria-label="Toggle Dark Mode"]') as HTMLButtonElement;
+                                                if (darkModeToggle) {
+                                                    darkModeToggle.click();
+                                                }
+                                            }}
+                                            className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 flex items-center justify-between cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                                        >
+                                            <span>{darkMode ? trans('auth_layout.light_mode') : trans('auth_layout.dark_mode')}</span>
+                                            <DarkModeToggle
+                                                onToggle={(newMode) => {
+                                                    setDarkMode(newMode);
+                                                }}
+                                            />
+                                        </div>
                             <ResponsiveNavLink
                                 method={user?.is_guest ? 'delete' : 'post'}
                                 href={user?.is_guest ? route('guest.logout') : route('logout')}

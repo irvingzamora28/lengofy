@@ -162,7 +162,7 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
                       </h2>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 sm:mt-2">{trans('gender_duel.connect_learn_challenge')}</p>
                     </div>
-                    <div className="flex space-x-3">
+                    <div className="flex space-x-3 w-full sm:w-auto">
                       <button
                         onClick={handleCreateRoom}
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center transition-colors"
