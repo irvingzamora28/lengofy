@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\GenderDuelGame;
+use App\Models\GenderDuelGamePlayer;
 use App\Services\GuestUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 class GuestUserController extends Controller
 {
@@ -82,6 +83,10 @@ class GuestUserController extends Controller
 
             // Logout the user
             Auth::logout();
+
+            // Delete related gender_duel_games records
+            GenderDuelGame::where('creator_id', $userId)->delete();
+            GenderDuelGamePlayer::where('user_id', $userId)->delete();
 
             // Delete the guest user
             User::where('id', $userId)->delete();
