@@ -34,7 +34,7 @@ export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoPro
                             ${currentPlayerId === player.id ? 'ring-2 ring-indigo-500 dark:ring-indigo-400' : ''}`}
                     >
                         <div className="flex items-center gap-3">
-                            {index === 0 && <FaTrophy className="text-yellow-500" />}
+                            {index === 0 && player.score > 0 && <FaTrophy className="text-yellow-500" />}
                             <span className={`
                                 ${currentPlayerId === player.id ? 'font-extrabold text-gray-800 dark:text-white' : 'font-semibold text-gray-600 dark:text-gray-300'}
                                 text-md md:text-lg`

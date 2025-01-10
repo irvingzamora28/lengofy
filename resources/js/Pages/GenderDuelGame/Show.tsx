@@ -123,6 +123,14 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     console.log("Game status: ", data.status);
                     console.log("Game status: ", data.data.status);
 
+                    // If the game is about to start
+                    if (data.data.current_round === 0 && data.data.status === 'in_progress') {
+                        console.log("Game is about to start!");
+                        setLastAnswer(null);
+                        setFeedbackMessage('');
+                        setShowExitConfirmation(false);
+                    }
+
                     if (data.data.status === 'completed' && data.data.winner) {
                         setFeedbackMessage(`${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
                         handleGameCompletion(data.data);
@@ -135,10 +143,14 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     break;
 
                 case 'answer_submitted':
-                    const { player_name, correct } = data.data;
+                    const { player_name, correct, userId, answer } = data.data;
+                    console.log("answer_submitted: ", data);
+
                     setLastAnswer({
+                        user_id: userId,
                         player_name,
-                        correct
+                        correct,
+                        answer
                     });
                     break;
 
@@ -289,9 +301,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                 type: 'restart_gender_duel_game',
                 genderDuelGameId: genderDuelGameState.id,
             }));
-            setLastAnswer(null);
-            setFeedbackMessage('');
-            setShowExitConfirmation(false);
         }
     };
 
@@ -341,6 +350,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                             players={genderDuelGameState.players}
                             difficulty={auth.user.gender_duel_difficulty || 'medium'}
                             isHost={hostId === auth.user.id} // Pass host information
+                            userId={auth.user.id}
                             currentRound={genderDuelGameState.current_round} // zero-based
                             onRestart={onRestart}
                         />

@@ -1,7 +1,8 @@
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
-import { FaTrophy, FaHourglassHalf } from 'react-icons/fa';
+import { FaTrophy, FaHourglassHalf, FaInfoCircle } from 'react-icons/fa';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { useEffect, useRef, useState } from 'react';
+import CircularTimer from '../Games/CircularTimer';
+import { useEffect, useState } from 'react';
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +22,7 @@ interface GameAreaProps {
     difficulty: 'easy' | 'medium' | 'hard';
     isHost: boolean;
     onRestart: () => void;
+    userId: number;
 }
 
 const DIFFICULTY_TIMES = {
@@ -41,8 +43,6 @@ const renderLastAnswer = (lastAnswer: any) => {
     );
 };
 
-import { FaChartBar, FaInfoCircle } from 'react-icons/fa';
-import CircularTimer from '../Games/CircularTimer';
 
 const renderFeedback = (message: string) => {
     if (!message) return null;
@@ -86,6 +86,7 @@ const GameArea = ({
     players,
     difficulty,
     isHost,
+    userId,
     onRestart
 }: GameAreaProps) => {
     const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
@@ -211,12 +212,12 @@ const GameArea = ({
                             {lastAnswer.correct ? (
                                 <div className="flex items-center gap-2">
                                     <AiOutlineCheckCircle className="inline-block" />
-                                    {lastAnswer.player_name} got it right!
+                                    {lastAnswer.user_id === userId ? "You" : lastAnswer.player_name} got it right!
                                 </div>
                             ) : (
                                 <div className="flex items-center gap-2">
                                     <AiOutlineCloseCircle className="inline-block" />
-                                    {lastAnswer.player_name ? `${lastAnswer.player_name} got it wrong!` : 'Time\'s up!'}
+                                    {lastAnswer.answer === 'timeout' ? 'Time\'s up!' : `${lastAnswer.user_id === userId ? "You" : lastAnswer.player_name} got it wrong!`}
                                 </div>
                             )}
                         </div>
@@ -265,9 +266,9 @@ const GameArea = ({
                         </div>
 
                         {/* Fixed height space for feedback */}
-                        <div className="flex-1 min-h-[100px] flex flex-col justify-center">
+                        {/* <div className="flex-1 min-h-[100px] flex flex-col justify-center">
                             {renderLastAnswer(lastAnswer)}
-                        </div>
+                        </div> */}
 
 
                         {/* Feedback messages below buttons */}
