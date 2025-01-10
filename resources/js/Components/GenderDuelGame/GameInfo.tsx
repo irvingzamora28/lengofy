@@ -43,7 +43,7 @@ export default function GameInfo({ languageName, currentRound, totalRounds, stat
                 {status === 'in_progress' && (
                     <>
                         <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200">
-                            {trans('gender_duel.round')} {currentRound}/{totalRounds}
+                            {trans('gender_duel.round')} {currentRound+1}/{totalRounds}
                         </span>
                         {category && (
                             <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200">{trans('gender_duel.category')}: {trans('categories.' + category.key)}</span>
