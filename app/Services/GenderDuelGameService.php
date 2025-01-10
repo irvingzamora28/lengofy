@@ -10,16 +10,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use App\Services\WebSocketService;
 
 class GenderDuelGameService
 {
     private const POINTS_CORRECT = 10;
     private const POINTS_INCORRECT = -5;
 
-    public function __construct(
-        private WebSocketService $webSocketService
-    ) {
+    public function __construct()
+    {
     }
 
     public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty, string $category): GenderDuelGame
@@ -37,7 +35,6 @@ class GenderDuelGameService
 
             $this->addPlayer($genderDuelGame, $user);
             $genderDuelGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
-            $this->webSocketService->broadcastGameCreated($genderDuelGame);
 
             return $genderDuelGame;
         });
@@ -99,10 +96,28 @@ class GenderDuelGameService
     private function endGame(GenderDuelGame $genderDuelGame): void
     {
         $genderDuelGame->update(['status' => GenderDuelGameStatus::ENDED]);
-        $this->webSocketService->broadcastGameEnded($genderDuelGame);
     }
 
-    public function leaveGame(GenderDuelGame $genderDuelGame, User $user): void
+    public function leaveGame(GenderDuelGame $genderDuelGame, User $user): bool
+    {
+        // Logic for a user leaving the game
+        $this->removePlayer($genderDuelGame, $user);
+
+        // Check if the game should end
+        if ($genderDuelGame->players()->count() === 0) {
+            $this->endGame($genderDuelGame);
+            return true; // Game has ended
+        }
+        // If game was in progress and not enough players, end it
+        else if ($genderDuelGame->status === GenderDuelGameStatus::IN_PROGRESS && $genderDuelGame->players()->count() < 2) {
+            $this->endGame($genderDuelGame);
+            return true; // Game has ended
+        }
+
+        return false; // Game is still ongoing
+    }
+
+    private function removePlayer(GenderDuelGame $genderDuelGame, User $user): void
     {
         Log::info('Player leaving game', [
             'game_id' => $genderDuelGame->id,
@@ -123,14 +138,6 @@ class GenderDuelGameService
         $playerId = $player->id;
         $player->delete();
 
-        // If this was the last player, end the game
-        if ($genderDuelGame->players()->count() === 0) {
-            $this->endGame($genderDuelGame);
-        }
-        // If game was in progress and not enough players, end it
-        else if ($genderDuelGame->status === GenderDuelGameStatus::IN_PROGRESS && $genderDuelGame->players()->count() < 2) {
-            $this->endGame($genderDuelGame);
-        }
     }
 
     public function getGameWords(GenderDuelGame $genderDuelGame): array

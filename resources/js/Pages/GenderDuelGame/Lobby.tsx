@@ -55,8 +55,8 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
         console.log('New game created:', data.game);
         setGames(prevGames => [...prevGames, data.game]);
       } else if (data.type === 'gender-duel-game-ended') {
-        console.log('Game ended:', data.gameId);
-        setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
+        console.log('Game ended:', data);
+        setGames(prevGames => prevGames.filter(game => game.id !== data.genderDuelGameId));
       }
     };
 

@@ -14,9 +14,10 @@ interface Props extends PageProps {
     auth: any;
     gender_duel_game: GenderDuelGame;
     wsEndpoint: string;
+    justCreated: boolean;
 }
 
-export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
+export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }: Props) {
     const [genderDuelGameState, setGenderDuelGameState] = useState(gender_duel_game);
     const [lastAnswer, setLastAnswer] = useState<any>(null);
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -33,6 +34,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
         wsRef.current = ws;
 
         ws.onopen = () => {
+            // Join the game room
             ws.send(JSON.stringify({
                 type: 'join_gender_duel_game',
                 genderDuelGameId: gender_duel_game.id,
@@ -43,6 +45,33 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
                     players: gender_duel_game.players
                 }
             }));
+
+            // If this is a newly created game, broadcast it to the lobby
+            if (justCreated) {
+                ws.send(JSON.stringify({
+                    type: 'gender-duel-game-created',
+                    genderDuelGameId: gender_duel_game.id,
+                    game: {
+                        id: gender_duel_game.id,
+                        players: gender_duel_game.players,
+                        max_players: gender_duel_game.max_players,
+                        language_name: gender_duel_game.language_name,
+                        source_language: {
+                            id: gender_duel_game.source_language?.id,
+                            code: gender_duel_game.source_language?.code,
+                            name: gender_duel_game.source_language?.name,
+                            flag: gender_duel_game.source_language?.flag,
+                        },
+                        target_language: {
+                            id: gender_duel_game.target_language?.id,
+                            code: gender_duel_game.target_language?.code,
+                            name: gender_duel_game.target_language?.name,
+                            flag: gender_duel_game.target_language?.flag,
+                        },
+                    }
+                }));
+            }
+
             if (gender_duel_game.max_players === 1) {
                 ws.send(JSON.stringify({
                     type: 'player_ready',
@@ -142,6 +171,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint }: Props) {
 
         return () => {
             if (ws.readyState === WebSocket.OPEN) {
+                // Client will disconnect and will trigger "gender-duel-game-ended" if it was the last player
                 ws.close();
             }
         };

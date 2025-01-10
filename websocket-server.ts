@@ -26,10 +26,13 @@ interface GenderDuelGameMessage {
         | "player_ready"
         | "start_gender_duel_game"
         | "restart_gender_duel_game"
-        | "join_lobby";
+        | "join_lobby"
+        | "gender-duel-game-created"
+        | "gender-duel-game-ended";
     genderDuelGameId: string;
     userId?: string;
     data?: any;
+    game?: any;
 }
 
 // Store active game rooms and their states
@@ -40,14 +43,6 @@ const lobbyConnections = new Set<WebSocket>();
 const serverConfig = {
     port: 6001,
     fetch(req, server) {
-        // Handle HTTP POST requests for broadcasting
-        if (
-            req.method === "POST" &&
-            new URL(req.url).pathname === "/broadcast"
-        ) {
-            return handleBroadcast(req);
-        }
-
         // Upgrade WebSocket connections
         if (server.upgrade(req)) {
             return; // Return if upgrade was successful
@@ -75,6 +70,21 @@ const serverConfig = {
                                 lobbyConnections.size
                             );
                         }
+                        break;
+
+                    case "gender-duel-game-created":
+                        // Broadcast the new game to all lobby connections
+                        broadcastToLobby({
+                            type: "gender-duel-game-created",
+                            game: data.game
+                        });
+                        break;
+                    case "gender-duel-game-ended":
+                        // Broadcast the new game to all lobby connections
+                        broadcastToLobby({
+                            type: "gender-duel-game-ended",
+                            genderDuelGameId: data.genderDuelGameId
+                        });
                         break;
 
                     case "join_gender_duel_game":
@@ -453,7 +463,7 @@ const serverConfig = {
                         );
                         broadcastToLobby({
                             type: "gender-duel-game-ended",
-                            gameId,
+                            genderDuelGameId: gameId,
                         });
                     }
                     break;
@@ -485,21 +495,6 @@ function broadcastToLobby(data: any) {
             client.send(JSON.stringify(data));
         }
     });
-}
-
-// Handle broadcast requests from the Laravel backend
-async function handleBroadcast(req: Request) {
-    try {
-        const data = await req.json();
-        console.log("Received broadcast request:", data);
-
-        broadcastToLobby(data);
-
-        return new Response("Broadcast sent successfully", { status: 200 });
-    } catch (error) {
-        console.error("Error handling broadcast:", error);
-        return new Response("Error processing broadcast", { status: 500 });
-    }
 }
 
 console.log(

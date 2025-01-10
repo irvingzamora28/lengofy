@@ -71,10 +71,13 @@ class GenderDuelGameController extends Controller
             $validated['difficulty'],
             $validated['category'],
         );
-        return redirect()->route('games.gender-duel.show', ['genderDuelGame' => $genderDuelGame]);
+        return redirect()->route('games.gender-duel.show', [
+            'genderDuelGame' => $genderDuelGame,
+            'justCreated' => true
+        ]);
     }
 
-    public function show(GenderDuelGame $genderDuelGame)
+    public function show(GenderDuelGame $genderDuelGame, Request $request)
     {
         // Load genderDuelGame data with relationships
         $genderDuelGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
@@ -86,6 +89,7 @@ class GenderDuelGameController extends Controller
         $genderDuelGame->refresh();
 
         return Inertia::render('GenderDuelGame/Show', [
+            'justCreated' => $request->boolean('justCreated', false),
             'gender_duel_game' => [
                 'id' => $genderDuelGame->id,
                 'status' => $genderDuelGame->status,
@@ -101,6 +105,18 @@ class GenderDuelGameController extends Controller
                 'total_rounds' => $genderDuelGame->total_rounds,
                 'difficulty' => $genderDuelGame->difficulty ?? 'medium',
                 'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
+                'source_language' => [
+                    'id' => $genderDuelGame->languagePair->sourceLanguage->id,
+                    'code' => $genderDuelGame->languagePair->sourceLanguage->code,
+                    'name' => $genderDuelGame->languagePair->sourceLanguage->name,
+                    'flag' => $this->languageService->getFlag($genderDuelGame->languagePair->sourceLanguage->code),
+                ],
+                'target_language' => [
+                    'id' => $genderDuelGame->languagePair->targetLanguage->id,
+                    'code' => $genderDuelGame->languagePair->targetLanguage->code,
+                    'name' => $genderDuelGame->languagePair->targetLanguage->name,
+                    'flag' => $this->languageService->getFlag($genderDuelGame->languagePair->targetLanguage->code),
+                ],
                 'words' => $words,
                 'hostId' => $genderDuelGame->creator_id,
                 'category' => $genderDuelGame->category_id === 0
