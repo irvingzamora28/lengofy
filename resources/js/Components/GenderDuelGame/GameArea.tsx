@@ -163,7 +163,7 @@ const GameArea = ({
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
 
-        if (status === 'in_progress' && currentWord && isHost && !countdownType) {
+        if (status === 'in_progress' && currentWord && !countdownType) {
             timer = setInterval(() => {
                 setTimeLeft((prevTime) => {
                     if (prevTime <= 1) {
@@ -184,7 +184,7 @@ const GameArea = ({
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [status, currentWord, difficulty, isHost, timeoutProcessed, onAnswer, countdownType, currentRound, totalRounds]);
+    }, [status, currentWord, difficulty, timeoutProcessed, onAnswer, countdownType, currentRound, totalRounds]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
