@@ -76,7 +76,7 @@ const renderFeedback = (message: string) => {
 const GameArea = ({
     status,
     currentWord,
-    currentRound,
+    currentRound = 0,
     totalRounds,
     lastAnswer,
     feedbackMessage,
@@ -91,8 +91,8 @@ const GameArea = ({
     const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
     const [timeoutProcessed, setTimeoutProcessed] = useState<boolean>(false);
     const [shake, setShake] = useState(false);
-    const [showCountdown, setShowCountdown] = useState(false);
     const [countdown, setCountdown] = useState(3);
+    const [countdownType, setCountdownType] = useState<'start' | 'restart' | 'next' | null>(null);
     const { t: trans } = useTranslation();
 
     const handleAnswer = (answer: string) => {
@@ -100,37 +100,51 @@ const GameArea = ({
         if (isCorrect) {
             const audio = new Audio(correctSound);
             audio.play();
-            onAnswer(answer); // Call onAnswer for correct answer
-            setTimeLeft(DIFFICULTY_TIMES[difficulty]); // Reset timer only on correct answer
+            onAnswer(answer);
         } else {
             const audio = new Audio(incorrectSound);
             audio.play();
             setShake(true);
-            setTimeout(() => setShake(false), 500); // Reset shake after 500ms
-            // Timer remains unchanged for incorrect answers, allowing continuous gameplay
+            setTimeout(() => setShake(false), 500);
         }
     };
 
     const handleRestart = () => {
-        setShowCountdown(true);
-        setCountdown(3);
+        onRestart();
     };
 
+    // Handle initial game start
+    useEffect(() => {
+        if (status === 'in_progress' && !countdownType && !lastAnswer) {
+            setCountdown(3);
+            setCountdownType('start');
+        }
+    }, [status]);
+
+    // Handle word changes during game
+    useEffect(() => {
+        if (status === 'in_progress' && (lastAnswer || timeoutProcessed) && currentWord) {
+            setCountdown(3);
+            // Check if it's the last word
+            const isLastWord = (currentRound+1) === totalRounds;
+            setCountdownType(isLastWord ? 'restart' : 'next');
+            setTimeoutProcessed(false);
+        }
+    }, [currentWord, lastAnswer, timeoutProcessed, currentRound, totalRounds]);
+
+    // Countdown timer effect
     useEffect(() => {
         let countdownInterval: NodeJS.Timeout | undefined;
 
-        if (showCountdown && countdown > 0) {
+        if (countdownType && countdown > 0) {
             countdownInterval = setInterval(() => {
                 setCountdown((prev) => {
                     if (prev <= 1) {
-                        setShowCountdown(false);
-                        onRestart(); // Start the game immediately
-                        console.log('Game restarted (GameArea) after countdown');
-                        console.log("status:", status);
-                        console.log("currentWord:", currentWord);
-
-
-                        return 3; // Reset countdown
+                        setCountdownType(null);
+                        if (countdownType === 'next') {
+                            setTimeLeft(DIFFICULTY_TIMES[difficulty]); // Reset game timer after next word countdown
+                        }
+                        return 3;
                     }
                     return prev - 1;
                 });
@@ -142,25 +156,24 @@ const GameArea = ({
                 clearInterval(countdownInterval);
             }
         };
-    }, [showCountdown, countdown, onRestart]);
+    }, [countdown, countdownType, difficulty]);
 
+    // Game timer effect
     useEffect(() => {
         let timer: NodeJS.Timeout | null = null;
 
-        if (status === 'in_progress' && currentWord && isHost) {
-            // Reset timer when word changes or game restarts
-            setTimeLeft(DIFFICULTY_TIMES[difficulty]);
-            setTimeoutProcessed(false); // Reset the timeout processed flag
-
+        if (status === 'in_progress' && currentWord && isHost && !countdownType) {
             timer = setInterval(() => {
                 setTimeLeft((prevTime) => {
                     if (prevTime <= 1) {
-                        // Time's up - send an empty answer to indicate timeout
                         if (!timeoutProcessed) {
                             onAnswer('timeout');
-                            setTimeoutProcessed(true); // Mark timeout as processed
+                            setTimeoutProcessed(true);
+                            setCountdown(3);
+                            const isLastWord = (currentRound+1) === totalRounds;
+                            setCountdownType(isLastWord ? 'restart' : 'next');
                         }
-                        return DIFFICULTY_TIMES[difficulty]; // Reset timer
+                        return DIFFICULTY_TIMES[difficulty];
                     }
                     return prevTime - 1;
                 });
@@ -170,7 +183,7 @@ const GameArea = ({
         return () => {
             if (timer) clearInterval(timer);
         };
-    }, [status, currentWord, difficulty, isHost, timeoutProcessed, onAnswer]);
+    }, [status, currentWord, difficulty, isHost, timeoutProcessed, onAnswer, countdownType, currentRound, totalRounds]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
@@ -188,6 +201,32 @@ const GameArea = ({
                             {trans('gender_duel.i_am_ready')}
                         </PrimaryButton>
                     )}
+                </div>
+            ) : countdownType ? (
+                <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+                    {countdownType === 'next' && lastAnswer && (
+                        <div className={`text-2xl font-bold ${
+                            lastAnswer.correct ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                        }`}>
+                            {lastAnswer.correct ? (
+                                <div className="flex items-center gap-2">
+                                    <AiOutlineCheckCircle className="inline-block" />
+                                    {lastAnswer.player_name} got it right!
+                                </div>
+                            ) : (
+                                <div className="flex items-center gap-2">
+                                    <AiOutlineCloseCircle className="inline-block" />
+                                    {lastAnswer.player_name ? `${lastAnswer.player_name} got it wrong!` : 'Time\'s up!'}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    <div className="text-7xl font-bold text-indigo-600 dark:text-indigo-400 animate-pulse">
+                        {countdown}
+                    </div>
+                    <div className="text-xl text-gray-700 dark:text-gray-300">
+                        {countdownType === 'next' ? 'Next word in...' : 'Game starting in...'}
+                    </div>
                 </div>
             ) : status === 'in_progress' && currentWord ? (
                 <div className={`flex-1 flex flex-col h-full text-center ${shake ? 'animate-shake' : ''}`}>
@@ -262,7 +301,7 @@ const GameArea = ({
                 </div>
             ) : null}
 
-            {showCountdown && (
+            {countdownType && (countdownType === 'start' || countdownType === 'restart') && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow">
                         <h2 className="text-4xl font-bold">{trans('gender_duel.starting_in')} {countdown}...</h2>
