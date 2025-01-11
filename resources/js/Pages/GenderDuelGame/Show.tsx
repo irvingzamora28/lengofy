@@ -27,7 +27,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
     // Determine the host player
     const hostId = genderDuelGameState.hostId;
-    console.log("Show hostId:", hostId);
 
     useEffect(() => {
         const ws = new WebSocket(wsEndpoint);
@@ -101,7 +100,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                             newState.players.every(player => player.is_ready));
 
                         if (allReady && newState.status === 'waiting') {
-                            console.log('All players are ready');
 
                             ws.send(JSON.stringify({
                                 type: 'start_gender_duel_game',
@@ -119,13 +117,9 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                         ...data.data,
                         players: data.data.players || prev.players
                     }));
-                    console.log("gender_duel_game_state_updated: ", data);
-                    console.log("Game status: ", data.status);
-                    console.log("Game status: ", data.data.status);
 
                     // If the game is about to start
                     if (data.data.current_round === 0 && data.data.status === 'in_progress') {
-                        console.log("Game is about to start!");
                         setLastAnswer(null);
                         setFeedbackMessage('');
                         setShowExitConfirmation(false);
@@ -144,7 +138,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
                 case 'answer_submitted':
                     const { player_name, correct, userId, answer } = data.data;
-                    console.log("answer_submitted: ", data);
 
                     setLastAnswer({
                         user_id: userId,
@@ -190,14 +183,11 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
     }, [gender_duel_game.id]);
 
     useEffect(() => {
-        console.log("lastAnswer: ", lastAnswer);
-        console.log("feedbackMessage: ", feedbackMessage);
 
     }, [lastAnswer, feedbackMessage]);
 
     // Function to handle game completion
     const handleGameCompletion = async (data: GenderDuelGameState) => {
-        console.log("handleGameCompletion data: ", data);
         const currentPlayer = data.players.find(player => player.user_id === auth.user.id);
         if (!currentPlayer) return;
 
@@ -222,7 +212,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
         try {
             const response = await axios.post('/scores/update', scoreData);
-            console.log('Score updated successfully');
 
             // Save updated scores to localStorage
             localStorage.setItem(`genderDuelScores_${auth.user.id}`, JSON.stringify({
@@ -294,7 +283,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
     const onRestart = () => {
         if (genderDuelGameState.status === 'completed') {
-            console.log("Send restart message to WebSocket server");
 
             // Send restart message to WebSocket server
             wsRef.current?.send(JSON.stringify({
@@ -305,7 +293,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
     };
 
     useEffect(() => {
-        console.log("Show: genderDuelGameState:", genderDuelGameState);
     }, [genderDuelGameState]);
 
     const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);
