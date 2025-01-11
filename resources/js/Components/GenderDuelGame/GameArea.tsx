@@ -31,18 +31,6 @@ const DIFFICULTY_TIMES = {
     hard: 1
 };
 
-const renderLastAnswer = (lastAnswer: any) => {
-    if (!lastAnswer) return null;
-    return (
-        <div className={`mt-6 flex items-center justify-center gap-3 text-lg md:text-xl font-bold animate-fade-in ${
-            lastAnswer.correct ? 'text-green-500 dark:text-green-400' : 'text-red-500 dark:text-red-400'
-        }`}>
-            {lastAnswer.correct ? <AiOutlineCheckCircle size={28}/> : <AiOutlineCloseCircle size={28}/>}
-            <strong>{lastAnswer.player_name}</strong> {lastAnswer.correct ? 'nailed it!' : 'missed this one'}
-        </div>
-    );
-};
-
 
 const renderFeedback = (message: string) => {
     if (!message) return null;
@@ -264,11 +252,6 @@ const GameArea = ({
                                 ))}
                             </div>
                         </div>
-
-                        {/* Fixed height space for feedback */}
-                        {/* <div className="flex-1 min-h-[100px] flex flex-col justify-center">
-                            {renderLastAnswer(lastAnswer)}
-                        </div> */}
 
 
                         {/* Feedback messages below buttons */}
