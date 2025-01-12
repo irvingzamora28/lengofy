@@ -21,10 +21,10 @@ interface GenderDuelGameRoom {
 interface GenderDuelGameMessage {
     type:
         | "join_gender_duel_game"
+        | "start_gender_duel_game"
         | "submit_answer"
         | "gender_duel_game_state_update"
         | "player_ready"
-        | "start_gender_duel_game"
         | "restart_gender_duel_game"
         | "join_lobby"
         | "gender-duel-game-created"
@@ -32,13 +32,65 @@ interface GenderDuelGameMessage {
     genderDuelGameId: string;
     userId?: string;
     data?: any;
-    game?: any;
-}
+};
 
 // Store active game rooms and their states
 const genderDuelGameRooms = new Map<string, Set<WebSocket>>();
 const genderDuelGameStates = new Map<string, GenderDuelGameState>();
 const lobbyConnections = new Set<WebSocket>();
+
+// Store timeout flags and transition timers for each game
+const timeoutFlags = new Map<string, Set<number>>();
+const transitionTimers = new Map<string, Map<number, NodeJS.Timeout>>();
+
+// Helper function to clean up game resources
+const cleanupGame = (gameId: string) => {
+    console.log("Cleaning up game resources for", gameId);
+    // Only remove timeouts and reset game state, don't remove the game room
+    if (timeoutFlags.has(gameId)) {
+        timeoutFlags.get(gameId)?.clear();
+    }
+}
+
+const cleanupGameCompletely = (gameId: string) => {
+    console.log("Completely cleaning up game", gameId);
+    // Remove all game resources when all players have left
+    genderDuelGameRooms.delete(gameId);
+    genderDuelGameStates.delete(gameId);
+    timeoutFlags.delete(gameId);
+}
+
+// Helper function to clean up player resources
+const cleanupPlayer = (ws: WebSocket) => {
+    // Remove from lobby
+    lobbyConnections.delete(ws);
+
+    // Find and remove the client from any game rooms they're in
+    for (const [gameId, room] of genderDuelGameRooms.entries()) {
+        if (room.has(ws)) {
+            room.delete(ws);
+            console.log(`Removed client from game ${gameId}, ${room.size} players remaining`);
+
+            // Only cleanup completely if all players have left
+            if (room.size === 0) {
+                cleanupGameCompletely(gameId);
+            } else {
+                // Update remaining players about the disconnection
+                const gameState = genderDuelGameStates.get(gameId);
+                if (gameState) {
+                    for (const client of room) {
+                        client.send(
+                            JSON.stringify({
+                                type: "gender_duel_game_state_updated",
+                                data: gameState,
+                            })
+                        );
+                    }
+                }
+            }
+        }
+    }
+};
 
 const serverConfig = {
     port: 6001,
@@ -190,37 +242,50 @@ const serverConfig = {
                         break;
 
                     case "restart_gender_duel_game":
-                        const restartGameState = genderDuelGameStates.get(
-                            data.genderDuelGameId
-                        );
-                        if (restartGameState) {
-                            restartGameState.status = "waiting";
-                            restartGameState.current_round = 0; // Reset to the first round (zero-based)
-                            restartGameState.players.forEach((player) => {
-                                player.score = 0;
-                            });
-                            // Notify all players in the game room about the updated game state
-                            gameRoom.forEach((client) => {
+                        console.log("Received restart request", data);
+                        if (gameRoom) {
+                            console.log("Found game room, cleaning up old game state");
+                            // Only clean up game state, not the room
+                            cleanupGame(data.genderDuelGameId);
+
+                            // Initialize new game state
+                            const newGameState: GenderDuelGameState = {
+                                id: data.genderDuelGameId,
+                                status: "waiting",
+                                current_round: 0,
+                                current_word: null,
+                                words: data.data.words,
+                                players: data.data.players.map((p: any) => ({ ...p, score: 0, is_ready: false })),
+                                language_name: data.data.language_name,
+                                total_rounds: data.data.total_rounds,
+                                category: data.data.category,
+                                hostId: data.data.hostId,
+                                last_answer: null
+                            };
+                            genderDuelGameStates.set(data.genderDuelGameId, newGameState);
+                            console.log("Created new game state", newGameState);
+
+                            // Reset timeout flags for this game
+                            if (timeoutFlags.has(data.genderDuelGameId)) {
+                                timeoutFlags.get(data.genderDuelGameId)?.clear();
+                            }
+
+                            // Broadcast new game state to all clients
+                            console.log("Broadcasting to clients", gameRoom.size);
+                            for (const client of gameRoom) {
                                 client.send(
                                     JSON.stringify({
                                         type: "gender_duel_game_state_updated",
-                                        genderDuelGameId:
-                                            data.genderDuelGameId,
-                                        // Append to data current_word
-                                        data: {
-                                            ...restartGameState,
-                                            current_word:
-                                                restartGameState.words[
-                                                    restartGameState.current_round
-                                                ],
-                                        },
+                                        data: newGameState,
                                     })
                                 );
-                            });
+                            }
+                        } else {
+                            console.log("Game room not found for restart", data.genderDuelGameId);
                         }
                         break;
 
-                    case "submit_answer":
+                    case "submit_answer": {
                         console.log("Answer submitted:", data);
                         const answerGameRoom = genderDuelGameRooms.get(
                             data.genderDuelGameId
@@ -264,15 +329,29 @@ const serverConfig = {
                             return;
                         }
 
+                        // For timeouts, check if this round was already handled
+                        if (isTimeout) {
+                            if (!timeoutFlags.has(data.genderDuelGameId)) {
+                                timeoutFlags.set(data.genderDuelGameId, new Set());
+                            }
+                            const gameTimeouts = timeoutFlags.get(data.genderDuelGameId)!;
+
+                            if (gameTimeouts.has(currentGameState.current_round)) {
+                                console.log("Timeout already handled for this round");
+                                return;
+                            }
+
+                            gameTimeouts.add(currentGameState.current_round);
+                        }
+
                         // Update player score only if the answer is correct (not timeout)
                         if (isCorrect) {
                             answeringPlayer.score =
                                 (answeringPlayer.score || 0) + 1;
                         }
 
-                        // Broadcast answer result and updated scores
+                        // First, send the answer result to all clients
                         for (const client of answerGameRoom) {
-                            // Send answer_submitted event regardless of correctness
                             client.send(
                                 JSON.stringify({
                                     type: "answer_submitted",
@@ -288,7 +367,7 @@ const serverConfig = {
                                 })
                             );
 
-                            // Send updated game state with new scores
+                            // Send updated scores immediately
                             client.send(
                                 JSON.stringify({
                                     type: "gender_duel_game_state_updated",
@@ -299,61 +378,101 @@ const serverConfig = {
                             );
                         }
 
-                        // Move to next round only if the answer was correct or if it was a timeout
-                        if (isCorrect || isTimeout) {
-                            if (
-                                currentGameState.current_round <
-                                currentGameState.words.length - 1
-                            ) {
-                                currentGameState.current_round += 1; // Move to the next round (still zero-based)
-                                const nextWord =
-                                    currentGameState.words[
-                                        currentGameState.current_round
-                                    ];
-                                console.log("Round: ", currentGameState.current_round);
-                                console.log("Broadcasting next word:", nextWord);
-                                // Broadcast the next word
-                                for (const client of answerGameRoom) {
-                                    client.send(
-                                        JSON.stringify({
-                                            type: "gender_duel_game_state_updated",
-                                            data: {
-                                                current_word: nextWord,
-                                                current_round:
-                                                    currentGameState.current_round, // zero-based
-                                            },
-                                        })
-                                    );
-                                }
-                            } else {
-                                console.log("Game is finished");
+                        // Check if it's the last round
+                        const isLastRound = currentGameState.current_round === currentGameState.words.length - 1;
 
-                                // Game is finished
+                        // Create transition timer
+                        if (!transitionTimers.has(data.genderDuelGameId)) {
+                            transitionTimers.set(data.genderDuelGameId, new Map());
+                        }
+                        const gameTimers = transitionTimers.get(data.genderDuelGameId)!;
+
+                        // Clear any existing timer for this round
+                        const existingTimer = gameTimers.get(currentGameState.current_round);
+                        if (existingTimer) {
+                            clearTimeout(existingTimer);
+                        }
+
+                        // Set new transition timer
+                        const transitionTimer = setTimeout(() => {
+                            if (isLastRound) {
+                                // End the game
                                 currentGameState.status = "completed";
-
-                                // Sort players by score to determine winner
-                                const sortedPlayers = [
-                                    ...currentGameState.players,
-                                ].sort(
-                                    (a, b) => (b.score || 0) - (a.score || 0)
+                                const winner = currentGameState.players.reduce((prev, current) =>
+                                    (current.score || 0) > (prev.score || 0) ? current : prev
                                 );
 
-                                // Broadcast game completion to all players
+                                // Send final game state
                                 for (const client of answerGameRoom) {
                                     client.send(
                                         JSON.stringify({
                                             type: "gender_duel_game_state_updated",
                                             data: {
+                                                players: currentGameState.players,
                                                 status: "completed",
-                                                players: sortedPlayers,
-                                                winner: sortedPlayers[0],
+                                                winner,
+                                                current_round: currentGameState.current_round,
                                             },
                                         })
                                     );
                                 }
+
+                                // Clean up game resources
+                                cleanupGame(data.genderDuelGameId);
+                            } else {
+                                // Move to next round
+                                const nextRound = currentGameState.current_round + 1;
+                                console.log(`Moving from round ${currentGameState.current_round} to ${nextRound}`);
+                                currentGameState.current_round = nextRound;
+
+                                // Clear the last answer state first
+                                for (const client of answerGameRoom) {
+                                    client.send(
+                                        JSON.stringify({
+                                            type: "answer_submitted",
+                                            data: null
+                                        })
+                                    );
+                                }
+
+                                // Then send the new round state
+                                for (const client of answerGameRoom) {
+                                    client.send(
+                                        JSON.stringify({
+                                            type: "gender_duel_game_state_updated",
+                                            data: {
+                                                players: currentGameState.players,
+                                                current_round: currentGameState.current_round,
+                                                current_word: currentGameState.words[currentGameState.current_round],
+                                                status: "in_progress"
+                                            },
+                                        })
+                                    );
+                                }
+
+                                // Clear the timeout flag for the previous round
+                                if (isTimeout) {
+                                    const gameTimeouts = timeoutFlags.get(data.genderDuelGameId);
+                                    if (gameTimeouts) {
+                                        gameTimeouts.delete(currentGameState.current_round - 1);
+                                        if (gameTimeouts.size === 0) {
+                                            timeoutFlags.delete(data.genderDuelGameId);
+                                        }
+                                    }
+                                }
                             }
-                        }
+
+                            // Clear the transition timer
+                            gameTimers.delete(currentGameState.current_round);
+                            if (gameTimers.size === 0) {
+                                transitionTimers.delete(data.genderDuelGameId);
+                            }
+                        }, 3000);
+
+                        // Store the transition timer
+                        gameTimers.set(currentGameState.current_round, transitionTimer);
                         break;
+                    }
 
                     case "gender_duel_game_state_update":
                         if (gameRoom) {
@@ -387,52 +506,8 @@ const serverConfig = {
             }
         },
         close(ws: WebSocket) {
-            // Handle client disconnection
             console.log("Client disconnected");
-
-            // Find and remove client from their game room
-            for (const [gameId, clients] of genderDuelGameRooms.entries()) {
-                if (clients.has(ws)) {
-                    clients.delete(ws);
-                    console.log(`Player left game ${gameId}`);
-
-                    // Get current game state
-                    const gameState = genderDuelGameStates.get(gameId);
-                    if (gameState && gameState.players) {
-                        // Remove the disconnected player
-                        const updatedPlayers = gameState.players.filter(
-                            (player) => player.user_id !== Number(ws.id)
-                        );
-                        gameState.players = updatedPlayers;
-
-                        // Broadcast updated player list to remaining clients
-                        for (const client of clients) {
-                            client.send(
-                                JSON.stringify({
-                                    type: "gender_duel_game_state_updated",
-                                    data: {
-                                        players: updatedPlayers,
-                                    },
-                                })
-                            );
-                        }
-                    }
-
-                    // If no players left, clean up the game room
-                    if (clients.size === 0) {
-                        genderDuelGameRooms.delete(gameId);
-                        genderDuelGameStates.delete(gameId);
-                        console.log(
-                            `Game ${gameId} cleaned up - no players remaining`
-                        );
-                        broadcastToLobby({
-                            type: "gender-duel-game-ended",
-                            genderDuelGameId: gameId,
-                        });
-                    }
-                    break;
-                }
-            }
+            cleanupPlayer(ws);
         },
     },
     ...(isLocal ? {} : {

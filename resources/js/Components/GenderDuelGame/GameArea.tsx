@@ -121,25 +121,36 @@ const GameArea = ({
     }, [status]);
 
     useEffect(() => {
-        if (status === 'in_progress' && (lastAnswer || isRoundTimedOut) && currentWord) {
-            setTransitionCountdown(3);
-            const isLastWord = (currentRound + 1) === totalRounds;
-            setTransitionType(isLastWord ? null : 'next_word');
+        // Reset round time when a new word is received
+        if (status === 'in_progress' && currentWord && !transitionType) {
+            console.log(`Starting round ${currentRound} with word: ${currentWord.word}`);
+            setRoundTimeRemaining(DIFFICULTY_TIMES[difficulty]);
             setIsRoundTimedOut(false);
         }
-    }, [currentWord, lastAnswer, isRoundTimedOut, currentRound, totalRounds]);
+    }, [currentWord, status, difficulty, transitionType, currentRound]);
+
+    useEffect(() => {
+        if (status === 'in_progress' && lastAnswer) {
+            console.log(`Round ${currentRound} ended with answer:`, lastAnswer);
+            // Only start transition when we receive an answer
+            setTransitionCountdown(3);
+            setTransitionType('next_word');
+            // Clear any existing round timer
+            setRoundTimeRemaining(DIFFICULTY_TIMES[difficulty]);
+            setIsRoundTimedOut(false);
+        }
+    }, [lastAnswer, difficulty, currentRound]);
 
     useEffect(() => {
         let transitionInterval: NodeJS.Timeout | undefined;
 
         if (transitionType && transitionCountdown > 0) {
+            console.log(`Transition countdown: ${transitionCountdown}`);
             transitionInterval = setInterval(() => {
                 setTransitionCountdown((prev) => {
                     if (prev <= 1) {
+                        console.log('Transition complete');
                         setTransitionType(null);
-                        if (transitionType === 'next_word') {
-                            setRoundTimeRemaining(DIFFICULTY_TIMES[difficulty]);
-                        }
                         return 3;
                     }
                     return prev - 1;
@@ -152,23 +163,21 @@ const GameArea = ({
                 clearInterval(transitionInterval);
             }
         };
-    }, [transitionCountdown, transitionType, difficulty]);
+    }, [transitionCountdown, transitionType]);
 
     useEffect(() => {
         let roundTimer: NodeJS.Timeout | null = null;
 
-        if (status === 'in_progress' && currentWord && !transitionType) {
+        if (status === 'in_progress' && currentWord && !transitionType && !lastAnswer && !isRoundTimedOut) {
+            console.log(`Round timer: ${roundTimeRemaining}s remaining`);
             roundTimer = setInterval(() => {
                 setRoundTimeRemaining((prevTime) => {
                     if (prevTime <= 1) {
-                        if (!isRoundTimedOut) {
-                            onAnswer('timeout');
-                            setIsRoundTimedOut(true);
-                            setTransitionCountdown(3);
-                            const isLastWord = (currentRound + 1) === totalRounds;
-                            setTransitionType(isLastWord ? null : 'next_word');
-                        }
-                        return DIFFICULTY_TIMES[difficulty];
+                        console.log('Round timed out');
+                        onAnswer('timeout');
+                        setIsRoundTimedOut(true);
+                        clearInterval(roundTimer!);
+                        return 0;
                     }
                     return prevTime - 1;
                 });
@@ -176,9 +185,12 @@ const GameArea = ({
         }
 
         return () => {
-            if (roundTimer) clearInterval(roundTimer);
+            if (roundTimer) {
+                console.log('Clearing round timer');
+                clearInterval(roundTimer);
+            }
         };
-    }, [status, currentWord, difficulty, isRoundTimedOut, onAnswer, transitionType, currentRound, totalRounds]);
+    }, [status, currentWord, isRoundTimedOut, onAnswer, transitionType, lastAnswer, roundTimeRemaining]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
@@ -281,7 +293,7 @@ const GameArea = ({
                                 </div>
                             ))}
                     </div>
-                    <PrimaryButton onClick={handleRestart} className="mt-4">{trans('gender_duel.restart_game')}</PrimaryButton>
+                    {isHost && <PrimaryButton onClick={handleRestart} className="mt-4">{trans('gender_duel.restart_game')}</PrimaryButton>}
                 </div>
             ) : null}
 

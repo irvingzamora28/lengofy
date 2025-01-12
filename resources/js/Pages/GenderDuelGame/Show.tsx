@@ -112,11 +112,23 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     break;
 
                 case 'gender_duel_game_state_updated':
-                    setGenderDuelGameState(prev => ({
-                        ...prev,
-                        ...data.data,
-                        players: data.data.players || prev.players
-                    }));
+                    setGenderDuelGameState(prev => {
+                        // Ensure we don't skip rounds by validating the round transition
+                        const nextRound = data.data.current_round;
+                        if (typeof nextRound === 'number' && nextRound > prev.current_round + 1) {
+                            console.error(`Attempted to skip from round ${prev.current_round} to ${nextRound}`);
+                            return prev;
+                        }
+
+                        return {
+                            ...prev,
+                            ...data.data,
+                            // Keep existing players if not provided in update
+                            players: data.data.players || prev.players,
+                            // Ensure round transitions are sequential
+                            current_round: typeof nextRound === 'number' ? nextRound : prev.current_round
+                        };
+                    });
 
                     // If the game is about to start
                     if (data.data.current_round === 0 && data.data.status === 'in_progress') {
@@ -137,14 +149,14 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     break;
 
                 case 'answer_submitted':
-                    const { player_name, correct, userId, answer } = data.data;
+                    const { player_name, correct, userId, answer } = data.data || {};
 
-                    setLastAnswer({
+                    setLastAnswer(data.data ? {
                         user_id: userId,
                         player_name,
                         correct,
                         answer
-                    });
+                    } : null);
                     break;
 
                 case 'score_updated':
@@ -282,13 +294,23 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
     };
 
     const onRestart = () => {
-        if (genderDuelGameState.status === 'completed') {
-
-            // Send restart message to WebSocket server
-            wsRef.current?.send(JSON.stringify({
+        console.log("Restart requested");
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            console.log("WebSocket is open, sending restart message");
+            wsRef.current.send(JSON.stringify({
                 type: 'restart_gender_duel_game',
                 genderDuelGameId: genderDuelGameState.id,
+                data: {
+                    words: genderDuelGameState.words,
+                    players: genderDuelGameState.players,
+                    language_name: genderDuelGameState.language_name,
+                    total_rounds: genderDuelGameState.total_rounds,
+                    category: genderDuelGameState.category,
+                    hostId: genderDuelGameState.hostId
+                }
             }));
+        } else {
+            console.log("WebSocket is not open", wsRef.current?.readyState);
         }
     };
 
@@ -337,9 +359,9 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                             isCurrentPlayerReady={currentPlayer?.is_ready || false}
                             players={genderDuelGameState.players}
                             difficulty={auth.user.gender_duel_difficulty || 'medium'}
-                            isHost={hostId === auth.user.id} // Pass host information
+                            isHost={auth.user.id === genderDuelGameState.hostId}
                             userId={auth.user.id}
-                            currentRound={genderDuelGameState.current_round} // zero-based
+                            currentRound={genderDuelGameState.current_round}
                             onRestart={onRestart}
                         />
 
