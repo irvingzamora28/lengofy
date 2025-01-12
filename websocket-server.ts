@@ -190,36 +190,33 @@ const serverConfig = {
                         break;
 
                     case "restart_gender_duel_game":
-                        if (gameRoom) {
-                            // Reset game state
-                            const gameState = genderDuelGameStates.get(
-                                data.genderDuelGameId
-                            );
-                            if (gameState) {
-                                gameState.status = "in_progress";
-                                gameState.current_round = 0; // Reset to the first round (zero-based)
-                                gameState.players.forEach((player) => {
-                                    player.score = 0;
-                                });
-                                // Notify all players in the game room about the updated game state
-                                gameRoom.forEach((client) => {
-                                    client.send(
-                                        JSON.stringify({
-                                            type: "gender_duel_game_state_updated",
-                                            genderDuelGameId:
-                                                data.genderDuelGameId,
-                                            // Append to data current_word
-                                            data: {
-                                                ...gameState,
-                                                current_word:
-                                                    gameState.words[
-                                                        gameState.current_round
-                                                    ],
-                                            },
-                                        })
-                                    );
-                                });
-                            }
+                        const restartGameState = genderDuelGameStates.get(
+                            data.genderDuelGameId
+                        );
+                        if (restartGameState) {
+                            restartGameState.status = "waiting";
+                            restartGameState.current_round = 0; // Reset to the first round (zero-based)
+                            restartGameState.players.forEach((player) => {
+                                player.score = 0;
+                            });
+                            // Notify all players in the game room about the updated game state
+                            gameRoom.forEach((client) => {
+                                client.send(
+                                    JSON.stringify({
+                                        type: "gender_duel_game_state_updated",
+                                        genderDuelGameId:
+                                            data.genderDuelGameId,
+                                        // Append to data current_word
+                                        data: {
+                                            ...restartGameState,
+                                            current_word:
+                                                restartGameState.words[
+                                                    restartGameState.current_round
+                                                ],
+                                        },
+                                    })
+                                );
+                            });
                         }
                         break;
 
