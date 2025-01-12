@@ -8,17 +8,30 @@ import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
 import { Noun } from '@/types';
 
+interface Player {
+    id: number;
+    name: string;
+    score: number;
+}
+
+interface Answer {
+    correct: boolean;
+    user_id: number;
+    player_name: string;
+    answer: string;
+}
+
 interface GameAreaProps {
-    status: string;
+    status: 'waiting' | 'in_progress' | 'completed';
     currentWord?: Noun;
     currentRound?: number;
     totalRounds?: number;
-    lastAnswer: any;
+    lastAnswer: Answer;
     feedbackMessage: string;
     onAnswer: (answer: string) => void;
     onReady: () => void;
     isCurrentPlayerReady: boolean;
-    players: any[];
+    players: Player[];
     difficulty: 'easy' | 'medium' | 'hard';
     isHost: boolean;
     onRestart: () => void;
@@ -30,7 +43,6 @@ const DIFFICULTY_TIMES = {
     medium: 3,
     hard: 1
 };
-
 
 const renderFeedback = (message: string) => {
     if (!message) return null;
@@ -60,7 +72,6 @@ const renderFeedback = (message: string) => {
     );
 };
 
-
 const GameArea = ({
     status,
     currentWord,
@@ -77,11 +88,11 @@ const GameArea = ({
     userId,
     onRestart
 }: GameAreaProps) => {
-    const [timeLeft, setTimeLeft] = useState<number>(DIFFICULTY_TIMES[difficulty]);
-    const [timeoutProcessed, setTimeoutProcessed] = useState<boolean>(false);
+    const [roundTimeRemaining, setRoundTimeRemaining] = useState<number>(DIFFICULTY_TIMES[difficulty]);
+    const [isRoundTimedOut, setIsRoundTimedOut] = useState<boolean>(false);
     const [shake, setShake] = useState(false);
-    const [countdown, setCountdown] = useState(3);
-    const [countdownType, setCountdownType] = useState<'start' | 'restart' | 'next' | null>(null);
+    const [transitionCountdown, setTransitionCountdown] = useState(3);
+    const [transitionType, setTransitionType] = useState<'game_start' | 'next_word' | 'game_restart' | null>(null);
     const { t: trans } = useTranslation();
 
     const handleAnswer = (answer: string) => {
@@ -102,36 +113,32 @@ const GameArea = ({
         onRestart();
     };
 
-    // Handle initial game start
     useEffect(() => {
-        if (status === 'in_progress' && !countdownType && !lastAnswer) {
-            setCountdown(3);
-            setCountdownType('start');
+        if (status === 'in_progress' && !transitionType && !lastAnswer) {
+            setTransitionCountdown(3);
+            setTransitionType('game_start');
         }
     }, [status]);
 
-    // Handle word changes during game
     useEffect(() => {
-        if (status === 'in_progress' && (lastAnswer || timeoutProcessed) && currentWord) {
-            setCountdown(3);
-            // Check if it's the last word
-            const isLastWord = (currentRound+1) === totalRounds;
-            setCountdownType(isLastWord ? 'restart' : 'next');
-            setTimeoutProcessed(false);
+        if (status === 'in_progress' && (lastAnswer || isRoundTimedOut) && currentWord) {
+            setTransitionCountdown(3);
+            const isLastWord = (currentRound + 1) === totalRounds;
+            setTransitionType(isLastWord ? 'game_restart' : 'next_word');
+            setIsRoundTimedOut(false);
         }
-    }, [currentWord, lastAnswer, timeoutProcessed, currentRound, totalRounds]);
+    }, [currentWord, lastAnswer, isRoundTimedOut, currentRound, totalRounds]);
 
-    // Countdown timer effect
     useEffect(() => {
-        let countdownInterval: NodeJS.Timeout | undefined;
+        let transitionInterval: NodeJS.Timeout | undefined;
 
-        if (countdownType && countdown > 0) {
-            countdownInterval = setInterval(() => {
-                setCountdown((prev) => {
+        if (transitionType && transitionCountdown > 0) {
+            transitionInterval = setInterval(() => {
+                setTransitionCountdown((prev) => {
                     if (prev <= 1) {
-                        setCountdownType(null);
-                        if (countdownType === 'next') {
-                            setTimeLeft(DIFFICULTY_TIMES[difficulty]); // Reset game timer after next word countdown
+                        setTransitionType(null);
+                        if (transitionType === 'next_word') {
+                            setRoundTimeRemaining(DIFFICULTY_TIMES[difficulty]);
                         }
                         return 3;
                     }
@@ -141,26 +148,25 @@ const GameArea = ({
         }
 
         return () => {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
+            if (transitionInterval) {
+                clearInterval(transitionInterval);
             }
         };
-    }, [countdown, countdownType, difficulty]);
+    }, [transitionCountdown, transitionType, difficulty]);
 
-    // Game timer effect
     useEffect(() => {
-        let timer: NodeJS.Timeout | null = null;
+        let roundTimer: NodeJS.Timeout | null = null;
 
-        if (status === 'in_progress' && currentWord && !countdownType) {
-            timer = setInterval(() => {
-                setTimeLeft((prevTime) => {
+        if (status === 'in_progress' && currentWord && !transitionType) {
+            roundTimer = setInterval(() => {
+                setRoundTimeRemaining((prevTime) => {
                     if (prevTime <= 1) {
-                        if (!timeoutProcessed) {
+                        if (!isRoundTimedOut) {
                             onAnswer('timeout');
-                            setTimeoutProcessed(true);
-                            setCountdown(3);
-                            const isLastWord = (currentRound+1) === totalRounds;
-                            setCountdownType(isLastWord ? 'restart' : 'next');
+                            setIsRoundTimedOut(true);
+                            setTransitionCountdown(3);
+                            const isLastWord = (currentRound + 1) === totalRounds;
+                            setTransitionType(isLastWord ? 'game_restart' : 'next_word');
                         }
                         return DIFFICULTY_TIMES[difficulty];
                     }
@@ -170,9 +176,9 @@ const GameArea = ({
         }
 
         return () => {
-            if (timer) clearInterval(timer);
+            if (roundTimer) clearInterval(roundTimer);
         };
-    }, [status, currentWord, difficulty, timeoutProcessed, onAnswer, countdownType, currentRound, totalRounds]);
+    }, [status, currentWord, difficulty, isRoundTimedOut, onAnswer, transitionType, currentRound, totalRounds]);
 
     return (
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
@@ -191,9 +197,9 @@ const GameArea = ({
                         </PrimaryButton>
                     )}
                 </div>
-            ) : countdownType ? (
+            ) : transitionType ? (
                 <div className="flex-1 flex flex-col items-center justify-center space-y-6">
-                    {countdownType === 'next' && lastAnswer && (
+                    {transitionType === 'next_word' && lastAnswer && (
                         <div className={`text-2xl font-bold ${
                             lastAnswer.correct ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                         }`}>
@@ -211,27 +217,23 @@ const GameArea = ({
                         </div>
                     )}
                     <div className="text-7xl font-bold text-indigo-600 dark:text-indigo-400 animate-pulse">
-                        {countdown}
+                        {transitionCountdown}
                     </div>
                     <div className="text-xl text-gray-700 dark:text-gray-300">
-                        {countdownType === 'next' ? 'Next word in...' : 'Game starting in...'}
+                        {transitionType === 'next_word' ? 'Next word in...' : 'Game starting in...'}
                     </div>
                 </div>
             ) : status === 'in_progress' && currentWord ? (
                 <div className={`flex-1 flex flex-col h-full text-center ${shake ? 'animate-shake' : ''}`}>
-                    {/* Fixed height header */}
-                    <CircularTimer timeLeft={timeLeft} totalTime={DIFFICULTY_TIMES[difficulty]} />
+                    <CircularTimer timeLeft={roundTimeRemaining} totalTime={DIFFICULTY_TIMES[difficulty]} />
 
-                    {/* Flexible space for word display */}
                     <div className="flex-1 flex flex-col">
-                        {/* Word display with minimum height */}
                         <div className="flex-none mb-2 md:mb-8">
                             <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 transition-all duration-300">
                                 {currentWord.word}
                             </h1>
                         </div>
 
-                        {/* Fixed position buttons at bottom */}
                         <div className="flex-none mt-4">
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 {['der', 'die', 'das'].map((g) => (
@@ -253,8 +255,6 @@ const GameArea = ({
                             </div>
                         </div>
 
-
-                        {/* Feedback messages below buttons */}
                         <div className="flex-none mt-2 md:mt-4">
                             {feedbackMessage && renderFeedback(feedbackMessage)}
                         </div>
@@ -273,7 +273,7 @@ const GameArea = ({
                             .map((player, index) => (
                                 <div key={player.id} className="flex justify-between items-center border-b border-gray-300 dark:border-gray-600 pb-3 transition-all duration-300 hover:bg-white/30 dark:hover:bg-gray-700/30 rounded-lg px-4 py-2">
                                     <span className="font-bold">
-                                        {index + 1}. {player.player_name}
+                                        {index + 1}. {player.name}
                                     </span>
                                     <span className="font-medium bg-indigo-100 dark:bg-indigo-800 px-3 py-1 rounded-full">
                                         {player.score} pts
@@ -285,10 +285,10 @@ const GameArea = ({
                 </div>
             ) : null}
 
-            {countdownType && (countdownType === 'start' || countdownType === 'restart') && (
+            {transitionType && (transitionType === 'game_start' || transitionType === 'game_restart') && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow">
-                        <h2 className="text-4xl font-bold">{trans('gender_duel.starting_in')} {countdown}...</h2>
+                        <h2 className="text-4xl font-bold">{trans('gender_duel.starting_in')} {transitionCountdown}...</h2>
                     </div>
                 </div>
             )}
