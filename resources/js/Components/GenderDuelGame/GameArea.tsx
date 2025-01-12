@@ -76,7 +76,7 @@ const GameArea = ({
     status,
     currentWord,
     currentRound = 0,
-    totalRounds,
+    totalRounds = 10,
     lastAnswer,
     feedbackMessage,
     onAnswer,
@@ -124,7 +124,7 @@ const GameArea = ({
         if (status === 'in_progress' && (lastAnswer || isRoundTimedOut) && currentWord) {
             setTransitionCountdown(3);
             const isLastWord = (currentRound + 1) === totalRounds;
-            setTransitionType(isLastWord ? 'game_restart' : 'next_word');
+            setTransitionType(isLastWord ? null : 'next_word');
             setIsRoundTimedOut(false);
         }
     }, [currentWord, lastAnswer, isRoundTimedOut, currentRound, totalRounds]);
@@ -166,7 +166,7 @@ const GameArea = ({
                             setIsRoundTimedOut(true);
                             setTransitionCountdown(3);
                             const isLastWord = (currentRound + 1) === totalRounds;
-                            setTransitionType(isLastWord ? 'game_restart' : 'next_word');
+                            setTransitionType(isLastWord ? null : 'next_word');
                         }
                         return DIFFICULTY_TIMES[difficulty];
                     }

@@ -329,6 +329,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                         <GameArea
                             status={genderDuelGameState.status}
                             currentWord={genderDuelGameState.current_word}
+                            totalRounds={genderDuelGameState.total_rounds}
                             lastAnswer={lastAnswer}
                             feedbackMessage={feedbackMessage}
                             onAnswer={submitAnswer}
