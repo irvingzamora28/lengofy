@@ -58,6 +58,10 @@ const cleanupGameCompletely = (gameId: string) => {
     genderDuelGameRooms.delete(gameId);
     genderDuelGameStates.delete(gameId);
     timeoutFlags.delete(gameId);
+    broadcastToLobby({
+        type: "gender-duel-game-ended",
+        genderDuelGameId: gameId,
+    });
 }
 
 // Helper function to clean up player resources
