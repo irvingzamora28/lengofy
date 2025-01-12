@@ -57,8 +57,6 @@ const serverConfig = {
             try {
                 const data = JSON.parse(message) as GenderDuelGameMessage;
                 const gameRoom = genderDuelGameRooms.get(data.genderDuelGameId);
-                console.log("websocket-server: Message received:", data);
-                console.log("websocket-server: Game room:", gameRoom);
 
                 switch (data.type) {
                     case "join_lobby":
@@ -112,9 +110,6 @@ const serverConfig = {
                         ws.id = data.userId;
 
                         genderDuelGameRooms.get(data.genderDuelGameId)?.add(ws);
-                        console.log(
-                            `Player joined game ${data.genderDuelGameId}`
-                        );
 
                         // Update game state with new player
                         const gameState = genderDuelGameStates.get(
@@ -134,15 +129,11 @@ const serverConfig = {
                                 })
                             );
 
-                            console.log("Updated players:", gameState.players);
                         }
 
                         // Broadcast updated player list to all clients in the room
                         if (gameRoom) {
                             for (const client of gameRoom) {
-                                console.log(
-                                    "Broadcasting updated player list and status"
-                                );
                                 client.send(
                                     JSON.stringify({
                                         type: "gender_duel_game_state_updated",
@@ -157,9 +148,6 @@ const serverConfig = {
                         break;
 
                     case "player_ready":
-                        console.log(
-                            "websocket-server: Player ready update received:"
-                        );
                         if (gameRoom) {
                             // Broadcast to all players in the game room
                             for (const client of gameRoom) {
@@ -174,8 +162,6 @@ const serverConfig = {
                         break;
 
                     case "start_gender_duel_game":
-                        console.log("Starting game:", data.genderDuelGameId);
-
                         if (gameRoom) {
                             const gameState = genderDuelGameStates.get(
                                 data.genderDuelGameId
@@ -183,12 +169,6 @@ const serverConfig = {
                             if (gameState) {
                                 gameState.status = "in_progress";
                                 gameState.current_round = 0; // Start from index 0 (zero-based)
-
-                                console.log(
-                                    "Starting game:",
-                                    data.genderDuelGameId
-                                );
-                                console.log(gameState.words);
 
                                 // Broadcast game start to all players with first word (round 0)
                                 for (const client of gameRoom) {
@@ -222,17 +202,6 @@ const serverConfig = {
                                     player.score = 0;
                                 });
                                 // Notify all players in the game room about the updated game state
-                                console.log(
-                                    "Restarting game:",
-                                    data.genderDuelGameId
-                                );
-                                console.log(
-                                    "Notifying all players in the game room about the updated game state"
-                                );
-                                console.log(
-                                    gameRoom.size + " players in the game room"
-                                );
-
                                 gameRoom.forEach((client) => {
                                     client.send(
                                         JSON.stringify({
@@ -279,10 +248,6 @@ const serverConfig = {
                             );
                             return;
                         }
-
-                        console.log("Current word:", currentWord);
-                        console.log("Submitted answer:", data.data.answer);
-                        console.log("Expected gender:", currentWord.gender);
 
                         // Check if this is a timeout or a regular answer
                         const isTimeout = data.data.answer === "timeout";
@@ -348,6 +313,8 @@ const serverConfig = {
                                     currentGameState.words[
                                         currentGameState.current_round
                                     ];
+                                console.log("Round: ", currentGameState.current_round);
+                                console.log("Broadcasting next word:", nextWord);
                                 // Broadcast the next word
                                 for (const client of answerGameRoom) {
                                     client.send(
