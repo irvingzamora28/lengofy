@@ -36,7 +36,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
             // Join the game room
             ws.send(JSON.stringify({
                 type: 'join_gender_duel_game',
-                genderDuelGameId: gender_duel_game.id,
+                gameId: gender_duel_game.id,
                 userId: auth.user.id,
                 max_players: gender_duel_game.max_players,
                 data: {
@@ -48,33 +48,18 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
             // If this is a newly created game, broadcast it to the lobby
             if (justCreated) {
                 ws.send(JSON.stringify({
-                    type: 'gender-duel-game-created',
-                    genderDuelGameId: gender_duel_game.id,
-                    game: {
-                        id: gender_duel_game.id,
-                        players: gender_duel_game.players,
-                        max_players: gender_duel_game.max_players,
-                        language_name: gender_duel_game.language_name,
-                        source_language: {
-                            id: gender_duel_game.source_language?.id,
-                            code: gender_duel_game.source_language?.code,
-                            name: gender_duel_game.source_language?.name,
-                            flag: gender_duel_game.source_language?.flag,
-                        },
-                        target_language: {
-                            id: gender_duel_game.target_language?.id,
-                            code: gender_duel_game.target_language?.code,
-                            name: gender_duel_game.target_language?.name,
-                            flag: gender_duel_game.target_language?.flag,
-                        },
-                    }
+                    type: 'gender_duel_game_created',
+                    gameId: gender_duel_game.id,
+                    game: gender_duel_game
                 }));
             }
 
             if (gender_duel_game.max_players === 1) {
                 ws.send(JSON.stringify({
                     type: 'player_ready',
-                    genderDuelGameId: genderDuelGameState.id,
+                    gameId: genderDuelGameState.id,
+                    gameType: 'gender_duel',
+                    userId: auth.user.id,
                     data: {
                         player_id: currentPlayer?.id,
                         user_id: auth.user.id
@@ -85,33 +70,25 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
+            console.log('Received game message:', data.type);
+
             switch (data.type) {
                 case 'player_ready':
                     setGenderDuelGameState(prev => {
                         const newState = {
                             ...prev,
                             players: prev.players.map(player =>
-                                player.id === data.data.player_id
+                                player.id === data.data.player_id || player.user_id === data.data.user_id
                                     ? { ...player, is_ready: true }
                                     : player
                             )
                         };
-                        const allReady = newState.max_players === 1 || (newState.players.length >= 2 &&
-                            newState.players.every(player => player.is_ready));
-
-                        if (allReady && newState.status === 'waiting') {
-
-                            ws.send(JSON.stringify({
-                                type: 'start_gender_duel_game',
-                                genderDuelGameId: gender_duel_game.id,
-                                userId: auth.user.id
-                            }));
-                        }
                         return newState;
                     });
                     break;
 
                 case 'gender_duel_game_state_updated':
+                    console.log('Game state updated:', data.data);
                     setGenderDuelGameState(prev => {
                         // Ensure we don't skip rounds by validating the round transition
                         const nextRound = data.data.current_round;
@@ -131,7 +108,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     });
 
                     // If the game is about to start
-                    if (data.data.current_round === 0 && data.data.status === 'in_progress') {
+                    if (data.data.status === 'in_progress' && data.data.current_round === 0) {
                         setLastAnswer(null);
                         setFeedbackMessage('');
                         setShowExitConfirmation(false);
@@ -244,7 +221,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
                 type: 'submit_answer',
-                genderDuelGameId: genderDuelGameState.id,
+                gameId: genderDuelGameState.id,
+                gameType: 'gender_duel',
                 data: {
                     answer: gender,
                     userId: auth.user.id
@@ -261,20 +239,13 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                 if (wsRef.current?.readyState === WebSocket.OPEN) {
                     wsRef.current.send(JSON.stringify({
                         type: 'player_ready',
-                        genderDuelGameId: genderDuelGameState.id,
+                        gameId: genderDuelGameState.id,
+                        gameType: 'gender_duel',
+                        userId: auth.user.id,
                         data: {
                             player_id: currentPlayer?.id,
                             user_id: auth.user.id
                         }
-                    }));
-
-                    setGenderDuelGameState(prev => ({
-                        ...prev,
-                        players: prev.players.map(player =>
-                            player.id === currentPlayer?.id
-                                ? { ...player, is_ready: true }
-                                : player
-                        )
                     }));
                 }
             }
@@ -299,7 +270,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
             console.log("WebSocket is open, sending restart message");
             wsRef.current.send(JSON.stringify({
                 type: 'restart_gender_duel_game',
-                genderDuelGameId: genderDuelGameState.id,
+                gameId: genderDuelGameState.id,
+                gameType: 'gender_duel',
                 data: {
                     words: genderDuelGameState.words,
                     players: genderDuelGameState.players,

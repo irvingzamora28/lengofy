@@ -51,12 +51,12 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
       console.log('WebSocket message received:', data);
 
 
-      if (data.type === 'gender-duel-game-created') {
+      if (data.type === 'gender_duel_game_created') {
         console.log('New game created:', data.game);
         setGames(prevGames => [...prevGames, data.game]);
-      } else if (data.type === 'gender-duel-game-ended') {
+      } else if (data.type === 'gender_duel_game_ended') {
         console.log('Game ended:', data);
-        setGames(prevGames => prevGames.filter(game => game.id !== data.genderDuelGameId));
+        setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
       }
     };
 

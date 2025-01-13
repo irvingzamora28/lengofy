@@ -4,8 +4,8 @@
     "scripts": {
         "build": "tsc && vite build && vite build --ssr",
         "dev": "vite",
-        "ws": "bun run websocket-server.ts",
-        "ws:build": "bun build websocket-server.ts --outfile dist/websocket-server.js",
+        "ws": "bun run websocket/server.ts",
+        "ws:build": "bun build websocket/server.ts --outfile dist/websocket-server.js",
         "ws:prod": "bun run dist/websocket-server.js"
     },
     "devDependencies": {
