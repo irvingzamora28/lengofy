@@ -1,3 +1,3 @@
 #!/bin/sh
 
-envsubst '${SERVER_NAME}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+envsubst '${SERVER_NAME}' < /nginx/default.conf.template > /nginx/default.conf
