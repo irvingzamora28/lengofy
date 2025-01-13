@@ -187,7 +187,7 @@ const GameArea = ({
     }, [status, currentWord, isRoundTimedOut, onAnswer, transitionType, lastAnswer, roundTimeRemaining]);
 
     return (
-        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-full flex flex-col">
+        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-4 shadow-2xl transition-all duration-300 h-auto flex flex-col">
             {status === 'waiting' ? (
                 <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
                     <FaHourglassHalf className="text-5xl text-indigo-500 dark:text-indigo-400 animate-pulse" />
@@ -287,7 +287,7 @@ const GameArea = ({
                                 </div>
                             ))}
                     </div>
-                    {isHost && <PrimaryButton onClick={handleRestart} className="mt-4">{trans('gender_duel.restart_game')}</PrimaryButton>}
+                    {isHost && <PrimaryButton onClick={handleRestart} className="my -4">{trans('gender_duel.restart_game')}</PrimaryButton>}
                 </div>
             ) : null}
 
