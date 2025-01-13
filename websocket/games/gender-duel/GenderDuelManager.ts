@@ -247,19 +247,12 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
         // Set new transition timer
         const transitionTimer = setTimeout(() => {
             if (isLastRound) {
-                // End the game
-                state.status = "completed";
-                const winner = state.players.reduce((prev, current) =>
-                    (current.score || 0) > (prev.score || 0) ? current : prev
-                );
-
-                // Send final game state
+                // Send game state to frontend without determining winner
                 this.broadcast(room, {
-                    type: "gender_duel_game_state_updated",
+                    type: 'gender_duel_game_state_updated',
                     data: {
                         players: state.players,
                         status: "completed",
-                        winner,
                         current_round: state.current_round,
                     }
                 });

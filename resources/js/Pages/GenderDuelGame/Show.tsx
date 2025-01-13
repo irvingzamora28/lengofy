@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { GenderDuelGame, GenderDuelGameState, PageProps } from '@/types';
+import { GenderDuelGame, GenderDuelGamePlayer, GenderDuelGameState, PageProps } from '@/types';
 import { MdClose } from 'react-icons/md';
 import GameInfo from '@/Components/GenderDuelGame/GameInfo';
 import GameArea from '@/Components/GenderDuelGame/GameArea';
@@ -114,8 +114,8 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                         setShowExitConfirmation(false);
                     }
 
-                    if (data.data.status === 'completed' && data.data.winner) {
-                        setFeedbackMessage(`${data.data.winner.player_name} wins with ${data.data.winner.score} points!`);
+                    if (data.data.status === 'completed') {
+                        console.log('Game completed:', data.data);
                         handleGameCompletion(data.data);
                     }
 
@@ -178,7 +178,10 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
     // Function to handle game completion
     const handleGameCompletion = async (data: GenderDuelGameState) => {
         const currentPlayer = data.players.find(player => player.user_id === auth.user.id);
-        if (!currentPlayer) return;
+        if (!currentPlayer) {
+            console.error('Current player not found:', auth.user.id);
+            return;
+        }
 
         // Calculate scores
         const currentScore = currentPlayer.score || 0;
@@ -210,8 +213,41 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
             }));
 
             // Update feedback message with scores
-            setFeedbackMessage(`${data.winner?.player_name} ${trans('gender_duel.wins_with')} ${data.winner?.score} ${trans('gender_duel.points')}!\n
-                ${trans('gender_duel.highest_score')}: ${calculatedHighestScore}\n${trans('gender_duel.total_points')}: ${calculatedTotalPoints}\n${trans('gender_duel.winning_streak')}: ${currentWinningStreak}`);
+            const playersScore = data.players.reduce((acc: {[key: string]: number}, player: GenderDuelGamePlayer) => {
+                acc[player.id.toString()] = player.score; // Ensure ID is a string
+                return acc;
+            }, {});
+
+            const maxScore = Math.max(...Object.values(playersScore));
+            const winners = Object.keys(playersScore).filter(playerId => playersScore[playerId] === maxScore);
+            let message = '';
+            if (winners.length === data.players.length) {
+                message = `It's a tie!`;
+            } else if (winners.length === 1) {
+                const winnerId = winners[0];
+                const winner = data.players.find(player => player.id.toString() === winnerId);
+
+                if (winner) {
+                    message = `${winner.player_name} wins with ${winner.score} points!`;
+                } else {
+                    console.error('Winner not found:', winnerId);
+                    message = `Game completed, but winner not found with ID ${winnerId}`;
+                }
+            } else if (winners.length === 2) {
+                const winnerNames = winners.map(id => {
+                    const player = data.players.find(player => player.id.toString() === id);
+                    return player ? player.player_name : 'Unknown';
+                });
+                message = `It's a tie between ${winnerNames.join(' and ')} with ${maxScore} points!`;
+            } else {
+                const winnerNames = winners.map(id => {
+                    const player = data.players.find(player => player.id.toString() === id);
+                    return player ? player.player_name : 'Unknown';
+                });
+                message = `Winners: ${winnerNames.join(', ')} with ${maxScore} points!`;
+            }
+            setFeedbackMessage(`${message}\n
+            ${trans('gender_duel.highest_score')}: ${calculatedHighestScore}\n${trans('gender_duel.total_points')}: ${calculatedTotalPoints}\n${trans('gender_duel.winning_streak')}: ${currentWinningStreak}`);
         } catch (error) {
             console.error('Error updating score:', error);
         }

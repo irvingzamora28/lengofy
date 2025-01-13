@@ -51,7 +51,7 @@ const renderFeedback = (message: string) => {
 
     return (
         <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 shadow-md">
-            <div className="flex items-center self-center gap-2 text-lg font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="flex items-center justify-center self-center gap-2 text-lg font-bold text-indigo-600 dark:text-indigo-400">
                 {mainFeedback}
             </div>
 
