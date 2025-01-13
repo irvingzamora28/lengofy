@@ -65,8 +65,8 @@ jobs:
             # Set proper permissions for .env file
             sudo chmod 666 .env
 
-            # Generate nginx config file with the production server name
-            bash generate-nginx-config.sh "${{ secrets.SERVER_NAME }}"
+            # Replace ${SERVER_NAME} in the default.conf
+            sed -i "s/\${SERVER_NAME}/${{ secrets.SERVER_NAME }}/g" nginx/default.conf
 
             # Build and start containers
             docker compose -f docker-compose.prod.yml down
