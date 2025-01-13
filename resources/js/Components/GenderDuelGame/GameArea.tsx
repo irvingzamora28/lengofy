@@ -268,7 +268,26 @@ const GameArea = ({
                 </div>
             ) : status === 'completed' ? (
                 <div className="text-center space-y-8">
-                    <FaTrophy className="text-6xl text-yellow-500 mx-auto animate-bounce" />
+                    {players
+                        .sort((a, b) => b.score - a.score)
+                        .map((player, index) => (
+                            player.user_id === userId && (
+                                <div key={player.id} className="flex flex-col items-center justify-center space-y-4">
+                                    {index === 0 && (
+                                        <FaTrophy className="text-6xl text-yellow-500 mx-auto animate-bounce" />
+                                    )}
+                                    {index === 1 && (
+                                        <span className="text-6xl text-silver mx-auto">🥈</span>
+                                    )}
+                                    {index === 2 && (
+                                        <span className="text-6xl text-bronze mx-auto">🥉</span>
+                                    )}
+                                    {index > 2 && (
+                                        <span className="text-6xl text-gray-500 mx-auto">😢</span>
+                                    )}
+                                </div>
+                            )
+                        ))}
                     <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400">
                         {trans('gender_duel.game_over')}
                     </h3>
