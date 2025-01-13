@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
@@ -84,6 +85,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');
         Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
         Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
+    });
+
+    Route::prefix('games/memory-translation')->group(function () {
+        Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory.practice');
     });
 
     // Score routes
