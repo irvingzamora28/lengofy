@@ -6,13 +6,7 @@ import { useEffect, useState } from 'react';
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
-import { Noun } from '@/types';
-
-interface Player {
-    id: number;
-    name: string;
-    score: number;
-}
+import { GenderDuelGamePlayer, Noun } from '@/types';
 
 interface Answer {
     correct: boolean;
@@ -31,7 +25,7 @@ interface GameAreaProps {
     onAnswer: (answer: string) => void;
     onReady: () => void;
     isCurrentPlayerReady: boolean;
-    players: Player[];
+    players: GenderDuelGamePlayer[];
     difficulty: 'easy' | 'medium' | 'hard';
     isHost: boolean;
     onRestart: () => void;
@@ -284,8 +278,8 @@ const GameArea = ({
                             .sort((a, b) => b.score - a.score)
                             .map((player, index) => (
                                 <div key={player.id} className="flex justify-between items-center border-b border-gray-300 dark:border-gray-600 pb-3 transition-all duration-300 hover:bg-white/30 dark:hover:bg-gray-700/30 rounded-lg px-4 py-2">
-                                    <span className="font-bold">
-                                        {index + 1}. {player.name}
+                                    <span className="font-bold flex items-center gap-2">
+                                        {index + 1}. {index === 0 && <FaTrophy className="text-yellow-500" />} {player.player_name}
                                     </span>
                                     <span className="font-medium bg-indigo-100 dark:bg-indigo-800 px-3 py-1 rounded-full">
                                         {player.score} pts

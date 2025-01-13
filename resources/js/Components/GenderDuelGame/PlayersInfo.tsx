@@ -14,8 +14,9 @@ interface PlayersInfoProps {
     currentPlayerId?: number;
 }
 
-export default function PlayersInfo({ players, currentPlayerId }: PlayersInfoProps) {
+export default function PlayersInfo({ status, players, currentPlayerId }: PlayersInfoProps) {
     if (players.length === 0) return null;
+    if (status === 'completed') return null;
 
     const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
     const { t: trans } = useTranslation();
