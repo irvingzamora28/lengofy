@@ -232,7 +232,7 @@ const GameArea = ({
                         {transitionCountdown}
                     </div>
                     <div className="text-xl text-gray-700 dark:text-gray-300">
-                        {transitionType === 'next_word' ? 'Next word in...' : 'Game starting in...'}
+                        {transitionType === 'next_word' ? (++currentRound === totalRounds ? 'Game Over' : 'Next word in...') : 'Game starting in...'}
                     </div>
                 </div>
             ) : status === 'in_progress' && currentWord ? (
