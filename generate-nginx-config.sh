@@ -12,5 +12,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+# Export the SERVER_NAME variable
+export SERVER_NAME="$1"
+
 # Use the known relative path to the template file from the project root
 envsubst '${SERVER_NAME}' < "$SCRIPT_DIR/nginx/default.conf.template" > "$SCRIPT_DIR/nginx/default.conf"
