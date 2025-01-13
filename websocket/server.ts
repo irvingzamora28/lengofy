@@ -15,17 +15,18 @@ const server = serve({
     },
     websocket: {
         ...new WebSocketServer().getWebSocketConfig(),
-        ...(isLocal ? {} : {
-            tls: {
-                cert: readFileSync(
-                    `/etc/letsencrypt/live/${process.env.SERVER_NAME}/fullchain.pem`
-                ),
-                key: readFileSync(
-                    `/etc/letsencrypt/live/${process.env.SERVER_NAME}/privkey.pem`
-                ),
-            },
-        }),
     },
+    ...(isLocal ? {} : {
+        tls: {
+            cert: readFileSync(
+                `/etc/letsencrypt/live/${process.env.SERVER_NAME}/fullchain.pem`
+            ),
+            key: readFileSync(
+                `/etc/letsencrypt/live/${process.env.SERVER_NAME}/privkey.pem`
+            ),
+        },
+    }),
 });
 
+console.log(`Websocket running on ${isLocal ? 'ws' : 'wss'}://${process.env.SERVER_NAME}:${port}`);
 console.log(`WebSocket server is running on port ${port}`);
