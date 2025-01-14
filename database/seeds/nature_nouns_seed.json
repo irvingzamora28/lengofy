@@ -1,0 +1,1706 @@
+[
+    {
+        "word": "Natur",
+        "gender": "die",
+        "translations": {
+            "en": "nature",
+            "es": "naturaleza"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Berg",
+        "gender": "der",
+        "translations": {
+            "en": "mountain",
+            "es": "montaña"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "⛰️"
+    },
+    {
+        "word": "Fluss",
+        "gender": "der",
+        "translations": {
+            "en": "river",
+            "es": "río"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "See",
+        "gender": "der",
+        "translations": {
+            "en": "lake",
+            "es": "lago"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Meer",
+        "gender": "das",
+        "translations": {
+            "en": "sea",
+            "es": "mar"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Ozean",
+        "gender": "der",
+        "translations": {
+            "en": "ocean",
+            "es": "océano"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Wald",
+        "gender": "der",
+        "translations": {
+            "en": "forest",
+            "es": "bosque"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌳"
+    },
+    {
+        "word": "Baum",
+        "gender": "der",
+        "translations": {
+            "en": "tree",
+            "es": "árbol"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌲"
+    },
+    {
+        "word": "Blume",
+        "gender": "die",
+        "translations": {
+            "en": "flower",
+            "es": "flor"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌸"
+    },
+    {
+        "word": "Pflanze",
+        "gender": "die",
+        "translations": {
+            "en": "plant",
+            "es": "planta"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Tier",
+        "gender": "das",
+        "translations": {
+            "en": "animal",
+            "es": "animal"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐾"
+    },
+    {
+        "word": "Vogel",
+        "gender": "der",
+        "translations": {
+            "en": "bird",
+            "es": "pájaro"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐦"
+    },
+    {
+        "word": "Fisch",
+        "gender": "der",
+        "translations": {
+            "en": "fish",
+            "es": "pez"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐟"
+    },
+    {
+        "word": "Schmetterling",
+        "gender": "der",
+        "translations": {
+            "en": "butterfly",
+            "es": "mariposa"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🦋"
+    },
+    {
+        "word": "Sonne",
+        "gender": "die",
+        "translations": {
+            "en": "sun",
+            "es": "sol"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "☀️"
+    },
+    {
+        "word": "Mond",
+        "gender": "der",
+        "translations": {
+            "en": "moon",
+            "es": "luna"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌙"
+    },
+    {
+        "word": "Stern",
+        "gender": "der",
+        "translations": {
+            "en": "star",
+            "es": "estrella"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "⭐"
+    },
+    {
+        "word": "Wolke",
+        "gender": "die",
+        "translations": {
+            "en": "cloud",
+            "es": "nube"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "☁️"
+    },
+    {
+        "word": "Regen",
+        "gender": "der",
+        "translations": {
+            "en": "rain",
+            "es": "lluvia"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌧️"
+    },
+    {
+        "word": "Schnee",
+        "gender": "der",
+        "translations": {
+            "en": "snow",
+            "es": "nieve"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "❄️"
+    },
+    {
+        "word": "Eis",
+        "gender": "das",
+        "translations": {
+            "en": "ice",
+            "es": "hielo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🧊"
+    },
+    {
+        "word": "Wind",
+        "gender": "der",
+        "translations": {
+            "en": "wind",
+            "es": "viento"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌬️"
+    },
+    {
+        "word": "Sturm",
+        "gender": "der",
+        "translations": {
+            "en": "storm",
+            "es": "tormenta"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⛈️"
+    },
+    {
+        "word": "Blitz",
+        "gender": "der",
+        "translations": {
+            "en": "lightning",
+            "es": "relámpago"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⚡"
+    },
+    {
+        "word": "Donner",
+        "gender": "der",
+        "translations": {
+            "en": "thunder",
+            "es": "trueno"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌩️"
+    },
+    {
+        "word": "Nebel",
+        "gender": "der",
+        "translations": {
+            "en": "fog",
+            "es": "niebla"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌫️"
+    },
+    {
+        "word": "Bergkette",
+        "gender": "die",
+        "translations": {
+            "en": "mountain range",
+            "es": "cordillera"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⛰️"
+    },
+    {
+        "word": "Tal",
+        "gender": "das",
+        "translations": {
+            "en": "valley",
+            "es": "valle"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Wüste",
+        "gender": "die",
+        "translations": {
+            "en": "desert",
+            "es": "desierto"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🏜️"
+    },
+    {
+        "word": "Insel",
+        "gender": "die",
+        "translations": {
+            "en": "island",
+            "es": "isla"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏝️"
+    },
+    {
+        "word": "Strand",
+        "gender": "der",
+        "translations": {
+            "en": "beach",
+            "es": "playa"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏖️"
+    },
+    {
+        "word": "Küste",
+        "gender": "die",
+        "translations": {
+            "en": "coast",
+            "es": "costa"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Gletscher",
+        "gender": "der",
+        "translations": {
+            "en": "glacier",
+            "es": "glaciar"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🧊"
+    },
+    {
+        "word": "Vulkan",
+        "gender": "der",
+        "translations": {
+            "en": "volcano",
+            "es": "volcán"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌋"
+    },
+    {
+        "word": "Wasserfall",
+        "gender": "der",
+        "translations": {
+            "en": "waterfall",
+            "es": "cascada"
+        },
+        "difficulty_level": 2,
+        "category": "Nature"
+    },
+    {
+        "word": "Höhle",
+        "gender": "die",
+        "translations": {
+            "en": "cave",
+            "es": "cueva"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🕳️"
+    },
+    {
+        "word": "Wiese",
+        "gender": "die",
+        "translations": {
+            "en": "meadow",
+            "es": "pradera"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Feld",
+        "gender": "das",
+        "translations": {
+            "en": "field",
+            "es": "campo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌾"
+    },
+    {
+        "word": "Acker",
+        "gender": "der",
+        "translations": {
+            "en": "farmland",
+            "es": "terreno de cultivo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🚜"
+    },
+    {
+        "word": "Garten",
+        "gender": "der",
+        "translations": {
+            "en": "garden",
+            "es": "jardín"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🪴"
+    },
+    {
+        "word": "Park",
+        "gender": "der",
+        "translations": {
+            "en": "park",
+            "es": "parque"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Stein",
+        "gender": "der",
+        "translations": {
+            "en": "stone",
+            "es": "piedra"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🪨"
+    },
+    {
+        "word": "Fels",
+        "gender": "der",
+        "translations": {
+            "en": "rock",
+            "es": "roca"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🪨"
+    },
+    {
+        "word": "Erde",
+        "gender": "die",
+        "translations": {
+            "en": "earth",
+            "es": "tierra"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌍"
+    },
+    {
+        "word": "Sand",
+        "gender": "der",
+        "translations": {
+            "en": "sand",
+            "es": "arena"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏖️"
+    },
+    {
+        "word": "Lehm",
+        "gender": "der",
+        "translations": {
+            "en": "clay",
+            "es": "arcilla"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🏺"
+    },
+    {
+        "word": "Gras",
+        "gender": "das",
+        "translations": {
+            "en": "grass",
+            "es": "césped"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Laub",
+        "gender": "das",
+        "translations": {
+            "en": "foliage",
+            "es": "hojas"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🍂"
+    },
+    {
+        "word": "Ast",
+        "gender": "der",
+        "translations": {
+            "en": "branch",
+            "es": "rama"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Wurzel",
+        "gender": "die",
+        "translations": {
+            "en": "root",
+            "es": "raíz"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Blatt",
+        "gender": "das",
+        "translations": {
+            "en": "leaf",
+            "es": "hoja"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🍃"
+    },
+    {
+        "word": "Knospe",
+        "gender": "die",
+        "translations": {
+            "en": "bud",
+            "es": "brote"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Samen",
+        "gender": "der",
+        "translations": {
+            "en": "seed",
+            "es": "semilla"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Frucht",
+        "gender": "die",
+        "translations": {
+            "en": "fruit",
+            "es": "fruta"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🍎"
+    },
+    {
+        "word": "Beere",
+        "gender": "die",
+        "translations": {
+            "en": "berry",
+            "es": "baya"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🫐"
+    },
+    {
+        "word": "Nuss",
+        "gender": "die",
+        "translations": {
+            "en": "nut",
+            "es": "nuez"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌰"
+    },
+    {
+        "word": "Pilz",
+        "gender": "der",
+        "translations": {
+            "en": "mushroom",
+            "es": "hongo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🍄"
+    },
+    {
+        "word": "Muschel",
+        "gender": "die",
+        "translations": {
+            "en": "shell",
+            "es": "concha"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐚"
+    },
+    {
+        "word": "Koralle",
+        "gender": "die",
+        "translations": {
+            "en": "coral",
+            "es": "coral"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🪸"
+    },
+    {
+        "word": "Alge",
+        "gender": "die",
+        "translations": {
+            "en": "algae",
+            "es": "alga"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Moos",
+        "gender": "das",
+        "translations": {
+            "en": "moss",
+            "es": "musgo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Farn",
+        "gender": "der",
+        "translations": {
+            "en": "fern",
+            "es": "helecho"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Kaktus",
+        "gender": "der",
+        "translations": {
+            "en": "cactus",
+            "es": "cactus"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌵"
+    },
+    {
+        "word": "Gebirge",
+        "gender": "das",
+        "translations": {
+            "en": "mountains",
+            "es": "montañas"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⛰️"
+    },
+    {
+        "word": "Landschaft",
+        "gender": "die",
+        "translations": {
+            "en": "landscape",
+            "es": "paisaje"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Umwelt",
+        "gender": "die",
+        "translations": {
+            "en": "environment",
+            "es": "medio ambiente"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌍"
+    },
+    {
+        "word": "Ökosystem",
+        "gender": "das",
+        "translations": {
+            "en": "ecosystem",
+            "es": "ecosistema"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌍"
+    },
+    {
+        "word": "Tierwelt",
+        "gender": "die",
+        "translations": {
+            "en": "fauna",
+            "es": "fauna"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐾"
+    },
+    {
+        "word": "Pflanzenwelt",
+        "gender": "die",
+        "translations": {
+            "en": "flora",
+            "es": "flora"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Klima",
+        "gender": "das",
+        "translations": {
+            "en": "climate",
+            "es": "clima"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌡️"
+    },
+    {
+        "word": "Jahreszeit",
+        "gender": "die",
+        "translations": {
+            "en": "season",
+            "es": "estación"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🗓️"
+    },
+    {
+        "word": "Frühling",
+        "gender": "der",
+        "translations": {
+            "en": "spring",
+            "es": "primavera"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌷"
+    },
+    {
+        "word": "Sommer",
+        "gender": "der",
+        "translations": {
+            "en": "summer",
+            "es": "verano"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "☀️"
+    },
+    {
+        "word": "Herbst",
+        "gender": "der",
+        "translations": {
+            "en": "autumn",
+            "es": "otoño"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🍂"
+    },
+    {
+        "word": "Winter",
+        "gender": "der",
+        "translations": {
+            "en": "winter",
+            "es": "invierno"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "❄️"
+    },
+    {
+        "word": "Sonnenaufgang",
+        "gender": "der",
+        "translations": {
+            "en": "sunrise",
+            "es": "amanecer"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌅"
+    },
+    {
+        "word": "Sonnenuntergang",
+        "gender": "der",
+        "translations": {
+            "en": "sunset",
+            "es": "atardecer"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌇"
+    },
+    {
+        "word": "Mond",
+        "gender": "der",
+        "translations": {
+            "en": "moon",
+            "es": "luna"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌙"
+    },
+    {
+        "word": "Stern",
+        "gender": "der",
+        "translations": {
+            "en": "star",
+            "es": "estrella"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "⭐"
+    },
+    {
+        "word": "Sternschnuppe",
+        "gender": "die",
+        "translations": {
+            "en": "shooting star",
+            "es": "estrella fugaz"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌠"
+    },
+    {
+        "word": "Meteor",
+        "gender": "der",
+        "translations": {
+            "en": "meteor",
+            "es": "meteoro"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "☄️"
+    },
+    {
+        "word": "Komet",
+        "gender": "der",
+        "translations": {
+            "en": "comet",
+            "es": "cometa"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "☄️"
+    },
+    {
+        "word": "Sonnenschein",
+        "gender": "der",
+        "translations": {
+            "en": "sunshine",
+            "es": "luz del sol"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "☀️"
+    },
+    {
+        "word": "Regenbogen",
+        "gender": "der",
+        "translations": {
+            "en": "rainbow",
+            "es": "arco iris"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌈"
+    },
+    {
+        "word": "Dämmerung",
+        "gender": "die",
+        "translations": {
+            "en": "dusk",
+            "es": "crepúsculo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌇"
+    },
+    {
+        "word": "Morgendämmerung",
+        "gender": "die",
+        "translations": {
+            "en": "dawn",
+            "es": "amanecer"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌅"
+    },
+    {
+        "word": "Tropfen",
+        "gender": "der",
+        "translations": {
+            "en": "droplet",
+            "es": "gota"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "💧"
+    },
+    {
+        "word": "Welle",
+        "gender": "die",
+        "translations": {
+            "en": "wave",
+            "es": "ola"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Strömung",
+        "gender": "die",
+        "translations": {
+            "en": "current",
+            "es": "corriente"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Gezeiten",
+        "gender": "die",
+        "translations": {
+            "en": "tides",
+            "es": "mareas"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Ebbe",
+        "gender": "die",
+        "translations": {
+            "en": "low tide",
+            "es": "marea baja"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌊"
+    },
+    {
+        "word": "Himmel",
+        "gender": "der",
+        "translations": {
+            "en": "sky",
+            "es": "cielo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "☁️"
+    },
+    {
+        "word": "Luft",
+        "gender": "die",
+        "translations": {
+            "en": "air",
+            "es": "aire"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "💨"
+    },
+    {
+        "word": "Boden",
+        "gender": "der",
+        "translations": {
+            "en": "ground",
+            "es": "suelo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Temperatur",
+        "gender": "die",
+        "translations": {
+            "en": "temperature",
+            "es": "temperatura"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌡️"
+    },
+    {
+        "word": "Feuchtigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "humidity",
+            "es": "humedad"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "💧"
+    },
+    {
+        "word": "Wetter",
+        "gender": "das",
+        "translations": {
+            "en": "weather",
+            "es": "tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌤️"
+    },
+    {
+        "word": "Horizont",
+        "gender": "der",
+        "translations": {
+            "en": "horizon",
+            "es": "horizonte"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌅"
+    },
+    {
+        "word": "Hügel",
+        "gender": "der",
+        "translations": {
+            "en": "hill",
+            "es": "colina"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "⛰️"
+    },
+    {
+        "word": "Klippe",
+        "gender": "die",
+        "translations": {
+            "en": "cliff",
+            "es": "acantilado"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🪨"
+    },
+    {
+        "word": "Bach",
+        "gender": "der",
+        "translations": {
+            "en": "stream",
+            "es": "arroyo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Quelle",
+        "gender": "die",
+        "translations": {
+            "en": "spring",
+            "es": "fuente"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⛲"
+    },
+    {
+        "word": "Pfad",
+        "gender": "der",
+        "translations": {
+            "en": "path",
+            "es": "sendero"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🛤️"
+    },
+    {
+        "word": "Düne",
+        "gender": "die",
+        "translations": {
+            "en": "dune",
+            "es": "duna"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🏜️"
+    },
+    {
+        "word": "Schlucht",
+        "gender": "die",
+        "translations": {
+            "en": "gorge",
+            "es": "garganta"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🏞️"
+    },
+    {
+        "word": "Ebene",
+        "gender": "die",
+        "translations": {
+            "en": "plain",
+            "es": "llano"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Rose",
+        "gender": "die",
+        "translations": {
+            "en": "rose",
+            "es": "rosa"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌹"
+    },
+    {
+        "word": "Tulpe",
+        "gender": "die",
+        "translations": {
+            "en": "tulip",
+            "es": "tulipan"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌷"
+    },
+    {
+        "word": "Gänseblümchen",
+        "gender": "das",
+        "translations": {
+            "en": "daisy",
+            "es": "margarita"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌼"
+    },
+    {
+        "word": "Sonnenblume",
+        "gender": "die",
+        "translations": {
+            "en": "sunflower",
+            "es": "girasol"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌻"
+    },
+    {
+        "word": "Getreide",
+        "gender": "das",
+        "translations": {
+            "en": "grain, cereal",
+            "es": "grano, cereal"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌾"
+    },
+    {
+        "word": "Strauch",
+        "gender": "der",
+        "translations": {
+            "en": "bush",
+            "es": "arbusto"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Hecke",
+        "gender": "die",
+        "translations": {
+            "en": "hedge",
+            "es": "seto"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌿"
+    },
+    {
+        "word": "Kiefer",
+        "gender": "die",
+        "translations": {
+            "en": "pine tree",
+            "es": "pino"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌲"
+    },
+    {
+        "word": "Eiche",
+        "gender": "die",
+        "translations": {
+            "en": "oak tree",
+            "es": "roble"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌳"
+    },
+    {
+        "word": "Palme",
+        "gender": "die",
+        "translations": {
+            "en": "palm tree",
+            "es": "palmera"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌴"
+    },
+    {
+        "word": "Hund",
+        "gender": "der",
+        "translations": {
+            "en": "dog",
+            "es": "perro"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐕"
+    },
+    {
+        "word": "Katze",
+        "gender": "die",
+        "translations": {
+            "en": "cat",
+            "es": "gato"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐈"
+    },
+    {
+        "word": "Pferd",
+        "gender": "das",
+        "translations": {
+            "en": "horse",
+            "es": "caballo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐎"
+    },
+    {
+        "word": "Kuh",
+        "gender": "die",
+        "translations": {
+            "en": "cow",
+            "es": "vaca"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐄"
+    },
+    {
+        "word": "Schwein",
+        "gender": "das",
+        "translations": {
+            "en": "pig",
+            "es": "cerdo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐖"
+    },
+    {
+        "word": "Huhn",
+        "gender": "das",
+        "translations": {
+            "en": "chicken",
+            "es": "pollo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐓"
+    },
+    {
+        "word": "Ente",
+        "gender": "die",
+        "translations": {
+            "en": "duck",
+            "es": "pato"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🦆"
+    },
+    {
+        "word": "Schaf",
+        "gender": "das",
+        "translations": {
+            "en": "sheep",
+            "es": "oveja"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐑"
+    },
+    {
+        "word": "Ziege",
+        "gender": "die",
+        "translations": {
+            "en": "goat",
+            "es": "cabra"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐐"
+    },
+    {
+        "word": "Hase",
+        "gender": "der",
+        "translations": {
+            "en": "rabbit",
+            "es": "conejo"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐇"
+    },
+    {
+        "word": "Eichhörnchen",
+        "gender": "das",
+        "translations": {
+            "en": "squirrel",
+            "es": "ardilla"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐿️"
+    },
+    {
+        "word": "Fuchs",
+        "gender": "der",
+        "translations": {
+            "en": "fox",
+            "es": "zorro"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🦊"
+    },
+    {
+        "word": "Wolf",
+        "gender": "der",
+        "translations": {
+            "en": "wolf",
+            "es": "lobo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐺"
+    },
+    {
+        "word": "Hirsch",
+        "gender": "der",
+        "translations": {
+            "en": "deer",
+            "es": "ciervo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🦌"
+    },
+    {
+        "word": "Bär",
+        "gender": "der",
+        "translations": {
+            "en": "bear",
+            "es": "oso"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐻"
+    },
+    {
+        "word": "Affe",
+        "gender": "der",
+        "translations": {
+            "en": "monkey",
+            "es": "mono"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐒"
+    },
+    {
+        "word": "Elefant",
+        "gender": "der",
+        "translations": {
+            "en": "elephant",
+            "es": "elefante"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐘"
+    },
+    {
+        "word": "Löwe",
+        "gender": "der",
+        "translations": {
+            "en": "lion",
+            "es": "león"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🦁"
+    },
+    {
+        "word": "Tiger",
+        "gender": "der",
+        "translations": {
+            "en": "tiger",
+            "es": "tigre"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐅"
+    },
+    {
+        "word": "Schlange",
+        "gender": "die",
+        "translations": {
+            "en": "snake",
+            "es": "serpiente"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐍"
+    },
+    {
+        "word": "Eidechse",
+        "gender": "die",
+        "translations": {
+            "en": "lizard",
+            "es": "lagarto"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🦎"
+    },
+    {
+        "word": "Ameise",
+        "gender": "die",
+        "translations": {
+            "en": "ant",
+            "es": "hormiga"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐜"
+    },
+    {
+        "word": "Biene",
+        "gender": "die",
+        "translations": {
+            "en": "bee",
+            "es": "abeja"
+        },
+        "difficulty_level": 1,
+        "category": "Nature",
+        "emoji": "🐝"
+    },
+    {
+        "word": "Marienkäfer",
+        "gender": "der",
+        "translations": {
+            "en": "ladybug",
+            "es": "mariquita"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🐞"
+    },
+    {
+        "word": "Spinne",
+        "gender": "die",
+        "translations": {
+            "en": "spider",
+            "es": "araña"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🕷️"
+    },
+    {
+        "word": "Mücke",
+        "gender": "die",
+        "translations": {
+            "en": "mosquito",
+            "es": "mosquito"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🦟"
+    },
+    {
+        "word": "Hagel",
+        "gender": "der",
+        "translations": {
+            "en": "hail",
+            "es": "granizo"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌨️"
+    },
+    {
+        "word": "Regenschauer",
+        "gender": "der",
+        "translations": {
+            "en": "rain shower",
+            "es": "aguacero"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌧️"
+    },
+    {
+        "word": "Gewitter",
+        "gender": "das",
+        "translations": {
+            "en": "thunderstorm",
+            "es": "tormenta eléctrica"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⛈️"
+    },
+    {
+        "word": "Dürre",
+        "gender": "die",
+        "translations": {
+            "en": "drought",
+            "es": "sequía"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🔥"
+    },
+    {
+        "word": "Hitzewelle",
+        "gender": "die",
+        "translations": {
+            "en": "heatwave",
+            "es": "ola de calor"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🔥"
+    },
+    {
+        "word": "Niederschlag",
+        "gender": "der",
+        "translations": {
+            "en": "precipitation",
+            "es": "precipitación"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "🌧️"
+    },
+    {
+        "word": "Artenvielfalt",
+        "gender": "die",
+        "translations": {
+            "en": "biodiversity",
+            "es": "biodiversidad"
+        },
+        "difficulty_level": 3,
+        "category": "Nature",
+        "emoji": "🌍"
+    },
+    {
+        "word": "Naturschutz",
+        "gender": "der",
+        "translations": {
+            "en": "nature conservation",
+            "es": "conservación de la naturaleza"
+        },
+        "difficulty_level": 3,
+        "category": "Nature",
+        "emoji": "🌱"
+    },
+    {
+        "word": "Umweltschutz",
+        "gender": "der",
+        "translations": {
+            "en": "environmental protection",
+            "es": "protección ambiental"
+        },
+        "difficulty_level": 3,
+        "category": "Nature",
+        "emoji": "🌍"
+    },
+    {
+        "word": "Nachhaltigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "sustainability",
+            "es": "sostenibilidad"
+        },
+        "difficulty_level": 3,
+        "category": "Nature",
+        "emoji": "♻️"
+    },
+    {
+        "word": "Verschmutzung",
+        "gender": "die",
+        "translations": {
+            "en": "pollution",
+            "es": "contaminación"
+        },
+        "difficulty_level": 3,
+        "category": "Nature",
+        "emoji": "🏭"
+    },
+    {
+        "word": "Recycling",
+        "gender": "das",
+        "translations": {
+            "en": "recycling",
+            "es": "reciclaje"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "♻️"
+    },
+    {
+        "word": "Energie",
+        "gender": "die",
+        "translations": {
+            "en": "energy",
+            "es": "energía"
+        },
+        "difficulty_level": 2,
+        "category": "Nature",
+        "emoji": "⚡"
+    }
+]

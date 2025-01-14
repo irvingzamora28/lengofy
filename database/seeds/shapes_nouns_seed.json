@@ -1,0 +1,436 @@
+[
+    {
+        "word": "Form",
+        "gender": "die",
+        "translations": {
+            "en": "shape",
+            "es": "forma"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes"
+    },
+    {
+        "word": "Kreis",
+        "gender": "der",
+        "translations": {
+            "en": "circle",
+            "es": "círculo"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": "🔵"
+    },
+    {
+        "word": "Quadrat",
+        "gender": "das",
+        "translations": {
+            "en": "square",
+            "es": "cuadrado"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " 🟥"
+    },
+    {
+        "word": "Rechteck",
+        "gender": "das",
+        "translations": {
+            "en": "rectangle",
+            "es": "rectángulo"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " 🟧"
+    },
+    {
+        "word": "Dreieck",
+        "gender": "das",
+        "translations": {
+            "en": "triangle",
+            "es": "triángulo"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " 🔺"
+    },
+    {
+        "word": "Oval",
+        "gender": "das",
+        "translations": {
+            "en": "oval",
+            "es": "óvalo"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes"
+    },
+    {
+        "word": "Linie",
+        "gender": "die",
+        "translations": {
+            "en": "line",
+            "es": "línea"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " 📏"
+    },
+    {
+        "word": "Punkt",
+        "gender": "der",
+        "translations": {
+            "en": "point, dot",
+            "es": "punto"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " 📍"
+    },
+    {
+        "word": "Würfel",
+        "gender": "der",
+        "translations": {
+            "en": "cube",
+            "es": "cubo"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes",
+        "emoji": " 🧊"
+    },
+    {
+        "word": "Kugel",
+        "gender": "die",
+        "translations": {
+            "en": "sphere",
+            "es": "esfera"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes",
+        "emoji": " ⚽"
+    },
+    {
+        "word": "Zylinder",
+        "gender": "der",
+        "translations": {
+            "en": "cylinder",
+            "es": "cilindro"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Kegel",
+        "gender": "der",
+        "translations": {
+            "en": "cone",
+            "es": "cono"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes",
+        "emoji": " 🍦"
+    },
+    {
+        "word": "Pyramide",
+        "gender": "die",
+        "translations": {
+            "en": "pyramid",
+            "es": "pirámide"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes",
+        "emoji": " 🔺"
+    },
+    {
+        "word": "Stern",
+        "gender": "der",
+        "translations": {
+            "en": "star",
+            "es": "estrella"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": "⭐"
+    },
+    {
+        "word": "Herz",
+        "gender": "das",
+        "translations": {
+            "en": "heart",
+            "es": "corazón"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": "❤️"
+    },
+    {
+        "word": "Pfeil",
+        "gender": "der",
+        "translations": {
+            "en": "arrow",
+            "es": "flecha"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes",
+        "emoji": " ➡️"
+    },
+    {
+        "word": "Spirale",
+        "gender": "die",
+        "translations": {
+            "en": "spiral",
+            "es": "espiral"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Kurve",
+        "gender": "die",
+        "translations": {
+            "en": "curve",
+            "es": "curva"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Radius",
+        "gender": "der",
+        "translations": {
+            "en": "radius",
+            "es": "radio"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Durchmesser",
+        "gender": "der",
+        "translations": {
+            "en": "diameter",
+            "es": "diámetro"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Volumen",
+        "gender": "das",
+        "translations": {
+            "en": "volume",
+            "es": "volumen"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Oberfläche",
+        "gender": "die",
+        "translations": {
+            "en": "surface",
+            "es": "superficie"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Raute",
+        "gender": "die",
+        "translations": {
+            "en": "rhombus, diamond",
+            "es": "rombo"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Parallelogramm",
+        "gender": "das",
+        "translations": {
+            "en": "parallelogram",
+            "es": "paralelogramo"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Trapez",
+        "gender": "das",
+        "translations": {
+            "en": "trapezoid",
+            "es": "trapecio"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Pentagon",
+        "gender": "das",
+        "translations": {
+            "en": "pentagon",
+            "es": "pentágono"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Hexagon",
+        "gender": "das",
+        "translations": {
+            "en": "hexagon",
+            "es": "hexágono"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Oktagon",
+        "gender": "das",
+        "translations": {
+            "en": "octagon",
+            "es": "octógono"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Halbkreis",
+        "gender": "der",
+        "translations": {
+            "en": "semicircle",
+            "es": "semicírculo"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes",
+        "emoji": " 🌔"
+    },
+    {
+        "word": "Sektor",
+        "gender": "der",
+        "translations": {
+            "en": "sector (of a circle)",
+            "es": "sector (de un círculo)"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Quader",
+        "gender": "der",
+        "translations": {
+            "en": "cuboid, rectangular prism",
+            "es": "cuboide, prisma rectangular"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Prisma",
+        "gender": "das",
+        "translations": {
+            "en": "prism",
+            "es": "prisma"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Kegelstumpf",
+        "gender": "der",
+        "translations": {
+            "en": "frustum of a cone",
+            "es": "tronco de cono"
+        },
+        "difficulty_level": 3,
+        "category": "Shapes"
+    },
+    {
+        "word": "Torus",
+        "gender": "der",
+        "translations": {
+            "en": "torus",
+            "es": "toro"
+        },
+        "difficulty_level": 3,
+        "category": "Shapes"
+    },
+    {
+        "word": "Oktaeder",
+        "gender": "der",
+        "translations": {
+            "en": "octahedron",
+            "es": "octaedro"
+        },
+        "difficulty_level": 3,
+        "category": "Shapes"
+    },
+    {
+        "word": "Fläche",
+        "gender": "die",
+        "translations": {
+            "en": "area",
+            "es": "área"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Umfang",
+        "gender": "der",
+        "translations": {
+            "en": "perimeter",
+            "es": "perímetro"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Diagonale",
+        "gender": "die",
+        "translations": {
+            "en": "diagonal",
+            "es": "diagonal"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    },
+    {
+        "word": "Seite",
+        "gender": "die",
+        "translations": {
+            "en": "side (of a shape)",
+            "es": "lado (de una forma)"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes"
+    },
+    {
+        "word": "Ecke",
+        "gender": "die",
+        "translations": {
+            "en": "corner, angle",
+            "es": "esquina, ángulo"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes"
+    },
+    {
+        "word": "Mitte",
+        "gender": "die",
+        "translations": {
+            "en": "center",
+            "es": "centro"
+        },
+        "difficulty_level": 1,
+        "category": "Shapes"
+    },
+    {
+        "word": "Abstand",
+        "gender": "der",
+        "translations": {
+            "en": "distance",
+            "es": "distancia"
+        },
+        "difficulty_level": 2,
+        "category": "Shapes"
+    }
+]

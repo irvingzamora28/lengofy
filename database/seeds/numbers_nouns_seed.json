@@ -1,0 +1,849 @@
+[
+    {
+        "word": "Null",
+        "gender": null,
+        "translations": {
+            "en": "zero",
+            "es": "cero"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "0️⃣"
+    },
+    {
+        "word": "Eins",
+        "gender": null,
+        "translations": {
+            "en": "one",
+            "es": "uno"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "1️⃣"
+    },
+    {
+        "word": "Zwei",
+        "gender": null,
+        "translations": {
+            "en": "two",
+            "es": "dos"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "2️⃣"
+    },
+    {
+        "word": "Drei",
+        "gender": null,
+        "translations": {
+            "en": "three",
+            "es": "tres"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "3️⃣"
+    },
+    {
+        "word": "Vier",
+        "gender": null,
+        "translations": {
+            "en": "four",
+            "es": "cuatro"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "4️⃣"
+    },
+    {
+        "word": "Fünf",
+        "gender": null,
+        "translations": {
+            "en": "five",
+            "es": "cinco"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "5️⃣"
+    },
+    {
+        "word": "Sechs",
+        "gender": null,
+        "translations": {
+            "en": "six",
+            "es": "seis"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "6️⃣"
+    },
+    {
+        "word": "Sieben",
+        "gender": null,
+        "translations": {
+            "en": "seven",
+            "es": "siete"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "7️⃣"
+    },
+    {
+        "word": "Acht",
+        "gender": null,
+        "translations": {
+            "en": "eight",
+            "es": "ocho"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "8️⃣"
+    },
+    {
+        "word": "Neun",
+        "gender": null,
+        "translations": {
+            "en": "nine",
+            "es": "nueve"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "9️⃣"
+    },
+    {
+        "word": "Zehn",
+        "gender": null,
+        "translations": {
+            "en": "ten",
+            "es": "diez"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers",
+        "emoji": "🔟"
+    },
+    {
+        "word": "Elf",
+        "gender": null,
+        "translations": {
+            "en": "eleven",
+            "es": "once"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Zwölf",
+        "gender": null,
+        "translations": {
+            "en": "twelve",
+            "es": "doce"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Dreizehn",
+        "gender": null,
+        "translations": {
+            "en": "thirteen",
+            "es": "trece"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Vierzehn",
+        "gender": null,
+        "translations": {
+            "en": "fourteen",
+            "es": "catorce"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Fünfzehn",
+        "gender": null,
+        "translations": {
+            "en": "fifteen",
+            "es": "quince"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Sechzehn",
+        "gender": null,
+        "translations": {
+            "en": "sixteen",
+            "es": "dieciséis"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Siebzehn",
+        "gender": null,
+        "translations": {
+            "en": "seventeen",
+            "es": "diecisiete"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Achtzehn",
+        "gender": null,
+        "translations": {
+            "en": "eighteen",
+            "es": "dieciocho"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Neunzehn",
+        "gender": null,
+        "translations": {
+            "en": "nineteen",
+            "es": "diecinueve"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Zwanzig",
+        "gender": null,
+        "translations": {
+            "en": "twenty",
+            "es": "veinte"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Dreißig",
+        "gender": null,
+        "translations": {
+            "en": "thirty",
+            "es": "treinta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Vierzig",
+        "gender": null,
+        "translations": {
+            "en": "forty",
+            "es": "cuarenta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Fünfzig",
+        "gender": null,
+        "translations": {
+            "en": "fifty",
+            "es": "cincuenta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Sechzig",
+        "gender": null,
+        "translations": {
+            "en": "sixty",
+            "es": "sesenta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Siebzig",
+        "gender": null,
+        "translations": {
+            "en": "seventy",
+            "es": "setenta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Achtzig",
+        "gender": null,
+        "translations": {
+            "en": "eighty",
+            "es": "ochenta"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Neunzig",
+        "gender": null,
+        "translations": {
+            "en": "ninety",
+            "es": "noventa"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Hundert",
+        "gender": null,
+        "translations": {
+            "en": "one hundred",
+            "es": "cien"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Tausend",
+        "gender": null,
+        "translations": {
+            "en": "one thousand",
+            "es": "mil"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Million",
+        "gender": "die",
+        "translations": {
+            "en": "million",
+            "es": "millón"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Milliarde",
+        "gender": "die",
+        "translations": {
+            "en": "billion",
+            "es": "mil millones"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Erste",
+        "gender": "null",
+        "translations": {
+            "en": "first",
+            "es": "primero"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Zweite",
+        "gender": "null",
+        "translations": {
+            "en": "second",
+            "es": "segundo"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Dritte",
+        "gender": "null",
+        "translations": {
+            "en": "third",
+            "es": "tercero"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Vierte",
+        "gender": "null",
+        "translations": {
+            "en": "fourth",
+            "es": "cuarto"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Fünfte",
+        "gender": "null",
+        "translations": {
+            "en": "fifth",
+            "es": "quinto"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Sechste",
+        "gender": "null",
+        "translations": {
+            "en": "sixth",
+            "es": "sexto"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Siebte",
+        "gender": "null",
+        "translations": {
+            "en": "seventh",
+            "es": "séptimo"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Achte",
+        "gender": "null",
+        "translations": {
+            "en": "eighth",
+            "es": "octavo"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Neunte",
+        "gender": "null",
+        "translations": {
+            "en": "ninth",
+            "es": "noveno"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Zehnte",
+        "gender": "null",
+        "translations": {
+            "en": "tenth",
+            "es": "décimo"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "ein Halb",
+        "gender": null,
+        "translations": {
+            "en": "one half (1/2)",
+            "es": "un medio (1/2)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "ein Drittel",
+        "gender": null,
+        "translations": {
+            "en": "one third (1/3)",
+            "es": "un tercio (1/3)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "ein Viertel",
+        "gender": null,
+        "translations": {
+            "en": "one quarter (1/4)",
+            "es": "un cuarto (1/4)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "drei Viertel",
+        "gender": null,
+        "translations": {
+            "en": "three quarters (3/4)",
+            "es": "tres cuartos (3/4)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "ein Fünftel",
+        "gender": null,
+        "translations": {
+            "en": "one fifth (1/5)",
+            "es": "un quinto (1/5)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "ein Zehntel",
+        "gender": null,
+        "translations": {
+            "en": "one tenth (1/10)",
+            "es": "un décimo (1/10)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "0,1 (null Komma eins)",
+        "gender": null,
+        "translations": {
+            "en": "zero point one (0.1)",
+            "es": "cero coma uno (0.1)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "1,5 (eins Komma fünf)",
+        "gender": null,
+        "translations": {
+            "en": "one point five (1.5)",
+            "es": "uno coma cinco (1.5)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Prozent",
+        "gender": "das",
+        "translations": {
+            "en": "percent",
+            "es": "por ciento"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": " %"
+    },
+    {
+        "word": "Promille",
+        "gender": "das",
+        "translations": {
+            "en": "per mille, permillage",
+            "es": "por mil"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "doppelt",
+        "gender": "adj",
+        "translations": {
+            "en": "double",
+            "es": "doble"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "dreifach",
+        "gender": "adj",
+        "translations": {
+            "en": "triple",
+            "es": "triple"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "vierfach",
+        "gender": "adj",
+        "translations": {
+            "en": "fourfold",
+            "es": "cuádruple"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "mehrfach",
+        "gender": "adj",
+        "translations": {
+            "en": "multiple",
+            "es": "múltiple"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "wenig",
+        "gender": "adj",
+        "translations": {
+            "en": "few, little",
+            "es": "poco"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "einige",
+        "gender": "adj",
+        "translations": {
+            "en": "some, several",
+            "es": "algunos"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "viele",
+        "gender": "adj",
+        "translations": {
+            "en": "many",
+            "es": "muchos"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "mehrere",
+        "gender": "adj",
+        "translations": {
+            "en": "several",
+            "es": "varios"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "alle",
+        "gender": "adj",
+        "translations": {
+            "en": "all",
+            "es": "todos"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "beide",
+        "gender": "adj",
+        "translations": {
+            "en": "both",
+            "es": "ambos"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "halb",
+        "gender": "adj",
+        "translations": {
+            "en": "half",
+            "es": "medio"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "ganz",
+        "gender": "adj",
+        "translations": {
+            "en": "whole",
+            "es": "todo"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Billion",
+        "gender": "die",
+        "translations": {
+            "en": "trillion",
+            "es": "billón"
+        },
+        "difficulty_level": 3,
+        "category": "Numbers"
+    },
+    {
+        "word": "Billiarde",
+        "gender": "die",
+        "translations": {
+            "en": "quadrillion",
+            "es": "millardo"
+        },
+        "difficulty_level": 3,
+        "category": "Numbers"
+    },
+    {
+        "word": "plus",
+        "gender": "prep",
+        "translations": {
+            "en": "plus",
+            "es": "más"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": "➕"
+    },
+    {
+        "word": "minus",
+        "gender": "prep",
+        "translations": {
+            "en": "minus",
+            "es": "menos"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": "➖"
+    },
+    {
+        "word": "mal",
+        "gender": "prep",
+        "translations": {
+            "en": "times",
+            "es": "por"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": " ✖️"
+    },
+    {
+        "word": "geteilt durch",
+        "gender": "prep",
+        "translations": {
+            "en": "divided by",
+            "es": "dividido por"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": "➗"
+    },
+    {
+        "word": "ist gleich",
+        "gender": "prep",
+        "translations": {
+            "en": "equals",
+            "es": "es igual a"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers",
+        "emoji": "="
+    },
+    {
+        "word": "Quadrat",
+        "gender": "das",
+        "translations": {
+            "en": "square",
+            "es": "cuadrado"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Quadratwurzel",
+        "gender": "die",
+        "translations": {
+            "en": "square root",
+            "es": "raíz cuadrada"
+        },
+        "difficulty_level": 3,
+        "category": "Numbers"
+    },
+    {
+        "word": "Kubik",
+        "gender": "das",
+        "translations": {
+            "en": "cubic",
+            "es": "cúbico"
+        },
+        "difficulty_level": 3,
+        "category": "Numbers"
+    },
+    {
+        "word": "Zahl",
+        "gender": "die",
+        "translations": {
+            "en": "number",
+            "es": "número"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Ziffer",
+        "gender": "die",
+        "translations": {
+            "en": "digit, figure",
+            "es": "dígito, cifra"
+        },
+        "difficulty_level": 1,
+        "category": "Numbers"
+    },
+    {
+        "word": "Anzahl",
+        "gender": "die",
+        "translations": {
+            "en": "amount, quantity",
+            "es": "cantidad"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Menge",
+        "gender": "die",
+        "translations": {
+            "en": "quantity, amount",
+            "es": "cantidad"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Durchschnitt",
+        "gender": "der",
+        "translations": {
+            "en": "average",
+            "es": "promedio"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Summe",
+        "gender": "die",
+        "translations": {
+            "en": "sum",
+            "es": "suma"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "Reihe",
+        "gender": "die",
+        "translations": {
+            "en": "series",
+            "es": "serie"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "ungerade",
+        "gender": "adj",
+        "translations": {
+            "en": "odd (number)",
+            "es": "impar (número)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    },
+    {
+        "word": "gerade",
+        "gender": "adj",
+        "translations": {
+            "en": "even (number)",
+            "es": "par (número)"
+        },
+        "difficulty_level": 2,
+        "category": "Numbers"
+    }
+]

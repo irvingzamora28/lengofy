@@ -1,0 +1,877 @@
+[
+    {
+        "word": "Gesundheit",
+        "gender": "die",
+        "translations": {
+            "en": "health",
+            "es": "salud"
+        },
+        "difficulty_level": 1,
+        "category": "Health"
+    },
+    {
+        "word": "Krankheit",
+        "gender": "die",
+        "translations": {
+            "en": "illness",
+            "es": "enfermedad"
+        },
+        "difficulty_level": 1,
+        "category": "Health"
+    },
+    {
+        "word": "Arzt",
+        "gender": "der",
+        "translations": {
+            "en": "doctor (male)",
+            "es": "médico"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Ärztin",
+        "gender": "die",
+        "translations": {
+            "en": "doctor (female)",
+            "es": "médica"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Krankenhaus",
+        "gender": "das",
+        "translations": {
+            "en": "hospital",
+            "es": "hospital"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "🏥"
+    },
+    {
+        "word": "Apotheke",
+        "gender": "die",
+        "translations": {
+            "en": "pharmacy",
+            "es": "farmacia"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 💊"
+    },
+    {
+        "word": "Medikament",
+        "gender": "das",
+        "translations": {
+            "en": "medicine",
+            "es": "medicamento"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "💊"
+    },
+    {
+        "word": "Tablette",
+        "gender": "die",
+        "translations": {
+            "en": "tablet",
+            "es": "pastilla"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "💊"
+    },
+    {
+        "word": "Rezept",
+        "gender": "das",
+        "translations": {
+            "en": "prescription",
+            "es": "receta"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 📝"
+    },
+    {
+        "word": "Schmerz",
+        "gender": "der",
+        "translations": {
+            "en": "pain",
+            "es": "dolor"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Fieber",
+        "gender": "das",
+        "translations": {
+            "en": "fever",
+            "es": "fiebre"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤒"
+    },
+    {
+        "word": "Husten",
+        "gender": "der",
+        "translations": {
+            "en": "cough",
+            "es": "tos"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤧"
+    },
+    {
+        "word": "Schnupfen",
+        "gender": "der",
+        "translations": {
+            "en": "cold",
+            "es": "resfriado"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤧"
+    },
+    {
+        "word": "Grippe",
+        "gender": "die",
+        "translations": {
+            "en": "flu",
+            "es": "gripe"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤒"
+    },
+    {
+        "word": "Verletzung",
+        "gender": "die",
+        "translations": {
+            "en": "injury",
+            "es": "lesión"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "🤕"
+    },
+    {
+        "word": "Unfall",
+        "gender": "der",
+        "translations": {
+            "en": "accident",
+            "es": "accidente"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Bruch",
+        "gender": "der",
+        "translations": {
+            "en": "fracture",
+            "es": "fractura"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Operation",
+        "gender": "die",
+        "translations": {
+            "en": "operation",
+            "es": "operación"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Behandlung",
+        "gender": "die",
+        "translations": {
+            "en": "treatment",
+            "es": "tratamiento"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Impfung",
+        "gender": "die",
+        "translations": {
+            "en": "vaccination",
+            "es": "vacunación"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "💉"
+    },
+    {
+        "word": "Allergie",
+        "gender": "die",
+        "translations": {
+            "en": "allergy",
+            "es": "alergia"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Asthma",
+        "gender": "das",
+        "translations": {
+            "en": "asthma",
+            "es": "asma"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Diabetes",
+        "gender": "der",
+        "translations": {
+            "en": "diabetes",
+            "es": "diabetes"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Krebs",
+        "gender": "der",
+        "translations": {
+            "en": "cancer",
+            "es": "cáncer"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Herzinfarkt",
+        "gender": "der",
+        "translations": {
+            "en": "heart attack",
+            "es": "ataque al corazón"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "❤️‍🩹"
+    },
+    {
+        "word": "Blutdruck",
+        "gender": "der",
+        "translations": {
+            "en": "blood pressure",
+            "es": "presión arterial"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Übelkeit",
+        "gender": "die",
+        "translations": {
+            "en": "nausea",
+            "es": "náusea"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🤢"
+    },
+    {
+        "word": "Durchfall",
+        "gender": "der",
+        "translations": {
+            "en": "diarrhea",
+            "es": "diarrea"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Erkältung",
+        "gender": "die",
+        "translations": {
+            "en": "cold",
+            "es": "resfriado"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤧"
+    },
+    {
+        "word": "Entzündung",
+        "gender": "die",
+        "translations": {
+            "en": "inflammation",
+            "es": "inflamación"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Schwindel",
+        "gender": "der",
+        "translations": {
+            "en": "dizziness",
+            "es": "mareo"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 😵‍💫"
+    },
+    {
+        "word": "Kopfschmerzen",
+        "gender": "die",
+        "translations": {
+            "en": "headache",
+            "es": "dolor de cabeza"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Bauchschmerzen",
+        "gender": "die",
+        "translations": {
+            "en": "stomachache",
+            "es": "dolor de estómago"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Rückenschmerzen",
+        "gender": "die",
+        "translations": {
+            "en": "back pain",
+            "es": "dolor de espalda"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Müdigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "fatigue",
+            "es": "fatiga"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 😴"
+    },
+    {
+        "word": "Schlaflosigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "insomnia",
+            "es": "insomnio"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 😩"
+    },
+    {
+        "word": "Ausschlag",
+        "gender": "der",
+        "translations": {
+            "en": "rash",
+            "es": "erupción"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 😖"
+    },
+    {
+        "word": "Juckreiz",
+        "gender": "der",
+        "translations": {
+            "en": "itchiness",
+            "es": "picazón"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 😖"
+    },
+    {
+        "word": "Blutung",
+        "gender": "die",
+        "translations": {
+            "en": "bleeding",
+            "es": "sangrado"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Schwellung",
+        "gender": "die",
+        "translations": {
+            "en": "swelling",
+            "es": "hinchazón"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Übergewicht",
+        "gender": "das",
+        "translations": {
+            "en": "overweight",
+            "es": "sobrepeso"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Untergewicht",
+        "gender": "das",
+        "translations": {
+            "en": "underweight",
+            "es": "bajo peso"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Bluthochdruck",
+        "gender": "der",
+        "translations": {
+            "en": "hypertension (high blood pressure)",
+            "es": "hipertensión (presión arterial alta)"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Blutarmut",
+        "gender": "die",
+        "translations": {
+            "en": "anemia",
+            "es": "anemia"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Migräne",
+        "gender": "die",
+        "translations": {
+            "en": "migraine",
+            "es": "migraña"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🤕"
+    },
+    {
+        "word": "Schlaganfall",
+        "gender": "der",
+        "translations": {
+            "en": "stroke",
+            "es": "derrame cerebral"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Therapie",
+        "gender": "die",
+        "translations": {
+            "en": "therapy",
+            "es": "terapia"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Rehabilitation",
+        "gender": "die",
+        "translations": {
+            "en": "rehabilitation",
+            "es": "rehabilitación"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Physiotherapie",
+        "gender": "die",
+        "translations": {
+            "en": "physiotherapy",
+            "es": "fisioterapia"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Psychotherapie",
+        "gender": "die",
+        "translations": {
+            "en": "psychotherapy",
+            "es": "psicoterapia"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Röntgen",
+        "gender": "das",
+        "translations": {
+            "en": "X-ray",
+            "es": "radiografía"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Ultraschall",
+        "gender": "der",
+        "translations": {
+            "en": "ultrasound",
+            "es": "ultrasonido"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "MRT",
+        "gender": "die",
+        "translations": {
+            "en": "MRI (Magnetic Resonance Imaging)",
+            "es": "RM (Resonancia Magnética)"
+        },
+        "difficulty_level": 3,
+        "category": "Health"
+    },
+    {
+        "word": "EKG",
+        "gender": "das",
+        "translations": {
+            "en": "ECG (Electrocardiogram)",
+            "es": "ECG (Electrocardiograma)"
+        },
+        "difficulty_level": 3,
+        "category": "Health"
+    },
+    {
+        "word": "Blutuntersuchung",
+        "gender": "die",
+        "translations": {
+            "en": "blood test",
+            "es": "análisis de sangre"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Urinprobe",
+        "gender": "die",
+        "translations": {
+            "en": "urine test",
+            "es": "análisis de orina"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Verband",
+        "gender": "der",
+        "translations": {
+            "en": "bandage",
+            "es": "vendaje"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🩹"
+    },
+    {
+        "word": "Gips",
+        "gender": "der",
+        "translations": {
+            "en": "cast",
+            "es": "yeso"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🩹"
+    },
+    {
+        "word": "Spritze",
+        "gender": "die",
+        "translations": {
+            "en": "injection, syringe",
+            "es": "inyección, jeringa"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "💉"
+    },
+    {
+        "word": "Transplantation",
+        "gender": "die",
+        "translations": {
+            "en": "transplantation",
+            "es": "trasplante"
+        },
+        "difficulty_level": 3,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Dialyse",
+        "gender": "die",
+        "translations": {
+            "en": "dialysis",
+            "es": "diálisis"
+        },
+        "difficulty_level": 3,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Chemotherapie",
+        "gender": "die",
+        "translations": {
+            "en": "chemotherapy",
+            "es": "quimioterapia"
+        },
+        "difficulty_level": 3,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Strahlentherapie",
+        "gender": "die",
+        "translations": {
+            "en": "radiotherapy",
+            "es": "radioterapia"
+        },
+        "difficulty_level": 3,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Ernährung",
+        "gender": "die",
+        "translations": {
+            "en": "nutrition",
+            "es": "nutrición"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Diät",
+        "gender": "die",
+        "translations": {
+            "en": "diet",
+            "es": "dieta"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Bewegung",
+        "gender": "die",
+        "translations": {
+            "en": "exercise",
+            "es": "ejercicio"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🏃"
+    },
+    {
+        "word": "Sport",
+        "gender": "der",
+        "translations": {
+            "en": "sport",
+            "es": "deporte"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": "⚽"
+    },
+    {
+        "word": "Entspannung",
+        "gender": "die",
+        "translations": {
+            "en": "relaxation",
+            "es": "relajación"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "🧘"
+    },
+    {
+        "word": "Stress",
+        "gender": "der",
+        "translations": {
+            "en": "stress",
+            "es": "estrés"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 😫"
+    },
+    {
+        "word": "Schlaf",
+        "gender": "der",
+        "translations": {
+            "en": "sleep",
+            "es": "sueño"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 😴"
+    },
+    {
+        "word": "Hygiene",
+        "gender": "die",
+        "translations": {
+            "en": "hygiene",
+            "es": "higiene"
+        },
+        "difficulty_level": 1,
+        "category": "Health",
+        "emoji": " 🧼"
+    },
+    {
+        "word": "Vorsorge",
+        "gender": "die",
+        "translations": {
+            "en": "prevention",
+            "es": "prevención"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Impfausweis",
+        "gender": "der",
+        "translations": {
+            "en": "vaccination card",
+            "es": "tarjeta de vacunación"
+        },
+        "difficulty_level": 2,
+        "category": "Health"
+    },
+    {
+        "word": "Zahnarzt",
+        "gender": "der",
+        "translations": {
+            "en": "dentist (male)",
+            "es": "dentista"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Zahnärztin",
+        "gender": "die",
+        "translations": {
+            "en": "dentist (female)",
+            "es": "dentista"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Chirurg",
+        "gender": "der",
+        "translations": {
+            "en": "surgeon (male)",
+            "es": "cirujano"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Chirurgin",
+        "gender": "die",
+        "translations": {
+            "en": "surgeon (female)",
+            "es": "cirujana"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 👩‍⚕️"
+    },
+    {
+        "word": "Spezialist",
+        "gender": "der",
+        "translations": {
+            "en": "specialist (male)",
+            "es": "especialista"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Spezialistin",
+        "gender": "die",
+        "translations": {
+            "en": "specialist (female)",
+            "es": "especialista"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Notaufnahme",
+        "gender": "die",
+        "translations": {
+            "en": "emergency room",
+            "es": "sala de emergencia"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🏥"
+    },
+    {
+        "word": "Krankenstation",
+        "gender": "die",
+        "translations": {
+            "en": "hospital ward",
+            "es": "sala de hospital"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🏥"
+    },
+    {
+        "word": "Arztpraxis",
+        "gender": "die",
+        "translations": {
+            "en": "doctor's office",
+            "es": "consultorio médico"
+        },
+        "difficulty_level": 2,
+        "category": "Health",
+        "emoji": " 🧑‍⚕️"
+    }
+]

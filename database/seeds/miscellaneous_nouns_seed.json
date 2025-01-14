@@ -1,0 +1,863 @@
+[
+    {
+        "word": "Ding",
+        "gender": "das",
+        "translations": {
+            "en": "thing",
+            "es": "cosa"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Sache",
+        "gender": "die",
+        "translations": {
+            "en": "matter, thing",
+            "es": "asunto, cosa"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Idee",
+        "gender": "die",
+        "translations": {
+            "en": "idea",
+            "es": "idea"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "💡"
+    },
+    {
+        "word": "Gedanke",
+        "gender": "der",
+        "translations": {
+            "en": "thought",
+            "es": "pensamiento"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "💭"
+    },
+    {
+        "word": "Problem",
+        "gender": "das",
+        "translations": {
+            "en": "problem",
+            "es": "problema"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Lösung",
+        "gender": "die",
+        "translations": {
+            "en": "solution",
+            "es": "solución"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Antwort",
+        "gender": "die",
+        "translations": {
+            "en": "answer",
+            "es": "respuesta"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Frage",
+        "gender": "die",
+        "translations": {
+            "en": "question",
+            "es": "pregunta"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Grund",
+        "gender": "der",
+        "translations": {
+            "en": "reason",
+            "es": "razón"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Name",
+        "gender": "der",
+        "translations": {
+            "en": "name",
+            "es": "nombre"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Wort",
+        "gender": "das",
+        "translations": {
+            "en": "word",
+            "es": "palabra"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Sprache",
+        "gender": "die",
+        "translations": {
+            "en": "language",
+            "es": "idioma"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Geschichte",
+        "gender": "die",
+        "translations": {
+            "en": "story",
+            "es": "historia"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Macht",
+        "gender": "die",
+        "translations": {
+            "en": "power",
+            "es": "poder"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Liebe",
+        "gender": "die",
+        "translations": {
+            "en": "love",
+            "es": "amor"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "❤️"
+    },
+    {
+        "word": "Freude",
+        "gender": "die",
+        "translations": {
+            "en": "joy",
+            "es": "alegría"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": " 😀"
+    },
+    {
+        "word": "Trauer",
+        "gender": "die",
+        "translations": {
+            "en": "sorrow",
+            "es": "tristeza"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous",
+        "emoji": " 😢"
+    },
+    {
+        "word": "Angst",
+        "gender": "die",
+        "translations": {
+            "en": "fear",
+            "es": "miedo"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous",
+        "emoji": "😨"
+    },
+    {
+        "word": "Hoffnung",
+        "gender": "die",
+        "translations": {
+            "en": "hope",
+            "es": "esperanza"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Gefühl",
+        "gender": "das",
+        "translations": {
+            "en": "feeling",
+            "es": "sentimiento"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Glück",
+        "gender": "das",
+        "translations": {
+            "en": "luck, happiness",
+            "es": "suerte, felicidad"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🍀"
+    },
+    {
+        "word": "Chance",
+        "gender": "die",
+        "translations": {
+            "en": "chance",
+            "es": "oportunidad"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Erfolg",
+        "gender": "der",
+        "translations": {
+            "en": "success",
+            "es": "éxito"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Fehler",
+        "gender": "der",
+        "translations": {
+            "en": "mistake",
+            "es": "error"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Wahrheit",
+        "gender": "die",
+        "translations": {
+            "en": "truth",
+            "es": "verdad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Lüge",
+        "gender": "die",
+        "translations": {
+            "en": "lie",
+            "es": "mentira"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Geheimnis",
+        "gender": "das",
+        "translations": {
+            "en": "secret",
+            "es": "secreto"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Geld",
+        "gender": "das",
+        "translations": {
+            "en": "money",
+            "es": "dinero"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "💰"
+    },
+    {
+        "word": "Preis",
+        "gender": "der",
+        "translations": {
+            "en": "price",
+            "es": "precio"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Geschenk",
+        "gender": "das",
+        "translations": {
+            "en": "gift",
+            "es": "regalo"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🎁"
+    },
+    {
+        "word": "Spiel",
+        "gender": "das",
+        "translations": {
+            "en": "game",
+            "es": "juego"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": " 🎮"
+    },
+    {
+        "word": "Musik",
+        "gender": "die",
+        "translations": {
+            "en": "music",
+            "es": "música"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🎵"
+    },
+    {
+        "word": "Kunst",
+        "gender": "die",
+        "translations": {
+            "en": "art",
+            "es": "arte"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🎨"
+    },
+    {
+        "word": "Buch",
+        "gender": "das",
+        "translations": {
+            "en": "book",
+            "es": "libro"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "📖"
+    },
+    {
+        "word": "Film",
+        "gender": "der",
+        "translations": {
+            "en": "movie, film",
+            "es": "película, filme"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": " 🎬"
+    },
+    {
+        "word": "Internet",
+        "gender": "das",
+        "translations": {
+            "en": "internet",
+            "es": "internet"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🌐"
+    },
+    {
+        "word": "System",
+        "gender": "das",
+        "translations": {
+            "en": "system",
+            "es": "sistema"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Methode",
+        "gender": "die",
+        "translations": {
+            "en": "method",
+            "es": "método"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Prozess",
+        "gender": "der",
+        "translations": {
+            "en": "process",
+            "es": "proceso"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Qualität",
+        "gender": "die",
+        "translations": {
+            "en": "quality",
+            "es": "calidad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Menge",
+        "gender": "die",
+        "translations": {
+            "en": "quantity, amount",
+            "es": "cantidad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Vergleich",
+        "gender": "der",
+        "translations": {
+            "en": "comparison",
+            "es": "comparación"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Unterschied",
+        "gender": "der",
+        "translations": {
+            "en": "difference",
+            "es": "diferencia"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Ähnlichkeit",
+        "gender": "die",
+        "translations": {
+            "en": "similarity",
+            "es": "similitud"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Möglichkeit",
+        "gender": "die",
+        "translations": {
+            "en": "possibility",
+            "es": "posibilidad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Notwendigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "necessity",
+            "es": "necesidad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Freiheit",
+        "gender": "die",
+        "translations": {
+            "en": "freedom",
+            "es": "libertad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous",
+        "emoji": "🕊️"
+    },
+    {
+        "word": "Gerechtigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "justice",
+            "es": "justicia"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Verantwortung",
+        "gender": "die",
+        "translations": {
+            "en": "responsibility",
+            "es": "responsabilidad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Sicherheit",
+        "gender": "die",
+        "translations": {
+            "en": "security",
+            "es": "seguridad"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous",
+        "emoji": " 🔒"
+    },
+    {
+        "word": "Frieden",
+        "gender": "der",
+        "translations": {
+            "en": "peace",
+            "es": "paz"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous",
+        "emoji": " 🕊️"
+    },
+    {
+        "word": "Kultur",
+        "gender": "die",
+        "translations": {
+            "en": "culture",
+            "es": "cultura"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Tradition",
+        "gender": "die",
+        "translations": {
+            "en": "tradition",
+            "es": "tradición"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Wissen",
+        "gender": "das",
+        "translations": {
+            "en": "knowledge",
+            "es": "conocimiento"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Erfahrung",
+        "gender": "die",
+        "translations": {
+            "en": "experience",
+            "es": "experiencia"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Geduld",
+        "gender": "die",
+        "translations": {
+            "en": "patience",
+            "es": "paciencia"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Mut",
+        "gender": "der",
+        "translations": {
+            "en": "courage",
+            "es": "coraje"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Respekt",
+        "gender": "der",
+        "translations": {
+            "en": "respect",
+            "es": "respeto"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Vertrauen",
+        "gender": "das",
+        "translations": {
+            "en": "trust",
+            "es": "confianza"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Dankbarkeit",
+        "gender": "die",
+        "translations": {
+            "en": "gratitude",
+            "es": "gratitud"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Anstrengung",
+        "gender": "die",
+        "translations": {
+            "en": "effort",
+            "es": "esfuerzo"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "deshalb",
+        "gender": "adv",
+        "translations": {
+            "en": "therefore, that's why",
+            "es": "por lo tanto, por eso"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "trotzdem",
+        "gender": "adv",
+        "translations": {
+            "en": "nevertheless",
+            "es": "sin embargo"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "außerdem",
+        "gender": "adv",
+        "translations": {
+            "en": "besides, moreover",
+            "es": "además"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "dennoch",
+        "gender": "adv",
+        "translations": {
+            "en": "yet, still",
+            "es": "sin embargo"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "allerdings",
+        "gender": "adv",
+        "translations": {
+            "en": "however",
+            "es": "sin embargo"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "sowohl...als auch",
+        "gender": "phrase",
+        "translations": {
+            "en": "both...and",
+            "es": "tanto...como"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "entweder...oder",
+        "gender": "phrase",
+        "translations": {
+            "en": "either...or",
+            "es": "o...o"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "weder...noch",
+        "gender": "phrase",
+        "translations": {
+            "en": "neither...nor",
+            "es": "ni...ni"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "sondern",
+        "gender": "adv",
+        "translations": {
+            "en": "but rather",
+            "es": "sino"
+        },
+        "difficulty_level": 2,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "zusammen",
+        "gender": "adv",
+        "translations": {
+            "en": "together",
+            "es": "juntos"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "allein",
+        "gender": "adv",
+        "translations": {
+            "en": "alone",
+            "es": "solo"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "besonders",
+        "gender": "adv",
+        "translations": {
+            "en": "especially",
+            "es": "especialmente"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "vielleicht",
+        "gender": "adv",
+        "translations": {
+            "en": "perhaps, maybe",
+            "es": "quizás, tal vez"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Adresse",
+        "gender": "die",
+        "translations": {
+            "en": "address",
+            "es": "dirección"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Telefonnummer",
+        "gender": "die",
+        "translations": {
+            "en": "phone number",
+            "es": "número de teléfono"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Ticket",
+        "gender": "das",
+        "translations": {
+            "en": "ticket",
+            "es": "boleto"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "🎫"
+    },
+    {
+        "word": "Rechnung",
+        "gender": "die",
+        "translations": {
+            "en": "bill, invoice",
+            "es": "factura"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Formular",
+        "gender": "das",
+        "translations": {
+            "en": "form",
+            "es": "formulario"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Unterschrift",
+        "gender": "die",
+        "translations": {
+            "en": "signature",
+            "es": "firma"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "Datum",
+        "gender": "das",
+        "translations": {
+            "en": "date",
+            "es": "fecha"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    },
+    {
+        "word": "E-Mail",
+        "gender": "die",
+        "translations": {
+            "en": "email",
+            "es": "correo electrónico"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": "📧"
+    },
+    {
+        "word": "Passwort",
+        "gender": "das",
+        "translations": {
+            "en": "password",
+            "es": "contraseña"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous",
+        "emoji": " 🔑"
+    },
+    {
+        "word": "Symbol",
+        "gender": "das",
+        "translations": {
+            "en": "symbol",
+            "es": "símbolo"
+        },
+        "difficulty_level": 1,
+        "category": "Miscellaneous"
+    }
+]

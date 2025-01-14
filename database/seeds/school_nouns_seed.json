@@ -1,0 +1,914 @@
+[
+    {
+        "word": "Schule",
+        "gender": "die",
+        "translations": {
+            "en": "school",
+            "es": "escuela"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🏫"
+    },
+    {
+        "word": "Klassenzimmer",
+        "gender": "das",
+        "translations": {
+            "en": "classroom",
+            "es": "aula"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🗄️"
+    },
+    {
+        "word": "Lehrer",
+        "gender": "der",
+        "translations": {
+            "en": "teacher (male)",
+            "es": "profesor"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🧑‍🏫"
+    },
+    {
+        "word": "Lehrerin",
+        "gender": "die",
+        "translations": {
+            "en": "teacher (female)",
+            "es": "profesora"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "👩‍🏫"
+    },
+    {
+        "word": "Schüler",
+        "gender": "der",
+        "translations": {
+            "en": "student (male)",
+            "es": "alumno"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🧑‍🎓"
+    },
+    {
+        "word": "Schülerin",
+        "gender": "die",
+        "translations": {
+            "en": "student (female)",
+            "es": "alumna"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "👩‍🎓"
+    },
+    {
+        "word": "Buch",
+        "gender": "das",
+        "translations": {
+            "en": "book",
+            "es": "libro"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "📖"
+    },
+    {
+        "word": "Heft",
+        "gender": "das",
+        "translations": {
+            "en": "notebook",
+            "es": "cuaderno"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "📒"
+    },
+    {
+        "word": "Stift",
+        "gender": "der",
+        "translations": {
+            "en": "pen",
+            "es": "bolígrafo"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🖋️"
+    },
+    {
+        "word": "Bleistift",
+        "gender": "der",
+        "translations": {
+            "en": "pencil",
+            "es": "lápiz"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "✏️"
+    },
+    {
+        "word": "Radiergummi",
+        "gender": "der",
+        "translations": {
+            "en": "eraser",
+            "es": "goma de borrar"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🧽"
+    },
+    {
+        "word": "Lineal",
+        "gender": "das",
+        "translations": {
+            "en": "ruler",
+            "es": "regla"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "📏"
+    },
+    {
+        "word": "Schere",
+        "gender": "die",
+        "translations": {
+            "en": "scissors",
+            "es": "tijeras"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "✂️"
+    },
+    {
+        "word": "Schultasche",
+        "gender": "die",
+        "translations": {
+            "en": "schoolbag",
+            "es": "mochila"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🎒"
+    },
+    {
+        "word": "Tafel",
+        "gender": "die",
+        "translations": {
+            "en": "blackboard/whiteboard",
+            "es": "pizarra"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Kreide",
+        "gender": "die",
+        "translations": {
+            "en": "chalk",
+            "es": "tiza"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Computer",
+        "gender": "der",
+        "translations": {
+            "en": "computer",
+            "es": "ordenador"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 💻"
+    },
+    {
+        "word": "Laptop",
+        "gender": "der",
+        "translations": {
+            "en": "laptop",
+            "es": "portátil"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "💻"
+    },
+    {
+        "word": "Tisch",
+        "gender": "der",
+        "translations": {
+            "en": "desk/table",
+            "es": "mesa"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Stuhl",
+        "gender": "der",
+        "translations": {
+            "en": "chair",
+            "es": "silla"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🪑"
+    },
+    {
+        "word": "Test",
+        "gender": "der",
+        "translations": {
+            "en": "test",
+            "es": "examen"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Prüfung",
+        "gender": "die",
+        "translations": {
+            "en": "exam",
+            "es": "examen"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Note",
+        "gender": "die",
+        "translations": {
+            "en": "grade",
+            "es": "nota"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Hausaufgaben",
+        "gender": "die",
+        "translations": {
+            "en": "homework",
+            "es": "deberes"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Pause",
+        "gender": "die",
+        "translations": {
+            "en": "break",
+            "es": "recreo"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Ferien",
+        "gender": "die",
+        "translations": {
+            "en": "holidays",
+            "es": "vacaciones"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🏖️"
+    },
+    {
+        "word": "Projekt",
+        "gender": "das",
+        "translations": {
+            "en": "project",
+            "es": "proyecto"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Fach",
+        "gender": "das",
+        "translations": {
+            "en": "subject",
+            "es": "asignatura"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Mathe",
+        "gender": "die",
+        "translations": {
+            "en": "math",
+            "es": "matemáticas"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "➗"
+    },
+    {
+        "word": "Wissenschaft",
+        "gender": "die",
+        "translations": {
+            "en": "science",
+            "es": "ciencia"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "🔬"
+    },
+    {
+        "word": "Geschichte",
+        "gender": "die",
+        "translations": {
+            "en": "history",
+            "es": "historia"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 📜"
+    },
+    {
+        "word": "Kunst",
+        "gender": "die",
+        "translations": {
+            "en": "art",
+            "es": "arte"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "🎨"
+    },
+    {
+        "word": "Musik",
+        "gender": "die",
+        "translations": {
+            "en": "music",
+            "es": "música"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "🎵"
+    },
+    {
+        "word": "Sport",
+        "gender": "der",
+        "translations": {
+            "en": "physical education",
+            "es": "educación física"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "⚽"
+    },
+    {
+        "word": "Bibliothek",
+        "gender": "die",
+        "translations": {
+            "en": "library",
+            "es": "biblioteca"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 📚"
+    },
+    {
+        "word": "Direktor",
+        "gender": "der",
+        "translations": {
+            "en": "principal (male)",
+            "es": "director"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Direktorin",
+        "gender": "die",
+        "translations": {
+            "en": "principal (female)",
+            "es": "directora"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Hausmeister",
+        "gender": "der",
+        "translations": {
+            "en": "caretaker, janitor",
+            "es": "conserje"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Sekretär",
+        "gender": "der",
+        "translations": {
+            "en": "secretary (male)",
+            "es": "secretario"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Sekretärin",
+        "gender": "die",
+        "translations": {
+            "en": "secretary (female)",
+            "es": "secretaria"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Schulpsychologe",
+        "gender": "der",
+        "translations": {
+            "en": "school psychologist (male)",
+            "es": "psicólogo escolar"
+        },
+        "difficulty_level": 3,
+        "category": "School"
+    },
+    {
+        "word": "Schulpsychologin",
+        "gender": "die",
+        "translations": {
+            "en": "school psychologist (female)",
+            "es": "psicóloga escolar"
+        },
+        "difficulty_level": 3,
+        "category": "School"
+    },
+    {
+        "word": "Nachhilfelehrer",
+        "gender": "der",
+        "translations": {
+            "en": "tutor (male)",
+            "es": "profesor particular"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Nachhilfelehrerin",
+        "gender": "die",
+        "translations": {
+            "en": "tutor (female)",
+            "es": "profesora particular"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Vertretungslehrer",
+        "gender": "der",
+        "translations": {
+            "en": "substitute teacher (male)",
+            "es": "profesor suplente"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Vertretungslehrerin",
+        "gender": "die",
+        "translations": {
+            "en": "substitute teacher (female)",
+            "es": "profesora suplente"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Geografie",
+        "gender": "die",
+        "translations": {
+            "en": "geography",
+            "es": "geografía"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 🌍"
+    },
+    {
+        "word": "Biologie",
+        "gender": "die",
+        "translations": {
+            "en": "biology",
+            "es": "biología"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 🌿"
+    },
+    {
+        "word": "Chemie",
+        "gender": "die",
+        "translations": {
+            "en": "chemistry",
+            "es": "química"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 🧪"
+    },
+    {
+        "word": "Physik",
+        "gender": "die",
+        "translations": {
+            "en": "physics",
+            "es": "física"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " ⚛️"
+    },
+    {
+        "word": "Informatik",
+        "gender": "die",
+        "translations": {
+            "en": "computer science",
+            "es": "informática"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 💻"
+    },
+    {
+        "word": "Religion",
+        "gender": "die",
+        "translations": {
+            "en": "religion",
+            "es": "religión"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Ethik",
+        "gender": "die",
+        "translations": {
+            "en": "ethics",
+            "es": "ética"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Sozialkunde",
+        "gender": "die",
+        "translations": {
+            "en": "social studies",
+            "es": "estudios sociales"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Fremdsprache",
+        "gender": "die",
+        "translations": {
+            "en": "foreign language",
+            "es": "idioma extranjero"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Deutsch",
+        "gender": "das",
+        "translations": {
+            "en": "German",
+            "es": "alemán"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Englisch",
+        "gender": "das",
+        "translations": {
+            "en": "English",
+            "es": "inglés"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Spanisch",
+        "gender": "das",
+        "translations": {
+            "en": "Spanish",
+            "es": "español"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Französisch",
+        "gender": "das",
+        "translations": {
+            "en": "French",
+            "es": "francés"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Wörterbuch",
+        "gender": "das",
+        "translations": {
+            "en": "dictionary",
+            "es": "diccionario"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 📖"
+    },
+    {
+        "word": "Atlas",
+        "gender": "der",
+        "translations": {
+            "en": "atlas",
+            "es": "atlas"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🗺️"
+    },
+    {
+        "word": "Globus",
+        "gender": "der",
+        "translations": {
+            "en": "globe",
+            "es": "globo"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🌎"
+    },
+    {
+        "word": "Taschenrechner",
+        "gender": "der",
+        "translations": {
+            "en": "calculator",
+            "es": "calculadora"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🧮"
+    },
+    {
+        "word": "Farbkasten",
+        "gender": "der",
+        "translations": {
+            "en": "paint box",
+            "es": "caja de pinturas"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": "🎨"
+    },
+    {
+        "word": "Pinsel",
+        "gender": "der",
+        "translations": {
+            "en": "paintbrush",
+            "es": "pincel"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🖌️"
+    },
+    {
+        "word": "Klebstoff",
+        "gender": "der",
+        "translations": {
+            "en": "glue",
+            "es": "pegamento"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🧪"
+    },
+    {
+        "word": "Papier",
+        "gender": "das",
+        "translations": {
+            "en": "paper",
+            "es": "papel"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "📄"
+    },
+    {
+        "word": "Ordner",
+        "gender": "der",
+        "translations": {
+            "en": "binder",
+            "es": "carpeta"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": " 🗂️"
+    },
+    {
+        "word": "Hefter",
+        "gender": "der",
+        "translations": {
+            "en": "stapler",
+            "es": "grapadora"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 🗄️"
+    },
+    {
+        "word": "Locher",
+        "gender": "der",
+        "translations": {
+            "en": "hole punch",
+            "es": "perforadora"
+        },
+        "difficulty_level": 2,
+        "category": "School",
+        "emoji": " 🗄️"
+    },
+    {
+        "word": "Notizblock",
+        "gender": "der",
+        "translations": {
+            "en": "notepad",
+            "es": "bloc de notas"
+        },
+        "difficulty_level": 1,
+        "category": "School",
+        "emoji": "🗒️"
+    },
+    {
+        "word": "Unterricht",
+        "gender": "der",
+        "translations": {
+            "en": "lesson, class",
+            "es": "clase"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Vorlesung",
+        "gender": "die",
+        "translations": {
+            "en": "lecture",
+            "es": "conferencia"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Seminar",
+        "gender": "das",
+        "translations": {
+            "en": "seminar",
+            "es": "seminario"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Diskussion",
+        "gender": "die",
+        "translations": {
+            "en": "discussion",
+            "es": "discusión"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Präsentation",
+        "gender": "die",
+        "translations": {
+            "en": "presentation",
+            "es": "presentación"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Exkursion",
+        "gender": "die",
+        "translations": {
+            "en": "field trip",
+            "es": "excursión"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "AG",
+        "gender": "die",
+        "translations": {
+            "en": "extracurricular activity",
+            "es": "actividad extracurricular"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Schulhof",
+        "gender": "der",
+        "translations": {
+            "en": "schoolyard",
+            "es": "patio de la escuela"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Kantine",
+        "gender": "die",
+        "translations": {
+            "en": "cafeteria",
+            "es": "cantina"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Schulgebäude",
+        "gender": "das",
+        "translations": {
+            "en": "school building",
+            "es": "edificio escolar"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    },
+    {
+        "word": "Schulordnung",
+        "gender": "die",
+        "translations": {
+            "en": "school rules",
+            "es": "reglamento escolar"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Zeugnis",
+        "gender": "das",
+        "translations": {
+            "en": "report card, certificate",
+            "es": "boletín de notas, certificado"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Abitur",
+        "gender": "das",
+        "translations": {
+            "en": "A-levels (German high school diploma)",
+            "es": "selectividad (diploma de escuela secundaria alemán)"
+        },
+        "difficulty_level": 3,
+        "category": "School"
+    },
+    {
+        "word": "Studium",
+        "gender": "das",
+        "translations": {
+            "en": "studies at university",
+            "es": "estudios universitarios"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Semester",
+        "gender": "das",
+        "translations": {
+            "en": "semester",
+            "es": "semestre"
+        },
+        "difficulty_level": 2,
+        "category": "School"
+    },
+    {
+        "word": "Schuljahr",
+        "gender": "das",
+        "translations": {
+            "en": "school year",
+            "es": "año escolar"
+        },
+        "difficulty_level": 1,
+        "category": "School"
+    }
+]

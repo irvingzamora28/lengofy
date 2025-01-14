@@ -1,0 +1,843 @@
+[
+    {
+        "word": "Zeit",
+        "gender": "die",
+        "translations": {
+            "en": "time",
+            "es": "tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Sekunde",
+        "gender": "die",
+        "translations": {
+            "en": "second",
+            "es": "segundo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Minute",
+        "gender": "die",
+        "translations": {
+            "en": "minute",
+            "es": "minuto"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Stunde",
+        "gender": "die",
+        "translations": {
+            "en": "hour",
+            "es": "hora"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Tag",
+        "gender": "der",
+        "translations": {
+            "en": "day",
+            "es": "día"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Nacht",
+        "gender": "die",
+        "translations": {
+            "en": "night",
+            "es": "noche"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": "🌃"
+    },
+    {
+        "word": "Woche",
+        "gender": "die",
+        "translations": {
+            "en": "week",
+            "es": "semana"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Monat",
+        "gender": "der",
+        "translations": {
+            "en": "month",
+            "es": "mes"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Jahr",
+        "gender": "das",
+        "translations": {
+            "en": "year",
+            "es": "año"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Jahrzehnt",
+        "gender": "das",
+        "translations": {
+            "en": "decade",
+            "es": "década"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Jahrhundert",
+        "gender": "das",
+        "translations": {
+            "en": "century",
+            "es": "siglo"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Morgen",
+        "gender": "der",
+        "translations": {
+            "en": "morning",
+            "es": "mañana"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": "🌅"
+    },
+    {
+        "word": "Vormittag",
+        "gender": "der",
+        "translations": {
+            "en": "forenoon",
+            "es": "mañana"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Mittag",
+        "gender": "der",
+        "translations": {
+            "en": "noon",
+            "es": "mediodía"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " ☀️"
+    },
+    {
+        "word": "Nachmittag",
+        "gender": "der",
+        "translations": {
+            "en": "afternoon",
+            "es": "tarde"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Abend",
+        "gender": "der",
+        "translations": {
+            "en": "evening",
+            "es": "tarde/noche"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": "🌇"
+    },
+    {
+        "word": "Mitternacht",
+        "gender": "die",
+        "translations": {
+            "en": "midnight",
+            "es": "medianoche"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " 🌃"
+    },
+    {
+        "word": "Uhr",
+        "gender": "die",
+        "translations": {
+            "en": "clock",
+            "es": "reloj"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " 🕰️"
+    },
+    {
+        "word": "Kalender",
+        "gender": "der",
+        "translations": {
+            "en": "calendar",
+            "es": "calendario"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " 📅"
+    },
+    {
+        "word": "Montag",
+        "gender": "der",
+        "translations": {
+            "en": "Monday",
+            "es": "lunes"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Dienstag",
+        "gender": "der",
+        "translations": {
+            "en": "Tuesday",
+            "es": "martes"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Mittwoch",
+        "gender": "der",
+        "translations": {
+            "en": "Wednesday",
+            "es": "miércoles"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Donnerstag",
+        "gender": "der",
+        "translations": {
+            "en": "Thursday",
+            "es": "jueves"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Freitag",
+        "gender": "der",
+        "translations": {
+            "en": "Friday",
+            "es": "viernes"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Samstag",
+        "gender": "der",
+        "translations": {
+            "en": "Saturday",
+            "es": "sábado"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Sonntag",
+        "gender": "der",
+        "translations": {
+            "en": "Sunday",
+            "es": "domingo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Januar",
+        "gender": "der",
+        "translations": {
+            "en": "January",
+            "es": "enero"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Februar",
+        "gender": "der",
+        "translations": {
+            "en": "February",
+            "es": "febrero"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "März",
+        "gender": "der",
+        "translations": {
+            "en": "March",
+            "es": "marzo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "April",
+        "gender": "der",
+        "translations": {
+            "en": "April",
+            "es": "abril"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Mai",
+        "gender": "der",
+        "translations": {
+            "en": "May",
+            "es": "mayo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Juni",
+        "gender": "der",
+        "translations": {
+            "en": "June",
+            "es": "junio"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Juli",
+        "gender": "der",
+        "translations": {
+            "en": "July",
+            "es": "julio"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "August",
+        "gender": "der",
+        "translations": {
+            "en": "August",
+            "es": "agosto"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "September",
+        "gender": "der",
+        "translations": {
+            "en": "September",
+            "es": "septiembre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Oktober",
+        "gender": "der",
+        "translations": {
+            "en": "October",
+            "es": "octubre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "November",
+        "gender": "der",
+        "translations": {
+            "en": "November",
+            "es": "noviembre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Dezember",
+        "gender": "der",
+        "translations": {
+            "en": "December",
+            "es": "diciembre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Millisekunde",
+        "gender": "die",
+        "translations": {
+            "en": "millisecond",
+            "es": "milisegundo"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Viertelstunde",
+        "gender": "die",
+        "translations": {
+            "en": "quarter of an hour",
+            "es": "cuarto de hora"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Halbestunde",
+        "gender": "die",
+        "translations": {
+            "en": "half hour",
+            "es": "media hora"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Stundenplan",
+        "gender": "der",
+        "translations": {
+            "en": "timetable, schedule",
+            "es": "horario"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Zeitplan",
+        "gender": "der",
+        "translations": {
+            "en": "schedule, timetable",
+            "es": "horario, programa"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Termin",
+        "gender": "der",
+        "translations": {
+            "en": "appointment",
+            "es": "cita"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " 📅"
+    },
+    {
+        "word": "Frist",
+        "gender": "die",
+        "translations": {
+            "en": "deadline",
+            "es": "fecha límite"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Dauer",
+        "gender": "die",
+        "translations": {
+            "en": "duration",
+            "es": "duración"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Eile",
+        "gender": "die",
+        "translations": {
+            "en": "hurry, haste",
+            "es": "prisa"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Vergangenheit",
+        "gender": "die",
+        "translations": {
+            "en": "past",
+            "es": "pasado"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Gegenwart",
+        "gender": "die",
+        "translations": {
+            "en": "present",
+            "es": "presente"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Zukunft",
+        "gender": "die",
+        "translations": {
+            "en": "future",
+            "es": "futuro"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Moment",
+        "gender": "der",
+        "translations": {
+            "en": "moment",
+            "es": "momento"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Augenblick",
+        "gender": "der",
+        "translations": {
+            "en": "instant",
+            "es": "instante"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Weile",
+        "gender": "die",
+        "translations": {
+            "en": "while",
+            "es": "rato"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Epoche",
+        "gender": "die",
+        "translations": {
+            "en": "era, epoch",
+            "es": "época"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Periode",
+        "gender": "die",
+        "translations": {
+            "en": "period",
+            "es": "período"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "pünktlich",
+        "gender": "adj",
+        "translations": {
+            "en": "punctual",
+            "es": "puntual"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "früh",
+        "gender": "adj",
+        "translations": {
+            "en": "early",
+            "es": "temprano"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "spät",
+        "gender": "adj",
+        "translations": {
+            "en": "late",
+            "es": "tarde"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "sofort",
+        "gender": "adv",
+        "translations": {
+            "en": "immediately",
+            "es": "inmediatamente"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "gleich",
+        "gender": "adv",
+        "translations": {
+            "en": "right away",
+            "es": "enseguida"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "bald",
+        "gender": "adv",
+        "translations": {
+            "en": "soon",
+            "es": "pronto"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "vorhin",
+        "gender": "adv",
+        "translations": {
+            "en": "just now",
+            "es": "hace un momento"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "danach",
+        "gender": "adv",
+        "translations": {
+            "en": "afterwards",
+            "es": "después"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "zuvor",
+        "gender": "adv",
+        "translations": {
+            "en": "beforehand",
+            "es": "de antemano"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "täglich",
+        "gender": "adv",
+        "translations": {
+            "en": "daily",
+            "es": "diariamente"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "wöchentlich",
+        "gender": "adv",
+        "translations": {
+            "en": "weekly",
+            "es": "semanalmente"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "monatlich",
+        "gender": "adv",
+        "translations": {
+            "en": "monthly",
+            "es": "mensualmente"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "jährlich",
+        "gender": "adv",
+        "translations": {
+            "en": "yearly",
+            "es": "anualmente"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "immer",
+        "gender": "adv",
+        "translations": {
+            "en": "always",
+            "es": "siempre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "manchmal",
+        "gender": "adv",
+        "translations": {
+            "en": "sometimes",
+            "es": "a veces"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "nie",
+        "gender": "adv",
+        "translations": {
+            "en": "never",
+            "es": "nunca"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "selten",
+        "gender": "adv",
+        "translations": {
+            "en": "rarely",
+            "es": "raramente"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "oft",
+        "gender": "adv",
+        "translations": {
+            "en": "often",
+            "es": "a menudo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "stundenlang",
+        "gender": "adv",
+        "translations": {
+            "en": "for hours",
+            "es": "durante horas"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "einen Moment mal",
+        "gender": "phrase",
+        "translations": {
+            "en": "just a moment",
+            "es": "solo un momento"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "rechtzeitig",
+        "gender": "adv",
+        "translations": {
+            "en": "on time",
+            "es": "a tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Geburtstag",
+        "gender": "der",
+        "translations": {
+            "en": "birthday",
+            "es": "cumpleaños"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": "🎂"
+    },
+    {
+        "word": "Jahrestag",
+        "gender": "der",
+        "translations": {
+            "en": "anniversary",
+            "es": "aniversario"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Feiertag",
+        "gender": "der",
+        "translations": {
+            "en": "holiday",
+            "es": "día festivo"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": "🎉"
+    },
+    {
+        "word": "Wochenende",
+        "gender": "das",
+        "translations": {
+            "en": "weekend",
+            "es": "fin de semana"
+        },
+        "difficulty_level": 1,
+        "category": "Time",
+        "emoji": " 🏖️"
+    },
+    {
+        "word": "Arbeitszeit",
+        "gender": "die",
+        "translations": {
+            "en": "working hours",
+            "es": "horas de trabajo"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    },
+    {
+        "word": "Freizeit",
+        "gender": "die",
+        "translations": {
+            "en": "leisure time",
+            "es": "tiempo libre"
+        },
+        "difficulty_level": 1,
+        "category": "Time"
+    },
+    {
+        "word": "Pausenzeit",
+        "gender": "die",
+        "translations": {
+            "en": "break time",
+            "es": "tiempo de descanso"
+        },
+        "difficulty_level": 2,
+        "category": "Time"
+    }
+]

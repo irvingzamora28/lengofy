@@ -1,0 +1,1286 @@
+[
+    {
+        "word": "Computer",
+        "gender": "der",
+        "translations": {
+            "en": "computer",
+            "es": "computadora"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "💻"
+    },
+    {
+        "word": "Laptop",
+        "gender": "der",
+        "translations": {
+            "en": "laptop",
+            "es": "portátil"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "💻"
+    },
+    {
+        "word": "Tastatur",
+        "gender": "die",
+        "translations": {
+            "en": "keyboard",
+            "es": "teclado"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "⌨️"
+    },
+    {
+        "word": "Maus",
+        "gender": "die",
+        "translations": {
+            "en": "mouse",
+            "es": "ratón"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🖱️"
+    },
+    {
+        "word": "Bildschirm",
+        "gender": "der",
+        "translations": {
+            "en": "screen",
+            "es": "pantalla"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🖥️"
+    },
+    {
+        "word": "Drucker",
+        "gender": "der",
+        "translations": {
+            "en": "printer",
+            "es": "impresora"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🖨️"
+    },
+    {
+        "word": "Smartphone",
+        "gender": "das",
+        "translations": {
+            "en": "smartphone",
+            "es": "teléfono inteligente"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "📱"
+    },
+    {
+        "word": "Tablet",
+        "gender": "das",
+        "translations": {
+            "en": "tablet",
+            "es": "tableta"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📱"
+    },
+    {
+        "word": "Kopfhörer",
+        "gender": "die",
+        "translations": {
+            "en": "headphones",
+            "es": "auriculares"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🎧"
+    },
+    {
+        "word": "Lautsprecher",
+        "gender": "der",
+        "translations": {
+            "en": "speaker",
+            "es": "altavoz"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🔈"
+    },
+    {
+        "word": "Mikrofon",
+        "gender": "das",
+        "translations": {
+            "en": "microphone",
+            "es": "micrófono"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🎤"
+    },
+    {
+        "word": "Kamera",
+        "gender": "die",
+        "translations": {
+            "en": "camera",
+            "es": "cámara"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📷"
+    },
+    {
+        "word": "Fernbedienung",
+        "gender": "die",
+        "translations": {
+            "en": "remote control",
+            "es": "control remoto"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "  remote"
+    },
+    {
+        "word": "Fernseher",
+        "gender": "der",
+        "translations": {
+            "en": "television",
+            "es": "televisor"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "📺"
+    },
+    {
+        "word": "Router",
+        "gender": "der",
+        "translations": {
+            "en": "router",
+            "es": "enrutador"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 📶"
+    },
+    {
+        "word": "Modem",
+        "gender": "das",
+        "translations": {
+            "en": "modem",
+            "es": "módem"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Internet",
+        "gender": "das",
+        "translations": {
+            "en": "internet",
+            "es": "internet"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🌐"
+    },
+    {
+        "word": "Software",
+        "gender": "die",
+        "translations": {
+            "en": "software",
+            "es": "software"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Hardware",
+        "gender": "die",
+        "translations": {
+            "en": "hardware",
+            "es": "hardware"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Programm",
+        "gender": "das",
+        "translations": {
+            "en": "program",
+            "es": "programa"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Betriebssystem",
+        "gender": "das",
+        "translations": {
+            "en": "operating system",
+            "es": "sistema operativo"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Prozessor",
+        "gender": "der",
+        "translations": {
+            "en": "processor",
+            "es": "procesador"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Grafikkarte",
+        "gender": "die",
+        "translations": {
+            "en": "graphics card",
+            "es": "tarjeta gráfica"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Festplatte",
+        "gender": "die",
+        "translations": {
+            "en": "hard drive",
+            "es": "disco duro"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "USB-Stick",
+        "gender": "der",
+        "translations": {
+            "en": "USB stick",
+            "es": "memoria USB"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 💽"
+    },
+    {
+        "word": "Ladegerät",
+        "gender": "das",
+        "translations": {
+            "en": "charger",
+            "es": "cargador"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🔌"
+    },
+    {
+        "word": "Kabel",
+        "gender": "das",
+        "translations": {
+            "en": "cable",
+            "es": "cable"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "  кабел"
+    },
+    {
+        "word": "Steckdose",
+        "gender": "die",
+        "translations": {
+            "en": "socket",
+            "es": "enchufe"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🔌"
+    },
+    {
+        "word": "Batterie",
+        "gender": "die",
+        "translations": {
+            "en": "battery",
+            "es": "batería"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🔋"
+    },
+    {
+        "word": "Roboter",
+        "gender": "der",
+        "translations": {
+            "en": "robot",
+            "es": "robot"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🤖"
+    },
+    {
+        "word": "Drohne",
+        "gender": "die",
+        "translations": {
+            "en": "drone",
+            "es": "dron"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🛩️"
+    },
+    {
+        "word": "Satellit",
+        "gender": "der",
+        "translations": {
+            "en": "satellite",
+            "es": "satélite"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": "🛰️"
+    },
+    {
+        "word": "Teleskop",
+        "gender": "das",
+        "translations": {
+            "en": "telescope",
+            "es": "telescopio"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🔭"
+    },
+    {
+        "word": "Mikroskop",
+        "gender": "das",
+        "translations": {
+            "en": "microscope",
+            "es": "microscopio"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": "🔬"
+    },
+    {
+        "word": "Smartwatch",
+        "gender": "die",
+        "translations": {
+            "en": "smartwatch",
+            "es": "reloj inteligente"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "⌚"
+    },
+    {
+        "word": "Navigationssystem",
+        "gender": "das",
+        "translations": {
+            "en": "navigation system",
+            "es": "sistema de navegación"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Bluetooth",
+        "gender": "das",
+        "translations": {
+            "en": "Bluetooth",
+            "es": "Bluetooth"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🛜"
+    },
+    {
+        "word": "WLAN",
+        "gender": "das",
+        "translations": {
+            "en": "Wi-Fi",
+            "es": "Wi-Fi"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📶"
+    },
+    {
+        "word": "App",
+        "gender": "die",
+        "translations": {
+            "en": "app",
+            "es": "aplicación"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "📱"
+    },
+    {
+        "word": "Datenbank",
+        "gender": "die",
+        "translations": {
+            "en": "database",
+            "es": "base de datos"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Server",
+        "gender": "der",
+        "translations": {
+            "en": "server",
+            "es": "servidor"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Videokonferenz",
+        "gender": "die",
+        "translations": {
+            "en": "video conference",
+            "es": "videoconferencia"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🎦"
+    },
+    {
+        "word": "E-Book",
+        "gender": "das",
+        "translations": {
+            "en": "e-book",
+            "es": "libro electrónico"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📖"
+    },
+    {
+        "word": "Podcast",
+        "gender": "der",
+        "translations": {
+            "en": "podcast",
+            "es": "podcast"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🎙️"
+    },
+    {
+        "word": "Streaming",
+        "gender": "das",
+        "translations": {
+            "en": "streaming",
+            "es": "transmisión"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📡"
+    },
+    {
+        "word": "Cloud",
+        "gender": "die",
+        "translations": {
+            "en": "cloud",
+            "es": "nube"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "☁️"
+    },
+    {
+        "word": "Kryptowährung",
+        "gender": "die",
+        "translations": {
+            "en": "cryptocurrency",
+            "es": "criptomoneda"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🪙"
+    },
+    {
+        "word": "Algorithmus",
+        "gender": "der",
+        "translations": {
+            "en": "algorithm",
+            "es": "algoritmo"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Künstliche Intelligenz",
+        "gender": "die",
+        "translations": {
+            "en": "artificial intelligence",
+            "es": "inteligencia artificial"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Virtual Reality",
+        "gender": "die",
+        "translations": {
+            "en": "virtual reality",
+            "es": "realidad virtual"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🥽"
+    },
+    {
+        "word": "Augmented Reality",
+        "gender": "die",
+        "translations": {
+            "en": "augmented reality",
+            "es": "realidad aumentada"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 👓"
+    },
+    {
+        "word": "Datenbrille",
+        "gender": "die",
+        "translations": {
+            "en": "smart glasses",
+            "es": "gafas inteligentes"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 👓"
+    },
+    {
+        "word": "3D-Drucker",
+        "gender": "der",
+        "translations": {
+            "en": "3D printer",
+            "es": "impresora 3D"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 🖨️"
+    },
+    {
+        "word": "Wearable",
+        "gender": "das",
+        "translations": {
+            "en": "wearable",
+            "es": "dispositivo portátil"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Datenschutz",
+        "gender": "der",
+        "translations": {
+            "en": "data protection",
+            "es": "protección de datos"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Virus",
+        "gender": "der",
+        "translations": {
+            "en": "virus",
+            "es": "virus"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Firewall",
+        "gender": "die",
+        "translations": {
+            "en": "firewall",
+            "es": "cortafuegos"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Antivirenprogramm",
+        "gender": "das",
+        "translations": {
+            "en": "antivirus program",
+            "es": "programa antivirus"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Webcam",
+        "gender": "die",
+        "translations": {
+            "en": "webcam",
+            "es": "cámara web"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📹"
+    },
+    {
+        "word": "E-Mail",
+        "gender": "die",
+        "translations": {
+            "en": "email",
+            "es": "correo electrónico"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📧"
+    },
+    {
+        "word": "Suchmaschine",
+        "gender": "die",
+        "translations": {
+            "en": "search engine",
+            "es": "motor de búsqueda"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Blog",
+        "gender": "der",
+        "translations": {
+            "en": "blog",
+            "es": "blog"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Social Media",
+        "gender": "die",
+        "translations": {
+            "en": "social media",
+            "es": "redes sociales"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📲"
+    },
+    {
+        "word": "Digitalkamera",
+        "gender": "die",
+        "translations": {
+            "en": "digital camera",
+            "es": "cámara digital"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📸"
+    },
+    {
+        "word": "USB-Anschluss",
+        "gender": "der",
+        "translations": {
+            "en": "USB port",
+            "es": "puerto USB"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Speicherkarte",
+        "gender": "die",
+        "translations": {
+            "en": "memory card",
+            "es": "tarjeta de memoria"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 💾"
+    },
+    {
+        "word": "Netzwerk",
+        "gender": "das",
+        "translations": {
+            "en": "network",
+            "es": "red"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Backup",
+        "gender": "das",
+        "translations": {
+            "en": "backup",
+            "es": "copia de seguridad"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Download",
+        "gender": "der",
+        "translations": {
+            "en": "download",
+            "es": "descarga"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Upload",
+        "gender": "der",
+        "translations": {
+            "en": "upload",
+            "es": "subida"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Passwort",
+        "gender": "das",
+        "translations": {
+            "en": "password",
+            "es": "contraseña"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🔐"
+    },
+    {
+        "word": "Benutzername",
+        "gender": "der",
+        "translations": {
+            "en": "username",
+            "es": "nombre de usuario"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Cybersicherheit",
+        "gender": "die",
+        "translations": {
+            "en": "cybersecurity",
+            "es": "ciberseguridad"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Phishing",
+        "gender": "das",
+        "translations": {
+            "en": "phishing",
+            "es": "suplantación de identidad"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Spam",
+        "gender": "der",
+        "translations": {
+            "en": "spam",
+            "es": "correo no deseado"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Webseite",
+        "gender": "die",
+        "translations": {
+            "en": "website",
+            "es": "sitio web"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🌐"
+    },
+    {
+        "word": "Link",
+        "gender": "der",
+        "translations": {
+            "en": "link",
+            "es": "enlace"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🔗"
+    },
+    {
+        "word": "Datei",
+        "gender": "die",
+        "translations": {
+            "en": "file",
+            "es": "archivo"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🗂️"
+    },
+    {
+        "word": "Ordner",
+        "gender": "der",
+        "translations": {
+            "en": "folder",
+            "es": "carpeta"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 📁"
+    },
+    {
+        "word": "Programmiersprache",
+        "gender": "die",
+        "translations": {
+            "en": "programming language",
+            "es": "lenguaje de programación"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Code",
+        "gender": "der",
+        "translations": {
+            "en": "code",
+            "es": "código"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Chip",
+        "gender": "der",
+        "translations": {
+            "en": "chip",
+            "es": "chip"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Sensor",
+        "gender": "der",
+        "translations": {
+            "en": "sensor",
+            "es": "sensor"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Schaltkreis",
+        "gender": "der",
+        "translations": {
+            "en": "circuit",
+            "es": "circuito"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Anwendung",
+        "gender": "die",
+        "translations": {
+            "en": "application",
+            "es": "aplicación"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Softwareupdate",
+        "gender": "das",
+        "translations": {
+            "en": "software update",
+            "es": "actualización de software"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Browser",
+        "gender": "der",
+        "translations": {
+            "en": "browser",
+            "es": "navegador"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": " 🌐"
+    },
+    {
+        "word": "Domain",
+        "gender": "die",
+        "translations": {
+            "en": "domain",
+            "es": "dominio"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "IP-Adresse",
+        "gender": "die",
+        "translations": {
+            "en": "IP address",
+            "es": "dirección IP"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Bandbreite",
+        "gender": "die",
+        "translations": {
+            "en": "bandwidth",
+            "es": "ancho de banda"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Cloud-Computing",
+        "gender": "das",
+        "translations": {
+            "en": "cloud computing",
+            "es": "computación en la nube"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Rechenzentrum",
+        "gender": "das",
+        "translations": {
+            "en": "data center",
+            "es": "centro de datos"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Streaming-Dienst",
+        "gender": "der",
+        "translations": {
+            "en": "streaming service",
+            "es": "servicio de transmisión"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Podcast-Plattform",
+        "gender": "die",
+        "translations": {
+            "en": "podcast platform",
+            "es": "plataforma de podcast"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Peripheriegerät",
+        "gender": "das",
+        "translations": {
+            "en": "peripheral",
+            "es": "periférico"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Konsole",
+        "gender": "die",
+        "translations": {
+            "en": "console",
+            "es": "consola"
+        },
+        "difficulty_level": 1,
+        "category": "Technology",
+        "emoji": "🎮"
+    },
+    {
+        "word": "Projektor",
+        "gender": "der",
+        "translations": {
+            "en": "projector",
+            "es": "proyector"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 📽️"
+    },
+    {
+        "word": "E-Reader",
+        "gender": "der",
+        "translations": {
+            "en": "e-reader",
+            "es": "lector de libros electrónicos"
+        },
+        "difficulty_level": 2,
+        "category": "Technology",
+        "emoji": " 📖"
+    },
+    {
+        "word": "Smart-Home-Gerät",
+        "gender": "das",
+        "translations": {
+            "en": "smart home device",
+            "es": "dispositivo para el hogar inteligente"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "GPS-Gerät",
+        "gender": "das",
+        "translations": {
+            "en": "GPS device",
+            "es": "dispositivo GPS"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Schnittstelle",
+        "gender": "die",
+        "translations": {
+            "en": "interface",
+            "es": "interfaz"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Quellcode",
+        "gender": "der",
+        "translations": {
+            "en": "source code",
+            "es": "código fuente"
+        },
+        "difficulty_level": 3,
+        "category": "Technology"
+    },
+    {
+        "word": "Bug",
+        "gender": "der",
+        "translations": {
+            "en": "bug",
+            "es": "error"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Patch",
+        "gender": "der",
+        "translations": {
+            "en": "patch",
+            "es": "parche"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Update",
+        "gender": "das",
+        "translations": {
+            "en": "update",
+            "es": "actualización"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Verschlüsselung",
+        "gender": "die",
+        "translations": {
+            "en": "encryption",
+            "es": "cifrado"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Anwendungsprogrammierschnittstelle",
+        "gender": "die",
+        "translations": {
+            "en": "application programming interface",
+            "es": "interfaz de programación de aplicaciones"
+        },
+        "difficulty_level": 3,
+        "category": "Technology"
+    },
+    {
+        "word": "Maschinelles Lernen",
+        "gender": "das",
+        "translations": {
+            "en": "machine learning",
+            "es": "aprendizaje automático"
+        },
+        "difficulty_level": 3,
+        "category": "Technology"
+    },
+    {
+        "word": "Blockchain",
+        "gender": "die",
+        "translations": {
+            "en": "blockchain",
+            "es": "cadena de bloques"
+        },
+        "difficulty_level": 3,
+        "category": "Technology"
+    },
+    {
+        "word": "Quantencomputing",
+        "gender": "das",
+        "translations": {
+            "en": "quantum computing",
+            "es": "computación cuántica"
+        },
+        "difficulty_level": 3,
+        "category": "Technology"
+    },
+    {
+        "word": "Virtuelle Assistent",
+        "gender": "der",
+        "translations": {
+            "en": "virtual assistant",
+            "es": "asistente virtual"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Biometrie",
+        "gender": "die",
+        "translations": {
+            "en": "biometrics",
+            "es": "biometría"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Metaversum",
+        "gender": "das",
+        "translations": {
+            "en": "metaverse",
+            "es": "metaverso"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Daten",
+        "gender": "die",
+        "translations": {
+            "en": "data",
+            "es": "datos"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Malware",
+        "gender": "die",
+        "translations": {
+            "en": "malware",
+            "es": "malware"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Hacker",
+        "gender": "der",
+        "translations": {
+            "en": "hacker",
+            "es": "hacker"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Technologie",
+        "gender": "die",
+        "translations": {
+            "en": "technology",
+            "es": "tecnología"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Innovation",
+        "gender": "die",
+        "translations": {
+            "en": "innovation",
+            "es": "innovación"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Digitalisierung",
+        "gender": "die",
+        "translations": {
+            "en": "digitalization",
+            "es": "digitalización"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Techniker",
+        "gender": "der",
+        "translations": {
+            "en": "technician",
+            "es": "técnico"
+        },
+        "difficulty_level": 1,
+        "category": "Technology"
+    },
+    {
+        "word": "Technologische Fortschritt",
+        "gender": "der",
+        "translations": {
+            "en": "technological progress",
+            "es": "progreso tecnológico"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Elektronik",
+        "gender": "die",
+        "translations": {
+            "en": "electronics",
+            "es": "electrónica"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    },
+    {
+        "word": "Gadget",
+        "gender": "das",
+        "translations": {
+            "en": "gadget",
+            "es": "gadget"
+        },
+        "difficulty_level": 2,
+        "category": "Technology"
+    }
+]

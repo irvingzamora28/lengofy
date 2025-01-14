@@ -1,0 +1,1286 @@
+[
+    {
+        "word": "Beruf",
+        "gender": "der",
+        "translations": {
+            "en": "profession, job",
+            "es": "profesión, trabajo"
+        },
+        "difficulty_level": 1,
+        "category": "Professions"
+    },
+    {
+        "word": "Arzt",
+        "gender": "der",
+        "translations": {
+            "en": "doctor (male)",
+            "es": "médico"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Ärztin",
+        "gender": "die",
+        "translations": {
+            "en": "doctor (female)",
+            "es": "médica"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Krankenschwester",
+        "gender": "die",
+        "translations": {
+            "en": "nurse (female)",
+            "es": "enfermera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👩‍⚕️"
+    },
+    {
+        "word": "Krankenpfleger",
+        "gender": "der",
+        "translations": {
+            "en": "nurse (male)",
+            "es": "enfermero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Lehrer",
+        "gender": "der",
+        "translations": {
+            "en": "teacher (male)",
+            "es": "profesor"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "🧑‍🏫"
+    },
+    {
+        "word": "Lehrerin",
+        "gender": "die",
+        "translations": {
+            "en": "teacher (female)",
+            "es": "profesora"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍🏫"
+    },
+    {
+        "word": "Ingenieur",
+        "gender": "der",
+        "translations": {
+            "en": "engineer (male)",
+            "es": "ingeniero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Ingenieurin",
+        "gender": "die",
+        "translations": {
+            "en": "engineer (female)",
+            "es": "ingeniera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍🔧"
+    },
+    {
+        "word": "Architekt",
+        "gender": "der",
+        "translations": {
+            "en": "architect (male)",
+            "es": "arquitecto"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Architektin",
+        "gender": "die",
+        "translations": {
+            "en": "architect (female)",
+            "es": "arquitecta"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Anwalt",
+        "gender": "der",
+        "translations": {
+            "en": "lawyer (male)",
+            "es": "abogado"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍⚖️"
+    },
+    {
+        "word": "Anwältin",
+        "gender": "die",
+        "translations": {
+            "en": "lawyer (female)",
+            "es": "abogada"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍⚖️"
+    },
+    {
+        "word": "Polizist",
+        "gender": "der",
+        "translations": {
+            "en": "police officer (male)",
+            "es": "policía"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👮"
+    },
+    {
+        "word": "Polizistin",
+        "gender": "die",
+        "translations": {
+            "en": "police officer (female)",
+            "es": "policía"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👮‍♀️"
+    },
+    {
+        "word": "Feuerwehrmann",
+        "gender": "der",
+        "translations": {
+            "en": "firefighter (male)",
+            "es": "bombero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍🚒"
+    },
+    {
+        "word": "Feuerwehrfrau",
+        "gender": "die",
+        "translations": {
+            "en": "firefighter (female)",
+            "es": "bombera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👩‍🚒"
+    },
+    {
+        "word": "Bäcker",
+        "gender": "der",
+        "translations": {
+            "en": "baker (male)",
+            "es": "panadero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👨‍🍳"
+    },
+    {
+        "word": "Bäckerin",
+        "gender": "die",
+        "translations": {
+            "en": "baker (female)",
+            "es": "panadera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍🍳"
+    },
+    {
+        "word": "Koch",
+        "gender": "der",
+        "translations": {
+            "en": "cook/chef (male)",
+            "es": "cocinero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👨‍🍳"
+    },
+    {
+        "word": "Köchin",
+        "gender": "die",
+        "translations": {
+            "en": "cook/chef (female)",
+            "es": "cocinera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍🍳"
+    },
+    {
+        "word": "Friseur",
+        "gender": "der",
+        "translations": {
+            "en": "hairdresser (male)",
+            "es": "peluquero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 💇‍♂️"
+    },
+    {
+        "word": "Friseurin",
+        "gender": "die",
+        "translations": {
+            "en": "hairdresser (female)",
+            "es": "peluquera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 💇‍♀️"
+    },
+    {
+        "word": "Verkäufer",
+        "gender": "der",
+        "translations": {
+            "en": "salesperson (male)",
+            "es": "vendedor"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👨‍💼"
+    },
+    {
+        "word": "Verkäuferin",
+        "gender": "die",
+        "translations": {
+            "en": "salesperson (female)",
+            "es": "vendedora"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👩‍💼"
+    },
+    {
+        "word": "Kellner",
+        "gender": "der",
+        "translations": {
+            "en": "waiter",
+            "es": "camarero"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍🍳"
+    },
+    {
+        "word": "Kellnerin",
+        "gender": "die",
+        "translations": {
+            "en": "waitress",
+            "es": "camarera"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 👩‍🍳"
+    },
+    {
+        "word": "Musiker",
+        "gender": "der",
+        "translations": {
+            "en": "musician (male)",
+            "es": "músico"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🎤"
+    },
+    {
+        "word": "Musikerin",
+        "gender": "die",
+        "translations": {
+            "en": "musician (female)",
+            "es": "música"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🎤"
+    },
+    {
+        "word": "Künstler",
+        "gender": "der",
+        "translations": {
+            "en": "artist (male)",
+            "es": "artista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🎨"
+    },
+    {
+        "word": "Künstlerin",
+        "gender": "die",
+        "translations": {
+            "en": "artist (female)",
+            "es": "artista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🎨"
+    },
+    {
+        "word": "Journalist",
+        "gender": "der",
+        "translations": {
+            "en": "journalist (male)",
+            "es": "periodista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Journalistin",
+        "gender": "die",
+        "translations": {
+            "en": "journalist (female)",
+            "es": "periodista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Programmierer",
+        "gender": "der",
+        "translations": {
+            "en": "programmer (male)",
+            "es": "programador"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👨‍💻"
+    },
+    {
+        "word": "Programmiererin",
+        "gender": "die",
+        "translations": {
+            "en": "programmer (female)",
+            "es": "programadora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💻"
+    },
+    {
+        "word": "Zahnarzt",
+        "gender": "der",
+        "translations": {
+            "en": "dentist (male)",
+            "es": "dentista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Zahnärztin",
+        "gender": "die",
+        "translations": {
+            "en": "dentist (female)",
+            "es": "dentista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Apotheker",
+        "gender": "der",
+        "translations": {
+            "en": "pharmacist (male)",
+            "es": "farmacéutico"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Apothekerin",
+        "gender": "die",
+        "translations": {
+            "en": "pharmacist (female)",
+            "es": "farmacéutica"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Landwirt",
+        "gender": "der",
+        "translations": {
+            "en": "farmer (male)",
+            "es": "agricultor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👨‍🌾"
+    },
+    {
+        "word": "Landwirtin",
+        "gender": "die",
+        "translations": {
+            "en": "farmer (female)",
+            "es": "agricultora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🌾"
+    },
+    {
+        "word": "Tierarzt",
+        "gender": "der",
+        "translations": {
+            "en": "veterinarian (male)",
+            "es": "veterinario"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍⚕️"
+    },
+    {
+        "word": "Tierärztin",
+        "gender": "die",
+        "translations": {
+            "en": "veterinarian (female)",
+            "es": "veterinaria"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Psychologe",
+        "gender": "der",
+        "translations": {
+            "en": "psychologist (male)",
+            "es": "psicólogo"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Psychologin",
+        "gender": "die",
+        "translations": {
+            "en": "psychologist (female)",
+            "es": "psicóloga"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Therapeut",
+        "gender": "der",
+        "translations": {
+            "en": "therapist (male)",
+            "es": "terapeuta"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Therapeutin",
+        "gender": "die",
+        "translations": {
+            "en": "therapist (female)",
+            "es": "terapeuta"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Sozialarbeiter",
+        "gender": "der",
+        "translations": {
+            "en": "social worker (male)",
+            "es": "trabajador social"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍💼"
+    },
+    {
+        "word": "Sozialarbeiterin",
+        "gender": "die",
+        "translations": {
+            "en": "social worker (female)",
+            "es": "trabajadora social"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Hebamme",
+        "gender": "die",
+        "translations": {
+            "en": "midwife",
+            "es": "partera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚕️"
+    },
+    {
+        "word": "Pflegekraft",
+        "gender": "die",
+        "translations": {
+            "en": "caregiver",
+            "es": "cuidador/a"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍⚕️"
+    },
+    {
+        "word": "Manager",
+        "gender": "der",
+        "translations": {
+            "en": "manager (male)",
+            "es": "gerente"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍💼"
+    },
+    {
+        "word": "Managerin",
+        "gender": "die",
+        "translations": {
+            "en": "manager (female)",
+            "es": "gerente"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Unternehmer",
+        "gender": "der",
+        "translations": {
+            "en": "entrepreneur (male)",
+            "es": "empresario"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Unternehmerin",
+        "gender": "die",
+        "translations": {
+            "en": "entrepreneur (female)",
+            "es": "empresaria"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Buchhalter",
+        "gender": "der",
+        "translations": {
+            "en": "accountant (male)",
+            "es": "contador"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍💼"
+    },
+    {
+        "word": "Buchhalterin",
+        "gender": "die",
+        "translations": {
+            "en": "accountant (female)",
+            "es": "contadora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Banker",
+        "gender": "der",
+        "translations": {
+            "en": "banker (male)",
+            "es": "banquero"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Bankerin",
+        "gender": "die",
+        "translations": {
+            "en": "banker (female)",
+            "es": "banquera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Finanzberater",
+        "gender": "der",
+        "translations": {
+            "en": "financial advisor (male)",
+            "es": "asesor financiero"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍💼"
+    },
+    {
+        "word": "Finanzberaterin",
+        "gender": "die",
+        "translations": {
+            "en": "financial advisor (female)",
+            "es": "asesora financiera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Makler",
+        "gender": "der",
+        "translations": {
+            "en": "broker, real estate agent (male)",
+            "es": "corredor, agente de bienes raíces"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Maklerin",
+        "gender": "die",
+        "translations": {
+            "en": "broker, real estate agent (female)",
+            "es": "corredora, agente de bienes raíces"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Wissenschaftler",
+        "gender": "der",
+        "translations": {
+            "en": "scientist (male)",
+            "es": "científico"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔬"
+    },
+    {
+        "word": "Wissenschaftlerin",
+        "gender": "die",
+        "translations": {
+            "en": "scientist (female)",
+            "es": "científica"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🔬"
+    },
+    {
+        "word": "Forscher",
+        "gender": "der",
+        "translations": {
+            "en": "researcher (male)",
+            "es": "investigador"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍🔬"
+    },
+    {
+        "word": "Forscherin",
+        "gender": "die",
+        "translations": {
+            "en": "researcher (female)",
+            "es": "investigadora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🔬"
+    },
+    {
+        "word": "Softwareentwickler",
+        "gender": "der",
+        "translations": {
+            "en": "software developer (male)",
+            "es": "desarrollador de software"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👨‍💻"
+    },
+    {
+        "word": "Softwareentwicklerin",
+        "gender": "die",
+        "translations": {
+            "en": "software developer (female)",
+            "es": "desarrolladora de software"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💻"
+    },
+    {
+        "word": "Datenanalyst",
+        "gender": "der",
+        "translations": {
+            "en": "data analyst (male)",
+            "es": "analista de datos"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👨‍💻"
+    },
+    {
+        "word": "Datenanalystin",
+        "gender": "die",
+        "translations": {
+            "en": "data analyst (female)",
+            "es": "analista de datos"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💻"
+    },
+    {
+        "word": "Webdesigner",
+        "gender": "der",
+        "translations": {
+            "en": "web designer (male)",
+            "es": "diseñador web"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👨‍💻"
+    },
+    {
+        "word": "Webdesignerin",
+        "gender": "die",
+        "translations": {
+            "en": "web designer (female)",
+            "es": "diseñadora web"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💻"
+    },
+    {
+        "word": "Autor",
+        "gender": "der",
+        "translations": {
+            "en": "author (male)",
+            "es": "autor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " ✍️"
+    },
+    {
+        "word": "Autorin",
+        "gender": "die",
+        "translations": {
+            "en": "author (female)",
+            "es": "autora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "✍️"
+    },
+    {
+        "word": "Schauspieler",
+        "gender": "der",
+        "translations": {
+            "en": "actor",
+            "es": "actor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🎭"
+    },
+    {
+        "word": "Schauspielerin",
+        "gender": "die",
+        "translations": {
+            "en": "actress",
+            "es": "actriz"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🎭"
+    },
+    {
+        "word": "Regisseur",
+        "gender": "der",
+        "translations": {
+            "en": "director (male)",
+            "es": "director"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🎬"
+    },
+    {
+        "word": "Regisseurin",
+        "gender": "die",
+        "translations": {
+            "en": "director (female)",
+            "es": "directora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🎬"
+    },
+    {
+        "word": "Fotograf",
+        "gender": "der",
+        "translations": {
+            "en": "photographer (male)",
+            "es": "fotógrafo"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 📸"
+    },
+    {
+        "word": "Fotografin",
+        "gender": "die",
+        "translations": {
+            "en": "photographer (female)",
+            "es": "fotógrafa"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 📸"
+    },
+    {
+        "word": "Designer",
+        "gender": "der",
+        "translations": {
+            "en": "designer (male)",
+            "es": "diseñador"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🎨"
+    },
+    {
+        "word": "Designerin",
+        "gender": "die",
+        "translations": {
+            "en": "designer (female)",
+            "es": "diseñadora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🎨"
+    },
+    {
+        "word": "Redakteur",
+        "gender": "der",
+        "translations": {
+            "en": "editor (male)",
+            "es": "editor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " ✍️"
+    },
+    {
+        "word": "Redakteurin",
+        "gender": "die",
+        "translations": {
+            "en": "editor (female)",
+            "es": "editora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " ✍️"
+    },
+    {
+        "word": "Handwerker",
+        "gender": "der",
+        "translations": {
+            "en": "craftsman/tradesperson (male)",
+            "es": "artesano/trabajador manual"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Handwerkerin",
+        "gender": "die",
+        "translations": {
+            "en": "craftsman/tradesperson (female)",
+            "es": "artesana/trabajadora manual"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🔧"
+    },
+    {
+        "word": "Elektriker",
+        "gender": "der",
+        "translations": {
+            "en": "electrician (male)",
+            "es": "electricista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Elektrikerin",
+        "gender": "die",
+        "translations": {
+            "en": "electrician (female)",
+            "es": "electricista"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🔧"
+    },
+    {
+        "word": "Klempner",
+        "gender": "der",
+        "translations": {
+            "en": "plumber (male)",
+            "es": "fontanero"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Klempnerin",
+        "gender": "die",
+        "translations": {
+            "en": "plumber (female)",
+            "es": "fontanera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🔧"
+    },
+    {
+        "word": "Mechaniker",
+        "gender": "der",
+        "translations": {
+            "en": "mechanic (male)",
+            "es": "mecánico"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Mechanikerin",
+        "gender": "die",
+        "translations": {
+            "en": "mechanic (female)",
+            "es": "mecánica"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🔧"
+    },
+    {
+        "word": "Tischler",
+        "gender": "der",
+        "translations": {
+            "en": "carpenter (male)",
+            "es": "carpintero"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🔧"
+    },
+    {
+        "word": "Tischlerin",
+        "gender": "die",
+        "translations": {
+            "en": "carpenter (female)",
+            "es": "carpintera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🔧"
+    },
+    {
+        "word": "Maler",
+        "gender": "der",
+        "translations": {
+            "en": "painter (male)",
+            "es": "pintor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🎨"
+    },
+    {
+        "word": "Malerin",
+        "gender": "die",
+        "translations": {
+            "en": "painter (female)",
+            "es": "pintora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍🎨"
+    },
+    {
+        "word": "Gärtner",
+        "gender": "der",
+        "translations": {
+            "en": "gardener (male)",
+            "es": "jardinero"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍🌾"
+    },
+    {
+        "word": "Gärtnerin",
+        "gender": "die",
+        "translations": {
+            "en": "gardener (female)",
+            "es": "jardinera"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🌾"
+    },
+    {
+        "word": "Fahrer",
+        "gender": "der",
+        "translations": {
+            "en": "driver (male)",
+            "es": "conductor"
+        },
+        "difficulty_level": 1,
+        "category": "Professions"
+    },
+    {
+        "word": "Fahrerin",
+        "gender": "die",
+        "translations": {
+            "en": "driver (female)",
+            "es": "conductora"
+        },
+        "difficulty_level": 1,
+        "category": "Professions"
+    },
+    {
+        "word": "Pilot",
+        "gender": "der",
+        "translations": {
+            "en": "pilot (male)",
+            "es": "piloto"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍✈️"
+    },
+    {
+        "word": "Pilotin",
+        "gender": "die",
+        "translations": {
+            "en": "pilot (female)",
+            "es": "pilota"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 👩‍✈️"
+    },
+    {
+        "word": "Soldat",
+        "gender": "der",
+        "translations": {
+            "en": "soldier (male)",
+            "es": "soldado"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🪖"
+    },
+    {
+        "word": "Soldatin",
+        "gender": "die",
+        "translations": {
+            "en": "soldier (female)",
+            "es": "soldada"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🪖"
+    },
+    {
+        "word": "Rezeptionist",
+        "gender": "der",
+        "translations": {
+            "en": "receptionist (male)",
+            "es": "recepcionista"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Rezeptionistin",
+        "gender": "die",
+        "translations": {
+            "en": "receptionist (female)",
+            "es": "recepcionista"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Student",
+        "gender": "der",
+        "translations": {
+            "en": "student (male)",
+            "es": "estudiante"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "🧑‍🎓"
+    },
+    {
+        "word": "Studentin",
+        "gender": "die",
+        "translations": {
+            "en": "student (female)",
+            "es": "estudiante"
+        },
+        "difficulty_level": 1,
+        "category": "Professions",
+        "emoji": "👩‍🎓"
+    },
+    {
+        "word": "Professor",
+        "gender": "der",
+        "translations": {
+            "en": "professor (male)",
+            "es": "profesor"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍🏫"
+    },
+    {
+        "word": "Professorin",
+        "gender": "die",
+        "translations": {
+            "en": "professor (female)",
+            "es": "profesora"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍🏫"
+    },
+    {
+        "word": "Richter",
+        "gender": "der",
+        "translations": {
+            "en": "judge (male)",
+            "es": "juez"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "🧑‍⚖️"
+    },
+    {
+        "word": "Richterin",
+        "gender": "die",
+        "translations": {
+            "en": "judge (female)",
+            "es": "jueza"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍⚖️"
+    },
+    {
+        "word": "Diplomat",
+        "gender": "der",
+        "translations": {
+            "en": "diplomat (male)",
+            "es": "diplomático"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Diplomatin",
+        "gender": "die",
+        "translations": {
+            "en": "diplomat (female)",
+            "es": "diplomática"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    },
+    {
+        "word": "Politiker",
+        "gender": "der",
+        "translations": {
+            "en": "politician (male)",
+            "es": "político"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": " 🧑‍💼"
+    },
+    {
+        "word": "Politikerin",
+        "gender": "die",
+        "translations": {
+            "en": "politician (female)",
+            "es": "política"
+        },
+        "difficulty_level": 2,
+        "category": "Professions",
+        "emoji": "👩‍💼"
+    }
+]

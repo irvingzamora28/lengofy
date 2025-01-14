@@ -1,0 +1,329 @@
+[
+    {
+        "word": "Möbel",
+        "gender": "die",
+        "translations": {
+            "en": "furniture",
+            "es": "muebles"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture"
+    },
+    {
+        "word": "Tisch",
+        "gender": "der",
+        "translations": {
+            "en": "table",
+            "es": "mesa"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture"
+    },
+    {
+        "word": "Stuhl",
+        "gender": "der",
+        "translations": {
+            "en": "chair",
+            "es": "silla"
+        },
+         "difficulty_level": 1,
+        "category": "Furniture",
+        "emoji":"🪑"
+    },
+    {
+        "word": "Bett",
+        "gender": "das",
+        "translations": {
+            "en": "bed",
+            "es": "cama"
+        },
+       "difficulty_level": 1,
+       "category": "Furniture",
+         "emoji": "🛏️"
+    },
+  {
+        "word": "Sofa",
+        "gender": "das",
+        "translations": {
+            "en": "sofa",
+            "es": "sofá"
+        },
+       "difficulty_level": 1,
+       "category": "Furniture",
+        "emoji":"🛋️"
+    },
+     {
+        "word": "Schrank",
+        "gender": "der",
+        "translations": {
+            "en": "closet",
+            "es": "armario"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture",
+        "emoji":"🚪"
+    },
+    {
+        "word": "Regal",
+        "gender": "das",
+        "translations": {
+            "en": "shelf",
+            "es": "estante"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture",
+        "emoji":"🗄️"
+    },
+    {
+      "word": "Schreibtisch",
+      "gender": "der",
+      "translations": {
+          "en": "desk",
+          "es": "escritorio"
+        },
+      "difficulty_level": 1,
+      "category": "Furniture",
+      "emoji": " 🖥️"
+    },
+    {
+        "word":"Kommode",
+        "gender":"die",
+        "translations":{
+            "en":"chest of drawers",
+            "es":"cómoda"
+        },
+        "difficulty_level":2,
+        "category":"Furniture",
+         "emoji":"🗄️"
+    },
+  {
+        "word":"Hocker",
+        "gender":"der",
+        "translations":{
+            "en":"stool",
+           "es":"taburete"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture",
+         "emoji": "🪑"
+    },
+ {
+        "word": "Sessel",
+        "gender": "der",
+        "translations": {
+            "en": "armchair",
+            "es": "sillón"
+        },
+        "difficulty_level": 1,
+        "category": "Furniture",
+         "emoji": "🪑"
+    },
+    {
+      "word": "Nachttisch",
+      "gender": "der",
+      "translations": {
+          "en": "nightstand",
+          "es": "mesita de noche"
+        },
+      "difficulty_level": 1,
+        "category": "Furniture",
+        "emoji":"🛏️"
+    },
+    {
+         "word":"Couchtisch",
+         "gender":"der",
+         "translations":{
+            "en":"coffee table",
+            "es":"mesa de centro"
+        },
+         "difficulty_level": 1,
+         "category": "Furniture"
+    },
+   {
+        "word":"Bücherregal",
+        "gender":"das",
+        "translations":{
+           "en":"bookshelf",
+            "es":"estantería"
+        },
+        "difficulty_level":2,
+        "category":"Furniture",
+         "emoji":"📚"
+   },
+   {
+        "word":"Küchenschrank",
+        "gender":"der",
+        "translations":{
+            "en":"kitchen cabinet",
+           "es":"alacena"
+       },
+       "difficulty_level": 2,
+        "category": "Furniture",
+        "emoji":"🗄️"
+    },
+    {
+        "word":"Spiegel",
+        "gender":"der",
+        "translations":{
+            "en":"mirror",
+           "es":"espejo"
+        },
+        "difficulty_level":1,
+        "category":"Furniture",
+         "emoji":"🪞"
+     },
+   {
+        "word":"Lampe",
+        "gender":"die",
+        "translations":{
+            "en":"lamp",
+            "es":"lámpara"
+         },
+         "difficulty_level":1,
+         "category":"Furniture",
+          "emoji":"💡"
+    },
+    {
+       "word":"Vorhang",
+        "gender":"der",
+        "translations":{
+           "en":"curtain",
+            "es":"cortina"
+         },
+         "difficulty_level":2,
+         "category":"Furniture",
+         "emoji":"🪟"
+    },
+     {
+        "word":"Teppich",
+         "gender":"der",
+        "translations":{
+            "en":"carpet",
+             "es":"alfombra"
+         },
+         "difficulty_level":1,
+         "category":"Furniture",
+         "emoji": " 🛏️"
+    },
+  {
+        "word": "Matratze",
+        "gender": "die",
+        "translations": {
+            "en": "mattress",
+            "es": "colchón"
+        },
+        "difficulty_level": 2,
+        "category": "Furniture",
+        "emoji":"🛏️"
+    },
+    {
+        "word": "Kissen",
+        "gender": "das",
+        "translations": {
+            "en": "pillow",
+            "es": "almohada"
+        },
+        "difficulty_level": 1,
+         "category": "Furniture",
+          "emoji":"🛌"
+    },
+    {
+        "word": "Decke",
+        "gender": "die",
+        "translations": {
+            "en": "blanket",
+            "es": "manta"
+        },
+       "difficulty_level": 1,
+        "category": "Furniture",
+         "emoji":"🛌"
+    },
+  {
+         "word": "Bilderrahmen",
+        "gender": "der",
+        "translations": {
+            "en": "picture frame",
+            "es": "marco de fotos"
+        },
+         "difficulty_level": 2,
+         "category":"Furniture",
+         "emoji":"🖼️"
+    },
+   {
+       "word": "Schublade",
+       "gender": "die",
+       "translations": {
+         "en": "drawer",
+         "es": "cajón"
+        },
+       "difficulty_level": 2,
+      "category":"Furniture",
+      "emoji":"🗄️"
+    },
+    {
+      "word":"Tür",
+      "gender":"die",
+      "translations":{
+        "en":"door",
+        "es":"puerta"
+      },
+      "difficulty_level": 1,
+       "category":"Furniture",
+         "emoji":"🚪"
+    },
+    {
+      "word": "Fenster",
+      "gender": "das",
+      "translations": {
+        "en": "window",
+        "es": "ventana"
+       },
+       "difficulty_level":1,
+       "category":"Furniture",
+       "emoji":"🪟"
+    },
+    {
+      "word": "Vase",
+      "gender": "die",
+       "translations":{
+         "en":"vase",
+         "es":"jarrón"
+        },
+      "difficulty_level":2,
+      "category":"Furniture",
+       "emoji":"🏺"
+    },
+    {
+      "word":"Kerze",
+      "gender":"die",
+      "translations":{
+          "en":"candle",
+          "es":"vela"
+        },
+      "difficulty_level": 1,
+      "category":"Furniture",
+      "emoji":"🕯️"
+    },
+    {
+       "word":"Uhr",
+       "gender":"die",
+       "translations":{
+           "en":"clock",
+           "es":"reloj"
+       },
+       "difficulty_level": 1,
+        "category":"Furniture",
+         "emoji":"🕰️"
+     },
+    {
+        "word":"Papierkorb",
+         "gender":"der",
+         "translations":{
+            "en":"trash can",
+            "es":"papelera"
+        },
+       "difficulty_level": 2,
+       "category":"Furniture",
+       "emoji": "🗑️"
+   }
+]

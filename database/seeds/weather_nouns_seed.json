@@ -1,0 +1,674 @@
+[
+    {
+        "word": "Wetter",
+        "gender": "das",
+        "translations": {
+            "en": "weather",
+            "es": "tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": " 🌤️"
+    },
+    {
+        "word": "Sonne",
+        "gender": "die",
+        "translations": {
+            "en": "sun",
+            "es": "sol"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☀️"
+    },
+    {
+        "word": "Regen",
+        "gender": "der",
+        "translations": {
+            "en": "rain",
+            "es": "lluvia"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌧️"
+    },
+    {
+        "word": "Wolke",
+        "gender": "die",
+        "translations": {
+            "en": "cloud",
+            "es": "nube"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☁️"
+    },
+    {
+        "word": "Wind",
+        "gender": "der",
+        "translations": {
+            "en": "wind",
+            "es": "viento"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌬️"
+    },
+    {
+        "word": "Schnee",
+        "gender": "der",
+        "translations": {
+            "en": "snow",
+            "es": "nieve"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "❄️"
+    },
+    {
+        "word": "Eis",
+        "gender": "das",
+        "translations": {
+            "en": "ice",
+            "es": "hielo"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🧊"
+    },
+    {
+        "word": "Hagel",
+        "gender": "der",
+        "translations": {
+            "en": "hail",
+            "es": "granizo"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌨️"
+    },
+    {
+        "word": "Nebel",
+        "gender": "der",
+        "translations": {
+            "en": "fog",
+            "es": "niebla"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌫️"
+    },
+    {
+        "word": "Sturm",
+        "gender": "der",
+        "translations": {
+            "en": "storm",
+            "es": "tormenta"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "⛈️"
+    },
+    {
+        "word": "Gewitter",
+        "gender": "das",
+        "translations": {
+            "en": "thunderstorm",
+            "es": "tormenta eléctrica"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌩️"
+    },
+    {
+        "word": "Blitz",
+        "gender": "der",
+        "translations": {
+            "en": "lightning",
+            "es": "relámpago"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "⚡"
+    },
+    {
+        "word": "Donner",
+        "gender": "der",
+        "translations": {
+            "en": "thunder",
+            "es": "trueno"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌩️"
+    },
+    {
+        "word": "Temperatur",
+        "gender": "die",
+        "translations": {
+            "en": "temperature",
+            "es": "temperatura"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌡️"
+    },
+    {
+        "word": "Hitze",
+        "gender": "die",
+        "translations": {
+            "en": "heat",
+            "es": "calor"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🔥"
+    },
+    {
+        "word": "Kälte",
+        "gender": "die",
+        "translations": {
+            "en": "cold",
+            "es": "frío"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🥶"
+    },
+    {
+        "word": "Regenbogen",
+        "gender": "der",
+        "translations": {
+            "en": "rainbow",
+            "es": "arco iris"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌈"
+    },
+    {
+        "word": "Sonnenschein",
+        "gender": "der",
+        "translations": {
+            "en": "sunshine",
+            "es": "luz del sol"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": " ☀️"
+    },
+    {
+        "word": "Dürre",
+        "gender": "die",
+        "translations": {
+            "en": "drought",
+            "es": "sequía"
+        },
+        "difficulty_level": 2,
+        "category": "Weather"
+    },
+    {
+        "word": "Überschwemmung",
+        "gender": "die",
+        "translations": {
+            "en": "flood",
+            "es": "inundación"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌊"
+    },
+    {
+        "word": "Schauer",
+        "gender": "der",
+        "translations": {
+            "en": "shower",
+            "es": "chubasco"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": " 🌧️"
+    },
+    {
+        "word": "Luftfeuchtigkeit",
+        "gender": "die",
+        "translations": {
+            "en": "humidity",
+            "es": "humedad"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 💧"
+    },
+    {
+        "word": "Luftdruck",
+        "gender": "der",
+        "translations": {
+            "en": "atmospheric pressure",
+            "es": "presión atmosférica"
+        },
+        "difficulty_level": 2,
+        "category": "Weather"
+    },
+    {
+        "word": "Bewölkung",
+        "gender": "die",
+        "translations": {
+            "en": "cloud cover",
+            "es": "nubosidad"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "☁️"
+    },
+    {
+        "word": "Niederschlag",
+        "gender": "der",
+        "translations": {
+            "en": "precipitation",
+            "es": "precipitación"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌧️"
+    },
+    {
+        "word": "Schneeregen",
+        "gender": "der",
+        "translations": {
+            "en": "sleet",
+            "es": "aguanieve"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌨️"
+    },
+    {
+        "word": "Graupel",
+        "gender": "der",
+        "translations": {
+            "en": "graupel (soft hail)",
+            "es": "graupel (granizo blando)"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌨️"
+    },
+    {
+        "word": "Tau",
+        "gender": "der",
+        "translations": {
+            "en": "dew",
+            "es": "rocío"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "💧"
+    },
+    {
+        "word": "Frost",
+        "gender": "der",
+        "translations": {
+            "en": "frost",
+            "es": "helada"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🥶"
+    },
+    {
+        "word": "Reif",
+        "gender": "der",
+        "translations": {
+            "en": "hoarfrost",
+            "es": "escarcha"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🧊"
+    },
+    {
+        "word": "Wirbelsturm",
+        "gender": "der",
+        "translations": {
+            "en": "hurricane, cyclone",
+            "es": "huracán, ciclón"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌀"
+    },
+    {
+        "word": "Tornado",
+        "gender": "der",
+        "translations": {
+            "en": "tornado",
+            "es": "tornado"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌪️"
+    },
+    {
+        "word": "Monsun",
+        "gender": "der",
+        "translations": {
+            "en": "monsoon",
+            "es": "monzón"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌧️"
+    },
+    {
+        "word": "Taifun",
+        "gender": "der",
+        "translations": {
+            "en": "typhoon",
+            "es": "tifón"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌀"
+    },
+    {
+        "word": "Polarlicht",
+        "gender": "das",
+        "translations": {
+            "en": "aurora borealis (Northern lights)",
+            "es": "aurora boreal"
+        },
+        "difficulty_level": 3,
+        "category": "Weather"
+    },
+    {
+        "word": "heiter",
+        "gender": "adj",
+        "translations": {
+            "en": "clear, bright (sky)",
+            "es": "despejado, brillante (cielo)"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "☀️"
+    },
+    {
+        "word": "sonnig",
+        "gender": "adj",
+        "translations": {
+            "en": "sunny",
+            "es": "soleado"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☀️"
+    },
+    {
+        "word": "wolkig",
+        "gender": "adj",
+        "translations": {
+            "en": "cloudy",
+            "es": "nublado"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☁️"
+    },
+    {
+        "word": "bewölkt",
+        "gender": "adj",
+        "translations": {
+            "en": "overcast",
+            "es": "cubierto"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "☁️"
+    },
+    {
+        "word": "regnerisch",
+        "gender": "adj",
+        "translations": {
+            "en": "rainy",
+            "es": "lluvioso"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": " 🌧️"
+    },
+    {
+        "word": "schneereich",
+        "gender": "adj",
+        "translations": {
+            "en": "snowy",
+            "es": "nevado"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "❄️"
+    },
+    {
+        "word": "stürmisch",
+        "gender": "adj",
+        "translations": {
+            "en": "stormy",
+            "es": "tormentoso"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " ⛈️"
+    },
+    {
+        "word": "windig",
+        "gender": "adj",
+        "translations": {
+            "en": "windy",
+            "es": "ventoso"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌬️"
+    },
+    {
+        "word": "mild",
+        "gender": "adj",
+        "translations": {
+            "en": "mild",
+            "es": "templado"
+        },
+        "difficulty_level": 1,
+        "category": "Weather"
+    },
+    {
+        "word": "kühl",
+        "gender": "adj",
+        "translations": {
+            "en": "cool",
+            "es": "fresco"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": " 🌬️"
+    },
+    {
+        "word": "feucht",
+        "gender": "adj",
+        "translations": {
+            "en": "humid",
+            "es": "húmedo"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 💧"
+    },
+    {
+        "word": "trocken",
+        "gender": "adj",
+        "translations": {
+            "en": "dry",
+            "es": "seco"
+        },
+        "difficulty_level": 1,
+        "category": "Weather"
+    },
+    {
+        "word": "schwül",
+        "gender": "adj",
+        "translations": {
+            "en": "muggy",
+            "es": "bochornoso"
+        },
+        "difficulty_level": 2,
+        "category": "Weather"
+    },
+    {
+        "word": "neblig",
+        "gender": "adj",
+        "translations": {
+            "en": "foggy",
+            "es": "neblinoso"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌫️"
+    },
+    {
+        "word": "klar",
+        "gender": "adj",
+        "translations": {
+            "en": "clear",
+            "es": "claro"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☀️"
+    },
+    {
+        "word": "leicht",
+        "gender": "adj",
+        "translations": {
+            "en": "light (rain, wind)",
+            "es": "ligero (lluvia, viento)"
+        },
+        "difficulty_level": 1,
+        "category": "Weather"
+    },
+    {
+        "word": "stark",
+        "gender": "adj",
+        "translations": {
+            "en": "strong (rain, wind)",
+            "es": "fuerte (lluvia, viento)"
+        },
+        "difficulty_level": 1,
+        "category": "Weather"
+    },
+    {
+        "word": "wechselhaft",
+        "gender": "adj",
+        "translations": {
+            "en": "changeable",
+            "es": "cambiante"
+        },
+        "difficulty_level": 2,
+        "category": "Weather"
+    },
+    {
+        "word": "Morgendämmerung",
+        "gender": "die",
+        "translations": {
+            "en": "dawn",
+            "es": "amanecer"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": " 🌅"
+    },
+    {
+        "word": "Abenddämmerung",
+        "gender": "die",
+        "translations": {
+            "en": "dusk",
+            "es": "crepúsculo"
+        },
+        "difficulty_level": 2,
+        "category": "Weather",
+        "emoji": "🌇"
+    },
+    {
+        "word": "Sonnenaufgang",
+        "gender": "der",
+        "translations": {
+            "en": "sunrise",
+            "es": "amanecer"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌅"
+    },
+    {
+        "word": "Sonnenuntergang",
+        "gender": "der",
+        "translations": {
+            "en": "sunset",
+            "es": "atardecer"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌇"
+    },
+    {
+        "word": "Jahreszeit",
+        "gender": "die",
+        "translations": {
+            "en": "season",
+            "es": "estación"
+        },
+        "difficulty_level": 1,
+        "category": "Weather"
+    },
+    {
+        "word": "Frühling",
+        "gender": "der",
+        "translations": {
+            "en": "spring",
+            "es": "primavera"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🌷"
+    },
+    {
+        "word": "Sommer",
+        "gender": "der",
+        "translations": {
+            "en": "summer",
+            "es": "verano"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "☀️"
+    },
+    {
+        "word": "Herbst",
+        "gender": "der",
+        "translations": {
+            "en": "autumn",
+            "es": "otoño"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "🍂"
+    },
+    {
+        "word": "Winter",
+        "gender": "der",
+        "translations": {
+            "en": "winter",
+            "es": "invierno"
+        },
+        "difficulty_level": 1,
+        "category": "Weather",
+        "emoji": "❄️"
+    }
+]
