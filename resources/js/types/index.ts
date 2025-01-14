@@ -32,6 +32,7 @@ export interface Noun {
     word: string;
     gender: 'der' | 'die' | 'das' | 'el' | 'la';
     translation?: string;
+    emoji?: string;
 }
 
 export interface GenderDuelGame {

@@ -20,6 +20,7 @@ class NounService {
                 'id' => $noun->id,
                 'word' => $noun->word,
                 'gender' => $noun->gender,
+                'emoji' => $noun->emoji,
                 'translation' => $noun->getTranslation($translation_language_id),
             ])
             ->toArray();
