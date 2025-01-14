@@ -16,6 +16,7 @@ class Noun extends Model
         'language_id',
         'gender',
         'difficulty_level',
+        'emoji',
     ];
 
     protected $casts = [
@@ -29,7 +30,7 @@ class Noun extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'noun_category', 'noun_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_noun', 'noun_id', 'category_id');
     }
 
     public function translations(): HasMany
