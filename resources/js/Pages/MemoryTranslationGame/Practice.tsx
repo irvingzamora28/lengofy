@@ -7,6 +7,7 @@ import axios from "axios";
 import correctSound from "@/assets/audio/correct.mp3";
 import incorrectSound from "@/assets/audio/incorrect.mp3";
 import DifficultyModal from "@/Components/Games/DifficultyModal";
+import { useTranslation } from "react-i18next";
 
 interface CardData {
     word: string;
@@ -76,6 +77,7 @@ const MemoryTranslationGamePractice: React.FC<
     const [isGameOver, setIsGameOver] = useState(false);
     const [cardsToFlipDown, setCardsToFlipDown] = useState<string[]>([]);
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+    const { t: trans } = useTranslation();
 
     useEffect(() => {
         const initializedCards = createCardPairs(nouns).sort(
@@ -228,7 +230,7 @@ const MemoryTranslationGamePractice: React.FC<
                             <MdClose size={24} />
                         </button>
                         <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
-                            Memory Translation - Results
+                            Memory Translation - {trans('memory_translation.results')}
                         </h2>
                     </div>
                 }
@@ -237,17 +239,17 @@ const MemoryTranslationGamePractice: React.FC<
                 <div className="w-full mt-10 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
                     <div className="w-11/12 md:w-1/2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
                         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                            Game Complete!
+                            {trans('memory_translation.game_completed')}
                         </h1>
                         <p className="text-lg text-gray-600 dark:text-gray-300">
-                            Score: <span className="font-bold">{score}</span>
+                            {trans('memory_translation.score')}: <span className="font-bold">{score}</span>
                         </p>
                         <p className="text-lg text-gray-600 dark:text-gray-300">
-                            Moves: <span className="font-bold">{moves}</span>
+                            {trans('memory_translation.moves')}: <span className="font-bold">{moves}</span>
                         </p>
                         {gameEndTime && (
                             <p className="text-lg text-gray-600 dark:text-gray-300">
-                                Time: <span className="font-bold">{formatTime(gameEndTime - gameStartTime)}</span>
+                                {trans('memory_translation.time')}: <span className="font-bold">{formatTime(gameEndTime - gameStartTime)}</span>
                             </p>
                         )}
                         <div className="my-4 flex flex-col space-y-4">
@@ -255,20 +257,20 @@ const MemoryTranslationGamePractice: React.FC<
                                 onClick={() => restartGame(false)}
                                 className="bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 self-center rounded-lg mb-2 sm:mb-0 w-full sm:w-1/2"
                             >
-                                Play Again
+                                {trans('memory_translation.btn_restart')}
                             </button>
                             <button
                                 onClick={() => setShowDifficultyModal(true)}
                                 className="bg-green-500 dark:bg-green-700 text-white py-2 px-4 self-center rounded-lg w-full sm:w-1/2"
                             >
-                                Change difficulty
+                                {trans('memory_translation.btn_change_difficulty')}
                             </button>
                         </div>
 
                         {/* Word List */}
                         <div className="mt-8">
                             <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                                Words in this Game
+                                {trans('memory_translation.words_in_this_game')}
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {nouns.map((noun, index) => (
@@ -302,6 +304,9 @@ const MemoryTranslationGamePractice: React.FC<
                         setSelectedDifficulty={setSelectedDifficulty}
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
+                        easyText={trans('memory_translation.modal_difficulty.easy_text')}
+                        mediumText={trans('memory_translation.modal_difficulty.medium_text')}
+                        hardText={trans('memory_translation.modal_difficulty.hard_text')}
                         startGame={() => {
                             router.visit(
                                 route("games.memory-translation.practice", {
@@ -401,7 +406,7 @@ const MemoryTranslationGamePractice: React.FC<
                                     </div>
                                 ) : (
                                     <div className="text-gray-200 text-lg font-semibold">
-                                        Flip
+                                        {trans('memory_translation.flip')}
                                     </div>
                                 )}
                             </button>
@@ -409,7 +414,7 @@ const MemoryTranslationGamePractice: React.FC<
                     </div>
                     <div className="fixed bottom-0 left-0 right-0 p-4 bg-gray-800 shadow-md">
                         <p className="text-center text-xl text-white">
-                            Score: {score}
+                            {trans('memory_translation.score')}: {score}
                         </p>
                     </div>
                 </div>
