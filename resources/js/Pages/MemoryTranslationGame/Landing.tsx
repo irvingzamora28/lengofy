@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
     FaBrain,
     FaLanguage,
@@ -86,7 +86,12 @@ const FlipCards = ({ data }: { data: CardData[] }) => {
 
 
 
-const FloatingElement = ({ children, index }) => {
+interface FloatingElementProps {
+  children: React.ReactNode;
+  index: number;
+}
+
+const FloatingElement: React.FC<FloatingElementProps> = ({ children, index }) => {
     return (
         <motion.div
             animate={{
@@ -135,7 +140,7 @@ const MemoryGameLanding: React.FC = () => {
 
 
     useEffect(() => {
-        const handleMouseMove = (e) => {
+        const handleMouseMove = (e: MouseEvent) => {
             const { clientX, clientY } = e;
             const moveX = clientX - window.innerWidth / 2;
             const moveY = clientY - window.innerHeight / 2;
