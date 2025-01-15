@@ -10,6 +10,8 @@ import {
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
+import { useTranslation } from "react-i18next";
+import memoryTranslationImage from "@/assets/images/memory-translation-og.png";
 
 interface CardData {
     word: string;
@@ -114,6 +116,8 @@ const MemoryGameLanding: React.FC = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [randomCards, setRandomCards] = useState<CardData[]>([]);
     const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '50%']);
+    const { t: trans } = useTranslation();
+
 
     const flashcardsData: CardData[] = [
         { word: "Haus", translation: "House", emoji: "🏠" },
@@ -154,18 +158,18 @@ const MemoryGameLanding: React.FC = () => {
     const features = [
         {
             icon: <FaBrain className="w-12 h-12 text-indigo-500 dark:text-indigo-400" />,
-            title: "Memory Enhancement",
-            description: "Train your brain while learning new vocabulary. Our memory game combines cognitive exercise with language learning.",
+            title: trans("memory_translation_landing_page.feature_1_title"),
+            description: trans("memory_translation_landing_page.feature_1_description"),
         },
         {
             icon: <FaLanguage className="w-12 h-12 text-indigo-500 dark:text-indigo-400" />,
-            title: "Language Learning",
-            description: "Practice vocabulary and translations in an engaging way. Match words and their translations to reinforce your language skills.",
+            title: trans("memory_translation_landing_page.feature_2_title"),
+            description: trans("memory_translation_landing_page.feature_2_description"),
         },
         {
             icon: <FaGamepad className="w-12 h-12 text-indigo-500 dark:text-indigo-400" />,
-            title: "Fun Gaming Experience",
-            description: "Enjoy an interactive and entertaining way to learn. Challenge yourself with different difficulty levels and track your progress.",
+            title: trans("memory_translation_landing_page.feature_3_title"),
+            description: trans("memory_translation_landing_page.feature_3_description"),
         },
     ];
 
@@ -173,7 +177,26 @@ const MemoryGameLanding: React.FC = () => {
         <GuestLayout>
             <Head>
                 <title>Memory Translation Game</title>
-                <meta name="description" content="Test your language knowledge with fun memory games!" />
+                <meta
+                    name="description"
+                    content={trans("memory_translation_landing_page.meta_description")}
+                />
+                <meta
+                    name="keywords"
+                    content={trans("memory_translation_landing_page.meta_keywords")}
+                />
+                <meta
+                    property="og:title"
+                    content={trans("memory_translation_landing_page.meta_title")}
+                />
+                <meta
+                    property="og:description"
+                    content={trans("memory_translation_landing_page.meta_description")}
+                />
+                <meta
+                    property="og:image"
+                    content={memoryTranslationImage}
+                />
             </Head>
 
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-indigo-900 via-purple-900 to-black dark:from-gray-900 dark:via-indigo-950 dark:to-black">
@@ -204,7 +227,7 @@ const MemoryGameLanding: React.FC = () => {
 
                 <p className="text-xl sm:text-2xl text-indigo-100 dark:text-indigo-200 mb-8 sm:mb-12 max-w-3xl mx-auto px-4"
                 >
-                    Embark on an exciting journey of language mastery through the power of memory and fun!
+                    {trans("memory_translation_landing_page.description")}
                 </p>
 
                 {/* Interactive Cards Section */}
@@ -230,7 +253,7 @@ const MemoryGameLanding: React.FC = () => {
                                     className="inline-flex items-center px-8 py-4 text-xl font-bold rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:shadow-[0_0_50px_rgba(79,70,229,0.6)] transition-all duration-300"
                                 >
                                     <FaPlay className="mr-3" />
-                                    Begin Your Adventure
+                                    {trans("memory_translation_landing_page.btn_begin")}
                                 </Link>
                             </motion.div>
                         </motion.div>
@@ -288,10 +311,10 @@ const MemoryGameLanding: React.FC = () => {
                                         y: mousePosition.y * 0.02,
                                     }}
                                 >
-                                    Ready to Transform Your Learning?
+                                    {trans("memory_translation_landing_page.section_call_to_action.title")}
                                 </motion.h2>
                                 <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
-                                    Join a community of successful learners who have mastered new languages through our engaging memory games.
+                                    {trans("memory_translation_landing_page.section_call_to_action.description")}
                                 </p>
                                 <motion.div
                                     whileHover={{ scale: 1.05 }}
@@ -301,7 +324,7 @@ const MemoryGameLanding: React.FC = () => {
                                         href="/memory-game/play"
                                         className="inline-flex items-center px-8 py-4 text-lg font-bold rounded-full bg-white text-indigo-600 hover:bg-indigo-100 shadow-lg hover:shadow-xl transition-all duration-300"
                                     >
-                                        Start Playing Now
+                                        {trans("memory_translation_landing_page.section_call_to_action.btn_begin")}
                                     </Link>
                                 </motion.div>
                             </div>

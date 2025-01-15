@@ -176,6 +176,27 @@
             "btn_leave": "Leave Game"
         }
     },
+    "memory_translation_landing_page": {
+        "title": "Fun Memory Game for Language Learning",
+        "description": "Embark on an exciting journey of language mastery through the power of memory and fun!",
+        "btn_begin": "Begin Your Adventure",
+        "tap_cards_to_flip_them": "Tap the cards to flip them!",
+        "click_cards_to_flip_them": "Click the cards to flip them!",
+        "feature_1_title": "Memory Enhancement",
+        "feature_1_description": "Train your brain while learning new vocabulary. Our memory game combines cognitive exercise with language learning.",
+        "feature_2_title": "Language Learning",
+        "feature_2_description": "Practice vocabulary and translations in an engaging way. Match words and their translations to reinforce your language skills.",
+        "feature_3_title": "Fun Gaming Experience",
+        "feature_3_description": "Enjoy an interactive and entertaining way to learn. Challenge yourself with different difficulty levels and track your progress.",
+        "section_call_to_action": {
+            "title": "Ready to Transform Your Learning?",
+            "description": "Join a community of successful learners who have mastered new languages through our engaging memory games.",
+            "btn_begin": "Start Playing Now"
+        },
+        "meta_title": "Memory Translation: A Fun Memory Game for Language Learning",
+        "meta_description": "Test your language knowledge with fun memory games! Match cards to find the hidden translations and challenge your memory. Practice vocabulary, words, and phrases in a fun and engaging way. Enhance your language skills and have a blast with this interactive learning tool!",
+        "meta_keywords": "Memory Translation, fun memory game, language learning, vocabulary, word games, hidden translations, interactive learning tool"
+    },
     "categories": {
         "all": "All",
         "animals": "Animals",

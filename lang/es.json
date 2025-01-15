@@ -177,6 +177,27 @@
             "btn_leave": "Abandonar Juego"
         }
     },
+    "memory_translation_landing_page": {
+        "title": "Juego de memoria divertido para aprender idiomas",
+        "description": "¡Embárcate en un emocionante viaje de dominio del idioma a través del poder de la memoria y la diversión!",
+        "btn_begin": "Comienza tu aventura",
+        "tap_cards_to_flip_them": "¡Toca las cartas para darles la vuelta!",
+        "click_cards_to_flip_them": "¡Haz clic en las cartas para darles la vuelta!",
+        "feature_1_title": "Mejora de la memoria",
+        "feature_1_description": "Entrena tu cerebro mientras aprendes vocabulario nuevo. Nuestro juego de memoria combina el ejercicio cognitivo con el aprendizaje de idiomas.",
+        "feature_2_title": "Aprendizaje de idiomas",
+        "feature_2_description": "Practica vocabulario y traducciones de una manera interesante. Empareja palabras y sus traducciones para reforzar tus habilidades lingüísticas.",
+        "feature_3_title": "Experiencia de juego divertida",
+        "feature_3_description": "Disfruta de una forma interactiva y entretenida de aprender. Ponte a prueba con diferentes niveles de dificultad y sigue tu progreso.",
+        "section_call_to_action": {
+            "title": "¿Estás listo para transformar tu aprendizaje?",
+            "description": "Únete a una comunidad de estudiantes exitosos que han dominado nuevos idiomas a través de nuestros atractivos juegos de memoria.",
+            "btn_begin": "Empieza a jugar ahora"
+        },
+        "meta_title": "Memory Translation: un divertido juego de memoria para aprender idiomas",
+        "meta_description": "¡Pon a prueba tus conocimientos de idiomas con divertidos juegos de memoria! Empareja tarjetas para encontrar las traducciones ocultas y desafía tu memoria. Practica vocabulario, palabras y frases de una manera divertida y atractiva. Mejora tus habilidades lingüísticas y diviértete con esta herramienta de aprendizaje interactiva!",
+        "meta_keywords": "Memory Translation, divertido juego de memoria, aprendizaje de idiomas, vocabulario, juegos de palabras, traducciones ocultas, herramienta de aprendizaje interactiva"
+    },
     "categories": {
         "all": "Todas",
         "animals": "Animales",

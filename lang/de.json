@@ -177,6 +177,27 @@
             "btn_leave": "Spiel verlassen"
         }
     },
+    "memory_translation_landing_page": {
+        "title": "Lustiges Memory-Spiel zum Sprachenlernen",
+        "description": "Begeben Sie sich auf eine spannende Reise der Sprachbeherrschung durch die Kraft des Gedächtnisses und des Spaßes!",
+        "btn_begin": "Beginnen Sie Ihr Abenteuer",
+        "tap_cards_to_flip_them": "Tippen Sie auf die Karten, um sie umzudrehen!",
+        "click_cards_to_flip_them": "Klicken Sie auf die Karten, um sie umzudrehen!",
+        "feature_1_title": "Gedächtnisverbesserung",
+        "feature_1_description": "Trainieren Sie Ihr Gehirn, während Sie neue Vokabeln lernen. Unser Memory-Spiel kombiniert kognitive Übungen mit Sprachenlernen.",
+        "feature_2_title": "Sprachenlernen",
+        "feature_2_description": "Üben Sie Vokabeln und Übersetzungen auf unterhaltsame Weise. Ordnen Sie Wörter und ihre Übersetzungen zu, um Ihre Sprachkenntnisse zu verbessern.",
+        "feature_3_title": "Lustiges Spielerlebnis",
+        "feature_3_description": "Genießen Sie ein interaktive und unterhaltsame Art zu lernen. Fordern Sie sich mit verschiedenen Schwierigkeitsstufen heraus und verfolgen Sie Ihren Fortschritt.",
+        "section_call_to_action": {
+            "title": "Bereit, Ihr Lernen zu verändern?",
+            "description": "Werden Sie Teil einer Community erfolgreicher Lernender, die durch unsere spannenden Gedächtnisspiele neue Sprachen gemeistert haben.",
+            "btn_begin": "Jetzt spielen"
+        },
+        "meta_title": "Memory Translation: Ein unterhaltsames Gedächtnisspiel zum Sprachenlernen",
+        "meta_description": "Testen Sie Ihre Sprachkenntnisse mit unterhaltsamen Gedächtnisspielen! Ordnen Sie Karten zu, um die versteckten Übersetzungen zu finden und Ihr Gedächtnis herauszufordern. Üben Sie Vokabeln, Wörter und Sätze auf unterhaltsame und spannende Weise. Verbessern Sie Ihre Sprachkenntnisse und haben Sie Spaß mit diesem interaktiven Lerntool!",
+        "meta_keywords": "Memory Translation, unterhaltsames Gedächtnisspiel, Sprachenlernen, Vokabeln, Wortspiele, versteckte Übersetzungen, interaktives Lerntool"
+    },
     "categories": {
         "all": "Alle",
         "animals": "Tiere",
