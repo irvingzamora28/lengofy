@@ -52,6 +52,26 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/gender-duel', function (LanguageService $languageService) {
         $locale = app()->getLocale();
         return Inertia::render('GenderDuelGame/Landing', [
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
+                        ],
+                    ];
+                })->all(),
             'locale' => $locale
         ]);
     })->name('gender-duel.play');
@@ -59,6 +79,26 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/memory-translation', function (LanguageService $languageService) {
         $locale = app()->getLocale();
         return Inertia::render('MemoryTranslationGame/Landing', [
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
+                        ],
+                    ];
+                })->all(),
             'locale' => $locale
         ]);
     })->name('memory-translation.play');
@@ -127,4 +167,4 @@ Route::post('/language/switch', function (Request $request) {
     return redirect()->back()->cookie('locale', $request->locale, 60 * 24 * 365);
 })->name('language.switch');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

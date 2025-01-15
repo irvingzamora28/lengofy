@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     FaPlay,
     FaMars,
@@ -11,6 +11,8 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { Head } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import genderDuelImage from "@/assets/images/gender-duel-landing.png";
+import { AnimatePresence } from "framer-motion";
+import GuestLanguageModal from "@/Components/GuestLanguageModal";
 
 interface Feature {
     icon: JSX.Element;
@@ -18,7 +20,12 @@ interface Feature {
     description: string;
 }
 
-const LandingPageGenderDuel: React.FC = () => {
+interface LandingPageGenderDuelProps {
+    languagePairs: Record<string, any>;
+}
+
+const LandingPageGenderDuel: React.FC<LandingPageGenderDuelProps> = ({ languagePairs }) => {
+    const [showLanguageModal, setShowLanguageModal] = useState(false);
     const { t: trans } = useTranslation();
     const features: Feature[] = [
         {
@@ -37,6 +44,10 @@ const LandingPageGenderDuel: React.FC = () => {
             description: trans("gender_duel_landing_page.feature_progress_tracking_description"),
         },
     ];
+
+    const handleGuestPlay = () => {
+        setShowLanguageModal(true);
+    };
 
     return (
         <GuestLayout>
@@ -76,7 +87,7 @@ const LandingPageGenderDuel: React.FC = () => {
                         <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
                             {trans("gender_duel_landing_page.description")}
                         </p>
-                        <button className="px-12 py-6 text-xl md:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center space-x-3 transform hover:scale-105 transition mx-auto">
+                        <button onClick={handleGuestPlay} className="px-12 py-6 text-xl md:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center space-x-3 transform hover:scale-105 transition mx-auto">
                             <FaPlay className="w-6 h-6 md:w-12 md:h-12" /> <span>{trans("gender_duel_landing_page.play_now")}</span>
                         </button>
                     </div>
@@ -124,6 +135,16 @@ const LandingPageGenderDuel: React.FC = () => {
                     <p>{trans('generals.copyright')}</p>
                 </footer>
             </div>
+
+            <AnimatePresence>
+                {showLanguageModal && (
+                    <GuestLanguageModal
+                        show={showLanguageModal}
+                        onClose={() => setShowLanguageModal(false)}
+                        languagePairs={languagePairs}
+                    />
+                )}
+            </AnimatePresence>
         </GuestLayout>
     );
 };

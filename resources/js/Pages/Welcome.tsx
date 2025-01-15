@@ -6,7 +6,6 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { PageProps } from '@/types';
 import {
     FaUserFriends,
-    FaPlay,
     FaCheckCircle,
     FaArrowRight
 } from 'react-icons/fa';
