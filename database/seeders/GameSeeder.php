@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Game;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GameSeeder extends Seeder
@@ -13,8 +12,14 @@ class GameSeeder extends Seeder
      */
     public function run(): void
     {
-        Game::create([
-            'name' => 'Gender Duel',
-        ]);
+
+        $games = [
+            ['name' => 'Gender Duel', 'slug' => 'gender-duel'],
+            ['name' => 'Memory Translation', 'slug' => 'memory-translation'],
+        ];
+
+        foreach ($games as $game) {
+            Game::create($game);
+        }
     }
 }
