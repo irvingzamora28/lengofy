@@ -74,6 +74,8 @@ const MemoryTranslationGamePractice: React.FC<
     const [gameStartTime] = useState(Date.now());
     const [gameEndTime, setGameEndTime] = useState<number | null>(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [cardsToFlipDown, setCardsToFlipDown] = useState<string[]>([]);
+    const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const initializedCards = createCardPairs(nouns).sort(
@@ -82,8 +84,23 @@ const MemoryTranslationGamePractice: React.FC<
         setCards(initializedCards);
     }, []);
 
+    const flipCardsDown = (cardIds: string[]) => {
+        setCards((prevCards) =>
+            prevCards.map((card) =>
+                cardIds.includes(card.id) ? { ...card, isFlipped: false } : card
+            )
+        );
+        setCardsToFlipDown([]);
+        setFlippedCards([]);
+        setIsChecking(false);
+    };
+
     const flipCard = (cardId: string) => {
-        if (isChecking) return;
+        // If the card is already matched or the same card is clicked again, do nothing
+        if (matchedPairs.includes(cards.find(card => card.id === cardId)?.pairId || '') ||
+            flippedCards.some(card => card.id === cardId)) {
+            return;
+        }
 
         const newCards = cards.map((card) =>
             card.id === cardId ? { ...card, isFlipped: true } : card
@@ -91,46 +108,62 @@ const MemoryTranslationGamePractice: React.FC<
         setCards(newCards);
 
         const selectedCard = newCards.find((card) => card.id === cardId);
+        if (!selectedCard) return;
 
-        if (flippedCards.length === 1 && selectedCard) {
-            setIsChecking(true);
+        if (flippedCards.length === 1) {
             setMoves((prev) => prev + 1);
-
             const [firstFlippedCard] = flippedCards;
+
+            // If there's a pending timeout for previous cards, clear it
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                setTimeoutId(null);
+            }
+
+            // If there are cards marked to be flipped down, flip them now
+            if (cardsToFlipDown.length > 0) {
+                setCards(prevCards =>
+                    prevCards.map(card =>
+                        cardsToFlipDown.includes(card.id) ? { ...card, isFlipped: false } : card
+                    )
+                );
+                setCardsToFlipDown([]);
+                // Reset flippedCards since we're starting fresh with the new card
+                setFlippedCards([selectedCard]);
+                return;
+            }
+
             if (firstFlippedCard.pairId === selectedCard.pairId) {
-                const newMatchedPairs = [...matchedPairs, selectedCard.pairId];
+                // Match found
                 setScore((prevScore) => prevScore + 1);
-                setMatchedPairs(newMatchedPairs);
+                setMatchedPairs((prevPairs) => [...prevPairs, selectedCard.pairId]);
                 setFlippedCards([]);
                 playSound(correctSound);
-                setIsChecking(false);
 
                 // Check if game is complete
-                if (newMatchedPairs.length === nouns.length) {
+                if (matchedPairs.length + 1 === nouns.length) {
                     setGameEndTime(Date.now());
                     setIsGameOver(true);
                 }
             } else {
+                // No match
                 playSound(incorrectSound);
-                setTimeout(() => {
-                    setCards((prevCards) =>
-                        prevCards.map((card) =>
-                            card.pairId === firstFlippedCard.pairId ||
-                            card.pairId === selectedCard.pairId
+                setCardsToFlipDown([firstFlippedCard.id, selectedCard.id]);
+                setFlippedCards([]);
+                const newTimeoutId = setTimeout(() => {
+                    setCards(prevCards =>
+                        prevCards.map(card =>
+                            card.id === firstFlippedCard.id || card.id === selectedCard.id
                                 ? { ...card, isFlipped: false }
                                 : card
                         )
                     );
-                    setFlippedCards([]);
-                    setIsChecking(false);
+                    setCardsToFlipDown([]);
                 }, 1000);
+                setTimeoutId(newTimeoutId);
             }
         } else {
-            setFlippedCards(
-                [selectedCard].filter(
-                    (card): card is MemoryCard => card !== undefined
-                )
-            );
+            setFlippedCards([selectedCard]);
         }
     };
 
