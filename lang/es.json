@@ -123,7 +123,10 @@
         "feature_real_time_multiplayer": "Juego en Tiempo Real",
         "feature_real_time_multiplayer_description": "Desafía a tus amigos o comparte tu experiencia con otros jugadores en todo el mundo",
         "feature_progress_tracking": "Rastreo de Progreso",
-        "feature_progress_tracking_description": "Mantén un registro de tu progreso con estadísticas detalladas"
+        "feature_progress_tracking_description": "Mantén un registro de tu progreso con estadísticas detalladas",
+        "meta_title": "Duelo de Géneros",
+        "meta_description": "Domina los géneros de los sustantivos con un emocionante juego multijugador!",
+        "meta_keywords": "Duelo de Géneros, géneros de sustantivos, juego de multijugadores, aprender idiomas, divertido aprendizaje, aprendizaje social"
     },
     "gender_duel": {
         "lobby": "Gender Duel Lobby",

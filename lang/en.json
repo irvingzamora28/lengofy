@@ -122,7 +122,10 @@
         "feature_real_time_multiplayer": "Real-time Multiplayer",
         "feature_real_time_multiplayer_description": "Challenge friends or match with players globally",
         "feature_progress_tracking": "Progress Tracking",
-        "feature_progress_tracking_description": "Track your improvement with detailed statistics"
+        "feature_progress_tracking_description": "Track your improvement with detailed statistics",
+        "meta_title": "Gender Duel",
+        "meta_description": "Master noun genders through an exciting dueling game!",
+        "meta_keywords": "Gender Duel, noun genders, multiplayer language game, learning languages, fun learning experience, social learning"
     },
     "gender_duel": {
         "lobby": "Gender Duel Lobby",

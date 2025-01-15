@@ -40,7 +40,29 @@ const LandingPageGenderDuel: React.FC = () => {
 
     return (
         <GuestLayout>
-            <Head title="Gender Duel" />
+            <Head>
+                <title>Gender Duel</title>
+                <meta
+                    name="description"
+                    content={trans("gender_duel_landing_page.meta_description")}
+                />
+                <meta
+                    name="keywords"
+                    content={trans("gender_duel_landing_page.meta_keywords")}
+                />
+                <meta
+                    property="og:title"
+                    content={trans("gender_duel_landing_page.meta_title")}
+                />
+                <meta
+                    property="og:description"
+                    content={trans("gender_duel_landing_page.meta_description")}
+                />
+                <meta
+                    property="og:image"
+                    content={genderDuelImage}
+                />
+            </Head>
             <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
                 <section className="pt-24 pb-20 px-4">
                     <div className="max-w-6xl mx-auto text-center">
