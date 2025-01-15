@@ -10,6 +10,7 @@ import {
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
+import genderDuelImage from "@/assets/images/gender-duel-landing.png";
 
 interface Feature {
     icon: JSX.Element;
@@ -89,7 +90,7 @@ const LandingPageGenderDuel: React.FC = () => {
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl" />
                             <img
-                                src="/api/placeholder/800/400"
+                                src={genderDuelImage}
                                 alt="Game Preview"
                                 className="rounded-xl shadow-2xl relative z-10 mx-auto"
                             />
