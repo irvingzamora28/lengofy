@@ -55,6 +55,13 @@ Route::middleware(['guest'])->group(function () {
             'locale' => $locale
         ]);
     })->name('gender-duel.play');
+
+    Route::get('/memory-translation', function (LanguageService $languageService) {
+        $locale = app()->getLocale();
+        return Inertia::render('MemoryTranslationGame/Landing', [
+            'locale' => $locale
+        ]);
+    })->name('memory-translation.play');
 });
 
 Route::get('/dashboard', function () {
