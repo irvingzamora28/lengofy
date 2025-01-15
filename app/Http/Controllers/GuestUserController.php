@@ -22,12 +22,13 @@ class GuestUserController extends Controller
     {
         $request->validate([
             'language_pair_id' => 'required|exists:language_pairs,id',
+            'redirect_route' => 'nullable|in:games.gender-duel.practice,games.memory-translation.practice',
         ]);
 
         $user = $this->guestUserService->createGuestUser($request->language_pair_id);
         Auth::login($user);
 
-        return redirect()->route('games.gender-duel.practice', [
+        return redirect()->route($request->redirect_route ?? 'dashboard', [
             'difficulty' => 'medium',
             'category' => 0,
         ]);

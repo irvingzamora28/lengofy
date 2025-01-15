@@ -140,6 +140,7 @@ const LandingPageGenderDuel: React.FC<LandingPageGenderDuelProps> = ({ languageP
                 {showLanguageModal && (
                     <GuestLanguageModal
                         show={showLanguageModal}
+                        redirectRoute="games.gender-duel.practice"
                         onClose={() => setShowLanguageModal(false)}
                         languagePairs={languagePairs}
                     />

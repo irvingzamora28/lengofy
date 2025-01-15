@@ -135,7 +135,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('games/memory-translation')->group(function () {
-        Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory.practice');
+        Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
     });
 
     // Score routes
