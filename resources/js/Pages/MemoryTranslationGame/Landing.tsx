@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import {
     FaBrain,
     FaLanguage,
@@ -12,6 +12,8 @@ import { Head } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
 import memoryTranslationImage from "@/assets/images/memory-translation-og.png";
+import GuestLanguageModal from "@/Components/GuestLanguageModal";
+import { Button } from "@headlessui/react";
 
 interface CardData {
     word: string;
@@ -111,8 +113,13 @@ const FloatingElement: React.FC<FloatingElementProps> = ({ children, index }) =>
     );
 };
 
-const MemoryGameLanding: React.FC = () => {
+interface MemoryGameLandingProps {
+    languagePairs: Record<string, any>;
+}
+
+const MemoryGameLanding: React.FC<MemoryGameLandingProps> = ({ languagePairs }) => {
     const { scrollY } = useScroll();
+    const [showLanguageModal, setShowLanguageModal] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [randomCards, setRandomCards] = useState<CardData[]>([]);
     const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '50%']);
@@ -131,6 +138,10 @@ const MemoryGameLanding: React.FC = () => {
         { word: "Mond", translation: "Moon", emoji: "🌕" },
         { word: "Stern", translation: "Star", emoji: "⭐" },
     ];
+
+    const handleGuestPlay = () => {
+        setShowLanguageModal(true);
+    };
 
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * flashcardsData.length);
@@ -248,13 +259,13 @@ const MemoryGameLanding: React.FC = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <Link
-                                    href="/memory-game/play"
+                                <Button
+                                    onClick={handleGuestPlay}
                                     className="inline-flex items-center px-8 py-4 text-xl font-bold rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:shadow-[0_0_50px_rgba(79,70,229,0.6)] transition-all duration-300"
                                 >
                                     <FaPlay className="mr-3" />
                                     {trans("memory_translation_landing_page.btn_begin")}
-                                </Link>
+                                </Button>
                             </motion.div>
                         </motion.div>
 
@@ -320,18 +331,29 @@ const MemoryGameLanding: React.FC = () => {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <Link
-                                        href="/memory-game/play"
+                                    <Button
+                                        onClick={handleGuestPlay}
                                         className="inline-flex items-center px-8 py-4 text-lg font-bold rounded-full bg-white text-indigo-600 hover:bg-indigo-100 shadow-lg hover:shadow-xl transition-all duration-300"
                                     >
                                         {trans("memory_translation_landing_page.section_call_to_action.btn_begin")}
-                                    </Link>
+                                    </Button>
                                 </motion.div>
                             </div>
                         </motion.div>
                     </div>
                 </div>
             </div>
+
+            <AnimatePresence>
+                {showLanguageModal && (
+                    <GuestLanguageModal
+                        show={showLanguageModal}
+                        redirectRoute="games.memory-translation.practice"
+                        onClose={() => setShowLanguageModal(false)}
+                        languagePairs={languagePairs}
+                    />
+                )}
+            </AnimatePresence>
         </GuestLayout>
     );
 };

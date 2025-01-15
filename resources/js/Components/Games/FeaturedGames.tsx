@@ -3,35 +3,29 @@ import GameCard from './GameCard';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import genderDuelDashboardImage from "@/assets/images/gender-duel-dashboard.png";
+import memoryTranslationDashboardImage from "@/assets/images/memory-translation-dashboard.png";
+
 
 const sampleGames = [
     {
         id: 'gender-duel',
         title: 'Gender Duel',
         description: 'Master German noun genders through an exciting dueling game!',
-        thumbnail: 'https://picsum.photos/200/300',
+        thumbnail: genderDuelDashboardImage,
         playCount: 150,
         successRate: 75,
         featured: true
     },
     {
-        id: 'verb-challenge',
-        title: 'Verb Challenge',
-        description: 'Practice German verb conjugations in a fun and interactive way.',
-        thumbnail: 'https://picsum.photos/200/300',
+        id: 'memory-translation',
+        title: 'Memory Translation',
+        description: 'Test your German vocabulary with fun memory games! Match cards to find the hidden translations and challenge your memory.',
+        thumbnail: memoryTranslationDashboardImage,
         playCount: 120,
         successRate: 68,
         featured: true
     },
-    {
-        id: 'case-master',
-        title: 'Case Master',
-        description: 'Learn German cases through engaging exercises and challenges.',
-        thumbnail: 'https://picsum.photos/200/300',
-        playCount: 90,
-        successRate: 62,
-        featured: true
-    }
 ];
 
 export default function FeaturedGames() {
