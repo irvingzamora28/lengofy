@@ -274,6 +274,9 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
                         setSelectedDifficulty={setSelectedDifficulty}
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
+                        easyText={trans('gender_duel.modal_difficulty.easy_text')}
+                        mediumText={trans('gender_duel.modal_difficulty.medium_text')}
+                        hardText={trans('gender_duel.modal_difficulty.hard_text')}
                         startGame={() => {
                             router.visit(route('games.gender-duel.practice', {
                                 difficulty: selectedDifficulty,

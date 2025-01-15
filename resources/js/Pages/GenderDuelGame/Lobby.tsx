@@ -255,6 +255,9 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
           startGame={startGame}
+          easyText={trans('gender_duel.modal_difficulty.easy_text')}
+          mediumText={trans('gender_duel.modal_difficulty.medium_text')}
+          hardText={trans('gender_duel.modal_difficulty.hard_text')}
           gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>
