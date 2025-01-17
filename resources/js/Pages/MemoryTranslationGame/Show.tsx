@@ -135,6 +135,12 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     }
                     break;
 
+                case 'memory_translation_pair_matched':
+                    // Update matched pairs for all players
+                    const matchedIndices = data.data.matchedIndices;
+                    setMatchedPairs(prev => [...prev, ...matchedIndices]);
+                    break;
+
                 case 'memory_translation_game_state_updated':
                     console.log('Game state updated:', data.data);
                     setGameState(prevState => {
@@ -164,10 +170,6 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     if (data.data.current_turn !== gameState.current_turn) {
                         setSelectedCards([]);
                     }
-                    break;
-
-                case 'pair_matched':
-                    setMatchedPairs(prev => [...prev, ...data.data.cards]);
                     break;
 
                 case 'score_updated':
@@ -238,14 +240,15 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     firstCard.id.split('-')[0] === secondCard.id.split('-')[0];
 
                 if (isMatch) {
-                    setMatchedPairs(prev => [...prev, firstIndex, secondIndex]);
-                    // Update score
+                    const newScore = (currentPlayer?.score || 0) + 1;
+                    // Send match information to server
                     wsRef.current?.send(JSON.stringify({
-                        type: 'memory_translation_update_score',
+                        type: 'memory_translation_pair_matched',
                         gameId: gameState.id,
                         userId: auth.user.id,
                         data: {
-                            score: (currentPlayer?.score || 0) + 1
+                            matchedIndices: [firstIndex, secondIndex],
+                            score: newScore
                         }
                     }));
                 }

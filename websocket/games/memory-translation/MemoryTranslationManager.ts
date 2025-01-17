@@ -29,6 +29,9 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             case 'memory_translation_flip_card':
                 this.handleCardFlip(message as MemoryTranslationGameMessage);
                 break;
+            case 'memory_translation_pair_matched':
+                this.handlePairMatched(message as MemoryTranslationGameMessage);
+                break;
             case 'memory_translation_update_score':
                 this.handleUpdateScore(message as MemoryTranslationGameMessage);
                 break;
@@ -197,6 +200,34 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             state.current_turn = state.players[0].user_id!;
             this.setState(gameId, state);
             this.broadcastState(gameId);
+        }
+    }
+
+    private handlePairMatched(message: MemoryTranslationGameMessage): void {
+        const { gameId, userId, data } = message;
+        const room = this.getRoom(gameId);
+        const state = this.getState(gameId);
+
+        if (room && state && data?.matchedIndices) {
+            // Broadcast the matched pair to all players
+            this.broadcast(room, {
+                type: 'memory_translation_pair_matched',
+                gameId,
+                userId,
+                data: {
+                    matchedIndices: data.matchedIndices
+                }
+            });
+
+            // Update player score
+            if (data.score !== undefined) {
+                const playerIndex = state.players.findIndex(p => p.user_id === userId);
+                if (playerIndex !== -1) {
+                    state.players[playerIndex].score = data.score;
+                    this.setState(gameId, state);
+                    this.broadcastState(gameId);
+                }
+            }
         }
     }
 
