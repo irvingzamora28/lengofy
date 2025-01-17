@@ -13,6 +13,11 @@
         "success": "Erfolg",
         "warning": "Warnung",
         "info": "Info",
+        "easy": "Einfach",
+        "medium": "Mittel",
+        "hard": "Schwierig",
+        "ready": "Fertig",
+        "not_ready": "Nicht Fertig",
         "confirm": "Bestätigen",
         "cancel": "Abbrechen",
         "yes": "Ja",
@@ -220,6 +225,8 @@
         "players": "Spieler",
         "ready": "Bereit",
         "game": "Spiel",
+        "your_turn": "Ihr Zug",
+        "players_turn": "{{name}}'s Zug",
         "btn_join_game": "Spiel beitreten",
         "round": "Runde",
         "category": "Kategorie",
@@ -232,6 +239,14 @@
             "waiting": "Warten",
             "in_progress": "In Bearbeitung",
             "completed": "Abgeschlossen"
+        },
+        "game_info": {
+            "status": "Status",
+            "category": "Kategorie",
+            "difficulty": "Schwierigkeit",
+            "moves": "Bewegungen",
+            "time": "Zeit",
+            "score": "Punktzahl"
         },
         "modal_exit": {
             "title": "Spiel verlassen?",

@@ -224,6 +224,8 @@
         "players": "Players",
         "ready": "Ready",
         "game": "Game",
+        "your_turn": "Your Turn",
+        "players_turn": "{{name}}'s Turn",
         "btn_join_game": "Join Game",
         "round": "Round",
         "category": "Category",

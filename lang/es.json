@@ -13,6 +13,11 @@
         "success": "Éxito",
         "warning": "Advertencia",
         "info": "Información",
+        "easy": "Fácil",
+        "medium": "Medio",
+        "hard": "Difícil",
+        "ready": "Listo",
+        "not_ready": "No Listo",
         "confirm": "Confirmar",
         "cancel": "Cancelar",
         "yes": "Sí",
@@ -220,6 +225,8 @@
         "players": "Jugadores",
         "ready": "Listo",
         "game": "Juego",
+        "your_turn": "Tu Turno",
+        "players_turn": "Turno de {{name}}",
         "btn_join_game": "Unirse al Juego",
         "round": "Ronda",
         "category": "Categoría",
@@ -232,6 +239,14 @@
             "waiting": "Esperando",
             "in_progress": "En Progreso",
             "completed": "Completado"
+        },
+        "game_info": {
+            "status": "Estado",
+            "category": "Categoría",
+            "difficulty": "Dificultad",
+            "moves": "Movimientos",
+            "time": "Tiempo",
+            "score": "Puntuación"
         },
         "modal_exit": {
             "title": "¿Deseas Abandonar el Juego?",
