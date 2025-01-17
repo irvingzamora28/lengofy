@@ -61,7 +61,11 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 status: "waiting",
                 current_turn: 0,
                 words: message.data?.words || [],
-                players: message.data?.players || [],
+                players: (message.data?.players || []).map(player => ({
+                    ...player,
+                    score: 0,
+                    moves: 0
+                })),
                 language_name: message.data?.language_name || '',
                 category: message.data?.category || '',
                 hostId: message.userId || 0,
@@ -183,6 +187,11 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             // If this is the second card flipped, we'll wait for the match check
             // Turn change will be handled in handlePairMatched if no match
             if (data?.isSecondCard) {
+                // Increment number of moves for the player
+                const playerIndex = state.players.findIndex(p => p.user_id === userId);
+                if (playerIndex !== -1) {
+                    state.players[playerIndex].moves = (state.players[playerIndex].moves || 0) + 1;
+                }
                 state.lastFlippedCards = data.cardIndices;
                 this.setState(gameId, state);
             }
