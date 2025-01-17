@@ -17,6 +17,35 @@ interface Props extends PageProps {
     justCreated: boolean;
 }
 
+const createCardPairs = (nouns: any[]): any[] => {
+    const cardPairs: any[] = [];
+
+    nouns.forEach((noun, index) => {
+        // Create word card
+        const wordCard: any = {
+            ...noun,
+            id: `${noun.id}-word`,
+            type: 'word',
+            isFlipped: false
+        };
+
+        // Create translation card
+        const translationCard: any = {
+            ...noun,
+            id: `${noun.id}-translation`,
+            word: noun.translation,
+            translation: noun.word,
+            type: 'translation',
+            isFlipped: false
+        };
+
+        cardPairs.push(wordCard, translationCard);
+    });
+
+    // Shuffle the cards
+    return cardPairs.sort(() => Math.random() - 0.5);
+};
+
 export default function Show({ auth, memory_translation_game, wsEndpoint, justCreated }: Props) {
     const [gameState, setGameState] = useState(memory_translation_game);
     const [selectedCards, setSelectedCards] = useState<number[]>([]);
@@ -37,6 +66,9 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         ws.onopen = () => {
             console.log('Connected to Memory Translation game WebSocket about to join the game room');
 
+            // Create card pairs only when creating a new game
+            const cardPairs = createCardPairs(memory_translation_game.words);
+
             // Join the game room
             ws.send(JSON.stringify({
                 type: 'join_memory_translation_game',
@@ -44,8 +76,10 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 userId: auth.user.id,
                 max_players: memory_translation_game.max_players,
                 data: {
-                    words: memory_translation_game.words,
-                    players: memory_translation_game.players
+                    words: cardPairs,
+                    players: memory_translation_game.players,
+                    language_name: memory_translation_game.language_name,
+                    category: memory_translation_game.category
                 }
             }));
 
@@ -55,7 +89,10 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 ws.send(JSON.stringify({
                     type: 'memory_translation_game_created',
                     gameId: memory_translation_game.id,
-                    game: memory_translation_game
+                    game: {
+                        ...memory_translation_game,
+                        words: cardPairs
+                    }
                 }));
             }
 
@@ -90,35 +127,42 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     }));
                     break;
 
-                case 'memory_translation_game_state_updated':
-                    console.log('Game state updated:', data.data);
-                    setGameState(prev => ({
-                        ...prev,
-                        ...data.data,
-                        players: data.data.players || prev.players,
-                    }));
-
-                    // Start timer when game starts
-                    if (data.data.status === 'in_progress' && prev.status === 'waiting') {
-                        startTimer();
-                        setShowExitConfirmation(false);
-                    }
-
-                    if (data.data.status === 'completed') {
-                        stopTimer();
-                        handleGameCompletion(data.data);
-                    }
-
-                    if (data.data.players && data.data.players.length === 0) {
-                        router.visit('/games/memory-translation');
-                        return;
+                case 'memory_translation_card_flipped':
+                    if (data.userId !== auth.user.id) {
+                        // Sync card flip for other players
+                        const cardIndex = data.data.cardIndex;
+                        setSelectedCards(prev => [...prev, cardIndex]);
                     }
                     break;
 
-                case 'card_flipped':
-                    const { cardIndex, playerId } = data.data;
-                    if (playerId !== currentPlayer?.id) {
-                        setSelectedCards(prev => [...prev, cardIndex]);
+                case 'memory_translation_game_state_updated':
+                    console.log('Game state updated:', data.data);
+                    setGameState(prevState => {
+                        const newState = {
+                            ...prevState,
+                            ...data.data,
+                            players: data.data.players || prevState.players,
+                        };
+
+                        if (data.data.status === 'in_progress' && prevState.status === 'waiting') {
+                            setShowExitConfirmation(false);
+                        }
+
+                        if (data.data.status === 'completed') {
+                            handleGameCompletion(data.data);
+                        }
+
+                        if (data.data.players && data.data.players.length === 0) {
+                            router.visit('/games/memory-translation');
+                            return prevState;
+                        }
+
+                        return newState;
+                    });
+
+                    // Clear selected cards when turn changes
+                    if (data.data.current_turn !== gameState.current_turn) {
+                        setSelectedCards([]);
                     }
                     break;
 
@@ -149,92 +193,64 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         };
 
         return () => {
-            stopTimer();
             if (ws.readyState === WebSocket.OPEN) {
                 ws.close();
             }
         };
     }, [memory_translation_game.id]);
 
-    const startTimer = () => {
-        if (timerIntervalRef.current) return;
-
-        timerIntervalRef.current = setInterval(() => {
-            timerRef.current += 1;
-            if (wsRef.current?.readyState === WebSocket.OPEN) {
-                wsRef.current.send(JSON.stringify({
-                    type: 'update_player_time',
-                    gameId: gameState.id,
-                    userId: auth.user.id,
-                    time: timerRef.current
-                }));
-            }
-        }, 1000);
-    };
-
-    const stopTimer = () => {
-        if (timerIntervalRef.current) {
-            clearInterval(timerIntervalRef.current);
-            timerIntervalRef.current = null;
-        }
-    };
-
     const handleCardClick = (index: number) => {
-        if (
-            selectedCards.includes(index) ||
-            matchedPairs.includes(index) ||
-            selectedCards.length >= 2 ||
-            gameState.status !== 'in_progress'
-        ) {
+        // Only allow clicks if it's the player's turn
+        if (gameState.current_turn !== auth.user.id || selectedCards.length >= 2) {
             return;
         }
 
-        // Send card flip to server
-        if (wsRef.current?.readyState === WebSocket.OPEN) {
-            wsRef.current.send(JSON.stringify({
-                type: 'flip_card',
-                gameId: gameState.id,
-                userId: auth.user.id,
-                cardIndex: index
-            }));
+        // Don't allow clicking already matched or selected cards
+        if (matchedPairs.includes(index) || selectedCards.includes(index)) {
+            return;
         }
 
         const newSelectedCards = [...selectedCards, index];
         setSelectedCards(newSelectedCards);
 
-        // If this is the second card
+        // Send card flip message to server
+        wsRef.current?.send(JSON.stringify({
+            type: 'memory_translation_flip_card',
+            gameId: gameState.id,
+            userId: auth.user.id,
+            data: {
+                cardIndex: index,
+                isSecondCard: newSelectedCards.length === 2
+            }
+        }));
+
+        // Check for matches when two cards are selected
         if (newSelectedCards.length === 2) {
-            setMoves(prev => prev + 1);
+            const [firstIndex, secondIndex] = newSelectedCards;
+            const firstCard = gameState.words[firstIndex];
+            const secondCard = gameState.words[secondIndex];
 
-            // Check for match
-            const [firstCard, secondCard] = newSelectedCards;
-            const isMatch = checkForMatch(firstCard, secondCard);
+            setTimeout(() => {
+                // Check if cards form a pair (one is word and other is translation)
+                const isMatch =
+                    (firstCard.type === 'word' && secondCard.type === 'translation' ||
+                     firstCard.type === 'translation' && secondCard.type === 'word') &&
+                    firstCard.id.split('-')[0] === secondCard.id.split('-')[0];
 
-            if (isMatch) {
-                setMatchedPairs(prev => [...prev, firstCard, secondCard]);
-                // Send match to server
-                if (wsRef.current?.readyState === WebSocket.OPEN) {
-                    wsRef.current.send(JSON.stringify({
-                        type: 'pair_matched',
+                if (isMatch) {
+                    setMatchedPairs(prev => [...prev, firstIndex, secondIndex]);
+                    // Update score
+                    wsRef.current?.send(JSON.stringify({
+                        type: 'memory_translation_update_score',
                         gameId: gameState.id,
                         userId: auth.user.id,
-                        cards: [firstCard, secondCard]
+                        data: {
+                            score: (currentPlayer?.score || 0) + 1
+                        }
                     }));
                 }
-            }
-
-            // Clear selected cards after a delay
-            setTimeout(() => {
-                setSelectedCards([]);
             }, 1000);
         }
-    };
-
-    const checkForMatch = (index1: number, index2: number): boolean => {
-        const cards = gameState.words;
-        const card1 = cards[index1];
-        const card2 = cards[index2];
-        return card1.word === card2.translation || card1.translation === card2.word;
     };
 
     const handleGameCompletion = async (data: MemoryTranslationGameState) => {
@@ -340,10 +356,11 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                                 <GameArea
                                     game={gameState}
                                     selectedCards={selectedCards}
-                                    isCurrentPlayerReady={currentPlayer?.is_ready || false}
                                     matchedPairs={matchedPairs}
+                                    isCurrentPlayerReady={currentPlayer?.is_ready || false}
                                     onCardClick={handleCardClick}
                                     onReady={markReady}
+                                    currentUserId={auth.user.id}
                                 />
                                 <PlayersInfo
                                     status={gameState.status}

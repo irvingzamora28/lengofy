@@ -26,11 +26,17 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             case 'memory_translation_player_ready':
                 this.handlePlayerReady(message as MemoryTranslationGameMessage);
                 break;
+            case 'memory_translation_flip_card':
+                this.handleCardFlip(message as MemoryTranslationGameMessage);
+                break;
             case 'memory_translation_update_score':
                 this.handleUpdateScore(message as MemoryTranslationGameMessage);
                 break;
             case 'memory_translation_game_end':
                 this.handleGameEnd(gameId);
+                break;
+            case 'update_player_time':
+                this.handleUpdatePlayerTime(message as MemoryTranslationGameMessage);
                 break;
         }
     }
@@ -75,6 +81,12 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                         state.players.push(newPlayer);
                     }
                 }
+
+                // If this is a new game, update the words with the card pairs
+                if (message.data?.words && state.words.length === 0) {
+                    state.words = message.data.words;
+                }
+
                 this.setState(gameId, state);
                 this.broadcastState(gameId);
             }
@@ -147,12 +159,42 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         }
     }
 
+    private handleCardFlip(message: MemoryTranslationGameMessage): void {
+        const { gameId, userId, data } = message;
+        const state = this.getState(gameId);
+        const room = this.getRoom(gameId);
+
+        if (state && room && state.status === 'in_progress' && state.current_turn === userId) {
+            // Broadcast the card flip to all players
+            this.broadcast(room, {
+                type: 'memory_translation_card_flipped',
+                gameId,
+                userId,
+                data: {
+                    cardIndex: data?.cardIndex,
+                    isSecondCard: data?.isSecondCard
+                }
+            });
+
+            // If this is the second card flipped, move to next player's turn after a delay
+            if (data?.isSecondCard) {
+                setTimeout(() => {
+                    const currentPlayerIndex = state.players.findIndex(p => p.user_id === userId);
+                    const nextPlayerIndex = (currentPlayerIndex + 1) % state.players.length;
+                    state.current_turn = state.players[nextPlayerIndex].user_id!;
+                    this.setState(gameId, state);
+                    this.broadcastState(gameId);
+                }, 1500); // Wait for the cards to be visible before changing turns
+            }
+        }
+    }
+
     private handleStart(gameId: string): void {
         const state = this.getState(gameId);
         if (state) {
             console.log('Starting game:', gameId);
             state.status = "in_progress";
-            state.current_turn = 0;
+            state.current_turn = state.players[0].user_id!;
             this.setState(gameId, state);
             this.broadcastState(gameId);
         }
@@ -170,6 +212,19 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             }
             this.setState(gameId, state);
             this.broadcastState(gameId);
+        }
+    }
+
+    private handleUpdatePlayerTime(message: MemoryTranslationGameMessage): void {
+        const { gameId, userId, data } = message;
+        const state = this.getState(gameId);
+
+        if (state && data?.time !== undefined) {
+            const playerIndex = state.players.findIndex(p => p.user_id === userId);
+            if (playerIndex !== -1) {
+                state.players[playerIndex].time = data.time;
+                this.setState(gameId, state);
+            }
         }
     }
 

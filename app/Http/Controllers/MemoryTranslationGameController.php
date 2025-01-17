@@ -78,29 +78,23 @@ class MemoryTranslationGameController extends Controller
     {
         $validated = $request->validate([
             'difficulty' => 'required|in:easy,medium,hard',
-            'category' => 'nullable|exists:categories,id',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
-        $user = auth()->user();
-        $languagePair = LanguagePair::findOrFail($user->language_pair_id);
+        $amountOfNouns = match ($validated['difficulty']) {
+            'easy' => 10,
+            'medium' => 20,
+            'hard' => 32,
+        };
 
+        $user = auth()->user();
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
+        $nouns = $this->nounService->getNouns($languagePair->target_language_id, $languagePair->source_language_id, $validated['category'], $amountOfNouns);
         return Inertia::render('MemoryTranslationGame/Practice', [
+            'nouns' => $nouns,
             'difficulty' => $validated['difficulty'],
-            'category' => $validated['category'] === 0
-                    ? (object) ['id' => 0, 'key' => 'all']
-                    : Category::find($validated['category']),
-            'languagePair' => [
-                'source_language' => [
-                    'id' => $languagePair->source_language_id,
-                    'code' => $languagePair->sourceLanguage->code,
-                    'name' => $languagePair->sourceLanguage->name,
-                ],
-                'target_language' => [
-                    'id' => $languagePair->target_language_id,
-                    'code' => $languagePair->targetLanguage->code,
-                    'name' => $languagePair->targetLanguage->name,
-                ],
-            ],
+            'category' => $validated['category'],
+            'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
     }
 
