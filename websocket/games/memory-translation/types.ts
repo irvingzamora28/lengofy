@@ -1,27 +1,17 @@
-import { Noun } from '../../../resources/js/types';
+import { MemoryTranslationGamePlayer, Noun } from '../../../resources/js/types';
 import { BaseGameState, BaseGameMessage } from '../../core/types';
 
 export interface MemoryTranslationGameState extends BaseGameState {
     id: string;
     status: 'waiting' | 'in_progress' | 'completed';
-    players: {
-        id: number;
-        user_id?: number;
-        guest_id?: string;
-        player_name: string;
-        score: number;
-        moves: number;
-        time: number;
-        is_ready: boolean;
-        is_host: boolean;
-    }[];
+    players: MemoryTranslationGamePlayer[];
     words: Noun[];
     language_name: string;
-    hostId: string;
+    hostId: number;
     max_players: number;
     current_turn: number;
-    language_pair_id: number;
-    category_id: number;
+    category: string;
+    winner: MemoryTranslationGamePlayer | null;
 }
 
 export interface MemoryTranslationGameMessage extends BaseGameMessage {
@@ -29,11 +19,11 @@ export interface MemoryTranslationGameMessage extends BaseGameMessage {
     gameId: string;
     memoryTranslationGameId?: string;
     gameType?: string;
-    userId?: string;
+    userId: number;
     data?: {
-        player_id?: string;
+        player_id?: number;
         user_id?: string;
-        players?: any[];
+        players?: MemoryTranslationGamePlayer[];
         words?: any[];
         language_name?: string;
         total_rounds?: number;
@@ -41,6 +31,9 @@ export interface MemoryTranslationGameMessage extends BaseGameMessage {
         hostId?: string;
         max_players?: number;
         answer?: string;
+        score?: number;
+        moves?: number;
+        time?: number;
     };
     game?: any;
 }

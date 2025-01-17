@@ -115,22 +115,11 @@ export interface MemoryTranslationGame {
 export interface MemoryTranslationGamePlayer {
     id: number;
     memory_translation_game_id: number;
-    user_id?: number;
-    guest_id?: string;
+    user_id: number;
     player_name: string;
     score: number;
     moves: number;
     time: number;
     is_ready: boolean;
     is_host: boolean;
-}
-
-export interface MemoryTranslationGameState {
-    status: string;
-    players: MemoryTranslationGamePlayer[];
-    current_turn: number;
-    words: Noun[];
-    hostId?: string;
-    winner: MemoryTranslationGamePlayer | null;
-    max_players?: number;
 }

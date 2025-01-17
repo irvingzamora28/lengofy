@@ -6,13 +6,13 @@ export interface BaseGameState {
     id: string;
     status: 'waiting' | 'in_progress' | 'completed';
     players: any[];
-    hostId: string;
+    hostId: number;
 }
 
 export interface BaseGameMessage {
     type: string;
     gameId: string;
-    userId?: string;
+    userId: number;
     data?: any;
 }
 

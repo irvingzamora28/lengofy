@@ -1,8 +1,7 @@
 import { ServerWebSocket } from "bun";
 import { BaseGameManager } from "../../core/BaseGameManager";
 import { BaseGameMessage } from "../../core/types";
-import { MemoryTranslationGameMessage } from "./types";
-
+import { MemoryTranslationGameMessage, MemoryTranslationGameState } from "./types";
 
 export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationGameState> {
     constructor(lobbyConnections: Set<ServerWebSocket>) {
@@ -14,25 +13,25 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         console.log('Received message:', type, 'for game:', gameId);
 
         switch (type) {
-            case 'memory_translation_join_game':
-                this.handleJoinGame(ws, gameId, userId!, data);
+            case 'join_memory_translation_game':
+            case 'player_joined':
+                this.handleJoinGame(ws, message as MemoryTranslationGameMessage);
                 break;
             case "memory_translation_game_created":
-                this.handleGameCreated(message);
+                this.handleGameCreated(message as MemoryTranslationGameMessage);
+                break;
             case 'memory_translation_leave_game':
                 this.handleLeaveGame(ws, gameId, userId!);
                 break;
             case 'memory_translation_player_ready':
-                this.handlePlayerReady(message);
+                this.handlePlayerReady(message as MemoryTranslationGameMessage);
                 break;
             case 'memory_translation_update_score':
-                this.handleUpdateScore(gameId, userId!, data.score, data.moves, data.time);
+                this.handleUpdateScore(message as MemoryTranslationGameMessage);
                 break;
-            case 'memory_translation_game_over':
-                this.handleGameOver(gameId);
+            case 'memory_translation_game_end':
+                this.handleGameEnd(gameId);
                 break;
-            default:
-                console.log('Unknown message type:', type);
         }
     }
 
@@ -55,12 +54,10 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 words: message.data?.words || [],
                 players: message.data?.players || [],
                 language_name: message.data?.language_name || '',
-                total_rounds: message.data?.total_rounds || 10,
                 category: message.data?.category || '',
-                hostId: message.userId || '',
-                current_word: null,
-                last_answer: null,
-                max_players: message.data?.max_players || 2
+                hostId: message.userId || 0,
+                max_players: message.data?.max_players || 2,
+                winner: null
             });
         }
 
@@ -84,20 +81,24 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         }
     }
 
-    private handleLeaveGame(ws: ServerWebSocket, gameId: string, userId: string): void {
+    private handleLeaveGame(ws: ServerWebSocket, gameId: string, userId: number): void {
         const room = this.getRoom(gameId);
         const state = this.getState(gameId);
 
         if (room && state) {
             room.delete(ws);
-            state.players = state.players.filter(p => p.user_id !== parseInt(userId));
 
-            if (state.players.length === 0) {
-                this.cleanupCompletely(gameId);
+            // Remove player from state
+            state.players = state.players.filter(p => p.user_id !== userId);
+
+            // If no players left or only one player in multiplayer game, end the game
+            if (state.players.length === 0 ||
+                (state.max_players > 1 && state.players.length === 1)) {
+                this.handleGameEnd(gameId);
             } else {
                 // If host left, assign new host
                 if (state.hostId === userId) {
-                    state.hostId = state.players[0].user_id!.toString();
+                    state.hostId = state.players[0].user_id!;
                     state.players[0].is_host = true;
                 }
                 this.broadcastState(gameId);
@@ -109,16 +110,20 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         const gameId = message.gameId;
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
+
         console.log("GameId: ", gameId);
         console.log("State: ", state);
         console.log("Room: ", room);
+
         if (!state || !room) return;
 
         console.log('Player ready:', message.data?.player_id, 'in game:', gameId);
 
         // First broadcast the player ready message to all clients
         this.broadcast(room, {
-            type: "player_ready",
+            type: "memory_translation_player_ready",
+            gameId: gameId,
+            userId: message.userId,
             data: message.data
         });
 
@@ -136,6 +141,9 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         if (allReady && state.status === 'waiting') {
             console.log('All players ready, starting game:', gameId);
             this.handleStart(gameId);
+        } else {
+            this.setState(gameId, state);
+            this.broadcastState(gameId);
         }
     }
 
@@ -144,8 +152,7 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         if (state) {
             console.log('Starting game:', gameId);
             state.status = "in_progress";
-            state.current_round = 0;
-            state.current_word = state.words[0];
+            state.current_turn = 0;
             this.setState(gameId, state);
             this.broadcastState(gameId);
         }
@@ -157,15 +164,16 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         if (state) {
             const player = state.players.find(p => p.user_id === message.userId);
             if (player) {
-                player.score = message.data?.score;
-                player.moves = message.data?.moves;
-                player.time = message.data?.time;
+                player.score = message.data?.score || 0;
+                player.moves = message.data?.moves || 0;
+                player.time = message.data?.time || 0;
             }
+            this.setState(gameId, state);
             this.broadcastState(gameId);
         }
     }
 
-    private handleGameOver(gameId: string): void {
+    private handleGameEnd(gameId: string): void {
         const state = this.getState(gameId);
         if (state) {
             state.status = 'completed';
@@ -174,7 +182,7 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             // Clean up game resources after a delay
             setTimeout(() => {
                 this.cleanupCompletely(gameId);
-            }, 5000);
+            }, 60000); // 1 minute delay
         }
     }
 }
