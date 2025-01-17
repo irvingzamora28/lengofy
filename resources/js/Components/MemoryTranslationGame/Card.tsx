@@ -3,6 +3,7 @@ interface Props {
     word: {
         word: string;
         translation: string;
+        emoji: string;
     };
     isFlipped: boolean;
     isMatched: boolean;
@@ -35,7 +36,14 @@ export default function Card({ index, word, isFlipped, isMatched, onClick }: Pro
                 flex items-center justify-center p-2
                 text-blue-500 text-lg font-semibold text-center
             `}>
-                {index % 2 === 0 ? word.word : word.translation}
+                {word.emoji ? (
+                    <div className="flex flex-col items-center">
+                        <span>{word.word.charAt(0).toUpperCase() + word.word.slice(1)}</span>
+                        <span>{word.emoji}</span>
+                    </div>
+                ) : (
+                    <span>{word.word.charAt(0).toUpperCase() + word.word.slice(1)}</span>
+                )}
             </div>
         </div>
     );
