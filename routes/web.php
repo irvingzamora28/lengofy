@@ -136,8 +136,13 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('games/memory-translation')->group(function () {
         Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
+        Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
         Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
         Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
+        Route::get('/{memoryTranslationGame}', [MemoryTranslationGameController::class, 'show'])->name('games.memory-translation.show');
+        Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
+        Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
+        Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
     });
 
     // Score routes

@@ -33,34 +33,57 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint }
   const { t: trans } = useTranslation();
   const wsRef = useRef<WebSocket | null>(null);
 
+  useEffect(() => {
+    console.log("Active games: ", activeGames);
+  }, []);
+
   // Subscribe to game events using WebSocket
   useEffect(() => {
     const ws = new WebSocket(wsEndpoint);
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log('Connected to lobby WebSocket');
+      console.log('Connected to Memory Translation lobby WebSocket');
       ws.send(JSON.stringify({
         type: 'join_lobby',
+        gameType: 'memory_translation',
         userId: auth.user.id
       }));
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('WebSocket message received:', data);
+      console.log('Memory Translation WebSocket message received:', data);
 
+      // Only handle messages for memory translation game
       if (data.type === 'memory_translation_game_created') {
-        console.log('New game created:', data.game);
-        setGames(prevGames => [...prevGames, data.game]);
+        console.log('New memory translation game created:', data.game);
+        setGames(prevGames => {
+          // Check if game already exists
+          if (prevGames.some(g => g.id === data.game.id)) {
+            return prevGames;
+          }
+          return [...prevGames, data.game];
+        });
       } else if (data.type === 'memory_translation_game_ended') {
-        console.log('Game ended:', data);
+        console.log('Memory translation game ended:', data);
         setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
       }
     };
 
     ws.onclose = () => {
-      console.log('Disconnected from lobby WebSocket');
+      console.log('Disconnected from Memory Translation lobby WebSocket');
+      // Attempt to reconnect after a delay
+      setTimeout(() => {
+        if (wsRef.current?.readyState === WebSocket.CLOSED) {
+          console.log('Attempting to reconnect to Memory Translation lobby...');
+          wsRef.current = new WebSocket(wsEndpoint);
+        }
+      }, 3000);
+    };
+
+    ws.onerror = (error) => {
+      console.error('Memory Translation WebSocket error:', error);
     };
 
     return () => {
@@ -71,6 +94,7 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint }
   }, [wsEndpoint, auth.user.id]);
 
   const startCreateRoom = () => {
+    console.log("Starting create room before settings update");
     router.post(
       route('profile.game-settings.update', { redirectRoute: 'games.memory-translation.lobby' }),
       {
@@ -79,6 +103,8 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint }
       {
         preserveScroll: true,
         onSuccess: () => {
+            console.log("Going to create room");
+
           router.post(route('games.memory-translation.create'), {
             language_pair_id: auth.user.language_pair_id,
             max_players: 8,
@@ -205,16 +231,18 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint }
                                 {game.players.length}/{game.max_players} {trans('memory_translation.players')}
                               </span>
                             </div>
-                            <span className="px-2 py-1 rounded text-xs font-semibold">
-                              {trans(`categories.${game.category}`)}
+                            <span className="text-gray-600 dark:text-gray-300 px-2 py-1 rounded text-xs font-semibold">
+                                {trans('categories.' + game.category.key)}
                             </span>
                           </div>
                           <div className="flex justify-between items-center">
                             <Link
-                              href={route('games.memory-translation.join', game.id)}
+                              href={`/games/memory-translation/${game.id}/join`}
+                              method="post"
+                              as="button"
                               className="bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors w-full text-center"
                             >
-                              {trans('memory_translation.join_game')}
+                              {trans('memory_translation.btn_join_game')}
                             </Link>
                           </div>
                         </div>

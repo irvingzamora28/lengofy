@@ -202,8 +202,8 @@
         "meta_keywords": "Memory Translation, unterhaltsames Gedächtnisspiel, Sprachenlernen, Vokabeln, Wortspiele, versteckte Übersetzungen, interaktives Lerntool"
     },
     "memory_translation": {
-        "lobby": "Gender-Duell-Lobby",
-        "active_games": "Aktive Gender-Duell-Spiele",
+        "lobby": "Memory Translation Lobby",
+        "active_games": "Aktive Memory Translation Spiele",
         "active_games_plural": "Aktive Spiele",
         "connect_learn_challenge": "Vernetzen, lernen und sich selbst herausfordern!",
         "btn_create_new_room": "Neuen Raum erstellen",

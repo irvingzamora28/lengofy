@@ -24,7 +24,7 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
         switch (message.type) {
             case "join_gender_duel_game":
             case "player_joined":
-                this.handleJoin(ws, message);
+                this.handleJoinGame(ws, message);
                 break;
             case "gender_duel_game_created":
                 this.handleGameCreated(message);
@@ -53,7 +53,7 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
         });
     }
 
-    private handleJoin(ws: ServerWebSocket, message: GenderDuelGameMessage): void {
+    private handleJoinGame(ws: ServerWebSocket, message: GenderDuelGameMessage): void {
         const gameId = message.genderDuelGameId || message.gameId;
         if (!this.rooms.has(gameId)) {
             console.log('Creating new game room:', gameId);

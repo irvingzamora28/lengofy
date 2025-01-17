@@ -101,6 +101,7 @@ export interface MemoryTranslationGame {
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
     max_players: number;
+    difficulty: 'easy' | 'medium' | 'hard';
     current_turn: number;
     language_name: string;
     source_language: Language;
@@ -122,4 +123,14 @@ export interface MemoryTranslationGamePlayer {
     time: number;
     is_ready: boolean;
     is_host: boolean;
+}
+
+export interface MemoryTranslationGameState {
+    status: string;
+    players: MemoryTranslationGamePlayer[];
+    current_turn: number;
+    words: Noun[];
+    hostId?: string;
+    winner: MemoryTranslationGamePlayer | null;
+    max_players?: number;
 }

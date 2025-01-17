@@ -13,6 +13,11 @@
         "success": "Success",
         "warning": "Warning",
         "info": "Info",
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard",
+        "ready": "Ready",
+        "not_ready": "Not Ready",
         "confirm": "Confirm",
         "cancel": "Cancel",
         "yes": "Yes",
@@ -231,6 +236,14 @@
             "waiting": "Waiting",
             "in_progress": "In Progress",
             "completed": "Completed"
+        },
+        "game_info": {
+            "status": "Status",
+            "category": "Category",
+            "difficulty": "Difficulty",
+            "moves": "Moves",
+            "time": "Time",
+            "score": "Score"
         },
         "modal_exit": {
             "title": "Leave Game?",

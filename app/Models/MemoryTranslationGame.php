@@ -27,7 +27,7 @@ class MemoryTranslationGame extends Model
 
     public function players(): HasMany
     {
-        return $this->hasMany(GenderDuelGamePlayer::class, 'game_id');
+        return $this->hasMany(MemoryTranslationGamePlayer::class, 'game_id');
     }
 
     public function creator(): BelongsTo

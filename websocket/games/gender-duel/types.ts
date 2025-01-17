@@ -18,8 +18,29 @@ export interface GenderDuelGameState extends BaseGameState {
 
 export interface GenderDuelGameMessage extends BaseGameMessage {
     type: string;
-    gameId?: string;
+    gameId: string;
     genderDuelGameId?: string; // For backward compatibility
+    gameType?: string;
+    userId?: string;
+    data?: {
+        player_id?: string;
+        user_id?: string;
+        players?: any[];
+        words?: any[];
+        language_name?: string;
+        total_rounds?: number;
+        category?: string;
+        hostId?: string;
+        max_players?: number;
+        answer?: string;
+    };
+    game?: any;
+}
+
+export interface MemoryTranslationGameMessage extends BaseGameMessage {
+    type: string;
+    gameId: string;
+    memoryTranslationGameId?: string;
     gameType?: string;
     userId?: string;
     data?: {
