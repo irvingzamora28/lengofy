@@ -66,7 +66,8 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 category: message.data?.category || '',
                 hostId: message.userId || 0,
                 max_players: message.data?.max_players || 2,
-                winner: null
+                winner: null,
+                lastFlippedCards: []
             });
         }
 
@@ -179,15 +180,11 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 }
             });
 
-            // If this is the second card flipped, move to next player's turn after a delay
+            // If this is the second card flipped, we'll wait for the match check
+            // Turn change will be handled in handlePairMatched if no match
             if (data?.isSecondCard) {
-                setTimeout(() => {
-                    const currentPlayerIndex = state.players.findIndex(p => p.user_id === userId);
-                    const nextPlayerIndex = (currentPlayerIndex + 1) % state.players.length;
-                    state.current_turn = state.players[nextPlayerIndex].user_id!;
-                    this.setState(gameId, state);
-                    this.broadcastState(gameId);
-                }, 1500); // Wait for the cards to be visible before changing turns
+                state.lastFlippedCards = data.cardIndices;
+                this.setState(gameId, state);
             }
         }
     }
@@ -209,25 +206,36 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         const state = this.getState(gameId);
 
         if (room && state && data?.matchedIndices) {
+            const isMatch = data.isMatch;
+
             // Broadcast the matched pair to all players
             this.broadcast(room, {
                 type: 'memory_translation_pair_matched',
                 gameId,
                 userId,
                 data: {
-                    matchedIndices: data.matchedIndices
+                    matchedIndices: data.matchedIndices,
+                    isMatch: isMatch
                 }
             });
 
-            // Update player score
-            if (data.score !== undefined) {
+            // Update player score and handle turn change
+            if (isMatch) {
+                // Update score on match
                 const playerIndex = state.players.findIndex(p => p.user_id === userId);
                 if (playerIndex !== -1) {
-                    state.players[playerIndex].score = data.score;
-                    this.setState(gameId, state);
-                    this.broadcastState(gameId);
+                    state.players[playerIndex].score = (state.players[playerIndex].score || 0) + 1;
                 }
+                // Don't change turn on match - player continues
+            } else {
+                // Change turn if no match
+                const currentPlayerIndex = state.players.findIndex(p => p.user_id === userId);
+                const nextPlayerIndex = (currentPlayerIndex + 1) % state.players.length;
+                state.current_turn = state.players[nextPlayerIndex].user_id!;
             }
+
+            this.setState(gameId, state);
+            this.broadcastState(gameId);
         }
     }
 

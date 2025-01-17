@@ -138,7 +138,13 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 case 'memory_translation_pair_matched':
                     // Update matched pairs for all players
                     const matchedIndices = data.data.matchedIndices;
-                    setMatchedPairs(prev => [...prev, ...matchedIndices]);
+                    if (data.data.isMatch) {
+                        setMatchedPairs(prev => [...prev, ...matchedIndices]);
+                    }
+                    // Clear selected cards after a delay
+                    setTimeout(() => {
+                        setSelectedCards([]);
+                    }, 1000);
                     break;
 
                 case 'memory_translation_game_state_updated':
@@ -222,7 +228,8 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
             userId: auth.user.id,
             data: {
                 cardIndex: index,
-                isSecondCard: newSelectedCards.length === 2
+                isSecondCard: newSelectedCards.length === 2,
+                cardIndices: newSelectedCards.length === 2 ? newSelectedCards : undefined
             }
         }));
 
@@ -239,19 +246,16 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                      firstCard.type === 'translation' && secondCard.type === 'word') &&
                     firstCard.id.split('-')[0] === secondCard.id.split('-')[0];
 
-                if (isMatch) {
-                    const newScore = (currentPlayer?.score || 0) + 1;
-                    // Send match information to server
-                    wsRef.current?.send(JSON.stringify({
-                        type: 'memory_translation_pair_matched',
-                        gameId: gameState.id,
-                        userId: auth.user.id,
-                        data: {
-                            matchedIndices: [firstIndex, secondIndex],
-                            score: newScore
-                        }
-                    }));
-                }
+                // Send match result to server
+                wsRef.current?.send(JSON.stringify({
+                    type: 'memory_translation_pair_matched',
+                    gameId: gameState.id,
+                    userId: auth.user.id,
+                    data: {
+                        matchedIndices: [firstIndex, secondIndex],
+                        isMatch: isMatch
+                    }
+                }));
             }, 1000);
         }
     };
