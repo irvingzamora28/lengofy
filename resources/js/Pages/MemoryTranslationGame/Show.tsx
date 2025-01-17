@@ -6,6 +6,8 @@ import { MdClose } from 'react-icons/md';
 import GameArea from '@/Components/MemoryTranslationGame/GameArea';
 import GameInfo from '@/Components/MemoryTranslationGame/GameInfo';
 import PlayersInfo from '@/Components/MemoryTranslationGame/PlayersInfo';
+import correctMatchSound from "@/assets/audio/correct-match.mp3";
+import incorrectMatchSound from "@/assets/audio/incorrect-match.mp3";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from './ConfirmationExitModal';
@@ -51,11 +53,43 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
     const [selectedCards, setSelectedCards] = useState<number[]>([]);
     const [matchedPairs, setMatchedPairs] = useState<number[]>([]);
     const [moves, setMoves] = useState(0);
-    const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const wsRef = useRef<WebSocket | null>(null);
+    const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const { t: trans } = useTranslation();
     const timerRef = useRef<number>(0);
     const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Audio refs
+    const correctSoundRef = useRef<HTMLAudioElement | null>(null);
+    const incorrectSoundRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        // Initialize audio elements
+        correctSoundRef.current = new Audio(correctMatchSound);
+        incorrectSoundRef.current = new Audio(incorrectMatchSound);
+
+        // Clean up audio elements
+        return () => {
+            if (correctSoundRef.current) {
+                correctSoundRef.current.pause();
+                correctSoundRef.current = null;
+            }
+            if (incorrectSoundRef.current) {
+                incorrectSoundRef.current.pause();
+                incorrectSoundRef.current = null;
+            }
+        };
+    }, []);
+
+    const playSound = (isMatch: boolean) => {
+        if (isMatch && correctSoundRef.current) {
+            correctSoundRef.current.currentTime = 0;
+            correctSoundRef.current.play().catch(error => console.log('Error playing sound:', error));
+        } else if (!isMatch && incorrectSoundRef.current) {
+            incorrectSoundRef.current.currentTime = 0;
+            incorrectSoundRef.current.play().catch(error => console.log('Error playing sound:', error));
+        }
+    };
 
     const currentPlayer = gameState.players.find(player => player.user_id === auth.user.id);
 
@@ -138,7 +172,12 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 case 'memory_translation_pair_matched':
                     // Update matched pairs for all players
                     const matchedIndices = data.data.matchedIndices;
-                    if (data.data.isMatch) {
+                    const isMatch = data.data.isMatch;
+
+                    // Play appropriate sound
+                    playSound(isMatch);
+
+                    if (isMatch) {
                         setMatchedPairs(prev => [...prev, ...matchedIndices]);
                     }
                     // Clear selected cards after a delay
