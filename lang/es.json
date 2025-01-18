@@ -24,6 +24,11 @@
         "no": "No",
         "ok": "Aceptar",
         "close": "Cerrar",
+        "modal_game_exit": {
+            "title": "¿Deseas Abandonar el Juego?",
+            "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",
+            "btn_leave": "Abandonar Juego"
+        },
         "language": "Idioma"
     },
     "login": {
@@ -135,6 +140,7 @@
     },
     "gender_duel": {
         "lobby": "Gender Duel Lobby",
+        "game_room_title": "Sala de Gender Duel",
         "active_games": "Juegos Activos de Gender Duel",
         "active_games_plural": "Juegos Activos",
         "connect_learn_challenge": "Conectar, Aprender y Desafíate!",
@@ -178,11 +184,6 @@
             "for_words_from_every_category": "para palabras de cada categoría",
             "start_practice": "Empezar la Práctica",
             "create_room": "Crear Sala"
-        },
-        "modal_exit": {
-            "title": "¿Deseas Abandonar el Juego?",
-            "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",
-            "btn_leave": "Abandonar Juego"
         }
     },
     "memory_translation_landing_page": {
@@ -208,6 +209,7 @@
     },
     "memory_translation": {
         "lobby": "Memory Translation Lobby",
+        "game_room_title": "Sala de Memory Translation",
         "active_games": "Juegos Activos de Memory Translation",
         "active_games_plural": "Juegos Activos",
         "connect_learn_challenge": "Conectar, Aprender y Desafíate!",
@@ -247,11 +249,6 @@
             "moves": "Movimientos",
             "time": "Tiempo",
             "score": "Puntuación"
-        },
-        "modal_exit": {
-            "title": "¿Deseas Abandonar el Juego?",
-            "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",
-            "btn_leave": "Abandonar Juego"
         },
         "score": "Puntuación",
         "flip": "Voltear",

@@ -24,6 +24,11 @@
         "no": "Nein",
         "ok": "Ok",
         "close": "Schließen",
+        "modal_exit": {
+            "title": "Spiel verlassen?",
+            "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",
+            "btn_leave": "Spiel verlassen"
+        },
         "language": "Sprache"
     },
     "login": {
@@ -135,6 +140,7 @@
     },
     "gender_duel": {
         "lobby": "Gender-Duell-Lobby",
+        "game_room_title": "Gender Duel Raum",
         "active_games": "Aktive Gender-Duell-Spiele",
         "active_games_plural": "Aktive Spiele",
         "connect_learn_challenge": "Vernetzen, lernen und sich selbst herausfordern!",
@@ -178,11 +184,6 @@
             "for_words_from_every_category": "für Wörter aus jeder Kategorie",
             "start_practice": "Übung beginnen",
             "create_room": "Raum erstellen"
-        },
-        "modal_exit": {
-            "title": "Spiel verlassen?",
-            "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",
-            "btn_leave": "Spiel verlassen"
         }
     },
     "memory_translation_landing_page": {
@@ -208,6 +209,7 @@
     },
     "memory_translation": {
         "lobby": "Memory Translation Lobby",
+        "game_room_title": "Memory Translation Raum",
         "active_games": "Aktive Memory Translation Spiele",
         "active_games_plural": "Aktive Spiele",
         "connect_learn_challenge": "Vernetzen, lernen und sich selbst herausfordern!",
@@ -247,11 +249,6 @@
             "moves": "Bewegungen",
             "time": "Zeit",
             "score": "Punktzahl"
-        },
-        "modal_exit": {
-            "title": "Spiel verlassen?",
-            "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",
-            "btn_leave": "Spiel verlassen"
         },
         "score": "Punktzahl",
         "flip": "Umkehren",

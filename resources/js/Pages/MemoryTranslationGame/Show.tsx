@@ -10,7 +10,7 @@ import correctMatchSound from "@/assets/audio/correct-match.mp3";
 import incorrectMatchSound from "@/assets/audio/incorrect-match.mp3";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import ConfirmationExitModal from './ConfirmationExitModal';
+import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 
 interface Props extends PageProps {
     auth: any;
@@ -364,6 +364,13 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
     };
 
     const leaveGame = () => {
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            wsRef.current.send(JSON.stringify({
+                type: 'leave_game',
+                gameId: gameState.id,
+                userId: auth.user.id
+            }));
+        }
         router.delete(route(`games.memory-translation.leave`, `${gameState.id}`));
     };
 
@@ -391,7 +398,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 </div>
             }
         >
-            <Head title={trans('memory_translation.title')} />
+            <Head title={trans('memory_translation.game_room_title')} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -419,20 +426,13 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                 </div>
             </div>
 
-            <ConfirmationExitModal
-                show={showExitConfirmation}
-                onClose={() => setShowExitConfirmation(false)}
-                onConfirm={() => {
-                    if (wsRef.current?.readyState === WebSocket.OPEN) {
-                        wsRef.current.send(JSON.stringify({
-                            type: 'leave_game',
-                            gameId: gameState.id,
-                            userId: auth.user.id
-                        }));
-                    }
-                    router.visit('/games/memory-translation');
-                }}
-            />
+            {/* Confirmation Modal */}
+            {showExitConfirmation && (
+                <ConfirmationExitModal
+                    onLeave={leaveGame}
+                    onCancel={() => setShowExitConfirmation(false)}
+                />
+            )}
         </AuthenticatedLayout>
     );
 }

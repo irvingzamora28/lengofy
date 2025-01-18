@@ -8,7 +8,7 @@ import GameArea from '@/Components/GenderDuelGame/GameArea';
 import PlayersInfo from '@/Components/GenderDuelGame/PlayersInfo';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import ConfirmationExitModal from './ConfirmationExitModal';
+import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 
 interface Props extends PageProps {
     auth: any;
@@ -344,7 +344,7 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
                     </div>
                 }
             >
-                <Head title="Game Room" />
+                <Head title={trans('gender_duel.game_room_title')} />
 
                 <div className="py-6 bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-black dark:to-black">
                     <div className="max-w-7xl min-h-[26rem] md:h-[30rem] mx-auto px-4">
@@ -385,8 +385,6 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
             {/* Confirmation Modal */}
             {showExitConfirmation && (
                 <ConfirmationExitModal
-                    title={trans('gender_duel.modal_exit.title')}
-                    message={trans('gender_duel.modal_exit.message')}
                     onLeave={leaveGame}
                     onCancel={() => setShowExitConfirmation(false)}
                 />
