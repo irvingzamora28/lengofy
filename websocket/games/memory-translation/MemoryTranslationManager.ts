@@ -108,19 +108,43 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         if (room && state) {
             room.delete(ws);
 
+            // Find the leaving player before removing them from state
+            const leavingPlayer = state.players.find(p => p.user_id === userId);
+
             // Remove player from state
             state.players = state.players.filter(p => p.user_id !== userId);
+
+            // Broadcast specific player left event
+            if (leavingPlayer) {
+                this.broadcast(room, {
+                    type: 'memory_translation_player_left',
+                    gameId,
+                    data: {
+                        user_id: userId,
+                        player_name: leavingPlayer.player_name
+                    }
+                });
+            }
 
             // If no players left or only one player in multiplayer game, end the game
             if (state.players.length === 0 ||
                 (state.max_players > 1 && state.players.length === 1)) {
                 this.handleGameEnd(gameId);
+                // Broadcast game ended due to not enough players
+                this.broadcast(room, {
+                    type: 'memory_translation_game_ended',
+                    gameId,
+                    data: {
+                        reason: 'not_enough_players'
+                    }
+                });
             } else {
                 // If host left, assign new host
                 if (state.hostId === userId) {
                     state.hostId = state.players[0].user_id!;
                     state.players[0].is_host = true;
                 }
+                this.setState(gameId, state);
                 this.broadcastState(gameId);
             }
         }

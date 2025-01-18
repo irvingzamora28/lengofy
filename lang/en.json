@@ -24,6 +24,14 @@
         "no": "No",
         "ok": "Ok",
         "close": "Close",
+        "games": {
+            "game_completed": "Game Completed",
+            "final_score": "Final Score",
+            "winner_announcement": "{{name}} wins!",
+            "loser_announcement": "{{name}} loses!",
+            "tie": "It's a tie!",
+            "tie_with_players": "It's a tie between players {{players}}!"
+        },
         "modal_game_exit": {
             "title": "Leave Game?",
             "message": "The game is still in progress. Are you sure you want to leave?",
@@ -257,7 +265,6 @@
         "words_in_this_game": "Words in this Game",
         "btn_restart": "Play Again",
         "btn_change_difficulty": "Change Difficulty",
-        "game_completed": "Game Completed",
         "modal_difficulty": {
             "title": "Select Difficulty",
             "easy": "Easy",

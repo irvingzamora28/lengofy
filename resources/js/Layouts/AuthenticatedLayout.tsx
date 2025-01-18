@@ -8,6 +8,7 @@ import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { useDarkMode } from '@/Hooks/useDarkMode';
 import { useTranslation } from 'react-i18next';
 import { User } from '@/types';
+import { Toaster } from 'react-hot-toast';
 
 export default function Authenticated({
     header,
@@ -211,6 +212,7 @@ export default function Authenticated({
             )}
 
             <main>{children}</main>
+            <Toaster />
         </div>
     );
 }

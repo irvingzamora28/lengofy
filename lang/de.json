@@ -24,6 +24,14 @@
         "no": "Nein",
         "ok": "Ok",
         "close": "Schließen",
+        "games": {
+            "game_completed": "Spiel beendet",
+            "final_score": "Endpunktscore",
+            "winner_announcement": "{{name}} gewinnt!",
+            "loser_announcement": "{{name}} verliert!",
+            "tie": "Unentschieden!",
+            "tie_with_players": "Unentschieden zwischen Spielern {{players}}!"
+        },
         "modal_exit": {
             "title": "Spiel verlassen?",
             "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",
@@ -258,7 +266,6 @@
         "words_in_this_game": "Wörter in diesem Spiel",
         "btn_restart": "Neustart",
         "btn_change_difficulty": "Schwierigkeitsgrad ändern",
-        "game_completed": "Spiel beendet",
         "modal_difficulty": {
             "title": "Schwierigkeitsgrad auswählen",
             "easy": "Einfach",

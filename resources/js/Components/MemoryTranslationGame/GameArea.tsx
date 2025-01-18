@@ -52,22 +52,28 @@ export default function GameArea({
     }
 
     if (game.status === "completed") {
-        const winner = game.players.reduce((prev, current) =>
-            prev.score > current.score ? prev : current
-        );
+        const playersWithMaxScore = game.players.filter(player => player.score === game.players[0].score);
+        const winner = playersWithMaxScore.length === 1 ? playersWithMaxScore[0] : null;
 
         return (
             <div className="flex flex-col items-center justify-center p-8 space-y-4">
                 <h3 className="text-xl font-semibold">
-                    {trans("memory_translation.game_completed")}
+                    {trans("generals.games.game_completed")}
                 </h3>
                 <p className="text-lg">
-                    {trans("memory_translation.winner_announcement", {
-                        name: winner.player_name,
-                    })}
+                    {winner
+                        ? trans("generals.games.winner_announcement", {
+                            name: winner.player_name,
+                        })
+                        : playersWithMaxScore.length > 2
+                            ? trans("generals.games.tie_with_players", {
+                                players: playersWithMaxScore.map(player => player.player_name).join(", "),
+                            })
+                            : trans("generals.games.tie")
+                        }
                 </p>
                 <div className="text-gray-600">
-                    {trans("memory_translation.final_score")}: {winner.score}
+                    {trans("generals.games.final_score")}: {playersWithMaxScore[0].score}
                 </div>
             </div>
         );

@@ -11,6 +11,7 @@ import incorrectMatchSound from "@/assets/audio/incorrect-match.mp3";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
+import toast from 'react-hot-toast';
 
 interface Props extends PageProps {
     auth: any;
@@ -186,6 +187,16 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     }, 1000);
                     break;
 
+                case 'memory_translation_player_left':
+                    toast.error(`${data.data.player_name} has left the game`);
+                    break;
+
+                case 'memory_translation_game_ended':
+                    if (data.data.reason === 'not_enough_players') {
+                        toast.error('Game ended: Not enough players to continue', { duration: 6000 });
+                    }
+                    break;
+
                 case 'memory_translation_game_state_updated':
                     console.log('Game state updated:', data.data);
                     setGameState(prevState => {
@@ -322,11 +333,12 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
             game_id: 2, // MemoryTranslation game ID
             highest_score: calculatedHighestScore,
             total_points: calculatedTotalPoints,
+            winning_streak: 0,
             best_time: calculatedBestTime
         };
 
         try {
-            await axios.post('/api/scores', scoreData);
+            const response = await axios.post('/scores/update', scoreData);
 
             // Update localStorage
             localStorage.setItem(`memoryTranslationScores_${auth.user.id}`, JSON.stringify({
@@ -366,7 +378,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
     const leaveGame = () => {
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
-                type: 'leave_game',
+                type: 'memory_translation_leave_game',
                 gameId: gameState.id,
                 userId: auth.user.id
             }));

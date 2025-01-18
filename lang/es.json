@@ -24,6 +24,14 @@
         "no": "No",
         "ok": "Aceptar",
         "close": "Cerrar",
+        "games": {
+            "game_completed": "Juego Completado",
+            "final_score": "Puntuación Final",
+            "winner_announcement": "{{name}} gana!",
+            "loser_announcement": "{{name}} pierde!",
+            "tie": "Empate!",
+            "tie_with_players": "Empate entre jugadores {{players}}!"
+        },
         "modal_game_exit": {
             "title": "¿Deseas Abandonar el Juego?",
             "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",
@@ -258,7 +266,6 @@
         "words_in_this_game": "Palabras en este Juego",
         "btn_restart": "Jugar de Nuevo",
         "btn_change_difficulty": "Cambiar Dificultad",
-        "game_completed": "Juego Completado",
         "modal_difficulty": {
             "title": "Selecciona la Dificultad",
             "easy": "Fácil",
