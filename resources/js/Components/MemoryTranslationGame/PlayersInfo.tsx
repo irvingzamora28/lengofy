@@ -19,7 +19,7 @@ export default function PlayersInfo({ status, players, currentUserId }: Props) {
 
     return (
         <div className="mt-4">
-            <h3 className="text-lg font-semibold mb-2">
+            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 {trans("memory_translation.players")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -30,22 +30,19 @@ export default function PlayersInfo({ status, players, currentUserId }: Props) {
                             p-4 rounded-lg shadow
                             ${
                                 player.user_id === currentUserId
-                                    ? "bg-blue-50 border border-blue-200"
-                                    : "bg-gray-50"
+                                    ? "bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700"
+                                    : "bg-gray-50 dark:bg-gray-800"
                             }
-                            ${player.is_ready ? "border-green-300" : ""}
+                            ${player.is_ready ? "border-green-300 dark:border-green-500" : ""}
                         `}
                     >
                         <div className="flex justify-between items-center">
                             <div className="flex flex-col">
-                                <span className="font-semibold">
+                                <span className="font-semibold text-gray-900 dark:text-gray-100">
                                     {player.player_name}
                                 </span>
-                                <span className="text-sm text-gray-600">
-                                    {/* if status is wating */}
-                                    {status === "waiting" &&
-                                    (
-                                        // If player is ready
+                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                    {status === "waiting" && (
                                         player.is_ready ? (
                                             <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-semibold">
                                                 <FaCheckCircle />
@@ -53,40 +50,27 @@ export default function PlayersInfo({ status, players, currentUserId }: Props) {
                                             </span>
                                         ) : (
                                             <span className="flex items-center gap-1 text-red-600 dark:text-red-400 font-semibold animate-pulse">
-                                            <FaTimesCircle />
-                                            {trans("generals.not_ready")}
-                                        </span>
+                                                <FaTimesCircle />
+                                                {trans("generals.not_ready")}
+                                            </span>
                                         )
-                                    )}
-                                    {status === "playing" && (
-                                        <>
-
-                                        </>
                                     )}
                                 </span>
                             </div>
                             <div className="flex space-x-4">
                                 <div className="text-center">
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-gray-600 dark:text-gray-400">
                                         {trans("memory_translation.moves")}
                                     </div>
-                                    <div className="font-semibold">
+                                    <div className="font-semibold text-gray-900 dark:text-gray-100">
                                         {player.moves}
                                     </div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-sm text-gray-600">
-                                        {trans("memory_translation.time")}
-                                    </div>
-                                    <div className="font-semibold">
-                                        {formatTime(player.time)}
-                                    </div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-gray-600 dark:text-gray-400">
                                         {trans("memory_translation.score")}
                                     </div>
-                                    <div className="font-semibold">
+                                    <div className="font-semibold text-gray-900 dark:text-gray-100">
                                         {player.score}
                                     </div>
                                 </div>
