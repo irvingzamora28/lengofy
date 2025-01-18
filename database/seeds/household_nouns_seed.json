@@ -1,0 +1,398 @@
+[
+  {
+    "word": "Haushalt",
+    "gender": "der",
+    "translations": {
+      "en": "household",
+      "es": "hogar"
+    },
+    "difficulty_level": 1,
+    "category": "Household"
+  },
+  {
+    "word": "Küche",
+    "gender": "die",
+    "translations": {
+      "en": "kitchen",
+      "es": "cocina"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+    "emoji":"🍳"
+  },
+  {
+    "word": "Wohnzimmer",
+    "gender": "das",
+    "translations": {
+      "en": "living room",
+      "es": "sala de estar"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+     "emoji":"🛋️"
+  },
+   {
+    "word": "Schlafzimmer",
+    "gender": "das",
+    "translations": {
+      "en": "bedroom",
+      "es": "dormitorio"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+     "emoji":"🛌"
+  },
+  {
+    "word": "Badezimmer",
+    "gender": "das",
+    "translations": {
+      "en": "bathroom",
+      "es": "baño"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+      "emoji":"🛁"
+  },
+  {
+    "word": "Toilette",
+    "gender": "die",
+    "translations": {
+      "en": "toilet",
+      "es": "inodoro"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+     "emoji":"🚽"
+  },
+    {
+    "word": "Esstisch",
+    "gender": "der",
+    "translations": {
+      "en": "dining table",
+      "es": "mesa de comedor"
+    },
+    "difficulty_level": 1,
+    "category": "Household"
+  },
+  {
+    "word": "Stuhl",
+    "gender": "der",
+    "translations": {
+      "en": "chair",
+      "es": "silla"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+    "emoji":"🪑"
+  },
+  {
+    "word": "Herd",
+    "gender": "der",
+    "translations": {
+      "en": "stove",
+      "es": "estufa"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+     "emoji":"🔥"
+  },
+  {
+    "word": "Ofen",
+    "gender": "der",
+    "translations": {
+      "en": "oven",
+      "es": "horno"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+    "emoji":"🎛️"
+  },
+  {
+    "word": "Kühlschrank",
+    "gender": "der",
+    "translations": {
+      "en": "refrigerator",
+      "es": "refrigerador"
+    },
+     "difficulty_level": 1,
+    "category": "Household"
+  },
+  {
+        "word":"Spülmaschine",
+        "gender":"die",
+        "translations":{
+           "en":"dishwasher",
+           "es":"lavavajillas"
+        },
+        "difficulty_level":2,
+        "category":"Household",
+        "emoji": " 🍽️"
+    },
+  {
+        "word":"Waschmaschine",
+        "gender":"die",
+        "translations":{
+            "en":"washing machine",
+             "es":"lavadora"
+       },
+         "difficulty_level": 2,
+       "category":"Household",
+         "emoji": " 🧺"
+    },
+    {
+        "word":"Trockner",
+         "gender":"der",
+        "translations":{
+            "en":"dryer",
+            "es":"secadora"
+         },
+        "difficulty_level": 2,
+        "category":"Household"
+    },
+      {
+        "word": "Staubsauger",
+        "gender": "der",
+        "translations": {
+            "en": "vacuum cleaner",
+            "es": "aspiradora"
+        },
+         "difficulty_level": 2,
+        "category": "Household"
+    },
+  {
+    "word": "Bügeleisen",
+    "gender": "das",
+    "translations": {
+      "en": "iron",
+      "es": "plancha"
+    },
+    "difficulty_level": 2,
+    "category": "Household"
+  },
+  {
+        "word":"Besen",
+        "gender":"der",
+        "translations":{
+           "en":"broom",
+           "es":"escoba"
+        },
+      "difficulty_level": 1,
+        "category":"Household"
+    },
+    {
+        "word": "Eimer",
+        "gender":"der",
+        "translations":{
+            "en":"bucket",
+             "es":"cubo"
+        },
+       "difficulty_level": 1,
+        "category":"Household"
+    },
+    {
+        "word":"Lappen",
+        "gender":"der",
+        "translations":{
+           "en":"cloth",
+           "es":"trapo"
+        },
+      "difficulty_level":1,
+        "category":"Household"
+    },
+   {
+        "word":"Handtuch",
+        "gender":"das",
+        "translations":{
+            "en":"towel",
+            "es":"toalla"
+        },
+       "difficulty_level": 1,
+       "category":"Household",
+         "emoji":" 🛁"
+   },
+    {
+        "word": "Seife",
+        "gender": "die",
+        "translations": {
+            "en": "soap",
+            "es": "jabón"
+        },
+        "difficulty_level": 1,
+         "category": "Household",
+         "emoji": "🧼"
+    },
+    {
+      "word": "Shampoo",
+      "gender": "das",
+      "translations": {
+          "en":"shampoo",
+           "es": "champú"
+       },
+      "difficulty_level": 1,
+      "category": "Household",
+      "emoji":"🧴"
+    },
+    {
+       "word":"Zahnbürste",
+       "gender":"die",
+       "translations":{
+         "en":"toothbrush",
+          "es":"cepillo de dientes"
+        },
+      "difficulty_level":1,
+        "category":"Household",
+         "emoji":"🪥"
+    },
+ {
+       "word": "Zahnpasta",
+        "gender":"die",
+        "translations":{
+             "en":"toothpaste",
+           "es":"pasta de dientes"
+      },
+      "difficulty_level": 1,
+      "category": "Household",
+      "emoji":"🦷"
+  },
+  {
+     "word":"Bettdecke",
+     "gender":"die",
+     "translations":{
+        "en":"duvet",
+        "es":"edredón"
+       },
+      "difficulty_level": 1,
+      "category":"Household",
+       "emoji":"🛌"
+  },
+    {
+      "word":"Kissen",
+      "gender":"das",
+      "translations":{
+         "en":"pillow",
+          "es":"almohada"
+        },
+       "difficulty_level":1,
+      "category":"Household",
+        "emoji":"🛌"
+    },
+    {
+         "word":"Laken",
+        "gender":"das",
+        "translations":{
+            "en":"bedsheet",
+            "es":"sábana"
+        },
+        "difficulty_level": 2,
+        "category":"Household"
+     },
+    {
+        "word":"Topf",
+        "gender":"der",
+        "translations":{
+           "en":"pot",
+           "es":"olla"
+        },
+        "difficulty_level": 1,
+        "category":"Household",
+        "emoji": "🍲"
+    },
+   {
+        "word":"Pfanne",
+        "gender":"die",
+        "translations":{
+           "en":"pan",
+           "es":"sartén"
+        },
+        "difficulty_level":1,
+        "category":"Household",
+        "emoji":"🍳"
+    },
+  {
+       "word":"Teller",
+       "gender":"der",
+       "translations":{
+            "en":"plate",
+           "es":"plato"
+        },
+       "difficulty_level":1,
+      "category":"Household",
+      "emoji":"🍽️"
+   },
+   {
+       "word":"Glas",
+       "gender":"das",
+       "translations":{
+          "en":"glass",
+          "es":"vaso"
+        },
+      "difficulty_level":1,
+       "category":"Household",
+         "emoji":" 🥛"
+    },
+  {
+        "word":"Tasse",
+        "gender":"die",
+        "translations":{
+            "en":"cup",
+            "es":"taza"
+       },
+       "difficulty_level":1,
+        "category":"Household",
+         "emoji": " ☕"
+    },
+  {
+    "word": "Gabel",
+    "gender": "die",
+    "translations": {
+      "en": "fork",
+      "es": "tenedor"
+    },
+     "difficulty_level": 1,
+    "category": "Household",
+     "emoji": "🍴"
+  },
+  {
+    "word": "Löffel",
+    "gender": "der",
+    "translations": {
+      "en": "spoon",
+      "es": "cuchara"
+    },
+     "difficulty_level": 1,
+    "category": "Household",
+       "emoji": "🥄"
+  },
+    {
+    "word": "Messer",
+    "gender": "das",
+    "translations": {
+      "en": "knife",
+      "es": "cuchillo"
+    },
+    "difficulty_level": 1,
+    "category": "Household",
+    "emoji": "🔪"
+  },
+    {
+       "word":"Müll",
+        "gender":"der",
+        "translations":{
+          "en":"trash",
+          "es":"basura"
+      },
+      "difficulty_level": 1,
+      "category":"Household"
+    },
+   {
+      "word":"Papierkorb",
+      "gender":"der",
+      "translations":{
+          "en":"trash can",
+          "es":"papelera"
+      },
+     "difficulty_level": 2,
+     "category":"Household",
+     "emoji": "🗑️"
+    }
+]

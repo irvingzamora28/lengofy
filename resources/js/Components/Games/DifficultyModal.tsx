@@ -17,6 +17,9 @@ interface DifficultyModalProps {
     gameType?: 'singlePlayer' | 'multiPlayer';
     onDifficultyChange?: () => void;
     showCategories?: boolean;
+    easyText: string;
+    mediumText: string;
+    hardText: string;
 }
 
 export default function DifficultyModal({
@@ -29,7 +32,10 @@ export default function DifficultyModal({
     startGame,
     gameType = 'multiPlayer',
     onDifficultyChange,
-    showCategories = true
+    showCategories = true,
+    easyText,
+    mediumText,
+    hardText
 }: DifficultyModalProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const { t: trans } = useTranslation();
@@ -106,9 +112,9 @@ export default function DifficultyModal({
                         >
                             {trans(`gender_duel.modal_difficulty.${difficulty}`)}
                             <span className="block text-sm mt-1 opacity-80">
-                                {difficulty === 'easy' && '5 seconds per word'}
-                                {difficulty === 'medium' && '3 seconds per word'}
-                                {difficulty === 'hard' && '1 second per word'}
+                                {difficulty === 'easy' && easyText}
+                                {difficulty === 'medium' && mediumText}
+                                {difficulty === 'hard' && hardText}
                             </span>
                         </button>
                     ))}

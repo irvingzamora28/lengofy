@@ -20,6 +20,7 @@ export interface User {
     last_active_at?: string;
     language_pair_id: string;
     gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
+    memory_translation_difficulty?: 'easy' | 'medium' | 'hard';
 }
 
 export interface Category {
@@ -32,6 +33,7 @@ export interface Noun {
     word: string;
     gender: 'der' | 'die' | 'das' | 'el' | 'la';
     translation?: string;
+    emoji?: string;
 }
 
 export interface GenderDuelGame {
@@ -92,4 +94,32 @@ export interface Score {
         id: number;
         name: string; // Include any other relevant game fields
     };
+}
+
+export interface MemoryTranslationGame {
+    hostId: any;
+    id: number;
+    status: 'waiting' | 'in_progress' | 'completed';
+    max_players: number;
+    difficulty: 'easy' | 'medium' | 'hard';
+    current_turn: number;
+    language_name: string;
+    source_language: Language;
+    target_language: Language;
+    language_pair_id: number;
+    words: Noun[];
+    players: MemoryTranslationGamePlayer[];
+    category: Category;
+}
+
+export interface MemoryTranslationGamePlayer {
+    id: number;
+    memory_translation_game_id: number;
+    user_id: number;
+    player_name: string;
+    score: number;
+    moves: number;
+    time: number;
+    is_ready: boolean;
+    is_host: boolean;
 }

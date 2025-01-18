@@ -39,29 +39,47 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log('Connected to lobby WebSocket');
+      console.log('Connected to Gender Duel lobby WebSocket');
       ws.send(JSON.stringify({
         type: 'join_lobby',
+        gameType: 'gender_duel',
         userId: auth.user.id
       }));
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('WebSocket message received:', data);
+      console.log('Gender Duel WebSocket message received:', data);
 
-
+      // Only handle messages for gender duel game
       if (data.type === 'gender_duel_game_created') {
-        console.log('New game created:', data.game);
-        setGames(prevGames => [...prevGames, data.game]);
+        console.log('New gender duel game created:', data.game);
+        setGames(prevGames => {
+          // Check if game already exists
+          if (prevGames.some(g => g.id === data.game.id)) {
+            return prevGames;
+          }
+          return [...prevGames, data.game];
+        });
       } else if (data.type === 'gender_duel_game_ended') {
-        console.log('Game ended:', data);
+        console.log('Gender duel game ended:', data);
         setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
       }
     };
 
     ws.onclose = () => {
-      console.log('Disconnected from lobby WebSocket');
+      console.log('Disconnected from Gender Duel lobby WebSocket');
+      // Attempt to reconnect after a delay
+      setTimeout(() => {
+        if (wsRef.current?.readyState === WebSocket.CLOSED) {
+          console.log('Attempting to reconnect to Gender Duel lobby...');
+          wsRef.current = new WebSocket(wsEndpoint);
+        }
+      }, 3000);
+    };
+
+    ws.onerror = (error) => {
+      console.error('Gender Duel WebSocket error:', error);
     };
 
     return () => {
@@ -80,7 +98,6 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
       {
         preserveScroll: true, // Ensure scroll position is preserved
         onSuccess: () => {
-          // Navigate to single-player game
           router.post(route('games.gender-duel.create'), {
             language_pair_id: auth.user.language_pair_id,
             max_players: 8,
@@ -255,6 +272,9 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
           startGame={startGame}
+          easyText={trans('gender_duel.modal_difficulty.easy_text')}
+          mediumText={trans('gender_duel.modal_difficulty.medium_text')}
+          hardText={trans('gender_duel.modal_difficulty.hard_text')}
           gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
       )}
     </AuthenticatedLayout>

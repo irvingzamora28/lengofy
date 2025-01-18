@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('user_id')
                   ->constrained()
                   ->onDelete('cascade');
-            
+
             // Game-specific settings
             $table->enum('gender_duel_difficulty', ['easy', 'medium', 'hard'])
                   ->default('medium')
@@ -24,7 +24,11 @@ return new class extends Migration
             $table->boolean('gender_duel_timer')
                   ->default(true)
                   ->nullable();
-            
+
+            $table->enum('memory_translation_difficulty', ['easy', 'medium', 'hard'])
+                  ->default('medium')
+                  ->nullable();
+
             // Global user settings
             $table->string('preferred_language')
                   ->nullable();
@@ -33,11 +37,11 @@ return new class extends Migration
                   ->nullable();
             $table->string('timezone')
                   ->nullable();
-            
+
             // Flexible JSON for future/rare settings
             $table->json('additional_settings')
                   ->nullable();
-            
+
             $table->timestamps();
 
             // Ensure unique settings per user

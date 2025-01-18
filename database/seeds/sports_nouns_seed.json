@@ -1,0 +1,347 @@
+[
+    {
+        "word": "Sport",
+        "gender": "der",
+        "translations": {
+            "en": "sport",
+            "es": "deporte"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+         "emoji": "⚽"
+    },
+    {
+        "word": "Fußball",
+        "gender": "der",
+        "translations": {
+            "en": "football/soccer",
+            "es": "fútbol"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+        "emoji": "⚽"
+    },
+    {
+        "word": "Basketball",
+        "gender": "der",
+        "translations": {
+            "en": "basketball",
+            "es": "baloncesto"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+         "emoji": "🏀"
+    },
+      {
+        "word": "Tennis",
+        "gender": "das",
+        "translations": {
+            "en": "tennis",
+            "es": "tenis"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+         "emoji": "🎾"
+    },
+    {
+        "word": "Schwimmen",
+        "gender": "das",
+        "translations": {
+            "en": "swimming",
+            "es": "natación"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+         "emoji": "🏊"
+    },
+     {
+        "word": "Laufen",
+        "gender": "das",
+        "translations": {
+            "en": "running",
+            "es": "correr"
+        },
+       "difficulty_level": 1,
+        "category": "Sports",
+        "emoji": "🏃"
+    },
+    {
+        "word": "Radfahren",
+        "gender": "das",
+        "translations": {
+            "en": "cycling",
+            "es": "ciclismo"
+        },
+        "difficulty_level": 1,
+        "category": "Sports",
+          "emoji": "🚴"
+    },
+    {
+        "word": "Volleyball",
+        "gender": "der",
+         "translations": {
+            "en": "volleyball",
+            "es": "voleibol"
+         },
+         "difficulty_level": 1,
+        "category": "Sports",
+          "emoji":"🏐"
+    },
+      {
+        "word":"Handball",
+        "gender":"der",
+        "translations":{
+            "en":"handball",
+            "es":"balonmano"
+        },
+         "difficulty_level": 1,
+        "category":"Sports",
+         "emoji": "🤾"
+    },
+      {
+         "word":"Badminton",
+        "gender":"das",
+        "translations":{
+            "en":"badminton",
+            "es":"bádminton"
+       },
+         "difficulty_level": 2,
+       "category":"Sports",
+        "emoji": "🏸"
+    },
+    {
+       "word": "Baseball",
+        "gender":"der",
+        "translations":{
+            "en":"baseball",
+            "es":"béisbol"
+       },
+        "difficulty_level": 2,
+         "category":"Sports",
+         "emoji": "⚾"
+    },
+  {
+        "word":"Hockey",
+       "gender":"das",
+        "translations":{
+            "en":"hockey",
+            "es":"hockey"
+        },
+       "difficulty_level":2,
+        "category":"Sports"
+   },
+    {
+        "word":"Eishockey",
+        "gender":"das",
+        "translations":{
+            "en":"ice hockey",
+            "es":"hockey sobre hielo"
+        },
+        "difficulty_level":2,
+        "category":"Sports",
+         "emoji": "🏒"
+    },
+   {
+        "word":"Golf",
+        "gender":"das",
+        "translations":{
+            "en":"golf",
+             "es":"golf"
+       },
+        "difficulty_level":2,
+        "category":"Sports",
+       "emoji": "⛳"
+    },
+   {
+        "word":"Boxen",
+       "gender":"das",
+       "translations":{
+           "en":"boxing",
+            "es":"boxeo"
+       },
+       "difficulty_level":2,
+       "category":"Sports",
+          "emoji":"🥊"
+    },
+  {
+       "word":"Skifahren",
+       "gender":"das",
+        "translations":{
+           "en":"skiing",
+           "es":"esquí"
+       },
+      "difficulty_level":2,
+       "category":"Sports",
+       "emoji": "⛷️"
+   },
+   {
+       "word":"Snowboarden",
+        "gender":"das",
+        "translations":{
+           "en":"snowboarding",
+           "es":"snowboarding"
+       },
+        "difficulty_level":2,
+        "category":"Sports",
+       "emoji":"🏂"
+    },
+    {
+         "word":"Rudern",
+         "gender":"das",
+         "translations":{
+            "en":"rowing",
+            "es":"remo"
+         },
+       "difficulty_level":2,
+       "category":"Sports",
+       "emoji":"🚣"
+    },
+    {
+        "word":"Reiten",
+        "gender":"das",
+        "translations":{
+            "en":"horse riding",
+            "es":"equitación"
+       },
+       "difficulty_level":2,
+       "category":"Sports",
+         "emoji": "🏇"
+    },
+    {
+        "word": "Yoga",
+         "gender":"das",
+         "translations":{
+            "en":"yoga",
+            "es":"yoga"
+        },
+         "difficulty_level":1,
+         "category":"Sports",
+           "emoji": "🧘"
+    },
+ {
+        "word": "Pilates",
+        "gender":"das",
+        "translations":{
+            "en":"pilates",
+            "es":"pilates"
+         },
+         "difficulty_level":2,
+        "category":"Sports"
+    },
+   {
+       "word": "Tanzen",
+        "gender":"das",
+        "translations":{
+             "en":"dancing",
+            "es":"bailar"
+        },
+        "difficulty_level":1,
+        "category":"Sports",
+          "emoji":"💃"
+    },
+   {
+        "word": "Klettern",
+        "gender":"das",
+        "translations":{
+            "en":"climbing",
+            "es":"escalada"
+        },
+         "difficulty_level":2,
+         "category":"Sports",
+           "emoji":"🧗"
+    },
+   {
+        "word":"Gewichtheben",
+       "gender":"das",
+       "translations":{
+           "en":"weightlifting",
+          "es":"halterofilia"
+       },
+      "difficulty_level":2,
+       "category":"Sports",
+       "emoji": "🏋️"
+    },
+ {
+       "word":"Leichtathletik",
+       "gender":"die",
+        "translations":{
+            "en":"athletics",
+            "es":"atletismo"
+        },
+        "difficulty_level":2,
+        "category":"Sports"
+    },
+    {
+         "word":"Schiedsrichter",
+         "gender":"der",
+        "translations":{
+             "en":"referee",
+             "es":"árbitro"
+        },
+         "difficulty_level":2,
+         "category":"Sports"
+    },
+    {
+        "word":"Trainer",
+        "gender":"der",
+       "translations":{
+            "en":"coach",
+            "es":"entrenador"
+        },
+         "difficulty_level":2,
+        "category":"Sports"
+   },
+   {
+       "word":"Mannschaft",
+        "gender":"die",
+        "translations":{
+           "en":"team",
+           "es":"equipo"
+      },
+      "difficulty_level":2,
+        "category":"Sports"
+    },
+   {
+        "word":"Stadion",
+        "gender":"das",
+        "translations":{
+            "en":"stadium",
+            "es":"estadio"
+       },
+        "difficulty_level":2,
+        "category":"Sports",
+        "emoji":"🏟️"
+    },
+ {
+        "word":"Turnhalle",
+         "gender":"die",
+         "translations":{
+           "en":"gymnasium",
+             "es":"gimnasio"
+         },
+         "difficulty_level": 2,
+        "category":"Sports",
+        "emoji": " 🏋️"
+   },
+   {
+        "word": "Wettkampf",
+        "gender":"der",
+        "translations":{
+            "en":"competition",
+            "es":"competición"
+        },
+        "difficulty_level":2,
+       "category":"Sports"
+    },
+    {
+        "word":"Medaille",
+        "gender":"die",
+        "translations":{
+            "en":"medal",
+            "es":"medalla"
+        },
+        "difficulty_level":2,
+        "category":"Sports",
+        "emoji":"🏅"
+    }
+]

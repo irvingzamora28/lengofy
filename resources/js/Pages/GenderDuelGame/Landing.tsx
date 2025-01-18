@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     FaPlay,
     FaMars,
@@ -10,6 +10,9 @@ import {
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head } from "@inertiajs/react";
 import { useTranslation } from "react-i18next";
+import genderDuelImage from "@/assets/images/gender-duel-landing.png";
+import { AnimatePresence } from "framer-motion";
+import GuestLanguageModal from "@/Components/GuestLanguageModal";
 
 interface Feature {
     icon: JSX.Element;
@@ -17,7 +20,12 @@ interface Feature {
     description: string;
 }
 
-const LandingPageGenderDuel: React.FC = () => {
+interface LandingPageGenderDuelProps {
+    languagePairs: Record<string, any>;
+}
+
+const LandingPageGenderDuel: React.FC<LandingPageGenderDuelProps> = ({ languagePairs }) => {
+    const [showLanguageModal, setShowLanguageModal] = useState(false);
     const { t: trans } = useTranslation();
     const features: Feature[] = [
         {
@@ -37,9 +45,35 @@ const LandingPageGenderDuel: React.FC = () => {
         },
     ];
 
+    const handleGuestPlay = () => {
+        setShowLanguageModal(true);
+    };
+
     return (
         <GuestLayout>
-            <Head title="Gender Duel" />
+            <Head>
+                <title>Gender Duel</title>
+                <meta
+                    name="description"
+                    content={trans("gender_duel_landing_page.meta_description")}
+                />
+                <meta
+                    name="keywords"
+                    content={trans("gender_duel_landing_page.meta_keywords")}
+                />
+                <meta
+                    property="og:title"
+                    content={trans("gender_duel_landing_page.meta_title")}
+                />
+                <meta
+                    property="og:description"
+                    content={trans("gender_duel_landing_page.meta_description")}
+                />
+                <meta
+                    property="og:image"
+                    content={genderDuelImage}
+                />
+            </Head>
             <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
                 <section className="pt-24 pb-20 px-4">
                     <div className="max-w-6xl mx-auto text-center">
@@ -53,7 +87,7 @@ const LandingPageGenderDuel: React.FC = () => {
                         <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
                             {trans("gender_duel_landing_page.description")}
                         </p>
-                        <button className="px-12 py-6 text-xl md:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center space-x-3 transform hover:scale-105 transition mx-auto">
+                        <button onClick={handleGuestPlay} className="px-12 py-6 text-xl md:text-6xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center space-x-3 transform hover:scale-105 transition mx-auto">
                             <FaPlay className="w-6 h-6 md:w-12 md:h-12" /> <span>{trans("gender_duel_landing_page.play_now")}</span>
                         </button>
                     </div>
@@ -89,7 +123,7 @@ const LandingPageGenderDuel: React.FC = () => {
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl" />
                             <img
-                                src="/api/placeholder/800/400"
+                                src={genderDuelImage}
                                 alt="Game Preview"
                                 className="rounded-xl shadow-2xl relative z-10 mx-auto"
                             />
@@ -101,6 +135,17 @@ const LandingPageGenderDuel: React.FC = () => {
                     <p>{trans('generals.copyright')}</p>
                 </footer>
             </div>
+
+            <AnimatePresence>
+                {showLanguageModal && (
+                    <GuestLanguageModal
+                        show={showLanguageModal}
+                        redirectRoute="games.gender-duel.practice"
+                        onClose={() => setShowLanguageModal(false)}
+                        languagePairs={languagePairs}
+                    />
+                )}
+            </AnimatePresence>
         </GuestLayout>
     );
 };

@@ -6,11 +6,11 @@ use App\Models\Noun;
 
 class NounService {
 
-    public function getNouns(int $language_id, int $translation_language_id, int $category_id, int $totalRounds): array {
-        $query = Noun::where('language_id', $language_id);
-        if ($category_id !== 0) {
-            $query->whereHas('categories', function ($query) use ($category_id) {
-                $query->where('category_id', $category_id);
+    public function getNouns(int $languageId, int $translationLanguageId, int $categoryId, int $totalRounds): array {
+        $query = Noun::where('language_id', $languageId);
+        if ($categoryId !== 0) {
+            $query->whereHas('categories', function ($query) use ($categoryId) {
+                $query->where('category_id', $categoryId);
             });
         }
         return $query->inRandomOrder()
@@ -20,7 +20,8 @@ class NounService {
                 'id' => $noun->id,
                 'word' => $noun->word,
                 'gender' => $noun->gender,
-                'translation' => $noun->getTranslation($translation_language_id),
+                'emoji' => $noun->emoji,
+                'translation' => $noun->getTranslation($translationLanguageId),
             ])
             ->toArray();
     }

@@ -1,0 +1,842 @@
+[
+    {
+        "word": "Person",
+        "gender": "die",
+        "translations": {
+            "en": "person",
+            "es": "persona"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family"
+    },
+    {
+        "word": "Mann",
+        "gender": "der",
+        "translations": {
+            "en": "man",
+            "es": "hombre"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👨"
+    },
+    {
+        "word": "Frau",
+        "gender": "die",
+        "translations": {
+            "en": "woman",
+            "es": "mujer"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👩"
+    },
+    {
+        "word": "Kind",
+        "gender": "das",
+        "translations": {
+            "en": "child",
+            "es": "niño/a"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧒"
+    },
+    {
+        "word": "Junge",
+        "gender": "der",
+        "translations": {
+            "en": "boy",
+            "es": "niño"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👦"
+    },
+    {
+        "word": "Mädchen",
+        "gender": "das",
+        "translations": {
+            "en": "girl",
+            "es": "niña"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👧"
+    },
+    {
+        "word": "Familie",
+        "gender": "die",
+        "translations": {
+            "en": "family",
+            "es": "familia"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👪"
+    },
+    {
+        "word": "Mutter",
+        "gender": "die",
+        "translations": {
+            "en": "mother",
+            "es": "madre"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👩"
+    },
+    {
+        "word": "Vater",
+        "gender": "der",
+        "translations": {
+            "en": "father",
+            "es": "padre"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👨"
+    },
+    {
+        "word": "Eltern",
+        "gender": "die",
+        "translations": {
+            "en": "parents",
+            "es": "padres"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Sohn",
+        "gender": "der",
+        "translations": {
+            "en": "son",
+            "es": "hijo"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👦"
+    },
+    {
+        "word": "Tochter",
+        "gender": "die",
+        "translations": {
+            "en": "daughter",
+            "es": "hija"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👧"
+    },
+    {
+        "word": "Bruder",
+        "gender": "der",
+        "translations": {
+            "en": "brother",
+            "es": "hermano"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👦"
+    },
+    {
+        "word": "Schwester",
+        "gender": "die",
+        "translations": {
+            "en": "sister",
+            "es": "hermana"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👧"
+    },
+    {
+        "word": "Großeltern",
+        "gender": "die",
+        "translations": {
+            "en": "grandparents",
+            "es": "abuelos"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👵👴"
+    },
+    {
+        "word": "Oma",
+        "gender": "die",
+        "translations": {
+            "en": "grandma",
+            "es": "abuela"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👵"
+    },
+    {
+        "word": "Opa",
+        "gender": "der",
+        "translations": {
+            "en": "grandpa",
+            "es": "abuelo"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👴"
+    },
+    {
+        "word": "Enkel",
+        "gender": "der",
+        "translations": {
+            "en": "grandson",
+            "es": "nieto"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👦"
+    },
+    {
+        "word": "Enkelin",
+        "gender": "die",
+        "translations": {
+            "en": "granddaughter",
+            "es": "nieta"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👧"
+    },
+    {
+        "word": "Onkel",
+        "gender": "der",
+        "translations": {
+            "en": "uncle",
+            "es": "tío"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family"
+    },
+    {
+        "word": "Tante",
+        "gender": "die",
+        "translations": {
+            "en": "aunt",
+            "es": "tía"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family"
+    },
+    {
+        "word": "Cousin",
+        "gender": "der",
+        "translations": {
+            "en": "cousin (male)",
+            "es": "primo"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑"
+    },
+    {
+        "word": "Cousine",
+        "gender": "die",
+        "translations": {
+            "en": "cousin (female)",
+            "es": "prima"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👩"
+    },
+    {
+        "word": "Ehemann",
+        "gender": "der",
+        "translations": {
+            "en": "husband",
+            "es": "esposo"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👨"
+    },
+    {
+        "word": "Ehefrau",
+        "gender": "die",
+        "translations": {
+            "en": "wife",
+            "es": "esposa"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👩"
+    },
+    {
+        "word": "Freund",
+        "gender": "der",
+        "translations": {
+            "en": "friend (male)",
+            "es": "amigo"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Freundin",
+        "gender": "die",
+        "translations": {
+            "en": "friend (female)",
+            "es": "amiga"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Baby",
+        "gender": "das",
+        "translations": {
+            "en": "baby",
+            "es": "bebé"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👶"
+    },
+    {
+        "word": "Teenager",
+        "gender": "der",
+        "translations": {
+            "en": "teenager (male)",
+            "es": "adolescente"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "🧑"
+    },
+    {
+        "word": "Teenagerin",
+        "gender": "die",
+        "translations": {
+            "en": "teenager (female)",
+            "es": "adolescente"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 👩"
+    },
+    {
+        "word": "Partner",
+        "gender": "der",
+        "translations": {
+            "en": "partner (male)",
+            "es": "pareja"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Partnerin",
+        "gender": "die",
+        "translations": {
+            "en": "partner (female)",
+            "es": "pareja"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Nachbar",
+        "gender": "der",
+        "translations": {
+            "en": "neighbor (male)",
+            "es": "vecino"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑"
+    },
+    {
+        "word": "Nachbarin",
+        "gender": "die",
+        "translations": {
+            "en": "neighbor (female)",
+            "es": "vecina"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": "👩"
+    },
+    {
+        "word": "Schwager",
+        "gender": "der",
+        "translations": {
+            "en": "brother-in-law",
+            "es": "cuñado"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Schwägerin",
+        "gender": "die",
+        "translations": {
+            "en": "sister-in-law",
+            "es": "cuñada"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Schwiegereltern",
+        "gender": "die",
+        "translations": {
+            "en": "parents-in-law",
+            "es": "suegros"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Schwiegermutter",
+        "gender": "die",
+        "translations": {
+            "en": "mother-in-law",
+            "es": "suegra"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Schwiegervater",
+        "gender": "der",
+        "translations": {
+            "en": "father-in-law",
+            "es": "suegro"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Stiefmutter",
+        "gender": "die",
+        "translations": {
+            "en": "stepmother",
+            "es": "madrastra"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Stiefvater",
+        "gender": "der",
+        "translations": {
+            "en": "stepfather",
+            "es": "padrastro"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Stiefbruder",
+        "gender": "der",
+        "translations": {
+            "en": "stepbrother",
+            "es": "hermanastro"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Stiefschwester",
+        "gender": "die",
+        "translations": {
+            "en": "stepsister",
+            "es": "hermanastra"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Halbbruder",
+        "gender": "der",
+        "translations": {
+            "en": "half-brother",
+            "es": "medio hermano"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Halbschwester",
+        "gender": "die",
+        "translations": {
+            "en": "half-sister",
+            "es": "media hermana"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Verlobter",
+        "gender": "der",
+        "translations": {
+            "en": "fiancé",
+            "es": "prometido"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "💍"
+    },
+    {
+        "word": "Verlobte",
+        "gender": "die",
+        "translations": {
+            "en": "fiancée",
+            "es": "prometida"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "💍"
+    },
+    {
+        "word": "Ehepartner",
+        "gender": "der",
+        "translations": {
+            "en": "spouse (male)",
+            "es": "cónyuge"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Ehepartnerin",
+        "gender": "die",
+        "translations": {
+            "en": "spouse (female)",
+            "es": "cónyuge"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Urgroßeltern",
+        "gender": "die",
+        "translations": {
+            "en": "great-grandparents",
+            "es": "bisabuelos"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Uroma",
+        "gender": "die",
+        "translations": {
+            "en": "great-grandmother",
+            "es": "bisabuela"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Uropa",
+        "gender": "der",
+        "translations": {
+            "en": "great-grandfather",
+            "es": "bisabuelo"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Pate",
+        "gender": "der",
+        "translations": {
+            "en": "godfather",
+            "es": "padrino"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Patin",
+        "gender": "die",
+        "translations": {
+            "en": "godmother",
+            "es": "madrina"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Patenkind",
+        "gender": "das",
+        "translations": {
+            "en": "godchild",
+            "es": "ahijado/a"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Zwilling",
+        "gender": "der",
+        "translations": {
+            "en": "twin (male)",
+            "es": "gemelo"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Zwilling",
+        "gender": "die",
+        "translations": {
+            "en": "twin (female)",
+            "es": "gemela"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Säugling",
+        "gender": "der",
+        "translations": {
+            "en": "infant",
+            "es": "bebé"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "👶"
+    },
+    {
+        "word": "Kleinkind",
+        "gender": "das",
+        "translations": {
+            "en": "toddler",
+            "es": "niño pequeño"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "🧒"
+    },
+    {
+        "word": "Erwachsener",
+        "gender": "der",
+        "translations": {
+            "en": "adult (male)",
+            "es": "adulto"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑"
+    },
+    {
+        "word": "Erwachsene",
+        "gender": "die",
+        "translations": {
+            "en": "adult (female)",
+            "es": "adulta"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "👩"
+    },
+    {
+        "word": "Senior",
+        "gender": "der",
+        "translations": {
+            "en": "senior (male)",
+            "es": "anciano"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "👴"
+    },
+    {
+        "word": "Seniorin",
+        "gender": "die",
+        "translations": {
+            "en": "senior (female)",
+            "es": "anciana"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": "👵"
+    },
+    {
+        "word": "Witwer",
+        "gender": "der",
+        "translations": {
+            "en": "widower",
+            "es": "viudo"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Witwe",
+        "gender": "die",
+        "translations": {
+            "en": "widow",
+            "es": "viuda"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Single",
+        "gender": "der",
+        "translations": {
+            "en": "single (male)",
+            "es": "soltero"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family"
+    },
+    {
+        "word": "Single",
+        "gender": "die",
+        "translations": {
+            "en": "single (female)",
+            "es": "soltera"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family"
+    },
+    {
+        "word": "Bekannter",
+        "gender": "der",
+        "translations": {
+            "en": "acquaintance (male)",
+            "es": "conocido"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Bekannte",
+        "gender": "die",
+        "translations": {
+            "en": "acquaintance (female)",
+            "es": "conocida"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Kollege",
+        "gender": "der",
+        "translations": {
+            "en": "colleague (male)",
+            "es": "colega"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Kollegin",
+        "gender": "die",
+        "translations": {
+            "en": "colleague (female)",
+            "es": "colega"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Mitbewohner",
+        "gender": "der",
+        "translations": {
+            "en": "roommate (male)",
+            "es": "compañero de piso"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Mitbewohnerin",
+        "gender": "die",
+        "translations": {
+            "en": "roommate (female)",
+            "es": "compañera de piso"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Paar",
+        "gender": "das",
+        "translations": {
+            "en": "couple",
+            "es": "pareja"
+        },
+        "difficulty_level": 1,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Beziehung",
+        "gender": "die",
+        "translations": {
+            "en": "relationship",
+            "es": "relación"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Verwandte",
+        "gender": "der",
+        "translations": {
+            "en": "relative",
+            "es": "pariente"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Gemeinschaft",
+        "gender": "die",
+        "translations": {
+            "en": "community",
+            "es": "comunidad"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family",
+        "emoji": " 🧑‍🤝‍🧑"
+    },
+    {
+        "word": "Generation",
+        "gender": "die",
+        "translations": {
+            "en": "generation",
+            "es": "generación"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    },
+    {
+        "word": "Herkunft",
+        "gender": "die",
+        "translations": {
+            "en": "origin, heritage",
+            "es": "origen, herencia"
+        },
+        "difficulty_level": 2,
+        "category": "People_Family"
+    }
+]

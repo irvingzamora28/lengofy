@@ -1,0 +1,1506 @@
+[
+    {
+        "word": "Auto",
+        "gender": "das",
+        "translations": {
+            "en": "car",
+            "es": "coche"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚗"
+    },
+    {
+        "word": "Fahrrad",
+        "gender": "das",
+        "translations": {
+            "en": "bicycle",
+            "es": "bicicleta"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚲"
+    },
+    {
+        "word": "Zug",
+        "gender": "der",
+        "translations": {
+            "en": "train",
+            "es": "tren"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚆"
+    },
+    {
+        "word": "Bus",
+        "gender": "der",
+        "translations": {
+            "en": "bus",
+            "es": "autobús"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚌"
+    },
+    {
+        "word": "Flugzeug",
+        "gender": "das",
+        "translations": {
+            "en": "airplane",
+            "es": "avión"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "✈️"
+    },
+    {
+        "word": "Motorrad",
+        "gender": "das",
+        "translations": {
+            "en": "motorcycle",
+            "es": "motocicleta"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🏍️"
+    },
+    {
+        "word": "U-Bahn",
+        "gender": "die",
+        "translations": {
+            "en": "subway",
+            "es": "metro"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚇"
+    },
+    {
+        "word": "Straßenbahn",
+        "gender": "die",
+        "translations": {
+            "en": "tram",
+            "es": "tranvía"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚊"
+    },
+    {
+        "word": "Lastwagen",
+        "gender": "der",
+        "translations": {
+            "en": "truck",
+            "es": "camión"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚚"
+    },
+    {
+        "word": "Schiff",
+        "gender": "das",
+        "translations": {
+            "en": "ship",
+            "es": "barco"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚢"
+    },
+    {
+        "word": "Boot",
+        "gender": "das",
+        "translations": {
+            "en": "boat",
+            "es": "bote"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛥️"
+    },
+    {
+        "word": "Hubschrauber",
+        "gender": "der",
+        "translations": {
+            "en": "helicopter",
+            "es": "helicóptero"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚁"
+    },
+    {
+        "word": "Taxi",
+        "gender": "das",
+        "translations": {
+            "en": "taxi",
+            "es": "taxi"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚕"
+    },
+    {
+        "word": "Roller",
+        "gender": "der",
+        "translations": {
+            "en": "scooter",
+            "es": "scooter"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛴"
+    },
+    {
+        "word": "Lieferwagen",
+        "gender": "der",
+        "translations": {
+            "en": "delivery van",
+            "es": "furgoneta"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚐"
+    },
+    {
+        "word": "Wohnmobil",
+        "gender": "das",
+        "translations": {
+            "en": "RV",
+            "es": "autocaravana"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚐"
+    },
+    {
+        "word": "Fähre",
+        "gender": "die",
+        "translations": {
+            "en": "ferry",
+            "es": "ferry"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "⛴️"
+    },
+    {
+        "word": "Gleis",
+        "gender": "das",
+        "translations": {
+            "en": "track",
+            "es": "vía"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Bahnsteig",
+        "gender": "der",
+        "translations": {
+            "en": "platform",
+            "es": "andén"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Flughafen",
+        "gender": "der",
+        "translations": {
+            "en": "airport",
+            "es": "aeropuerto"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛬"
+    },
+    {
+        "word": "Bahnhof",
+        "gender": "der",
+        "translations": {
+            "en": "train station",
+            "es": "estación de tren"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚉"
+    },
+    {
+        "word": "Fahrkarte",
+        "gender": "die",
+        "translations": {
+            "en": "ticket",
+            "es": "billete"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🎫"
+    },
+    {
+        "word": "Gepäck",
+        "gender": "das",
+        "translations": {
+            "en": "luggage",
+            "es": "equipaje"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🧳"
+    },
+    {
+        "word": "Reifen",
+        "gender": "der",
+        "translations": {
+            "en": "tire",
+            "es": "neumático"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Lenkrad",
+        "gender": "das",
+        "translations": {
+            "en": "steering wheel",
+            "es": "volante"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Ampel",
+        "gender": "die",
+        "translations": {
+            "en": "traffic light",
+            "es": "semáforo"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚦"
+    },
+    {
+        "word": "Kreisverkehr",
+        "gender": "der",
+        "translations": {
+            "en": "roundabout",
+            "es": "rotonda"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Brücke",
+        "gender": "die",
+        "translations": {
+            "en": "bridge",
+            "es": "puente"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🌉"
+    },
+    {
+        "word": "Tunnel",
+        "gender": "der",
+        "translations": {
+            "en": "tunnel",
+            "es": "túnel"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fahrstuhl",
+        "gender": "der",
+        "translations": {
+            "en": "elevator",
+            "es": "ascensor"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🛗"
+    },
+    {
+        "word": "Rolltreppe",
+        "gender": "die",
+        "translations": {
+            "en": "escalator",
+            "es": "escalera mecánica"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Güterzug",
+        "gender": "der",
+        "translations": {
+            "en": "freight train",
+            "es": "tren de carga"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Segelboot",
+        "gender": "das",
+        "translations": {
+            "en": "sailboat",
+            "es": "velero"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "⛵"
+    },
+    {
+        "word": "Anhänger",
+        "gender": "der",
+        "translations": {
+            "en": "trailer",
+            "es": "remolque"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Kofferraum",
+        "gender": "der",
+        "translations": {
+            "en": "trunk",
+            "es": "maletero"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Motor",
+        "gender": "der",
+        "translations": {
+            "en": "engine",
+            "es": "motor"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Geschwindigkeitsbegrenzung",
+        "gender": "die",
+        "translations": {
+            "en": "speed limit",
+            "es": "límite de velocidad"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Parkplatz",
+        "gender": "der",
+        "translations": {
+            "en": "parking lot",
+            "es": "estacionamiento"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🅿️"
+    },
+    {
+        "word": "Tankstelle",
+        "gender": "die",
+        "translations": {
+            "en": "gas station",
+            "es": "gasolinera"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "⛽"
+    },
+    {
+        "word": "Straße",
+        "gender": "die",
+        "translations": {
+            "en": "street",
+            "es": "calle"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛣️"
+    },
+    {
+        "word": "Autobahn",
+        "gender": "die",
+        "translations": {
+            "en": "highway",
+            "es": "autopista"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛣️"
+    },
+    {
+        "word": "Luftballon",
+        "gender": "der",
+        "translations": {
+            "en": "hot air balloon",
+            "es": "globo aerostático"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": "🎈"
+    },
+    {
+        "word": "Zeppelin",
+        "gender": "der",
+        "translations": {
+            "en": "zeppelin",
+            "es": "zéppelin"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Tretboot",
+        "gender": "das",
+        "translations": {
+            "en": "pedal boat",
+            "es": "patín de pedales"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": "🚣"
+    },
+    {
+        "word": "Jetski",
+        "gender": "das",
+        "translations": {
+            "en": "jet ski",
+            "es": "moto de agua"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🛺"
+    },
+    {
+        "word": "Seilbahn",
+        "gender": "die",
+        "translations": {
+            "en": "cable car",
+            "es": "teleférico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚠"
+    },
+    {
+        "word": "Rikscha",
+        "gender": "die",
+        "translations": {
+            "en": "rickshaw",
+            "es": "rickshaw"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Hoverboard",
+        "gender": "das",
+        "translations": {
+            "en": "hoverboard",
+            "es": "hoverboard"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Schlitten",
+        "gender": "der",
+        "translations": {
+            "en": "sled",
+            "es": "trineo"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🛷"
+    },
+    {
+        "word": "U-Boot",
+        "gender": "das",
+        "translations": {
+            "en": "submarine",
+            "es": "submarino"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🚢"
+    },
+    {
+        "word": "Raumfähre",
+        "gender": "die",
+        "translations": {
+            "en": "space shuttle",
+            "es": "transbordador espacial"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🚀"
+    },
+    {
+        "word": "Straßenkarte",
+        "gender": "die",
+        "translations": {
+            "en": "road map",
+            "es": "mapa de carreteras"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Navigationsgerät",
+        "gender": "das",
+        "translations": {
+            "en": "GPS",
+            "es": "GPS"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Parkuhr",
+        "gender": "die",
+        "translations": {
+            "en": "parking meter",
+            "es": "parquímetro"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fußgängerzone",
+        "gender": "die",
+        "translations": {
+            "en": "pedestrian zone",
+            "es": "zona peatonal"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Einbahnstraße",
+        "gender": "die",
+        "translations": {
+            "en": "one-way street",
+            "es": "calle de sentido único"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fahrzeug",
+        "gender": "das",
+        "translations": {
+            "en": "vehicle",
+            "es": "vehículo"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Gangschaltung",
+        "gender": "die",
+        "translations": {
+            "en": "gearshift",
+            "es": "cambio de marchas"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Kupplung",
+        "gender": "die",
+        "translations": {
+            "en": "clutch",
+            "es": "embrague"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Bremse",
+        "gender": "die",
+        "translations": {
+            "en": "brake",
+            "es": "freno"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Auspuff",
+        "gender": "der",
+        "translations": {
+            "en": "exhaust",
+            "es": "escape"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Carsharing",
+        "gender": "das",
+        "translations": {
+            "en": "car sharing",
+            "es": "compartir coche"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fahrschule",
+        "gender": "die",
+        "translations": {
+            "en": "driving school",
+            "es": "escuela de manejo"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Führerschein",
+        "gender": "der",
+        "translations": {
+            "en": "driver's license",
+            "es": "licencia de conducir"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🧾"
+    },
+    {
+        "word": "Haltestelle",
+        "gender": "die",
+        "translations": {
+            "en": "bus stop",
+            "es": "parada de autobús"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚏"
+    },
+    {
+        "word": "Raststätte",
+        "gender": "die",
+        "translations": {
+            "en": "rest stop",
+            "es": "área de servicio"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Kreuzung",
+        "gender": "die",
+        "translations": {
+            "en": "intersection",
+            "es": "cruce"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " ⛝"
+    },
+    {
+        "word": "Stau",
+        "gender": "der",
+        "translations": {
+            "en": "traffic jam",
+            "es": "atasco"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "S-Bahn",
+        "gender": "die",
+        "translations": {
+            "en": "urban railway",
+            "es": "tren urbano"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Regionalbahn",
+        "gender": "die",
+        "translations": {
+            "en": "regional train",
+            "es": "tren regional"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fernbus",
+        "gender": "der",
+        "translations": {
+            "en": "long-distance bus",
+            "es": "autobús de larga distancia"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Elektroauto",
+        "gender": "das",
+        "translations": {
+            "en": "electric car",
+            "es": "coche eléctrico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚗"
+    },
+    {
+        "word": "Hybridauto",
+        "gender": "das",
+        "translations": {
+            "en": "hybrid car",
+            "es": "coche híbrido"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Gleitschirm",
+        "gender": "der",
+        "translations": {
+            "en": "paraglider",
+            "es": "parapente"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🪂"
+    },
+    {
+        "word": "Fallschirm",
+        "gender": "der",
+        "translations": {
+            "en": "parachute",
+            "es": "paracaídas"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": "🪂"
+    },
+    {
+        "word": "Draisine",
+        "gender": "die",
+        "translations": {
+            "en": "handcar",
+            "es": "dresina"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Limousine",
+        "gender": "die",
+        "translations": {
+            "en": "limousine",
+            "es": "limusina"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚖"
+    },
+    {
+        "word": "Schneemobil",
+        "gender": "das",
+        "translations": {
+            "en": "snowmobile",
+            "es": "moto de nieve"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🛷"
+    },
+    {
+        "word": "Segway",
+        "gender": "der",
+        "translations": {
+            "en": "segway",
+            "es": "segway"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Tandem",
+        "gender": "das",
+        "translations": {
+            "en": "tandem",
+            "es": "tándem"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Skateboard",
+        "gender": "das",
+        "translations": {
+            "en": "skateboard",
+            "es": "monopatín"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🛹"
+    },
+    {
+        "word": "Inlineskates",
+        "gender": "die",
+        "translations": {
+            "en": "inline skates",
+            "es": "patines en línea"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fahrradweg",
+        "gender": "der",
+        "translations": {
+            "en": "bike path",
+            "es": "carril bici"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Pannendienst",
+        "gender": "der",
+        "translations": {
+            "en": "roadside assistance",
+            "es": "asistencia en carretera"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Gepäckträger",
+        "gender": "der",
+        "translations": {
+            "en": "luggage rack",
+            "es": "portaequipajes"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Zoll",
+        "gender": "der",
+        "translations": {
+            "en": "customs",
+            "es": "aduana"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Reisebus",
+        "gender": "die",
+        "translations": {
+            "en": "tour bus",
+            "es": "autobús turístico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Taxistand",
+        "gender": "der",
+        "translations": {
+            "en": "taxi stand",
+            "es": "parada de taxis"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fährboot",
+        "gender": "das",
+        "translations": {
+            "en": "ferry boat",
+            "es": "barco de ferry"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "⛴️"
+    },
+    {
+        "word": "Rettungswagen",
+        "gender": "der",
+        "translations": {
+            "en": "ambulance",
+            "es": "ambulancia"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚑"
+    },
+    {
+        "word": "Feuerwehrauto",
+        "gender": "das",
+        "translations": {
+            "en": "fire truck",
+            "es": "camión de bomberos"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚒"
+    },
+    {
+        "word": "Streifenwagen",
+        "gender": "der",
+        "translations": {
+            "en": "patrol car",
+            "es": "coche patrulla"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚓"
+    },
+    {
+        "word": "Müllwagen",
+        "gender": "der",
+        "translations": {
+            "en": "garbage truck",
+            "es": "camión de basura"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🚚"
+    },
+    {
+        "word": "Lieferwagen",
+        "gender": "der",
+        "translations": {
+            "en": "delivery van",
+            "es": "furgoneta de reparto"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": "🚐"
+    },
+    {
+        "word": "Güterzug",
+        "gender": "der",
+        "translations": {
+            "en": "freight train",
+            "es": "tren de mercancías"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Schneepflug",
+        "gender": "der",
+        "translations": {
+            "en": "snowplow",
+            "es": "quitanieves"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Abschleppwagen",
+        "gender": "der",
+        "translations": {
+            "en": "tow truck",
+            "es": "grúa"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚛"
+    },
+    {
+        "word": "Eisenbahn",
+        "gender": "die",
+        "translations": {
+            "en": "railway",
+            "es": "ferrocarril"
+        },
+        "emoji": "🚂",
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Gleis",
+        "gender": "das",
+        "translations": {
+            "en": "rail",
+            "es": "vía"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Bahnsteig",
+        "gender": "der",
+        "translations": {
+            "en": "platform",
+            "es": "andén"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Anker",
+        "gender": "der",
+        "translations": {
+            "en": "anchor",
+            "es": "ancla"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "⚓"
+    },
+    {
+        "word": "Landebahn",
+        "gender": "die",
+        "translations": {
+            "en": "runway",
+            "es": "pista de aterrizaje"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Tunnel",
+        "gender": "der",
+        "translations": {
+            "en": "tunnel",
+            "es": "túnel"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fußgänger",
+        "gender": "der",
+        "translations": {
+            "en": "pedestrian",
+            "es": "peatón"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Bürgersteig",
+        "gender": "der",
+        "translations": {
+            "en": "sidewalk",
+            "es": "acera"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Gehweg",
+        "gender": "der",
+        "translations": {
+            "en": "sidewalk",
+            "es": "acera"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Zebrastreifen",
+        "gender": "der",
+        "translations": {
+            "en": "crosswalk",
+            "es": "paso de peatones"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🦓"
+    },
+    {
+        "word": "Verkehrsschild",
+        "gender": "das",
+        "translations": {
+            "en": "traffic sign",
+            "es": "señal de tráfico"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🚦"
+    },
+    {
+        "word": "Straßenbauarbeiten",
+        "gender": "die",
+        "translations": {
+            "en": "road construction",
+            "es": "obras viales"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Verkehrsregelung",
+        "gender": "die",
+        "translations": {
+            "en": "traffic control",
+            "es": "control de tráfico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Terminal",
+        "gender": "das",
+        "translations": {
+            "en": "terminal",
+            "es": "terminal"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Kleintransporter",
+        "gender": "der",
+        "translations": {
+            "en": "van",
+            "es": "furgoneta"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": "🚐"
+    },
+    {
+        "word": "Cabriolet",
+        "gender": "das",
+        "translations": {
+            "en": "convertible",
+            "es": "descapotable"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚗"
+    },
+    {
+        "word": "Sportwagen",
+        "gender": "der",
+        "translations": {
+            "en": "sports car",
+            "es": "coche deportivo"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🏎️"
+    },
+    {
+        "word": "Minivan",
+        "gender": "der",
+        "translations": {
+            "en": "minivan",
+            "es": "minivan"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚐"
+    },
+    {
+        "word": "Moped",
+        "gender": "das",
+        "translations": {
+            "en": "moped",
+            "es": "ciclomotor"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🛵"
+    },
+    {
+        "word": "E-Scooter",
+        "gender": "der",
+        "translations": {
+            "en": "electric scooter",
+            "es": "patinete eléctrico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🛴"
+    },
+    {
+        "word": "Bushaltestelle",
+        "gender": "die",
+        "translations": {
+            "en": "bus stop",
+            "es": "parada de autobús"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🚏"
+    },
+    {
+        "word": "Doppeldeckerbus",
+        "gender": "der",
+        "translations": {
+            "en": "double-decker bus",
+            "es": "autobús de dos pisos"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚌"
+    },
+    {
+        "word": "Motorboot",
+        "gender": "das",
+        "translations": {
+            "en": "motorboat",
+            "es": "lancha motora"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🛥️"
+    },
+    {
+        "word": "Fahrplan",
+        "gender": "der",
+        "translations": {
+            "en": "timetable",
+            "es": "horario"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 📅"
+    },
+    {
+        "word": "Route",
+        "gender": "die",
+        "translations": {
+            "en": "route",
+            "es": "ruta"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Fahrpreis",
+        "gender": "der",
+        "translations": {
+            "en": "fare",
+            "es": "tarifa"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Umstieg",
+        "gender": "der",
+        "translations": {
+            "en": "transfer",
+            "es": "transbordo"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Schaffner",
+        "gender": "der",
+        "translations": {
+            "en": "conductor",
+            "es": "revisor"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 👨‍✈️"
+    },
+    {
+        "word": "Reise",
+        "gender": "die",
+        "translations": {
+            "en": "journey",
+            "es": "viaje"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🧳"
+    },
+    {
+        "word": "Ziel",
+        "gender": "das",
+        "translations": {
+            "en": "destination",
+            "es": "destino"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Abfahrt",
+        "gender": "die",
+        "translations": {
+            "en": "departure",
+            "es": "salida"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation"
+    },
+    {
+        "word": "Ankunft",
+        "gender": "die",
+        "translations": {
+            "en": "arrival",
+            "es": "llegada"
+        },
+        "difficulty_level": 1,
+        "category": "Transportation",
+        "emoji": " 🛬"
+    },
+    {
+        "word": "Fracht",
+        "gender": "die",
+        "translations": {
+            "en": "cargo",
+            "es": "carga"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 📦"
+    },
+    {
+        "word": "Versand",
+        "gender": "der",
+        "translations": {
+            "en": "shipping",
+            "es": "envío"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 🚚"
+    },
+    {
+        "word": "Lieferung",
+        "gender": "die",
+        "translations": {
+            "en": "delivery",
+            "es": "entrega"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " 📦"
+    },
+    {
+        "word": "Navigation",
+        "gender": "die",
+        "translations": {
+            "en": "navigation",
+            "es": "navegación"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Verkehrsmeldung",
+        "gender": "die",
+        "translations": {
+            "en": "traffic report",
+            "es": "informe de tráfico"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Notbremse",
+        "gender": "die",
+        "translations": {
+            "en": "emergency brake",
+            "es": "freno de emergencia"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Sicherheitsgurt",
+        "gender": "der",
+        "translations": {
+            "en": "seatbelt",
+            "es": "cinturón de seguridad"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Airbag",
+        "gender": "der",
+        "translations": {
+            "en": "airbag",
+            "es": "bolsa de aire"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Pannenservice",
+        "gender": "der",
+        "translations": {
+            "en": "road assistance",
+            "es": "servicio de asistencia en carretera"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation"
+    },
+    {
+        "word": "Verbandskasten",
+        "gender": "der",
+        "translations": {
+            "en": "first aid kit",
+            "es": "botiquín de primeros auxilios"
+        },
+        "difficulty_level": 2,
+        "category": "Transportation",
+        "emoji": " ⛑️"
+    },
+    {
+        "word": "Einschienenbahn",
+        "gender": "die",
+        "translations": {
+            "en": "monorail",
+            "es": "monorraíl"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Standseilbahn",
+        "gender": "die",
+        "translations": {
+            "en": "funicular",
+            "es": "funicular"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    },
+    {
+        "word": "Drohne",
+        "gender": "die",
+        "translations": {
+            "en": "drone",
+            "es": "dron"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation",
+        "emoji": " 🛩️"
+    },
+    {
+        "word": "Autonome Fahrzeug",
+        "gender": "das",
+        "translations": {
+            "en": "autonomous vehicle",
+            "es": "vehículo autónomo"
+        },
+        "difficulty_level": 3,
+        "category": "Transportation"
+    }
+]

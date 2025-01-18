@@ -13,7 +13,7 @@ class Category extends Model
 
     public function nouns()
     {
-        return $this->belongsToMany(Noun::class, 'noun_category', 'category_id', 'noun_id');
+        return $this->belongsToMany(Noun::class, 'category_noun', 'category_id', 'noun_id');
     }
 
     public function getName(string $locale = null): string

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->uuid('guest_id')->nullable();
             $table->string('player_name');
-            $table->integer('score')->default(0);
+            $table->unsignedMediumInteger('score')->default(0);
             $table->boolean('is_ready')->default(false);
             $table->timestamps();
         });

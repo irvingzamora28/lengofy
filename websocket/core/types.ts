@@ -1,18 +1,18 @@
 import { ServerWebSocket } from "bun";
 
-export type GameType = 'gender_duel' | 'word_puzzle' | 'memory';
+export type GameType = 'gender_duel' | 'word_puzzle' | 'memory_translation';
 
 export interface BaseGameState {
     id: string;
     status: 'waiting' | 'in_progress' | 'completed';
     players: any[];
-    hostId: string;
+    hostId: number;
 }
 
 export interface BaseGameMessage {
     type: string;
     gameId: string;
-    userId?: string;
+    userId: number;
     data?: any;
 }
 

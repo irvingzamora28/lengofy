@@ -10,10 +10,11 @@ import i18n from 'i18next';
 interface Props {
     show: boolean;
     onClose: () => void;
+    redirectRoute?: string;
     languagePairs: Record<string, any>;
 }
 
-export default function GuestLanguageModal({ show, onClose, languagePairs }: Props) {
+export default function GuestLanguageModal({ show, onClose, redirectRoute, languagePairs }: Props) {
     const { t: trans } = useTranslation();
 
     // Initialize with the first language pair
@@ -21,6 +22,7 @@ export default function GuestLanguageModal({ show, onClose, languagePairs }: Pro
 
     const { data, setData, post, processing, errors } = useForm({
         language_pair_id: defaultLanguagePairId,
+        redirect_route: redirectRoute || '',
     });
 
     const handleSubmit = (e: React.FormEvent) => {

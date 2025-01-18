@@ -1,0 +1,760 @@
+[
+    {
+        "word": "Körper",
+        "gender": "der",
+        "translations": {
+            "en": "body",
+            "es": "cuerpo"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Kopf",
+        "gender": "der",
+        "translations": {
+            "en": "head",
+            "es": "cabeza"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👤"
+    },
+    {
+        "word": "Haar",
+        "gender": "das",
+        "translations": {
+            "en": "hair",
+            "es": "cabello"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "💇"
+    },
+    {
+        "word": "Auge",
+        "gender": "das",
+        "translations": {
+            "en": "eye",
+            "es": "ojo"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👁️"
+    },
+    {
+        "word": "Ohr",
+        "gender": "das",
+        "translations": {
+            "en": "ear",
+            "es": "oreja"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👂"
+    },
+    {
+        "word": "Nase",
+        "gender": "die",
+        "translations": {
+            "en": "nose",
+            "es": "nariz"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👃"
+    },
+    {
+        "word": "Mund",
+        "gender": "der",
+        "translations": {
+            "en": "mouth",
+            "es": "boca"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👄"
+    },
+    {
+        "word": "Zahn",
+        "gender": "der",
+        "translations": {
+            "en": "tooth",
+            "es": "diente"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "🦷"
+    },
+    {
+        "word": "Zunge",
+        "gender": "die",
+        "translations": {
+            "en": "tongue",
+            "es": "lengua"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Hals",
+        "gender": "der",
+        "translations": {
+            "en": "neck",
+            "es": "cuello"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Schulter",
+        "gender": "die",
+        "translations": {
+            "en": "shoulder",
+            "es": "hombro"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Arm",
+        "gender": "der",
+        "translations": {
+            "en": "arm",
+            "es": "brazo"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Hand",
+        "gender": "die",
+        "translations": {
+            "en": "hand",
+            "es": "mano"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "🖐️"
+    },
+    {
+        "word": "Finger",
+        "gender": "der",
+        "translations": {
+            "en": "finger",
+            "es": "dedo"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": " 🖐️"
+    },
+    {
+        "word": "Brust",
+        "gender": "die",
+        "translations": {
+            "en": "chest",
+            "es": "pecho"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Bauch",
+        "gender": "der",
+        "translations": {
+            "en": "stomach",
+            "es": "estómago"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Rücken",
+        "gender": "der",
+        "translations": {
+            "en": "back",
+            "es": "espalda"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Bein",
+        "gender": "das",
+        "translations": {
+            "en": "leg",
+            "es": "pierna"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Fuß",
+        "gender": "der",
+        "translations": {
+            "en": "foot",
+            "es": "pie"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "🦶"
+    },
+    {
+        "word": "Zehe",
+        "gender": "die",
+        "translations": {
+            "en": "toe",
+            "es": "dedo del pie"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "🦶"
+    },
+    {
+        "word": "Haut",
+        "gender": "die",
+        "translations": {
+            "en": "skin",
+            "es": "piel"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Herz",
+        "gender": "das",
+        "translations": {
+            "en": "heart",
+            "es": "corazón"
+        },
+        "difficulty_level": 2,
+        "category": "Body",
+        "emoji": "❤️"
+    },
+    {
+        "word": "Gehirn",
+        "gender": "das",
+        "translations": {
+            "en": "brain",
+            "es": "cerebro"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Blut",
+        "gender": "das",
+        "translations": {
+            "en": "blood",
+            "es": "sangre"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Knochen",
+        "gender": "der",
+        "translations": {
+            "en": "bone",
+            "es": "hueso"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Muskel",
+        "gender": "der",
+        "translations": {
+            "en": "muscle",
+            "es": "músculo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Nerv",
+        "gender": "der",
+        "translations": {
+            "en": "nerve",
+            "es": "nervio"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Lunge",
+        "gender": "die",
+        "translations": {
+            "en": "lung",
+            "es": "pulmón"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Leber",
+        "gender": "die",
+        "translations": {
+            "en": "liver",
+            "es": "hígado"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Magen",
+        "gender": "der",
+        "translations": {
+            "en": "stomach",
+            "es": "estómago"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Niere",
+        "gender": "die",
+        "translations": {
+            "en": "kidney",
+            "es": "riñón"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Stirn",
+        "gender": "die",
+        "translations": {
+            "en": "forehead",
+            "es": "frente"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Wange",
+        "gender": "die",
+        "translations": {
+            "en": "cheek",
+            "es": "mejilla"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Kinn",
+        "gender": "das",
+        "translations": {
+            "en": "chin",
+            "es": "barbilla"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Augenbraue",
+        "gender": "die",
+        "translations": {
+            "en": "eyebrow",
+            "es": "ceja"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": " 🤨"
+    },
+    {
+        "word": "Wimper",
+        "gender": "die",
+        "translations": {
+            "en": "eyelash",
+            "es": "pestaña"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Lippe",
+        "gender": "die",
+        "translations": {
+            "en": "lip",
+            "es": "labio"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👄"
+    },
+    {
+        "word": "Nacken",
+        "gender": "der",
+        "translations": {
+            "en": "nape of the neck",
+            "es": "nuca"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Ellbogen",
+        "gender": "der",
+        "translations": {
+            "en": "elbow",
+            "es": "codo"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Unterarm",
+        "gender": "der",
+        "translations": {
+            "en": "forearm",
+            "es": "antebrazo"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Handgelenk",
+        "gender": "das",
+        "translations": {
+            "en": "wrist",
+            "es": "muñeca"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Faust",
+        "gender": "die",
+        "translations": {
+            "en": "fist",
+            "es": "puño"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "✊"
+    },
+    {
+        "word": "Fingernagel",
+        "gender": "der",
+        "translations": {
+            "en": "fingernail",
+            "es": "uña"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Daumen",
+        "gender": "der",
+        "translations": {
+            "en": "thumb",
+            "es": "pulgar"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "👍"
+    },
+    {
+        "word": "Knie",
+        "gender": "das",
+        "translations": {
+            "en": "knee",
+            "es": "rodilla"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": "🦵"
+    },
+    {
+        "word": "Knöchel",
+        "gender": "der",
+        "translations": {
+            "en": "ankle",
+            "es": "tobillo"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Ferse",
+        "gender": "die",
+        "translations": {
+            "en": "heel",
+            "es": "talón"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Fußgelenk",
+        "gender": "das",
+        "translations": {
+            "en": "ankle joint",
+            "es": "articulación del tobillo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Schienbein",
+        "gender": "das",
+        "translations": {
+            "en": "shin",
+            "es": "espinilla"
+        },
+        "difficulty_level": 1,
+        "category": "Body"
+    },
+    {
+        "word": "Darm",
+        "gender": "der",
+        "translations": {
+            "en": "intestine",
+            "es": "intestino"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Speiseröhre",
+        "gender": "die",
+        "translations": {
+            "en": "esophagus",
+            "es": "esófago"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Galle",
+        "gender": "die",
+        "translations": {
+            "en": "bile",
+            "es": "bilis"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Bauchspeicheldrüse",
+        "gender": "die",
+        "translations": {
+            "en": "pancreas",
+            "es": "páncreas"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Milz",
+        "gender": "die",
+        "translations": {
+            "en": "spleen",
+            "es": "bazo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Blase",
+        "gender": "die",
+        "translations": {
+            "en": "bladder",
+            "es": "vejiga"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Zwerchfell",
+        "gender": "das",
+        "translations": {
+            "en": "diaphragm",
+            "es": "diafragma"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Kehlkopf",
+        "gender": "der",
+        "translations": {
+            "en": "larynx",
+            "es": "laringe"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Luftröhre",
+        "gender": "die",
+        "translations": {
+            "en": "trachea",
+            "es": "tráquea"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Wirbelsäule",
+        "gender": "die",
+        "translations": {
+            "en": "spine",
+            "es": "columna vertebral"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Hormon",
+        "gender": "das",
+        "translations": {
+            "en": "hormone",
+            "es": "hormona"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Immunsystem",
+        "gender": "das",
+        "translations": {
+            "en": "immune system",
+            "es": "sistema inmunológico"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Muskelkater",
+        "gender": "der",
+        "translations": {
+            "en": "muscle soreness",
+            "es": "dolor muscular"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Gelenk",
+        "gender": "das",
+        "translations": {
+            "en": "joint",
+            "es": "articulación"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Sehne",
+        "gender": "die",
+        "translations": {
+            "en": "tendon",
+            "es": "tendón"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Band",
+        "gender": "das",
+        "translations": {
+            "en": "ligament",
+            "es": "ligamento"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Puls",
+        "gender": "der",
+        "translations": {
+            "en": "pulse",
+            "es": "pulso"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Kreislauf",
+        "gender": "der",
+        "translations": {
+            "en": "circulation",
+            "es": "circulación"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Stoffwechsel",
+        "gender": "der",
+        "translations": {
+            "en": "metabolism",
+            "es": "metabolismo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Zelle",
+        "gender": "die",
+        "translations": {
+            "en": "cell",
+            "es": "célula"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Geweb",
+        "gender": "das",
+        "translations": {
+            "en": "tissue",
+            "es": "tejido"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Körperhaltung",
+        "gender": "die",
+        "translations": {
+            "en": "posture",
+            "es": "postura"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Skelett",
+        "gender": "das",
+        "translations": {
+            "en": "skeleton",
+            "es": "esqueleto"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+    {
+        "word": "Gesicht",
+        "gender": "das",
+        "translations": {
+            "en": "face",
+            "es": "cara"
+        },
+        "difficulty_level": 1,
+        "category": "Body",
+        "emoji": " 👤"
+    },
+    {
+        "word": "Körperteil",
+        "gender": "der",
+        "translations": {
+            "en": "body part",
+            "es": "parte del cuerpo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    }
+]

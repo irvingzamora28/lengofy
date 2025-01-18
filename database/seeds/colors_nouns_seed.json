@@ -1,0 +1,651 @@
+[
+    {
+        "word": "Farbe",
+        "gender": "die",
+        "translations": {
+            "en": "color",
+            "es": "color"
+        },
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Rot",
+        "gender": "null",
+        "translations": {
+            "en": "red",
+            "es": "rojo"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟥"
+    },
+    {
+        "word": "Blau",
+        "gender": "null",
+        "translations": {
+            "en": "blue",
+            "es": "azul"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟦"
+    },
+    {
+        "word": "Gelb",
+        "gender": "null",
+        "translations": {
+            "en": "yellow",
+            "es": "amarillo"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟨"
+    },
+    {
+        "word": "Grün",
+        "gender": "null",
+        "translations": {
+            "en": "green",
+            "es": "verde"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟩"
+    },
+    {
+        "word": "Schwarz",
+        "gender": "null",
+        "translations": {
+            "en": "black",
+            "es": "negro"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "⬛"
+    },
+    {
+        "word": "Weiß",
+        "gender": "null",
+        "translations": {
+            "en": "white",
+            "es": "blanco"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "⬜"
+    },
+    {
+        "word": "Braun",
+        "gender": "null",
+        "translations": {
+            "en": "brown",
+            "es": "marrón"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟫"
+    },
+    {
+        "word": "Orange",
+        "gender": "null",
+        "translations": {
+            "en": "orange",
+            "es": "naranja"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": "🟠"
+    },
+    {
+        "word": "Lila",
+        "gender": "null",
+        "translations": {
+            "en": "purple",
+            "es": "morado"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": " 💜"
+    },
+    {
+        "word": "Rosa",
+        "gender": "null",
+        "translations": {
+            "en": "pink",
+            "es": "rosa"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": " 🩷"
+    },
+    {
+        "word": "Grau",
+        "gender": "null",
+        "translations": {
+            "en": "gray",
+            "es": "gris"
+        },
+        "difficulty_level": 1,
+        "category": "Colors",
+        "emoji": " 🩶"
+    },
+    {
+        "word": "Hellblau",
+        "gender": "null",
+        "translations": {
+            "en": "light blue",
+            "es": "azul claro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Dunkelblau",
+        "gender": "null",
+        "translations": {
+            "en": "dark blue",
+            "es": "azul oscuro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Hellgrün",
+        "gender": "null",
+        "translations": {
+            "en": "light green",
+            "es": "verde claro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Dunkelgrün",
+        "gender": "null",
+        "translations": {
+            "en": "dark green",
+            "es": "verde oscuro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Hellrot",
+        "gender": "null",
+        "translations": {
+            "en": "light red",
+            "es": "rojo claro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Dunkelrot",
+        "gender": "null",
+        "translations": {
+            "en": "dark red",
+            "es": "rojo oscuro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Hellgrau",
+        "gender": "null",
+        "translations": {
+            "en": "light gray",
+            "es": "gris claro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Dunkelgrau",
+        "gender": "null",
+        "translations": {
+            "en": "dark gray",
+            "es": "gris oscuro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Türkis",
+        "gender": "null",
+        "translations": {
+            "en": "turquoise",
+            "es": "turquesa"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🟦"
+    },
+    {
+        "word": "Beige",
+        "gender": "null",
+        "translations": {
+            "en": "beige",
+            "es": "beige"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Gold",
+        "gender": "null",
+        "translations": {
+            "en": "gold",
+            "es": "oro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🥇"
+    },
+    {
+        "word": "Silber",
+        "gender": "null",
+        "translations": {
+            "en": "silver",
+            "es": "plata"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🥈"
+    },
+    {
+        "word": "Olivgrün",
+        "gender": null,
+        "translations": {
+            "en": "olive green",
+            "es": "verde oliva"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🫒"
+    },
+    {
+        "word": "Magenta",
+        "gender": null,
+        "translations": {
+            "en": "magenta",
+            "es": "magenta"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 💜"
+    },
+    {
+        "word": "Violett",
+        "gender": null,
+        "translations": {
+            "en": "violet",
+            "es": "violeta"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 💜"
+    },
+    {
+        "word": "Marineblau",
+        "gender": null,
+        "translations": {
+            "en": "navy blue",
+            "es": "azul marino"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🟦"
+    },
+    {
+        "word": "Mintgrün",
+        "gender": null,
+        "translations": {
+            "en": "mint green",
+            "es": "verde menta"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🟩"
+    },
+    {
+        "word": "Hellrosa",
+        "gender": "null",
+        "translations": {
+            "en": "light pink",
+            "es": "rosa claro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": "🩷"
+    },
+    {
+        "word": "Dunkelrosa",
+        "gender": "null",
+        "translations": {
+            "en": "dark pink",
+            "es": "rosa oscuro"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🩷"
+    },
+    {
+        "word": "Khaki",
+        "gender": "null",
+        "translations": {
+            "en": "khaki",
+            "es": "kaki"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Koralle",
+        "gender": "null",
+        "translations": {
+            "en": "coral",
+            "es": "coral"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": "🧡"
+    },
+    {
+        "word": "Lachsfarben",
+        "gender": "null",
+        "translations": {
+            "en": "salmon",
+            "es": "salmón"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": "🧡"
+    },
+    {
+        "word": "Lavendel",
+        "gender": "null",
+        "translations": {
+            "en": "lavender",
+            "es": "lavanda"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 💜"
+    },
+    {
+        "word": "Fliederfarben",
+        "gender": "null",
+        "translations": {
+            "en": "lilac",
+            "es": "lila"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 💜"
+    },
+    {
+        "word": "Senfgelb",
+        "gender": "null",
+        "translations": {
+            "en": "mustard yellow",
+            "es": "amarillo mostaza"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": "🟨"
+    },
+    {
+        "word": "Cyan",
+        "gender": "null",
+        "translations": {
+            "en": "cyan",
+            "es": "cian"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🟦"
+    },
+    {
+        "word": "Bronze",
+        "gender": "null",
+        "translations": {
+            "en": "bronze",
+            "es": "bronce"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🥉"
+    },
+    {
+        "word": "Kupfer",
+        "gender": "null",
+        "translations": {
+            "en": "copper",
+            "es": "cobre"
+        },
+        "difficulty_level": 2,
+        "category": "Colors",
+        "emoji": " 🦰"
+    },
+    {
+        "word": "matt",
+        "gender": "adj",
+        "translations": {
+            "en": "matte",
+            "es": "mate"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "glänzend",
+        "gender": "adj",
+        "translations": {
+            "en": "glossy",
+            "es": "brillante"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "leuchtend",
+        "gender": "adj",
+        "translations": {
+            "en": "vibrant, bright",
+            "es": "vibrante, brillante"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "pastellfarben",
+        "gender": "adj",
+        "translations": {
+            "en": "pastel",
+            "es": "pastel"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "dezent",
+        "gender": "adj",
+        "translations": {
+            "en": "subtle",
+            "es": "sutil"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "kräftig",
+        "gender": "adj",
+        "translations": {
+            "en": "strong, intense",
+            "es": "fuerte, intenso"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "blass",
+        "gender": "adj",
+        "translations": {
+            "en": "pale",
+            "es": "pálido"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "transparent",
+        "gender": "adj",
+        "translations": {
+            "en": "transparent",
+            "es": "transparente"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "opak",
+        "gender": "adj",
+        "translations": {
+            "en": "opaque",
+            "es": "opaco"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "farbenfroh",
+        "gender": "adj",
+        "translations": {
+            "en": "colorful",
+            "es": "colorido"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "einfarbig",
+        "gender": "adj",
+        "translations": {
+            "en": "monochrome",
+            "es": "monocromo"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "zweifarbig",
+        "gender": "adj",
+        "translations": {
+            "en": "two-toned",
+            "es": "bicolor"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "mehrfarbig",
+        "gender": "adj",
+        "translations": {
+            "en": "multicolored",
+            "es": "multicolor"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "gestreift",
+        "gender": "adj",
+        "translations": {
+            "en": "striped",
+            "es": "rayado"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "gepunktet",
+        "gender": "adj",
+        "translations": {
+            "en": "dotted",
+            "es": "de lunares"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "kariert",
+        "gender": "adj",
+        "translations": {
+            "en": "checkered",
+            "es": "a cuadros"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Farbton",
+        "gender": "der",
+        "translations": {
+            "en": "hue",
+            "es": "tono de color"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Farbpalette",
+        "gender": "die",
+        "translations": {
+            "en": "color palette",
+            "es": "paleta de colores"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Farbkreis",
+        "gender": "der",
+        "translations": {
+            "en": "color wheel",
+            "es": "círculo cromático"
+        },
+        "difficulty_level": 3,
+        "category": "Colors"
+    },
+    {
+        "word": "Farbmischung",
+        "gender": "die",
+        "translations": {
+            "en": "color mixing",
+            "es": "mezcla de colores"
+        },
+        "difficulty_level": 3,
+        "category": "Colors"
+    },
+    {
+        "word": "Farbspektrum",
+        "gender": "das",
+        "translations": {
+            "en": "color spectrum",
+            "es": "espectro de color"
+        },
+        "difficulty_level": 3,
+        "category": "Colors"
+    },
+    {
+        "word": "Färbung",
+        "gender": "die",
+        "translations": {
+            "en": "coloring, dyeing",
+            "es": "coloración, teñido"
+        },
+        "difficulty_level": 2,
+        "category": "Colors"
+    }
+]

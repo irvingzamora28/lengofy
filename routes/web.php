@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
@@ -51,9 +52,56 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/gender-duel', function (LanguageService $languageService) {
         $locale = app()->getLocale();
         return Inertia::render('GenderDuelGame/Landing', [
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
+                        ],
+                    ];
+                })->all(),
             'locale' => $locale
         ]);
     })->name('gender-duel.play');
+
+    Route::get('/memory-translation', function (LanguageService $languageService) {
+        $locale = app()->getLocale();
+        return Inertia::render('MemoryTranslationGame/Landing', [
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
+                        ],
+                    ];
+                })->all(),
+            'locale' => $locale
+        ]);
+    })->name('memory-translation.play');
 });
 
 Route::get('/dashboard', function () {
@@ -86,6 +134,17 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
     });
 
+    Route::prefix('games/memory-translation')->group(function () {
+        Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
+        Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
+        Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
+        Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
+        Route::get('/{memoryTranslationGame}', [MemoryTranslationGameController::class, 'show'])->name('games.memory-translation.show');
+        Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
+        Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
+        Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
+    });
+
     // Score routes
     Route::post('/scores/update', [ScoreController::class, 'update'])->name('scores.update');
     Route::post('/scores/update-add-score', [ScoreController::class, 'updateAddScore'])->name('scores.update-add-score');
@@ -115,4 +174,4 @@ Route::post('/language/switch', function (Request $request) {
     return redirect()->back()->cookie('locale', $request->locale, 60 * 24 * 365);
 })->name('language.switch');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

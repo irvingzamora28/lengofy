@@ -1,0 +1,877 @@
+[
+    {
+        "word": "Affe",
+        "gender": "der",
+        "translations": {
+            "en": "monkey",
+            "es": "mono"
+        },
+        "emoji": "🙈",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Ameise",
+        "gender": "die",
+        "translations": {
+            "en": "ant",
+            "es": "hormiga"
+        },
+        "emoji": "🐜",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Bär",
+        "gender": "der",
+        "translations": {
+            "en": "bear",
+            "es": "oso"
+        },
+        "emoji": "🐻",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Biene",
+        "gender": "die",
+        "translations": {
+            "en": "bee",
+            "es": "abeja"
+        },
+        "emoji": "🐝",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Dachs",
+        "gender": "der",
+        "translations": {
+            "en": "badger",
+            "es": "tejón"
+        },
+        "emoji": "🦡",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Delfin",
+        "gender": "der",
+        "translations": {
+            "en": "dolphin",
+            "es": "delfin"
+        },
+        "emoji": "🐬",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Esel",
+        "gender": "der",
+        "translations": {
+            "en": "donkey",
+            "es": "burro"
+        },
+        "emoji": "🫏",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Eichhörnchen",
+        "gender": "das",
+        "translations": {
+            "en": "squirrel",
+            "es": "ardilla"
+        },
+        "emoji": "🐿️",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Elefant",
+        "gender": "der",
+        "translations": {
+            "en": "elephant",
+            "es": "elefante"
+        },
+        "emoji": "🐘",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Ente",
+        "gender": "die",
+        "translations": {
+            "en": "duck",
+            "es": "pato"
+        },
+        "emoji": "🦆",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Eule",
+        "gender": "die",
+        "translations": {
+            "en": "owl",
+            "es": "lechuza"
+        },
+        "emoji": "🦉",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Falke",
+        "gender": "der",
+        "translations": {
+            "en": "falcon",
+            "es": "halcón"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Fasan",
+        "gender": "der",
+        "translations": {
+            "en": "pheasant",
+            "es": "faisán"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Fledermaus",
+        "gender": "die",
+        "translations": {
+            "en": "bat",
+            "es": "murcielago"
+        },
+        "emoji": "🦇",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Frosch",
+        "gender": "der",
+        "translations": {
+            "en": "frog",
+            "es": "rana"
+        },
+        "emoji": "🐸",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Fuchs",
+        "gender": "der",
+        "translations": {
+            "en": "fox",
+            "es": "zorro"
+        },
+        "emoji": "🦊",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Gans",
+        "gender": "die",
+        "translations": {
+            "en": "goose",
+            "es": "ganso"
+        },
+        "emoji": "🪿",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Gazelle",
+        "gender": "die",
+        "translations": {
+            "en": "gazelle",
+            "es": "gacela"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Gepard",
+        "gender": "der",
+        "translations": {
+            "en": "cheetah",
+            "es": "gato de caza"
+        },
+        "emoji": "🐆",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Giraffe",
+        "gender": "die",
+        "translations": {
+            "en": "giraffe",
+            "es": "jirafa"
+        },
+        "emoji": "🦒",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Gorilla",
+        "gender": "der",
+        "translations": {
+            "en": "gorilla",
+            "es": "gorila"
+        },
+        "emoji": "🦍",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Hai",
+        "gender": "der",
+        "translations": {
+            "en": "shark",
+            "es": "tiburón"
+        },
+        "emoji": "🦈",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Hamster",
+        "gender": "der",
+        "translations": {
+            "en": "hamster",
+            "es": "hámster"
+        },
+        "emoji": "🐹",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Hase",
+        "gender": "der",
+        "translations": {
+            "en": "rabbit",
+            "es": "conejo"
+        },
+        "emoji": "🐇",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Hering",
+        "gender": "der",
+        "translations": {
+            "en": "herring",
+            "es": "arenque"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Hirsch",
+        "gender": "der",
+        "translations": {
+            "en": "deer",
+            "es": "ciervo"
+        },
+        "emoji": "🦌",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Huhn",
+        "gender": "das",
+        "translations": {
+            "en": "chicken",
+            "es": "pollo"
+        },
+        "emoji": "🐔",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Hummel",
+        "gender": "die",
+        "translations": {
+            "en": "bumblebee",
+            "es": "abeja"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Igel",
+        "gender": "der",
+        "translations": {
+            "en": "hedgehog",
+            "es": "erizo"
+        },
+        "emoji": "🦔",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Kamel",
+        "gender": "das",
+        "translations": {
+            "en": "camel",
+            "es": "camello"
+        },
+        "emoji": "🐪",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Känguru",
+        "gender": "das",
+        "translations": {
+            "en": "kangaroo",
+            "es": "canguro"
+        },
+        "emoji": "🦘",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Kaninchen",
+        "gender": "das",
+        "translations": {
+            "en": "rabbit",
+            "es": "conejo"
+        },
+        "emoji": "🐇",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Karpfen",
+        "gender": "der",
+        "translations": {
+            "en": "carp",
+            "es": "carpa"
+        },
+        "emoji": "🐟",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Katze",
+        "gender": "die",
+        "translations": {
+            "en": "cat",
+            "es": "gato"
+        },
+        "emoji": "🐱",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Kobra",
+        "gender": "die",
+        "translations": {
+            "en": "cobra",
+            "es": "cobra"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Koala",
+        "gender": "der",
+        "translations": {
+            "en": "koala",
+            "es": "koala"
+        },
+        "emoji": "🐨",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Kolibri",
+        "gender": "der",
+        "translations": {
+            "en": "hummingbird",
+            "es": "colibrí"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Kuh",
+        "gender": "die",
+        "translations": {
+            "en": "cow",
+            "es": "vaca"
+        },
+        "emoji": "🐄",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Lachs",
+        "gender": "der",
+        "translations": {
+            "en": "salmon",
+            "es": "salmón"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Lama",
+        "gender": "das",
+        "translations": {
+            "en": "llama",
+            "es": "llama"
+        },
+        "emoji": "🦙",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Leopard",
+        "gender": "der",
+        "translations": {
+            "en": "leopard",
+            "es": "leopardo"
+        },
+        "emoji": "🐆",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Löwe",
+        "gender": "der",
+        "translations": {
+            "en": "lion",
+            "es": "león"
+        },
+        "emoji": "🦁",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Maus",
+        "gender": "die",
+        "translations": {
+            "en": "mouse",
+            "es": "ratón"
+        },
+        "emoji": "🐁",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Maulwurf",
+        "gender": "der",
+        "translations": {
+            "en": "mole",
+            "es": "topo"
+        },
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Meerjungfrau",
+        "gender": "die",
+        "translations": {
+            "en": "mermaid",
+            "es": "sirena"
+        },
+        "emoji": "🧜‍♀️",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Murmeltier",
+        "gender": "das",
+        "translations": {
+            "en": "marmot",
+            "es": "marmota"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Möwe",
+        "gender": "die",
+        "translations": {
+            "en": "seagull",
+            "es": "gaviota"
+        },
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Mops",
+        "gender": "der",
+        "translations": {
+            "en": "pug",
+            "es": "pug"
+        },
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Mücke",
+        "gender": "die",
+        "translations": {
+            "en": "mosquito",
+            "es": "mosquito"
+        },
+        "emoji": "🦟",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Nashorn",
+        "gender": "das",
+        "translations": {
+            "en": "rhinoceros",
+            "es": "rinoceronte"
+        },
+        "emoji": "🦏",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Nilpferd",
+        "gender": "das",
+        "translations": {
+            "en": "hippopotamus",
+            "es": "hipopótamo"
+        },
+        "emoji": "🦛",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Orang-Utan",
+        "gender": "der",
+        "translations": {
+            "en": "orangutan",
+            "es": "orangután"
+        },
+        "emoji": "🦧",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Otter",
+        "gender": "der",
+        "translations": {
+            "en": "otter",
+            "es": "nutria"
+        },
+        "emoji": "🦦",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Panda",
+        "gender": "der",
+        "translations": {
+            "en": "panda",
+            "es": "panda"
+        },
+        "emoji": "🐼",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Papagei",
+        "gender": "der",
+        "translations": {
+            "en": "parrot",
+            "es": "loro"
+        },
+        "emoji": "🦜",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Pferd",
+        "gender": "das",
+        "translations": {
+            "en": "horse",
+            "es": "caballo"
+        },
+        "emoji": "🐎",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Pinguin",
+        "gender": "der",
+        "translations": {
+            "en": "penguin",
+            "es": "pingüino"
+        },
+        "emoji": "🐧",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Rabe",
+        "gender": "der",
+        "translations": {
+            "en": "raven",
+            "es": "cuervo"
+        },
+        "emoji": "🐦‍⬛",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Ratte",
+        "gender": "die",
+        "translations": {
+            "en": "rat",
+            "es": "rata"
+        },
+        "emoji": "🐀",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Reh",
+        "gender": "das",
+        "translations": {
+            "en": "roe deer",
+            "es": "corzo"
+        },
+        "emoji": "🦌",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Robbe",
+        "gender": "die",
+        "translations": {
+            "en": "seal",
+            "es": "foca"
+        },
+        "emoji": "🦭",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Schakal",
+        "gender": "der",
+        "translations": {
+            "en": "jackal",
+            "es": "chacal"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Schildkröte",
+        "gender": "die",
+        "translations": {
+            "en": "turtle",
+            "es": "tortuga"
+        },
+        "emoji": "🐢",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Schimpanse",
+        "gender": "der",
+        "translations": {
+            "en": "chimp",
+            "es": "chimpancé"
+        },
+        "emoji": "🦧",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Schlange",
+        "gender": "die",
+        "translations": {
+            "en": "snake",
+            "es": "serpiente"
+        },
+        "emoji": "🐍",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Schnecke",
+        "gender": "die",
+        "translations": {
+            "en": "snail",
+            "es": "caracol"
+        },
+        "emoji": "🐌",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Schwan",
+        "gender": "der",
+        "translations": {
+            "en": "swan",
+            "es": "cisne"
+        },
+        "emoji": "🦢",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Seehund",
+        "gender": "der",
+        "translations": {
+            "en": "seal",
+            "es": "foca"
+        },
+        "emoji": "🦭",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Spinne",
+        "gender": "die",
+        "translations": {
+            "en": "spider",
+            "es": "araña"
+        },
+        "emoji": "🕷️",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Stier",
+        "gender": "der",
+        "translations": {
+            "en": "bull",
+            "es": "toro"
+        },
+        "emoji": "🐂",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Storch",
+        "gender": "der",
+        "translations": {
+            "en": "stork",
+            "es": "cigüeña"
+        },
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Taube",
+        "gender": "die",
+        "translations": {
+            "en": "pigeon",
+            "es": "paloma"
+        },
+        "emoji": "🕊️",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Tiger",
+        "gender": "der",
+        "translations": {
+            "en": "tiger",
+            "es": "tigre"
+        },
+        "emoji": "🐅",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Tintenfisch",
+        "gender": "der",
+        "translations": {
+            "en": "squid",
+            "es": "calamar"
+        },
+        "emoji": "🦑",
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Vogel",
+        "gender": "der",
+        "translations": {
+            "en": "bird",
+            "es": "pájaro"
+        },
+        "emoji": "🐦",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Wal",
+        "gender": "der",
+        "translations": {
+            "en": "whale",
+            "es": "ballena"
+        },
+        "emoji": "🐳",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Wolf",
+        "gender": "der",
+        "translations": {
+            "en": "wolf",
+            "es": "lobo"
+        },
+        "emoji": "🐺",
+        "difficulty_level": 1,
+        "category": "Animals"
+    },
+    {
+        "word": "Zebra",
+        "gender": "das",
+        "translations": {
+            "en": "zebra",
+            "es": "cebra"
+        },
+        "emoji": "🦓",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Ziege",
+        "gender": "die",
+        "translations": {
+            "en": "goat",
+            "es": "cabra"
+        },
+        "emoji": "🐐",
+        "difficulty_level": 2,
+        "category": "Animals"
+    },
+    {
+        "word": "Zikade",
+        "gender": "die",
+        "translations": {
+            "en": "cicada",
+            "es": "cigarra"
+        },
+        "difficulty_level": 3,
+        "category": "Animals"
+    },
+    {
+        "word": "Zoo",
+        "gender": "der",
+        "translations": {
+            "en": "zoo",
+            "es": "zoológico"
+        },
+        "difficulty_level": 1,
+        "category": "Animals"
+    }
+]
