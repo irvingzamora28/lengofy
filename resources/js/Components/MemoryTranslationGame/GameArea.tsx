@@ -125,7 +125,10 @@ export default function GameArea({
 
     // Update visible cards whenever selected cards change
     useEffect(() => {
-        const cards = selectedCards.map(index => game.words[index]);
+        const cards = selectedCards.map(index => ({
+            ...game.words[index],
+            isFlipped: true // Since these are selected cards, they are always flipped
+        }));
         setVisibleCards(cards);
     }, [selectedCards, game.words]);
 
@@ -207,7 +210,10 @@ export default function GameArea({
                     <Card
                         key={index}
                         index={index}
-                        cardData={word}
+                        cardData={{
+                            ...word,
+                            isFlipped: selectedCards.includes(index) || matchedPairs.includes(index)
+                        }}
                         isFlipped={selectedCards.includes(index) || matchedPairs.includes(index)}
                         isMatched={matchedPairs.includes(index)}
                         onClick={() => onCardClick(index)}

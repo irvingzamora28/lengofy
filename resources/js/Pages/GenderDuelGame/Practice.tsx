@@ -8,11 +8,11 @@ import { GenderDuelAnswer, Noun } from "@/types";
 import correctSound from '@/assets/audio/correct.mp3';
 import incorrectSound from '@/assets/audio/incorrect.mp3';
 import { useTranslation } from 'react-i18next';
-import ConfirmationExitModal from "./ConfirmationExitModal";
 import WrongAnswersSummary from "./WrongAnswersSummary";
 import axios from "axios";
 import DifficultyModal from "@/Components/Games/DifficultyModal";
 import { PageProps } from "@/types";
+import ConfirmationExitModal from "@/Components/Games/ConfirmationExitModal";
 
 interface GenderDuelPracticeProps extends PageProps {
     auth: any;
@@ -384,8 +384,6 @@ const GenderDuelPractice: React.FC<GenderDuelPracticeProps> = ({ auth, nouns, ca
             {/* Confirmation Modal */}
             {showExitConfirmation && (
                 <ConfirmationExitModal
-                    title={trans('gender_duel.modal_exit.title')}
-                    message={trans('gender_duel.modal_exit.message')}
                     onLeave={leaveGame}
                     onCancel={() => setShowExitConfirmation(false)}
                 />

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { MemoryTranslationGame, MemoryTranslationGamePlayer, MemoryTranslationGameState, PageProps } from '@/types';
+import { MemoryTranslationGame, MemoryTranslationGameState, PageProps } from '@/types';
 import { MdClose } from 'react-icons/md';
 import GameArea from '@/Components/MemoryTranslationGame/GameArea';
 import GameInfo from '@/Components/MemoryTranslationGame/GameInfo';
