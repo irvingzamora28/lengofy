@@ -288,14 +288,10 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
             const [firstIndex, secondIndex] = newSelectedCards;
             const firstCard = gameState.words[firstIndex];
             const secondCard = gameState.words[secondIndex];
+            const isMatch = firstCard.id.toString().split('-')[0] === secondCard.id.toString().split('-')[0];
 
+            const timeout = isMatch ? 1000 : 3000;
             setTimeout(() => {
-                // Check if cards form a pair (one is word and other is translation)
-                const isMatch =
-                    (firstCard.type === 'word' && secondCard.type === 'translation' ||
-                     firstCard.type === 'translation' && secondCard.type === 'word') &&
-                    firstCard.id.split('-')[0] === secondCard.id.split('-')[0];
-
                 // Send match result to server
                 wsRef.current?.send(JSON.stringify({
                     type: 'memory_translation_pair_matched',
@@ -303,10 +299,10 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     userId: auth.user.id,
                     data: {
                         matchedIndices: [firstIndex, secondIndex],
-                        isMatch: isMatch
+                        isMatch
                     }
                 }));
-            }, 1000);
+            }, timeout);
         }
     };
 
