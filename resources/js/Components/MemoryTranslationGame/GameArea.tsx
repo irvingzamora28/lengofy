@@ -45,14 +45,14 @@ const CardPreview = ({ cards, isVisible }: CardPreviewProps) => {
 
             {/* Card content */}
             <div className="relative text-center space-y-3">
+              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+                {card.word}
+              </p>
               {card.emoji && (
                 <p className="text-4xl transform hover:scale-110 transition-transform duration-200">
                   {card.emoji}
                 </p>
               )}
-              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                {card.word}
-              </p>
             </div>
           </div>
         ))}

@@ -31,10 +31,10 @@ export default function GameInfo({ game, currentPlayer }: Props) {
                         <span className="text-sm text-gray-600 dark:text-gray-400">{trans('memory_translation.game_info.moves')}</span>
                         <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">{currentPlayer.moves}</span>
                     </div>
-                    <div className="flex flex-col items-center">
+                    {/* <div className="flex flex-col items-center">
                         <span className="text-sm text-gray-600 dark:text-gray-400">{trans('memory_translation.game_info.time')}</span>
                         <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatTime(currentPlayer.time)}</span>
-                    </div>
+                    </div> */}
                     <div className="flex flex-col items-center">
                         <span className="text-sm text-gray-600 dark:text-gray-400">{trans('memory_translation.game_info.score')}</span>
                         <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">{currentPlayer.score}</span>
