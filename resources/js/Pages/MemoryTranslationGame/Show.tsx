@@ -313,7 +313,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         // Calculate scores
         const currentScore = currentPlayer.score || 0;
         const isWinner = data.winner?.user_id === auth.user.id;
-
+        // TODO: Check the logic of setting the winner, it could be a tie, multiple winners, etc. Personalize the message
         // Get previous scores from localStorage
         const prevScores = JSON.parse(localStorage.getItem(`memoryTranslationScores_${auth.user.id}`) || '{"highestScore": 0, "totalPoints": 0, "bestTime": null}');
 
