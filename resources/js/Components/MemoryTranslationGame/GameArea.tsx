@@ -163,7 +163,8 @@ export default function GameArea({
     }
 
     if (game.status === "completed") {
-        const playersWithMaxScore = game.players.filter(player => player.score === game.players[0].score);
+        const maxScore = Math.max(...game.players.map(player => player.score));
+        const playersWithMaxScore = game.players.filter(player => player.score === maxScore);
         const winner = playersWithMaxScore.length === 1 ? playersWithMaxScore[0] : null;
 
         return (
