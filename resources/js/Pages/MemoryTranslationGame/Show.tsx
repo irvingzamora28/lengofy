@@ -181,10 +181,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     if (isMatch) {
                         setMatchedPairs(prev => [...prev, ...matchedIndices]);
                     }
-                    // Clear selected cards after a delay
-                    setTimeout(() => {
-                        setSelectedCards([]);
-                    }, 1000);
+                    setSelectedCards([]);
                     break;
 
                 case 'memory_translation_player_left':
