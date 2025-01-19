@@ -123,3 +123,16 @@ export interface MemoryTranslationGamePlayer {
     is_ready: boolean;
     is_host: boolean;
 }
+
+export interface MemoryTranslationGameState {
+    id: string;
+    status: 'waiting' | 'in_progress' | 'completed';
+    players: MemoryTranslationGamePlayer[];
+    words: Noun[];
+    language_name: string;
+    hostId: number;
+    max_players: number;
+    current_turn: number;
+    category: string;
+    winner: MemoryTranslationGamePlayer | null;
+}
