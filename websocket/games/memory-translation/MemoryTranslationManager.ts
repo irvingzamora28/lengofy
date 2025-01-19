@@ -352,6 +352,7 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 lastFlippedCards: [],
                 selectedCards: [],
                 matchedPairs: [],
+                words: data?.words || state.words,
                 players: state.players.map(player => ({
                     ...player,
                     score: 0,

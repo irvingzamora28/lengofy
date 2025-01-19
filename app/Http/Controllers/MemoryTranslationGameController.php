@@ -102,7 +102,7 @@ class MemoryTranslationGameController extends Controller
     {
         $validated = $request->validate([
             'difficulty' => 'required|in:easy,medium,hard',
-            'category' => 'nullable|exists:categories,id',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
         $user = auth()->user();
