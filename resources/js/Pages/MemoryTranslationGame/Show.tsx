@@ -53,6 +53,8 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
     const [gameState, setGameState] = useState(memory_translation_game);
     const [selectedCards, setSelectedCards] = useState<number[]>([]);
     const [matchedPairs, setMatchedPairs] = useState<number[]>([]);
+    const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">(memory_translation_game.difficulty);
+    const [selectedCategory, setSelectedCategory] = useState<number>(memory_translation_game.category.id);
     const [moves, setMoves] = useState(0);
     const wsRef = useRef<WebSocket | null>(null);
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
@@ -98,7 +100,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         const ws = new WebSocket(wsEndpoint);
         wsRef.current = ws;
 
-        ws.onopen = () => {
+        ws.onopen = async () => {
             console.log('Connected to Memory Translation game WebSocket about to join the game room');
 
             // Create card pairs only when creating a new game
@@ -146,7 +148,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
             }
         };
 
-        ws.onmessage = (event) => {
+        ws.onmessage = async (event) => {
             const data = JSON.parse(event.data);
             console.log('Received game message:', data.type);
 
@@ -181,10 +183,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     if (isMatch) {
                         setMatchedPairs(prev => [...prev, ...matchedIndices]);
                     }
-                    // Clear selected cards after a delay
-                    setTimeout(() => {
-                        setSelectedCards([]);
-                    }, 1000);
+                    setSelectedCards([]);
                     break;
 
                 case 'memory_translation_player_left':
@@ -210,6 +209,13 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                             setShowExitConfirmation(false);
                         }
 
+                        if (data.data.status === 'waiting' && prevState.status === 'completed') {
+                            // Reset states when game is restarted
+                            setSelectedCards([]);
+                            setMatchedPairs([]);
+                            setMoves(0);
+                        }
+
                         if (data.data.status === 'completed') {
                             handleGameCompletion(data.data);
                         }
@@ -226,6 +232,18 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     if (data.data.current_turn !== gameState.current_turn) {
                         setSelectedCards([]);
                     }
+                    break;
+
+                case 'memory_translation_game_reset':
+                    // Reset all card-related states
+                    setSelectedCards([]);
+                    setMatchedPairs([]);
+                    setMoves(0);
+                    setGameState(prev => ({
+                        ...prev,
+                        words: data.data.words, // Create a new array with the new words
+                        status: 'waiting' as const,
+                    }));
                     break;
 
                 case 'score_updated':
@@ -306,6 +324,24 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         }
     };
 
+    const fetchWords = async () => {
+        try {
+            const response = await axios.get(route('games.memory-translation.get-words'), {
+                params: {
+                    difficulty: selectedDifficulty,
+                    category: selectedCategory,
+                },
+            });
+            const initializedCards = createCardPairs(response.data).sort(
+                () => Math.random() - 0.5
+            );
+            return initializedCards;
+        } catch (error) {
+            console.error('Error fetching words:', error);
+            return [];
+        }
+    }
+
     const handleGameCompletion = async (data: MemoryTranslationGameState) => {
         const currentPlayer = data.players.find(player => player.user_id === auth.user.id);
         if (!currentPlayer) {
@@ -316,7 +352,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         // Calculate scores
         const currentScore = currentPlayer.score || 0;
         const isWinner = data.winner?.user_id === auth.user.id;
-
+        // TODO: Check the logic of setting the winner, it could be a tie, multiple winners, etc. Personalize the message
         // Get previous scores from localStorage
         const prevScores = JSON.parse(localStorage.getItem(`memoryTranslationScores_${auth.user.id}`) || '{"highestScore": 0, "totalPoints": 0, "bestTime": null}');
 
@@ -390,6 +426,26 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         }
     };
 
+    const handleRestartGame = async () => {
+        const initializedCards = await fetchWords(); // Fetch new words
+        console.log('Initialized cards:', initializedCards);
+        // Now send the signal to restart the game
+        if (wsRef.current) {
+            wsRef.current.send(JSON.stringify({
+                type: 'restart_memory_translation_game',
+                gameId: gameState.id,
+                gameType: 'memory_translation',
+                data: {
+                    words: initializedCards,
+                    players: gameState.players,
+                    language_name: gameState.language_name,
+                    category: gameState.category,
+                    hostId: gameState.hostId
+                }
+            }));
+        }
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -422,6 +478,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                                     onCardClick={handleCardClick}
                                     onReady={markReady}
                                     currentUserId={auth.user.id}
+                                    onRestart={handleRestartGame}
                                 />
                                 <PlayersInfo
                                     status={gameState.status}

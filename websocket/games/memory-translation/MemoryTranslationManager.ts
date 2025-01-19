@@ -41,6 +41,9 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             case 'update_player_time':
                 this.handleUpdatePlayerTime(message as MemoryTranslationGameMessage);
                 break;
+            case 'restart_memory_translation_game':
+                this.handleGameRestart(message as MemoryTranslationGameMessage);
+                break;
         }
     }
 
@@ -238,16 +241,16 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
         const room = this.getRoom(gameId);
         const state = this.getState(gameId);
 
-        if (room && state && data?.matchedIndices) {
-            const isMatch = data.isMatch;
+        if (room && state && data?.matchedIndices && data?.isMatch !== undefined) {
+            const { matchedIndices, isMatch } = data;
 
-            // Broadcast the matched pair to all players
+            // Broadcast the match result to all players
             this.broadcast(room, {
                 type: 'memory_translation_pair_matched',
                 gameId,
                 userId,
                 data: {
-                    matchedIndices: data.matchedIndices,
+                    matchedIndices,
                     isMatch: isMatch
                 }
             });
@@ -259,16 +262,38 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
                 if (playerIndex !== -1) {
                     state.players[playerIndex].score = (state.players[playerIndex].score || 0) + 1;
                 }
-                // Don't change turn on match - player continues
+
+                // Check if all pairs have been matched
+                const totalPairs = state.words.length / 2;
+                const totalMatchedPairs = state.players.reduce((sum, player) => sum + (player.score || 0), 0);
+
+                if (totalMatchedPairs === totalPairs) {
+                    // Find winner(s)
+                    const maxScore = Math.max(...state.players.map(p => p.score || 0));
+                    const winners = state.players.filter(p => p.score === maxScore);
+
+                    // Set winner in state if there's only one winner
+                    if (winners.length === 1) {
+                        state.winner = winners[0];
+                    }
+
+                    // Set game status to completed
+                    state.status = 'completed';
+                    this.setState(gameId, state);
+                    this.handleGameEnd(gameId);
+                } else {
+                    // Don't change turn on match - player continues
+                    this.setState(gameId, state);
+                    this.broadcastState(gameId);
+                }
             } else {
                 // Change turn if no match
                 const currentPlayerIndex = state.players.findIndex(p => p.user_id === userId);
                 const nextPlayerIndex = (currentPlayerIndex + 1) % state.players.length;
                 state.current_turn = state.players[nextPlayerIndex].user_id!;
+                this.setState(gameId, state);
+                this.broadcastState(gameId);
             }
-
-            this.setState(gameId, state);
-            this.broadcastState(gameId);
         }
     }
 
@@ -310,6 +335,47 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             setTimeout(() => {
                 this.cleanupCompletely(gameId);
             }, 60000); // 1 minute delay
+        }
+    }
+
+    private handleGameRestart(message: MemoryTranslationGameMessage): void {
+        const { gameId, data } = message;
+        const state = this.getState(gameId);
+
+        if (state) {
+            // Reset game state but keep players
+            const newState = {
+                ...state,
+                status: 'waiting' as const,
+                current_turn: data?.hostId || state.hostId,
+                winner: null,
+                lastFlippedCards: [],
+                selectedCards: [],
+                matchedPairs: [],
+                words: data?.words || state.words,
+                players: state.players.map(player => ({
+                    ...player,
+                    score: 0,
+                    moves: 0,
+                    time: 0,
+                    is_ready: false
+                }))
+            };
+
+            this.setState(gameId, newState);
+            this.broadcastState(gameId);
+
+            // Broadcast a specific reset message to ensure all clients reset their card states
+            const room = this.getRoom(gameId);
+            if (room) {
+                this.broadcast(room, {
+                    type: 'memory_translation_game_reset',
+                    gameId,
+                    data: {
+                        words: newState.words
+                    }
+                });
+            }
         }
     }
 }

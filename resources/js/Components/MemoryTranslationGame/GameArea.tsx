@@ -109,6 +109,7 @@ interface MemoryTranslationGameAreaProps {
     onCardClick: (index: number) => void;
     onReady: () => void;
     currentUserId: number;
+    onRestart?: () => void;
 }
 
 export default function GameArea({
@@ -119,6 +120,7 @@ export default function GameArea({
     onCardClick,
     onReady,
     currentUserId,
+    onRestart,
 }: MemoryTranslationGameAreaProps) {
     const { t: trans } = useTranslation();
     const [visibleCards, setVisibleCards] = useState<CardWord[]>([]);
@@ -161,7 +163,8 @@ export default function GameArea({
     }
 
     if (game.status === "completed") {
-        const playersWithMaxScore = game.players.filter(player => player.score === game.players[0].score);
+        const maxScore = Math.max(...game.players.map(player => player.score));
+        const playersWithMaxScore = game.players.filter(player => player.score === maxScore);
         const winner = playersWithMaxScore.length === 1 ? playersWithMaxScore[0] : null;
 
         return (
@@ -178,6 +181,14 @@ export default function GameArea({
                     <div className="text-gray-600 dark:text-gray-400">
                         {trans("generals.games.final_score")}: {playersWithMaxScore[0].score}
                     </div>
+                    {onRestart && currentUserId === game.hostId && (
+                        <PrimaryButton
+                            onClick={onRestart}
+                            className="mt-4 bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 px-6 py-2 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                        >
+                            {trans("memory_translation.restart_game")}
+                        </PrimaryButton>
+                    )}
                 </div>
             </div>
         );

@@ -28,7 +28,7 @@ export interface MemoryTranslationGameMessage extends BaseGameMessage {
         language_name?: string;
         total_rounds?: number;
         category?: string;
-        hostId?: string;
+        hostId?: number;
         max_players?: number;
         answer?: string;
         score?: number;
