@@ -207,6 +207,13 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                             setShowExitConfirmation(false);
                         }
 
+                        if (data.data.status === 'waiting' && prevState.status === 'completed') {
+                            // Reset states when game is restarted
+                            setSelectedCards([]);
+                            setMatchedPairs([]);
+                            setMoves(0);
+                        }
+
                         if (data.data.status === 'completed') {
                             handleGameCompletion(data.data);
                         }
@@ -223,6 +230,18 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     if (data.data.current_turn !== gameState.current_turn) {
                         setSelectedCards([]);
                     }
+                    break;
+
+                case 'memory_translation_game_reset':
+                    // Reset all card-related states
+                    setSelectedCards([]);
+                    setMatchedPairs([]);
+                    setMoves(0);
+                    setGameState(prev => ({
+                        ...prev,
+                        words: data.data.words, // Create a new array with the new words
+                        status: 'waiting' as const,
+                    }));
                     break;
 
                 case 'score_updated':
@@ -387,6 +406,29 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         }
     };
 
+    const handleRestart = () => {
+        console.log("Restart requested");
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            console.log("WebSocket is open, sending restart message");
+            // Create new shuffled card pairs
+            const cardPairs = createCardPairs(gameState.words);
+            wsRef.current.send(JSON.stringify({
+                type: 'restart_memory_translation_game',
+                gameId: gameState.id,
+                gameType: 'memory_translation',
+                data: {
+                    words: cardPairs,
+                    players: gameState.players,
+                    language_name: gameState.language_name,
+                    category: gameState.category,
+                    hostId: gameState.hostId
+                }
+            }));
+        } else {
+            console.log("WebSocket is not open", wsRef.current?.readyState);
+        }
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -419,6 +461,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                                     onCardClick={handleCardClick}
                                     onReady={markReady}
                                     currentUserId={auth.user.id}
+                                    onRestart={handleRestart}
                                 />
                                 <PlayersInfo
                                     status={gameState.status}

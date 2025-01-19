@@ -41,6 +41,9 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             case 'update_player_time':
                 this.handleUpdatePlayerTime(message as MemoryTranslationGameMessage);
                 break;
+            case 'restart_memory_translation_game':
+                this.handleGameRestart(message as MemoryTranslationGameMessage);
+                break;
         }
     }
 
@@ -332,6 +335,46 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             setTimeout(() => {
                 this.cleanupCompletely(gameId);
             }, 60000); // 1 minute delay
+        }
+    }
+
+    private handleGameRestart(message: MemoryTranslationGameMessage): void {
+        const { gameId, data } = message;
+        const state = this.getState(gameId);
+
+        if (state) {
+            // Reset game state but keep players
+            const newState = {
+                ...state,
+                status: 'waiting' as const,
+                current_turn: data?.hostId || state.hostId,
+                winner: null,
+                lastFlippedCards: [],
+                selectedCards: [],
+                matchedPairs: [],
+                players: state.players.map(player => ({
+                    ...player,
+                    score: 0,
+                    moves: 0,
+                    time: 0,
+                    is_ready: false
+                }))
+            };
+
+            this.setState(gameId, newState);
+            this.broadcastState(gameId);
+
+            // Broadcast a specific reset message to ensure all clients reset their card states
+            const room = this.getRoom(gameId);
+            if (room) {
+                this.broadcast(room, {
+                    type: 'memory_translation_game_reset',
+                    gameId,
+                    data: {
+                        words: newState.words
+                    }
+                });
+            }
         }
     }
 }
