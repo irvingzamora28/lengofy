@@ -105,6 +105,12 @@ class MemoryTranslationGameController extends Controller
             'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
         ]);
 
+        $amountOfNouns = match ($validated['difficulty']) {
+            'easy' => 10,
+            'medium' => 20,
+            'hard' => 32,
+        };
+
         $user = auth()->user();
         $languagePair = LanguagePair::findOrFail($user->language_pair_id);
 
@@ -112,7 +118,7 @@ class MemoryTranslationGameController extends Controller
             languageId: $languagePair->target_language_id,
             translationLanguageId: $languagePair->source_language_id,
             categoryId: $validated['category'],
-            totalRounds: 8
+            totalRounds: $amountOfNouns,
         );
 
         return response()->json($words);
@@ -123,12 +129,18 @@ class MemoryTranslationGameController extends Controller
         // Load game data with relationships
         $memoryTranslationGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
 
+        $amountOfNouns = match ($memoryTranslationGame->difficulty) {
+            'easy' => 10,
+            'medium' => 20,
+            'hard' => 32,
+        };
+
         // Get words for the game
         $words = $this->nounService->getNouns(
             languageId: $memoryTranslationGame->languagePair->target_language_id,
             translationLanguageId: $memoryTranslationGame->languagePair->source_language_id,
             categoryId: $memoryTranslationGame->category_id,
-            totalRounds: 8
+            totalRounds: $amountOfNouns,
         );
 
         // Refresh the game instance to get the latest state
