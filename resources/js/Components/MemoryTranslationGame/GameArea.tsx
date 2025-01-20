@@ -25,7 +25,7 @@ interface PreviewCardsProps {
 const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const CARD_HEIGHT = 80;
-    const CARD_SPACING = 16;
+    const CARD_SPACING = 24;
 
     return (
         <div ref={containerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center items-start pointer-events-none">
