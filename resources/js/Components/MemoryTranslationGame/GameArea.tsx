@@ -9,6 +9,7 @@ import { throttle } from "lodash";
 interface CardWord {
     id: number;
     word: string;
+    gender: string;
     emoji?: string;
     isFlipped: boolean;
 }
@@ -118,7 +119,7 @@ const Card = ({ cardData, isFlipped, isMatched, onClick }: CardProps) => {
             `}>
                 {isFlipped && (
                     <div className="text-[8px] sm:text-xs text-white text-center p-1 break-words">
-                        <p>{cardData.word}</p>
+                        <p>{cardData.gender} {cardData.word}</p>
                         {cardData.emoji && <p>{cardData.emoji}</p>}
                     </div>
                 )}
@@ -236,7 +237,7 @@ export default function GameArea({
             <PreviewCards
                 cards={selectedCards.map(index => ({
                     id: game.words[index].id,
-                    word: game.words[index].word,
+                    word: `${game.words[index].gender} ${game.words[index].word}`,
                     emoji: game.words[index].emoji
                 }))}
                 cardPositions={cardPositions}
