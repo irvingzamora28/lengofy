@@ -259,6 +259,9 @@ Push to main branch:
 git push origin main
 ```
 
+## TODO
+ -Remove this emoji: "  кабел"
+
 ## License
 
 Distributed under the Creative Commons Attribution-NonCommercial 4.0 International Public License. See `LICENSE` for more information.
