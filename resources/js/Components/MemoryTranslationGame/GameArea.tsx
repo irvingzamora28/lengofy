@@ -30,7 +30,7 @@ const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
 
     return (
         <div ref={containerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center items-start pointer-events-none">
-            <div className="relative w-full max-w-[90vw]" style={{ minHeight: `${CARD_HEIGHT}px` }}>
+            <div className="relative w-full max-w-[95vw] mx-auto" style={{ minHeight: `${CARD_HEIGHT}px` }}>
                 <AnimatePresence>
                     {cards.map((card, index) => {
                         const containerRect = containerRef.current?.getBoundingClientRect();
@@ -44,8 +44,17 @@ const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
                         const initialX = cardCenterX - containerCenterX;
                         const initialY = position.top - containerRect.top;
 
-                        // Calculate final card width based on container size
-                        const finalWidth = Math.min(containerRect.width * 0.9, position.width * 2);
+                        // Calculate final card width based on screen size and word length
+                        let finalWidth;
+                        if (window.innerWidth < 640) { // sm breakpoint in Tailwind
+                            // Mobile: More aggressive width scaling for smaller screens
+                            const minWidth = Math.max(position.width * 2, Math.min(card.word.length * 16, containerRect.width * 0.95));
+                            finalWidth = Math.max(minWidth, containerRect.width * 0.5);
+                        } else {
+                            // Desktop: More conservative width scaling
+                            const minWidth = Math.max(position.width * 2, Math.min(card.word.length * 12, containerRect.width * 0.6));
+                            finalWidth = Math.min(minWidth, containerRect.width * 0.4);
+                        }
 
                         return (
                             <motion.div
@@ -74,9 +83,9 @@ const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
                                 }}
                                 className="absolute left-1/2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg p-2 backdrop-blur-sm"
                             >
-                                <div className="flex items-center justify-center h-full">
-                                    <div className="text-center">
-                                        <p className="text-lg sm:text-xl font-semibold dark:text-gray-100 truncate">
+                                <div className="flex items-center justify-center h-full w-full">
+                                    <div className="text-center w-full px-2 whitespace-nowrap">
+                                        <p className="text-lg sm:text-xl font-semibold dark:text-gray-100">
                                             {card.word}
                                         </p>
                                         {card.emoji && <p className="text-2xl sm:text-3xl">{card.emoji}</p>}
