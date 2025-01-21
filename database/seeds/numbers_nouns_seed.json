@@ -1,6 +1,6 @@
 [
     {
-        "word": "Null",
+        "word": null,
         "gender": null,
         "translations": {
             "en": "zero",
@@ -332,7 +332,7 @@
     },
     {
         "word": "Erste",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "first",
             "es": "primero"
@@ -342,7 +342,7 @@
     },
     {
         "word": "Zweite",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "second",
             "es": "segundo"
@@ -352,7 +352,7 @@
     },
     {
         "word": "Dritte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "third",
             "es": "tercero"
@@ -362,7 +362,7 @@
     },
     {
         "word": "Vierte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "fourth",
             "es": "cuarto"
@@ -372,7 +372,7 @@
     },
     {
         "word": "Fünfte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "fifth",
             "es": "quinto"
@@ -382,7 +382,7 @@
     },
     {
         "word": "Sechste",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "sixth",
             "es": "sexto"
@@ -392,7 +392,7 @@
     },
     {
         "word": "Siebte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "seventh",
             "es": "séptimo"
@@ -402,7 +402,7 @@
     },
     {
         "word": "Achte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "eighth",
             "es": "octavo"
@@ -412,7 +412,7 @@
     },
     {
         "word": "Neunte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "ninth",
             "es": "noveno"
@@ -422,7 +422,7 @@
     },
     {
         "word": "Zehnte",
-        "gender": "null",
+        "gender": null,
         "translations": {
             "en": "tenth",
             "es": "décimo"

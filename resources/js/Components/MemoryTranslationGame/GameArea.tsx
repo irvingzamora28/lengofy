@@ -2,94 +2,17 @@ import { MemoryTranslationGame } from "@/types";
 import { useTranslation } from "react-i18next";
 import { FaHourglassHalf } from "react-icons/fa";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import PrimaryButton from "../PrimaryButton";
 import { throttle } from "lodash";
+import PreviewCards from "./PreviewCards";
 
 interface CardWord {
-    id: number;
+    id: string;
     word: string;
     gender: string;
     emoji?: string;
     isFlipped: boolean;
 }
-
-interface PreviewCardsProps {
-    cards: Array<{
-        id: number;
-        word: string;
-        emoji?: string;
-    }>;
-    cardPositions: Map<number, DOMRect>;
-}
-
-const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const CARD_HEIGHT = 80;
-    const CARD_SPACING = 24;
-
-    return (
-        <div ref={containerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center items-start pointer-events-none">
-            <div className="relative w-full max-w-[90vw]" style={{ minHeight: `${CARD_HEIGHT}px` }}>
-                <AnimatePresence>
-                    {cards.map((card, index) => {
-                        const containerRect = containerRef.current?.getBoundingClientRect();
-                        const position = cardPositions.get(card.id);
-
-                        if (!position || !containerRect) return null;
-
-                        // Calculate positions relative to viewport
-                        const containerCenterX = containerRect.left + (containerRect.width / 2);
-                        const cardCenterX = position.left + (position.width / 2);
-                        const initialX = cardCenterX - containerCenterX;
-                        const initialY = position.top - containerRect.top;
-
-                        // Calculate final card width based on container size
-                        const finalWidth = Math.min(containerRect.width * 0.9, position.width * 2);
-
-                        return (
-                            <motion.div
-                                key={card.id}
-                                initial={{
-                                    x: initialX,
-                                    y: initialY,
-                                    width: position.width,
-                                    height: position.height,
-                                    scale: 1,
-                                    opacity: 1
-                                }}
-                                animate={{
-                                    x: -finalWidth / 2, // Center the card by offsetting half its width
-                                    y: index * (CARD_HEIGHT + CARD_SPACING),
-                                    width: finalWidth,
-                                    height: CARD_HEIGHT,
-                                    scale: 1.2
-                                }}
-                                exit={{ opacity: 0, scale: 0.5 }}
-                                transition={{
-                                    type: 'spring',
-                                    stiffness: 200,
-                                    damping: 20,
-                                    restDelta: 0.1
-                                }}
-                                className="absolute left-1/2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg p-2 backdrop-blur-sm"
-                            >
-                                <div className="flex items-center justify-center h-full">
-                                    <div className="text-center">
-                                        <p className="text-lg sm:text-xl font-semibold dark:text-gray-100 truncate">
-                                            {card.word}
-                                        </p>
-                                        {card.emoji && <p className="text-2xl sm:text-3xl">{card.emoji}</p>}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </AnimatePresence>
-            </div>
-        </div>
-    );
-};
 
 interface CardProps {
     cardData: CardWord;
@@ -119,7 +42,8 @@ const Card = ({ cardData, isFlipped, isMatched, onClick }: CardProps) => {
             `}>
                 {isFlipped && (
                     <div className="text-[8px] sm:text-xs text-white text-center p-1 break-words">
-                        <p>{cardData.gender} {cardData.word}</p>
+                        {cardData.id.includes('word') && <p>{cardData.gender}</p>}
+                        <p>{cardData.word}</p>
                         {cardData.emoji && <p>{cardData.emoji}</p>}
                     </div>
                 )}
@@ -150,15 +74,15 @@ export default function GameArea({
     onRestart,
 }: MemoryTranslationGameAreaProps) {
     const { t: trans } = useTranslation();
-    const [cardPositions, setCardPositions] = useState<Map<number, DOMRect>>(new Map());
+    const [cardPositions, setCardPositions] = useState<Map<string, DOMRect>>(new Map());
 
     // Update all card positions on mount and resize
     const updateCardPositions = useCallback(throttle(() => {
-        const newPositions = new Map<number, DOMRect>();
+        const newPositions = new Map<string, DOMRect>();
         game.words.forEach(word => {
             const element = document.querySelector(`[data-card-id="${word.id}"]`);
             if (element) {
-                newPositions.set(word.id, element.getBoundingClientRect());
+                newPositions.set(word.id.toString(), element.getBoundingClientRect());
             }
         });
         setCardPositions(newPositions);
@@ -236,8 +160,9 @@ export default function GameArea({
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-2 shadow-2xl transition-all duration-300">
             <PreviewCards
                 cards={selectedCards.map(index => ({
-                    id: game.words[index].id,
-                    word: `${game.words[index].gender} ${game.words[index].word}`,
+                    id: game.words[index].id.toString(),
+                    gender: game.words[index].gender,
+                    word: game.words[index].word,
                     emoji: game.words[index].emoji
                 }))}
                 cardPositions={cardPositions}
@@ -261,6 +186,7 @@ export default function GameArea({
                         key={word.id}
                         cardData={{
                             ...word,
+                            id: word.id.toString(),
                             isFlipped: selectedCards.includes(index) || matchedPairs.includes(index)
                         }}
                         isFlipped={selectedCards.includes(index) || matchedPairs.includes(index)}
