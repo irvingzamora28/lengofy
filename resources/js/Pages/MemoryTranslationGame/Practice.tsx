@@ -8,8 +8,8 @@ import correctSound from "@/assets/audio/correct.mp3";
 import incorrectSound from "@/assets/audio/incorrect.mp3";
 import DifficultyModal from "@/Components/Games/DifficultyModal";
 import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
 import { throttle } from "lodash";
+import PreviewCards from "@/Components/MemoryTranslationGame/PreviewCards";
 
 interface CardData {
     word: string;
@@ -62,71 +62,6 @@ const createCardPairs = (nouns: Noun[]): MemoryCard[] => {
     return cardPairs;
 };
 
-const PreviewCards = ({ cards, cardPositions }: { cards: Array<{ id: string; word: string; gender: string; emoji?: string }>; cardPositions: Map<string, DOMRect> }) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const CARD_HEIGHT = 80;
-    const CARD_SPACING = 24;
-
-    return (
-        <div ref={containerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center items-start pointer-events-none">
-            <div className="relative w-full max-w-[90vw]" style={{ minHeight: `${CARD_HEIGHT}px` }}>
-                <AnimatePresence>
-                    {cards.map((card, index) => {
-                        const containerRect = containerRef.current?.getBoundingClientRect();
-                        const position = cardPositions.get(card.id);
-
-                        if (!position || !containerRect) return null;
-
-                        const containerCenterX = containerRect.left + (containerRect.width / 2);
-                        const cardCenterX = position.left + (position.width / 2);
-                        const initialX = cardCenterX - containerCenterX;
-                        const initialY = position.top - containerRect.top;
-
-                        const finalWidth = Math.min(containerRect.width * 0.9, position.width * 2);
-
-                        return (
-                            <motion.div
-                                key={card.id}
-                                initial={{
-                                    x: initialX,
-                                    y: initialY,
-                                    width: position.width,
-                                    height: position.height,
-                                    scale: 1,
-                                    opacity: 1,
-                                }}
-                                animate={{
-                                    x: -finalWidth / 2,
-                                    y: index * (CARD_HEIGHT + CARD_SPACING),
-                                    width: finalWidth,
-                                    height: CARD_HEIGHT,
-                                    scale: 1.2,
-                                }}
-                                exit={{ opacity: 0, scale: 0.5 }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 200,
-                                    damping: 20,
-                                    restDelta: 0.1,
-                                }}
-                                className="absolute left-1/2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg p-2 backdrop-blur-sm"
-                            >
-                                <div className="flex items-center justify-center h-full">
-                                    <div className="text-center">
-                                        <p className="text-lg sm:text-xl font-semibold dark:text-gray-100 truncate">
-                                        {(card.id.includes("word-" + card.id.split("-")[1])) ? `${card.gender} ` : ""} {card.word}
-                                        </p>
-                                        {card.emoji && <p className="text-2xl sm:text-3xl">{card.emoji}</p>}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </AnimatePresence>
-            </div>
-        </div>
-    );
-};
 
 const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps> = ({
     auth,
