@@ -29,7 +29,7 @@ export interface Category {
 }
 
 export interface Noun {
-    id: number;
+    id: number | string;
     word: string;
     gender: 'der' | 'die' | 'das' | 'el' | 'la';
     translation?: string;

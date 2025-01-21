@@ -7,7 +7,7 @@ import PrimaryButton from "../PrimaryButton";
 import { throttle } from "lodash";
 
 interface CardWord {
-    id: number;
+    id: string;
     word: string;
     gender: string;
     emoji?: string;
@@ -16,11 +16,12 @@ interface CardWord {
 
 interface PreviewCardsProps {
     cards: Array<{
-        id: number;
+        id: string;
+        gender: string;
         word: string;
         emoji?: string;
     }>;
-    cardPositions: Map<number, DOMRect>;
+    cardPositions: Map<string, DOMRect>;
 }
 
 const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
@@ -86,7 +87,8 @@ const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
                                 <div className="flex items-center justify-center h-full w-full">
                                     <div className="text-center w-full px-2 whitespace-nowrap">
                                         <p className="text-lg sm:text-xl font-semibold dark:text-gray-100">
-                                            {card.word}
+                                        {card.id.includes('word') && <p>{card.gender}</p>}
+                                        <p>{card.word}</p>
                                         </p>
                                         {card.emoji && <p className="text-2xl sm:text-3xl">{card.emoji}</p>}
                                     </div>
@@ -128,7 +130,8 @@ const Card = ({ cardData, isFlipped, isMatched, onClick }: CardProps) => {
             `}>
                 {isFlipped && (
                     <div className="text-[8px] sm:text-xs text-white text-center p-1 break-words">
-                        <p>{cardData.gender} {cardData.word}</p>
+                        {cardData.id.includes('word') && <p>{cardData.gender}</p>}
+                        <p>{cardData.word}</p>
                         {cardData.emoji && <p>{cardData.emoji}</p>}
                     </div>
                 )}
@@ -159,15 +162,15 @@ export default function GameArea({
     onRestart,
 }: MemoryTranslationGameAreaProps) {
     const { t: trans } = useTranslation();
-    const [cardPositions, setCardPositions] = useState<Map<number, DOMRect>>(new Map());
+    const [cardPositions, setCardPositions] = useState<Map<string, DOMRect>>(new Map());
 
     // Update all card positions on mount and resize
     const updateCardPositions = useCallback(throttle(() => {
-        const newPositions = new Map<number, DOMRect>();
+        const newPositions = new Map<string, DOMRect>();
         game.words.forEach(word => {
             const element = document.querySelector(`[data-card-id="${word.id}"]`);
             if (element) {
-                newPositions.set(word.id, element.getBoundingClientRect());
+                newPositions.set(word.id.toString(), element.getBoundingClientRect());
             }
         });
         setCardPositions(newPositions);
@@ -245,8 +248,9 @@ export default function GameArea({
         <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-2 shadow-2xl transition-all duration-300">
             <PreviewCards
                 cards={selectedCards.map(index => ({
-                    id: game.words[index].id,
-                    word: `${game.words[index].gender} ${game.words[index].word}`,
+                    id: game.words[index].id.toString(),
+                    gender: game.words[index].gender,
+                    word: game.words[index].word,
                     emoji: game.words[index].emoji
                 }))}
                 cardPositions={cardPositions}
@@ -270,6 +274,7 @@ export default function GameArea({
                         key={word.id}
                         cardData={{
                             ...word,
+                            id: word.id.toString(),
                             isFlipped: selectedCards.includes(index) || matchedPairs.includes(index)
                         }}
                         isFlipped={selectedCards.includes(index) || matchedPairs.includes(index)}
