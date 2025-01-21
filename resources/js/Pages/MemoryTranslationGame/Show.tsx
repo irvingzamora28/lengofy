@@ -3,6 +3,8 @@ import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { MemoryTranslationGame, MemoryTranslationGameState, PageProps } from '@/types';
 import { MdClose } from 'react-icons/md';
+import { FaUserPlus } from 'react-icons/fa';
+import { IoPersonAddSharp } from 'react-icons/io5';
 import GameArea from '@/Components/MemoryTranslationGame/GameArea';
 import GameInfo from '@/Components/MemoryTranslationGame/GameInfo';
 import PlayersInfo from '@/Components/MemoryTranslationGame/PlayersInfo';
@@ -446,19 +448,62 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         }
     };
 
+    // Share functionality
+    const handleShare = async () => {
+        const url = new URL(window.location.href);
+        const baseUrl = `${url.protocol}//${url.host}${url.pathname}`;
+        const shareTitle = `Join my Memory Translation Game!`;
+        const shareText = `Hey! Join me for a game of Memory Translation on Lengofy!`;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: baseUrl,
+                });
+            } else {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+            // Fallback to clipboard
+            try {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            } catch (err) {
+                toast.error(trans('Failed to share or copy link'));
+            }
+        }
+    };
+
     return (
         <AuthenticatedLayout
             header={
-                <div className="flex items-center">
-                    <button
-                        onClick={handleExitClick}
-                        className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                    >
-                        <MdClose size={24} />
-                    </button>
-                    <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300 leading-tight">
-                        Memory Translation
+                <div className="flex justify-between items-center">
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {trans('Memory Translation Game')}
                     </h2>
+                    <div className="flex gap-2">
+                        {gameState.status === 'waiting' && (
+                            <button
+                                onClick={handleShare}
+                                className="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                            >
+                                <IoPersonAddSharp className="mr-2 md:hidden" />
+                                <FaUserPlus className="mr-2 hidden md:block" />
+                                <span className="hidden md:inline">{trans('generals.invite_friends')}</span>
+                                <span className="md:hidden">{trans('generals.invite')}</span>
+                            </button>
+                        )}
+                        <button
+                            onClick={() => setShowExitConfirmation(true)}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                        >
+                            <MdClose size={24} />
+                        </button>
+                    </div>
                 </div>
             }
         >
