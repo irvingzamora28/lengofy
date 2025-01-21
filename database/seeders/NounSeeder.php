@@ -37,7 +37,7 @@ class NounSeeder extends Seeder
 
         $nouns = [];
         foreach ($files as $file) {
-            $filePath = database_path('seeds/' . $file);
+            $filePath = database_path('seeds/de/' . $file);
             $fileNouns = json_decode(file_get_contents($filePath), true);
             $nouns = array_merge($nouns, $fileNouns);
         }
