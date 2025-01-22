@@ -1,7 +1,7 @@
 [
     {
         "word": "Time",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "tiempo"
         },
@@ -10,7 +10,7 @@
     },
      {
         "word": "Second",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "segundo"
         },
@@ -19,7 +19,7 @@
     },
     {
         "word": "Minute",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "minuto"
         },
@@ -28,7 +28,7 @@
     },
     {
         "word": "Hour",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "hora"
         },
@@ -37,7 +37,7 @@
     },
      {
         "word":"Day",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"día"
         },
@@ -46,7 +46,7 @@
     },
     {
         "word": "Night",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "noche"
         },
@@ -56,7 +56,7 @@
     },
    {
         "word": "Week",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "semana"
         },
@@ -65,7 +65,7 @@
     },
   {
     "word": "Month",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "mes"
     },
@@ -74,7 +74,7 @@
   },
   {
     "word": "Year",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "año"
     },
@@ -83,7 +83,7 @@
   },
   {
     "word": "Morning",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "mañana"
     },
@@ -93,7 +93,7 @@
   },
     {
         "word":"Afternoon",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"tarde"
         },
@@ -102,7 +102,7 @@
     },
      {
        "word":"Evening",
-       "gender":"the",
+       "gender":null,
         "translations":{
            "es":"tarde/noche"
         },
@@ -111,7 +111,7 @@
      },
      {
        "word":"Midnight",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"medianoche"
          },
@@ -120,7 +120,7 @@
      },
    {
         "word":"Sunrise",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"amanecer"
         },
@@ -130,7 +130,7 @@
     },
     {
        "word":"Sunset",
-       "gender":"the",
+       "gender":null,
        "translations":{
             "es":"atardecer"
         },
@@ -140,7 +140,7 @@
     },
      {
         "word":"Today",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"hoy"
         },
@@ -149,7 +149,7 @@
     },
     {
         "word":"Yesterday",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"ayer"
         },
@@ -158,7 +158,7 @@
     },
     {
         "word":"Tomorrow",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"mañana"
         },
@@ -167,7 +167,7 @@
     },
     {
       "word":"Now",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"ahora"
         },
@@ -176,7 +176,7 @@
     },
     {
        "word":"Later",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"luego"
         },
@@ -185,7 +185,7 @@
     },
     {
       "word":"Soon",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"pronto"
          },
@@ -194,7 +194,7 @@
     },
     {
         "word":"Early",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"temprano"
         },
@@ -203,7 +203,7 @@
     },
     {
       "word":"Late",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"tarde"
        },
@@ -212,7 +212,7 @@
     },
     {
         "word":"Always",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"siempre"
          },
@@ -221,7 +221,7 @@
     },
     {
         "word":"Sometimes",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"a veces"
          },
@@ -230,7 +230,7 @@
     },
     {
        "word":"Never",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"nunca"
          },
@@ -239,7 +239,7 @@
     },
     {
         "word":"Often",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"a menudo"
         },
@@ -248,7 +248,7 @@
     },
    {
       "word":"Rarely",
-       "gender":"the",
+       "gender":null,
       "translations":{
           "es":"rara vez"
       },
@@ -257,7 +257,7 @@
     },
      {
        "word":"Usually",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"usualmente"
         },
@@ -266,7 +266,7 @@
     },
      {
        "word":"Daily",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"diario"
          },
@@ -275,7 +275,7 @@
      },
      {
         "word":"Weekly",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"semanal"
          },
@@ -284,7 +284,7 @@
     },
     {
         "word":"Monthly",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"mensual"
         },
@@ -293,7 +293,7 @@
     },
     {
       "word":"Yearly",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"anual"
         },
@@ -302,7 +302,7 @@
     },
     {
       "word":"Season",
-       "gender":"the",
+       "gender":null,
         "translations":{
          "es":"estación"
         },

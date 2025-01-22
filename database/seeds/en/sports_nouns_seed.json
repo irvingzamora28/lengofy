@@ -1,7 +1,7 @@
 [
     {
         "word": "Sport",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "deporte"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Soccer",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "fútbol"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Basketball",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "baloncesto"
         },
@@ -30,7 +30,7 @@
     },
      {
         "word": "Tennis",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "tenis"
         },
@@ -40,7 +40,7 @@
     },
     {
         "word": "Swimming",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "natación"
         },
@@ -50,7 +50,7 @@
     },
    {
         "word":"Baseball",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es":"béisbol"
         },
@@ -60,7 +60,7 @@
     },
    {
         "word":"Volleyball",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es":"voleibol"
          },
@@ -70,7 +70,7 @@
     },
     {
       "word":"Golf",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"golf"
        },
@@ -80,7 +80,7 @@
     },
     {
         "word": "Running",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "correr"
         },
@@ -90,7 +90,7 @@
     },
      {
        "word":"Cycling",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"ciclismo"
         },
@@ -100,7 +100,7 @@
     },
      {
         "word":"Boxing",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"boxeo"
          },
@@ -110,7 +110,7 @@
     },
   {
     "word": "Gymnastics",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "gimnasia"
     },
@@ -119,7 +119,7 @@
   },
   {
     "word": "Skiing",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "esquí"
     },
@@ -129,7 +129,7 @@
   },
     {
        "word":"Snowboarding",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"snowboard"
          },
@@ -139,7 +139,7 @@
     },
   {
     "word": "Skateboarding",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "monopatín"
     },
@@ -149,7 +149,7 @@
   },
   {
     "word": "Surfing",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "surf"
     },
@@ -159,7 +159,7 @@
   },
     {
       "word":"Badminton",
-        "gender":"the",
+        "gender":null,
       "translations":{
          "es":"bádminton"
        },
@@ -169,7 +169,7 @@
     },
     {
         "word":"Table tennis",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"tenis de mesa"
         },
@@ -179,7 +179,7 @@
     },
    {
        "word":"Hockey",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"hockey"
         },
@@ -189,7 +189,7 @@
    },
     {
         "word":"Cricket",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cricket"
         },
@@ -198,7 +198,7 @@
     },
     {
       "word":"Rugby",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"rugby"
         },
@@ -207,7 +207,7 @@
     },
   {
         "word":"Weightlifting",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"halterofilia"
          },
@@ -217,7 +217,7 @@
   },
     {
         "word":"Yoga",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"yoga"
         },
@@ -227,7 +227,7 @@
     },
    {
        "word":"Martial arts",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"artes marciales"
         },
@@ -236,7 +236,7 @@
     },
      {
       "word":"Fencing",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"esgrima"
         },
@@ -245,7 +245,7 @@
     },
    {
         "word":"Archery",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"tiro con arco"
         },

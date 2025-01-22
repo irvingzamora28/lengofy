@@ -1,7 +1,7 @@
 [
     {
         "word": "Thing",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cosa"
         },
@@ -10,7 +10,7 @@
     },
     {
       "word": "Place",
-      "gender": "the",
+      "gender": null,
       "translations": {
         "es": "lugar"
       },
@@ -19,7 +19,7 @@
     },
     {
         "word": "Idea",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "idea"
         },
@@ -28,7 +28,7 @@
     },
     {
         "word": "Problem",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "problema"
         },
@@ -37,7 +37,7 @@
     },
     {
         "word": "Solution",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "solución"
         },
@@ -46,7 +46,7 @@
     },
      {
         "word":"Question",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "pregunta"
         },
@@ -56,7 +56,7 @@
     },
     {
        "word":"Answer",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"respuesta"
          },
@@ -66,7 +66,7 @@
     },
   {
     "word": "Reason",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "razón"
     },
@@ -75,7 +75,7 @@
   },
     {
         "word":"Plan",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"plan"
         },
@@ -84,7 +84,7 @@
     },
   {
         "word":"Money",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"dinero"
          },
@@ -94,7 +94,7 @@
     },
   {
         "word":"Price",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"precio"
         },
@@ -103,7 +103,7 @@
     },
  {
     "word": "Cost",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "costo"
     },
@@ -112,7 +112,7 @@
   },
   {
     "word":"Payment",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "pago"
     },
@@ -121,7 +121,7 @@
   },
    {
        "word":"Gift",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"regalo"
         },
@@ -131,7 +131,7 @@
     },
    {
         "word":"Game",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"juego"
         },
@@ -141,7 +141,7 @@
     },
   {
      "word":"Toy",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"juguete"
       },
@@ -151,7 +151,7 @@
    },
   {
      "word":"Music",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"música"
       },
@@ -161,7 +161,7 @@
     },
   {
      "word":"Sound",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"sonido"
       },
@@ -171,7 +171,7 @@
     },
     {
         "word":"Image",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"imagen"
         },
@@ -181,7 +181,7 @@
     },
     {
         "word":"Picture",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"foto"
          },
@@ -191,7 +191,7 @@
     },
     {
        "word":"Story",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"historia"
         },
@@ -200,7 +200,7 @@
      },
     {
       "word":"Word",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"palabra"
         },
@@ -209,7 +209,7 @@
     },
   {
         "word":"Sentence",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"oración"
         },
@@ -218,7 +218,7 @@
     },
     {
       "word":"Language",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"idioma"
        },
@@ -227,7 +227,7 @@
     },
      {
        "word":"Message",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"mensaje"
        },
@@ -236,7 +236,7 @@
      },
   {
         "word":"Sign",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"señal"
          },
@@ -245,7 +245,7 @@
     },
     {
         "word":"Symbol",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"símbolo"
         },
@@ -254,7 +254,7 @@
     },
   {
     "word":"Material",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "material"
     },
@@ -263,7 +263,7 @@
   },
  {
     "word":"Paper",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "papel"
     },
@@ -272,7 +272,7 @@
   },
     {
         "word":"Plastic",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"plástico"
          },
@@ -281,7 +281,7 @@
     },
     {
        "word":"Glass",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"vidrio"
        },
@@ -290,7 +290,7 @@
     },
    {
       "word":"Wood",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"madera"
         },
@@ -299,7 +299,7 @@
     },
      {
       "word":"Metal",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"metal"
        },
@@ -308,7 +308,7 @@
      },
   {
         "word":"Fabric",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"tela"
         },
@@ -317,7 +317,7 @@
     },
   {
     "word":"Tool",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "herramienta"
     },
@@ -326,7 +326,7 @@
   },
   {
     "word": "Box",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "caja"
     },
@@ -336,7 +336,7 @@
   },
     {
        "word":"Container",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"contenedor"
          },
@@ -345,7 +345,7 @@
     },
   {
     "word": "Bag",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "bolsa"
     },
@@ -355,7 +355,7 @@
   },
   {
        "word":"Card",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"tarjeta"
         },
@@ -365,7 +365,7 @@
   },
     {
         "word":"Key",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"llave"
          },
@@ -375,7 +375,7 @@
     },
    {
         "word":"Lock",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cerradura"
         },
@@ -385,7 +385,7 @@
     },
   {
      "word":"Gift",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"regalo"
         },
@@ -395,7 +395,7 @@
     },
  {
       "word":"List",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"lista"
        },
@@ -404,7 +404,7 @@
     },
    {
         "word":"Form",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"formulario"
         },
@@ -413,7 +413,7 @@
     },
   {
         "word":"Copy",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"copia"
         },
@@ -422,7 +422,7 @@
     },
   {
         "word":"Example",
-        "gender":"the",
+        "gender":null,
          "translations":{
            "es":"ejemplo"
          },
@@ -431,7 +431,7 @@
     },
     {
         "word":"Type",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"tipo"
          },
@@ -440,7 +440,7 @@
     },
    {
        "word":"Way",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"manera"
          },
@@ -449,7 +449,7 @@
     },
     {
        "word":"Part",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"parte"
         },
@@ -458,7 +458,7 @@
     },
    {
         "word":"System",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"sistema"
           },
@@ -467,7 +467,7 @@
     },
    {
         "word":"Level",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"nivel"
          },
@@ -476,7 +476,7 @@
     },
      {
        "word":"Group",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"grupo"
          },
@@ -485,7 +485,7 @@
      },
      {
       "word":"Team",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"equipo"
         },
@@ -494,7 +494,7 @@
       },
   {
      "word":"Event",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"evento"
         },
@@ -503,7 +503,7 @@
     },
     {
        "word":"Meeting",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"reunión"
         },
@@ -512,7 +512,7 @@
     },
     {
         "word":"Party",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"fiesta"
          },
@@ -522,7 +522,7 @@
     },
    {
       "word":"Trip",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"viaje"
         },
@@ -532,7 +532,7 @@
     },
  {
         "word":"Vacation",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"vacaciones"
          },
@@ -542,7 +542,7 @@
     },
     {
         "word":"Experience",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"experiencia"
          },
@@ -551,7 +551,7 @@
     },
     {
       "word":"Feeling",
-       "gender":"the",
+       "gender":null,
        "translations":{
         "es":"sentimiento"
         },
@@ -560,7 +560,7 @@
     },
    {
         "word":"Emotion",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"emoción"
          },
@@ -569,7 +569,7 @@
     },
     {
        "word":"Memory",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"recuerdo"
         },
@@ -578,7 +578,7 @@
     },
   {
        "word":"Decision",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"decisión"
         },
@@ -587,7 +587,7 @@
   },
   {
         "word":"Choice",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"elección"
         },
@@ -596,7 +596,7 @@
     },
     {
        "word":"Result",
-       "gender":"the",
+       "gender":null,
         "translations":{
            "es":"resultado"
          },
@@ -605,7 +605,7 @@
     },
   {
        "word":"Reason",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"razón"
          },
@@ -614,7 +614,7 @@
     },
     {
         "word":"Goal",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"meta"
          },
@@ -623,7 +623,7 @@
     },
   {
        "word":"Purpose",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"propósito"
        },
@@ -632,7 +632,7 @@
     },
   {
         "word":"Cause",
-        "gender":"the",
+        "gender":null,
          "translations":{
             "es":"causa"
          },
@@ -641,7 +641,7 @@
     },
    {
        "word":"Effect",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"efecto"
          },
@@ -650,7 +650,7 @@
     },
     {
        "word":"Change",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"cambio"
          },
@@ -659,7 +659,7 @@
      },
   {
     "word": "Ability",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "habilidad"
     },
@@ -668,7 +668,7 @@
   },
    {
     "word":"Effort",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "esfuerzo"
     },
@@ -677,7 +677,7 @@
   },
   {
      "word":"Success",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"éxito"
        },
@@ -686,7 +686,7 @@
     },
   {
       "word":"Failure",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"fracaso"
         },
@@ -695,7 +695,7 @@
     },
    {
         "word":"Control",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"control"
         },
@@ -704,7 +704,7 @@
     },
   {
       "word":"Risk",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"riesgo"
         },
@@ -713,7 +713,7 @@
     },
     {
       "word":"Opportunity",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"oportunidad"
          },
@@ -722,7 +722,7 @@
     },
   {
      "word":"Need",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"necesidad"
       },
@@ -731,7 +731,7 @@
    },
    {
       "word":"Option",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"opción"
         },
@@ -740,7 +740,7 @@
     },
     {
       "word":"Example",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"ejemplo"
        },
@@ -749,7 +749,7 @@
     },
  {
       "word":"Process",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"proceso"
         },
@@ -758,7 +758,7 @@
     },
    {
       "word":"Method",
-       "gender":"the",
+       "gender":null,
        "translations":{
         "es":"método"
        },
@@ -767,7 +767,7 @@
     },
   {
     "word": "Order",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "pedido"
     },
@@ -776,7 +776,7 @@
   },
   {
     "word": "Care",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "cuidado"
     },
@@ -785,7 +785,7 @@
   },
   {
         "word":"Value",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"valor"
         },
@@ -794,7 +794,7 @@
     },
     {
        "word":"Access",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"acceso"
        },
@@ -803,7 +803,7 @@
     },
     {
        "word":"Source",
-       "gender":"the",
+       "gender":null,
        "translations":{
             "es":"fuente"
         },
@@ -812,7 +812,7 @@
     },
    {
         "word":"Resource",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"recurso"
          },
@@ -821,7 +821,7 @@
     },
    {
         "word":"Structure",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"estructura"
         },
@@ -830,7 +830,7 @@
     },
  {
     "word": "Format",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "formato"
     },
@@ -839,7 +839,7 @@
   },
     {
         "word":"Style",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"estilo"
          },
@@ -848,7 +848,7 @@
     },
     {
         "word":"Pattern",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"patrón"
         },
@@ -857,7 +857,7 @@
     },
    {
        "word":"Relationship",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"relación"
          },
@@ -866,7 +866,7 @@
     },
   {
     "word":"Connection",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "conexión"
     },
@@ -875,7 +875,7 @@
   },
    {
      "word":"Contact",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"contacto"
        },
@@ -884,7 +884,7 @@
     },
     {
        "word":"Network",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"red"
         },
@@ -893,7 +893,7 @@
     },
    {
       "word":"Control",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"control"
         },
@@ -902,7 +902,7 @@
     },
     {
       "word":"Power",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"poder"
         },
@@ -911,7 +911,7 @@
     },
   {
     "word": "Energy",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "energía"
     },
@@ -920,7 +920,7 @@
   },
  {
    "word":"Space",
-    "gender":"the",
+    "gender":null,
     "translations":{
        "es":"espacio"
      },
@@ -929,7 +929,7 @@
   },
     {
         "word":"Area",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"área"
         },
@@ -938,7 +938,7 @@
     },
     {
        "word":"Distance",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"distancia"
        },
@@ -947,7 +947,7 @@
     },
   {
         "word":"Direction",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"dirección"
          },
@@ -956,7 +956,7 @@
     },
  {
     "word":"Center",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "centro"
     },
@@ -965,7 +965,7 @@
   },
  {
       "word":"Location",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"ubicación"
         },
@@ -974,7 +974,7 @@
     },
     {
        "word":"Situation",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"situación"
         },
@@ -983,7 +983,7 @@
     },
    {
       "word":"Environment",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"ambiente"
         },
@@ -992,7 +992,7 @@
     },
    {
         "word":"Culture",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cultura"
          },
@@ -1001,7 +1001,7 @@
     },
     {
       "word":"Society",
-        "gender":"the",
+        "gender":null,
       "translations":{
            "es":"sociedad"
          },
@@ -1010,7 +1010,7 @@
     },
   {
         "word":"Community",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"comunidad"
         },
@@ -1019,7 +1019,7 @@
     },
   {
         "word":"Organization",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"organización"
         },
@@ -1028,7 +1028,7 @@
     },
   {
     "word": "Government",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "gobierno"
     },
@@ -1037,7 +1037,7 @@
   },
    {
         "word":"Country",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"país"
          },
@@ -1047,7 +1047,7 @@
     },
     {
        "word":"City",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"ciudad"
          },
@@ -1057,7 +1057,7 @@
     },
   {
         "word":"Town",
-        "gender":"the",
+        "gender":null,
          "translations":{
             "es":"pueblo"
           },
@@ -1067,7 +1067,7 @@
     },
   {
         "word":"Region",
-        "gender":"the",
+        "gender":null,
          "translations":{
             "es":"región"
          },
@@ -1076,7 +1076,7 @@
    },
     {
         "word":"World",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"mundo"
          },
@@ -1086,7 +1086,7 @@
     },
      {
        "word":"State",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"estado"
          },
@@ -1095,7 +1095,7 @@
      },
     {
        "word":"Process",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"proceso"
          },
@@ -1104,7 +1104,7 @@
     },
   {
     "word": "System",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "sistema"
     },
@@ -1113,7 +1113,7 @@
   },
     {
        "word":"Quality",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"calidad"
          },
@@ -1122,7 +1122,7 @@
     },
     {
         "word":"Service",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"servicio"
          },
@@ -1131,7 +1131,7 @@
     },
     {
        "word":"Project",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"proyecto"
         },

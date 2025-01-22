@@ -1,7 +1,7 @@
 [
     {
         "word": "Furniture",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "muebles"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Chair",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "silla"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Table",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "mesa"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Bed",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cama"
         },
@@ -40,7 +40,7 @@
     },
     {
         "word": "Sofa",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "sofá"
         },
@@ -50,7 +50,7 @@
     },
     {
         "word": "Couch",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "sofá"
         },
@@ -59,7 +59,7 @@
     },
     {
         "word": "Desk",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "escritorio"
         },
@@ -69,7 +69,7 @@
     },
     {
         "word": "Shelf",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "estante"
         },
@@ -79,7 +79,7 @@
     },
     {
       "word":"Cabinet",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"armario"
       },
@@ -88,7 +88,7 @@
     },
     {
         "word": "Dresser",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cómoda"
         },
@@ -97,7 +97,7 @@
     },
      {
         "word":"Wardrobe",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"ropero"
         },
@@ -106,7 +106,7 @@
     },
     {
         "word":"Mirror",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "espejo"
         },
@@ -116,7 +116,7 @@
     },
      {
        "word":"Lamp",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"lámpara"
         },
@@ -126,7 +126,7 @@
     },
     {
         "word":"Clock",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "reloj"
         },
@@ -136,7 +136,7 @@
     },
     {
       "word":"Curtain",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"cortina"
        },
@@ -145,7 +145,7 @@
     },
     {
         "word":"Rug",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "alfombra"
         },
@@ -154,7 +154,7 @@
     },
    {
      "word":"Pillow",
-      "gender":"the",
+      "gender":null,
      "translations":{
        "es":"almohada"
      },
@@ -164,7 +164,7 @@
    },
     {
        "word":"Blanket",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"manta"
         },
@@ -173,7 +173,7 @@
     },
    {
      "word":"Towel",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"toalla"
       },
@@ -182,7 +182,7 @@
    },
      {
         "word":"Bookshelf",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"estantería"
         },
@@ -191,7 +191,7 @@
     },
       {
         "word":"Nightstand",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"mesita de noche"
         },

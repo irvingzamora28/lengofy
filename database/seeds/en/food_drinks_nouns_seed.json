@@ -1,7 +1,7 @@
 [
     {
         "word": "Food",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "comida"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Apple",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "manzana"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Banana",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "plátano"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Orange",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "naranja"
         },
@@ -40,7 +40,7 @@
     },
     {
         "word": "Strawberry",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "fresa"
         },
@@ -50,7 +50,7 @@
     },
      {
         "word":"Grape",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "uva"
         },
@@ -60,7 +60,7 @@
     },
     {
         "word": "Watermelon",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "sandía"
         },
@@ -70,7 +70,7 @@
     },
     {
       "word":"Pineapple",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"piña"
       },
@@ -80,7 +80,7 @@
     },
      {
         "word": "Lemon",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "limón"
         },
@@ -90,7 +90,7 @@
     },
     {
        "word":"Mango",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"mango"
         },
@@ -100,7 +100,7 @@
     },
     {
         "word":"Pear",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "pera"
         },
@@ -110,7 +110,7 @@
     },
      {
       "word":"Peach",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"melocotón"
         },
@@ -120,7 +120,7 @@
     },
     {
       "word":"Cherry",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"cereza"
       },
@@ -130,7 +130,7 @@
     },
      {
         "word": "Carrot",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "zanahoria"
         },
@@ -140,7 +140,7 @@
     },
     {
         "word":"Potato",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "patata"
         },
@@ -150,7 +150,7 @@
     },
      {
         "word":"Tomato",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "tomate"
         },
@@ -160,7 +160,7 @@
     },
     {
         "word": "Onion",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "cebolla"
         },
@@ -170,7 +170,7 @@
     },
     {
         "word":"Garlic",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"ajo"
         },
@@ -180,7 +180,7 @@
     },
     {
         "word": "Cucumber",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "pepino"
         },
@@ -190,7 +190,7 @@
     },
      {
         "word":"Broccoli",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"brócoli"
         },
@@ -200,7 +200,7 @@
     },
     {
       "word": "Lettuce",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"lechuga"
       },
@@ -210,7 +210,7 @@
     },
    {
      "word":"Corn",
-     "gender":"the",
+     "gender":null,
      "translations":{
         "es":"maíz"
       },
@@ -220,7 +220,7 @@
    },
    {
       "word":"Mushroom",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"seta"
       },
@@ -230,7 +230,7 @@
     },
    {
        "word":"Pepper",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"pimiento"
         },
@@ -240,7 +240,7 @@
     },
     {
        "word":"Egg",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"huevo"
        },
@@ -250,7 +250,7 @@
     },
     {
        "word":"Cheese",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"queso"
         },
@@ -260,7 +260,7 @@
     },
      {
       "word":"Milk",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"leche"
        },
@@ -270,7 +270,7 @@
     },
     {
        "word":"Yogurt",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"yogur"
        },
@@ -279,7 +279,7 @@
     },
      {
       "word":"Bread",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"pan"
       },
@@ -289,7 +289,7 @@
     },
      {
        "word":"Rice",
-       "gender":"the",
+       "gender":null,
         "translations":{
             "es":"arroz"
          },
@@ -299,7 +299,7 @@
     },
     {
         "word":"Pasta",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "pasta"
         },
@@ -309,7 +309,7 @@
     },
    {
         "word":"Noodles",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "fideos"
         },
@@ -319,7 +319,7 @@
     },
     {
         "word":"Meat",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"carne"
         },
@@ -329,7 +329,7 @@
     },
    {
        "word":"Chicken",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"pollo"
          },
@@ -339,7 +339,7 @@
    },
    {
         "word":"Fish",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"pescado"
         },
@@ -349,7 +349,7 @@
     },
      {
         "word":"Sausage",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"salchicha"
         },
@@ -359,7 +359,7 @@
     },
     {
         "word":"Hamburger",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"hamburguesa"
         },
@@ -369,7 +369,7 @@
     },
      {
         "word":"Pizza",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "pizza"
         },
@@ -379,7 +379,7 @@
     },
      {
        "word":"Fries",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"papas fritas"
         },
@@ -389,7 +389,7 @@
     },
     {
        "word":"Soup",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"sopa"
        },
@@ -399,7 +399,7 @@
     },
     {
         "word":"Salad",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"ensalada"
         },
@@ -409,7 +409,7 @@
     },
      {
       "word":"Cake",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"torta"
       },
@@ -419,7 +419,7 @@
      },
     {
         "word":"Chocolate",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"chocolate"
         },
@@ -429,7 +429,7 @@
     },
     {
         "word":"Ice cream",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"helado"
          },
@@ -439,7 +439,7 @@
     },
       {
         "word":"Candy",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"dulce"
         },
@@ -449,7 +449,7 @@
     },
     {
        "word":"Donut",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"dona"
         },
@@ -459,7 +459,7 @@
     },
     {
         "word":"Water",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"agua"
          },
@@ -469,7 +469,7 @@
     },
     {
         "word":"Juice",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"jugo"
         },
@@ -479,7 +479,7 @@
     },
     {
        "word":"Coffee",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"café"
         },
@@ -489,7 +489,7 @@
     },
     {
        "word":"Tea",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"té"
          },
@@ -499,7 +499,7 @@
     },
     {
        "word":"Wine",
-       "gender":"the",
+       "gender":null,
         "translations":{
            "es":"vino"
         },
@@ -509,7 +509,7 @@
     },
      {
         "word":"Beer",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"cerveza"
         },

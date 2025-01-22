@@ -1,7 +1,7 @@
 [
     {
         "word": "Body",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cuerpo"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Head",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cabeza"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Hair",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "pelo"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Face",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cara"
         },
@@ -40,7 +40,7 @@
     },
      {
         "word": "Forehead",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "frente"
         },
@@ -49,7 +49,7 @@
     },
      {
         "word": "Ear",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "oreja"
         },
@@ -59,7 +59,7 @@
     },
     {
         "word": "Eye",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "ojo"
         },
@@ -69,7 +69,7 @@
     },
     {
         "word": "Nose",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "nariz"
         },
@@ -79,7 +79,7 @@
     },
     {
         "word": "Mouth",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "boca"
         },
@@ -89,7 +89,7 @@
     },
      {
         "word": "Tooth",
-         "gender": "the",
+         "gender": null,
         "translations": {
             "es": "diente"
         },
@@ -99,7 +99,7 @@
     },
     {
         "word": "Tongue",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "lengua"
         },
@@ -109,7 +109,7 @@
     },
     {
         "word": "Chin",
-         "gender": "the",
+         "gender": null,
         "translations": {
             "es": "barbilla"
         },
@@ -118,7 +118,7 @@
     },
     {
         "word": "Neck",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "cuello"
         },
@@ -127,7 +127,7 @@
     },
     {
        "word": "Shoulder",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "hombro"
         },
@@ -136,7 +136,7 @@
     },
     {
         "word":"Arm",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es":"brazo"
         },
@@ -145,7 +145,7 @@
     },
     {
         "word":"Elbow",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "codo"
         },
@@ -154,7 +154,7 @@
     },
    {
       "word":"Wrist",
-       "gender":"the",
+       "gender":null,
       "translations":{
          "es":"muñeca"
        },
@@ -163,7 +163,7 @@
    },
     {
         "word": "Hand",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "mano"
         },
@@ -173,7 +173,7 @@
     },
     {
         "word": "Finger",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "dedo"
         },
@@ -183,7 +183,7 @@
     },
     {
        "word":"Thumb",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es": "pulgar"
        },
@@ -192,7 +192,7 @@
     },
     {
         "word":"Nail",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"uña"
         },
@@ -201,7 +201,7 @@
     },
      {
         "word": "Chest",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "pecho"
         },
@@ -210,7 +210,7 @@
     },
     {
        "word":"Back",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"espalda"
        },
@@ -219,7 +219,7 @@
     },
      {
        "word":"Stomach",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"estómago"
         },
@@ -228,7 +228,7 @@
     },
     {
         "word": "Waist",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "cintura"
         },
@@ -237,7 +237,7 @@
     },
      {
         "word": "Hip",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "cadera"
         },
@@ -246,7 +246,7 @@
     },
     {
         "word": "Leg",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "pierna"
         },
@@ -255,7 +255,7 @@
     },
      {
        "word":"Thigh",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"muslo"
         },
@@ -264,7 +264,7 @@
     },
    {
       "word":"Knee",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"rodilla"
       },
@@ -273,7 +273,7 @@
    },
    {
        "word":"Calf",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"pantorrilla"
         },
@@ -282,7 +282,7 @@
    },
     {
        "word":"Ankle",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"tobillo"
        },
@@ -291,7 +291,7 @@
     },
     {
         "word": "Foot",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "pie"
         },
@@ -301,7 +301,7 @@
     },
      {
        "word":"Toe",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"dedo del pie"
         },
@@ -310,7 +310,7 @@
     },
      {
        "word":"Heel",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"talón"
         },
@@ -319,7 +319,7 @@
     },
       {
         "word":"Skin",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"piel"
         },
@@ -328,7 +328,7 @@
     },
     {
         "word":"Bone",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"hueso"
         },
@@ -337,7 +337,7 @@
     },
      {
         "word":"Muscle",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"músculo"
         },
@@ -346,7 +346,7 @@
     },
     {
       "word":"Heart",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"corazón"
        },
@@ -356,7 +356,7 @@
     },
     {
       "word":"Brain",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"cerebro"
        },
@@ -365,7 +365,7 @@
     },
      {
        "word":"Blood",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"sangre"
        },

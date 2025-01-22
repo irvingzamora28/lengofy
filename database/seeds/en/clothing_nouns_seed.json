@@ -1,7 +1,7 @@
 [
     {
         "word": "Clothing",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "ropa"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Shirt",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "camisa"
         },
@@ -20,7 +20,7 @@
     },
      {
         "word": "T-shirt",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "camiseta"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Pants",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "pantalones"
         },
@@ -40,7 +40,7 @@
     },
     {
         "word": "Jeans",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "vaqueros"
         },
@@ -50,7 +50,7 @@
     },
      {
         "word": "Shorts",
-         "gender": "the",
+         "gender": null,
         "translations": {
             "es": "pantalones cortos"
         },
@@ -60,7 +60,7 @@
     },
     {
        "word":"Skirt",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "falda"
         },
@@ -70,7 +70,7 @@
     },
     {
         "word": "Dress",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "vestido"
         },
@@ -80,7 +80,7 @@
     },
     {
         "word": "Jacket",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "chaqueta"
         },
@@ -90,7 +90,7 @@
     },
     {
         "word": "Coat",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "abrigo"
         },
@@ -100,7 +100,7 @@
     },
     {
         "word":"Sweater",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "suéter"
         },
@@ -110,7 +110,7 @@
     },
     {
         "word":"Hoodie",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"sudadera con capucha"
         },
@@ -119,7 +119,7 @@
     },
      {
         "word": "Blouse",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "blusa"
         },
@@ -128,7 +128,7 @@
     },
      {
         "word":"Suit",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "traje"
         },
@@ -138,7 +138,7 @@
     },
      {
        "word":"Tie",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"corbata"
        },
@@ -148,7 +148,7 @@
     },
     {
         "word": "Belt",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "cinturón"
         },
@@ -157,7 +157,7 @@
     },
      {
         "word":"Underwear",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"ropa interior"
         },
@@ -166,7 +166,7 @@
     },
     {
        "word":"Socks",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"calcetines"
         },
@@ -176,7 +176,7 @@
     },
       {
         "word": "Shoes",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "zapatos"
         },
@@ -186,7 +186,7 @@
     },
     {
         "word": "Boots",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "botas"
         },
@@ -196,7 +196,7 @@
     },
      {
         "word":"Sneakers",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"zapatillas de deporte"
         },
@@ -206,7 +206,7 @@
     },
    {
        "word":"Sandals",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"sandalias"
        },
@@ -216,7 +216,7 @@
    },
     {
         "word": "Hat",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "sombrero"
         },
@@ -226,7 +226,7 @@
     },
     {
       "word":"Cap",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"gorra"
        },
@@ -236,7 +236,7 @@
     },
     {
        "word":"Gloves",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"guantes"
         },
@@ -246,7 +246,7 @@
     },
     {
        "word":"Scarf",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"bufanda"
        },
@@ -256,7 +256,7 @@
     },
    {
      "word":"Swimsuit",
-     "gender":"the",
+     "gender":null,
      "translations":{
        "es":"traje de baño"
      },
@@ -266,7 +266,7 @@
     },
     {
        "word":"Pajamas",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"pijama"
        },
@@ -275,7 +275,7 @@
     },
     {
         "word":"Purse",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"bolso"
         },
@@ -285,7 +285,7 @@
     },
     {
        "word":"Wallet",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"billetera"
        },
@@ -295,7 +295,7 @@
     },
     {
        "word":"Backpack",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"mochila"
        },
@@ -305,7 +305,7 @@
     },
       {
         "word":"Sunglasses",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"gafas de sol"
         },
@@ -315,7 +315,7 @@
     },
      {
        "word":"Watch",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"reloj"
         },
@@ -325,7 +325,7 @@
     },
    {
       "word":"Jewelry",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"joyas"
       },
@@ -334,7 +334,7 @@
    },
     {
        "word":"Ring",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"anillo"
        },
@@ -344,7 +344,7 @@
     },
      {
        "word":"Necklace",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"collar"
          },

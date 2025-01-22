@@ -1,7 +1,7 @@
 [
     {
         "word": "People",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "gente"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Family",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "familia"
         },
@@ -19,7 +19,7 @@
     },
     {
         "word": "Man",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "hombre"
         },
@@ -29,7 +29,7 @@
     },
     {
         "word": "Woman",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "mujer"
         },
@@ -39,7 +39,7 @@
     },
      {
         "word":"Child",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"niño/a"
         },
@@ -49,7 +49,7 @@
     },
     {
         "word": "Boy",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "niño"
         },
@@ -59,7 +59,7 @@
     },
     {
        "word":"Girl",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"niña"
         },
@@ -69,7 +69,7 @@
     },
     {
         "word": "Baby",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "bebé"
         },
@@ -79,7 +79,7 @@
     },
     {
         "word": "Teenager",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "adolescente"
         },
@@ -88,7 +88,7 @@
     },
      {
        "word":"Adult",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"adulto/a"
         },
@@ -97,7 +97,7 @@
     },
      {
        "word":"Elderly",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"anciano/a"
        },
@@ -106,7 +106,7 @@
     },
     {
         "word":"Parent",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"padre/madre"
         },
@@ -115,7 +115,7 @@
     },
     {
         "word":"Mother",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"madre"
         },
@@ -125,7 +125,7 @@
     },
     {
         "word":"Father",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"padre"
         },
@@ -135,7 +135,7 @@
     },
     {
         "word":"Son",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"hijo"
         },
@@ -145,7 +145,7 @@
     },
     {
         "word":"Daughter",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"hija"
         },
@@ -155,7 +155,7 @@
     },
     {
       "word":"Sibling",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"hermano/a"
        },
@@ -164,7 +164,7 @@
     },
      {
        "word":"Brother",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"hermano"
         },
@@ -173,7 +173,7 @@
     },
     {
         "word":"Sister",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"hermana"
         },
@@ -182,7 +182,7 @@
     },
     {
        "word":"Grandparent",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"abuelo/a"
         },
@@ -191,7 +191,7 @@
     },
     {
         "word":"Grandmother",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"abuela"
         },
@@ -201,7 +201,7 @@
     },
     {
        "word":"Grandfather",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"abuelo"
         },
@@ -211,7 +211,7 @@
     },
    {
        "word":"Grandson",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"nieto"
          },
@@ -220,7 +220,7 @@
     },
    {
         "word":"Granddaughter",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"nieta"
          },
@@ -229,7 +229,7 @@
     },
      {
       "word":"Uncle",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"tío"
        },
@@ -238,7 +238,7 @@
      },
      {
        "word":"Aunt",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"tía"
         },
@@ -247,7 +247,7 @@
     },
    {
       "word":"Cousin",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"primo/a"
       },
@@ -256,7 +256,7 @@
     },
     {
         "word":"Nephew",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"sobrino"
          },
@@ -265,7 +265,7 @@
     },
     {
       "word":"Niece",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"sobrina"
         },
@@ -274,7 +274,7 @@
     },
      {
         "word":"Spouse",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cónyuge"
          },
@@ -283,7 +283,7 @@
     },
     {
         "word":"Husband",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"esposo"
         },
@@ -293,7 +293,7 @@
     },
     {
         "word": "Wife",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"esposa"
         },
@@ -303,7 +303,7 @@
     },
      {
         "word":"Friend",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"amigo/a"
          },
@@ -313,7 +313,7 @@
     },
     {
         "word":"Neighbor",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"vecino/a"
         },
@@ -322,7 +322,7 @@
     },
      {
        "word":"Colleague",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"colega"
         },
@@ -331,7 +331,7 @@
     },
     {
       "word":"Boss",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"jefe/a"
        },

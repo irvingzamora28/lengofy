@@ -1,7 +1,7 @@
 [
   {
     "word": "Profession",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "profesión"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Teacher",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "profesor/a"
     },
@@ -20,7 +20,7 @@
   },
   {
     "word": "Student",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "estudiante"
     },
@@ -30,7 +30,7 @@
   },
   {
     "word": "Doctor",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "médico/a"
     },
@@ -40,7 +40,7 @@
   },
   {
     "word": "Nurse",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "enfermero/a"
     },
@@ -50,7 +50,7 @@
   },
   {
     "word": "Engineer",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "ingeniero/a"
     },
@@ -60,7 +60,7 @@
   },
   {
     "word": "Artist",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "artista"
     },
@@ -70,7 +70,7 @@
   },
    {
         "word":"Writer",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"escritor/a"
         },
@@ -80,7 +80,7 @@
     },
   {
     "word": "Lawyer",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "abogado/a"
     },
@@ -90,7 +90,7 @@
   },
     {
         "word":"Judge",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"juez/a"
         },
@@ -100,7 +100,7 @@
     },
  {
     "word": "Chef",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "chef"
     },
@@ -110,7 +110,7 @@
   },
     {
         "word":"Baker",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"panadero/a"
         },
@@ -120,7 +120,7 @@
     },
    {
       "word":"Waiter",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"camarero/a"
        },
@@ -130,7 +130,7 @@
     },
     {
       "word":"Mechanic",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"mecánico/a"
         },
@@ -140,7 +140,7 @@
     },
     {
       "word":"Electrician",
-       "gender":"the",
+       "gender":null,
        "translations":{
         "es":"electricista"
        },
@@ -149,7 +149,7 @@
     },
      {
        "word":"Plumber",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"fontanero/a"
        },
@@ -158,7 +158,7 @@
     },
    {
         "word":"Carpenter",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"carpintero/a"
         },
@@ -168,7 +168,7 @@
     },
     {
        "word":"Farmer",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"granjero/a"
         },
@@ -178,7 +178,7 @@
     },
      {
        "word":"Fisherman",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"pescador"
          },
@@ -188,7 +188,7 @@
     },
     {
        "word":"Pilot",
-       "gender":"the",
+       "gender":null,
         "translations":{
           "es":"piloto"
          },
@@ -198,7 +198,7 @@
     },
     {
        "word":"Soldier",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"soldado"
         },
@@ -208,7 +208,7 @@
     },
     {
         "word":"Police officer",
-         "gender":"the",
+         "gender":null,
          "translations":{
              "es":"policía"
          },
@@ -218,7 +218,7 @@
     },
     {
        "word":"Firefighter",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"bombero/a"
        },
@@ -228,7 +228,7 @@
     },
    {
         "word":"Scientist",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"científico/a"
         },
@@ -238,7 +238,7 @@
    },
     {
        "word":"Accountant",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"contador/a"
         },
@@ -247,7 +247,7 @@
     },
    {
        "word":"Musician",
-       "gender":"the",
+       "gender":null,
         "translations":{
             "es":"músico/a"
         },
@@ -257,7 +257,7 @@
     },
     {
        "word":"Dancer",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"bailarín/a"
          },
@@ -267,7 +267,7 @@
     },
     {
         "word":"Actor",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"actor/actriz"
          },
@@ -277,7 +277,7 @@
     },
     {
         "word":"Athlete",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"atleta"
         },
@@ -287,7 +287,7 @@
     },
      {
        "word":"Hairdresser",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"peluquero/a"
         },
@@ -297,7 +297,7 @@
     },
    {
        "word":"Journalist",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"periodista"
         },
@@ -306,7 +306,7 @@
    },
    {
         "word":"Librarian",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"bibliotecario/a"
         },
@@ -315,7 +315,7 @@
    },
     {
        "word":"Photographer",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"fotógrafo/a"
         },
@@ -325,7 +325,7 @@
     },
     {
        "word":"Designer",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"diseñador/a"
          },
@@ -335,7 +335,7 @@
     },
    {
       "word":"Programmer",
-      "gender":"the",
+      "gender":null,
        "translations":{
           "es":"programador/a"
         },
@@ -345,7 +345,7 @@
    },
     {
       "word":"Dentist",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"dentista"
        },
@@ -355,7 +355,7 @@
    },
    {
        "word":"Pharmacist",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"farmacéutico/a"
          },

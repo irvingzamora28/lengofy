@@ -1,7 +1,7 @@
 [
   {
     "word": "Technology",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "tecnología"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Computer",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "ordenador"
     },
@@ -20,7 +20,7 @@
   },
   {
     "word": "Laptop",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "portátil"
     },
@@ -30,7 +30,7 @@
   },
   {
     "word": "Phone",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "teléfono"
     },
@@ -40,7 +40,7 @@
   },
   {
     "word": "Smartphone",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "teléfono inteligente"
     },
@@ -50,7 +50,7 @@
   },
   {
     "word": "Tablet",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "tableta"
     },
@@ -60,7 +60,7 @@
   },
   {
     "word": "Internet",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "internet"
     },
@@ -69,7 +69,7 @@
   },
   {
     "word": "Website",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "sitio web"
     },
@@ -78,7 +78,7 @@
   },
  {
     "word":"Email",
-     "gender":"the",
+     "gender":null,
     "translations":{
        "es":"correo electrónico"
     },
@@ -88,7 +88,7 @@
  },
   {
      "word":"Password",
-     "gender":"the",
+     "gender":null,
      "translations":{
       "es":"contraseña"
      },
@@ -97,7 +97,7 @@
   },
     {
       "word":"Software",
-       "gender":"the",
+       "gender":null,
       "translations":{
           "es":"software"
        },
@@ -106,7 +106,7 @@
     },
     {
       "word":"Application",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"aplicación"
         },
@@ -116,7 +116,7 @@
     },
      {
       "word":"Program",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"programa"
          },
@@ -125,7 +125,7 @@
      },
     {
       "word":"Code",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"código"
        },
@@ -134,7 +134,7 @@
     },
   {
     "word": "Keyboard",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "teclado"
     },
@@ -144,7 +144,7 @@
   },
   {
         "word":"Mouse",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"ratón"
         },
@@ -154,7 +154,7 @@
     },
    {
         "word":"Screen",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"pantalla"
         },
@@ -163,7 +163,7 @@
     },
   {
     "word": "Printer",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "impresora"
     },
@@ -172,7 +172,7 @@
   },
     {
       "word":"Scanner",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"escáner"
         },
@@ -181,7 +181,7 @@
     },
      {
         "word":"Camera",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"cámara"
          },
@@ -191,7 +191,7 @@
     },
     {
         "word":"Headphones",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"auriculares"
          },
@@ -201,7 +201,7 @@
     },
   {
     "word": "Speaker",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "altavoz"
     },
@@ -211,7 +211,7 @@
   },
   {
     "word": "Microphone",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "micrófono"
     },
@@ -221,7 +221,7 @@
   },
     {
       "word":"Battery",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"batería"
       },
@@ -230,7 +230,7 @@
     },
      {
        "word":"Charger",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"cargador"
          },
@@ -239,7 +239,7 @@
      },
   {
     "word": "Cable",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "cable"
     },
@@ -248,7 +248,7 @@
   },
     {
        "word":"Remote Control",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"control remoto"
         },
@@ -258,7 +258,7 @@
     },
     {
        "word":"Television",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"televisión"
         },
@@ -268,7 +268,7 @@
     },
     {
       "word":"Radio",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"radio"
        },
@@ -278,7 +278,7 @@
     },
    {
       "word":"Robot",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"robot"
         },
@@ -288,7 +288,7 @@
     },
    {
         "word":"Game console",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"consola de juegos"
         },
@@ -298,7 +298,7 @@
     },
     {
         "word":"USB",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"USB"
         },

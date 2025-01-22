@@ -1,7 +1,7 @@
 [
     {
         "word": "Weather",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "tiempo"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Sun",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "sol"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Cloud",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "nube"
         },
@@ -30,7 +30,7 @@
     },
      {
         "word":"Rain",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "lluvia"
         },
@@ -40,7 +40,7 @@
     },
    {
         "word":"Snow",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"nieve"
         },
@@ -50,7 +50,7 @@
     },
     {
         "word":"Wind",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "viento"
         },
@@ -59,7 +59,7 @@
     },
     {
         "word":"Storm",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"tormenta"
          },
@@ -69,7 +69,7 @@
     },
     {
         "word":"Thunder",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "trueno"
         },
@@ -78,7 +78,7 @@
     },
      {
         "word":"Lightning",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "relámpago"
         },
@@ -87,7 +87,7 @@
     },
      {
        "word":"Fog",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"niebla"
        },
@@ -96,7 +96,7 @@
     },
      {
        "word":"Hail",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"granizo"
         },
@@ -106,7 +106,7 @@
     },
    {
       "word":"Ice",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"hielo"
        },
@@ -116,7 +116,7 @@
    },
   {
     "word": "Temperature",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "temperatura"
     },
@@ -125,7 +125,7 @@
   },
   {
     "word": "Hot",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "calor"
     },
@@ -135,7 +135,7 @@
   },
   {
     "word": "Cold",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "frío"
     },
@@ -145,7 +145,7 @@
   },
     {
         "word":"Warm",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cálido"
         },
@@ -154,7 +154,7 @@
     },
     {
         "word":"Cool",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"fresco"
         },
@@ -163,7 +163,7 @@
     },
      {
         "word":"Sunny",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"soleado"
          },
@@ -173,7 +173,7 @@
     },
      {
        "word":"Cloudy",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"nublado"
         },
@@ -183,7 +183,7 @@
     },
      {
         "word":"Rainy",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"lluvioso"
          },
@@ -193,7 +193,7 @@
     },
    {
      "word":"Snowy",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"nevado"
        },
@@ -203,7 +203,7 @@
     },
     {
         "word":"Windy",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"ventoso"
         },
@@ -212,7 +212,7 @@
     },
     {
        "word":"Stormy",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"tormentoso"
          },
@@ -222,7 +222,7 @@
     },
    {
        "word":"Humid",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"húmedo"
         },
@@ -231,7 +231,7 @@
     },
    {
         "word":"Dry",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"seco"
          },

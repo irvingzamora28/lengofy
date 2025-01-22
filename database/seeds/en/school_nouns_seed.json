@@ -1,7 +1,7 @@
 [
   {
     "word": "School",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "escuela"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Teacher",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "profesor/a"
     },
@@ -20,7 +20,7 @@
   },
   {
     "word": "Student",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "estudiante"
     },
@@ -30,7 +30,7 @@
   },
   {
     "word": "Class",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "clase"
     },
@@ -39,7 +39,7 @@
   },
   {
     "word": "Classroom",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "aula"
     },
@@ -48,7 +48,7 @@
   },
     {
         "word":"Book",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"libro"
         },
@@ -58,7 +58,7 @@
     },
    {
         "word":"Notebook",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"cuaderno"
         },
@@ -67,7 +67,7 @@
     },
     {
         "word":"Pencil",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es":"lápiz"
         },
@@ -77,7 +77,7 @@
     },
      {
         "word":"Pen",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"bolígrafo"
         },
@@ -87,7 +87,7 @@
     },
   {
     "word": "Eraser",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "goma de borrar"
     },
@@ -96,7 +96,7 @@
   },
  {
     "word": "Ruler",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "regla"
     },
@@ -105,7 +105,7 @@
   },
  {
     "word": "Scissors",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "tijeras"
     },
@@ -115,7 +115,7 @@
   },
  {
    "word":"Backpack",
-   "gender":"the",
+   "gender":null,
    "translations":{
      "es":"mochila"
    },
@@ -125,7 +125,7 @@
   },
   {
     "word": "Desk",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "escritorio"
     },
@@ -135,7 +135,7 @@
   },
   {
       "word":"Chair",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"silla"
       },
@@ -145,7 +145,7 @@
     },
   {
     "word": "Board",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "pizarra"
     },
@@ -154,7 +154,7 @@
   },
   {
     "word": "Map",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "mapa"
     },
@@ -163,7 +163,7 @@
   },
     {
         "word":"Globe",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"globo terráqueo"
         },
@@ -172,7 +172,7 @@
     },
     {
        "word":"Projector",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"proyector"
         },
@@ -181,7 +181,7 @@
     },
    {
         "word":"Computer",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"ordenador"
         },
@@ -191,7 +191,7 @@
     },
      {
        "word":"Textbook",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"libro de texto"
         },
@@ -200,7 +200,7 @@
      },
     {
       "word":"Homework",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"deberes"
       },
@@ -209,7 +209,7 @@
     },
   {
     "word": "Exam",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "examen"
     },
@@ -218,7 +218,7 @@
   },
     {
        "word":"Test",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"prueba"
         },
@@ -227,7 +227,7 @@
     },
    {
       "word":"Grade",
-      "gender":"the",
+      "gender":null,
        "translations":{
         "es":"nota"
        },
@@ -236,7 +236,7 @@
     },
      {
        "word":"Subject",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"asignatura"
          },
@@ -245,7 +245,7 @@
     },
    {
         "word":"Science",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"ciencia"
         },
@@ -254,7 +254,7 @@
     },
     {
        "word":"Math",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"matemáticas"
          },
@@ -263,7 +263,7 @@
     },
    {
        "word":"History",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"historia"
          },
@@ -272,7 +272,7 @@
     },
    {
       "word":"Geography",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"geografía"
        },
@@ -281,7 +281,7 @@
     },
   {
         "word":"Literature",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"literatura"
          },
@@ -290,7 +290,7 @@
     },
     {
        "word":"Art",
-       "gender":"the",
+       "gender":null,
         "translations":{
            "es":"arte"
         },
@@ -299,7 +299,7 @@
    },
      {
        "word":"Music",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"música"
          },
@@ -308,7 +308,7 @@
     },
   {
     "word": "Language",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "idioma"
     },
@@ -317,7 +317,7 @@
   },
   {
     "word": "Dictionary",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "diccionario"
     },
@@ -326,7 +326,7 @@
   },
  {
     "word":"Library",
-     "gender":"the",
+     "gender":null,
     "translations":{
       "es":"biblioteca"
     },

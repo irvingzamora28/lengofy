@@ -1,7 +1,7 @@
 [
     {
         "word": "Household",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "hogar"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "House",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "casa"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Apartment",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "apartamento"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Room",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "habitación"
         },
@@ -39,7 +39,7 @@
     },
     {
         "word": "Kitchen",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cocina"
         },
@@ -49,7 +49,7 @@
     },
      {
        "word":"Living Room",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"sala de estar"
         },
@@ -59,7 +59,7 @@
     },
     {
         "word": "Bathroom",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "baño"
         },
@@ -69,7 +69,7 @@
     },
       {
         "word":"Bedroom",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"dormitorio"
         },
@@ -79,7 +79,7 @@
     },
     {
         "word": "Dining Room",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "comedor"
         },
@@ -88,7 +88,7 @@
     },
     {
       "word":"Balcony",
-        "gender":"the",
+        "gender":null,
       "translations":{
          "es":"balcón"
       },
@@ -97,7 +97,7 @@
     },
     {
         "word":"Garden",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"jardín"
         },
@@ -107,7 +107,7 @@
     },
     {
         "word": "Door",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "puerta"
         },
@@ -117,7 +117,7 @@
     },
     {
         "word": "Window",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "ventana"
         },
@@ -127,7 +127,7 @@
     },
     {
        "word":"Wall",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"pared"
         },
@@ -136,7 +136,7 @@
     },
     {
        "word":"Floor",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"piso"
         },
@@ -145,7 +145,7 @@
     },
      {
         "word":"Ceiling",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"techo"
         },
@@ -154,7 +154,7 @@
     },
     {
       "word":"Stairs",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"escaleras"
       },
@@ -163,7 +163,7 @@
     },
     {
        "word":"Key",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"llave"
         },
@@ -173,7 +173,7 @@
     },
    {
        "word":"Lock",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"cerradura"
         },
@@ -183,7 +183,7 @@
     },
      {
        "word":"Spoon",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"cuchara"
         },
@@ -193,7 +193,7 @@
     },
     {
        "word":"Fork",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"tenedor"
         },
@@ -203,7 +203,7 @@
     },
    {
       "word":"Knife",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"cuchillo"
        },
@@ -213,7 +213,7 @@
    },
     {
         "word":"Plate",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "plato"
         },
@@ -223,7 +223,7 @@
     },
       {
         "word":"Bowl",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"tazón"
          },
@@ -233,7 +233,7 @@
     },
       {
         "word":"Glass",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"vaso"
           },
@@ -243,7 +243,7 @@
     },
     {
         "word":"Cup",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"taza"
          },
@@ -253,7 +253,7 @@
     },
    {
         "word":"Pot",
-        "gender":"the",
+        "gender":null,
          "translations":{
             "es":"olla"
          },
@@ -263,7 +263,7 @@
     },
    {
         "word":"Pan",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"sartén"
          },
@@ -273,7 +273,7 @@
     },
     {
       "word":"Refrigerator",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"refrigerador"
         },
@@ -283,7 +283,7 @@
     },
     {
         "word":"Oven",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"horno"
         },
@@ -293,7 +293,7 @@
     },
    {
         "word":"Microwave",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"microondas"
         },
@@ -302,7 +302,7 @@
     },
     {
         "word":"Washing machine",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"lavadora"
         },
@@ -312,7 +312,7 @@
     },
     {
       "word":"Dryer",
-      "gender":"the",
+      "gender":null,
        "translations":{
         "es":"secadora"
         },
@@ -321,7 +321,7 @@
     },
     {
       "word":"Trash can",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"basurero"
       },
@@ -331,7 +331,7 @@
     },
    {
         "word":"Toilet",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"inodoro"
         },
@@ -341,7 +341,7 @@
     },
     {
         "word":"Shower",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"ducha"
         },
@@ -351,7 +351,7 @@
     },
    {
        "word":"Bathtub",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"bañera"
         },
@@ -361,7 +361,7 @@
     },
    {
       "word":"Sink",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"lavabo"
        },
@@ -371,7 +371,7 @@
    },
   {
         "word":"Soap",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"jabón"
         },
@@ -381,7 +381,7 @@
     },
    {
         "word":"Broom",
-        "gender":"the",
+        "gender":null,
          "translations":{
            "es":"escoba"
         },
@@ -391,7 +391,7 @@
    },
     {
         "word":"Vacuum cleaner",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"aspiradora"
          },
@@ -400,7 +400,7 @@
     },
     {
        "word":"Iron",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"plancha"
          },
@@ -409,7 +409,7 @@
     },
     {
         "word":"Bucket",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"cubeta"
         },
@@ -419,7 +419,7 @@
     },
     {
        "word":"Hanger",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"percha"
        },

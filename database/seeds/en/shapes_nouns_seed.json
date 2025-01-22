@@ -1,7 +1,7 @@
 [
   {
     "word": "Shape",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "forma"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Circle",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "círculo"
     },
@@ -20,7 +20,7 @@
   },
   {
     "word": "Square",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "cuadrado"
     },
@@ -30,7 +30,7 @@
   },
   {
     "word": "Triangle",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "triángulo"
     },
@@ -40,7 +40,7 @@
   },
   {
     "word": "Rectangle",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "rectángulo"
     },
@@ -49,7 +49,7 @@
   },
     {
         "word":"Oval",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"óvalo"
         },
@@ -58,7 +58,7 @@
     },
    {
         "word":"Star",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"estrella"
         },
@@ -68,7 +68,7 @@
     },
   {
     "word": "Heart",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "corazón"
     },
@@ -78,7 +78,7 @@
   },
   {
     "word": "Diamond",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "diamante"
     },
@@ -88,7 +88,7 @@
   },
    {
     "word":"Pentagon",
-    "gender":"the",
+    "gender":null,
     "translations":{
         "es":"pentágono"
      },
@@ -97,7 +97,7 @@
   },
    {
     "word":"Hexagon",
-    "gender":"the",
+    "gender":null,
     "translations":{
         "es":"hexágono"
       },
@@ -106,7 +106,7 @@
    },
    {
      "word":"Octagon",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"octógono"
       },
@@ -115,7 +115,7 @@
    },
  {
         "word":"Cube",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"cubo"
          },
@@ -124,7 +124,7 @@
     },
     {
       "word":"Sphere",
-        "gender":"the",
+        "gender":null,
       "translations":{
           "es":"esfera"
       },
@@ -133,7 +133,7 @@
     },
    {
        "word":"Cylinder",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"cilindro"
        },
@@ -142,7 +142,7 @@
     },
     {
       "word":"Cone",
-      "gender":"the",
+      "gender":null,
        "translations":{
          "es":"cono"
        },
@@ -151,7 +151,7 @@
     },
     {
         "word":"Pyramid",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"pirámide"
         },

@@ -1,7 +1,7 @@
 [
     {
         "word": "Nature",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "naturaleza"
         },
@@ -10,7 +10,7 @@
     },
      {
         "word": "Sky",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "cielo"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Sun",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "sol"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Moon",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "luna"
         },
@@ -40,7 +40,7 @@
     },
    {
         "word":"Star",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "estrella"
         },
@@ -50,7 +50,7 @@
     },
    {
         "word":"Cloud",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "nube"
         },
@@ -60,7 +60,7 @@
     },
     {
         "word": "Rain",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "lluvia"
         },
@@ -70,7 +70,7 @@
     },
     {
         "word":"Snow",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"nieve"
         },
@@ -80,7 +80,7 @@
     },
     {
         "word": "Wind",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "viento"
         },
@@ -89,7 +89,7 @@
     },
     {
         "word": "Thunder",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "trueno"
         },
@@ -98,7 +98,7 @@
     },
     {
         "word":"Lightning",
-         "gender":"the",
+         "gender":null,
         "translations": {
             "es": "relámpago"
         },
@@ -107,7 +107,7 @@
     },
     {
         "word":"Rainbow",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"arcoíris"
         },
@@ -117,7 +117,7 @@
     },
     {
       "word":"Earth",
-        "gender":"the",
+        "gender":null,
       "translations":{
         "es":"tierra"
        },
@@ -127,7 +127,7 @@
     },
     {
       "word":"Mountain",
-        "gender":"the",
+        "gender":null,
       "translations":{
         "es":"montaña"
        },
@@ -137,7 +137,7 @@
     },
     {
         "word":"Hill",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"colina"
         },
@@ -146,7 +146,7 @@
     },
      {
        "word":"Valley",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"valle"
         },
@@ -155,7 +155,7 @@
     },
      {
         "word":"Volcano",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"volcán"
          },
@@ -165,7 +165,7 @@
     },
     {
         "word":"Desert",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"desierto"
         },
@@ -174,7 +174,7 @@
     },
      {
         "word":"Forest",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"bosque"
         },
@@ -184,7 +184,7 @@
     },
     {
       "word":"Jungle",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"jungla"
        },
@@ -193,7 +193,7 @@
     },
     {
        "word":"Beach",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"playa"
        },
@@ -203,7 +203,7 @@
     },
     {
         "word":"Ocean",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"océano"
         },
@@ -213,7 +213,7 @@
     },
      {
        "word":"River",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"río"
         },
@@ -223,7 +223,7 @@
     },
    {
       "word":"Lake",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"lago"
        },
@@ -233,7 +233,7 @@
    },
    {
        "word":"Sea",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"mar"
         },
@@ -242,7 +242,7 @@
     },
     {
        "word":"Island",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"isla"
         },
@@ -252,7 +252,7 @@
     },
      {
        "word":"Rock",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"roca"
         },
@@ -261,7 +261,7 @@
     },
    {
      "word":"Stone",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"piedra"
        },
@@ -270,7 +270,7 @@
    },
     {
         "word":"Sand",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"arena"
         },
@@ -279,7 +279,7 @@
     },
      {
         "word":"Grass",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"césped"
          },
@@ -289,7 +289,7 @@
     },
     {
       "word":"Tree",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"árbol"
        },
@@ -299,7 +299,7 @@
     },
    {
       "word":"Flower",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"flor"
        },
@@ -309,7 +309,7 @@
    },
     {
        "word":"Plant",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"planta"
         },
@@ -319,7 +319,7 @@
     },
     {
        "word":"Leaf",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"hoja"
         },
@@ -329,7 +329,7 @@
     },
     {
         "word":"Soil",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"suelo"
         },
@@ -338,7 +338,7 @@
     },
     {
        "word":"Root",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"raíz"
          },
@@ -347,7 +347,7 @@
     },
     {
         "word":"Branch",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"rama"
          },

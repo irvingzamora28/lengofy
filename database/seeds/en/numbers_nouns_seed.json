@@ -1,7 +1,7 @@
 [
   {
     "word": "Number",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "número"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Zero",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "cero"
     },
@@ -19,7 +19,7 @@
   },
   {
     "word": "One",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "uno"
     },
@@ -28,7 +28,7 @@
   },
   {
     "word": "Two",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "dos"
     },
@@ -37,7 +37,7 @@
   },
   {
     "word": "Three",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "tres"
     },
@@ -46,7 +46,7 @@
   },
   {
     "word": "Four",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "cuatro"
     },
@@ -55,7 +55,7 @@
   },
   {
     "word": "Five",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "cinco"
     },
@@ -64,7 +64,7 @@
   },
   {
     "word": "Six",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "seis"
     },
@@ -73,7 +73,7 @@
   },
   {
     "word": "Seven",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "siete"
     },
@@ -82,7 +82,7 @@
   },
   {
     "word": "Eight",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "ocho"
     },
@@ -91,7 +91,7 @@
   },
   {
     "word": "Nine",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "nueve"
     },
@@ -100,7 +100,7 @@
   },
   {
     "word": "Ten",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "diez"
     },
@@ -109,7 +109,7 @@
   },
     {
     "word": "Eleven",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "once"
     },
@@ -118,7 +118,7 @@
   },
    {
     "word": "Twelve",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "doce"
     },
@@ -127,7 +127,7 @@
   },
     {
       "word":"Thirteen",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"trece"
       },
@@ -136,7 +136,7 @@
     },
      {
       "word":"Fourteen",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"catorce"
       },
@@ -145,7 +145,7 @@
     },
     {
       "word":"Fifteen",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"quince"
       },
@@ -154,7 +154,7 @@
    },
     {
         "word":"Sixteen",
-         "gender":"the",
+         "gender":null,
        "translations":{
            "es":"dieciséis"
         },
@@ -163,7 +163,7 @@
     },
     {
         "word":"Seventeen",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"diecisiete"
         },
@@ -172,7 +172,7 @@
     },
    {
       "word":"Eighteen",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"dieciocho"
       },
@@ -181,7 +181,7 @@
     },
    {
       "word":"Nineteen",
-      "gender":"the",
+      "gender":null,
        "translations":{
           "es":"diecinueve"
        },
@@ -190,7 +190,7 @@
    },
    {
     "word": "Twenty",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "veinte"
     },
@@ -199,7 +199,7 @@
    },
     {
       "word":"Thirty",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"treinta"
       },
@@ -208,7 +208,7 @@
     },
     {
       "word":"Forty",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"cuarenta"
       },
@@ -217,7 +217,7 @@
     },
     {
         "word":"Fifty",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"cincuenta"
         },
@@ -226,7 +226,7 @@
     },
    {
        "word":"Sixty",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"sesenta"
        },
@@ -235,7 +235,7 @@
     },
      {
       "word":"Seventy",
-      "gender":"the",
+      "gender":null,
       "translations":{
           "es":"setenta"
       },
@@ -244,7 +244,7 @@
      },
      {
        "word":"Eighty",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"ochenta"
         },
@@ -253,7 +253,7 @@
     },
      {
         "word":"Ninety",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"noventa"
          },
@@ -262,7 +262,7 @@
     },
   {
     "word": "Hundred",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "cien"
     },
@@ -271,7 +271,7 @@
   },
   {
     "word":"Thousand",
-     "gender":"the",
+     "gender":null,
     "translations":{
         "es":"mil"
     },
@@ -280,7 +280,7 @@
   },
     {
         "word":"Million",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"millón"
          },
@@ -289,7 +289,7 @@
     },
     {
         "word":"Billion",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"billón"
          },
@@ -298,7 +298,7 @@
     },
      {
       "word":"First",
-       "gender":"the",
+       "gender":null,
       "translations":{
           "es":"primero"
        },
@@ -307,7 +307,7 @@
     },
     {
       "word":"Second",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"segundo"
       },
@@ -316,7 +316,7 @@
     },
     {
         "word":"Third",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"tercero"
         },

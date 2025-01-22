@@ -1,7 +1,7 @@
 [
     {
         "word": "Transportation",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "transporte"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Car",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "coche"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Bus",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "autobús"
         },
@@ -30,7 +30,7 @@
     },
   {
         "word":"Train",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es":"tren"
         },
@@ -40,7 +40,7 @@
     },
    {
         "word":"Bicycle",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"bicicleta"
         },
@@ -50,7 +50,7 @@
     },
     {
         "word":"Motorcycle",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"motocicleta"
          },
@@ -60,7 +60,7 @@
     },
     {
       "word":"Truck",
-       "gender":"the",
+       "gender":null,
       "translations":{
          "es":"camión"
         },
@@ -70,7 +70,7 @@
     },
    {
         "word":"Taxi",
-        "gender":"the",
+        "gender":null,
          "translations":{
            "es":"taxi"
         },
@@ -80,7 +80,7 @@
     },
    {
         "word":"Airplane",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"avión"
          },
@@ -90,7 +90,7 @@
     },
    {
       "word":"Helicopter",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"helicóptero"
        },
@@ -100,7 +100,7 @@
    },
    {
         "word":"Ship",
-        "gender":"the",
+        "gender":null,
          "translations":{
             "es":"barco"
         },
@@ -110,7 +110,7 @@
     },
   {
     "word":"Boat",
-     "gender":"the",
+     "gender":null,
     "translations":{
       "es":"bote"
      },
@@ -120,7 +120,7 @@
   },
     {
       "word":"Subway",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"metro"
         },
@@ -130,7 +130,7 @@
     },
     {
         "word":"Tram",
-         "gender":"the",
+         "gender":null,
         "translations":{
           "es":"tranvía"
          },
@@ -140,7 +140,7 @@
     },
      {
         "word":"Scooter",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"patinete"
          },
@@ -150,7 +150,7 @@
      },
      {
         "word":"Skateboard",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"monopatín"
          },
@@ -160,7 +160,7 @@
     },
     {
       "word":"Road",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"carretera"
        },
@@ -169,7 +169,7 @@
     },
     {
         "word":"Street",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"calle"
          },
@@ -178,7 +178,7 @@
     },
     {
        "word":"Sidewalk",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"acera"
         },
@@ -187,7 +187,7 @@
     },
     {
         "word":"Bridge",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"puente"
         },
@@ -196,7 +196,7 @@
     },
     {
       "word":"Tunnel",
-      "gender":"the",
+      "gender":null,
        "translations":{
            "es":"túnel"
         },
@@ -205,7 +205,7 @@
     },
      {
         "word":"Airport",
-         "gender":"the",
+         "gender":null,
          "translations":{
            "es":"aeropuerto"
          },
@@ -215,7 +215,7 @@
     },
     {
        "word":"Station",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"estación"
         },
@@ -224,7 +224,7 @@
     },
     {
       "word":"Port",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"puerto"
         },
@@ -233,7 +233,7 @@
     },
    {
         "word":"Traffic light",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"semáforo"
         },
@@ -243,7 +243,7 @@
     },
     {
        "word":"Parking",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"aparcamiento"
          },
@@ -253,7 +253,7 @@
     },
    {
       "word":"Gas station",
-       "gender":"the",
+       "gender":null,
        "translations":{
          "es":"gasolinera"
        },

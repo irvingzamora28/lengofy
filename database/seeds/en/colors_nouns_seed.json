@@ -1,7 +1,7 @@
 [
     {
         "word": "Color",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "color"
         },
@@ -10,7 +10,7 @@
     },
     {
         "word": "Red",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "rojo"
         },
@@ -20,7 +20,7 @@
     },
     {
         "word": "Blue",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "azul"
         },
@@ -30,7 +30,7 @@
     },
     {
         "word": "Yellow",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "amarillo"
         },
@@ -40,7 +40,7 @@
     },
     {
         "word": "Green",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "verde"
         },
@@ -50,7 +50,7 @@
     },
     {
         "word": "Orange",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "naranja"
         },
@@ -60,7 +60,7 @@
     },
      {
         "word": "Purple",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "morado"
         },
@@ -70,7 +70,7 @@
     },
     {
        "word":"Pink",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "rosa"
         },
@@ -80,7 +80,7 @@
     },
     {
         "word": "Black",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "negro"
         },
@@ -90,7 +90,7 @@
     },
     {
         "word": "White",
-        "gender": "the",
+        "gender": null,
         "translations": {
             "es": "blanco"
         },
@@ -100,7 +100,7 @@
     },
      {
         "word":"Brown",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"marrón"
         },
@@ -110,7 +110,7 @@
     },
     {
         "word": "Gray",
-        "gender":"the",
+        "gender":null,
         "translations": {
             "es": "gris"
         },
@@ -120,7 +120,7 @@
     },
      {
        "word":"Beige",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"beige"
         },
@@ -129,7 +129,7 @@
     },
      {
        "word":"Gold",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"dorado"
         },
@@ -139,7 +139,7 @@
     },
     {
        "word":"Silver",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"plateado"
         },
@@ -149,7 +149,7 @@
     },
     {
       "word":"Cyan",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"cian"
       },
@@ -158,7 +158,7 @@
     },
     {
         "word":"Magenta",
-         "gender":"the",
+         "gender":null,
         "translations":{
             "es":"magenta"
         },
@@ -167,7 +167,7 @@
     },
     {
         "word":"Lime",
-        "gender":"the",
+        "gender":null,
         "translations":{
           "es":"lima"
          },
@@ -176,7 +176,7 @@
     },
      {
        "word":"Teal",
-        "gender":"the",
+        "gender":null,
         "translations":{
             "es":"verde azulado"
         },

@@ -1,7 +1,7 @@
 [
   {
     "word": "Health",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "salud"
     },
@@ -10,7 +10,7 @@
   },
   {
     "word": "Doctor",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "médico"
     },
@@ -20,7 +20,7 @@
   },
   {
     "word": "Nurse",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "enfermera"
     },
@@ -30,7 +30,7 @@
   },
   {
     "word": "Hospital",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "hospital"
     },
@@ -40,7 +40,7 @@
   },
   {
     "word": "Pharmacy",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "farmacia"
     },
@@ -50,7 +50,7 @@
   },
   {
     "word": "Medicine",
-    "gender": "the",
+    "gender": null,
     "translations": {
       "es": "medicina"
     },
@@ -60,7 +60,7 @@
   },
   {
     "word": "Pill",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "pastilla"
     },
@@ -70,7 +70,7 @@
   },
   {
     "word": "Syrup",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "jarabe"
     },
@@ -79,7 +79,7 @@
   },
   {
      "word": "Injection",
-      "gender":"the",
+      "gender":null,
     "translations": {
       "es": "inyección"
     },
@@ -89,7 +89,7 @@
   },
     {
     "word": "Bandage",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "venda"
     },
@@ -99,7 +99,7 @@
   },
   {
     "word": "Pain",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "dolor"
     },
@@ -108,7 +108,7 @@
   },
   {
     "word": "Headache",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "dolor de cabeza"
     },
@@ -118,7 +118,7 @@
   },
    {
       "word":"Fever",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"fiebre"
       },
@@ -128,7 +128,7 @@
     },
    {
       "word":"Cough",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"tos"
       },
@@ -138,7 +138,7 @@
    },
    {
       "word":"Cold",
-       "gender":"the",
+       "gender":null,
       "translations":{
           "es":"resfriado"
       },
@@ -148,7 +148,7 @@
    },
   {
     "word": "Flu",
-     "gender":"the",
+     "gender":null,
     "translations": {
       "es": "gripe"
     },
@@ -158,7 +158,7 @@
   },
   {
     "word": "Allergy",
-    "gender":"the",
+    "gender":null,
     "translations": {
       "es": "alergia"
     },
@@ -167,7 +167,7 @@
   },
   {
     "word":"Virus",
-     "gender":"the",
+     "gender":null,
      "translations":{
         "es":"virus"
      },
@@ -177,7 +177,7 @@
   },
    {
        "word":"Bacteria",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"bacteria"
        },
@@ -187,7 +187,7 @@
    },
    {
        "word":"Symptom",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"síntoma"
         },
@@ -196,7 +196,7 @@
     },
     {
       "word":"Diagnosis",
-      "gender":"the",
+      "gender":null,
       "translations":{
          "es":"diagnóstico"
       },
@@ -205,7 +205,7 @@
     },
     {
      "word":"Treatment",
-      "gender":"the",
+      "gender":null,
       "translations":{
         "es":"tratamiento"
       },
@@ -214,7 +214,7 @@
     },
    {
        "word":"Operation",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"operación"
         },
@@ -223,7 +223,7 @@
     },
      {
         "word":"Surgery",
-         "gender":"the",
+         "gender":null,
         "translations":{
            "es":"cirugía"
          },
@@ -232,7 +232,7 @@
     },
     {
        "word":"Patient",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"paciente"
         },
@@ -241,7 +241,7 @@
     },
    {
       "word":"Heart Rate",
-       "gender":"the",
+       "gender":null,
       "translations":{
         "es":"frecuencia cardíaca"
       },
@@ -250,7 +250,7 @@
     },
     {
        "word":"Blood Pressure",
-        "gender":"the",
+        "gender":null,
        "translations":{
            "es":"presión arterial"
         },
@@ -259,7 +259,7 @@
     },
     {
        "word":"Vaccine",
-        "gender":"the",
+        "gender":null,
        "translations":{
          "es":"vacuna"
         },
@@ -269,7 +269,7 @@
     },
    {
        "word":"Therapy",
-        "gender":"the",
+        "gender":null,
        "translations":{
             "es":"terapia"
         },
@@ -278,7 +278,7 @@
     },
    {
       "word":"Physical Therapy",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"fisioterapia"
        },
@@ -287,7 +287,7 @@
     },
     {
         "word":"Mental Health",
-         "gender":"the",
+         "gender":null,
          "translations":{
             "es":"salud mental"
          },
@@ -296,7 +296,7 @@
     },
      {
        "word":"Well-being",
-        "gender":"the",
+        "gender":null,
         "translations":{
            "es":"bienestar"
          },
@@ -305,7 +305,7 @@
     },
     {
       "word":"Exercise",
-       "gender":"the",
+       "gender":null,
       "translations":{
           "es":"ejercicio"
       },
@@ -315,7 +315,7 @@
     },
     {
        "word":"Diet",
-        "gender":"the",
+        "gender":null,
        "translations":{
           "es":"dieta"
          },
@@ -324,7 +324,7 @@
     },
     {
       "word":"Sleep",
-       "gender":"the",
+       "gender":null,
        "translations":{
           "es":"dormir"
        },
@@ -334,7 +334,7 @@
    },
    {
        "word":"Rest",
-       "gender":"the",
+       "gender":null,
        "translations":{
            "es":"descanso"
        },
