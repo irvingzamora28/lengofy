@@ -1,0 +1,375 @@
+[
+    {
+        "word": "Body",
+        "gender": "the",
+        "translations": {
+            "es": "cuerpo"
+        },
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Head",
+        "gender": "the",
+        "translations": {
+            "es": "cabeza"
+        },
+        "emoji": "👤",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Hair",
+        "gender": "the",
+        "translations": {
+            "es": "pelo"
+        },
+         "emoji": "🧑‍🦰",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Face",
+        "gender": "the",
+        "translations": {
+            "es": "cara"
+        },
+         "emoji": "😊",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+     {
+        "word": "Forehead",
+        "gender": "the",
+        "translations": {
+            "es": "frente"
+        },
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+     {
+        "word": "Ear",
+        "gender": "the",
+        "translations": {
+            "es": "oreja"
+        },
+         "emoji": "👂",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Eye",
+        "gender": "the",
+        "translations": {
+            "es": "ojo"
+        },
+         "emoji": "👁️",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Nose",
+        "gender": "the",
+        "translations": {
+            "es": "nariz"
+        },
+         "emoji": "👃",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Mouth",
+        "gender": "the",
+        "translations": {
+            "es": "boca"
+        },
+        "emoji": "👄",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+     {
+        "word": "Tooth",
+         "gender": "the",
+        "translations": {
+            "es": "diente"
+        },
+        "emoji": "🦷",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Tongue",
+        "gender": "the",
+        "translations": {
+            "es": "lengua"
+        },
+        "emoji": "👅",
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+    {
+        "word": "Chin",
+         "gender": "the",
+        "translations": {
+            "es": "barbilla"
+        },
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+    {
+        "word": "Neck",
+         "gender":"the",
+        "translations": {
+            "es": "cuello"
+        },
+         "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+       "word": "Shoulder",
+         "gender":"the",
+        "translations": {
+            "es": "hombro"
+        },
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word":"Arm",
+         "gender":"the",
+        "translations": {
+            "es":"brazo"
+        },
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word":"Elbow",
+        "gender":"the",
+        "translations": {
+            "es": "codo"
+        },
+        "difficulty_level": 2,
+        "category": "Body"
+    },
+   {
+      "word":"Wrist",
+       "gender":"the",
+      "translations":{
+         "es":"muñeca"
+       },
+       "difficulty_level": 2,
+       "category":"Body"
+   },
+    {
+        "word": "Hand",
+        "gender": "the",
+        "translations": {
+            "es": "mano"
+        },
+        "emoji":"✋",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+        "word": "Finger",
+         "gender":"the",
+        "translations": {
+            "es": "dedo"
+        },
+         "emoji":"  finger",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+    {
+       "word":"Thumb",
+        "gender":"the",
+       "translations":{
+         "es": "pulgar"
+       },
+      "difficulty_level":2,
+       "category":"Body"
+    },
+    {
+        "word":"Nail",
+         "gender":"the",
+        "translations":{
+           "es":"uña"
+        },
+        "difficulty_level":2,
+        "category":"Body"
+    },
+     {
+        "word": "Chest",
+         "gender":"the",
+        "translations": {
+            "es": "pecho"
+        },
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+    {
+       "word":"Back",
+        "gender":"the",
+       "translations":{
+         "es":"espalda"
+       },
+      "difficulty_level":1,
+        "category":"Body"
+    },
+     {
+       "word":"Stomach",
+        "gender":"the",
+       "translations":{
+          "es":"estómago"
+        },
+       "difficulty_level": 2,
+        "category":"Body"
+    },
+    {
+        "word": "Waist",
+         "gender":"the",
+        "translations": {
+            "es": "cintura"
+        },
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+     {
+        "word": "Hip",
+         "gender":"the",
+        "translations": {
+            "es": "cadera"
+        },
+        "difficulty_level": 2,
+         "category": "Body"
+    },
+    {
+        "word": "Leg",
+         "gender":"the",
+        "translations": {
+            "es": "pierna"
+        },
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+     {
+       "word":"Thigh",
+        "gender":"the",
+       "translations":{
+         "es":"muslo"
+        },
+        "difficulty_level":2,
+       "category":"Body"
+    },
+   {
+      "word":"Knee",
+      "gender":"the",
+      "translations":{
+        "es":"rodilla"
+      },
+       "difficulty_level":1,
+       "category":"Body"
+   },
+   {
+       "word":"Calf",
+        "gender":"the",
+       "translations":{
+          "es":"pantorrilla"
+        },
+        "difficulty_level":2,
+        "category":"Body"
+   },
+    {
+       "word":"Ankle",
+       "gender":"the",
+       "translations":{
+         "es":"tobillo"
+       },
+       "difficulty_level":2,
+       "category":"Body"
+    },
+    {
+        "word": "Foot",
+        "gender": "the",
+        "translations": {
+            "es": "pie"
+        },
+         "emoji":"🦶",
+        "difficulty_level": 1,
+         "category": "Body"
+    },
+     {
+       "word":"Toe",
+        "gender":"the",
+        "translations":{
+          "es":"dedo del pie"
+        },
+        "difficulty_level":1,
+        "category":"Body"
+    },
+     {
+       "word":"Heel",
+        "gender":"the",
+        "translations":{
+          "es":"talón"
+        },
+       "difficulty_level":2,
+        "category":"Body"
+    },
+      {
+        "word":"Skin",
+         "gender":"the",
+        "translations":{
+          "es":"piel"
+        },
+        "difficulty_level":1,
+        "category":"Body"
+    },
+    {
+        "word":"Bone",
+         "gender":"the",
+        "translations":{
+          "es":"hueso"
+        },
+        "difficulty_level":2,
+        "category":"Body"
+    },
+     {
+        "word":"Muscle",
+         "gender":"the",
+        "translations":{
+          "es":"músculo"
+        },
+        "difficulty_level":2,
+        "category":"Body"
+    },
+    {
+      "word":"Heart",
+       "gender":"the",
+       "translations":{
+         "es":"corazón"
+       },
+       "emoji":"❤️",
+       "difficulty_level":2,
+       "category":"Body"
+    },
+    {
+      "word":"Brain",
+       "gender":"the",
+       "translations":{
+         "es":"cerebro"
+       },
+       "difficulty_level":2,
+       "category":"Body"
+    },
+     {
+       "word":"Blood",
+       "gender":"the",
+       "translations":{
+         "es":"sangre"
+       },
+       "difficulty_level":2,
+       "category":"Body"
+   }
+]

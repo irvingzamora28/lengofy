@@ -1,0 +1,355 @@
+[
+    {
+        "word": "Clothing",
+        "gender": "the",
+        "translations": {
+            "es": "ropa"
+        },
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Shirt",
+        "gender": "the",
+        "translations": {
+            "es": "camisa"
+        },
+        "emoji": "👕",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+     {
+        "word": "T-shirt",
+        "gender": "the",
+        "translations": {
+            "es": "camiseta"
+        },
+        "emoji": "👕",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Pants",
+        "gender": "the",
+        "translations": {
+            "es": "pantalones"
+        },
+         "emoji": "👖",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Jeans",
+        "gender": "the",
+        "translations": {
+            "es": "vaqueros"
+        },
+         "emoji": "👖",
+         "difficulty_level": 1,
+        "category": "Clothing"
+    },
+     {
+        "word": "Shorts",
+         "gender": "the",
+        "translations": {
+            "es": "pantalones cortos"
+        },
+        "emoji": "🩳",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+       "word":"Skirt",
+        "gender":"the",
+        "translations": {
+            "es": "falda"
+        },
+        "emoji":" 🩱",
+        "difficulty_level": 1,
+         "category": "Clothing"
+    },
+    {
+        "word": "Dress",
+        "gender": "the",
+        "translations": {
+            "es": "vestido"
+        },
+        "emoji": "👗",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Jacket",
+        "gender":"the",
+        "translations": {
+            "es": "chaqueta"
+        },
+         "emoji": "🧥",
+         "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Coat",
+        "gender":"the",
+        "translations": {
+            "es": "abrigo"
+        },
+         "emoji": "🧥",
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+    {
+        "word":"Sweater",
+         "gender":"the",
+        "translations": {
+            "es": "suéter"
+        },
+        "emoji": "🥼",
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+    {
+        "word":"Hoodie",
+         "gender":"the",
+        "translations":{
+          "es":"sudadera con capucha"
+        },
+       "difficulty_level": 2,
+        "category":"Clothing"
+    },
+     {
+        "word": "Blouse",
+        "gender":"the",
+        "translations": {
+            "es": "blusa"
+        },
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+     {
+        "word":"Suit",
+         "gender":"the",
+        "translations": {
+            "es": "traje"
+        },
+        "emoji": "👔",
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+     {
+       "word":"Tie",
+       "gender":"the",
+       "translations":{
+         "es":"corbata"
+       },
+        "emoji":"👔",
+       "difficulty_level":2,
+        "category":"Clothing"
+    },
+    {
+        "word": "Belt",
+        "gender":"the",
+        "translations": {
+            "es": "cinturón"
+        },
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+     {
+        "word":"Underwear",
+        "gender":"the",
+        "translations":{
+          "es":"ropa interior"
+        },
+        "difficulty_level":2,
+        "category":"Clothing"
+    },
+    {
+       "word":"Socks",
+        "gender":"the",
+        "translations":{
+            "es":"calcetines"
+        },
+       "emoji":"🧦",
+        "difficulty_level": 1,
+        "category":"Clothing"
+    },
+      {
+        "word": "Shoes",
+        "gender": "the",
+        "translations": {
+            "es": "zapatos"
+        },
+         "emoji": "👞",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+        "word": "Boots",
+        "gender": "the",
+        "translations": {
+            "es": "botas"
+        },
+         "emoji":"🥾",
+        "difficulty_level": 2,
+        "category": "Clothing"
+    },
+     {
+        "word":"Sneakers",
+         "gender":"the",
+        "translations":{
+          "es":"zapatillas de deporte"
+        },
+        "emoji":"👟",
+        "difficulty_level": 1,
+       "category":"Clothing"
+    },
+   {
+       "word":"Sandals",
+        "gender":"the",
+       "translations":{
+         "es":"sandalias"
+       },
+        "emoji":"🩴",
+        "difficulty_level":2,
+        "category":"Clothing"
+   },
+    {
+        "word": "Hat",
+        "gender": "the",
+        "translations": {
+            "es": "sombrero"
+        },
+         "emoji": " 🎩",
+        "difficulty_level": 1,
+        "category": "Clothing"
+    },
+    {
+      "word":"Cap",
+       "gender":"the",
+       "translations":{
+         "es":"gorra"
+       },
+       "emoji":"🧢",
+      "difficulty_level":1,
+      "category":"Clothing"
+    },
+    {
+       "word":"Gloves",
+        "gender":"the",
+        "translations":{
+            "es":"guantes"
+        },
+         "emoji":"🧤",
+        "difficulty_level": 2,
+        "category":"Clothing"
+    },
+    {
+       "word":"Scarf",
+        "gender":"the",
+       "translations":{
+         "es":"bufanda"
+       },
+        "emoji":"🧣",
+       "difficulty_level":2,
+       "category":"Clothing"
+    },
+   {
+     "word":"Swimsuit",
+     "gender":"the",
+     "translations":{
+       "es":"traje de baño"
+     },
+      "emoji":"🩱",
+     "difficulty_level":2,
+     "category":"Clothing"
+    },
+    {
+       "word":"Pajamas",
+       "gender":"the",
+       "translations":{
+           "es":"pijama"
+       },
+       "difficulty_level":2,
+      "category":"Clothing"
+    },
+    {
+        "word":"Purse",
+        "gender":"the",
+        "translations":{
+            "es":"bolso"
+        },
+        "emoji":"👛",
+        "difficulty_level":2,
+        "category":"Clothing"
+    },
+    {
+       "word":"Wallet",
+       "gender":"the",
+       "translations":{
+          "es":"billetera"
+       },
+       "emoji":" 👝",
+       "difficulty_level":2,
+       "category":"Clothing"
+    },
+    {
+       "word":"Backpack",
+       "gender":"the",
+       "translations":{
+         "es":"mochila"
+       },
+       "emoji":"🎒",
+        "difficulty_level":1,
+       "category":"Clothing"
+    },
+      {
+        "word":"Sunglasses",
+         "gender":"the",
+        "translations":{
+            "es":"gafas de sol"
+        },
+         "emoji":"🕶️",
+        "difficulty_level": 2,
+       "category":"Clothing"
+    },
+     {
+       "word":"Watch",
+        "gender":"the",
+       "translations":{
+         "es":"reloj"
+        },
+         "emoji":"⌚",
+        "difficulty_level":2,
+       "category":"Clothing"
+    },
+   {
+      "word":"Jewelry",
+      "gender":"the",
+      "translations":{
+         "es":"joyas"
+      },
+      "difficulty_level":3,
+      "category":"Clothing"
+   },
+    {
+       "word":"Ring",
+       "gender":"the",
+       "translations":{
+          "es":"anillo"
+       },
+      "emoji":"💍",
+      "difficulty_level":3,
+      "category":"Clothing"
+    },
+     {
+       "word":"Necklace",
+        "gender":"the",
+        "translations":{
+           "es":"collar"
+         },
+          "emoji":"📿",
+        "difficulty_level":3,
+        "category":"Clothing"
+    }
+]

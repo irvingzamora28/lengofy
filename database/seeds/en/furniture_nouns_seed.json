@@ -1,0 +1,201 @@
+[
+    {
+        "word": "Furniture",
+        "gender": "the",
+        "translations": {
+            "es": "muebles"
+        },
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Chair",
+        "gender": "the",
+        "translations": {
+            "es": "silla"
+        },
+        "emoji": "🪑",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Table",
+        "gender": "the",
+        "translations": {
+            "es": "mesa"
+        },
+        "emoji": " 🪑",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Bed",
+        "gender": "the",
+        "translations": {
+            "es": "cama"
+        },
+        "emoji": " 🛏️",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Sofa",
+        "gender": "the",
+        "translations": {
+            "es": "sofá"
+        },
+         "emoji":"🛋️",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Couch",
+        "gender": "the",
+        "translations": {
+            "es": "sofá"
+        },
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Desk",
+        "gender": "the",
+        "translations": {
+            "es": "escritorio"
+        },
+         "emoji":" 🗄️",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+        "word": "Shelf",
+        "gender":"the",
+        "translations": {
+            "es": "estante"
+        },
+         "emoji":" 🗄️",
+        "difficulty_level": 2,
+        "category": "furniture"
+    },
+    {
+      "word":"Cabinet",
+      "gender":"the",
+      "translations":{
+         "es":"armario"
+      },
+      "difficulty_level": 2,
+        "category":"furniture"
+    },
+    {
+        "word": "Dresser",
+        "gender": "the",
+        "translations": {
+            "es": "cómoda"
+        },
+        "difficulty_level": 2,
+        "category": "furniture"
+    },
+     {
+        "word":"Wardrobe",
+         "gender":"the",
+        "translations":{
+          "es":"ropero"
+        },
+        "difficulty_level":2,
+        "category":"furniture"
+    },
+    {
+        "word":"Mirror",
+         "gender":"the",
+        "translations": {
+            "es": "espejo"
+        },
+        "emoji":"🪞",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+     {
+       "word":"Lamp",
+        "gender":"the",
+        "translations":{
+           "es":"lámpara"
+        },
+         "emoji":"💡",
+         "difficulty_level": 1,
+        "category":"furniture"
+    },
+    {
+        "word":"Clock",
+         "gender":"the",
+        "translations": {
+            "es": "reloj"
+        },
+          "emoji":"⏰",
+        "difficulty_level": 1,
+        "category": "furniture"
+    },
+    {
+      "word":"Curtain",
+       "gender":"the",
+       "translations":{
+         "es":"cortina"
+       },
+       "difficulty_level": 2,
+      "category":"furniture"
+    },
+    {
+        "word":"Rug",
+         "gender":"the",
+        "translations": {
+            "es": "alfombra"
+        },
+         "difficulty_level": 2,
+        "category": "furniture"
+    },
+   {
+     "word":"Pillow",
+      "gender":"the",
+     "translations":{
+       "es":"almohada"
+     },
+      "emoji":" 🛏️",
+      "difficulty_level":1,
+      "category":"furniture"
+   },
+    {
+       "word":"Blanket",
+        "gender":"the",
+       "translations":{
+           "es":"manta"
+        },
+        "difficulty_level": 2,
+        "category":"furniture"
+    },
+   {
+     "word":"Towel",
+      "gender":"the",
+      "translations":{
+         "es":"toalla"
+      },
+      "difficulty_level":2,
+      "category":"furniture"
+   },
+     {
+        "word":"Bookshelf",
+         "gender":"the",
+        "translations":{
+          "es":"estantería"
+        },
+         "difficulty_level":2,
+        "category":"furniture"
+    },
+      {
+        "word":"Nightstand",
+        "gender":"the",
+        "translations":{
+           "es":"mesita de noche"
+        },
+         "difficulty_level": 2,
+        "category":"furniture"
+    }
+]

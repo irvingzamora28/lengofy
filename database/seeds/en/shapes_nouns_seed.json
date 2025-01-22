@@ -1,0 +1,161 @@
+[
+  {
+    "word": "Shape",
+    "gender": "the",
+    "translations": {
+      "es": "forma"
+    },
+    "difficulty_level": 1,
+    "category": "shapes"
+  },
+  {
+    "word": "Circle",
+    "gender": "the",
+    "translations": {
+      "es": "círculo"
+    },
+    "emoji": "⚪",
+    "difficulty_level": 1,
+    "category": "shapes"
+  },
+  {
+    "word": "Square",
+    "gender": "the",
+    "translations": {
+      "es": "cuadrado"
+    },
+    "emoji": " ⬜",
+    "difficulty_level": 1,
+     "category": "shapes"
+  },
+  {
+    "word": "Triangle",
+    "gender": "the",
+    "translations": {
+      "es": "triángulo"
+    },
+      "emoji": " 🔺",
+    "difficulty_level": 1,
+     "category": "shapes"
+  },
+  {
+    "word": "Rectangle",
+    "gender": "the",
+    "translations": {
+      "es": "rectángulo"
+    },
+    "difficulty_level": 2,
+     "category": "shapes"
+  },
+    {
+        "word":"Oval",
+        "gender":"the",
+        "translations":{
+            "es":"óvalo"
+        },
+        "difficulty_level":2,
+        "category":"shapes"
+    },
+   {
+        "word":"Star",
+        "gender":"the",
+        "translations":{
+          "es":"estrella"
+        },
+        "emoji":"⭐",
+        "difficulty_level":1,
+        "category":"shapes"
+    },
+  {
+    "word": "Heart",
+    "gender":"the",
+    "translations": {
+      "es": "corazón"
+    },
+     "emoji":"❤️",
+    "difficulty_level": 1,
+    "category": "shapes"
+  },
+  {
+    "word": "Diamond",
+    "gender":"the",
+    "translations": {
+      "es": "diamante"
+    },
+      "emoji":"♦️",
+    "difficulty_level": 2,
+     "category": "shapes"
+  },
+   {
+    "word":"Pentagon",
+    "gender":"the",
+    "translations":{
+        "es":"pentágono"
+     },
+     "difficulty_level":2,
+     "category":"shapes"
+  },
+   {
+    "word":"Hexagon",
+    "gender":"the",
+    "translations":{
+        "es":"hexágono"
+      },
+       "difficulty_level":2,
+      "category":"shapes"
+   },
+   {
+     "word":"Octagon",
+      "gender":"the",
+      "translations":{
+         "es":"octógono"
+      },
+      "difficulty_level":2,
+      "category":"shapes"
+   },
+ {
+        "word":"Cube",
+        "gender":"the",
+        "translations":{
+          "es":"cubo"
+         },
+        "difficulty_level":2,
+        "category":"shapes"
+    },
+    {
+      "word":"Sphere",
+        "gender":"the",
+      "translations":{
+          "es":"esfera"
+      },
+       "difficulty_level":2,
+        "category":"shapes"
+    },
+   {
+       "word":"Cylinder",
+        "gender":"the",
+       "translations":{
+          "es":"cilindro"
+       },
+        "difficulty_level":2,
+        "category":"shapes"
+    },
+    {
+      "word":"Cone",
+      "gender":"the",
+       "translations":{
+         "es":"cono"
+       },
+        "difficulty_level":2,
+      "category":"shapes"
+    },
+    {
+        "word":"Pyramid",
+        "gender":"the",
+        "translations":{
+           "es":"pirámide"
+        },
+        "difficulty_level":2,
+        "category":"shapes"
+    }
+]

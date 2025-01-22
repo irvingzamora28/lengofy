@@ -1,0 +1,357 @@
+[
+    {
+        "word": "Nature",
+        "gender": "the",
+        "translations": {
+            "es": "naturaleza"
+        },
+        "difficulty_level": 1,
+        "category": "nature"
+    },
+     {
+        "word": "Sky",
+        "gender": "the",
+        "translations": {
+            "es": "cielo"
+        },
+        "emoji": " ☁️",
+        "difficulty_level": 1,
+        "category": "nature"
+    },
+    {
+        "word": "Sun",
+        "gender": "the",
+        "translations": {
+            "es": "sol"
+        },
+         "emoji":"☀️",
+        "difficulty_level": 1,
+        "category": "nature"
+    },
+    {
+        "word": "Moon",
+        "gender": "the",
+        "translations": {
+            "es": "luna"
+        },
+         "emoji":" 🌙",
+        "difficulty_level": 1,
+        "category": "nature"
+    },
+   {
+        "word":"Star",
+        "gender":"the",
+        "translations": {
+            "es": "estrella"
+        },
+        "emoji":"⭐",
+        "difficulty_level": 1,
+        "category":"nature"
+    },
+   {
+        "word":"Cloud",
+         "gender":"the",
+        "translations": {
+            "es": "nube"
+        },
+        "emoji":" ☁️",
+        "difficulty_level": 1,
+       "category":"nature"
+    },
+    {
+        "word": "Rain",
+        "gender": "the",
+        "translations": {
+            "es": "lluvia"
+        },
+         "emoji":"🌧️",
+        "difficulty_level": 1,
+        "category": "nature"
+    },
+    {
+        "word":"Snow",
+        "gender":"the",
+        "translations":{
+          "es":"nieve"
+        },
+        "emoji":" ❄️",
+         "difficulty_level": 1,
+        "category":"nature"
+    },
+    {
+        "word": "Wind",
+        "gender":"the",
+        "translations": {
+            "es": "viento"
+        },
+         "difficulty_level": 1,
+        "category": "nature"
+    },
+    {
+        "word": "Thunder",
+         "gender":"the",
+        "translations": {
+            "es": "trueno"
+        },
+         "difficulty_level": 2,
+        "category":"nature"
+    },
+    {
+        "word":"Lightning",
+         "gender":"the",
+        "translations": {
+            "es": "relámpago"
+        },
+         "difficulty_level": 2,
+        "category":"nature"
+    },
+    {
+        "word":"Rainbow",
+        "gender":"the",
+        "translations":{
+            "es":"arcoíris"
+        },
+        "emoji":"🌈",
+        "difficulty_level": 2,
+        "category":"nature"
+    },
+    {
+      "word":"Earth",
+        "gender":"the",
+      "translations":{
+        "es":"tierra"
+       },
+        "emoji":"🌎",
+      "difficulty_level":1,
+      "category":"nature"
+    },
+    {
+      "word":"Mountain",
+        "gender":"the",
+      "translations":{
+        "es":"montaña"
+       },
+       "emoji":" ⛰️",
+      "difficulty_level":1,
+      "category":"nature"
+    },
+    {
+        "word":"Hill",
+         "gender":"the",
+        "translations":{
+            "es":"colina"
+        },
+       "difficulty_level":2,
+        "category":"nature"
+    },
+     {
+       "word":"Valley",
+       "gender":"the",
+       "translations":{
+         "es":"valle"
+        },
+        "difficulty_level":2,
+       "category":"nature"
+    },
+     {
+        "word":"Volcano",
+         "gender":"the",
+        "translations":{
+            "es":"volcán"
+         },
+        "emoji":"🌋",
+        "difficulty_level":2,
+        "category":"nature"
+    },
+    {
+        "word":"Desert",
+         "gender":"the",
+        "translations":{
+            "es":"desierto"
+        },
+        "difficulty_level":2,
+        "category":"nature"
+    },
+     {
+        "word":"Forest",
+        "gender":"the",
+        "translations":{
+            "es":"bosque"
+        },
+        "emoji":"🌲",
+        "difficulty_level":1,
+        "category":"nature"
+    },
+    {
+      "word":"Jungle",
+      "gender":"the",
+      "translations":{
+        "es":"jungla"
+       },
+      "difficulty_level":2,
+        "category":"nature"
+    },
+    {
+       "word":"Beach",
+        "gender":"the",
+       "translations":{
+         "es":"playa"
+       },
+      "emoji":" 🏖️",
+      "difficulty_level":1,
+       "category":"nature"
+    },
+    {
+        "word":"Ocean",
+        "gender":"the",
+        "translations":{
+            "es":"océano"
+        },
+        "emoji":" 🌊",
+         "difficulty_level":1,
+        "category":"nature"
+    },
+     {
+       "word":"River",
+        "gender":"the",
+        "translations":{
+           "es":"río"
+        },
+        "emoji":" 🏞️",
+         "difficulty_level":1,
+        "category":"nature"
+    },
+   {
+      "word":"Lake",
+       "gender":"the",
+       "translations":{
+         "es":"lago"
+       },
+      "emoji":" 🏞️",
+      "difficulty_level":1,
+       "category":"nature"
+   },
+   {
+       "word":"Sea",
+        "gender":"the",
+       "translations":{
+           "es":"mar"
+        },
+       "difficulty_level":1,
+        "category":"nature"
+    },
+    {
+       "word":"Island",
+        "gender":"the",
+        "translations":{
+            "es":"isla"
+        },
+        "emoji":" 🏝️",
+        "difficulty_level":2,
+        "category":"nature"
+    },
+     {
+       "word":"Rock",
+        "gender":"the",
+       "translations":{
+           "es":"roca"
+        },
+        "difficulty_level":2,
+        "category":"nature"
+    },
+   {
+     "word":"Stone",
+      "gender":"the",
+      "translations":{
+        "es":"piedra"
+       },
+      "difficulty_level":2,
+       "category":"nature"
+   },
+    {
+        "word":"Sand",
+        "gender":"the",
+        "translations":{
+            "es":"arena"
+        },
+        "difficulty_level":1,
+        "category":"nature"
+    },
+     {
+        "word":"Grass",
+         "gender":"the",
+        "translations":{
+           "es":"césped"
+         },
+         "emoji":"🌿",
+         "difficulty_level":1,
+        "category":"nature"
+    },
+    {
+      "word":"Tree",
+       "gender":"the",
+       "translations":{
+         "es":"árbol"
+       },
+        "emoji":" 🌳",
+      "difficulty_level":1,
+      "category":"nature"
+    },
+   {
+      "word":"Flower",
+      "gender":"the",
+      "translations":{
+         "es":"flor"
+       },
+      "emoji":" 🌸",
+       "difficulty_level": 1,
+       "category":"nature"
+   },
+    {
+       "word":"Plant",
+        "gender":"the",
+        "translations":{
+           "es":"planta"
+        },
+        "emoji":" 🪴",
+       "difficulty_level":1,
+        "category":"nature"
+    },
+    {
+       "word":"Leaf",
+        "gender":"the",
+        "translations":{
+            "es":"hoja"
+        },
+       "emoji":" 🍁",
+       "difficulty_level":1,
+        "category":"nature"
+    },
+    {
+        "word":"Soil",
+         "gender":"the",
+        "translations":{
+            "es":"suelo"
+        },
+       "difficulty_level":2,
+         "category":"nature"
+    },
+    {
+       "word":"Root",
+        "gender":"the",
+       "translations":{
+           "es":"raíz"
+         },
+       "difficulty_level":2,
+       "category":"nature"
+    },
+    {
+        "word":"Branch",
+         "gender":"the",
+         "translations":{
+           "es":"rama"
+         },
+        "difficulty_level": 2,
+       "category":"nature"
+    }
+]

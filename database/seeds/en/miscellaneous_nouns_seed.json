@@ -1,0 +1,1141 @@
+[
+    {
+        "word": "Thing",
+        "gender": "the",
+        "translations": {
+            "es": "cosa"
+        },
+        "difficulty_level": 1,
+        "category": "miscellaneous"
+    },
+    {
+      "word": "Place",
+      "gender": "the",
+      "translations": {
+        "es": "lugar"
+      },
+      "difficulty_level":1,
+      "category":"miscellaneous"
+    },
+    {
+        "word": "Idea",
+        "gender": "the",
+        "translations": {
+            "es": "idea"
+        },
+        "difficulty_level": 2,
+        "category": "miscellaneous"
+    },
+    {
+        "word": "Problem",
+        "gender":"the",
+        "translations": {
+            "es": "problema"
+        },
+        "difficulty_level": 2,
+        "category": "miscellaneous"
+    },
+    {
+        "word": "Solution",
+        "gender": "the",
+        "translations": {
+            "es": "solución"
+        },
+        "difficulty_level": 2,
+         "category": "miscellaneous"
+    },
+     {
+        "word":"Question",
+         "gender":"the",
+        "translations": {
+            "es": "pregunta"
+        },
+        "emoji":"❓",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Answer",
+        "gender":"the",
+        "translations":{
+           "es":"respuesta"
+         },
+          "emoji":"✔️",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+  {
+    "word": "Reason",
+    "gender": "the",
+    "translations": {
+      "es": "razón"
+    },
+    "difficulty_level": 2,
+     "category": "miscellaneous"
+  },
+    {
+        "word":"Plan",
+         "gender":"the",
+        "translations":{
+            "es":"plan"
+        },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Money",
+         "gender":"the",
+        "translations":{
+           "es":"dinero"
+         },
+          "emoji":"💰",
+         "difficulty_level": 1,
+         "category":"miscellaneous"
+    },
+  {
+        "word":"Price",
+        "gender":"the",
+        "translations":{
+            "es":"precio"
+        },
+         "difficulty_level": 2,
+         "category":"miscellaneous"
+    },
+ {
+    "word": "Cost",
+    "gender":"the",
+    "translations": {
+      "es": "costo"
+    },
+    "difficulty_level": 2,
+    "category": "miscellaneous"
+  },
+  {
+    "word":"Payment",
+     "gender":"the",
+    "translations": {
+      "es": "pago"
+    },
+    "difficulty_level": 2,
+     "category": "miscellaneous"
+  },
+   {
+       "word":"Gift",
+        "gender":"the",
+       "translations":{
+         "es":"regalo"
+        },
+         "emoji":"🎁",
+         "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"Game",
+        "gender":"the",
+        "translations":{
+            "es":"juego"
+        },
+         "emoji":"🕹️",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+  {
+     "word":"Toy",
+      "gender":"the",
+      "translations":{
+         "es":"juguete"
+      },
+       "emoji":"🧸",
+      "difficulty_level": 1,
+     "category":"miscellaneous"
+   },
+  {
+     "word":"Music",
+      "gender":"the",
+      "translations":{
+         "es":"música"
+      },
+     "emoji":" 🎶",
+     "difficulty_level":1,
+      "category":"miscellaneous"
+    },
+  {
+     "word":"Sound",
+      "gender":"the",
+      "translations":{
+          "es":"sonido"
+      },
+      "emoji":" 🔊",
+     "difficulty_level": 1,
+      "category":"miscellaneous"
+    },
+    {
+        "word":"Image",
+         "gender":"the",
+        "translations":{
+            "es":"imagen"
+        },
+          "emoji":"🖼️",
+         "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+    {
+        "word":"Picture",
+         "gender":"the",
+        "translations":{
+            "es":"foto"
+         },
+          "emoji":"🖼️",
+        "difficulty_level":1,
+         "category":"miscellaneous"
+    },
+    {
+       "word":"Story",
+        "gender":"the",
+       "translations":{
+         "es":"historia"
+        },
+         "difficulty_level": 1,
+        "category":"miscellaneous"
+     },
+    {
+      "word":"Word",
+       "gender":"the",
+       "translations":{
+           "es":"palabra"
+        },
+         "difficulty_level": 1,
+       "category":"miscellaneous"
+    },
+  {
+        "word":"Sentence",
+         "gender":"the",
+        "translations":{
+           "es":"oración"
+        },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+      "word":"Language",
+       "gender":"the",
+      "translations":{
+        "es":"idioma"
+       },
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+     {
+       "word":"Message",
+        "gender":"the",
+       "translations":{
+         "es":"mensaje"
+       },
+       "difficulty_level": 1,
+        "category":"miscellaneous"
+     },
+  {
+        "word":"Sign",
+         "gender":"the",
+        "translations":{
+            "es":"señal"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+        "word":"Symbol",
+         "gender":"the",
+        "translations":{
+           "es":"símbolo"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+    "word":"Material",
+    "gender":"the",
+    "translations": {
+      "es": "material"
+    },
+    "difficulty_level": 2,
+    "category":"miscellaneous"
+  },
+ {
+    "word":"Paper",
+     "gender":"the",
+    "translations": {
+      "es": "papel"
+    },
+    "difficulty_level": 1,
+    "category": "miscellaneous"
+  },
+    {
+        "word":"Plastic",
+         "gender":"the",
+        "translations":{
+            "es":"plástico"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Glass",
+        "gender":"the",
+       "translations":{
+          "es":"vidrio"
+       },
+       "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+   {
+      "word":"Wood",
+       "gender":"the",
+       "translations":{
+         "es":"madera"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+     {
+      "word":"Metal",
+       "gender":"the",
+       "translations":{
+          "es":"metal"
+       },
+        "difficulty_level": 2,
+      "category":"miscellaneous"
+     },
+  {
+        "word":"Fabric",
+         "gender":"the",
+        "translations":{
+            "es":"tela"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+    "word":"Tool",
+    "gender":"the",
+    "translations": {
+      "es": "herramienta"
+    },
+    "difficulty_level": 2,
+    "category": "miscellaneous"
+  },
+  {
+    "word": "Box",
+     "gender":"the",
+    "translations": {
+      "es": "caja"
+    },
+      "emoji":" 📦",
+    "difficulty_level": 1,
+     "category":"miscellaneous"
+  },
+    {
+       "word":"Container",
+        "gender":"the",
+       "translations":{
+            "es":"contenedor"
+         },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+    "word": "Bag",
+    "gender":"the",
+    "translations": {
+      "es": "bolsa"
+    },
+      "emoji":" 🛍️",
+    "difficulty_level": 1,
+     "category":"miscellaneous"
+  },
+  {
+       "word":"Card",
+        "gender":"the",
+       "translations":{
+            "es":"tarjeta"
+        },
+        "emoji":" 🃏",
+        "difficulty_level": 1,
+       "category":"miscellaneous"
+  },
+    {
+        "word":"Key",
+         "gender":"the",
+        "translations":{
+            "es":"llave"
+         },
+         "emoji":"🔑",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"Lock",
+         "gender":"the",
+        "translations":{
+            "es":"cerradura"
+        },
+         "emoji":" 🔒",
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+     "word":"Gift",
+      "gender":"the",
+      "translations":{
+         "es":"regalo"
+        },
+        "emoji":"🎁",
+      "difficulty_level":1,
+       "category":"miscellaneous"
+    },
+ {
+      "word":"List",
+       "gender":"the",
+       "translations":{
+         "es":"lista"
+       },
+       "difficulty_level":2,
+      "category":"miscellaneous"
+    },
+   {
+        "word":"Form",
+        "gender":"the",
+        "translations":{
+            "es":"formulario"
+        },
+         "difficulty_level":2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Copy",
+         "gender":"the",
+        "translations":{
+            "es":"copia"
+        },
+        "difficulty_level":2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Example",
+        "gender":"the",
+         "translations":{
+           "es":"ejemplo"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+        "word":"Type",
+        "gender":"the",
+        "translations":{
+            "es":"tipo"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+       "word":"Way",
+        "gender":"the",
+       "translations":{
+           "es":"manera"
+         },
+          "difficulty_level":1,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Part",
+        "gender":"the",
+       "translations":{
+          "es":"parte"
+        },
+        "difficulty_level":1,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"System",
+         "gender":"the",
+         "translations":{
+            "es":"sistema"
+          },
+          "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"Level",
+         "gender":"the",
+        "translations":{
+          "es":"nivel"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+     {
+       "word":"Group",
+        "gender":"the",
+        "translations":{
+            "es":"grupo"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+     },
+     {
+      "word":"Team",
+       "gender":"the",
+       "translations":{
+           "es":"equipo"
+        },
+        "difficulty_level":2,
+        "category":"miscellaneous"
+      },
+  {
+     "word":"Event",
+      "gender":"the",
+      "translations":{
+         "es":"evento"
+        },
+        "difficulty_level":2,
+       "category":"miscellaneous"
+    },
+    {
+       "word":"Meeting",
+        "gender":"the",
+        "translations":{
+          "es":"reunión"
+        },
+       "difficulty_level":2,
+      "category":"miscellaneous"
+    },
+    {
+        "word":"Party",
+         "gender":"the",
+        "translations":{
+            "es":"fiesta"
+         },
+          "emoji":"🎉",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+   {
+      "word":"Trip",
+       "gender":"the",
+       "translations":{
+         "es":"viaje"
+        },
+        "emoji":" 🧳",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+ {
+        "word":"Vacation",
+        "gender":"the",
+        "translations":{
+           "es":"vacaciones"
+         },
+          "emoji":" 🏝️",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+    {
+        "word":"Experience",
+         "gender":"the",
+        "translations":{
+           "es":"experiencia"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+      "word":"Feeling",
+       "gender":"the",
+       "translations":{
+        "es":"sentimiento"
+        },
+       "difficulty_level": 2,
+      "category":"miscellaneous"
+    },
+   {
+        "word":"Emotion",
+         "gender":"the",
+        "translations":{
+            "es":"emoción"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Memory",
+        "gender":"the",
+        "translations":{
+            "es":"recuerdo"
+        },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+       "word":"Decision",
+        "gender":"the",
+       "translations":{
+           "es":"decisión"
+        },
+       "difficulty_level": 2,
+       "category":"miscellaneous"
+  },
+  {
+        "word":"Choice",
+        "gender":"the",
+        "translations":{
+           "es":"elección"
+        },
+         "difficulty_level": 2,
+         "category":"miscellaneous"
+    },
+    {
+       "word":"Result",
+       "gender":"the",
+        "translations":{
+           "es":"resultado"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+       "word":"Reason",
+        "gender":"the",
+       "translations":{
+          "es":"razón"
+         },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+        "word":"Goal",
+        "gender":"the",
+        "translations":{
+            "es":"meta"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+       "word":"Purpose",
+       "gender":"the",
+       "translations":{
+         "es":"propósito"
+       },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Cause",
+        "gender":"the",
+         "translations":{
+            "es":"causa"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+       "word":"Effect",
+        "gender":"the",
+        "translations":{
+          "es":"efecto"
+         },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+       "word":"Change",
+        "gender":"the",
+        "translations":{
+          "es":"cambio"
+         },
+          "difficulty_level": 2,
+        "category":"miscellaneous"
+     },
+  {
+    "word": "Ability",
+    "gender":"the",
+    "translations": {
+      "es": "habilidad"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+   {
+    "word":"Effort",
+     "gender":"the",
+    "translations": {
+      "es": "esfuerzo"
+    },
+     "difficulty_level": 2,
+    "category":"miscellaneous"
+  },
+  {
+     "word":"Success",
+      "gender":"the",
+      "translations":{
+         "es":"éxito"
+       },
+       "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+      "word":"Failure",
+       "gender":"the",
+       "translations":{
+         "es":"fracaso"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"Control",
+        "gender":"the",
+        "translations":{
+            "es":"control"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+      "word":"Risk",
+       "gender":"the",
+       "translations":{
+         "es":"riesgo"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+      "word":"Opportunity",
+        "gender":"the",
+       "translations":{
+            "es":"oportunidad"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+     "word":"Need",
+      "gender":"the",
+      "translations":{
+        "es":"necesidad"
+      },
+       "difficulty_level": 2,
+      "category":"miscellaneous"
+   },
+   {
+      "word":"Option",
+       "gender":"the",
+       "translations":{
+         "es":"opción"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+      "word":"Example",
+       "gender":"the",
+       "translations":{
+         "es":"ejemplo"
+       },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+ {
+      "word":"Process",
+       "gender":"the",
+       "translations":{
+         "es":"proceso"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+   {
+      "word":"Method",
+       "gender":"the",
+       "translations":{
+        "es":"método"
+       },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+    "word": "Order",
+    "gender": "the",
+    "translations": {
+      "es": "pedido"
+    },
+    "difficulty_level": 2,
+    "category":"miscellaneous"
+  },
+  {
+    "word": "Care",
+    "gender":"the",
+    "translations": {
+      "es": "cuidado"
+    },
+    "difficulty_level": 2,
+    "category":"miscellaneous"
+  },
+  {
+        "word":"Value",
+         "gender":"the",
+        "translations":{
+           "es":"valor"
+        },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Access",
+        "gender":"the",
+       "translations":{
+         "es":"acceso"
+       },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Source",
+       "gender":"the",
+       "translations":{
+            "es":"fuente"
+        },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+   {
+        "word":"Resource",
+         "gender":"the",
+        "translations":{
+          "es":"recurso"
+         },
+          "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+        "word":"Structure",
+         "gender":"the",
+        "translations":{
+          "es":"estructura"
+        },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+ {
+    "word": "Format",
+    "gender":"the",
+    "translations": {
+      "es": "formato"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+    {
+        "word":"Style",
+         "gender":"the",
+        "translations":{
+            "es":"estilo"
+         },
+        "difficulty_level": 2,
+         "category":"miscellaneous"
+    },
+    {
+        "word":"Pattern",
+         "gender":"the",
+        "translations":{
+           "es":"patrón"
+        },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+   {
+       "word":"Relationship",
+        "gender":"the",
+       "translations":{
+            "es":"relación"
+         },
+          "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+    "word":"Connection",
+     "gender":"the",
+    "translations": {
+      "es": "conexión"
+    },
+    "difficulty_level": 2,
+    "category":"miscellaneous"
+  },
+   {
+     "word":"Contact",
+      "gender":"the",
+      "translations":{
+          "es":"contacto"
+       },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+       "word":"Network",
+        "gender":"the",
+        "translations":{
+            "es":"red"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+   {
+      "word":"Control",
+       "gender":"the",
+       "translations":{
+         "es":"control"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+      "word":"Power",
+       "gender":"the",
+       "translations":{
+         "es":"poder"
+        },
+        "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+    "word": "Energy",
+    "gender":"the",
+    "translations": {
+      "es": "energía"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+ {
+   "word":"Space",
+    "gender":"the",
+    "translations":{
+       "es":"espacio"
+     },
+      "difficulty_level":1,
+      "category":"miscellaneous"
+  },
+    {
+        "word":"Area",
+         "gender":"the",
+        "translations":{
+           "es":"área"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Distance",
+        "gender":"the",
+       "translations":{
+         "es":"distancia"
+       },
+       "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Direction",
+         "gender":"the",
+        "translations":{
+            "es":"dirección"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+ {
+    "word":"Center",
+     "gender":"the",
+    "translations": {
+      "es": "centro"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+ {
+      "word":"Location",
+       "gender":"the",
+       "translations":{
+         "es":"ubicación"
+        },
+         "difficulty_level":2,
+       "category":"miscellaneous"
+    },
+    {
+       "word":"Situation",
+        "gender":"the",
+       "translations":{
+           "es":"situación"
+        },
+        "difficulty_level":2,
+        "category":"miscellaneous"
+    },
+   {
+      "word":"Environment",
+       "gender":"the",
+       "translations":{
+         "es":"ambiente"
+        },
+         "difficulty_level":2,
+       "category":"miscellaneous"
+    },
+   {
+        "word":"Culture",
+         "gender":"the",
+        "translations":{
+            "es":"cultura"
+         },
+          "difficulty_level": 2,
+         "category":"miscellaneous"
+    },
+    {
+      "word":"Society",
+        "gender":"the",
+      "translations":{
+           "es":"sociedad"
+         },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+  {
+        "word":"Community",
+        "gender":"the",
+        "translations":{
+          "es":"comunidad"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Organization",
+        "gender":"the",
+        "translations":{
+          "es":"organización"
+        },
+        "difficulty_level": 2,
+         "category":"miscellaneous"
+    },
+  {
+    "word": "Government",
+    "gender":"the",
+    "translations": {
+      "es": "gobierno"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+   {
+        "word":"Country",
+         "gender":"the",
+        "translations":{
+            "es":"país"
+         },
+          "emoji":" 🌎",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"City",
+        "gender":"the",
+       "translations":{
+            "es":"ciudad"
+         },
+          "emoji":" 🏙️",
+         "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Town",
+        "gender":"the",
+         "translations":{
+            "es":"pueblo"
+          },
+          "emoji":"🏘️",
+        "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+  {
+        "word":"Region",
+        "gender":"the",
+         "translations":{
+            "es":"región"
+         },
+         "difficulty_level": 2,
+       "category":"miscellaneous"
+   },
+    {
+        "word":"World",
+         "gender":"the",
+         "translations":{
+           "es":"mundo"
+         },
+         "emoji":"🌎",
+         "difficulty_level": 1,
+        "category":"miscellaneous"
+    },
+     {
+       "word":"State",
+        "gender":"the",
+        "translations":{
+            "es":"estado"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+     },
+    {
+       "word":"Process",
+        "gender":"the",
+       "translations":{
+          "es":"proceso"
+         },
+         "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+  {
+    "word": "System",
+    "gender":"the",
+    "translations": {
+      "es": "sistema"
+    },
+    "difficulty_level": 2,
+     "category":"miscellaneous"
+  },
+    {
+       "word":"Quality",
+        "gender":"the",
+        "translations":{
+           "es":"calidad"
+         },
+          "difficulty_level": 2,
+       "category":"miscellaneous"
+    },
+    {
+        "word":"Service",
+         "gender":"the",
+         "translations":{
+            "es":"servicio"
+         },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    },
+    {
+       "word":"Project",
+        "gender":"the",
+        "translations":{
+          "es":"proyecto"
+        },
+        "difficulty_level": 2,
+        "category":"miscellaneous"
+    }
+]

@@ -1,0 +1,308 @@
+[
+  {
+    "word": "Technology",
+    "gender": "the",
+    "translations": {
+      "es": "tecnología"
+    },
+    "difficulty_level": 1,
+    "category": "technology"
+  },
+  {
+    "word": "Computer",
+    "gender": "the",
+    "translations": {
+      "es": "ordenador"
+    },
+     "emoji": "💻",
+    "difficulty_level": 1,
+    "category": "technology"
+  },
+  {
+    "word": "Laptop",
+    "gender": "the",
+    "translations": {
+      "es": "portátil"
+    },
+      "emoji":" 💻",
+    "difficulty_level": 1,
+    "category": "technology"
+  },
+  {
+    "word": "Phone",
+    "gender": "the",
+    "translations": {
+      "es": "teléfono"
+    },
+    "emoji":"📱",
+    "difficulty_level": 1,
+    "category": "technology"
+  },
+  {
+    "word": "Smartphone",
+    "gender":"the",
+    "translations": {
+      "es": "teléfono inteligente"
+    },
+      "emoji":"📱",
+    "difficulty_level": 1,
+     "category": "technology"
+  },
+  {
+    "word": "Tablet",
+    "gender": "the",
+    "translations": {
+      "es": "tableta"
+    },
+     "emoji": " 📱",
+    "difficulty_level": 1,
+     "category": "technology"
+  },
+  {
+    "word": "Internet",
+    "gender":"the",
+    "translations": {
+      "es": "internet"
+    },
+     "difficulty_level": 1,
+     "category": "technology"
+  },
+  {
+    "word": "Website",
+     "gender":"the",
+    "translations": {
+      "es": "sitio web"
+    },
+     "difficulty_level": 2,
+    "category": "technology"
+  },
+ {
+    "word":"Email",
+     "gender":"the",
+    "translations":{
+       "es":"correo electrónico"
+    },
+    "emoji":" 📧",
+    "difficulty_level":1,
+     "category":"technology"
+ },
+  {
+     "word":"Password",
+     "gender":"the",
+     "translations":{
+      "es":"contraseña"
+     },
+      "difficulty_level":2,
+     "category":"technology"
+  },
+    {
+      "word":"Software",
+       "gender":"the",
+      "translations":{
+          "es":"software"
+       },
+       "difficulty_level":2,
+      "category":"technology"
+    },
+    {
+      "word":"Application",
+       "gender":"the",
+       "translations":{
+         "es":"aplicación"
+        },
+        "emoji":" 📱",
+       "difficulty_level":2,
+      "category":"technology"
+    },
+     {
+      "word":"Program",
+       "gender":"the",
+       "translations":{
+           "es":"programa"
+         },
+         "difficulty_level":2,
+        "category":"technology"
+     },
+    {
+      "word":"Code",
+       "gender":"the",
+       "translations":{
+         "es":"código"
+       },
+        "difficulty_level":2,
+       "category":"technology"
+    },
+  {
+    "word": "Keyboard",
+    "gender":"the",
+    "translations": {
+      "es": "teclado"
+    },
+    "emoji":"⌨️",
+    "difficulty_level": 1,
+    "category": "technology"
+  },
+  {
+        "word":"Mouse",
+         "gender":"the",
+        "translations":{
+            "es":"ratón"
+        },
+         "emoji":"🖱️",
+        "difficulty_level": 1,
+        "category":"technology"
+    },
+   {
+        "word":"Screen",
+         "gender":"the",
+        "translations":{
+           "es":"pantalla"
+        },
+        "difficulty_level":1,
+       "category":"technology"
+    },
+  {
+    "word": "Printer",
+     "gender":"the",
+    "translations": {
+      "es": "impresora"
+    },
+    "difficulty_level": 2,
+    "category": "technology"
+  },
+    {
+      "word":"Scanner",
+       "gender":"the",
+      "translations":{
+        "es":"escáner"
+        },
+        "difficulty_level":2,
+      "category":"technology"
+    },
+     {
+        "word":"Camera",
+         "gender":"the",
+         "translations":{
+            "es":"cámara"
+         },
+         "emoji":" 📷",
+        "difficulty_level":1,
+        "category":"technology"
+    },
+    {
+        "word":"Headphones",
+        "gender":"the",
+        "translations":{
+          "es":"auriculares"
+         },
+        "emoji":"🎧",
+         "difficulty_level":1,
+         "category":"technology"
+    },
+  {
+    "word": "Speaker",
+    "gender": "the",
+    "translations": {
+      "es": "altavoz"
+    },
+     "emoji": " 🔈",
+    "difficulty_level": 2,
+    "category": "technology"
+  },
+  {
+    "word": "Microphone",
+    "gender":"the",
+    "translations": {
+      "es": "micrófono"
+    },
+    "emoji":"🎤",
+    "difficulty_level": 2,
+    "category": "technology"
+  },
+    {
+      "word":"Battery",
+       "gender":"the",
+      "translations":{
+        "es":"batería"
+      },
+        "difficulty_level":2,
+      "category":"technology"
+    },
+     {
+       "word":"Charger",
+        "gender":"the",
+        "translations":{
+          "es":"cargador"
+         },
+         "difficulty_level":2,
+        "category":"technology"
+     },
+  {
+    "word": "Cable",
+    "gender":"the",
+    "translations": {
+      "es": "cable"
+    },
+    "difficulty_level": 2,
+    "category": "technology"
+  },
+    {
+       "word":"Remote Control",
+        "gender":"the",
+       "translations":{
+           "es":"control remoto"
+        },
+        "emoji":" 🕹️",
+       "difficulty_level": 2,
+        "category":"technology"
+    },
+    {
+       "word":"Television",
+       "gender":"the",
+       "translations":{
+           "es":"televisión"
+        },
+          "emoji":" 📺",
+       "difficulty_level":1,
+        "category":"technology"
+    },
+    {
+      "word":"Radio",
+       "gender":"the",
+       "translations":{
+         "es":"radio"
+       },
+        "emoji":"📻",
+       "difficulty_level":2,
+       "category":"technology"
+    },
+   {
+      "word":"Robot",
+       "gender":"the",
+       "translations":{
+         "es":"robot"
+        },
+        "emoji":"🤖",
+        "difficulty_level":2,
+      "category":"technology"
+    },
+   {
+        "word":"Game console",
+         "gender":"the",
+        "translations":{
+            "es":"consola de juegos"
+        },
+        "emoji":"🎮",
+        "difficulty_level":2,
+        "category":"technology"
+    },
+    {
+        "word":"USB",
+         "gender":"the",
+        "translations":{
+           "es":"USB"
+        },
+       "difficulty_level":2,
+       "category":"technology"
+    }
+]

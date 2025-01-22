@@ -1,0 +1,326 @@
+[
+  {
+    "word": "Number",
+    "gender": "the",
+    "translations": {
+      "es": "número"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Zero",
+    "gender": "the",
+    "translations": {
+      "es": "cero"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "One",
+    "gender": "the",
+    "translations": {
+      "es": "uno"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Two",
+    "gender": "the",
+    "translations": {
+      "es": "dos"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Three",
+    "gender": "the",
+    "translations": {
+      "es": "tres"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Four",
+    "gender": "the",
+    "translations": {
+      "es": "cuatro"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Five",
+    "gender": "the",
+    "translations": {
+      "es": "cinco"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Six",
+    "gender":"the",
+    "translations": {
+      "es": "seis"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Seven",
+    "gender": "the",
+    "translations": {
+      "es": "siete"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Eight",
+    "gender": "the",
+    "translations": {
+      "es": "ocho"
+    },
+     "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Nine",
+    "gender": "the",
+    "translations": {
+      "es": "nueve"
+    },
+     "difficulty_level": 1,
+    "category": "numbers"
+  },
+  {
+    "word": "Ten",
+    "gender": "the",
+    "translations": {
+      "es": "diez"
+    },
+    "difficulty_level": 1,
+    "category": "numbers"
+  },
+    {
+    "word": "Eleven",
+     "gender":"the",
+    "translations": {
+      "es": "once"
+    },
+    "difficulty_level": 2,
+    "category": "numbers"
+  },
+   {
+    "word": "Twelve",
+     "gender":"the",
+    "translations": {
+      "es": "doce"
+    },
+    "difficulty_level": 2,
+    "category": "numbers"
+  },
+    {
+      "word":"Thirteen",
+      "gender":"the",
+      "translations":{
+        "es":"trece"
+      },
+     "difficulty_level": 2,
+      "category":"numbers"
+    },
+     {
+      "word":"Fourteen",
+       "gender":"the",
+      "translations":{
+        "es":"catorce"
+      },
+      "difficulty_level": 2,
+      "category":"numbers"
+    },
+    {
+      "word":"Fifteen",
+      "gender":"the",
+      "translations":{
+         "es":"quince"
+      },
+      "difficulty_level": 2,
+       "category":"numbers"
+   },
+    {
+        "word":"Sixteen",
+         "gender":"the",
+       "translations":{
+           "es":"dieciséis"
+        },
+        "difficulty_level":2,
+        "category":"numbers"
+    },
+    {
+        "word":"Seventeen",
+        "gender":"the",
+        "translations":{
+            "es":"diecisiete"
+        },
+        "difficulty_level":2,
+        "category":"numbers"
+    },
+   {
+      "word":"Eighteen",
+      "gender":"the",
+      "translations":{
+          "es":"dieciocho"
+      },
+       "difficulty_level":2,
+      "category":"numbers"
+    },
+   {
+      "word":"Nineteen",
+      "gender":"the",
+       "translations":{
+          "es":"diecinueve"
+       },
+       "difficulty_level":2,
+      "category":"numbers"
+   },
+   {
+    "word": "Twenty",
+     "gender":"the",
+    "translations": {
+      "es": "veinte"
+    },
+     "difficulty_level": 2,
+    "category": "numbers"
+   },
+    {
+      "word":"Thirty",
+       "gender":"the",
+      "translations":{
+        "es":"treinta"
+      },
+      "difficulty_level": 2,
+       "category":"numbers"
+    },
+    {
+      "word":"Forty",
+      "gender":"the",
+      "translations":{
+         "es":"cuarenta"
+      },
+       "difficulty_level": 2,
+       "category":"numbers"
+    },
+    {
+        "word":"Fifty",
+         "gender":"the",
+        "translations":{
+          "es":"cincuenta"
+        },
+       "difficulty_level":2,
+        "category":"numbers"
+    },
+   {
+       "word":"Sixty",
+        "gender":"the",
+       "translations":{
+         "es":"sesenta"
+       },
+      "difficulty_level":2,
+        "category":"numbers"
+    },
+     {
+      "word":"Seventy",
+      "gender":"the",
+      "translations":{
+          "es":"setenta"
+      },
+      "difficulty_level":2,
+       "category":"numbers"
+     },
+     {
+       "word":"Eighty",
+        "gender":"the",
+       "translations":{
+           "es":"ochenta"
+        },
+        "difficulty_level":2,
+       "category":"numbers"
+    },
+     {
+        "word":"Ninety",
+        "gender":"the",
+        "translations":{
+          "es":"noventa"
+         },
+         "difficulty_level":2,
+         "category":"numbers"
+    },
+  {
+    "word": "Hundred",
+    "gender": "the",
+    "translations": {
+      "es": "cien"
+    },
+    "difficulty_level": 2,
+    "category": "numbers"
+  },
+  {
+    "word":"Thousand",
+     "gender":"the",
+    "translations":{
+        "es":"mil"
+    },
+     "difficulty_level": 2,
+    "category":"numbers"
+  },
+    {
+        "word":"Million",
+         "gender":"the",
+        "translations":{
+            "es":"millón"
+         },
+        "difficulty_level": 3,
+        "category":"numbers"
+    },
+    {
+        "word":"Billion",
+        "gender":"the",
+        "translations":{
+           "es":"billón"
+         },
+         "difficulty_level": 3,
+        "category":"numbers"
+    },
+     {
+      "word":"First",
+       "gender":"the",
+      "translations":{
+          "es":"primero"
+       },
+       "difficulty_level":2,
+      "category":"numbers"
+    },
+    {
+      "word":"Second",
+       "gender":"the",
+      "translations":{
+        "es":"segundo"
+      },
+      "difficulty_level":2,
+      "category":"numbers"
+    },
+    {
+        "word":"Third",
+         "gender":"the",
+        "translations":{
+          "es":"tercero"
+        },
+         "difficulty_level":2,
+        "category":"numbers"
+    }
+]

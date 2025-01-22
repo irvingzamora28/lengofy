@@ -1,0 +1,366 @@
+[
+  {
+    "word": "Profession",
+    "gender": "the",
+    "translations": {
+      "es": "profesión"
+    },
+    "difficulty_level": 1,
+    "category": "professions"
+  },
+  {
+    "word": "Teacher",
+    "gender": "the",
+    "translations": {
+      "es": "profesor/a"
+    },
+    "emoji": "🧑‍🏫",
+    "difficulty_level": 1,
+    "category": "professions"
+  },
+  {
+    "word": "Student",
+    "gender": "the",
+    "translations": {
+      "es": "estudiante"
+    },
+    "emoji": "🧑‍🎓",
+    "difficulty_level": 1,
+    "category": "professions"
+  },
+  {
+    "word": "Doctor",
+    "gender": "the",
+    "translations": {
+      "es": "médico/a"
+    },
+    "emoji": "🧑‍⚕️",
+    "difficulty_level": 1,
+    "category": "professions"
+  },
+  {
+    "word": "Nurse",
+    "gender": "the",
+    "translations": {
+      "es": "enfermero/a"
+    },
+    "emoji": " 🧑‍⚕️",
+    "difficulty_level": 1,
+    "category": "professions"
+  },
+  {
+    "word": "Engineer",
+    "gender": "the",
+    "translations": {
+      "es": "ingeniero/a"
+    },
+    "emoji": " 🧑‍🏭",
+    "difficulty_level": 2,
+    "category": "professions"
+  },
+  {
+    "word": "Artist",
+    "gender": "the",
+    "translations": {
+      "es": "artista"
+    },
+     "emoji": " 🧑‍🎨",
+    "difficulty_level": 2,
+     "category": "professions"
+  },
+   {
+        "word":"Writer",
+         "gender":"the",
+        "translations":{
+            "es":"escritor/a"
+        },
+         "emoji":"✍️",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+  {
+    "word": "Lawyer",
+    "gender": "the",
+    "translations": {
+      "es": "abogado/a"
+    },
+    "emoji":" 🧑‍⚖️",
+    "difficulty_level": 2,
+    "category": "professions"
+  },
+    {
+        "word":"Judge",
+         "gender":"the",
+        "translations":{
+            "es":"juez/a"
+        },
+        "emoji":" 🧑‍⚖️",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+ {
+    "word": "Chef",
+     "gender":"the",
+    "translations": {
+      "es": "chef"
+    },
+      "emoji":" 🧑‍🍳",
+    "difficulty_level": 2,
+    "category": "professions"
+  },
+    {
+        "word":"Baker",
+         "gender":"the",
+        "translations":{
+           "es":"panadero/a"
+        },
+          "emoji":" 🧑‍🍳",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+   {
+      "word":"Waiter",
+      "gender":"the",
+      "translations":{
+        "es":"camarero/a"
+       },
+        "emoji":" 🧑‍🍳",
+       "difficulty_level": 2,
+       "category":"professions"
+    },
+    {
+      "word":"Mechanic",
+       "gender":"the",
+       "translations":{
+          "es":"mecánico/a"
+        },
+        "emoji":" 🧑‍🔧",
+       "difficulty_level": 2,
+       "category":"professions"
+    },
+    {
+      "word":"Electrician",
+       "gender":"the",
+       "translations":{
+        "es":"electricista"
+       },
+       "difficulty_level":2,
+       "category":"professions"
+    },
+     {
+       "word":"Plumber",
+        "gender":"the",
+       "translations":{
+          "es":"fontanero/a"
+       },
+       "difficulty_level":2,
+       "category":"professions"
+    },
+   {
+        "word":"Carpenter",
+         "gender":"the",
+        "translations":{
+           "es":"carpintero/a"
+        },
+        "emoji":" 🧑‍🏭",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+    {
+       "word":"Farmer",
+        "gender":"the",
+        "translations":{
+           "es":"granjero/a"
+        },
+         "emoji":" 🧑‍🌾",
+         "difficulty_level": 2,
+        "category":"professions"
+    },
+     {
+       "word":"Fisherman",
+       "gender":"the",
+       "translations":{
+           "es":"pescador"
+         },
+         "emoji":" 🧑‍🎣",
+       "difficulty_level": 2,
+        "category":"professions"
+    },
+    {
+       "word":"Pilot",
+       "gender":"the",
+        "translations":{
+          "es":"piloto"
+         },
+        "emoji":" 🧑‍✈️",
+       "difficulty_level": 2,
+      "category":"professions"
+    },
+    {
+       "word":"Soldier",
+        "gender":"the",
+       "translations":{
+          "es":"soldado"
+        },
+         "emoji":" 🧑‍✈️",
+       "difficulty_level": 2,
+      "category":"professions"
+    },
+    {
+        "word":"Police officer",
+         "gender":"the",
+         "translations":{
+             "es":"policía"
+         },
+        "emoji":" 👮",
+         "difficulty_level": 2,
+       "category":"professions"
+    },
+    {
+       "word":"Firefighter",
+       "gender":"the",
+       "translations":{
+           "es":"bombero/a"
+       },
+        "emoji":" 🧑‍🚒",
+        "difficulty_level": 2,
+      "category":"professions"
+    },
+   {
+        "word":"Scientist",
+        "gender":"the",
+       "translations":{
+           "es":"científico/a"
+        },
+        "emoji":" 🧑‍🔬",
+       "difficulty_level": 2,
+       "category":"professions"
+   },
+    {
+       "word":"Accountant",
+        "gender":"the",
+       "translations":{
+         "es":"contador/a"
+        },
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+   {
+       "word":"Musician",
+       "gender":"the",
+        "translations":{
+            "es":"músico/a"
+        },
+         "emoji":" 🧑‍🎤",
+       "difficulty_level": 2,
+       "category":"professions"
+    },
+    {
+       "word":"Dancer",
+        "gender":"the",
+       "translations":{
+            "es":"bailarín/a"
+         },
+         "emoji":" 💃",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+    {
+        "word":"Actor",
+         "gender":"the",
+        "translations":{
+            "es":"actor/actriz"
+         },
+         "emoji":" 🧑‍🎤",
+        "difficulty_level": 2,
+         "category":"professions"
+    },
+    {
+        "word":"Athlete",
+         "gender":"the",
+        "translations":{
+            "es":"atleta"
+        },
+        "emoji":" 🏃‍♀️",
+        "difficulty_level": 2,
+        "category":"professions"
+    },
+     {
+       "word":"Hairdresser",
+        "gender":"the",
+       "translations":{
+           "es":"peluquero/a"
+        },
+        "emoji":" 💇",
+       "difficulty_level": 2,
+        "category":"professions"
+    },
+   {
+       "word":"Journalist",
+        "gender":"the",
+       "translations":{
+            "es":"periodista"
+        },
+       "difficulty_level": 2,
+        "category":"professions"
+   },
+   {
+        "word":"Librarian",
+         "gender":"the",
+        "translations":{
+            "es":"bibliotecario/a"
+        },
+       "difficulty_level":2,
+        "category":"professions"
+   },
+    {
+       "word":"Photographer",
+        "gender":"the",
+       "translations":{
+          "es":"fotógrafo/a"
+        },
+          "emoji":" 🧑‍💻",
+        "difficulty_level":2,
+       "category":"professions"
+    },
+    {
+       "word":"Designer",
+        "gender":"the",
+       "translations":{
+           "es":"diseñador/a"
+         },
+          "emoji":" 🧑‍💻",
+        "difficulty_level":2,
+       "category":"professions"
+    },
+   {
+      "word":"Programmer",
+      "gender":"the",
+       "translations":{
+          "es":"programador/a"
+        },
+       "emoji":"🧑‍💻",
+        "difficulty_level":2,
+      "category":"professions"
+   },
+    {
+      "word":"Dentist",
+      "gender":"the",
+      "translations":{
+        "es":"dentista"
+       },
+      "emoji":" 🧑‍⚕️",
+      "difficulty_level":2,
+       "category":"professions"
+   },
+   {
+       "word":"Pharmacist",
+        "gender":"the",
+       "translations":{
+           "es":"farmacéutico/a"
+         },
+        "emoji":" 🧑‍⚕️",
+        "difficulty_level":2,
+      "category":"professions"
+    }
+]

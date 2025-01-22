@@ -1,0 +1,186 @@
+[
+    {
+        "word": "Color",
+        "gender": "the",
+        "translations": {
+            "es": "color"
+        },
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Red",
+        "gender": "the",
+        "translations": {
+            "es": "rojo"
+        },
+        "emoji": "🔴",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Blue",
+        "gender": "the",
+        "translations": {
+            "es": "azul"
+        },
+        "emoji": "🔵",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Yellow",
+        "gender": "the",
+        "translations": {
+            "es": "amarillo"
+        },
+        "emoji": "🟡",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Green",
+        "gender": "the",
+        "translations": {
+            "es": "verde"
+        },
+        "emoji": "🟢",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Orange",
+        "gender": "the",
+        "translations": {
+            "es": "naranja"
+        },
+         "emoji": "🟠",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+     {
+        "word": "Purple",
+        "gender": "the",
+        "translations": {
+            "es": "morado"
+        },
+        "emoji": "🟣",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+       "word":"Pink",
+        "gender":"the",
+        "translations": {
+            "es": "rosa"
+        },
+        "emoji":"🌸",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "Black",
+        "gender": "the",
+        "translations": {
+            "es": "negro"
+        },
+        "emoji": "⚫",
+        "difficulty_level": 1,
+        "category": "Colors"
+    },
+    {
+        "word": "White",
+        "gender": "the",
+        "translations": {
+            "es": "blanco"
+        },
+        "emoji": "⚪",
+        "difficulty_level": 1,
+         "category": "Colors"
+    },
+     {
+        "word":"Brown",
+         "gender":"the",
+        "translations":{
+            "es":"marrón"
+        },
+         "emoji":"🟫",
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+    {
+        "word": "Gray",
+        "gender":"the",
+        "translations": {
+            "es": "gris"
+        },
+        "emoji": "◻️",
+        "difficulty_level": 2,
+        "category": "Colors"
+    },
+     {
+       "word":"Beige",
+        "gender":"the",
+        "translations":{
+          "es":"beige"
+        },
+         "difficulty_level": 2,
+        "category":"Colors"
+    },
+     {
+       "word":"Gold",
+        "gender":"the",
+        "translations":{
+          "es":"dorado"
+        },
+        "emoji":"👑",
+         "difficulty_level": 2,
+        "category":"Colors"
+    },
+    {
+       "word":"Silver",
+        "gender":"the",
+        "translations":{
+            "es":"plateado"
+        },
+         "emoji":"💿",
+        "difficulty_level": 2,
+        "category":"Colors"
+    },
+    {
+      "word":"Cyan",
+      "gender":"the",
+      "translations":{
+        "es":"cian"
+      },
+      "difficulty_level":3,
+      "category":"Colors"
+    },
+    {
+        "word":"Magenta",
+         "gender":"the",
+        "translations":{
+            "es":"magenta"
+        },
+         "difficulty_level": 3,
+        "category":"Colors"
+    },
+    {
+        "word":"Lime",
+        "gender":"the",
+        "translations":{
+          "es":"lima"
+         },
+          "difficulty_level": 3,
+         "category":"Colors"
+    },
+     {
+       "word":"Teal",
+        "gender":"the",
+        "translations":{
+            "es":"verde azulado"
+        },
+         "difficulty_level": 3,
+        "category":"Colors"
+    }
+]

@@ -1,0 +1,312 @@
+[
+    {
+        "word": "Time",
+        "gender": "the",
+        "translations": {
+            "es": "tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "time"
+    },
+     {
+        "word": "Second",
+        "gender": "the",
+        "translations": {
+            "es": "segundo"
+        },
+        "difficulty_level": 1,
+        "category": "time"
+    },
+    {
+        "word": "Minute",
+        "gender": "the",
+        "translations": {
+            "es": "minuto"
+        },
+        "difficulty_level": 1,
+        "category": "time"
+    },
+    {
+        "word": "Hour",
+        "gender": "the",
+        "translations": {
+            "es": "hora"
+        },
+         "difficulty_level": 1,
+         "category": "time"
+    },
+     {
+        "word":"Day",
+        "gender":"the",
+        "translations":{
+            "es":"día"
+        },
+        "difficulty_level": 1,
+        "category": "time"
+    },
+    {
+        "word": "Night",
+        "gender": "the",
+        "translations": {
+            "es": "noche"
+        },
+         "emoji": "🌃",
+        "difficulty_level": 1,
+        "category": "time"
+    },
+   {
+        "word": "Week",
+        "gender": "the",
+        "translations": {
+            "es": "semana"
+        },
+        "difficulty_level": 1,
+        "category": "time"
+    },
+  {
+    "word": "Month",
+    "gender": "the",
+    "translations": {
+      "es": "mes"
+    },
+    "difficulty_level": 1,
+     "category": "time"
+  },
+  {
+    "word": "Year",
+    "gender":"the",
+    "translations": {
+      "es": "año"
+    },
+    "difficulty_level": 1,
+    "category": "time"
+  },
+  {
+    "word": "Morning",
+    "gender":"the",
+    "translations": {
+      "es": "mañana"
+    },
+     "emoji":" 🌅",
+    "difficulty_level": 1,
+     "category": "time"
+  },
+    {
+        "word":"Afternoon",
+         "gender":"the",
+        "translations":{
+           "es":"tarde"
+        },
+         "difficulty_level": 1,
+        "category":"time"
+    },
+     {
+       "word":"Evening",
+       "gender":"the",
+        "translations":{
+           "es":"tarde/noche"
+        },
+        "difficulty_level":1,
+        "category":"time"
+     },
+     {
+       "word":"Midnight",
+        "gender":"the",
+        "translations":{
+          "es":"medianoche"
+         },
+         "difficulty_level": 2,
+        "category":"time"
+     },
+   {
+        "word":"Sunrise",
+        "gender":"the",
+        "translations":{
+          "es":"amanecer"
+        },
+        "emoji":" 🌅",
+        "difficulty_level": 2,
+         "category":"time"
+    },
+    {
+       "word":"Sunset",
+       "gender":"the",
+       "translations":{
+            "es":"atardecer"
+        },
+        "emoji":" 🌇",
+        "difficulty_level": 2,
+         "category":"time"
+    },
+     {
+        "word":"Today",
+         "gender":"the",
+        "translations":{
+            "es":"hoy"
+        },
+         "difficulty_level": 1,
+        "category":"time"
+    },
+    {
+        "word":"Yesterday",
+        "gender":"the",
+        "translations":{
+           "es":"ayer"
+        },
+        "difficulty_level": 1,
+        "category":"time"
+    },
+    {
+        "word":"Tomorrow",
+        "gender":"the",
+        "translations":{
+           "es":"mañana"
+        },
+        "difficulty_level": 1,
+        "category":"time"
+    },
+    {
+      "word":"Now",
+       "gender":"the",
+       "translations":{
+         "es":"ahora"
+        },
+        "difficulty_level":1,
+      "category":"time"
+    },
+    {
+       "word":"Later",
+        "gender":"the",
+        "translations":{
+           "es":"luego"
+        },
+        "difficulty_level": 1,
+       "category":"time"
+    },
+    {
+      "word":"Soon",
+        "gender":"the",
+        "translations":{
+            "es":"pronto"
+         },
+        "difficulty_level": 2,
+         "category":"time"
+    },
+    {
+        "word":"Early",
+         "gender":"the",
+        "translations":{
+           "es":"temprano"
+        },
+        "difficulty_level": 2,
+        "category":"time"
+    },
+    {
+      "word":"Late",
+       "gender":"the",
+       "translations":{
+         "es":"tarde"
+       },
+       "difficulty_level": 2,
+      "category":"time"
+    },
+    {
+        "word":"Always",
+        "gender":"the",
+        "translations":{
+           "es":"siempre"
+         },
+         "difficulty_level": 2,
+        "category":"time"
+    },
+    {
+        "word":"Sometimes",
+         "gender":"the",
+        "translations":{
+            "es":"a veces"
+         },
+          "difficulty_level": 2,
+        "category":"time"
+    },
+    {
+       "word":"Never",
+        "gender":"the",
+       "translations":{
+          "es":"nunca"
+         },
+         "difficulty_level": 2,
+       "category":"time"
+    },
+    {
+        "word":"Often",
+         "gender":"the",
+        "translations":{
+            "es":"a menudo"
+        },
+        "difficulty_level": 2,
+         "category":"time"
+    },
+   {
+      "word":"Rarely",
+       "gender":"the",
+      "translations":{
+          "es":"rara vez"
+      },
+      "difficulty_level": 3,
+       "category":"time"
+    },
+     {
+       "word":"Usually",
+        "gender":"the",
+       "translations":{
+          "es":"usualmente"
+        },
+       "difficulty_level": 2,
+        "category":"time"
+    },
+     {
+       "word":"Daily",
+        "gender":"the",
+        "translations":{
+           "es":"diario"
+         },
+         "difficulty_level":2,
+        "category":"time"
+     },
+     {
+        "word":"Weekly",
+         "gender":"the",
+        "translations":{
+           "es":"semanal"
+         },
+         "difficulty_level": 2,
+        "category":"time"
+    },
+    {
+        "word":"Monthly",
+         "gender":"the",
+        "translations":{
+            "es":"mensual"
+        },
+       "difficulty_level": 2,
+        "category":"time"
+    },
+    {
+      "word":"Yearly",
+       "gender":"the",
+       "translations":{
+         "es":"anual"
+        },
+        "difficulty_level": 2,
+       "category":"time"
+    },
+    {
+      "word":"Season",
+       "gender":"the",
+        "translations":{
+         "es":"estación"
+        },
+       "difficulty_level": 2,
+       "category":"time"
+    }
+]

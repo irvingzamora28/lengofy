@@ -1,0 +1,341 @@
+[
+    {
+        "word": "People",
+        "gender": "the",
+        "translations": {
+            "es": "gente"
+        },
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word": "Family",
+        "gender": "the",
+        "translations": {
+            "es": "familia"
+        },
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word": "Man",
+        "gender": "the",
+        "translations": {
+            "es": "hombre"
+        },
+        "emoji": "👨",
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word": "Woman",
+        "gender": "the",
+        "translations": {
+            "es": "mujer"
+        },
+        "emoji": "👩",
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+     {
+        "word":"Child",
+         "gender":"the",
+        "translations":{
+            "es":"niño/a"
+        },
+        "emoji":" 🧒",
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word": "Boy",
+        "gender": "the",
+        "translations": {
+            "es": "niño"
+        },
+         "emoji": "👦",
+        "difficulty_level": 1,
+         "category": "people_family"
+    },
+    {
+       "word":"Girl",
+        "gender":"the",
+        "translations":{
+            "es":"niña"
+        },
+        "emoji":"👧",
+        "difficulty_level": 1,
+       "category":"people_family"
+    },
+    {
+        "word": "Baby",
+        "gender": "the",
+        "translations": {
+            "es": "bebé"
+        },
+        "emoji": "👶",
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word": "Teenager",
+        "gender":"the",
+        "translations": {
+            "es": "adolescente"
+        },
+         "difficulty_level": 2,
+        "category": "people_family"
+    },
+     {
+       "word":"Adult",
+        "gender":"the",
+        "translations":{
+            "es":"adulto/a"
+        },
+       "difficulty_level": 2,
+      "category":"people_family"
+    },
+     {
+       "word":"Elderly",
+        "gender":"the",
+       "translations":{
+         "es":"anciano/a"
+       },
+       "difficulty_level": 2,
+        "category":"people_family"
+    },
+    {
+        "word":"Parent",
+         "gender":"the",
+        "translations":{
+            "es":"padre/madre"
+        },
+        "difficulty_level": 1,
+        "category": "people_family"
+    },
+    {
+        "word":"Mother",
+         "gender":"the",
+        "translations":{
+            "es":"madre"
+        },
+        "emoji":" 👩",
+        "difficulty_level": 1,
+        "category":"people_family"
+    },
+    {
+        "word":"Father",
+        "gender":"the",
+        "translations":{
+           "es":"padre"
+        },
+        "emoji":" 👨",
+        "difficulty_level": 1,
+        "category":"people_family"
+    },
+    {
+        "word":"Son",
+        "gender":"the",
+        "translations":{
+            "es":"hijo"
+        },
+        "emoji":"👦",
+        "difficulty_level": 1,
+         "category":"people_family"
+    },
+    {
+        "word":"Daughter",
+        "gender":"the",
+        "translations":{
+            "es":"hija"
+        },
+        "emoji":"👧",
+        "difficulty_level": 1,
+         "category":"people_family"
+    },
+    {
+      "word":"Sibling",
+      "gender":"the",
+      "translations":{
+        "es":"hermano/a"
+       },
+        "difficulty_level": 2,
+      "category":"people_family"
+    },
+     {
+       "word":"Brother",
+        "gender":"the",
+       "translations":{
+           "es":"hermano"
+        },
+        "difficulty_level": 1,
+       "category":"people_family"
+    },
+    {
+        "word":"Sister",
+        "gender":"the",
+        "translations":{
+            "es":"hermana"
+        },
+        "difficulty_level": 1,
+         "category":"people_family"
+    },
+    {
+       "word":"Grandparent",
+       "gender":"the",
+       "translations":{
+          "es":"abuelo/a"
+        },
+         "difficulty_level": 2,
+       "category":"people_family"
+    },
+    {
+        "word":"Grandmother",
+        "gender":"the",
+        "translations":{
+          "es":"abuela"
+        },
+        "emoji":" 👵",
+         "difficulty_level": 2,
+        "category":"people_family"
+    },
+    {
+       "word":"Grandfather",
+        "gender":"the",
+       "translations":{
+          "es":"abuelo"
+        },
+        "emoji":"👴",
+        "difficulty_level": 2,
+        "category":"people_family"
+    },
+   {
+       "word":"Grandson",
+        "gender":"the",
+        "translations":{
+            "es":"nieto"
+         },
+         "difficulty_level": 2,
+        "category":"people_family"
+    },
+   {
+        "word":"Granddaughter",
+         "gender":"the",
+        "translations":{
+          "es":"nieta"
+         },
+        "difficulty_level": 2,
+        "category":"people_family"
+    },
+     {
+      "word":"Uncle",
+      "gender":"the",
+      "translations":{
+        "es":"tío"
+       },
+       "difficulty_level": 2,
+       "category":"people_family"
+     },
+     {
+       "word":"Aunt",
+        "gender":"the",
+       "translations":{
+           "es":"tía"
+        },
+        "difficulty_level": 2,
+         "category":"people_family"
+    },
+   {
+      "word":"Cousin",
+      "gender":"the",
+      "translations":{
+         "es":"primo/a"
+      },
+       "difficulty_level": 2,
+        "category":"people_family"
+    },
+    {
+        "word":"Nephew",
+         "gender":"the",
+         "translations":{
+           "es":"sobrino"
+         },
+          "difficulty_level": 2,
+        "category":"people_family"
+    },
+    {
+      "word":"Niece",
+       "gender":"the",
+       "translations":{
+          "es":"sobrina"
+        },
+         "difficulty_level": 2,
+        "category":"people_family"
+    },
+     {
+        "word":"Spouse",
+         "gender":"the",
+        "translations":{
+            "es":"cónyuge"
+         },
+        "difficulty_level": 2,
+         "category":"people_family"
+    },
+    {
+        "word":"Husband",
+         "gender":"the",
+        "translations":{
+            "es":"esposo"
+        },
+        "emoji": " 👨",
+        "difficulty_level": 2,
+         "category":"people_family"
+    },
+    {
+        "word": "Wife",
+         "gender":"the",
+        "translations":{
+           "es":"esposa"
+        },
+        "emoji": " 👩",
+        "difficulty_level": 2,
+         "category": "people_family"
+    },
+     {
+        "word":"Friend",
+         "gender":"the",
+        "translations":{
+           "es":"amigo/a"
+         },
+          "emoji":" 🧑‍🤝‍🧑",
+         "difficulty_level": 1,
+        "category":"people_family"
+    },
+    {
+        "word":"Neighbor",
+        "gender":"the",
+        "translations":{
+           "es":"vecino/a"
+        },
+        "difficulty_level": 2,
+        "category":"people_family"
+    },
+     {
+       "word":"Colleague",
+        "gender":"the",
+        "translations":{
+          "es":"colega"
+        },
+         "difficulty_level": 2,
+         "category":"people_family"
+    },
+    {
+      "word":"Boss",
+       "gender":"the",
+       "translations":{
+         "es":"jefe/a"
+       },
+       "difficulty_level":2,
+       "category":"people_family"
+    }
+]
