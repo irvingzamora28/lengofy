@@ -114,7 +114,7 @@ Route::get('/dashboard', function () {
 
     $games = Game::all();
 
-    $user = auth()->user()->load(['languagePair' => function($query) {
+    $user = auth()->user()->load(['languagePair' => function ($query) {
         $query->with(['sourceLanguage:id,code,name', 'targetLanguage:id,code,name']);
     }]);
 
@@ -155,12 +155,19 @@ Route::middleware('auth')->group(function () {
             Route::get('/{genderDuelGame}', [GenderDuelGameController::class, 'show'])->name('games.gender-duel.show');
             Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');
             Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
+            Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
         });
 
         // Memory Translation routes
         Route::prefix('memory-translation')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
             Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
-            Route::get('/play', [MemoryTranslationGameController::class, 'play'])->name('games.memory-translation.play');
+            Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
+            Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
+            Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
+            Route::get('/{memoryTranslationGame}', [MemoryTranslationGameController::class, 'show'])->name('games.memory-translation.show');
+            Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
+            Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
+            Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
         });
     });
 
