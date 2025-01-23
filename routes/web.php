@@ -8,6 +8,7 @@ use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
+use App\Models\Game;
 use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -110,8 +111,25 @@ Route::get('/dashboard', function () {
         ->orderBy('winning_streak', 'desc')
         ->limit(10)
         ->get();
+
+    $games = Game::all();
+
+    $user = auth()->user()->load(['languagePair' => function($query) {
+        $query->with(['sourceLanguage:id,code,name', 'targetLanguage:id,code,name']);
+    }]);
+
     return Inertia::render('Dashboard', [
         'scores' => $scores,
+        'games' => $games,
+        'auth' => [
+            'user' => array_merge($user->toArray(), [
+                'language_pair' => $user->languagePair ? [
+                    'id' => $user->languagePair->id,
+                    'sourceLanguage' => $user->languagePair->sourceLanguage,
+                    'targetLanguage' => $user->languagePair->targetLanguage,
+                ] : null
+            ])
+        ]
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

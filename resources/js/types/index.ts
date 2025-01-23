@@ -1,4 +1,4 @@
-import { Language } from './language';
+import { Language, LanguagePair } from './language';
 
 export * from './language';
 
@@ -19,6 +19,7 @@ export interface User {
     guest_token?: string;
     last_active_at?: string;
     language_pair_id: string;
+    language_pair?: LanguagePair;
     gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
     memory_translation_difficulty?: 'easy' | 'medium' | 'hard';
 }
@@ -81,6 +82,13 @@ export interface GenderDuelGameState {
     max_players?: number;
 }
 
+export interface Game {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    supported_language_pairs: string[] | null;
+}
 
 export interface Score {
     id: number;
