@@ -3,23 +3,44 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode, useState, useEffect } from 'react';
 import DarkModeToggle from '@/Components/UI/DarkModeToggle';
 import { useDarkMode } from '@/Hooks/useDarkMode';
 import { useTranslation } from 'react-i18next';
 import { User } from '@/types';
 import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+
+interface PageProps {
+    auth: {
+        user: User;
+    };
+    flash: {
+        error?: string | null;
+        success?: string | null;
+    };
+    [key: string]: any;
+}
 
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const { auth } = usePage<{ auth: { user: User } }>().props;
+    const { auth, flash } = usePage<PageProps>().props;
     const user = auth.user;
     const { t: trans } = useTranslation();
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const { darkMode, setDarkMode } = useDarkMode();
+
+    useEffect(() => {
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+    }, [flash]);
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -212,7 +233,7 @@ export default function Authenticated({
             )}
 
             <main>{children}</main>
-            <Toaster />
+            <Toaster position="top-right" />
         </div>
     );
 }
