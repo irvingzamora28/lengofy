@@ -14,12 +14,23 @@ class GameSeeder extends Seeder
     {
 
         $games = [
-            ['name' => 'Gender Duel', 'slug' => 'gender-duel'],
-            ['name' => 'Memory Translation', 'slug' => 'memory-translation'],
+            [
+                'name' => 'Memory Translation Game',
+                'slug' => 'memory-translation',
+                'supported_language_pairs' => null, // Available for all language pairs
+            ],
+            [
+                'name' => 'Gender Duel',
+                'slug' => 'gender-duel',
+                'supported_language_pairs' => ['en-de', 'es-de'], // Only available when target is German and source is English or Spanish
+            ],
         ];
 
         foreach ($games as $game) {
-            Game::create($game);
+            Game::updateOrCreate(
+                ['slug' => $game['slug']], // Find by slug
+                $game // Update or create with these values
+            );
         }
     }
 }

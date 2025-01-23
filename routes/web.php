@@ -8,6 +8,7 @@ use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
+use App\Models\Game;
 use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -110,8 +111,29 @@ Route::get('/dashboard', function () {
         ->orderBy('winning_streak', 'desc')
         ->limit(10)
         ->get();
+
+    $games = Game::all();
+
+    $user = auth()->user()->load(['languagePair' => function($query) {
+        $query->with(['sourceLanguage:id,code,name', 'targetLanguage:id,code,name']);
+    }]);
+
     return Inertia::render('Dashboard', [
         'scores' => $scores,
+        'games' => $games,
+        'auth' => [
+            'user' => array_merge($user->toArray(), [
+                'language_pair' => $user->languagePair ? [
+                    'id' => $user->languagePair->id,
+                    'sourceLanguage' => $user->languagePair->sourceLanguage,
+                    'targetLanguage' => $user->languagePair->targetLanguage,
+                ] : null
+            ])
+        ],
+        'flash' => [
+            'error' => session('error'),
+            'success' => session('success'),
+        ],
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -123,26 +145,23 @@ Route::middleware('auth')->group(function () {
         ->name('profile.game-settings.update');
 
     // Game routes
-    Route::prefix('games/gender-duel')->group(function () {
-        Route::get('/', [GenderDuelGameController::class, 'lobby'])->name('games.gender-duel.lobby');
-        Route::post('/', [GenderDuelGameController::class, 'create'])->name('games.gender-duel.create');
-        Route::get('/practice', [GenderDuelGameController::class, 'practice'])->name('games.gender-duel.practice');
-        Route::get('/get-words', [GenderDuelGameController::class, 'getGenderDuelWords'])->name('games.gender-duel.get-words');
-        Route::get('/{genderDuelGame}', [GenderDuelGameController::class, 'show'])->name('games.gender-duel.show');
-        Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');
-        Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
-        Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
-    });
+    Route::prefix('games')->middleware(['auth', 'verified'])->group(function () {
+        // Gender Duel routes
+        Route::prefix('gender-duel')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
+            Route::get('/', [GenderDuelGameController::class, 'lobby'])->name('games.gender-duel.lobby');
+            Route::post('/', [GenderDuelGameController::class, 'create'])->name('games.gender-duel.create');
+            Route::get('/practice', [GenderDuelGameController::class, 'practice'])->name('games.gender-duel.practice');
+            Route::get('/get-words', [GenderDuelGameController::class, 'getGenderDuelWords'])->name('games.gender-duel.get-words');
+            Route::get('/{genderDuelGame}', [GenderDuelGameController::class, 'show'])->name('games.gender-duel.show');
+            Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');
+            Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
+        });
 
-    Route::prefix('games/memory-translation')->group(function () {
-        Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
-        Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
-        Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
-        Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
-        Route::get('/{memoryTranslationGame}', [MemoryTranslationGameController::class, 'show'])->name('games.memory-translation.show');
-        Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
-        Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
-        Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
+        // Memory Translation routes
+        Route::prefix('memory-translation')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
+            Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
+            Route::get('/play', [MemoryTranslationGameController::class, 'play'])->name('games.memory-translation.play');
+        });
     });
 
     // Score routes

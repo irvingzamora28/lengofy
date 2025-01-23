@@ -1,0 +1,344 @@
+[
+  {
+    "word": "Health",
+    "gender": null,
+    "translations": {
+      "es": "salud"
+    },
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Doctor",
+    "gender": null,
+    "translations": {
+      "es": "médico"
+    },
+    "emoji": "🧑‍⚕️",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Nurse",
+    "gender": null,
+    "translations": {
+      "es": "enfermera"
+    },
+     "emoji":" 🧑‍⚕️",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Hospital",
+    "gender": null,
+    "translations": {
+      "es": "hospital"
+    },
+      "emoji":" 🏥",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Pharmacy",
+    "gender": null,
+    "translations": {
+      "es": "farmacia"
+    },
+    "emoji": " ⚕️",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Medicine",
+    "gender": null,
+    "translations": {
+      "es": "medicina"
+    },
+      "emoji":"💊",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Pill",
+    "gender":null,
+    "translations": {
+      "es": "pastilla"
+    },
+     "emoji":"💊",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Syrup",
+    "gender":null,
+    "translations": {
+      "es": "jarabe"
+    },
+     "difficulty_level": 2,
+    "category": "health"
+  },
+  {
+     "word": "Injection",
+      "gender":null,
+    "translations": {
+      "es": "inyección"
+    },
+     "emoji": "💉",
+    "difficulty_level": 2,
+    "category": "health"
+  },
+    {
+    "word": "Bandage",
+     "gender":null,
+    "translations": {
+      "es": "venda"
+    },
+      "emoji":"🩹",
+    "difficulty_level": 2,
+    "category": "health"
+  },
+  {
+    "word": "Pain",
+     "gender":null,
+    "translations": {
+      "es": "dolor"
+    },
+     "difficulty_level": 1,
+    "category": "health"
+  },
+  {
+    "word": "Headache",
+     "gender":null,
+    "translations": {
+      "es": "dolor de cabeza"
+    },
+     "emoji":"🤕",
+    "difficulty_level": 1,
+    "category": "health"
+  },
+   {
+      "word":"Fever",
+      "gender":null,
+      "translations":{
+         "es":"fiebre"
+      },
+       "emoji":"🤒",
+      "difficulty_level": 1,
+     "category":"health"
+    },
+   {
+      "word":"Cough",
+      "gender":null,
+      "translations":{
+        "es":"tos"
+      },
+       "emoji":" 🤧",
+       "difficulty_level": 1,
+       "category":"health"
+   },
+   {
+      "word":"Cold",
+       "gender":null,
+      "translations":{
+          "es":"resfriado"
+      },
+      "emoji":" 🤧",
+      "difficulty_level": 1,
+       "category":"health"
+   },
+  {
+    "word": "Flu",
+     "gender":null,
+    "translations": {
+      "es": "gripe"
+    },
+     "emoji":" 🤧",
+    "difficulty_level": 2,
+    "category": "health"
+  },
+  {
+    "word": "Allergy",
+    "gender":null,
+    "translations": {
+      "es": "alergia"
+    },
+    "difficulty_level": 2,
+    "category": "health"
+  },
+  {
+    "word":"Virus",
+     "gender":null,
+     "translations":{
+        "es":"virus"
+     },
+      "emoji":"🦠",
+     "difficulty_level":2,
+     "category":"health"
+  },
+   {
+       "word":"Bacteria",
+        "gender":null,
+       "translations":{
+          "es":"bacteria"
+       },
+        "emoji":"🦠",
+       "difficulty_level":3,
+      "category":"health"
+   },
+   {
+       "word":"Symptom",
+       "gender":null,
+       "translations":{
+          "es":"síntoma"
+        },
+       "difficulty_level":2,
+      "category":"health"
+    },
+    {
+      "word":"Diagnosis",
+      "gender":null,
+      "translations":{
+         "es":"diagnóstico"
+      },
+      "difficulty_level":3,
+      "category":"health"
+    },
+    {
+     "word":"Treatment",
+      "gender":null,
+      "translations":{
+        "es":"tratamiento"
+      },
+      "difficulty_level":2,
+       "category":"health"
+    },
+   {
+       "word":"Operation",
+       "gender":null,
+       "translations":{
+           "es":"operación"
+        },
+         "difficulty_level":3,
+         "category":"health"
+    },
+     {
+        "word":"Surgery",
+         "gender":null,
+        "translations":{
+           "es":"cirugía"
+         },
+         "difficulty_level":3,
+         "category":"health"
+    },
+    {
+       "word":"Patient",
+        "gender":null,
+       "translations":{
+           "es":"paciente"
+        },
+       "difficulty_level":2,
+       "category":"health"
+    },
+   {
+      "word":"Heart Rate",
+       "gender":null,
+      "translations":{
+        "es":"frecuencia cardíaca"
+      },
+     "difficulty_level":3,
+       "category":"health"
+    },
+    {
+       "word":"Blood Pressure",
+        "gender":null,
+       "translations":{
+           "es":"presión arterial"
+        },
+        "difficulty_level":3,
+       "category":"health"
+    },
+    {
+       "word":"Vaccine",
+        "gender":null,
+       "translations":{
+         "es":"vacuna"
+        },
+        "emoji":"💉",
+        "difficulty_level":2,
+       "category":"health"
+    },
+   {
+       "word":"Therapy",
+        "gender":null,
+       "translations":{
+            "es":"terapia"
+        },
+       "difficulty_level":2,
+       "category":"health"
+    },
+   {
+      "word":"Physical Therapy",
+       "gender":null,
+       "translations":{
+           "es":"fisioterapia"
+       },
+        "difficulty_level":3,
+      "category":"health"
+    },
+    {
+        "word":"Mental Health",
+         "gender":null,
+         "translations":{
+            "es":"salud mental"
+         },
+        "difficulty_level": 2,
+        "category":"health"
+    },
+     {
+       "word":"Well-being",
+        "gender":null,
+        "translations":{
+           "es":"bienestar"
+         },
+        "difficulty_level":2,
+       "category":"health"
+    },
+    {
+      "word":"Exercise",
+       "gender":null,
+      "translations":{
+          "es":"ejercicio"
+      },
+       "emoji":" 🏃‍♀️",
+      "difficulty_level":2,
+      "category":"health"
+    },
+    {
+       "word":"Diet",
+        "gender":null,
+       "translations":{
+          "es":"dieta"
+         },
+         "difficulty_level":2,
+         "category":"health"
+    },
+    {
+      "word":"Sleep",
+       "gender":null,
+       "translations":{
+          "es":"dormir"
+       },
+      "emoji":" 😴",
+       "difficulty_level":1,
+       "category":"health"
+   },
+   {
+       "word":"Rest",
+       "gender":null,
+       "translations":{
+           "es":"descanso"
+       },
+      "difficulty_level":1,
+       "category":"health"
+    }
+]

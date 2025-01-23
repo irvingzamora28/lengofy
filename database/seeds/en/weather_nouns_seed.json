@@ -1,0 +1,241 @@
+[
+    {
+        "word": "Weather",
+        "gender": null,
+        "translations": {
+            "es": "tiempo"
+        },
+        "difficulty_level": 1,
+        "category": "weather"
+    },
+    {
+        "word": "Sun",
+        "gender": null,
+        "translations": {
+            "es": "sol"
+        },
+        "emoji": "☀️",
+        "difficulty_level": 1,
+        "category": "weather"
+    },
+    {
+        "word": "Cloud",
+        "gender": null,
+        "translations": {
+            "es": "nube"
+        },
+         "emoji":" ☁️",
+        "difficulty_level": 1,
+        "category": "weather"
+    },
+     {
+        "word":"Rain",
+         "gender":null,
+        "translations": {
+            "es": "lluvia"
+        },
+        "emoji":"🌧️",
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+   {
+        "word":"Snow",
+        "gender":null,
+        "translations":{
+            "es":"nieve"
+        },
+        "emoji":" ❄️",
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+    {
+        "word":"Wind",
+         "gender":null,
+        "translations": {
+            "es": "viento"
+        },
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+    {
+        "word":"Storm",
+         "gender":null,
+        "translations":{
+            "es":"tormenta"
+         },
+        "emoji":" ⛈️",
+        "difficulty_level": 2,
+        "category":"weather"
+    },
+    {
+        "word":"Thunder",
+         "gender":null,
+        "translations": {
+            "es": "trueno"
+        },
+         "difficulty_level": 2,
+        "category":"weather"
+    },
+     {
+        "word":"Lightning",
+         "gender":null,
+        "translations": {
+            "es": "relámpago"
+        },
+         "difficulty_level": 2,
+        "category":"weather"
+    },
+     {
+       "word":"Fog",
+        "gender":null,
+       "translations":{
+         "es":"niebla"
+       },
+       "difficulty_level": 2,
+        "category":"weather"
+    },
+     {
+       "word":"Hail",
+        "gender":null,
+       "translations":{
+          "es":"granizo"
+        },
+        "emoji":" 🧊",
+        "difficulty_level": 2,
+        "category":"weather"
+    },
+   {
+      "word":"Ice",
+      "gender":null,
+      "translations":{
+          "es":"hielo"
+       },
+       "emoji":" 🧊",
+        "difficulty_level": 2,
+        "category":"weather"
+   },
+  {
+    "word": "Temperature",
+    "gender":null,
+    "translations": {
+      "es": "temperatura"
+    },
+    "difficulty_level": 1,
+    "category": "weather"
+  },
+  {
+    "word": "Hot",
+    "gender":null,
+    "translations": {
+      "es": "calor"
+    },
+      "emoji":"🔥",
+    "difficulty_level": 1,
+    "category": "weather"
+  },
+  {
+    "word": "Cold",
+    "gender": null,
+    "translations": {
+      "es": "frío"
+    },
+    "emoji":"🥶",
+    "difficulty_level": 1,
+    "category": "weather"
+  },
+    {
+        "word":"Warm",
+         "gender":null,
+        "translations":{
+            "es":"cálido"
+        },
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+    {
+        "word":"Cool",
+        "gender":null,
+        "translations":{
+           "es":"fresco"
+        },
+       "difficulty_level": 1,
+        "category":"weather"
+    },
+     {
+        "word":"Sunny",
+         "gender":null,
+        "translations":{
+           "es":"soleado"
+         },
+         "emoji":" ☀️",
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+     {
+       "word":"Cloudy",
+        "gender":null,
+        "translations":{
+          "es":"nublado"
+        },
+        "emoji":" ☁️",
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+     {
+        "word":"Rainy",
+        "gender":null,
+        "translations":{
+            "es":"lluvioso"
+         },
+          "emoji":" 🌧️",
+        "difficulty_level": 1,
+        "category":"weather"
+    },
+   {
+     "word":"Snowy",
+      "gender":null,
+      "translations":{
+          "es":"nevado"
+       },
+       "emoji":" ❄️",
+       "difficulty_level":1,
+        "category":"weather"
+    },
+    {
+        "word":"Windy",
+         "gender":null,
+        "translations":{
+           "es":"ventoso"
+        },
+         "difficulty_level": 2,
+        "category":"weather"
+    },
+    {
+       "word":"Stormy",
+        "gender":null,
+       "translations":{
+            "es":"tormentoso"
+         },
+         "emoji":" ⛈️",
+       "difficulty_level":2,
+        "category":"weather"
+    },
+   {
+       "word":"Humid",
+        "gender":null,
+       "translations":{
+           "es":"húmedo"
+        },
+       "difficulty_level":2,
+        "category":"weather"
+    },
+   {
+        "word":"Dry",
+         "gender":null,
+        "translations":{
+           "es":"seco"
+         },
+         "difficulty_level":2,
+        "category":"weather"
+    }
+]

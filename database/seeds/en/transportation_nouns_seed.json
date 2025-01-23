@@ -1,0 +1,264 @@
+[
+    {
+        "word": "Transportation",
+        "gender": null,
+        "translations": {
+            "es": "transporte"
+        },
+        "difficulty_level": 1,
+        "category": "transportation"
+    },
+    {
+        "word": "Car",
+        "gender": null,
+        "translations": {
+            "es": "coche"
+        },
+        "emoji": "🚗",
+        "difficulty_level": 1,
+        "category": "transportation"
+    },
+    {
+        "word": "Bus",
+        "gender": null,
+        "translations": {
+            "es": "autobús"
+        },
+         "emoji": "🚌",
+        "difficulty_level": 1,
+        "category": "transportation"
+    },
+  {
+        "word":"Train",
+        "gender":null,
+        "translations": {
+            "es":"tren"
+        },
+        "emoji":" 🚆",
+        "difficulty_level": 1,
+        "category":"transportation"
+    },
+   {
+        "word":"Bicycle",
+        "gender":null,
+        "translations":{
+          "es":"bicicleta"
+        },
+        "emoji":"🚲",
+        "difficulty_level": 1,
+       "category":"transportation"
+    },
+    {
+        "word":"Motorcycle",
+         "gender":null,
+        "translations":{
+           "es":"motocicleta"
+         },
+        "emoji":" 🏍️",
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+    {
+      "word":"Truck",
+       "gender":null,
+      "translations":{
+         "es":"camión"
+        },
+        "emoji":" 🚚",
+       "difficulty_level": 2,
+       "category":"transportation"
+    },
+   {
+        "word":"Taxi",
+        "gender":null,
+         "translations":{
+           "es":"taxi"
+        },
+         "emoji":"🚕",
+        "difficulty_level": 1,
+        "category":"transportation"
+    },
+   {
+        "word":"Airplane",
+         "gender":null,
+        "translations":{
+           "es":"avión"
+         },
+         "emoji":" ✈️",
+        "difficulty_level": 1,
+        "category":"transportation"
+    },
+   {
+      "word":"Helicopter",
+       "gender":null,
+       "translations":{
+         "es":"helicóptero"
+       },
+       "emoji":" 🚁",
+       "difficulty_level": 2,
+       "category":"transportation"
+   },
+   {
+        "word":"Ship",
+        "gender":null,
+         "translations":{
+            "es":"barco"
+        },
+         "emoji":" 🚢",
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+  {
+    "word":"Boat",
+     "gender":null,
+    "translations":{
+      "es":"bote"
+     },
+     "emoji":" 🛥️",
+    "difficulty_level": 2,
+     "category":"transportation"
+  },
+    {
+      "word":"Subway",
+       "gender":null,
+      "translations":{
+        "es":"metro"
+        },
+         "emoji":"🚇",
+       "difficulty_level": 2,
+       "category":"transportation"
+    },
+    {
+        "word":"Tram",
+         "gender":null,
+        "translations":{
+          "es":"tranvía"
+         },
+         "emoji":"🚊",
+         "difficulty_level": 2,
+        "category":"transportation"
+    },
+     {
+        "word":"Scooter",
+         "gender":null,
+        "translations":{
+            "es":"patinete"
+         },
+          "emoji":"🛴",
+        "difficulty_level": 2,
+        "category":"transportation"
+     },
+     {
+        "word":"Skateboard",
+         "gender":null,
+         "translations":{
+            "es":"monopatín"
+         },
+        "emoji":" 🛹",
+        "difficulty_level": 2,
+         "category":"transportation"
+    },
+    {
+      "word":"Road",
+       "gender":null,
+       "translations":{
+          "es":"carretera"
+       },
+       "difficulty_level": 1,
+       "category":"transportation"
+    },
+    {
+        "word":"Street",
+        "gender":null,
+        "translations":{
+           "es":"calle"
+         },
+        "difficulty_level": 1,
+        "category":"transportation"
+    },
+    {
+       "word":"Sidewalk",
+        "gender":null,
+        "translations":{
+          "es":"acera"
+        },
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+    {
+        "word":"Bridge",
+         "gender":null,
+        "translations":{
+           "es":"puente"
+        },
+        "difficulty_level": 2,
+       "category":"transportation"
+    },
+    {
+      "word":"Tunnel",
+      "gender":null,
+       "translations":{
+           "es":"túnel"
+        },
+       "difficulty_level": 2,
+      "category":"transportation"
+    },
+     {
+        "word":"Airport",
+         "gender":null,
+         "translations":{
+           "es":"aeropuerto"
+         },
+          "emoji":" 🛬",
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+    {
+       "word":"Station",
+        "gender":null,
+       "translations":{
+          "es":"estación"
+        },
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+    {
+      "word":"Port",
+       "gender":null,
+       "translations":{
+          "es":"puerto"
+        },
+       "difficulty_level": 2,
+       "category":"transportation"
+    },
+   {
+        "word":"Traffic light",
+         "gender":null,
+        "translations":{
+            "es":"semáforo"
+        },
+        "emoji":"🚦",
+        "difficulty_level": 2,
+        "category":"transportation"
+    },
+    {
+       "word":"Parking",
+        "gender":null,
+       "translations":{
+          "es":"aparcamiento"
+         },
+         "emoji":"🅿️",
+       "difficulty_level": 2,
+        "category":"transportation"
+    },
+   {
+      "word":"Gas station",
+       "gender":null,
+       "translations":{
+         "es":"gasolinera"
+       },
+         "emoji":"⛽",
+       "difficulty_level": 2,
+        "category":"transportation"
+    }
+]

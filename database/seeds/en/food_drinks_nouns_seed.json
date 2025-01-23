@@ -1,0 +1,520 @@
+[
+    {
+        "word": "Food",
+        "gender": null,
+        "translations": {
+            "es": "comida"
+        },
+        "difficulty_level": 1,
+        "category": "food_drinks"
+    },
+    {
+        "word": "Apple",
+        "gender": null,
+        "translations": {
+            "es": "manzana"
+        },
+        "emoji": "🍎",
+        "difficulty_level": 1,
+        "category": "food_drinks"
+    },
+    {
+        "word": "Banana",
+        "gender": null,
+        "translations": {
+            "es": "plátano"
+        },
+        "emoji": "🍌",
+        "difficulty_level": 1,
+         "category": "food_drinks"
+    },
+    {
+        "word": "Orange",
+        "gender": null,
+        "translations": {
+            "es": "naranja"
+        },
+        "emoji": "🍊",
+        "difficulty_level": 1,
+         "category": "food_drinks"
+    },
+    {
+        "word": "Strawberry",
+        "gender":null,
+        "translations": {
+            "es": "fresa"
+        },
+        "emoji": "🍓",
+        "difficulty_level": 1,
+         "category": "food_drinks"
+    },
+     {
+        "word":"Grape",
+         "gender":null,
+        "translations": {
+            "es": "uva"
+        },
+        "emoji":"🍇",
+        "difficulty_level": 1,
+        "category": "food_drinks"
+    },
+    {
+        "word": "Watermelon",
+         "gender":null,
+        "translations": {
+            "es": "sandía"
+        },
+         "emoji": "🍉",
+        "difficulty_level": 2,
+         "category": "food_drinks"
+    },
+    {
+      "word":"Pineapple",
+      "gender":null,
+      "translations":{
+        "es":"piña"
+      },
+       "emoji":"🍍",
+        "difficulty_level": 2,
+        "category":"food_drinks"
+    },
+     {
+        "word": "Lemon",
+         "gender":null,
+        "translations": {
+            "es": "limón"
+        },
+        "emoji": "🍋",
+        "difficulty_level": 2,
+        "category": "food_drinks"
+    },
+    {
+       "word":"Mango",
+        "gender":null,
+        "translations":{
+            "es":"mango"
+        },
+        "emoji":"🥭",
+        "difficulty_level": 2,
+         "category": "food_drinks"
+    },
+    {
+        "word":"Pear",
+        "gender":null,
+        "translations": {
+            "es": "pera"
+        },
+         "emoji":"🍐",
+        "difficulty_level": 2,
+        "category": "food_drinks"
+    },
+     {
+      "word":"Peach",
+        "gender":null,
+        "translations":{
+           "es":"melocotón"
+        },
+        "emoji":"🍑",
+        "difficulty_level": 2,
+         "category":"food_drinks"
+    },
+    {
+      "word":"Cherry",
+       "gender":null,
+      "translations":{
+        "es":"cereza"
+      },
+      "emoji":"🍒",
+       "difficulty_level":2,
+       "category":"food_drinks"
+    },
+     {
+        "word": "Carrot",
+        "gender": null,
+        "translations": {
+            "es": "zanahoria"
+        },
+         "emoji": "🥕",
+        "difficulty_level": 1,
+        "category": "food_drinks"
+    },
+    {
+        "word":"Potato",
+         "gender":null,
+        "translations": {
+            "es": "patata"
+        },
+         "emoji":"🥔",
+        "difficulty_level": 1,
+         "category": "food_drinks"
+    },
+     {
+        "word":"Tomato",
+         "gender":null,
+        "translations": {
+            "es": "tomate"
+        },
+         "emoji":"🍅",
+        "difficulty_level": 1,
+         "category":"food_drinks"
+    },
+    {
+        "word": "Onion",
+         "gender":null,
+        "translations": {
+            "es": "cebolla"
+        },
+         "emoji": "🧅",
+        "difficulty_level": 2,
+         "category": "food_drinks"
+    },
+    {
+        "word":"Garlic",
+         "gender":null,
+        "translations":{
+            "es":"ajo"
+        },
+         "emoji":"🧄",
+        "difficulty_level": 2,
+        "category":"food_drinks"
+    },
+    {
+        "word": "Cucumber",
+        "gender":null,
+        "translations": {
+            "es": "pepino"
+        },
+         "emoji":"🥒",
+        "difficulty_level": 2,
+        "category": "food_drinks"
+    },
+     {
+        "word":"Broccoli",
+         "gender":null,
+        "translations":{
+           "es":"brócoli"
+        },
+        "emoji":"🥦",
+        "difficulty_level": 2,
+         "category": "food_drinks"
+    },
+    {
+      "word": "Lettuce",
+      "gender":null,
+      "translations":{
+         "es":"lechuga"
+      },
+       "emoji":"🥬",
+       "difficulty_level": 2,
+      "category":"food_drinks"
+    },
+   {
+     "word":"Corn",
+     "gender":null,
+     "translations":{
+        "es":"maíz"
+      },
+     "emoji":"🌽",
+      "difficulty_level":2,
+     "category":"food_drinks"
+   },
+   {
+      "word":"Mushroom",
+      "gender":null,
+      "translations":{
+        "es":"seta"
+      },
+       "emoji":"🍄",
+      "difficulty_level":2,
+       "category":"food_drinks"
+    },
+   {
+       "word":"Pepper",
+        "gender":null,
+       "translations":{
+            "es":"pimiento"
+        },
+        "emoji":"🫑",
+       "difficulty_level":2,
+        "category":"food_drinks"
+    },
+    {
+       "word":"Egg",
+        "gender":null,
+       "translations":{
+           "es":"huevo"
+       },
+       "emoji":"🥚",
+        "difficulty_level": 1,
+       "category":"food_drinks"
+    },
+    {
+       "word":"Cheese",
+        "gender":null,
+        "translations":{
+          "es":"queso"
+        },
+       "emoji":"🧀",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+     {
+      "word":"Milk",
+       "gender":null,
+       "translations":{
+          "es":"leche"
+       },
+      "emoji":"🥛",
+      "difficulty_level": 1,
+       "category":"food_drinks"
+    },
+    {
+       "word":"Yogurt",
+       "gender":null,
+       "translations":{
+          "es":"yogur"
+       },
+       "difficulty_level": 2,
+       "category":"food_drinks"
+    },
+     {
+      "word":"Bread",
+      "gender":null,
+      "translations":{
+        "es":"pan"
+      },
+        "emoji":"🍞",
+      "difficulty_level":1,
+      "category":"food_drinks"
+    },
+     {
+       "word":"Rice",
+       "gender":null,
+        "translations":{
+            "es":"arroz"
+         },
+        "emoji":"🍚",
+       "difficulty_level": 1,
+       "category":"food_drinks"
+    },
+    {
+        "word":"Pasta",
+         "gender":null,
+        "translations": {
+            "es": "pasta"
+        },
+         "emoji":"🍝",
+         "difficulty_level": 1,
+        "category": "food_drinks"
+    },
+   {
+        "word":"Noodles",
+         "gender":null,
+        "translations": {
+            "es": "fideos"
+        },
+        "emoji":"🍜",
+        "difficulty_level": 2,
+        "category": "food_drinks"
+    },
+    {
+        "word":"Meat",
+        "gender":null,
+        "translations":{
+            "es":"carne"
+        },
+       "emoji":"🥩",
+       "difficulty_level": 2,
+       "category":"food_drinks"
+    },
+   {
+       "word":"Chicken",
+        "gender":null,
+        "translations":{
+           "es":"pollo"
+         },
+         "emoji":"🍗",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+   },
+   {
+        "word":"Fish",
+        "gender":null,
+        "translations":{
+            "es":"pescado"
+        },
+         "emoji":" 🐟",
+        "difficulty_level": 2,
+        "category":"food_drinks"
+    },
+     {
+        "word":"Sausage",
+        "gender":null,
+        "translations":{
+          "es":"salchicha"
+        },
+        "emoji":"🌭",
+        "difficulty_level":2,
+        "category":"food_drinks"
+    },
+    {
+        "word":"Hamburger",
+        "gender":null,
+        "translations":{
+            "es":"hamburguesa"
+        },
+         "emoji":"🍔",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+     {
+        "word":"Pizza",
+         "gender":null,
+        "translations": {
+            "es": "pizza"
+        },
+         "emoji":"🍕",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+     {
+       "word":"Fries",
+        "gender":null,
+        "translations":{
+            "es":"papas fritas"
+        },
+         "emoji":"🍟",
+        "difficulty_level":1,
+        "category":"food_drinks"
+    },
+    {
+       "word":"Soup",
+        "gender":null,
+       "translations":{
+         "es":"sopa"
+       },
+       "emoji":"🥣",
+        "difficulty_level":1,
+        "category":"food_drinks"
+    },
+    {
+        "word":"Salad",
+        "gender":null,
+        "translations":{
+           "es":"ensalada"
+        },
+        "emoji":"🥗",
+        "difficulty_level":1,
+       "category":"food_drinks"
+    },
+     {
+      "word":"Cake",
+      "gender":null,
+      "translations":{
+        "es":"torta"
+      },
+       "emoji":"🎂",
+      "difficulty_level": 1,
+      "category":"food_drinks"
+     },
+    {
+        "word":"Chocolate",
+         "gender":null,
+        "translations":{
+           "es":"chocolate"
+        },
+        "emoji":"🍫",
+        "difficulty_level":1,
+        "category":"food_drinks"
+    },
+    {
+        "word":"Ice cream",
+         "gender":null,
+        "translations":{
+          "es":"helado"
+         },
+          "emoji":"🍦",
+        "difficulty_level":1,
+        "category":"food_drinks"
+    },
+      {
+        "word":"Candy",
+         "gender":null,
+        "translations":{
+            "es":"dulce"
+        },
+          "emoji":"🍬",
+        "difficulty_level":1,
+       "category":"food_drinks"
+    },
+    {
+       "word":"Donut",
+        "gender":null,
+        "translations":{
+            "es":"dona"
+        },
+         "emoji":"🍩",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+    {
+        "word":"Water",
+         "gender":null,
+        "translations":{
+           "es":"agua"
+         },
+        "emoji":" 💧",
+         "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+    {
+        "word":"Juice",
+         "gender":null,
+        "translations":{
+            "es":"jugo"
+        },
+         "emoji":" 🧃",
+        "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+    {
+       "word":"Coffee",
+        "gender":null,
+       "translations":{
+         "es":"café"
+        },
+         "emoji":"☕",
+       "difficulty_level": 1,
+        "category":"food_drinks"
+    },
+    {
+       "word":"Tea",
+        "gender":null,
+        "translations":{
+           "es":"té"
+         },
+          "emoji":"🍵",
+       "difficulty_level": 1,
+       "category":"food_drinks"
+    },
+    {
+       "word":"Wine",
+       "gender":null,
+        "translations":{
+           "es":"vino"
+        },
+         "emoji":" 🍷",
+       "difficulty_level": 2,
+        "category":"food_drinks"
+    },
+     {
+        "word":"Beer",
+         "gender":null,
+        "translations":{
+           "es":"cerveza"
+        },
+         "emoji":"🍺",
+        "difficulty_level": 2,
+        "category":"food_drinks"
+    }
+]

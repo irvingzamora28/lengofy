@@ -10,6 +10,9 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'slug'];
+    protected $casts = [
+        'supported_language_pairs' => 'array',
+    ];
 
     public function scores()
     {

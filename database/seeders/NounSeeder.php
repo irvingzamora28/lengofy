@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class NounSeeder extends Seeder
 {
+
+    protected $languageCode;
+
+    public function __construct($languageCode = 'de')
+    {
+        $this->languageCode = $languageCode;
+    }
+
     public function run(): void
     {
         $files = [
@@ -37,11 +45,11 @@ class NounSeeder extends Seeder
 
         $nouns = [];
         foreach ($files as $file) {
-            $filePath = database_path('seeds/' . $file);
+            $filePath = database_path('seeds/' . $this->languageCode . '/' . $file);
             $fileNouns = json_decode(file_get_contents($filePath), true);
             $nouns = array_merge($nouns, $fileNouns);
         }
-        $language = Language::where('name', 'Deutsch')->firstOrFail();
+        $language = Language::where('code', $this->languageCode)->firstOrFail();
 
         $nounData = [];
         $categoryNounData = [];

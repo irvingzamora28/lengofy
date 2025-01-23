@@ -1,0 +1,12 @@
+import genderDuelDashboardImage from "@/assets/images/gender-duel-dashboard.png";
+import memoryTranslationDashboardImage from "@/assets/images/memory-translation-dashboard.png";
+
+export const GAME_THUMBNAILS: Record<string, string> = {
+    'gender-duel': genderDuelDashboardImage,
+    'memory-translation': memoryTranslationDashboardImage,
+};
+
+export const GAME_DESCRIPTIONS: Record<string, string> = {
+    'gender-duel': 'Master German noun genders through an exciting dueling game!',
+    'memory-translation': 'Test your German vocabulary with fun memory games! Match cards to find the hidden translations and challenge your memory.',
+};

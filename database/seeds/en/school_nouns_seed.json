@@ -1,0 +1,337 @@
+[
+  {
+    "word": "School",
+    "gender": null,
+    "translations": {
+      "es": "escuela"
+    },
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+    "word": "Teacher",
+    "gender": null,
+    "translations": {
+      "es": "profesor/a"
+    },
+     "emoji":"🧑‍🏫",
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+    "word": "Student",
+    "gender": null,
+    "translations": {
+      "es": "estudiante"
+    },
+      "emoji":"🧑‍🎓",
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+    "word": "Class",
+    "gender": null,
+    "translations": {
+      "es": "clase"
+    },
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+    "word": "Classroom",
+    "gender":null,
+    "translations": {
+      "es": "aula"
+    },
+    "difficulty_level": 1,
+    "category": "school"
+  },
+    {
+        "word":"Book",
+         "gender":null,
+        "translations":{
+           "es":"libro"
+        },
+        "emoji":" 📖",
+        "difficulty_level": 1,
+        "category":"school"
+    },
+   {
+        "word":"Notebook",
+        "gender":null,
+        "translations":{
+            "es":"cuaderno"
+        },
+         "difficulty_level": 1,
+        "category":"school"
+    },
+    {
+        "word":"Pencil",
+         "gender":null,
+        "translations": {
+            "es":"lápiz"
+        },
+        "emoji":" ✏️",
+        "difficulty_level": 1,
+        "category":"school"
+    },
+     {
+        "word":"Pen",
+         "gender":null,
+        "translations":{
+            "es":"bolígrafo"
+        },
+         "emoji":"🖋️",
+        "difficulty_level": 1,
+        "category":"school"
+    },
+  {
+    "word": "Eraser",
+     "gender":null,
+    "translations": {
+      "es": "goma de borrar"
+    },
+    "difficulty_level": 1,
+    "category": "school"
+  },
+ {
+    "word": "Ruler",
+     "gender":null,
+    "translations": {
+      "es": "regla"
+    },
+      "difficulty_level": 1,
+    "category": "school"
+  },
+ {
+    "word": "Scissors",
+     "gender":null,
+    "translations": {
+      "es": "tijeras"
+    },
+     "emoji": "✂️",
+    "difficulty_level": 1,
+    "category": "school"
+  },
+ {
+   "word":"Backpack",
+   "gender":null,
+   "translations":{
+     "es":"mochila"
+   },
+    "emoji":"🎒",
+    "difficulty_level":1,
+   "category":"school"
+  },
+  {
+    "word": "Desk",
+    "gender": null,
+    "translations": {
+      "es": "escritorio"
+    },
+     "emoji":" 🗄️",
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+      "word":"Chair",
+      "gender":null,
+      "translations":{
+        "es":"silla"
+      },
+      "emoji":" 🪑",
+      "difficulty_level":1,
+      "category":"school"
+    },
+  {
+    "word": "Board",
+     "gender":null,
+    "translations": {
+      "es": "pizarra"
+    },
+    "difficulty_level": 1,
+    "category": "school"
+  },
+  {
+    "word": "Map",
+     "gender":null,
+    "translations": {
+      "es": "mapa"
+    },
+    "difficulty_level": 2,
+    "category": "school"
+  },
+    {
+        "word":"Globe",
+         "gender":null,
+        "translations":{
+           "es":"globo terráqueo"
+        },
+         "difficulty_level": 2,
+        "category":"school"
+    },
+    {
+       "word":"Projector",
+        "gender":null,
+        "translations":{
+          "es":"proyector"
+        },
+         "difficulty_level": 2,
+        "category":"school"
+    },
+   {
+        "word":"Computer",
+         "gender":null,
+        "translations":{
+           "es":"ordenador"
+        },
+        "emoji":" 💻",
+        "difficulty_level": 2,
+       "category":"school"
+    },
+     {
+       "word":"Textbook",
+       "gender":null,
+       "translations":{
+         "es":"libro de texto"
+        },
+        "difficulty_level":2,
+       "category":"school"
+     },
+    {
+      "word":"Homework",
+       "gender":null,
+      "translations":{
+        "es":"deberes"
+      },
+      "difficulty_level":2,
+       "category":"school"
+    },
+  {
+    "word": "Exam",
+    "gender": null,
+    "translations": {
+      "es": "examen"
+    },
+    "difficulty_level": 2,
+    "category": "school"
+  },
+    {
+       "word":"Test",
+        "gender":null,
+       "translations":{
+          "es":"prueba"
+        },
+        "difficulty_level":2,
+       "category":"school"
+    },
+   {
+      "word":"Grade",
+      "gender":null,
+       "translations":{
+        "es":"nota"
+       },
+       "difficulty_level":2,
+       "category":"school"
+    },
+     {
+       "word":"Subject",
+        "gender":null,
+       "translations":{
+           "es":"asignatura"
+         },
+        "difficulty_level":2,
+        "category":"school"
+    },
+   {
+        "word":"Science",
+         "gender":null,
+        "translations":{
+           "es":"ciencia"
+        },
+         "difficulty_level": 2,
+        "category":"school"
+    },
+    {
+       "word":"Math",
+        "gender":null,
+        "translations":{
+           "es":"matemáticas"
+         },
+         "difficulty_level": 2,
+        "category":"school"
+    },
+   {
+       "word":"History",
+        "gender":null,
+       "translations":{
+          "es":"historia"
+         },
+        "difficulty_level": 2,
+        "category":"school"
+    },
+   {
+      "word":"Geography",
+       "gender":null,
+       "translations":{
+         "es":"geografía"
+       },
+       "difficulty_level":2,
+        "category":"school"
+    },
+  {
+        "word":"Literature",
+         "gender":null,
+        "translations":{
+            "es":"literatura"
+         },
+        "difficulty_level": 2,
+       "category":"school"
+    },
+    {
+       "word":"Art",
+       "gender":null,
+        "translations":{
+           "es":"arte"
+        },
+        "difficulty_level": 2,
+       "category":"school"
+   },
+     {
+       "word":"Music",
+        "gender":null,
+       "translations":{
+          "es":"música"
+         },
+         "difficulty_level": 2,
+         "category":"school"
+    },
+  {
+    "word": "Language",
+    "gender": null,
+    "translations": {
+      "es": "idioma"
+    },
+    "difficulty_level": 2,
+    "category": "school"
+  },
+  {
+    "word": "Dictionary",
+     "gender":null,
+    "translations": {
+      "es": "diccionario"
+    },
+    "difficulty_level": 2,
+    "category": "school"
+  },
+ {
+    "word":"Library",
+     "gender":null,
+    "translations":{
+      "es":"biblioteca"
+    },
+      "emoji":" 📚",
+    "difficulty_level":1,
+   "category":"school"
+ }
+]
