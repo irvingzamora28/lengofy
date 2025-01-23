@@ -18,7 +18,7 @@ class LanguagePairSeeder extends Seeder
             ['source' => 'es', 'target' => 'de', 'active' => true, 'rules' => ['gender_options' => ['der', 'die', 'das']]],
             ['source' => 'de', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
             ['source' => 'de', 'target' => 'es', 'active' => false, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
-            ['source' => 'es', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
+            ['source' => 'es', 'target' => 'en', 'active' => true, 'rules' => ['gender_options' => []]],
             ['source' => 'fr', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
             ['source' => 'fr', 'target' => 'es', 'active' => false, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
         ];
