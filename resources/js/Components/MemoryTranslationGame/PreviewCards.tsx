@@ -74,7 +74,7 @@ const PreviewCards = ({ cards, cardPositions }: PreviewCardsProps) => {
                                 <div className="flex items-center justify-center h-full w-full">
                                     <div className="text-center w-full px-2 whitespace-nowrap">
                                         <p className="text-lg sm:text-xl font-semibold dark:text-gray-100">
-                                        {card.id.includes('word') && <>{card.gender}</>}
+                                        {card.id.includes('word') && <>{card.gender} </>}
                                         <>{card.word}</>
                                         </p>
                                         {card.emoji && <p className="text-2xl sm:text-3xl">{card.emoji}</p>}
