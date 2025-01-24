@@ -509,10 +509,10 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
         >
             <Head title={trans('memory_translation.game_room_title')} />
 
-            <div className="py-12 bg-gray-100 dark:bg-gray-900">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="py0 sm:py-12 bg-gray-100 dark:bg-gray-900">
+                <div className="w-full md:w-11/12 mx-auto px-0 sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                        <div className="p-2 sm:p-6 text-gray-900 dark:text-gray-100">
                             <div className="flex flex-col space-y-4">
                                 <GameInfo game={gameState} currentPlayer={currentPlayer} />
                                 <GameArea

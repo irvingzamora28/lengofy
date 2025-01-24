@@ -98,7 +98,7 @@ export default function GameArea({
         ? "grid-cols-4 sm:grid-cols-5"
         : game.words.length <= 48
             ? "grid-cols-6 sm:grid-cols-8"
-            : "grid-cols-8 sm:grid-cols-10";
+            : "grid-cols-8 sm:grid-cols-12";
 
     if (game.status === "waiting") {
         return (

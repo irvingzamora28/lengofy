@@ -16,7 +16,7 @@ export default function GameInfo({ game, currentPlayer }: Props) {
     };
 
     return (
-        <div className="flex flex-wrap justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
+        <div className="hidden md:flex flex-wrap justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
             <div className="flex flex-col mb-4 sm:mb-0">
                 <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                     {trans('memory_translation.game_info.status')}: {trans(`memory_translation.status.${game.status}`)}
