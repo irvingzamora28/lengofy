@@ -9,6 +9,9 @@ import PlayersInfo from '@/Components/GenderDuelGame/PlayersInfo';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
+import toast from 'react-hot-toast';
+import { IoPersonAddSharp } from 'react-icons/io5';
+import { FaUserPlus } from 'react-icons/fa';
 
 interface Props extends PageProps {
     auth: any;
@@ -327,21 +330,63 @@ export default function Show({ auth, gender_duel_game, wsEndpoint, justCreated }
 
     const currentPlayer = genderDuelGameState.players.find(player => player.user_id === auth.user.id);
 
+    const handleShare = async () => {
+        const url = new URL(window.location.href);
+        const baseUrl = `${url.protocol}//${url.host}${url.pathname}`;
+        const shareTitle = `Join my Gender Duel Game!`;
+        const shareText = `Hey! Join me for a game of Gender Duel on Lengofy!`;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: baseUrl,
+                });
+            } else {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+            // Fallback to clipboard
+            try {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            } catch (err) {
+                toast.error(trans('Failed to share or copy link'));
+            }
+        }
+    };
+
     return (
         <>
             <AuthenticatedLayout
                 header={
-                    <div className="flex items-center">
+                    <div className="flex justify-between items-center">
+                        <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300 leading-tight">
+                        {trans('Gender Duel')}
+                    </h2>
+                    <div className="flex gap-2">
+                        {genderDuelGameState.status === 'waiting' && (
+                            <button
+                                onClick={handleShare}
+                                className="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                            >
+                                <IoPersonAddSharp className="mr-2 md:hidden" />
+                                <FaUserPlus className="mr-2 hidden md:block" />
+                                <span className="hidden md:inline">{trans('generals.invite_friends')}</span>
+                                <span className="md:hidden">{trans('generals.invite')}</span>
+                            </button>
+                        )}
                         <button
-                            onClick={handleExitClick}
+                            onClick={() => setShowExitConfirmation(true)}
                             className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
                         >
                             <MdClose size={24} />
                         </button>
-                        <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300 leading-tight">
-                            Gender Duel
-                        </h2>
                     </div>
+                </div>
                 }
             >
                 <Head title={trans('gender_duel.game_room_title')} />
