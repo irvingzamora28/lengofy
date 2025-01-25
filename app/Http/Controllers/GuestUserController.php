@@ -31,7 +31,9 @@ class GuestUserController extends Controller
 
         if ($request->redirect_route && $request->game_id) {
             // For game show routes, we need to pass the game ID
+            $paramName = str_contains($request->redirect_route, 'gender-duel') ? 'genderDuelGame' : 'memoryTranslationGame';
             return redirect()->route($request->redirect_route, [
+                $paramName => $request->game_id
             ]);
         }
 

@@ -14,7 +14,7 @@ interface Props {
 
 export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin, canRegister, languagePairId }: Props) {
     // Format the route name to match the validation rules
-    const formattedRoute = `games.${gameRoute.replace('games.', '')}`;
+    const formattedRoute = `games.${gameRoute}`;
 
     const { post, processing } = useForm({
         language_pair_id: languagePairId,
