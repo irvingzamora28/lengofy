@@ -13,17 +13,15 @@ interface Props {
 }
 
 export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin, canRegister, languagePairId }: Props) {
-    // Format the route name to match the validation rules
-    const formattedRoute = `games.${gameRoute}`;
 
-    const { post, processing } = useForm({
+    const { post: postGuest, processing: guestProcessing } = useForm({
         language_pair_id: languagePairId,
-        redirect_route: formattedRoute,
+        redirect_route: gameRoute,
         game_id: gameId,
     });
 
     const handleGuestJoin = () => {
-        post(route("guest.create"), {
+        postGuest(route("guest.create"), {
             preserveScroll: true,
         });
     };
@@ -31,14 +29,14 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
     const handleCreateAccount = () => {
         window.location.href = route("register", {
             language_pair_id: languagePairId,
-            redirect_route: formattedRoute,
+            redirect_route: gameRoute,
             game_id: gameId
         });
     };
 
     const handleLogin = () => {
         window.location.href = route("login", {
-            redirect_route: formattedRoute,
+            redirect_route: gameRoute,
             game_id: gameId
         });
     };
@@ -79,7 +77,7 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
                         <SecondaryButton
                             className="w-full justify-center"
                             onClick={handleGuestJoin}
-                            disabled={processing}
+                            disabled={guestProcessing}
                         >
                             Join as Guest
                         </SecondaryButton>

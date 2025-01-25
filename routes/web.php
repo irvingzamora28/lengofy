@@ -111,7 +111,7 @@ Route::middleware(['guest'])->group(function () {
         $game = MemoryTranslationGame::findOrFail($memoryTranslationGame);
         return Inertia::render('Games/GuestInvitation', [
             'gameName' => 'Memory Translation',
-            'gameRoute' => 'memory-translation.show',
+            'gameRoute' => 'games.memory-translation.join-from-invite',
             'gameId' => $game->id,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -123,7 +123,7 @@ Route::middleware(['guest'])->group(function () {
         $game = GenderDuelGame::findOrFail($genderDuelGame);
         return Inertia::render('Games/GuestInvitation', [
             'gameName' => 'Gender Duel',
-            'gameRoute' => 'gender-duel.show',
+            'gameRoute' => 'games.gender-duel.join-from-invite',
             'gameId' => $game->id,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -205,6 +205,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
             Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
             Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
+            Route::get('/{memoryTranslationGame}/join-from-invite', [MemoryTranslationGameController::class, 'joinFromInvite'])->name('games.memory-translation.join-from-invite');
             Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
             Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
             Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');

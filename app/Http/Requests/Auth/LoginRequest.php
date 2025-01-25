@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
@@ -29,6 +30,10 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            // validate redirect_route
+            'redirect_route' => ['sometimes', 'string:games.gender-duel.join-from-invite,games.memory-translation.join-from-invite'],
+            // validate game_id
+            'game_id' => ['required_if:redirect_route,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite|integer'],
         ];
     }
 

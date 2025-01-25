@@ -187,6 +187,16 @@ class MemoryTranslationGameController extends Controller
 
     public function join(MemoryTranslationGame $memoryTranslationGame)
     {
+        return $this->handleJoinGame($memoryTranslationGame);
+    }
+
+    public function joinFromInvite(MemoryTranslationGame $memoryTranslationGame)
+    {
+        return $this->handleJoinGame($memoryTranslationGame);
+    }
+
+    private function handleJoinGame(MemoryTranslationGame $memoryTranslationGame)
+    {
         $user = auth()->user();
 
         if ($memoryTranslationGame->language_pair_id !== $user->language_pair_id) {
@@ -202,7 +212,7 @@ class MemoryTranslationGameController extends Controller
         }
 
         try {
-            $this->memoryTranslationGameService->joinGame($memoryTranslationGame, auth()->user());
+            $this->memoryTranslationGameService->joinGame($memoryTranslationGame, $user);
             return redirect()->route('games.memory-translation.show', $memoryTranslationGame);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);

@@ -64,6 +64,10 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'language_pair_id' => 'required|exists:language_pairs,id',
+            // validate redirect_route
+            'redirect_route' => ['sometimes', 'string:games.gender-duel.join-from-invite,games.memory-translation.join-from-invite'],
+            // validate game_id
+            'game_id' => ['required_if:redirect_route,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite|integer'],
         ]);
 
         $user = User::create([
@@ -76,6 +80,13 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        // Check if we need to redirect to a game
+        if ($request->redirect_route && $request->game_id) {
+            $paramName = str_contains($request->redirect_route, 'gender-duel') ? 'genderDuelGame' : 'memoryTranslationGame';
+            return redirect()->route($request->redirect_route, [
+                $paramName => $request->game_id
+            ]);
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

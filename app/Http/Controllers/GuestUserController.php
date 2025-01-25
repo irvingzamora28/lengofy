@@ -22,15 +22,15 @@ class GuestUserController extends Controller
     {
         $request->validate([
             'language_pair_id' => 'required|exists:language_pairs,id',
-            'redirect_route' => 'nullable|in:games.gender-duel.practice,games.memory-translation.practice,games.gender-duel.show,games.memory-translation.show',
-            'game_id' => 'required_if:redirect_route,games.gender-duel.show,games.memory-translation.show|integer',
+            'redirect_route' => 'nullable|in:games.gender-duel.practice,games.memory-translation.practice,games.gender-duel.show,games.memory-translation.show,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite',
+            'game_id' => 'required_if:redirect_route,games.gender-duel.show,games.memory-translation.show,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite|integer',
         ]);
 
         $user = $this->guestUserService->createGuestUser($request->language_pair_id);
         Auth::login($user);
 
         if ($request->redirect_route && $request->game_id) {
-            // For game show routes, we need to pass the game ID
+            // For game routes, we need to pass the game ID
             $paramName = str_contains($request->redirect_route, 'gender-duel') ? 'genderDuelGame' : 'memoryTranslationGame';
             return redirect()->route($request->redirect_route, [
                 $paramName => $request->game_id

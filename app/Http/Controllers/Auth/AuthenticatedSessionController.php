@@ -33,6 +33,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Check if we need to redirect to a game
+        if ($request->redirect_route && $request->game_id) {
+            $paramName = str_contains($request->redirect_route, 'gender-duel') ? 'genderDuelGame' : 'memoryTranslationGame';
+            return redirect()->route($request->redirect_route, [
+                $paramName => $request->game_id
+            ]);
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
