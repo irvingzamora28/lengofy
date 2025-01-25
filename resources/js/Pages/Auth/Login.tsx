@@ -7,7 +7,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import axios from "axios";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function Login({
     status,
@@ -16,16 +16,23 @@ export default function Login({
     status?: string;
     canResetPassword: boolean;
 }) {
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectRoute = urlParams.get("redirect_route");
+    const gameId = urlParams.get("game_id");
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
         remember: false,
+        redirect_route: redirectRoute,
+        game_id: gameId,
     });
     const { t: trans } = useTranslation();
 
     useEffect(() => {
         // Call CSRF cookie endpoint when component mounts
-        axios.get('/sanctum/csrf-cookie').then(() => {
+        axios.get("/sanctum/csrf-cookie").then(() => {
             // CSRF cookie is set; now we can make authenticated requests
         });
 
@@ -36,7 +43,18 @@ export default function Login({
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post(route("login"));
+        post(route("login"), {
+            onSuccess: () => {
+                // If redirect route and game ID are provided, redirect to the game
+                if (data.redirect_route && data.game_id) {
+                    window.location.href = route(data.redirect_route, {
+                        [data.redirect_route.includes("gender-duel")
+                            ? "genderDuelGame"
+                            : "memoryTranslationGame"]: data.game_id,
+                    });
+                }
+            },
+        });
     };
 
     return (
@@ -52,7 +70,10 @@ export default function Login({
 
                     <form onSubmit={submit}>
                         <div>
-                            <InputLabel htmlFor="email" value={trans("login.email")} />
+                            <InputLabel
+                                htmlFor="email"
+                                value={trans("login.email")}
+                            />
 
                             <TextInput
                                 id="email"
@@ -74,7 +95,10 @@ export default function Login({
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password" value={trans("login.password")} />
+                            <InputLabel
+                                htmlFor="password"
+                                value={trans("login.password")}
+                            />
 
                             <TextInput
                                 id="password"
@@ -103,7 +127,7 @@ export default function Login({
                                         setData("remember", e.target.checked)
                                     }
                                 />
-                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+                                <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
                                     {trans("login.remember_me")}
                                 </span>
                             </label>
@@ -113,14 +137,14 @@ export default function Login({
                             {canResetPassword && (
                                 <Link
                                     href={route("password.request")}
-                                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                 >
                                     {trans("login.forgot_password")}
                                 </Link>
                             )}
 
                             <PrimaryButton
-                                className="ms-4"
+                                className="ml-4"
                                 disabled={processing}
                             >
                                 {trans("login.login")}

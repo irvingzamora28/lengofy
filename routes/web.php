@@ -9,6 +9,8 @@ use App\Http\Controllers\ScoreController;
 use App\Models\LanguagePair;
 use App\Models\Score;
 use App\Models\Game;
+use App\Models\GenderDuelGame;
+use App\Models\MemoryTranslationGame;
 use App\Services\LanguageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -103,7 +105,47 @@ Route::middleware(['guest'])->group(function () {
             'locale' => $locale
         ]);
     })->name('memory-translation.play');
+
+    // Guest invitation routes
+    Route::get('/games/memory-translation/{memoryTranslationGame}/invite', function ($memoryTranslationGame) {
+        $game = MemoryTranslationGame::findOrFail($memoryTranslationGame);
+        return Inertia::render('Games/GuestInvitation', [
+            'gameName' => 'Memory Translation',
+            'gameRoute' => 'memory-translation.show',
+            'gameId' => $game->id,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'languagePairId' => $game->language_pair_id,
+        ]);
+    })->name('games.memory-translation.invite');
+
+    Route::get('/games/gender-duel/{genderDuelGame}/invite', function ($genderDuelGame) {
+        $game = GenderDuelGame::findOrFail($genderDuelGame);
+        return Inertia::render('Games/GuestInvitation', [
+            'gameName' => 'Gender Duel',
+            'gameRoute' => 'gender-duel.show',
+            'gameId' => $game->id,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'languagePairId' => $game->language_pair_id,
+        ]);
+    })->name('games.gender-duel.invite');
 });
+
+// Game show routes - accessible to both guests and authenticated users
+Route::get('/games/gender-duel/{genderDuelGame}', function(GenderDuelGame $genderDuelGame) {
+    if (!auth()->check()) {
+        return redirect()->route('games.gender-duel.invite', ['genderDuelGame' => $genderDuelGame->id]);
+    }
+    return app()->make(GenderDuelGameController::class)->show($genderDuelGame, request());
+})->name('games.gender-duel.show');
+
+Route::get('/games/memory-translation/{memoryTranslationGame}', function(MemoryTranslationGame $memoryTranslationGame) {
+    if (!auth()->check()) {
+        return redirect()->route('games.memory-translation.invite', ['memoryTranslationGame' => $memoryTranslationGame->id]);
+    }
+    return app()->make(MemoryTranslationGameController::class)->show($memoryTranslationGame, request());
+})->name('games.memory-translation.show');
 
 Route::get('/dashboard', function () {
     $scores = Score::with(['user', 'game'])->orderBy('highest_score', 'desc')
@@ -152,7 +194,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/', [GenderDuelGameController::class, 'create'])->name('games.gender-duel.create');
             Route::get('/practice', [GenderDuelGameController::class, 'practice'])->name('games.gender-duel.practice');
             Route::get('/get-words', [GenderDuelGameController::class, 'getGenderDuelWords'])->name('games.gender-duel.get-words');
-            Route::get('/{genderDuelGame}', [GenderDuelGameController::class, 'show'])->name('games.gender-duel.show');
             Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');
             Route::post('/{genderDuelGame}/ready', [GenderDuelGameController::class, 'ready'])->name('games.gender-duel.ready');
             Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
@@ -164,7 +205,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [MemoryTranslationGameController::class, 'create'])->name('games.memory-translation.create');
             Route::get('/practice', [MemoryTranslationGameController::class, 'practice'])->name('games.memory-translation.practice');
             Route::get('/get-words', [MemoryTranslationGameController::class, 'getMemoryTranslationWords'])->name('games.memory-translation.get-words');
-            Route::get('/{memoryTranslationGame}', [MemoryTranslationGameController::class, 'show'])->name('games.memory-translation.show');
             Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
             Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
             Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
@@ -199,5 +239,4 @@ Route::post('/language/switch', function (Request $request) {
     // Optional: Store in a cookie for persistence
     return redirect()->back()->cookie('locale', $request->locale, 60 * 24 * 365);
 })->name('language.switch');
-
 require __DIR__ . '/auth.php';
