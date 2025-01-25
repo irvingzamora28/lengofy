@@ -129,6 +129,16 @@ class GenderDuelGameController extends Controller
 
     public function join(GenderDuelGame $genderDuelGame)
     {
+        return $this->handleJoinGame($genderDuelGame);
+    }
+
+    public function joinFromInvite(GenderDuelGame $genderDuelGame)
+    {
+        return $this->handleJoinGame($genderDuelGame);
+    }
+
+    private function handleJoinGame(GenderDuelGame $genderDuelGame)
+    {
         $user = auth()->user();
 
         if ($genderDuelGame->language_pair_id !== $user->language_pair_id) {
