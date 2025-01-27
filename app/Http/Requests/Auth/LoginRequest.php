@@ -31,9 +31,9 @@ class LoginRequest extends FormRequest
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
             // validate redirect_route
-            'redirect_route' => ['sometimes', 'string:games.gender-duel.join-from-invite,games.memory-translation.join-from-invite'],
+            'redirect_route' => ['nullable', 'string', Rule::in(['games.gender-duel.join-from-invite', 'games.memory-translation.join-from-invite'])],
             // validate game_id
-            'game_id' => ['required_if:redirect_route,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite|integer'],
+            'game_id' => ['nullable', 'required_if:redirect_route,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite', 'integer'],
         ];
     }
 

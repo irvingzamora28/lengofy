@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Models\LanguagePair;
 use App\Services\LanguageService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -57,19 +56,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'language_pair_id' => 'required|exists:language_pairs,id',
-            // validate redirect_route
-            'redirect_route' => ['sometimes', 'string:games.gender-duel.join-from-invite,games.memory-translation.join-from-invite'],
-            // validate game_id
-            'game_id' => ['required_if:redirect_route,games.gender-duel.join-from-invite,games.memory-translation.join-from-invite|integer'],
-        ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
