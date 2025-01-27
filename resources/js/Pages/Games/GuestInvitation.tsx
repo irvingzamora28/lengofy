@@ -4,6 +4,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { HiUserGroup } from "react-icons/hi";
 import PrimaryButton from "@/Components/PrimaryButton";
 import SecondaryButton from "@/Components/SecondaryButton";
+import { useEffect, useState } from "react";
 
 interface Props {
     gameName: string;
@@ -21,6 +22,8 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
         redirect_route: gameRoute,
         game_id: gameId,
     });
+
+    const [countdown, setCountdown] = useState(30); // Countdown state
 
     const handleGuestJoin = () => {
         postGuest(route("guest.create"), {
@@ -43,6 +46,27 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
         });
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            handleGuestJoin();
+        }, 30000); // 30 seconds
+
+        const interval = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000); // Update countdown every second
+
+        return () => {
+            clearTimeout(timer);
+            clearInterval(interval); // Cleanup interval on unmount
+        };
+    }, []);
+
     return (
         <>
             <Head title={`Join ${gameName}`} />
@@ -50,7 +74,7 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
                 <div className="w-full sm:max-w-md mt-6 px-8 py-8 bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-200 dark:border-gray-700">
                     <div className="text-center mb-8">
                         <div className="mb-6 flex justify-center">
-                        <HiUserGroup className="w-20 h-20 text-purple-600 dark:text-purple-400" /> {/* Replace SVG with FaUserAlt */}
+                        <HiUserGroup className="w-20 h-20 text-purple-600 dark:text-purple-400" />
                         </div>
                         <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-3">
                             Join {gameName} with Friends! 🎮
@@ -62,7 +86,7 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
                             <span className="font-medium">Why create an account?</span>
                             <ul className="mt-2 space-y-1 text-left">
                                 <li className="flex items-center">
-                                    <FaCheckCircle className="w-4 h-4 mr-2 text-green-500" /> {/* Replace SVG with FaCheckCircle */}
+                                    <FaCheckCircle className="w-4 h-4 mr-2 text-green-500" />
                                     Save your progress & stats
                                 </li>
                                 <li className="flex items-center">
@@ -98,7 +122,7 @@ export default function GuestInvitation({ gameName, gameRoute, gameId, canLogin,
 
                         <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                             <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-3">
-                                Prefer to play without saving?
+                                {countdown > 0 ? `Enter as a guest in ${countdown} seconds` : "Entering as a guest..."}
                             </p>
                             <SecondaryButton
                                 className="w-full justify-center bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700"
