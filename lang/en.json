@@ -310,5 +310,13 @@
     "selectLanguagePair": "Select Language Pair",
     "chooseLanguageJourney": "Choose Your Language Journey",
     "startLearning": "Start Learning",
-    "selectLanguagePairDescription": "Select the language pair you want to learn and start your adventure!"
+    "selectLanguagePairDescription": "Select the language pair you want to learn and start your adventure!",
+    "waitlist": {
+        "title": "Coming Soon to Lengofy",
+        "description": "We're working on exciting new features to make language learning even more effective and enjoyable. Sign up to be notified when these features launch!",
+        "emailLabel": "Email address",
+        "submitButton": "Notify me when available",
+        "success": "Thanks for your interest! We'll notify you when these features launch.",
+        "error": "Something went wrong. Please try again."
+    }
 }

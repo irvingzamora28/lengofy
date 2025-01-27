@@ -10,12 +10,14 @@ import {
     FaArrowRight
 } from 'react-icons/fa';
 import { MdGroups, MdOndemandVideo } from 'react-icons/md';
+import UpcomingFeaturesSection from '@/Components/UpcomingFeatures/UpcomingFeaturesSection';
 
 export default function Welcome() {
     const {
         languagePairs,
         translations,
-        locale = 'en'
+        locale = 'en',
+        upcomingFeatures
     } = usePage<PageProps>().props;
 
     const [showLanguageModal, setShowLanguageModal] = useState(false);
@@ -48,6 +50,10 @@ export default function Welcome() {
 
     // State for cycling words
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        console.log("upcomingFeatures", upcomingFeatures);
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -279,6 +285,11 @@ export default function Welcome() {
                     </div>
                 </motion.section>
 
+                {/* Upcoming Features Section */}
+                <UpcomingFeaturesSection
+                    categories={upcomingFeatures}
+                />
+
                 {/* Featured Game Section */}
                 <section className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32 text-gray-100">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -312,7 +323,7 @@ export default function Welcome() {
                             <div className="mt-10 flex items-center gap-x-6">
                                 <button
                                     onClick={handleGuestPlay}
-                                    className="rounded-md bg-primary-500 px-3 py-2 text-md md:px-6 md:py-3 md:text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400 transition"
+                                    className="rounded-md bg-primary-500 px-3 py-2 text-md md:px-6 md:py-3 md:text-lg font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition"
                                 >
                                     {translations.welcome.tryNowButton}
                                 </button>

@@ -310,5 +310,13 @@
     "selectLanguagePair": "Sprachpaar auswählen",
     "chooseLanguageJourney": "Waehlen Sie Ihre Sprachreise",
     "startLearning": "Lernen beginnen",
-    "selectLanguagePairDescription": "Waehlen Sie die Sprache, die Sie lernen wollen und beginnen Sie Ihre Abenteuer!"
+    "selectLanguagePairDescription": "Waehlen Sie die Sprache, die Sie lernen wollen und beginnen Sie Ihre Abenteuer!",
+    "waitlist": {
+        "title": "Bald bei Lengofy verfügbar",
+        "description": "Wir arbeiten an spannenden neuen Funktionen, um das Sprachenlernen noch effektiver und unterhaltsamer zu machen. Melden Sie sich an, um benachrichtigt zu werden, wenn diese Funktionen eingeführt werden!",
+        "emailLabel": "E-Mail-Adresse",
+        "submitButton": "Benachrichtigen Sie mich, wenn verfügbar",
+        "success": "Vielen Dank für Ihr Interesse! Wir benachrichtigen Sie, wenn diese Funktionen eingeführt werden.",
+        "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    }
 }

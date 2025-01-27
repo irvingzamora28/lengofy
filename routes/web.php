@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Middleware\EnsurePlayerInGame;
+use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
 use App\Models\Score;
 use App\Models\Game;
@@ -21,6 +22,8 @@ use Illuminate\Http\Request;
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function (LanguageService $languageService) {
         $locale = app()->getLocale();
+
+        $upcomingFeatures = FeatureCategory::with('features')->get();
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -46,6 +49,7 @@ Route::middleware(['guest'])->group(function () {
                         ],
                     ];
                 })->all(),
+            'upcomingFeatures' => FeatureCategory::with('features')->get(),
             'translations' => [
                 'welcome' => __('welcome', [], $locale)
             ],
