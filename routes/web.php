@@ -165,17 +165,6 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Game show routes - accessible to both guests and authenticated users
-Route::prefix('games')->group(function () {
-    Route::get('/memory-translation/{memoryTranslationGame:id}', [MemoryTranslationGameController::class, 'show'])
-        ->middleware(EnsurePlayerInGame::class)
-        ->name('games.memory-translation.show');
-
-    Route::get('/gender-duel/{genderDuelGame:id}', [GenderDuelGameController::class, 'show'])
-        ->middleware(EnsurePlayerInGame::class)
-        ->name('games.gender-duel.show');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -218,6 +207,17 @@ Route::middleware('auth')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
     });
+});
+
+// Game show routes - accessible to both guests and authenticated users
+Route::prefix('games')->group(function () {
+    Route::get('/memory-translation/{memoryTranslationGame:id}', [MemoryTranslationGameController::class, 'show'])
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.memory-translation.show');
+
+    Route::get('/gender-duel/{genderDuelGame:id}', [GenderDuelGameController::class, 'show'])
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.gender-duel.show');
 });
 
 // Guest user routes
