@@ -91,83 +91,81 @@ export default function UpcomingFeaturesSection({ categories }: Props) {
                     </p>
                 </div>
 
-                <div className="grid gap-8 lg:grid-cols-2">
-                    {/* Features List */}
-                    <div className="space-y-8">
-                        {categories.map((category) => (
-                            <div key={category.id} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                                <h3 className="text-xl font-semibold text-primary-600 dark:text-white mb-4">
-                                    {category.name}
-                                </h3>
-                                <ul className="space-y-3">
-                                    {category.features.map((feature) => (
-                                        <li key={feature.id} className="flex items-start space-x-3">
-                                            <input
-                                                type="checkbox"
-                                                id={`feature-${feature.id}`} // Unique ID for each checkbox
-                                                checked={selectedFeatures.includes(feature.id)}
-                                                onChange={() => handleFeatureToggle(feature.id)}
-                                                className="mt-1 h-4 w-4 text-primary-600 rounded border-gray-300 focus:ring-primary-500"
-                                            />
-                                            <label
-                                                htmlFor={`feature-${feature.id}`} // Associate label with input
-                                                className="flex-1 cursor-pointer" // Make the label clickable
-                                            >
-                                                <p className="font-medium text-gray-900 dark:text-white">
-                                                    {feature.name}
+                {/* Features List */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    {categories.map((category) => (
+                        <div key={category.id} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                            <h3 className="text-xl font-semibold text-primary-600 dark:text-white mb-4">
+                                {category.name}
+                            </h3>
+                            <ul className="space-y-3">
+                                {category.features.map((feature) => (
+                                    <li key={feature.id} className="flex items-start space-x-3">
+                                        <input
+                                            type="checkbox"
+                                            id={`feature-${feature.id}`} // Unique ID for each checkbox
+                                            checked={selectedFeatures.includes(feature.id)}
+                                            onChange={() => handleFeatureToggle(feature.id)}
+                                            className="mt-1 h-4 w-4 text-primary-600 rounded border-gray-300 focus:ring-primary-500"
+                                        />
+                                        <label
+                                            htmlFor={`feature-${feature.id}`} // Associate label with input
+                                            className="flex-1 cursor-pointer" // Make the label clickable
+                                        >
+                                            <p className="font-medium text-gray-900 dark:text-white">
+                                                {feature.name}
+                                            </p>
+                                            {feature.description && (
+                                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                    {feature.description}
                                                 </p>
-                                                {feature.description && (
-                                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                        {feature.description}
-                                                    </p>
-                                                )}
-                                            </label>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Signup Form */}
-                    <div className="lg:sticky lg:top-8">
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        {trans("waitlist.emailLabel")}
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                                    />
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={!email}
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
-                                >
-                                    {trans("waitlist.submitButton")}
-                                </button>
-
-                                {successMessage && (
-                                    <p className="text-sm text-green-600 dark:text-green-400">
-                                        {successMessage}
-                                    </p>
-                                )}
-
-                                {error && (
-                                    <p className="text-sm text-red-600 dark:text-red-400">
-                                        {error}
-                                    </p>
-                                )}
-                            </form>
+                                            )}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
+                    ))}
+                </div>
+
+                {/* Signup Form */}
+                <div className="mx-auto max-w-2xl">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    {trans("waitlist.emailLabel")}
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={!email}
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+                            >
+                                {trans("waitlist.submitButton")}
+                            </button>
+
+                            {successMessage && (
+                                <p className="text-sm text-green-600 dark:text-green-400">
+                                    {successMessage}
+                                </p>
+                            )}
+
+                            {error && (
+                                <p className="text-sm text-red-600 dark:text-red-400">
+                                    {error}
+                                </p>
+                            )}
+                        </form>
                     </div>
                 </div>
             </div>
