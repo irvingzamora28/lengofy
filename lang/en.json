@@ -5,7 +5,7 @@
         "contact": "Contact",
         "privacy_policy": "Privacy Policy",
         "terms_of_service": "Terms of Service",
-        "copyright": " 2025 Lengofy. All rights reserved.",
+        "copyright": "© 2025 Lengofy. All rights reserved.",
         "toggle_dark_mode": "Toggle dark mode",
         "search": "Search",
         "clearSearch": "Clear Search",
@@ -39,7 +39,18 @@
             "message": "The game is still in progress. Are you sure you want to leave?",
             "btn_leave": "Leave Game"
         },
-        "language": "Language"
+        "language": "Language",
+        "loading": "Loading...",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "create": "Create",
+        "submit": "Submit",
+        "back": "Back",
+        "next": "Next",
+        "previous": "Previous",
+        "mute_sound": "Mute Sound",
+        "unmute_sound": "Unmute Sound"
     },
     "login": {
         "email": "Email",

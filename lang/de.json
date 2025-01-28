@@ -39,7 +39,18 @@
             "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",
             "btn_leave": "Spiel verlassen"
         },
-        "language": "Sprache"
+        "language": "Sprache",
+        "loading": "Laden...",
+        "save": "Speichern",
+        "delete": "Löschen",
+        "edit": "Bearbeiten",
+        "create": "Erstellen",
+        "submit": "Absenden",
+        "back": "Zurück",
+        "next": "Weiter",
+        "previous": "Zurück",
+        "mute_sound": "Ton ausschalten",
+        "unmute_sound": "Ton einschalten"
     },
     "login": {
         "email": "Email",

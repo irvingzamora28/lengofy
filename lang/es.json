@@ -39,7 +39,18 @@
             "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",
             "btn_leave": "Abandonar Juego"
         },
-        "language": "Idioma"
+        "language": "Idioma",
+        "loading": "Cargando...",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "create": "Crear",
+        "submit": "Enviar",
+        "back": "Atrás",
+        "next": "Siguiente",
+        "previous": "Anterior",
+        "mute_sound": "Silenciar Sonido",
+        "unmute_sound": "Activar Sonido"
     },
     "login": {
         "email": "Correo electrónico",
