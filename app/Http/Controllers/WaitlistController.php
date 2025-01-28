@@ -11,11 +11,16 @@ class WaitlistController extends Controller
 {
     public function subscribe(Request $request)
     {
+        // Custom validation messages
+        $messages = [
+            'email.unique' => 'You are already subscribed! We will notify you when these features launch.',
+        ];
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:waitlist_subscribers,email',
-            'features' => 'required|array|min:1',
+            'features' => 'nullable|array',
             'features.*' => 'exists:upcoming_features,id'
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
             return response()->json([
@@ -28,7 +33,10 @@ class WaitlistController extends Controller
             'email' => $request->email
         ]);
 
-        $subscriber->features()->attach($request->features);
+        // Attach features only if they are provided
+        if ($request->has('features')) {
+            $subscriber->features()->attach($request->features);
+        }
 
         return response()->json([
             'message' => 'Successfully subscribed to waitlist',

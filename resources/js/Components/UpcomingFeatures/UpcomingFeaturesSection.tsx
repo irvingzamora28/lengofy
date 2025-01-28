@@ -53,16 +53,25 @@ export default function UpcomingFeaturesSection({ categories }: Props) {
                 }),
             });
 
+            const data = await response.json(); // Parse the JSON response
+
             if (!response.ok) {
-                throw new Error('Subscription failed');
+                // Handle validation errors
+                if (data.errors && data.errors.email) {
+                    setError(data.errors.email[0]); // Set the custom error message
+                } else {
+                    setError(trans("waitlist.error")); // Fallback error message
+                }
+                return;
             }
 
+            // Success case
             setSuccessMessage(trans("waitlist.success"));
             setEmail('');
             setSelectedFeatures([]);
             setError('');
         } catch (err) {
-            setError(trans("waitlist.error"));
+            setError(trans("waitlist.error")); // Handle network or other errors
         }
     };
 
@@ -140,7 +149,7 @@ export default function UpcomingFeaturesSection({ categories }: Props) {
 
                                 <button
                                     type="submit"
-                                    disabled={selectedFeatures.length === 0 || !email}
+                                    disabled={!email}
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
                                 >
                                     {trans("waitlist.submitButton")}
