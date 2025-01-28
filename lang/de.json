@@ -318,5 +318,22 @@
         "submitButton": "Benachrichtigen Sie mich, wenn verfügbar",
         "success": "Vielen Dank für Ihr Interesse! Wir benachrichtigen Sie, wenn diese Funktionen eingeführt werden.",
         "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    },
+    "admin": {
+        "feature_analytics": "Funktionsanalyse",
+        "total_views": "Gesamtansichten",
+        "total_interests": "Gesamtinteressen",
+        "total_subscribers": "Gesamtabonnenten",
+        "avg_interests_per_subscriber": "Durchschnittliche Interessen pro Abonnent",
+        "avg_conversion": "Durchschnittliche Konversionsrate",
+        "total_features": "Gesamtfunktionen",
+        "top_features": "Top-Funktionen",
+        "interest_trends": "Interessentrends",
+        "feature_statistics": "Funktionsstatistiken",
+        "feature": "Funktion",
+        "category": "Kategorie",
+        "views": "Ansichten",
+        "interests": "Interessen",
+        "conversion_rate": "Konversionsrate"
     }
 }

@@ -213,6 +213,24 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+// Admin routes
+Route::prefix('leng-admon')->name('admin.')->group(function () {
+    // Guest routes
+    Route::middleware('guest:admin')->group(function () {
+        Route::get('/login', [App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'showLogin'])
+            ->name('login');
+        Route::post('/login', [App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'login']);
+    });
+
+    // Authenticated routes
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('/logout', [App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'logout'])
+            ->name('logout');
+        Route::get('/feature-analytics', [App\Http\Controllers\Admin\FeatureAnalyticsController::class, 'index'])
+            ->name('feature-analytics');
+    });
+});
+
 // Game show routes - accessible to both guests and authenticated users
 Route::prefix('games')->group(function () {
     Route::get('/memory-translation/{memoryTranslationGame:id}', [MemoryTranslationGameController::class, 'show'])

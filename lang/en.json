@@ -5,7 +5,7 @@
         "contact": "Contact",
         "privacy_policy": "Privacy Policy",
         "terms_of_service": "Terms of Service",
-        "copyright": "© 2025 Lengofy. All rights reserved.",
+        "copyright": " 2025 Lengofy. All rights reserved.",
         "toggle_dark_mode": "Toggle dark mode",
         "search": "Search",
         "clearSearch": "Clear Search",
@@ -318,5 +318,22 @@
         "submitButton": "Notify me when available",
         "success": "Thanks for your interest! We'll notify you when these features launch.",
         "error": "Something went wrong. Please try again."
+    },
+    "admin": {
+        "feature_analytics": "Feature Analytics",
+        "total_views": "Total Views",
+        "total_interests": "Total Interests",
+        "total_subscribers": "Total Subscribers",
+        "avg_interests_per_subscriber": "Average Interests per Subscriber",
+        "avg_conversion": "Average Conversion Rate",
+        "total_features": "Total Features",
+        "top_features": "Top Features",
+        "interest_trends": "Interest Trends",
+        "feature_statistics": "Feature Statistics",
+        "feature": "Feature",
+        "category": "Category",
+        "views": "Views",
+        "interests": "Interests",
+        "conversion_rate": "Conversion Rate"
     }
 }
