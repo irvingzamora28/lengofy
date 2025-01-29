@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Middleware\EnsurePlayerInGame;
@@ -211,6 +212,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
     });
+
+    // Lesson routes
+    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/lessons/progress', [LessonController::class, 'progress'])->name('lessons.progress');
+    Route::get('/lessons/search', [LessonController::class, 'search'])->name('lessons.search');
+    Route::get('/lessons/{languagePair}/{level}/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::post('/lessons/{languagePair}/{level}/{lesson}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
 });
 
 // Admin routes
