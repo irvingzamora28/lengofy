@@ -219,11 +219,18 @@ class LessonController extends Controller
         $results = [];
 
         if ($query) {
-            $lessonsPath = resource_path('lessons');
+            $user = auth()->user();
+            $languagePair = $user->languagePair;
 
-            foreach (File::directories($lessonsPath) as $pairPath) {
-                $pair = basename($pairPath);
+            if (!$languagePair) {
+                return redirect()->route('lessons.index')
+                    ->with('error', 'Please select a language pair first.');
+            }
 
+            $pairCode = $languagePair->sourceLanguage->code . '-' . $languagePair->targetLanguage->code;
+            $pairPath = resource_path("lessons/{$pairCode}");
+
+            if (File::exists($pairPath)) {
                 foreach (File::directories($pairPath) as $levelPath) {
                     $level = basename($levelPath);
 
@@ -234,8 +241,9 @@ class LessonController extends Controller
                             // Search in content and metadata
                             if (stripos($content, $query) !== false) {
                                 $metadata = $this->parseMetadata($content);
+
                                 $results[] = [
-                                    'language_pair' => $pair,
+                                    'language_pair' => $pairCode,
                                     'level' => $level,
                                     'lesson' => str_replace('.md', '', $lessonFile->getFilename()),
                                     'title' => $metadata['title'] ?? '',
@@ -255,6 +263,11 @@ class LessonController extends Controller
         return Inertia::render('Lessons/Search', [
             'query' => $query,
             'results' => $results,
+            'languagePair' => [
+                'code' => $pairCode ?? null,
+                'source' => $languagePair->sourceLanguage->name ?? null,
+                'target' => $languagePair->targetLanguage->name ?? null,
+            ],
         ]);
     }
 

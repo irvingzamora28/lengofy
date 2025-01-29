@@ -1,5 +1,5 @@
 import React from 'react';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { debounce } from 'lodash';
@@ -15,31 +15,64 @@ interface SearchResult {
 interface Props extends PageProps {
     query: string;
     results: SearchResult[];
+    languagePair: {
+        code: string;
+        source: string;
+        target: string;
+    };
 }
 
-export default function Search({ auth, query, results }: Props) {
-    const formatLanguagePair = (pair: string) => {
-        const [source, target] = pair.split('-');
-        return `${source.toUpperCase()} → ${target.toUpperCase()}`;
+export default function Search({ auth, query, results, languagePair }: Props) {
+    const { data, setData, get } = useForm({
+        query: query || '',
+    });
+
+    // Ref to track the latest get function
+    const getRef = React.useRef(get);
+    getRef.current = get;
+
+    // Stable debounced search function using refs
+    const debouncedSearchRef = React.useRef(
+        debounce((query: string) => {
+            console.log('Executing debounced search with query:', query);
+            getRef.current(route('lessons.search', { query }), {
+                preserveState: true,
+                preserveScroll: true,
+            });
+        }, 300)
+    );
+
+    React.useEffect(() => {
+        return () => {
+            debouncedSearchRef.current.cancel();
+        };
+    }, []);
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        console.log('Search input value:', value);
+        setData('query', value);
+        debouncedSearchRef.current(value); // Use the stable debounced function
     };
 
     const formatLevelName = (name: string) => {
-        return name.split('-').map(word => 
+        return name.split('-').map(word =>
             word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' ');
     };
 
-    const handleSearch = debounce((searchQuery: string) => {
-        router.get('/lessons/search', { query: searchQuery }, {
-            preserveState: true,
-            preserveScroll: true,
-        });
-    }, 300);
-
     return (
         <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Search Lessons</h2>}
+            header={
+                <div>
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        Search Lessons
+                    </h2>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        {languagePair.source} → {languagePair.target}
+                    </p>
+                </div>
+            }
         >
             <Head title="Search Lessons" />
 
@@ -47,33 +80,35 @@ export default function Search({ auth, query, results }: Props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6">
+                            {/* Search Input */}
                             <div className="mb-6">
                                 <input
                                     type="text"
+                                    value={data.query}
+                                    onChange={handleSearch}
                                     placeholder="Search lessons..."
-                                    defaultValue={query}
-                                    onChange={(e) => handleSearch(e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
+                                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent dark:bg-gray-900 dark:text-gray-100"
                                 />
                             </div>
 
+                            {/* Search Results */}
                             {results.length > 0 ? (
                                 <div className="space-y-4">
                                     {results.map((result, index) => (
                                         <Link
                                             key={index}
-                                            href={`/lessons/${result.language_pair}/${result.level}/${result.lesson}`}
+                                            href={route('lessons.show', {
+                                                languagePair: result.language_pair,
+                                                level: result.level,
+                                                lesson: result.lesson,
+                                            })}
                                             className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                         >
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                                        {result.title}
-                                                    </h3>
-                                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                                                        {formatLanguagePair(result.language_pair)} - {formatLevelName(result.level)}
-                                                    </p>
-                                                </div>
+                                            <div className="font-medium text-gray-900 dark:text-gray-100">
+                                                {result.title}
+                                            </div>
+                                            <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                                {formatLevelName(result.level)}
                                             </div>
                                             {result.topics && result.topics.length > 0 && (
                                                 <div className="flex flex-wrap gap-2 mt-2">
@@ -90,13 +125,13 @@ export default function Search({ auth, query, results }: Props) {
                                         </Link>
                                     ))}
                                 </div>
-                            ) : query ? (
-                                <div className="text-center text-gray-600 dark:text-gray-400 py-8">
+                            ) : data.query ? (
+                                <div className="text-center text-gray-500 dark:text-gray-400 py-8">
                                     No lessons found matching your search.
                                 </div>
                             ) : (
-                                <div className="text-center text-gray-600 dark:text-gray-400 py-8">
-                                    Start typing to search for lessons.
+                                <div className="text-center text-gray-500 dark:text-gray-400 py-8">
+                                    Enter a search term to find lessons.
                                 </div>
                             )}
                         </div>
