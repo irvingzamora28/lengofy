@@ -1,7 +1,7 @@
 ---
 title: "Introduction to German"
 lessonNumber: 1
-level: "basics"
+level: "beginner"
 topics: ["greetings", "pronunciation"]
 prerequisites: []
 ---

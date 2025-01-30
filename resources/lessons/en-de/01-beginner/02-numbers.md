@@ -1,7 +1,7 @@
 ---
 title: "Numbers in German"
 lessonNumber: 2
-level: "basics"
+level: "beginner"
 topics: ["numbers", "counting", "basic-math"]
 prerequisites: ["01-introduction"]
 ---

@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('lesson_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('language_pair');
+            $table->foreignId('language_pair_id')->references('id')->on('language_pairs')->onDelete('cascade');
             $table->string('level');
-            $table->string('lesson');
+            $table->integer('lesson_number');
             $table->boolean('completed')->default(false);
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
             // Unique constraint to prevent duplicate progress entries
-            $table->unique(['user_id', 'language_pair', 'level', 'lesson']);
+            $table->unique(
+                ['user_id', 'language_pair_id', 'level', 'lesson_number'],
+                'lesson_progress_unique'
+            );
         });
     }
 

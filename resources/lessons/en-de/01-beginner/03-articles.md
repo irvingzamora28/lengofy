@@ -1,7 +1,7 @@
 ---
 title: "German Articles and Gender"
 lessonNumber: 3
-level: "basics"
+level: "beginner"
 topics: ["articles", "gender", "nouns"]
 prerequisites: ["01-introduction", "02-numbers"]
 ---

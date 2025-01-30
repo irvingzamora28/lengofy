@@ -11,9 +11,9 @@ class LessonProgress extends Model
 
     protected $fillable = [
         'user_id',
-        'language_pair',
+        'language_pair_id',
         'level',
-        'lesson',
+        'lesson_number',
         'completed',
         'completed_at',
     ];

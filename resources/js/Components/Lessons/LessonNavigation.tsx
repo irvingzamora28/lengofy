@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from '@inertiajs/react';
 
 interface NavigationItem {
-    path: string;
     title: string;
+    lesson_number: number;
 }
 
 interface LessonNavigationProps {
     previous: NavigationItem | null;
     next: NavigationItem | null;
-    languagePair: string;
     level: string;
     onComplete: () => void;
     isCompleted: boolean;
@@ -18,7 +17,6 @@ interface LessonNavigationProps {
 const LessonNavigation: React.FC<LessonNavigationProps> = ({
     previous,
     next,
-    languagePair,
     level,
     onComplete,
     isCompleted
@@ -29,7 +27,7 @@ const LessonNavigation: React.FC<LessonNavigationProps> = ({
                 <div className="flex-1">
                     {previous && (
                         <Link
-                            href={`/lessons/${languagePair}/${level}/${previous.path}`}
+                            href={`/lessons/${level}/${previous.lesson_number}`}
                             className="group flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                         >
                             <svg
@@ -84,7 +82,7 @@ const LessonNavigation: React.FC<LessonNavigationProps> = ({
                 <div className="flex-1 text-right">
                     {next && (
                         <Link
-                            href={`/lessons/${languagePair}/${level}/${next.path}`}
+                            href={`/lessons/${level}/${next.lesson_number}`}
                             className="group flex items-center justify-end text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                         >
                             {next.title}

@@ -217,8 +217,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
     Route::get('/lessons/progress', [LessonController::class, 'progress'])->name('lessons.progress');
     Route::get('/lessons/search', [LessonController::class, 'search'])->name('lessons.search');
-    Route::get('/lessons/{languagePair}/{level}/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
-    Route::post('/lessons/{languagePair}/{level}/{lesson}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
+    Route::get('/lessons/{level}/{lesson_number}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::post('/lessons/{level}/{lesson_number}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
 });
 
 // Admin routes

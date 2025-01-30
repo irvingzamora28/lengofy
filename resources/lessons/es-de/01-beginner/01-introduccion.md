@@ -1,7 +1,7 @@
 ---
 title: "Introducción al Alemán"
 lessonNumber: 1
-level: "basics"
+level: "beginner"
 topics: ["saludos", "pronunciación"]
 prerequisites: []
 ---

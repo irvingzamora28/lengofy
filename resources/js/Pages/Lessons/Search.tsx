@@ -8,8 +8,9 @@ interface SearchResult {
     language_pair: string;
     level: string;
     lesson: string;
+    lesson_number: number;
     title: string;
-    topics: string[];
+    topics: string[]; // This should now be an array of strings
 }
 
 interface Props extends PageProps {
@@ -22,7 +23,7 @@ interface Props extends PageProps {
     };
 }
 
-export default function Search({ auth, query, results, languagePair }: Props) {
+export default function Search({ query, results, languagePair }: Props) {
     const { data, setData, get } = useForm({
         query: query || '',
     });
@@ -43,6 +44,8 @@ export default function Search({ auth, query, results, languagePair }: Props) {
     );
 
     React.useEffect(() => {
+        console.log("Results:", results);
+
         return () => {
             debouncedSearchRef.current.cancel();
         };
@@ -98,9 +101,8 @@ export default function Search({ auth, query, results, languagePair }: Props) {
                                         <Link
                                             key={index}
                                             href={route('lessons.show', {
-                                                languagePair: result.language_pair,
                                                 level: result.level,
-                                                lesson: result.lesson,
+                                                lesson_number: result.lesson_number,
                                             })}
                                             className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                         >

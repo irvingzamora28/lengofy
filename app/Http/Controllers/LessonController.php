@@ -6,6 +6,8 @@ use App\Models\LessonProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB; // Import DB facade
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class LessonController extends Controller
@@ -33,51 +35,19 @@ class LessonController extends Controller
 
         // Get lessons only for user's language pair
         $pairs = [];
-        $lessonsPath = resource_path("lessons/{$pairCode}");
+        $lessons = DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id) // Ensure we only search within the user's language pair
+            ->get();
 
-        if (File::exists($lessonsPath)) {
-            $levels = [];
-            foreach (File::directories($lessonsPath) as $levelPath) {
-                $level = basename($levelPath);
-                $lessons = [];
-
-                foreach (File::files($levelPath) as $lessonFile) {
-                    if ($lessonFile->getExtension() === 'md') {
-                        $content = File::get($lessonFile->getPathname());
-                        $metadata = $this->parseMetadata($content);
-
-                        $lessons[] = [
-                            'filename' => $lessonFile->getFilename(),
-                            'path' => str_replace('.md', '', $lessonFile->getFilename()),
-                            'metadata' => $metadata,
-                        ];
-                    }
-                }
-
-                if (!empty($lessons)) {
-                    usort($lessons, function($a, $b) {
-                        return ($a['metadata']['lessonNumber'] ?? 0) <=> ($b['metadata']['lessonNumber'] ?? 0);
-                    });
-
-                    // Add progress information to lessons
-                    foreach ($lessons as &$lesson) {
-                        $progressKey = "{$pairCode}/{$level}/{$lesson['path']}";
-                        $lesson['completed'] = $progress->has($progressKey) ? $progress[$progressKey]->completed : false;
-                    }
-
-                    $levels[] = [
-                        'name' => $level,
-                        'lessons' => $lessons,
-                    ];
-                }
-            }
-
-            if (!empty($levels)) {
-                $pairs[] = [
-                    'pair' => $pairCode,
-                    'levels' => $levels,
-                ];
-            }
+        // Process lessons for rendering
+        foreach ($lessons as $lesson) {
+            // Add progress information to lessons
+            $progressKey = "{$pairCode}/{$lesson->level}/{$lesson->title}";
+            $lesson->completed = $progress->has($progressKey) ? $progress[$progressKey]->completed : false;
+            $pairs[] = [
+                'pair' => $pairCode,
+                'lesson' => $lesson,
+            ];
         }
 
         return Inertia::render('Lessons/Index', [
@@ -85,69 +55,92 @@ class LessonController extends Controller
         ]);
     }
 
-    public function show($languagePair, $level, $lesson)
+    public function show($level, $lesson_number)
     {
-        $lessonPath = resource_path("lessons/{$languagePair}/{$level}/{$lesson}.md");
+        // TODO: Implement a more efficient way to get the previous and next lessons (We just need the lesson's numbers)
+        $user = auth()->user();
+        $languagePair = $user->languagePair;
 
-        if (!File::exists($lessonPath)) {
+        $lessonData = DB::table('lessons')->where('language_pair_id', $languagePair->id)->where('lesson_number', $lesson_number)->first();
+        if (!$lessonData) {
             abort(404);
         }
 
-        $content = File::get($lessonPath);
+        // Get all lessons for the current language pair and level
+        $allLessons = DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id)
+            ->where('level', $lessonData->level)
+            ->get();
+        $currentIndex = array_search($lesson_number, array_column($allLessons->toArray(), 'lesson_number'));
+
+        // Get next and previous lessons
+        $previousLesson = $currentIndex > 0 ? $allLessons[$currentIndex - 1] : null;
+        $nextLesson = $currentIndex < count($allLessons) - 1 ? $allLessons[$currentIndex + 1] : null;
 
         // Get user's progress for this lesson
         $progress = LessonProgress::firstOrCreate(
             [
                 'user_id' => auth()->id(),
-                'language_pair' => $languagePair,
+                'language_pair_id' => $languagePair->id,
                 'level' => $level,
-                'lesson' => $lesson,
+                'lesson_number' => $lesson_number,
             ]
         );
 
         if (request()->wantsJson()) {
-            return Response::make($content, 200, [
+            return Response::make($lessonData->content, 200, [
                 'Content-Type' => 'text/markdown'
             ]);
         }
 
-        // Get next and previous lessons
-        $allLessons = $this->getLessonsInLevel($languagePair, $level);
-        $currentIndex = array_search($lesson, array_column($allLessons, 'path'));
-
-        $previousLesson = $currentIndex > 0 ? $allLessons[$currentIndex - 1] : null;
-        $nextLesson = $currentIndex < count($allLessons) - 1 ? $allLessons[$currentIndex + 1] : null;
+        // Remove the metadata from the content
+        $lessonData->content = preg_replace('/^---\n(.*?)\n---/s', '', $lessonData->content);
 
         return Inertia::render('Lessons/Show', [
-            'languagePair' => $languagePair,
-            'level' => $level,
-            'lesson' => $lesson,
-            'content' => $content,
+            'languagePairName' => $languagePair->sourceLanguage->name . ' → ' . $languagePair->targetLanguage->name,
+            'level' => $lessonData->level,
+            'lesson_number' => $lesson_number,
+            'title' => $lessonData->title,
+            'content' => $lessonData->content,
             'progress' => $progress->only(['completed', 'completed_at']),
             'navigation' => [
                 'previous' => $previousLesson ? [
-                    'path' => $previousLesson['path'],
-                    'title' => $previousLesson['metadata']['title'] ?? '',
+                    'title' => $previousLesson->title,
+                    'lesson_number' => $previousLesson->lesson_number,
                 ] : null,
                 'next' => $nextLesson ? [
-                    'path' => $nextLesson['path'],
-                    'title' => $nextLesson['metadata']['title'] ?? '',
+                    'title' => $nextLesson->title,
+                    'lesson_number' => $nextLesson->lesson_number,
                 ] : null,
             ],
         ]);
     }
 
-    public function markComplete(Request $request, $languagePair, $level, $lesson)
+    public function markComplete(string $level, int $lesson_number)
     {
-        $progress = LessonProgress::firstOrCreate(
+        $validator = Validator::make(
+            ['level' => $level, 'lesson_number' => $lesson_number],
             [
-                'user_id' => auth()->id(),
-                'language_pair' => $languagePair,
-                'level' => $level,
-                'lesson' => $lesson,
+                'level' => 'required|string|in:beginner,elementary,pre-intermediate,intermediate,upper-intermediate,advanced,proficiency',
+                'lesson_number' => 'required',
             ]
         );
 
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $user = auth()->user();
+
+        $languagePair = $user->languagePair;
+
+        $progress = LessonProgress::firstOrCreate(
+            [
+                'user_id' => $user->id,
+                'language_pair_id' => $languagePair->id,
+                'level' => $level,
+                'lesson_number' => $lesson_number,
+            ]
+        );
         $progress->update([
             'completed' => true,
             'completed_at' => now(),
@@ -215,46 +208,21 @@ class LessonController extends Controller
 
     public function search(Request $request)
     {
+        $user = auth()->user();
+        $languagePair = $user->languagePair;
         $query = $request->input('query');
-        $results = [];
-
-        if ($query) {
-            $user = auth()->user();
-            $languagePair = $user->languagePair;
-
-            if (!$languagePair) {
-                return redirect()->route('lessons.index')
-                    ->with('error', 'Please select a language pair first.');
-            }
-
-            $pairCode = $languagePair->sourceLanguage->code . '-' . $languagePair->targetLanguage->code;
-            $pairPath = resource_path("lessons/{$pairCode}");
-
-            if (File::exists($pairPath)) {
-                foreach (File::directories($pairPath) as $levelPath) {
-                    $level = basename($levelPath);
-
-                    foreach (File::files($levelPath) as $lessonFile) {
-                        if ($lessonFile->getExtension() === 'md') {
-                            $content = File::get($lessonFile->getPathname());
-
-                            // Search in content and metadata
-                            if (stripos($content, $query) !== false) {
-                                $metadata = $this->parseMetadata($content);
-
-                                $results[] = [
-                                    'language_pair' => $pairCode,
-                                    'level' => $level,
-                                    'lesson' => str_replace('.md', '', $lessonFile->getFilename()),
-                                    'title' => $metadata['title'] ?? '',
-                                    'topics' => $metadata['topics'] ?? [],
-                                ];
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        $results = DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id) // Ensure we only search within the user's language pair
+            ->where(function ($innerQuery) use ($query) {
+                $innerQuery->where('title', 'like', "%{$query}%")
+                    ->orWhere('content', 'like', "%{$query}%");
+            })
+            ->get();
+        // Decode the JSON string in the topics field
+        $results = $results->map(function ($result) {
+            $result->topics = json_decode($result->topics, true);
+            return $result;
+        });
 
         if ($request->wantsJson()) {
             return response()->json($results);
@@ -289,7 +257,7 @@ class LessonController extends Controller
                 }
             }
 
-            usort($lessons, function($a, $b) {
+            usort($lessons, function ($a, $b) {
                 return ($a['metadata']['lessonNumber'] ?? 0) <=> ($b['metadata']['lessonNumber'] ?? 0);
             });
         }
@@ -297,7 +265,8 @@ class LessonController extends Controller
         return $lessons;
     }
 
-    private function parseMetadata($content) {
+    private function parseMetadata($content)
+    {
         preg_match('/^---\n(.*?)\n---/s', $content, $matches);
         $metadata = [];
 
