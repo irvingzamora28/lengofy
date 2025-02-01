@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lesson;
 use App\Models\LessonProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB; // Import DB facade
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -24,34 +26,40 @@ class LessonController extends Controller
 
         $pairCode = $languagePair->sourceLanguage->code . '-' . $languagePair->targetLanguage->code;
 
-        // Get user's progress for their lessons
+        // Eager load lesson progress for the user's language pair
         $progress = $user->lessonProgress()
-            ->where('language_pair', $pairCode)
-            ->select('language_pair', 'level', 'lesson', 'completed')
+            ->where('language_pair_id', $languagePair->id)
+            ->select('language_pair_id', 'level', 'lesson_number', 'completed')
             ->get()
             ->keyBy(function ($item) {
-                return "{$item->language_pair}/{$item->level}/{$item->lesson}";
+                return "{$item->language_pair_id}/{$item->level}/{$item->lesson_number}";
             });
 
-        // Get lessons only for user's language pair
-        $pairs = [];
-        $lessons = DB::table('lessons')
-            ->where('language_pair_id', $languagePair->id) // Ensure we only search within the user's language pair
+        // Eager load lessons for the user's language pair
+        $lessons = Lesson::where('language_pair_id', $languagePair->id)
             ->get();
 
         // Process lessons for rendering
+        $lessonsArray = [];
         foreach ($lessons as $lesson) {
             // Add progress information to lessons
-            $progressKey = "{$pairCode}/{$lesson->level}/{$lesson->title}";
+            $progressKey = "{$lesson->language_pair_id}/{$lesson->level}/{$lesson->lesson_number}";
             $lesson->completed = $progress->has($progressKey) ? $progress[$progressKey]->completed : false;
-            $pairs[] = [
-                'pair' => $pairCode,
-                'lesson' => $lesson,
-            ];
+
+            // Handle json_decode for topics with error handling
+            try {
+                $lesson->topics = json_decode($lesson->topics, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                // Log the error and set topics to an empty array
+                Log::error("Failed to decode JSON for lesson topics: " . $e->getMessage());
+                $lesson->topics = [];
+            }
+
+            $lessonsArray[] = $lesson; // Add lesson to the array
         }
 
         return Inertia::render('Lessons/Index', [
-            'languagePairs' => $pairs
+            'lessons' => $lessonsArray // Return only lessons
         ]);
     }
 
