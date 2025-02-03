@@ -35,6 +35,11 @@ Match the following greetings with their meanings:
    - Guten Tag
    - Guten Abend
 
+## Pronunciation Practice
+Practice saying the following phrase in German:
+
+<VoiceRecorder text="Guten Morgen" nativeAudio="../../courses/en-de/_shared/guten_morgen.mp3" />
+
 **Hint:** Think about when you would use each greeting during the day!
 
 ---
