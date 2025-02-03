@@ -1,0 +1,457 @@
+[
+  {
+    "level": "beginner",
+    "lessons": [
+      {
+        "name": "Alfabeto Alemán y Pronunciación para Hispanohablantes",
+        "lesson_number": 1,
+        "description": "Aprende el alfabeto alemán, incluyendo Umlauts y ß, con enfoque en diferencias de pronunciación para hispanohablantes.",
+        "goals": ["Fundamentals", "Vocabulary", "Other"]
+      },
+      {
+        "name": "Saludos y Presentaciones Básicas en Alemán (Desde Español)",
+        "lesson_number": 2,
+        "description": "Aprende saludos formales e informales y cómo presentarte y presentar a otros en alemán, desde una perspectiva hispanohablante.",
+        "goals": ["Fundamentals", "Vocabulary", "Travel"]
+      },
+      {
+        "name": "Números, Colores y Días de la Semana - Vocabulario Esencial en Alemán",
+        "lesson_number": 3,
+        "description": "Vocabulario esencial: números, colores y días de la semana en alemán, con comparaciones al español.",
+        "goals": ["Fundamentals", "Vocabulary"]
+      },
+      {
+        "name": "Géneros y Artículos Sustantivos Alemanes: Der, Die, Das Explicado para Hispanohablantes",
+        "lesson_number": 4,
+        "description": "Introducción a los sustantivos alemanes, géneros (der, die, das) y artículos (definidos e indefinidos), explicado para hablantes de español.",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "El Verbo \"Sein\" (Ser/Estar) en Presente - Alemán para Principiantes",
+        "lesson_number": 5,
+        "description": "Aprende la conjugación del verbo \"sein\" (ser/estar) en presente y sus usos básicos en alemán.",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "Pronombres Personales y Estructura Oracional Básica Alemana (SVO)",
+        "lesson_number": 6,
+        "description": "Aprende los pronombres personales alemanes y cómo formar oraciones simples en alemán (Sujeto-Verbo-Objeto).",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "Formando Preguntas Básicas en Alemán - Palabras Interrogativas",
+        "lesson_number": 7,
+        "description": "Aprende a formular preguntas básicas en alemán usando palabras interrogativas (Wer, Was, Wo, Wann, Warum, Wie).",
+        "goals": ["Fundamentals", "Grammar", "Travel"]
+      },
+      {
+        "name": "Vocabulario: Familia y Hogar en Alemán - Expandiendo lo Básico",
+        "lesson_number": 8,
+        "description": "Amplía tu vocabulario con palabras relacionadas a miembros de la familia y partes del hogar en alemán.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Imperativos Simples en Alemán - Dando Órdenes",
+        "lesson_number": 9,
+        "description": "Aprende a dar órdenes e instrucciones sencillas en alemán usando la forma imperativa.",
+        "goals": ["Grammar", "Travel", "Other"]
+      },
+      {
+        "name": "Repaso del Nivel Principiante de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel principiante de alemán, enfocado en estudiantes hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "elementary",
+    "lessons": [
+      {
+        "name": "Repaso y Saludos/Despedidas Ampliados - Alemán para Hispanohablantes",
+        "lesson_number": 1,
+        "description": "Repaso de conceptos básicos y aprende saludos, despedidas y frases de cortesía más diversas en alemán.",
+        "goals": ["Fundamentals", "Vocabulary", "Travel"]
+      },
+      {
+        "name": "Conjugación de Verbos Regulares en Presente - Gramática Alemana",
+        "lesson_number": 2,
+        "description": "Aprende los patrones de conjugación de verbos regulares alemanes en presente.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Caso Acusativo - Objetos Directos en Gramática Alemana",
+        "lesson_number": 3,
+        "description": "Introducción al caso acusativo y cómo afecta artículos y pronombres para objetos directos en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Caso Dativo - Objetos Indirectos en Gramática Alemana para Principiantes",
+        "lesson_number": 4,
+        "description": "Introducción al caso dativo y cómo afecta artículos y pronombres para objetos indirectos en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Vocabulario: Comida y Bebida en Alemán - Frases para Restaurante",
+        "lesson_number": 5,
+        "description": "Amplía tu vocabulario relacionado con comida y bebida, y aprende cómo ordenar en un restaurante en alemán.",
+        "goals": ["Vocabulary", "Travel"]
+      },
+      {
+        "name": "Verbos Modales: \"Können\" y \"Müssen\" (Poder/Deber) - Modales Alemanes",
+        "lesson_number": 6,
+        "description": "Introducción a los verbos modales \"können\" (poder/saber) y \"müssen\" (deber/tener que) y sus usos en alemán.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Preposiciones de Lugar - Dativo y Acusativo en Alemán",
+        "lesson_number": 7,
+        "description": "Aprende preposiciones de lugar y cuándo usar el caso dativo o acusativo con ellas en alemán.",
+        "goals": ["Grammar", "Travel"]
+      },
+      {
+        "name": "Describiendo Personas en Alemán - Apariencia y Personalidad",
+        "lesson_number": 8,
+        "description": "Aprende vocabulario para describir la apariencia física y rasgos básicos de personalidad en alemán.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Tiempo Pasado: \"Perfekt\" con \"Haben\" - Tiempos Pasados Alemanes",
+        "lesson_number": 9,
+        "description": "Introducción al tiempo \"Perfekt\" (perfecto presente) usando el verbo auxiliar \"haben\" en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Repaso del Nivel Elemental de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel elemental de alemán, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "pre-intermediate",
+    "lessons": [
+      {
+        "name": "Repaso y Rutinas Diarias - Vocabulario Alemán para la Vida Cotidiana",
+        "lesson_number": 1,
+        "description": "Repaso de nivel elemental y vocabulario para hablar sobre rutinas diarias y horarios en alemán.",
+        "goals": ["Fundamentals", "Vocabulary"]
+      },
+      {
+        "name": "Conjugación de Verbos Irregulares en Presente - Verbos Irregulares Alemanes",
+        "lesson_number": 2,
+        "description": "Aprende los patrones de conjugación de verbos irregulares comunes en presente en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Caso Genitivo - Posesión en Gramática Alemana Explicado",
+        "lesson_number": 3,
+        "description": "Introducción al caso genitivo y cómo indica posesión en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Preposiciones Bidireccionales (Wechselpräpositionen) - Dativo vs Acusativo",
+        "lesson_number": 4,
+        "description": "Aprende preposiciones bidireccionales (Wechselpräpositionen) y cuándo usar dativo o acusativo según movimiento o ubicación.",
+        "goals": ["Grammar", "Travel"]
+      },
+      {
+        "name": "Vocabulario: Hobbies y Actividades de Tiempo Libre en Alemán - Tiempo Libre",
+        "lesson_number": 5,
+        "description": "Amplía tu vocabulario relacionado con hobbies y actividades de tiempo libre en alemán.",
+        "goals": ["Vocabulary", "Other", "Cultural Exploration"]
+      },
+      {
+        "name": "Verbos Modales: \"Wollen\" y \"Sollen\" (Querer/Deber) - Expresando Deseo y Obligación",
+        "lesson_number": 6,
+        "description": "Introducción a los verbos modales \"wollen\" (querer) y \"sollen\" (deber) y sus usos en alemán.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Tiempo Pasado: \"Perfekt\" con \"Sein\" - Verbos de Movimiento Alemanes",
+        "lesson_number": 7,
+        "description": "Aprende el tiempo \"Perfekt\" (perfecto presente) usando el verbo auxiliar \"sein\" para verbos de movimiento y cambio de estado.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Adjetivos Comparativos y Superlativos - Comparando en Alemán",
+        "lesson_number": 8,
+        "description": "Aprende a formar y usar adjetivos comparativos y superlativos en alemán para comparar cosas.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Pidiendo y Dando Indicaciones en Alemán - Frases de Navegación",
+        "lesson_number": 9,
+        "description": "Practica cómo preguntar y dar indicaciones en alemán usando vocabulario y frases apropiadas.",
+        "goals": ["Travel", "Other"]
+      },
+      {
+        "name": "Repaso del Nivel Pre-intermedio de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel pre-intermedio de alemán, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "intermediate",
+    "lessons": [
+      {
+        "name": "Repaso y Expansión de Vocabulario Temático - Alemán Intermedio",
+        "lesson_number": 1,
+        "description": "Repaso de nivel pre-intermedio y expansión de vocabulario temático en diversas áreas de la vida diaria en alemán.",
+        "goals": ["Fundamentals", "Vocabulary"]
+      },
+      {
+        "name": "Tiempo Pasado: \"Präteritum\" (Pasado Simple) - Pasado Simple Alemán",
+        "lesson_number": 2,
+        "description": "Introducción al tiempo \"Präteritum\" (pasado simple) y su uso, especialmente para \"sein\" y \"haben\" y verbos modales.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Oraciones de Relativo en Nominativo y Acusativo - Oraciones de Relativo Alemanas",
+        "lesson_number": 3,
+        "description": "Aprende a formar oraciones de relativo en caso nominativo y acusativo para dar más información en alemán.",
+        "goals": ["Grammar", "Academic Study"]
+      },
+      {
+        "name": "Tiempo Futuro: \"Futur I\" - Expresando el Futuro en Alemán",
+        "lesson_number": 4,
+        "description": "Introducción al tiempo \"Futur I\" (futuro simple) y cómo expresar acciones y planes futuros en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Vocabulario: Viajes y Alojamiento (Avanzado) - Vocabulario de Viajes Alemán",
+        "lesson_number": 5,
+        "description": "Amplía y refina tu vocabulario relacionado con viajes, alojamiento y reservas en alemán.",
+        "goals": ["Vocabulary", "Travel"]
+      },
+      {
+        "name": "Verbos Modales en Pasado (\"Präteritum\") - Verbos Modales Alemanes en Pasado",
+        "lesson_number": 6,
+        "description": "Aprende a usar verbos modales en tiempo \"Präteritum\" (pasado simple) para expresar habilidades, obligaciones pasadas, etc.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Terminaciones de Adjetivos: Todos los Casos y Géneros - Dominando los Adjetivos Alemanes",
+        "lesson_number": 7,
+        "description": "Domina las terminaciones de adjetivos en los cuatro casos (nominativo, acusativo, dativo, genitivo) y para todos los géneros y tipos de sustantivos.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Vocabulario: Trabajo y Estudio en Alemán - Vocabulario Profesional y Académico",
+        "lesson_number": 8,
+        "description": "Amplía tu vocabulario relacionado con entornos laborales, profesiones y estudios académicos en alemán.",
+        "goals": ["Vocabulary", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Cláusulas \"Wenn\" y \"Falls\" (Oraciones Condicionales) - Condicionales Alemanes",
+        "lesson_number": 9,
+        "description": "Introducción a oraciones condicionales usando \"wenn\" y \"falls\" (si) y su estructura en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Repaso del Nivel Intermedio de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel intermedio de alemán, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "upper-intermediate",
+    "lessons": [
+      {
+        "name": "Repaso y Estructuras Gramaticales Complejas - Gramática Alemana Avanzada",
+        "lesson_number": 1,
+        "description": "Repaso de conceptos intermedios e introducción a estructuras gramaticales y construcciones de oraciones más complejas en alemán.",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "Oraciones de Relativo en Dativo y Genitivo - Oraciones de Relativo Avanzadas",
+        "lesson_number": 2,
+        "description": "Aprende a formar oraciones de relativo en caso dativo y genitivo para estructuras de oraciones más complejas en alemán.",
+        "goals": ["Grammar", "Academic Study"]
+      },
+      {
+        "name": "Voz Pasiva en Presente y Pasado - Voz Pasiva Alemana",
+        "lesson_number": 3,
+        "description": "Aprende a usar la voz pasiva (Passiv) tanto en presente como en pasado en alemán.",
+        "goals": ["Grammar", "Academic Study"]
+      },
+      {
+        "name": "Subjuntivo II (Konjunktiv II) - Alemán Hipotético",
+        "lesson_number": 4,
+        "description": "Introducción al Subjuntivo II (Konjunktiv II) para expresar situaciones hipotéticas y peticiones educadas en alemán.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Vocabulario: Negocios y Finanzas (Avanzado) - Vocabulario de Negocios Alemán",
+        "lesson_number": 5,
+        "description": "Amplía y refina tu vocabulario relacionado con negocios, finanzas y economía en alemán para contextos profesionales.",
+        "goals": ["Vocabulary", "Business Communication"]
+      },
+      {
+        "name": "Cláusulas \"Damit\" y \"Um...zu\" (Cláusulas de Propósito) - Cláusulas de Propósito Alemanas",
+        "lesson_number": 6,
+        "description": "Aprende a formar oraciones de propósito usando \"damit\" y \"um...zu\" para expresar la finalidad de una acción en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Preposiciones con Caso Genitivo - Preposiciones Genitivas Alemanas",
+        "lesson_number": 7,
+        "description": "Aprende preposiciones comunes que siempre requieren caso genitivo y practica su uso en alemán.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Vocabulario: Tecnología e Innovación (Avanzado) - Vocabulario de Tecnología Alemán",
+        "lesson_number": 8,
+        "description": "Amplía y refina tu vocabulario relacionado con tecnología, innovación y temas digitales en alemán.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Estilo Indirecto (Indirekte Rede) - Estilo Indirecto Alemán",
+        "lesson_number": 9,
+        "description": "Aprende a usar el estilo indirecto (Indirekte Rede) para reportar lo que otros han dicho en alemán.",
+        "goals": ["Grammar", "Business Communication"]
+      },
+      {
+        "name": "Repaso del Nivel Upper-intermediate de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel upper-intermediate de alemán, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "advanced",
+    "lessons": [
+      {
+        "name": "Repaso y Alemán Formal - Alemán Avanzado para Profesionales",
+        "lesson_number": 1,
+        "description": "Repaso de conceptos upper-intermediate y enfoque en el uso formal del idioma alemán, incluyendo registro y estilo.",
+        "goals": ["Fundamentals", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Subjuntivo I (Konjunktiv I) - Estilo Indirecto en Detalle - Subjuntivo I Alemán",
+        "lesson_number": 2,
+        "description": "Profundiza tu comprensión del Subjuntivo I (Konjunktiv I) y su uso específico en el estilo indirecto en alemán.",
+        "goals": ["Grammar", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Noun-Verb-Verbindungen (Colocaciones Sustantivo-Verbo) - Colocaciones Alemanas Avanzadas",
+        "lesson_number": 3,
+        "description": "Aprende colocaciones comunes e importantes de sustantivo-verbo (Noun-Verb-Verbindungen) para mejorar la fluidez y naturalidad en alemán.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "\"Obwohl\", \"Trotzdem\", \"Dennoch\" (Conectores de Contraste) - Conectores Alemanes Avanzados",
+        "lesson_number": 4,
+        "description": "Domina el uso de conectores avanzados como \"obwohl\", \"trotzdem\" y \"dennoch\" (aunque, sin embargo) para expresar contraste en alemán.",
+        "goals": ["Grammar", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Vocabulario: Eventos Actuales y Temas Globales (Avanzado) - Vocabulario de Temas Globales Alemán",
+        "lesson_number": 5,
+        "description": "Amplía y refina tu vocabulario para discutir eventos actuales, temas globales y temas políticos en alemán.",
+        "goals": ["Vocabulary", "Cultural Exploration", "Academic Study"]
+      },
+      {
+        "name": "\"Indirekte Fragen\" (Preguntas Indirectas) - Preguntas Formales en Alemán",
+        "lesson_number": 6,
+        "description": "Aprende cómo formular preguntas indirectas (Indirekte Fragen) para un estilo más cortés y formal de preguntar en alemán.",
+        "goals": ["Grammar", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Adverbios de Oración y Partículas Modales - Matices en el Habla Alemana",
+        "lesson_number": 7,
+        "description": "Introducción a adverbios de oración (Satzadverbien) y partículas modales (Modalpartikeln) y sus efectos sutiles en el significado en alemán.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Vocabulario: Escritura Académica y Profesional - Vocabulario de Escritura Académica Alemán",
+        "lesson_number": 8,
+        "description": "Desarrolla vocabulario especializado para escritura académica y profesional en alemán, incluyendo redacción de ensayos e informes.",
+        "goals": ["Vocabulary", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Modismos Alemanes y Lenguaje Figurado - Modismos Alemanes Avanzados",
+        "lesson_number": 9,
+        "description": "Explora y aprende modismos y lenguaje figurativo comunes en alemán para comprender y usar un alemán más matizado e idiomático.",
+        "goals": ["Vocabulary", "Cultural Exploration", "Other"]
+      },
+      {
+        "name": "Repaso del Nivel Avanzado de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso general de todos los temas cubiertos en el nivel avanzado de alemán, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "proficiency",
+    "lessons": [
+      {
+        "name": "Repaso y Refinamiento Lingüístico - Alemán Proficiency para Expertos",
+        "lesson_number": 1,
+        "description": "Repaso de conceptos avanzados y enfoque en refinamiento lingüístico, precisión y matices estilísticos en alemán.",
+        "goals": ["Fundamentals", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Fonética Alemana y Pronunciación Avanzada - Perfeccionando la Pronunciación Alemana",
+        "lesson_number": 2,
+        "description": "Profundiza tu comprensión de la fonética alemana y practica pronunciación avanzada, incluyendo variaciones regionales.",
+        "goals": ["Other", "Cultural Exploration"]
+      },
+      {
+        "name": "Análisis e Interpretación de Textos Alemanes Avanzados - Lectura Crítica en Alemán",
+        "lesson_number": 3,
+        "description": "Desarrolla habilidades avanzadas en análisis e interpretación de textos alemanes complejos, literarios y académicos.",
+        "goals": ["Academic Study", "Other"]
+      },
+      {
+        "name": "Alemán para Propósitos Profesionales Específicos (Negocios, Legal, Médico) - ESP Alemán",
+        "lesson_number": 4,
+        "description": "Explora vocabulario y estilos de comunicación alemanes especializados para campos profesionales específicos (negocios, legal, médico).",
+        "goals": ["Business Communication", "Academic Study", "Other"]
+      },
+      {
+        "name": "Estudios Culturales Alemanes y Comunicación Intercultural - Dominio de la Cultura Alemana",
+        "lesson_number": 5,
+        "description": "Estudia aspectos de la cultura, historia y sociedad alemanas y desarrolla competencia en comunicación intercultural.",
+        "goals": ["Cultural Exploration", "Business Communication", "Other"]
+      },
+      {
+        "name": "Escritura Creativa y Estilística - Expresándote Creativamente en Alemán",
+        "lesson_number": 6,
+        "description": "Participa en ejercicios de escritura creativa y explora la estilística alemana para mejorar la expresión personal en alemán.",
+        "goals": ["Other", "Cultural Exploration"]
+      },
+      {
+        "name": "Comprensión Auditiva Alemana Avanzada - Medios Auténticos Alemanes",
+        "lesson_number": 7,
+        "description": "Mejora habilidades de comprensión auditiva avanzada usando materiales auténticos alemanes (noticias, podcasts, conferencias, películas).",
+        "goals": ["Other", "Academic Study", "Cultural Exploration"]
+      },
+      {
+        "name": "Retórica y Habilidades de Presentación Alemanas (Avanzado) - Hablar en Público en Alemán",
+        "lesson_number": 8,
+        "description": "Refina habilidades retóricas y de presentación en alemán para una comunicación persuasiva y efectiva en entornos formales.",
+        "goals": ["Business Communication", "Academic Study", "Other"]
+      },
+      {
+        "name": "Traducción e Interpretación Alemán-Español (Avanzado) - Habilidades de Traducción Profesional",
+        "lesson_number": 9,
+        "description": "Desarrolla habilidades avanzadas de traducción e interpretación entre alemán y español con textos y contextos complejos.",
+        "goals": ["Other", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Repaso Final del Nivel Proficiency de Alemán para Hispanohablantes",
+        "lesson_number": 10,
+        "description": "Repaso final de todos los aspectos del nivel proficiency de alemán y evaluación completa, para hispanohablantes.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  }
+]
