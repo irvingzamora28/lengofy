@@ -17,6 +17,7 @@ class CreateLessonsTable extends Migration
             $table->json('topics')->nullable();
             $table->json('prerequisites')->nullable();
             $table->text('content');
+            $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('language_pair_id');
             $table->timestamps();
 
