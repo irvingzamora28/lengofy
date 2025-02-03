@@ -22,6 +22,15 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
   const [nativeWaveform, setNativeWaveform] = useState<WaveformData>({ samples: [], duration: 0 });
   const [userWaveform, setUserWaveform] = useState<WaveformData>({ samples: [], duration: 0 });
   const [isPlayingExample, setIsPlayingExample] = useState(false);
+  const [nativeProgress, setNativeProgress] = useState(0);
+  const [userProgress, setUserProgress] = useState(0);
+  const progressRef = useRef({
+    native: { current: 0, target: 0, isPlaying: false },
+    user: { current: 0, target: 0, isPlaying: false },
+    animationFrame: 0
+  });
+  const lastTimeRef = useRef(0);
+  const userAudioRef = useRef<HTMLAudioElement | null>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const audioChunks = useRef<Blob[]>([]);
   const liveCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -257,6 +266,66 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
     return `#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}00`;
   };
 
+  const animateProgress = (timestamp: number) => {
+    if (!lastTimeRef.current) lastTimeRef.current = timestamp;
+    const deltaTime = timestamp - lastTimeRef.current;
+    lastTimeRef.current = timestamp;
+
+    const smoothingFactor = deltaTime / 16;
+
+    // Smooth progress updates for native audio
+    if (progressRef.current.native.isPlaying && nativeAudioRef.current) {
+      progressRef.current.native.target = nativeAudioRef.current.currentTime / nativeAudioRef.current.duration;
+      const nativeDiff = progressRef.current.native.target - progressRef.current.native.current;
+      progressRef.current.native.current += nativeDiff * smoothingFactor;
+      setNativeProgress(progressRef.current.native.current);
+    }
+
+    // Smooth progress updates for user audio
+    if (progressRef.current.user.isPlaying && userAudioRef.current) {
+      progressRef.current.user.target = userAudioRef.current.currentTime / userAudioRef.current.duration;
+      const userDiff = progressRef.current.user.target - progressRef.current.user.current;
+      progressRef.current.user.current += userDiff * smoothingFactor;
+      setUserProgress(progressRef.current.user.current);
+    }
+
+    progressRef.current.animationFrame = requestAnimationFrame(animateProgress);
+  };
+
+  // Start animation loop when component mounts
+  useEffect(() => {
+    progressRef.current.animationFrame = requestAnimationFrame(animateProgress);
+    return () => {
+      if (progressRef.current.animationFrame) {
+        cancelAnimationFrame(progressRef.current.animationFrame);
+      }
+    };
+  }, []);
+
+  const handleNativePlay = () => {
+    progressRef.current.native.isPlaying = true;
+    progressRef.current.native.current = 0;
+    setIsPlayingExample(true);
+  };
+
+  const handleNativeEnded = () => {
+    progressRef.current.native.isPlaying = false;
+    progressRef.current.native.current = 0;
+    setNativeProgress(0);
+    setIsPlayingExample(false);
+  };
+
+  const handleUserPlay = () => {
+    progressRef.current.user.isPlaying = true;
+    progressRef.current.user.current = 0;
+  };
+
+  const handleUserEnded = () => {
+    progressRef.current.user.isPlaying = false;
+    progressRef.current.user.current = 0;
+    setUserProgress(0);
+  };
+
   const similarity = userPitch ? 1 - Math.min(Math.abs(userPitch - nativePitch) / 50, 1) : 0;
 
   return (
@@ -276,12 +345,7 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
         </button>
       </div>
 
-      {isPlayingExample && (
-        <div className="flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 animate-pulse">
-          <FaVolumeUp className="animate-bounce" />
-          <span>Playing example pronunciation...</span>
-        </div>
-      )}
+
 
       <div className="flex items-center justify-center gap-2">
         <button
@@ -337,6 +401,15 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
             width={800}
             height={200}
           />
+          {(nativeProgress > 0 || userProgress > 0) && (
+            <div
+              className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400/70 via-white/70 to-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.5)]"
+              style={{
+                left: `${Math.max(nativeProgress, userProgress) * 100}%`,
+                transform: 'translateX(-50%)'
+              }}
+            />
+          )}
           <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
             <div className="flex items-center gap-1 text-cyan-400">
               <FaVolumeUp className="text-xs" />
@@ -363,8 +436,10 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
                 <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">Your Recording</h3>
                 <button
                   onClick={() => {
-                    const audio = new Audio(audioUrl);
-                    audio.play();
+                    if (userAudioRef.current) {
+                      userAudioRef.current.currentTime = 0;
+                      userAudioRef.current.play();
+                    }
                   }}
                   className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 text-sm"
                 >
@@ -372,7 +447,13 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
                   <span>Play</span>
                 </button>
               </div>
-              <audio src={audioUrl} className="hidden" />
+              <audio
+                ref={userAudioRef}
+                src={audioUrl}
+                className="hidden"
+                onPlay={handleUserPlay}
+                onEnded={handleUserEnded}
+              />
             </div>
 
             <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
@@ -386,7 +467,13 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
                   <span>Play</span>
                 </button>
               </div>
-              <audio ref={nativeAudioRef} src={nativeAudio} className="hidden" onPlay={() => setIsPlayingExample(true)} onEnded={() => setIsPlayingExample(false)} />
+              <audio
+                ref={nativeAudioRef}
+                src={nativeAudio}
+                className="hidden"
+                onPlay={handleNativePlay}
+                onEnded={handleNativeEnded}
+              />
             </div>
           </div>
 
