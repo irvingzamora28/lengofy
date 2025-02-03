@@ -34,7 +34,8 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const audioChunks = useRef<Blob[]>([]);
   const liveCanvasRef = useRef<HTMLCanvasElement>(null);
-  const comparisonCanvasRef = useRef<HTMLCanvasElement>(null);
+  const nativeWaveformCanvasRef = useRef<HTMLCanvasElement>(null);
+  const userWaveformCanvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const nativeAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -66,7 +67,7 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
           samples,
           duration: audioBuffer.duration
         });
-        drawWaveform(comparisonCanvasRef.current!, samples, '#4ecdc4');
+        drawWaveform(nativeWaveformCanvasRef.current!, samples, '#4ecdc4');
 
       } catch (error) {
         console.error('Error analyzing native audio:', error);
@@ -197,29 +198,38 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
     }
   };
 
-  // Draw comparison waveforms
+  // Draw native waveform
   useEffect(() => {
-    if (userWaveform.samples.length > 0 && nativeWaveform.samples.length > 0) {
-      const canvas = comparisonCanvasRef.current;
+    if (nativeWaveform.samples.length > 0) {
+      const canvas = nativeWaveformCanvasRef.current;
       if (!canvas) return;
 
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawWaveform(canvas, nativeWaveform.samples, '#4ecdc4', 0.8);
+    }
+  }, [nativeWaveform.samples]);
 
-      // Draw native waveform
-      drawWaveform(canvas, nativeWaveform.samples, '#4ecdc4', 0.3);
+  // Draw user waveform
+  useEffect(() => {
+    if (userWaveform.samples.length > 0) {
+      const canvas = userWaveformCanvasRef.current;
+      if (!canvas) return;
 
-      // Draw user waveform
-      drawWaveform(canvas, userWaveform.samples, '#f87171', 0.3);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawWaveform(canvas, userWaveform.samples, '#34d399', 0.8);
 
       // Draw pitch match overlay
       const similarity = 1 - Math.min(Math.abs(userPitch - nativePitch) / 50, 1);
       ctx.fillStyle = `rgba(74, 222, 128, ${similarity * 0.4})`;
       ctx.fillRect(0, 0, canvas.width * similarity, canvas.height);
     }
-  }, [userWaveform, nativeWaveform, userPitch, nativePitch]);
+  }, [userWaveform.samples, userPitch, nativePitch]);
 
   // Helper functions
   const downsample = (data: Float32Array, targetLength: number): number[] => {
@@ -335,14 +345,6 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
           <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
           <p className="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{text}</p>
         </div>
-
-        <button
-          onClick={() => nativeAudioRef.current?.play()}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 font-medium text-sm flex-shrink-0"
-        >
-          <FaPlay className="text-xs" />
-          <span>Listen</span>
-        </button>
       </div>
 
 
@@ -392,30 +394,75 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
         </div>
       )}
 
-      {/* Comparison waveform after recording */}
+      {/* Native audio waveform */}
+      <div className="relative">
+        <canvas
+          ref={nativeWaveformCanvasRef}
+          className="w-full h-20 rounded-lg bg-gray-900 shadow-inner"
+          width={800}
+          height={200}
+        />
+        {nativeProgress > 0 && (
+          <div
+            className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400/70 via-white/70 to-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.5)]"
+            style={{
+              left: `${nativeProgress * 100}%`,
+              transform: 'translateX(-50%)'
+            }}
+          />
+        )}
+        <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
+          <div className="flex items-center gap-1 text-cyan-400">
+            <FaVolumeUp className="text-xs" />
+            <span>Example</span>
+          </div>
+        </div>
+
+        <div className="absolute bottom-2 right-2">
+          <div className="flex items-center gap-1">
+            <button
+              className="flex items-center gap-1 text-sm font-medium text-white/90 bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full hover:bg-gray-900/70 transition-colors"
+              onClick={() => {
+                if (nativeAudioRef.current) {
+                  nativeAudioRef.current.currentTime = 0;
+                  nativeAudioRef.current.play();
+                }
+              }}
+            >
+              <FaPlay className="text-xs" />
+              <span>Play</span>
+            </button>
+            <audio
+              ref={nativeAudioRef}
+              src={nativeAudio}
+              className="hidden"
+              onPlay={handleNativePlay}
+              onEnded={handleNativeEnded}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* User recording waveform */}
       {!recording && userWaveform.samples.length > 0 && (
-        <div className="relative">
+        <div className="relative mt-4">
           <canvas
-            ref={comparisonCanvasRef}
+            ref={userWaveformCanvasRef}
             className="w-full h-20 rounded-lg bg-gray-900 shadow-inner"
             width={800}
             height={200}
           />
-          {(nativeProgress > 0 || userProgress > 0) && (
+          {userProgress > 0 && (
             <div
               className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400/70 via-white/70 to-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.5)]"
               style={{
-                left: `${Math.max(nativeProgress, userProgress) * 100}%`,
+                left: `${userProgress * 100}%`,
                 transform: 'translateX(-50%)'
               }}
             />
           )}
           <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
-            <div className="flex items-center gap-1 text-cyan-400">
-              <FaVolumeUp className="text-xs" />
-              <span>Native</span>
-            </div>
-            <div className="flex items-center gap-1 text-rose-400">
+            <div className="flex items-center gap-1 text-emerald-400">
               <FaMicrophone className="text-xs" />
               <span>You</span>
             </div>
@@ -424,29 +471,21 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
               <span>{Math.round(similarity * 100)}%</span>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Audio players and feedback */}
-      {audioUrl && (
-        <div className="space-y-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">Your Recording</h3>
-                <button
-                  onClick={() => {
-                    if (userAudioRef.current) {
-                      userAudioRef.current.currentTime = 0;
-                      userAudioRef.current.play();
-                    }
-                  }}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 text-sm"
-                >
-                  <FaPlay className="text-xs" />
-                  <span>Play</span>
-                </button>
-              </div>
+          <div className="absolute bottom-2 right-2">
+            <div className="flex items-center gap-1">
+              <button
+                className="flex items-center gap-1 text-sm font-medium text-white/90 bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full hover:bg-gray-900/70 transition-colors"
+                onClick={() => {
+                  if (userAudioRef.current) {
+                    userAudioRef.current.currentTime = 0;
+                    userAudioRef.current.play();
+                  }
+                }}
+              >
+                <FaPlay className="text-xs" />
+                <span>Play</span>
+              </button>
               <audio
                 ref={userAudioRef}
                 src={audioUrl}
@@ -455,27 +494,13 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
                 onEnded={handleUserEnded}
               />
             </div>
-
-            <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">Native Speaker</h3>
-                <button
-                  onClick={() => nativeAudioRef.current?.play()}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 text-sm"
-                >
-                  <FaPlay className="text-xs" />
-                  <span>Play</span>
-                </button>
-              </div>
-              <audio
-                ref={nativeAudioRef}
-                src={nativeAudio}
-                className="hidden"
-                onPlay={handleNativePlay}
-                onEnded={handleNativeEnded}
-              />
-            </div>
           </div>
+        </div>
+      )}
+
+      {/* Audio players and feedback */}
+      {audioUrl && (
+        <div className="space-y-2">
 
           {userPitch > 0 && (
             <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
