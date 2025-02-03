@@ -65,11 +65,15 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
     analyzeNativeAudio();
   }, [nativeAudio]);
 
-  const handleTryAgain = () => {
+  const handleTryAgain =  async() => {
+    // Reset states
     setAudioUrl(null);
     setUserPitch(0);
     setUserWaveform({ samples: [], duration: 0 });
     audioChunks.current = [];
+
+    // Start recording immediately
+    await startRecording();
   };
 
   const startRecording = async () => {
