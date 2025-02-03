@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { PitchDetector } from 'pitchy';
-import { Button } from '@headlessui/react';
+import { FaMicrophone, FaStop, FaRedo, FaPlay, FaVolumeUp } from 'react-icons/fa';
+import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
+import { RiSoundModuleFill } from 'react-icons/ri';
 
 interface RecordPromptProps {
   text: string;
@@ -258,56 +260,70 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
   const similarity = userPitch ? 1 - Math.min(Math.abs(userPitch - nativePitch) / 50, 1) : 0;
 
   return (
-    <div className="space-y-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
-      <div className="flex items-center gap-4 flex-wrap">
-        <p className="text-lg font-medium text-gray-900 dark:text-gray-100 flex-1 min-w-[200px]">{text}</p>
-
-        <div className="flex items-center gap-2">
-          <Button
-            onClick={() => nativeAudioRef.current?.play()}
-            className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-          >
-            🔊 Play Example
-          </Button>
-          <audio ref={nativeAudioRef} src={nativeAudio} onPlay={() => setIsPlayingExample(true)} onEnded={() => setIsPlayingExample(false)} />
+    <div className="max-w-2xl mx-auto space-y-2 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+      <div className="flex items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-900/50 p-2 rounded-lg">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
+          <p className="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{text}</p>
         </div>
+
+        <button
+          onClick={() => nativeAudioRef.current?.play()}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 font-medium text-sm flex-shrink-0"
+        >
+          <FaPlay className="text-xs" />
+          <span>Listen</span>
+        </button>
       </div>
 
       {isPlayingExample && (
-        <div className="text-sm text-gray-600 dark:text-gray-400">
-          Playing example pronunciation...
+        <div className="flex items-center gap-2 text-sm text-indigo-600 dark:text-indigo-400 animate-pulse">
+          <FaVolumeUp className="animate-bounce" />
+          <span>Playing example pronunciation...</span>
         </div>
       )}
 
-      <div className="flex items-center gap-4 flex-wrap">
-        <Button
+      <div className="flex items-center justify-center gap-2">
+        <button
           onClick={recording ? stopRecording : startRecording}
-          className={`px-4 py-2 rounded-lg ${
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 ${
             recording
               ? 'bg-red-500 text-white hover:bg-red-600'
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          } transition-colors`}
+              : 'bg-emerald-500 text-white hover:bg-emerald-600'
+          }`}
           disabled={isPlayingExample}
         >
-          {recording ? '⏹ Stop Recording' : '🎤 Start Recording'}
-        </Button>
+          {recording ? (
+            <>
+              <FaStop className="text-lg" />
+              <span>Stop</span>
+            </>
+          ) : (
+            <>
+              <FaMicrophone className="text-lg" />
+              <span>Record</span>
+            </>
+          )}
+        </button>
 
         {audioUrl && (
-          <Button
+          <button
             onClick={handleTryAgain}
-            className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200"
           >
-            🔄 Try Again
-          </Button>
+            <FaRedo className="text-lg" />
+            <span>Try Again</span>
+          </button>
         )}
       </div>
 
       {/* Live waveform during recording */}
       {recording && (
         <div className="relative">
-          <canvas ref={liveCanvasRef} className="w-full h-32 rounded bg-gray-900" />
-          <div className="absolute top-2 left-2 text-blue-400 text-sm">
-            Live recording...
+          <canvas ref={liveCanvasRef} className="w-full h-16 rounded-lg bg-gray-900 shadow-inner" />
+          <div className="absolute top-2 left-2 flex items-center gap-2 text-emerald-400 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+            <span>Recording...</span>
           </div>
         </div>
       )}
@@ -317,15 +333,22 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
         <div className="relative">
           <canvas
             ref={comparisonCanvasRef}
-            className="w-full h-48 rounded bg-gray-900"
+            className="w-full h-20 rounded-lg bg-gray-900 shadow-inner"
             width={800}
             height={200}
           />
-          <div className="absolute top-2 left-2 flex gap-3 text-sm">
-            <div className="text-cyan-400">Native Speaker</div>
-            <div className="text-red-400">Your Recording</div>
-            <div className="text-green-400">
-              Match: {Math.round(similarity * 100)}%
+          <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
+            <div className="flex items-center gap-1 text-cyan-400">
+              <FaVolumeUp className="text-xs" />
+              <span>Native</span>
+            </div>
+            <div className="flex items-center gap-1 text-rose-400">
+              <FaMicrophone className="text-xs" />
+              <span>You</span>
+            </div>
+            <div className="flex items-center gap-1 text-emerald-400">
+              {similarity >= 0.7 ? <IoCheckmarkCircle className="text-sm" /> : <IoCloseCircle className="text-sm" />}
+              <span>{Math.round(similarity * 100)}%</span>
             </div>
           </div>
         </div>
@@ -333,31 +356,46 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
 
       {/* Audio players and feedback */}
       {audioUrl && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-white dark:bg-gray-700 rounded">
-              <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">Your Recording</h3>
-              <audio controls src={audioUrl} className="w-full" />
-              <div className="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-300">
-                {userPitch ? `${userPitch.toFixed(1)} Hz` : 'Analyzing...'}
+        <div className="space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">Your Recording</h3>
+                <button
+                  onClick={() => {
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                  }}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 text-sm"
+                >
+                  <FaPlay className="text-xs" />
+                  <span>Play</span>
+                </button>
               </div>
+              <audio src={audioUrl} className="hidden" />
             </div>
 
-            <div className="p-4 bg-white dark:bg-gray-700 rounded">
-              <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">Native Speaker</h3>
-              <audio controls src={nativeAudio} className="w-full" />
-              <div className="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-300">
-                {nativePitch.toFixed(1)} Hz
+            <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">Native Speaker</h3>
+                <button
+                  onClick={() => nativeAudioRef.current?.play()}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 text-sm"
+                >
+                  <FaPlay className="text-xs" />
+                  <span>Play</span>
+                </button>
               </div>
+              <audio ref={nativeAudioRef} src={nativeAudio} className="hidden" onPlay={() => setIsPlayingExample(true)} onEnded={() => setIsPlayingExample(false)} />
             </div>
           </div>
 
           {userPitch > 0 && (
-            <div className="p-4 bg-white dark:bg-gray-700 rounded">
-              <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">
+            <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
+              <h3 className="text-sm font-medium mb-1.5 text-gray-800 dark:text-gray-200">
                 Pronunciation Feedback
               </h3>
-              <div className="h-8 w-full rounded-full overflow-hidden bg-gray-200">
+              <div className="h-3 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-inner">
                 <div
                   className="h-full transition-all duration-500"
                   style={{
@@ -366,9 +404,15 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
                   }}
                 />
               </div>
-              <div className="mt-2 flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                <span>Needs Practice</span>
-                <span>Excellent! ({Math.round(similarity * 100)}%)</span>
+              <div className="mt-2 flex justify-between text-xs font-medium">
+                <span className="text-rose-500 dark:text-rose-400 flex items-center gap-1">
+                  <IoCloseCircle />
+                  Needs Practice
+                </span>
+                <span className="text-emerald-500 dark:text-emerald-400 flex items-center gap-1">
+                  <IoCheckmarkCircle />
+                  Excellent!
+                </span>
               </div>
             </div>
           )}
