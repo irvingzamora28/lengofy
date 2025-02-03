@@ -23,13 +23,10 @@ Here are some essential German greetings:
 ## Practice Exercise: Build the Word
 Now it's time to practice spelling some of these greetings! Rearrange the letters to spell the correct German word.
 
-<WordBuilder targetWord="Guten Morgen" />
-
-<WordBuilder targetWord="Hallo" />
-
-<WordBuilder targetWord="Guten Tag" />
-
-<WordBuilder targetWord="Guten Abend" />
+<WordBuilder targetWord="Guten Morgen" nativeWord="Good morning" />
+<WordBuilder targetWord="Hallo" nativeWord="Hello" />
+<WordBuilder targetWord="Guten Tag" nativeWord="Good day" />
+<WordBuilder targetWord="Guten Abend" nativeWord="Good evening" />
 
 ## Matching Exercise
 Match the following greetings with their meanings:
