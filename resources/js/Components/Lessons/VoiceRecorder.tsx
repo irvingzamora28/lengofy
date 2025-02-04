@@ -45,6 +45,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Check speech recognition support on mount
@@ -148,6 +149,9 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
           const transcript = event.results[0][0].transcript;
           setTranscript(transcript);
           setAccuracy(calculateAccuracy(transcript, text));
+          if (transcript.toLowerCase() === text.toLowerCase()) {
+            stopRecording();
+          }
         };
 
         recognition.onerror = () => {
@@ -199,6 +203,11 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
       setError(err instanceof Error ? err.message : 'Recording failed');
       setIsSpeechSupported(false); // Fallback to pitch comparison
     }
+
+    const timeoutDuration = (nativeWaveform.duration + 3) * 1000;
+    timeoutRef.current = setTimeout(() => {
+      stopRecording();
+    }, timeoutDuration);
   };
 
   const stopRecording = async () => {
@@ -249,6 +258,9 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
     }
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
   };
 
