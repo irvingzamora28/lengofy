@@ -426,27 +426,29 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
 
       <div className="flex items-center justify-center gap-2">
-        <button
-          onClick={recording ? stopRecording : startRecording}
-          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 ${
-            recording
-              ? 'bg-red-500 text-white hover:bg-red-600'
-              : 'bg-emerald-500 text-white hover:bg-emerald-600'
-          }`}
-          disabled={isPlayingExample}
-        >
-          {recording ? (
-            <>
-              <FaStop className="text-lg" />
-              <span>Stop</span>
-            </>
-          ) : (
-            <>
-              <FaMicrophone className="text-lg" />
-              <span>Record</span>
-            </>
-          )}
-        </button>
+        {!audioUrl && (
+            <button
+            onClick={recording ? stopRecording : startRecording}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 ${
+                recording
+                ? 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-emerald-500 text-white hover:bg-emerald-600'
+            }`}
+            disabled={isPlayingExample}
+            >
+            {recording ? (
+                <>
+                <FaStop className="text-lg" />
+                <span>Stop</span>
+                </>
+            ) : (
+                <>
+                <FaMicrophone className="text-lg" />
+                <span>Record</span>
+                </>
+            )}
+            </button>
+        )}
 
         {audioUrl && (
           <button
@@ -537,16 +539,18 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
               }}
             />
           )}
-          <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
-            <div className="flex items-center gap-1 text-emerald-400">
-              <FaMicrophone className="text-xs" />
-              <span>You</span>
+          {(!isSpeechSupported) && (
+            <div className="absolute top-2 left-2 flex gap-3 text-sm font-medium bg-gray-900/50 backdrop-blur-sm px-3 py-1 rounded-full">
+                <div className="flex items-center gap-1 text-emerald-400">
+                <FaMicrophone className="text-xs" />
+                <span>You</span>
+                </div>
+                <div className="flex items-center gap-1 text-emerald-400">
+                {similarity >= 0.7 ? <IoCheckmarkCircle className="text-sm" /> : <IoCloseCircle className="text-sm" />}
+                <span>{Math.round(similarity * 100)}%</span>
+                </div>
             </div>
-            <div className="flex items-center gap-1 text-emerald-400">
-              {similarity >= 0.7 ? <IoCheckmarkCircle className="text-sm" /> : <IoCloseCircle className="text-sm" />}
-              <span>{Math.round(similarity * 100)}%</span>
-            </div>
-          </div>
+          )}
 
           <div className="absolute bottom-2 right-2">
             <div className="flex items-center gap-1">
