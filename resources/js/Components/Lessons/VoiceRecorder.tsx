@@ -7,6 +7,7 @@ import { RiSoundModuleFill } from 'react-icons/ri';
 interface RecordPromptProps {
   text: string;
   nativeAudio: string;
+  language: string;
 }
 
 type WaveformData = {
@@ -14,7 +15,7 @@ type WaveformData = {
   duration: number;
 };
 
-const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
+const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptProps) => {
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [nativePitch, setNativePitch] = useState<number>(0);
@@ -38,6 +39,25 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
   const userWaveformCanvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const nativeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [isSpeechSupported, setIsSpeechSupported] = useState(true);
+  const [transcript, setTranscript] = useState('');
+  const [accuracy, setAccuracy] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const recognitionRef = useRef<any>(null);
+
+  useEffect(() => {
+    // Check speech recognition support on mount
+    setIsSpeechSupported('SpeechRecognition' in window || 'webkitSpeechRecognition' in window);
+  }, []);
+
+    // Calculate accuracy between spoken text and target text
+    const calculateAccuracy = (spoken: string, target: string) => {
+        const spokenWords = spoken.toLowerCase().split(/\s+/);
+        const targetWords = target.toLowerCase().split(/\s+/);
+        const matches = spokenWords.filter((word, index) => targetWords[index] === word).length;
+        return matches / targetWords.length;
+      };
 
   // Analyze native audio when component mounts
   useEffect(() => {
@@ -89,12 +109,18 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
   };
 
   const startRecording = async () => {
+    setError(null);
+    setTranscript('');
+    setAccuracy(0);
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioContext = new AudioContext();
-      const mediaRecorderInstance = new MediaRecorder(stream);
-      mediaRecorder.current = mediaRecorderInstance;
+        // Start recording and speech recognition
+        const mediaRecorderInstance = new MediaRecorder(stream);
+        mediaRecorder.current = mediaRecorderInstance;
 
+      const audioContext = new AudioContext();
+      mediaRecorder.current = mediaRecorderInstance;
       const source = audioContext.createMediaStreamSource(stream);
       const analyser = audioContext.createAnalyser();
       analyser.fftSize = 2048;
@@ -106,10 +132,30 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
 
       mediaRecorderInstance.start();
       setRecording(true);
+    // Real-time waveform
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
-      // Real-time waveform
-      const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
+      if (isSpeechSupported) {
+        // Speech recognition flow
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = language;
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          setTranscript(transcript);
+          setAccuracy(calculateAccuracy(transcript, text));
+        };
+
+        recognition.onerror = () => {
+          throw new Error('Speech recognition failed');
+        };
+
+        recognition.start();
+      } else {
 
       const draw = () => {
         if (!liveCanvasRef.current) return;
@@ -147,8 +193,11 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
       };
 
       draw();
+    }
     } catch (err) {
       console.error('Error accessing microphone:', err);
+      setError(err instanceof Error ? err.message : 'Recording failed');
+      setIsSpeechSupported(false); // Fallback to pitch comparison
     }
   };
 
@@ -157,6 +206,11 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
       mediaRecorder.current.stop();
       mediaRecorder.current.stream.getTracks().forEach(track => track.stop());
       setRecording(false);
+
+      // Stop speech recognition
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
 
       mediaRecorder.current.onstop = async () => {
         const audioBlob = new Blob(audioChunks.current, { type: 'audio/wav' });
@@ -345,6 +399,16 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
           <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
           <p className="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{text}</p>
         </div>
+        {isSpeechSupported && (
+
+            <button
+            onClick={() => nativeAudioRef.current?.play()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-all duration-200 font-medium text-sm flex-shrink-0"
+            >
+          <FaPlay className="text-xs" />
+          <span>Listen</span>
+        </button>
+        )}
       </div>
 
 
@@ -395,7 +459,7 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
       )}
 
       {/* Native audio waveform */}
-      <div className="relative">
+      <div className={isSpeechSupported ? `hidden` : `relative`}>
         <canvas
           ref={nativeWaveformCanvasRef}
           className="w-full h-20 rounded-lg bg-gray-900 shadow-inner"
@@ -499,7 +563,7 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
       )}
 
       {/* Audio players and feedback */}
-      {audioUrl && (
+      {!isSpeechSupported && audioUrl && (
         <div className="space-y-2">
 
           {userPitch > 0 && (
@@ -530,6 +594,23 @@ const VoiceRecorder = ({ text, nativeAudio }: RecordPromptProps) => {
           )}
         </div>
       )}
+
+    {transcript && (
+        <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg">
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+            Spoken: {transcript}
+        </p>
+        <p className="text-sm mt-1 text-emerald-500 dark:text-emerald-400">
+            Text Match: {Math.round(accuracy * 100)}%
+        </p>
+        </div>
+    )}
+
+    {error && (
+        <div className="p-2.5 bg-red-50 dark:bg-red-900/20 rounded-lg">
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        </div>
+  )}
     </div>
   );
 };
