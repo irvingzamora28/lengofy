@@ -2,6 +2,7 @@ import React from "react";
 import Markdown from "markdown-to-jsx";
 import WordBuilder from "@/Components/Lessons/WordBuilder"; // Import the WordBuilder component
 import VoiceRecorder from "./VoiceRecorder";
+import HighlightableText from "./HighlightableText";
 
 interface LessonViewerProps {
     content: string;
@@ -58,6 +59,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         VoiceRecorder: {
                             component: VoiceRecorder,
                         },
+                        HighlightableText: {
+                            component: HighlightableText,
+                        }
                     },
                 }}
             >

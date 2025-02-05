@@ -40,6 +40,11 @@ Practice saying the following phrase in German:
 
 <VoiceRecorder text="Guten Morgen" nativeAudio="../../courses/en-de/_shared/guten_morgen.mp3" />
 
+
+<HighlightableText highlights='[{"word":"Guten","info":"Means good in the accusative case."},{"word":"Morgen","info":"Means morning. Pronounced: MOR-gen."}]'>
+  Guten Morgen, wie geht es dir?
+</HighlightableText>
+
 **Hint:** Think about when you would use each greeting during the day!
 
 ---
