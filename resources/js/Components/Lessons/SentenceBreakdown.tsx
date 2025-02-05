@@ -34,27 +34,23 @@ export const SentenceBreakdown = ({ sentence, children }: SentenceBreakdownProps
       className="w-full max-w-xl mx-auto bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden"
     >
       <div className="p-4 sm:p-6">
-        <div className="flex items-center mb-6">
-          <FaBook className="text-blue-600 dark:text-blue-400 text-xl mr-2" />
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Sentence Analysis</h2>
+        <div className="flex items-center mb-2 md:mb-4">
+          <FaBook className="text-blue-600 dark:text-blue-400 text-xl mr-4" />
+          <div className="text-lg font-semibold text-gray-800 dark:text-gray-100">Sentence Analysis</div>
         </div>
 
-        <div className="text-lg sm:text-xl mb-6 font-medium text-center">
+        <div className="text-lg sm:text-xl mb-2 md:mb-4 font-medium text-center">
           {parts.map(({ part }, index) => (
             <motion.span
               key={index}
-              className="inline-block mx-1 px-2 py-1 rounded-md cursor-pointer"
+              className="inline-block mx-1 px-2 py-1 rounded-md cursor-pointer text-gray-700 dark:text-gray-300"
               initial={false}
               animate={{
-                backgroundColor: currentStep === index ? 'rgb(219 234 254)' : 'transparent',
-                color: currentStep === index ? 'rgb(30 64 175)' : 'currentColor',
+                backgroundColor: currentStep === index ? 'rgba(219, 234, 254, 0.8)' : 'rgba(219, 234, 254, 0)',
                 scale: currentStep === index ? 1.05 : 1,
               }}
               whileHover={{ scale: 1.05 }}
               onClick={() => setCurrentStep(index)}
-              style={{
-                colorScheme: 'dark:rgb(55 65 81)'
-              }}
             >
               {part}
             </motion.span>
@@ -82,7 +78,7 @@ export const SentenceBreakdown = ({ sentence, children }: SentenceBreakdownProps
               exit={{ opacity: 0, y: -20 }}
               className="mt-2"
             >
-              <p className="text-gray-600 dark:text-gray-300">{currentPart.explanation}</p>
+              <div className="my-2 text-gray-600 dark:text-gray-300">{currentPart.explanation}</div>
               <div className="mt-2 text-sm text-gray-400 dark:text-gray-500 text-right">
                 {currentStep + 1} / {parts.length}
               </div>
