@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { BsInfoCircle } from 'react-icons/bs';
+import { FaBook, FaInfoCircle } from 'react-icons/fa';
 
 interface HighlightProps {
   word: string;
@@ -8,30 +8,26 @@ interface HighlightProps {
 }
 
 interface HighlightableTextProps {
-  children: string; // The full sentence
-  highlights: string | HighlightProps[]; // Accepts either a JSON string or an array
+  children: string;
+  highlights: string | HighlightProps[];
 }
 
 const HighlightableText: React.FC<HighlightableTextProps> = ({ children, highlights }) => {
-
-  // Safely parse the highlights prop
   let parsedHighlights: HighlightProps[] = [];
   if (typeof highlights === 'string') {
     try {
       parsedHighlights = JSON.parse(highlights);
     } catch (error) {
       console.error('Failed to parse highlights:', error);
-      parsedHighlights = []; // Fallback to an empty array
+      parsedHighlights = [];
     }
   } else {
     parsedHighlights = highlights;
   }
 
-
   const [activeWord, setActiveWord] = useState<string | null>(null);
 
   const words = children ? children[0].split(' ').map((word, index) => {
-    // Clean word, remove spaces, puntuaction, commas, etc.
     word = word.replace(/[\s,\.]/g, '');
 
     const highlight = parsedHighlights.find((h) => h.word === word);
@@ -39,12 +35,12 @@ const HighlightableText: React.FC<HighlightableTextProps> = ({ children, highlig
       return (
         <span
           key={index}
-          className="relative cursor-pointer text-blue-600 hover:text-blue-800"
+          className="relative cursor-pointer text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
           onClick={() => setActiveWord(highlight.word)}
           data-tooltip-id={`tooltip-${highlight.word}`}
         >
           {word}
-          <BsInfoCircle className="ml-1 inline-block text-sm" /> &nbsp;
+          <FaInfoCircle className="ml-1 inline-block text-sm" /> &nbsp;
         </span>
       );
     }
@@ -52,18 +48,24 @@ const HighlightableText: React.FC<HighlightableTextProps> = ({ children, highlig
   }) : <></>;
 
   return (
-    <div className="text-lg">
-      <p>{words}</p>
-      {/* Render tooltips for highlighted words */}
-      {parsedHighlights.map((highlight) => (
-        <Tooltip
-          key={highlight.word}
-          id={`tooltip-${highlight.word}`}
-          content={highlight.info}
-          place="top"
-          style={{ backgroundColor: '#3b82f6', color: '#fff' }}
-        />
-      ))}
+    <div className="rounded-lg bg-white p-6 shadow-lg transition-colors dark:bg-gray-800">
+      <div className="mb-4 flex items-center border-b border-gray-200 pb-4 dark:border-gray-700">
+        <FaBook className="mr-2 text-2xl text-blue-600 dark:text-blue-400" />
+        <div className="text-lg font-semibold text-gray-800 dark:text-gray-100">Interactive Text</div>
+      </div>
+
+      <div className="text-lg text-gray-700 dark:text-gray-300">
+        <span>{words}</span>
+        {parsedHighlights.map((highlight) => (
+          <Tooltip
+            key={highlight.word}
+            id={`tooltip-${highlight.word}`}
+            content={highlight.info}
+            place="top"
+            style={{ backgroundColor: '#3b82f6', color: '#fff' }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
