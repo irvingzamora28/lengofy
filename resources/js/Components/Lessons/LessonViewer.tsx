@@ -3,6 +3,7 @@ import Markdown from "markdown-to-jsx";
 import WordBuilder from "@/Components/Lessons/WordBuilder"; // Import the WordBuilder component
 import VoiceRecorder from "./VoiceRecorder";
 import HighlightableText from "./HighlightableText";
+import { Part, SentenceBreakdown } from "./SentenceBreakdown";
 
 interface LessonViewerProps {
     content: string;
@@ -61,7 +62,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         },
                         HighlightableText: {
                             component: HighlightableText,
-                        }
+                        },
+                        SentenceBreakdown,
+                        Part,
                     },
                 }}
             >

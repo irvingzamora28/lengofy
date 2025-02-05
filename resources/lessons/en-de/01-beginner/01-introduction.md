@@ -45,6 +45,13 @@ Practice saying the following phrase in German:
   Guten Morgen, wie geht es dir?
 </HighlightableText>
 
+<SentenceBreakdown sentence="Ich möchte einen Kaffee bestellen.">
+  <Part part="Ich" explanation="I (subject pronoun)" />
+  <Part part="möchte" explanation="Would like (modal verb)" />
+  <Part part="einen Kaffee" explanation="A coffee (accusative case)" />
+  <Part part="bestellen" explanation="To order (infinitive verb)" />
+</SentenceBreakdown>
+
 **Hint:** Think about when you would use each greeting during the day!
 
 ---
