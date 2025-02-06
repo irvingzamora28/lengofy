@@ -50,7 +50,7 @@ const HighlightableText: React.FC<HighlightableTextProps> = ({ children, highlig
   return (
     <div className="rounded-lg bg-white p-6 shadow-lg transition-colors dark:bg-gray-800">
       <div className="mb-4 flex items-center border-b border-gray-200 pb-4 dark:border-gray-700">
-        <FaBook className="mr-2 text-2xl text-blue-600 dark:text-blue-400" />
+        <FaBook className="text-blue-600 dark:text-blue-400 text-xl mr-4" />
         <div className="text-lg font-semibold text-gray-800 dark:text-gray-100">Interactive Text</div>
       </div>
 
