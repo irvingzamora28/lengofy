@@ -4,6 +4,7 @@ import WordBuilder from "@/Components/Lessons/WordBuilder"; // Import the WordBu
 import VoiceRecorder from "./VoiceRecorder";
 import HighlightableText from "./HighlightableText";
 import { Part, SentenceBreakdown } from "./SentenceBreakdown";
+import TipBox from "./TipBox";
 
 interface LessonViewerProps {
     content: string;
@@ -63,6 +64,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         HighlightableText: {
                             component: HighlightableText,
                         },
+                        TipBox: {
+							component: TipBox,
+						},
                         SentenceBreakdown,
                         Part,
                     },
