@@ -15,6 +15,7 @@ use App\Models\Game;
 use App\Models\GenderDuelGame;
 use App\Models\MemoryTranslationGame;
 use App\Services\LanguageService;
+use App\Services\LessonService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -138,7 +139,9 @@ Route::middleware(['guest'])->group(function () {
     })->name('games.gender-duel.invite');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function (LessonService $lessonService) {
+    $user = auth()->user();
+    $lessons = $lessonService->getLessonsForUser($user);
     $scores = Score::with(['user', 'game'])->orderBy('highest_score', 'desc')
         ->orderBy('total_points', 'desc')
         ->orderBy('winning_streak', 'desc')
@@ -163,6 +166,7 @@ Route::get('/dashboard', function () {
                 ] : null
             ])
         ],
+        'lessons' => $lessons,
         'flash' => [
             'error' => session('error'),
             'success' => session('success'),

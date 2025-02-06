@@ -1,10 +1,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { PageProps, Score, Game } from "@/types";
+import { PageProps, Score, Game, Lesson } from "@/types";
 
 import GameStats from "@/Components/Games/GameStats";
 import FeaturedGames from "@/Components/Games/FeaturedGames";
 import Leaderboard from "@/Components/Games/Leaderboard";
+import RecentLessons from "@/Components/Lessons/RecentLessons";
 import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,9 +13,10 @@ import { useTranslation } from "react-i18next";
 interface DashboardProps extends PageProps {
     scores: Score[];
     games: Game[];
+    lessons: Lesson[];
 }
 
-export default function Dashboard({ scores, games }: DashboardProps) {
+export default function Dashboard({ scores, games, lessons }: DashboardProps) {
     const { t: trans } = useTranslation();
 
     useEffect(() => {
@@ -42,6 +44,11 @@ export default function Dashboard({ scores, games }: DashboardProps) {
                         <div className="overflow-hidden bg-gray-50 dark:bg-gray-900 shadow-sm sm:rounded-lg p-2 sm:p-4">
                             <FeaturedGames games={games} />
                         </div>
+                    </div>
+
+                    {/* Recent Lessons Section */}
+                    <div className="overflow-hidden sm:rounded-lg">
+                        <RecentLessons lessons={lessons} />
                     </div>
                 </div>
             </div>

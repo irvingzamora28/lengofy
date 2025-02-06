@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Head, Link } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { Lesson, PageProps } from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {
     FiBook,
@@ -10,15 +10,6 @@ import {
     FiBookOpen,
 } from "react-icons/fi";
 
-interface Lesson {
-    filename: string;
-    path: string;
-    title: string;
-    lesson_number: number;
-    level: string;
-    topics: string[];
-    completed: boolean;
-}
 
 interface Props extends PageProps {
     lessons: Lesson[];
