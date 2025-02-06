@@ -6,6 +6,7 @@ import HighlightableText from "./HighlightableText";
 import { Part, SentenceBreakdown } from "./SentenceBreakdown";
 import TipBox from "./TipBox";
 import Mnemonic from "./Mnemonic";
+import TextToSpeechPlayer from "../UI/TextToSpeechPlayer";
 
 interface LessonViewerProps {
     content: string;
@@ -70,6 +71,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
 						},
                         Mnemonic: {
                             component: Mnemonic,
+                        },
+                        TextToSpeechPlayer: {
+                            component: TextToSpeechPlayer,
                         },
                         SentenceBreakdown,
                         Part,
