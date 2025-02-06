@@ -404,12 +404,17 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
   const similarity = userPitch ? 1 - Math.min(Math.abs(userPitch - nativePitch) / 50, 1) : 0;
 
+  useEffect(() => {
+    console.log("Accuracy: ", accuracy);
+  }, [accuracy]);
+
+
   return (
     <div className="max-w-2xl mx-auto space-y-2 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 ease-in-out">
       <div className="flex items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-900/50 p-2 rounded-lg">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
-          <p className="text-base font-medium text-gray-900 dark:text-gray-100 truncate">{text}</p>
+          <p className="text-base font-medium text-slate-900 dark:text-slate-100 truncate">{text}</p>
         </div>
         {isSpeechSupported && (
 
@@ -453,7 +458,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
         {audioUrl && (
           <button
             onClick={handleTryAgain}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-slate-700 dark:text-slate-200 hover:bg-gray-200 dark:hover:bg-gray-600 shadow hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200"
           >
             <FaRedo className="text-lg" />
             <span>Try Again</span>
@@ -584,7 +589,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
           {userPitch > 0 && (
             <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg transition-all duration-300 hover:shadow-md">
-              <h3 className="text-sm font-medium mb-1.5 text-gray-800 dark:text-gray-200">
+              <h3 className="text-sm font-medium mb-1.5 text-slate-800 dark:text-slate-200">
                 Pronunciation Feedback
               </h3>
               <div className="h-3 w-full rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-inner">
@@ -596,11 +601,20 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
                   }}
                 />
               </div>
-              <div className="mt-2 flex justify-between text-xs font-medium">
-                <span className="text-rose-500 dark:text-rose-400 flex items-center gap-1">
-                  <IoCloseCircle />
-                  Needs Practice
-                </span>
+              <div className="mt-2 flex justify-between text-sm font-medium">
+                {similarity >= 1 ? (
+                  <div className="w-full flex items-center justify-center">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 animate-bounce">
+                      <IoCheckmarkCircle className="text-lg" />
+                      Perfect Match! Excellent Pronunciation
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-rose-500 dark:text-rose-400 flex items-center gap-2">
+                    <IoCloseCircle className="text-lg" />
+                    Keep Practicing
+                  </span>
+                )}
                 <span className="text-emerald-500 dark:text-emerald-400 flex items-center gap-1">
                   <IoCheckmarkCircle />
                   Excellent!
@@ -612,13 +626,29 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
       )}
 
     {transcript && (
-        <div className="p-2.5 bg-gray-50 dark:bg-gray-900 rounded-lg">
-        <p className="text-sm text-gray-700 dark:text-gray-300">
-            Spoken: {transcript}
-        </p>
-        <p className="text-sm mt-1 text-emerald-500 dark:text-emerald-400">
-            Text Match: {Math.round(accuracy * 100)}%
-        </p>
+        <div className={`p-4 ${accuracy >= 1 ? 'bg-green-50 dark:bg-green-900/30 ring-1 ring-green-500/20' : (transcript !== '') ? 'bg-red-50 dark:bg-red-900/30 ring-1 ring-red-500/20'  : 'bg-gray-50 dark:bg-gray-900'} rounded-xl transition-all duration-300`}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">You said:</span>
+
+            {accuracy >= 1 && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 animate-bounce">
+                <IoCheckmarkCircle className="text-base" />
+                Perfect Match!
+              </span>
+            ) || (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 animate-bounce">
+                <IoCloseCircle className="text-lg" />
+                Keep Practicing
+              </span>
+            )}
+          </div>
+          <div className="space-y-3">
+            <div className="flex flex-col gap-1">
+              <div className="text-md font-bold text-slate-700 dark:text-slate-300 bg-transparent rounded-lg">
+                {transcript}
+              </div>
+            </div>
+          </div>
         </div>
     )}
 
