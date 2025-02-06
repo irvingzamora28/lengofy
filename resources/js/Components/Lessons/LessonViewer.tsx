@@ -5,6 +5,7 @@ import VoiceRecorder from "./VoiceRecorder";
 import HighlightableText from "./HighlightableText";
 import { Part, SentenceBreakdown } from "./SentenceBreakdown";
 import TipBox from "./TipBox";
+import Mnemonic from "./Mnemonic";
 
 interface LessonViewerProps {
     content: string;
@@ -67,6 +68,9 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         TipBox: {
 							component: TipBox,
 						},
+                        Mnemonic: {
+                            component: Mnemonic,
+                        },
                         SentenceBreakdown,
                         Part,
                     },
