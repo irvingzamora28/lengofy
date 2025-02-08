@@ -1,4 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
+
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
 import { PitchDetector } from 'pitchy';
 import { FaMicrophone, FaStop, FaRedo, FaPlay, FaVolumeUp } from 'react-icons/fa';
 import { IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
@@ -145,7 +152,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
         recognition.continuous = false;
         recognition.interimResults = false;
 
-        recognition.onresult = (event) => {
+        recognition.onresult = (event: { results: { transcript: any; }[][]; }) => {
           const transcript = event.results[0][0].transcript;
           setTranscript(transcript);
           setAccuracy(calculateAccuracy(transcript, text));
@@ -573,7 +580,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
               </button>
               <audio
                 ref={userAudioRef}
-                src={audioUrl}
+                src={audioUrl || undefined}
                 className="hidden"
                 onPlay={handleUserPlay}
                 onEnded={handleUserEnded}

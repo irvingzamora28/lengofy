@@ -1,4 +1,3 @@
-import React from 'react';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
@@ -29,14 +28,13 @@ interface Props extends PageProps {
 
 export default function LessonProgress({ auth, progress }: Props) {
     const formatLevelName = (name: string) => {
-        return name.split('-').map(word => 
+        return name.split('-').map(word =>
             word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' ');
     };
 
     return (
         <AuthenticatedLayout
-            user={auth.user}
             header={
                 <div>
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
