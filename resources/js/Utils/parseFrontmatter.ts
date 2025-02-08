@@ -11,8 +11,6 @@ export function parseFrontmatter(text: string): Frontmatter | null {
     const firstSeparatorIndex = lines.findIndex((line) =>
         yamlSeparator.test(line)
     );
-    console.log("Lines:", lines);
-    console.log("First separator index:", firstSeparatorIndex);
 
     if (firstSeparatorIndex === -1) return null;
 

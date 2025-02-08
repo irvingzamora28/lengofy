@@ -69,15 +69,6 @@ class LessonController extends Controller
             ]
         );
 
-        if (request()->wantsJson()) {
-            return Response::make($lessonData->content, 200, [
-                'Content-Type' => 'text/markdown'
-            ]);
-        }
-
-        // Remove the metadata from the content
-        $lessonData->content = preg_replace('/^---\n(.*?)\n---/s', '', $lessonData->content);
-
         return Inertia::render('Lessons/Show', [
             'languagePairName' => $languagePair->sourceLanguage->name . ' → ' . $languagePair->targetLanguage->name,
             'level' => $lessonData->level,
