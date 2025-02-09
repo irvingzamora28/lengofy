@@ -7,6 +7,8 @@ import { Part, SentenceBreakdown } from "./SentenceBreakdown";
 import TipBox from "./TipBox";
 import Mnemonic from "./Mnemonic";
 import TextToSpeechPlayer from "../UI/TextToSpeechPlayer";
+import Table from "./Table";
+import TableBody from "./TableBody";
 
 interface LessonViewerProps {
     content: string;
@@ -24,39 +26,68 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             <Markdown
                 options={{
                     overrides: {
-                        table: {
-                            props: {
-                                className:
-                                    "min-w-full divide-y divide-gray-300",
-                            },
-                        },
-                        thead: {
-                            props: {
-                                className: "bg-gray-50",
-                            },
-                        },
-                        th: {
-                            props: {
-                                className:
-                                    "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                            },
-                        },
-                        td: {
-                            props: {
-                                className:
-                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
-                            },
-                        },
                         h1: {
-                            props: {
-                                className: "text-3xl font-bold mb-4",
-                            },
-                        },
-                        h2: {
-                            props: {
-                                className: "text-2xl font-bold mt-6 mb-4",
-                            },
-                        },
+							props: {
+								className: "py-3 text-2xl md:text-3xl lg:text-4xl",
+							},
+						},
+						h2: {
+							props: {
+								className: "border-t-2 border-slate-200 py-3 text-xl md:text-2xl lg:text-3xl",
+							},
+						},
+						h3: {
+							props: {
+								className: "py-3 text-md md:text-md lg:text-2xl",
+							},
+						},
+						ul: {
+							props: {
+								className: "pl-5 py-0 list-disc",
+							},
+						},
+						ol: {
+							props: {
+								className: "pl-5 py-1 list-decimal",
+							},
+						},
+						li: {
+							props: {
+								className: "pl-2 py-1",
+							},
+						},
+						table: {
+							component: Table,
+							props: {
+								className: "min-w-full text-left border-collapse bg-gradient-to-b from-blue-500 to-blue-600 dark:from-indigo-800 dark:to-indigo-900 rounded-none md:rounded-lg",
+							},
+						},
+						thead: {
+							props: {
+								className: "border-b font-medium dark:border-neutral-500",
+							},
+						},
+						th: {
+							props: {
+								className: "px-4 py-2 font-semibold text-sm sm:text-base text-slate-50 dark:text-gray-200",
+							},
+						},
+						tbody: {
+							component: TableBody,
+							props: {
+								className: "bg-white dark:bg-neutral-800 dark:text-gray-200",
+							},
+						},
+						td: {
+							props: {
+								className: "px-4 py-2 border-b dark:border-neutral-100",
+							},
+						},
+						p: {
+							props: {
+								className: "py-3",
+							},
+						},
                         WordBuilder: {
                             component: WordBuilder,
                         },
