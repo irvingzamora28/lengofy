@@ -64,8 +64,8 @@ class LessonSeeder extends Seeder
         foreach ($lines as $line) {
             if (strpos($line, 'title:') === 0) {
                 $metadata['title'] = $this->cleanValue(str_replace('title:', '', $line));
-            } elseif (strpos($line, 'lessonNumber:') === 0) {
-                $metadata['lesson_number'] = (int) trim(str_replace('lessonNumber:', '', $line));
+            } elseif (strpos($line, 'lesson_number:') === 0) {
+                $metadata['lesson_number'] = (int) trim(str_replace('lesson_number:', '', $line));
             } elseif (strpos($line, 'level:') === 0) {
 
                 $metadata['level'] = $this->cleanValue(str_replace('level:', '', $line));
