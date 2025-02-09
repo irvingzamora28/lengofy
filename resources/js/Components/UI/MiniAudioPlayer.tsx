@@ -1,25 +1,16 @@
 import { AudioPlayerProps } from "@/types/props";
 import { FiPauseCircle, FiPlayCircle } from "react-icons/fi";
-import { motion } from 'framer-motion';
-
+import { motion } from "framer-motion";
 
 const MiniAudioPlayer: React.FC<AudioPlayerProps> = ({ isPlaying, handlePlayPause }) => (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="inline-flex bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:shadow-xl transition-all"
+    <motion.button
+      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      onClick={handlePlayPause}
+      className="w-8 h-8 rounded-full bg-indigo-500 hover:bg-indigo-600 shadow-lg text-white flex items-center justify-center transition-all duration-200"
     >
-      <motion.button
-        whileTap={{ scale: 0.95 }}
-        onClick={handlePlayPause}
-        className="text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-full p-2"
-      >
-        {isPlaying ? (
-          <FiPauseCircle size={24} className="transition-all" />
-        ) : (
-          <FiPlayCircle size={24} className="transition-all" />
-        )}
-      </motion.button>
-    </motion.div>
+      {isPlaying ? <FiPauseCircle size={20} /> : <FiPlayCircle size={20} />}
+    </motion.button>
   );
 
 export default MiniAudioPlayer;
