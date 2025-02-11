@@ -21,7 +21,7 @@ const FullAudioPlayer: React.FC<FullAudioPlayerProps> = ({ isPlaying, currentTim
     const [showSpeedControls, setShowSpeedControls] = React.useState(false);
 
     return (
-        <div className="w-full max-w-xl mx-auto bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg">
+        <div className="w-full max-w-xl my-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg">
 		<div className="flex flex-col sm:flex-row gap-4 p-4 sm:p-6">
 			<div className="flex flex-row justify-center md:justify-start space-x-4">
 				<AudioPlayerControls isPlaying={isPlaying} isRepeating={isRepeating} handlePlayPause={handlePlayPause} handleRepeat={handleRepeat} handleRestart={handleRestart} />

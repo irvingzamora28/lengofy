@@ -48,7 +48,7 @@ const HighlightableText: React.FC<HighlightableTextProps> = ({ children, highlig
   }) : <></>;
 
   return (
-    <div className="w-full mx-auto p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
+    <div className="w-full mx-auto my-4 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg overflow-hidden">
 
       <div className="mb-4 flex items-center border-b border-gray-200 pb-4 dark:border-gray-700">
         <FaBook className="text-blue-600 dark:text-blue-400 text-xl mr-4" />

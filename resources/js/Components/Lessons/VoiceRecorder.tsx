@@ -417,7 +417,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
 
   return (
-    <div className="max-w-2xl mx-auto space-y-2 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+    <div className="max-w-2xl mx-auto my-4 space-y-2 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all duration-300 ease-in-out">
       <div className="flex items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-900/50 p-2 rounded-lg">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
