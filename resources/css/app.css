@@ -50,10 +50,8 @@
     animation: flip-to-front 500ms ease forwards;
 }
 
-
-  .li-with-button {
+.table td:has(button) {
+    /* Align the button all the way to the right */
     display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
+    justify-content: flex-end;
+}

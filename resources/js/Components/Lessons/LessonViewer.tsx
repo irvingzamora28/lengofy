@@ -19,16 +19,6 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     content,
     className = "",
 }) => {
-    useEffect(() => {
-        const buttons = document.querySelectorAll(
-            "ul > li > button, ul ul > li > button"
-        );
-        buttons.forEach((button) => {
-            if (button.parentElement) {
-                button.parentElement.classList.add("li-with-button");
-            }
-        });
-    }, [content]);
 
     return (
         <div className={`max-w-none ${className}`}>
@@ -97,7 +87,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         td: {
                             props: {
                                 className:
-                                    "px-4 py-2 border-b dark:border-neutral-100",
+                                    "px-4 py-2",
                             },
                         },
                         p: {
