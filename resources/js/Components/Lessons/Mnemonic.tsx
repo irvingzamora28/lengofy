@@ -12,7 +12,7 @@ const Mnemonic: React.FC<MnemonicProps> = ({ title, content }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative w-full max-w-md my-2">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="group flex w-full items-center justify-between px-4 py-3 rounded-lg

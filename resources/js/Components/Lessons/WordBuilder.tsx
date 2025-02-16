@@ -59,7 +59,7 @@ const WordBuilder: React.FC<WordBuilderProps> = ({
     };
 
     return (
-        <div className="max-w-xl mx-auto p-4 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm shadow-lg transition-all duration-300">
+        <div className="max-w-xl mx-auto p-4 my-2 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
                 <div className="text-lg my-2 font-semibold text-gray-800 dark:text-gray-100">
                     Build the Word
