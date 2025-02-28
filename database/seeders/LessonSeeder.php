@@ -18,6 +18,10 @@ class LessonSeeder extends Seeder
     {
         $lessonsPath = resource_path('lessons');
         $lessonFiles = File::allFiles($lessonsPath);
+        // Filter .mdx and .md files
+        $lessonFiles = array_filter($lessonFiles, function ($file) {
+            return $file->getExtension() === 'mdx' || $file->getExtension() === 'md';
+        });
 
         foreach ($lessonFiles as $file) {
             $languagePairCode = $file->getRelativePathname();
