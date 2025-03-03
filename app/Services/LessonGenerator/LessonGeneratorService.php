@@ -242,10 +242,20 @@ Here are the available components and when to use them:
    - Use in: Vocabulary practice sections, word formation exercises
    - Not appropriate for: Introduction sections or cultural notes
 
-8. Quiz:
-   - Purpose: Tests learner's understanding with multiple-choice questions
-   - Use in: Review sections, comprehension checks
-   - Not appropriate for: Introduction sections
+8. HighlightableText:
+   - Purpose: Highlights text for emphasis or attention
+   - Use in: Any section where an example needs to be highlighted
+   - Not appropriate for: Introduction sections or cultural notes
+
+9. ConversationBox:
+   - Purpose: Displays a conversation between two people to present a scenario
+   - Use in: Any section where a conversation needs to be presented
+   - Not appropriate for: Introduction sections or cultural notes
+
+10. AudioExercise:
+   - Purpose: Provides practice with audio exercises
+   - Use in: Any section where audio exercises are needed
+   - Not appropriate for: Introduction sections or cultural notes
 
 SECTION PLANNING GUIDELINES:
 1. Introduction Section:
@@ -273,23 +283,95 @@ SECTION PLANNING GUIDELINES:
    - Appropriate components: TipBox, TextToSpeechPlayer for examples
    - Should NOT include: SentenceBreakdown, WordBuilder
 
-Create a comprehensive lesson structure with at least 5-7 sections that follow these guidelines and are appropriate for the lesson topic.
+Input:
 
-RESPONSE FORMAT:
-Return ONLY a valid JSON object with the following structure:
+The input will be a JSON object containing the following fields:
+
+name: The name of the lesson.
+lesson_number: The lesson's number.
+description: A brief description of the lesson.
+goals: An array of strings representing the learning goals of the lesson (e.g., "Fundamentals", "Vocabulary").
+
+Output Format:
+
+The output must be a valid JSON object with the following structure:
+
 {
-  "title": "Lesson Title",
-  "lesson_number": X,
-  "description": "Lesson description",
-  "sections": [
-    {
-      "title": "Section Title",
-      "about": "Section description",
-      "components": ["ComponentName1", "ComponentName2"],
-      "elements": ["list", "paragraph", "dialogue"]
+    "title": "Lesson Title",
+    "lesson_number": 1,
+    "description": "Lesson Description",
+    "sections": [
+        {
+            "title": "Section Title",
+            "about": "Section Description",
+            "components": ["Component1", "Component2"],
+            "elements": ["Element1", "Element2"]
+        },
+        ...
+    ],
+    "vocabulary": {
+        "words": ["word1", "word2", ...],
+        "properties": ["translation", "exampleSentence", "exampleTranslation", "gender"]
     }
-  ]
 }
+
+Detailed Instructions:
+
+title: Create the lesson title by prepending "Lesson [lesson_number]: " to the name field from the input.
+
+description: Use the description field from the input directly.
+
+sections:
+
+Create an "Introduction" section with a generic welcome message in the about field. This section should have empty components and elements arrays.
+
+Based on the goals array in the input, create between 3 and 5 additional sections. Each section should have:
+
+title: A descriptive title for the section.
+
+about: A brief explanation of the section's content.
+
+components: An array of strings representing relevant components (see "Components" below). Choose components that are appropriate for the section's content.
+
+elements: An array of strings representing interactive elements (see "Elements" below).
+
+vocabulary: This is the most crucial part. There is only one vocabulary object in the lesson. The vocabulary must be an object with exactly two keys:
+
+words: An array of strings. These strings should be the vocabulary words themselves (e.g., "hola", "adiós"). Do not create objects for each word. Just list the words as strings. Provide words and not single letters. (Words should be at least 2 characters long).
+
+properties: An array of strings representing the names of the properties that will be associated with each word in a separate data structure (which is not part of this JSON output). This array should always be: ["translation", "exampleSentence", "exampleTranslation", "gender"]. Do not include the actual translations, example sentences, etc., in this JSON.
+
+Components:
+
+Use the following components where appropriate within the sections:
+
+TextToSpeechPlayer: For audio examples.
+TipBox: For important notes or tips.
+Mnemonic: For memory aids.
+VoiceRecorder: For pronunciation practice.
+SentenceBreakdown: For analyzing complex sentences.
+HighlightableText: To highlight key terms.
+WordBuilder: For vocabulary practice (unscrambling letters).
+ConversationBox: For presenting a conversation scenario.
+AudioExercise: For audio exercises.
+
+Elements:
+
+Use the following elements where appropriate within the sections:
+
+table
+list
+
+Strict Rules:
+
+1. The output MUST be valid, well-formatted JSON.
+2. The vocabulary.words array MUST contain only strings (the words themselves), NOT objects.
+3. The vocabulary.properties must be exactly ["translation", "exampleSentence", "exampleTranslation", "gender"]
+4. Adhere to all structural requirements outlined above.
+
+Now, using the following input, generate the corresponding JSON lesson:
+
+
 PROMPT;
     }
 
@@ -398,225 +480,11 @@ Create a comprehensive, educational MDX file following these guidelines.
 PROMPT;
     }
 
-    /**
-     * Extract text segments that need to be converted to speech from an MDX file
-     *
-     * @param string $mdxContent The content of the MDX file
-     * @return array Array of text segments that need audio
-     */
-    protected function extractTextToSpeechContent(string $mdxContent): array
-    {
-        $textToSpeechContent = [];
-        $lessonNumber = 1;
-
-        // Extract lesson number from frontmatter
-        if (preg_match('/lesson_number:\s*(\d+)/', $mdxContent, $matches)) {
-            $lessonNumber = (int) $matches[1];
-        }
-
-        // Extract all TextToSpeechPlayer components
-        preg_match_all('/<TextToSpeechPlayer[^>]*mp3File="[^"]*\/audio\/([^"]+)\.mp3"[^>]*>/', $mdxContent, $matches, PREG_SET_ORDER);
-
-        if (!empty($matches)) {
-            $processedAudioFiles = [];
-
-            foreach ($matches as $match) {
-                $audioFileName = $match[1];
-
-                // Skip if we've already processed this audio file
-                if (in_array($audioFileName, $processedAudioFiles)) {
-                    continue;
-                }
-
-                $processedAudioFiles[] = $audioFileName;
-
-                // Find the text content that should be associated with this audio file
-                $textContent = $this->findTextForAudioFile($mdxContent, $match[0], $audioFileName);
-
-                if ($textContent) {
-                    $textToSpeechContent[] = [
-                        'text' => $textContent,
-                        'audio_file_name' => $audioFileName . '.mp3'
-                    ];
-                }
-            }
-        }
-
-        // If no text was found, extract from other components
-        if (empty($textToSpeechContent)) {
-            // Extract text from HighlightableText components
-            preg_match_all('/<HighlightableText[^>]*>([^<]+)<\/HighlightableText>/', $mdxContent, $highlightMatches);
-            if (!empty($highlightMatches[1])) {
-                foreach ($highlightMatches[1] as $index => $text) {
-                    $textToSpeechContent[] = [
-                        'text' => trim($text),
-                        'audio_file_name' => "highlighted_text_" . ($index + 1) . ".mp3"
-                    ];
-                }
-            }
-
-            // Extract text from VoiceRecorder components
-            preg_match_all('/<VoiceRecorder\s+text="([^"]+)"/', $mdxContent, $voiceMatches);
-            if (!empty($voiceMatches[1])) {
-                foreach ($voiceMatches[1] as $index => $text) {
-                    $textToSpeechContent[] = [
-                        'text' => trim($text),
-                        'audio_file_name' => "voice_" . ($index + 1) . ".mp3"
-                    ];
-                }
-            }
-
-            // Extract text from WordBuilder components
-            preg_match_all('/<WordBuilder\s+targetWord="([^"]+)"/', $mdxContent, $wordMatches);
-            if (!empty($wordMatches[1])) {
-                foreach ($wordMatches[1] as $index => $text) {
-                    $textToSpeechContent[] = [
-                        'text' => trim($text),
-                        'audio_file_name' => "word_" . ($index + 1) . ".mp3"
-                    ];
-                }
-            }
-        }
-
-        return $textToSpeechContent;
-    }
-
-    /**
-     * Find the text that should be converted to speech for a specific audio file
-     *
-     * @param string $mdxContent The content of the MDX file
-     * @param string $component The TextToSpeechPlayer component
-     * @param string $audioFileName The audio file name (without extension)
-     * @return string|null The text to be converted to speech, or null if not found
-     */
-    protected function findTextForAudioFile(string $mdxContent, string $component, string $audioFileName): ?string
-    {
-        $componentPosition = strpos($mdxContent, $component);
-        if ($componentPosition === false) {
-            return null;
-        }
-
-        // Skip components in the introduction section
-        $introPosition = strpos($mdxContent, '## Introducción');
-        $nextSectionPosition = strpos($mdxContent, '##', $introPosition + 2);
-
-        if ($introPosition !== false && $componentPosition > $introPosition && $componentPosition < $nextSectionPosition) {
-            return null;
-        }
-
-        // Check for specific audio file patterns
-        if ($audioFileName === 'welcome') {
-            // Extract the first sentence from the introduction
-            preg_match('/## Introducción\s+([^\.!?]+[\.!?])/', $mdxContent, $introMatch);
-            return !empty($introMatch[1]) ? trim($introMatch[1]) : "Welcome to your lesson!";
-        }
-
-        // Look for a table before the component
-        $contentBefore = substr($mdxContent, 0, $componentPosition);
-        $tableStart = strrpos($contentBefore, '|');
-
-        if ($tableStart !== false) {
-            // Find the beginning of the table
-            $tableBeginning = strrpos(substr($contentBefore, 0, $tableStart), "\n\n");
-            if ($tableBeginning === false) {
-                $tableBeginning = 0;
-            } else {
-                $tableBeginning += 2; // Skip the newlines
-            }
-
-            $table = substr($contentBefore, $tableBeginning, $componentPosition - $tableBeginning);
-
-            if (strpos($table, '|') !== false) {
-                // Extract the target language column (usually the first column)
-                $targetLanguageTexts = [];
-                preg_match_all('/\|\s*([^|]+?)\s*\|/', $table, $tableMatches);
-
-                if (!empty($tableMatches[1])) {
-                    // Skip header and separator rows
-                    $skipRows = 0;
-                    if (strpos($tableMatches[1][1] ?? '', '---') !== false) {
-                        $skipRows = 2; // Skip header and separator
-                    } elseif (strpos($tableMatches[1][0] ?? '', 'Inglés') !== false ||
-                              strpos($tableMatches[1][0] ?? '', 'English') !== false) {
-                        $skipRows = 1; // Skip just header
-                    }
-
-                    for ($i = $skipRows; $i < count($tableMatches[1]); $i++) {
-                        $text = trim($tableMatches[1][$i]);
-                        if (!empty($text) && $text !== '-') {
-                            $targetLanguageTexts[] = $text;
-                        }
-                    }
-
-                    if (!empty($targetLanguageTexts)) {
-                        return implode('... ', $targetLanguageTexts);
-                    }
-                }
-            }
-        }
-
-        // Look for HighlightableText before the component
-        $highlightStart = strrpos($contentBefore, '<HighlightableText');
-        if ($highlightStart !== false) {
-            $highlightEnd = strpos($contentBefore, '</HighlightableText>', $highlightStart);
-            if ($highlightEnd !== false) {
-                $highlightContent = substr($contentBefore, $highlightStart, $highlightEnd - $highlightStart + 20);
-                preg_match('/>([^<]+)<\/HighlightableText>/', $highlightContent, $highlightMatch);
-                if (!empty($highlightMatch[1])) {
-                    return trim($highlightMatch[1]);
-                }
-            }
-        }
-
-        // Look for SentenceBreakdown before the component
-        $sentenceStart = strrpos($contentBefore, '<SentenceBreakdown');
-        if ($sentenceStart !== false) {
-            preg_match('/sentence="([^"]+)"/', substr($contentBefore, $sentenceStart), $sentenceMatch);
-            if (!empty($sentenceMatch[1])) {
-                return trim($sentenceMatch[1]);
-            }
-        }
-
-        // Look for a paragraph or sentence before the component
-        $paragraphEnd = strrpos($contentBefore, "\n\n");
-        if ($paragraphEnd !== false) {
-            $paragraph = trim(substr($contentBefore, $paragraphEnd));
-
-            // Skip markdown headers and component tags
-            if (!empty($paragraph) &&
-                !preg_match('/^#/', $paragraph) &&
-                !preg_match('/^<[a-zA-Z]+/', $paragraph)) {
-
-                // Extract the first sentence in the target language
-                $sentences = preg_split('/[.!?]+/', $paragraph);
-                foreach ($sentences as $sentence) {
-                    $sentence = trim($sentence);
-                    // Check if this sentence contains target language words (simple heuristic)
-                    if (!empty($sentence) &&
-                        !preg_match('/[áéíóúñ¿¡]/i', $sentence) && // Likely not Spanish
-                        preg_match('/[a-zA-Z]{3,}/', $sentence)) { // Has English words
-                        return $sentence;
-                    }
-                }
-
-                // If no clear target language sentence found, return the first non-empty sentence
-                foreach ($sentences as $sentence) {
-                    $sentence = trim($sentence);
-                    if (!empty($sentence)) {
-                        return $sentence;
-                    }
-                }
-            }
-        }
-
-        // If all else fails, use the audio filename as a fallback
-        return str_replace('_', ' ', ucfirst($audioFileName));
-    }
 
     /**
      * Create a prompt for generating the audio JSON
      *
-     * @param array $textToSpeechContent Array of text segments that need audio
+     * @param string $mdxContent The MDX content to generate audio for
      * @param string $targetLanguage The target language code
      * @param int $lessonNumber The lesson number
      * @return string The prompt for generating the audio JSON
