@@ -1,0 +1,457 @@
+[
+  {
+    "level": "beginner",
+    "lessons": [
+      {
+        "name": "Introducción al Alfabeto y Sonidos",
+        "lesson_number": 1,
+        "description": "Familiarízate con el alfabeto inglés y sus sonidos únicos.",
+        "goals": ["Fundamentals", "Vocabulary", "Pronunciation"]
+      },
+      {
+        "name": "Saludos y Presentaciones Básicas",
+        "lesson_number": 2,
+        "description": "Aprende a saludar y presentarte en inglés.",
+        "goals": ["Fundamentals", "Vocabulary", "Other"]
+      },
+      {
+        "name": "Números, Colores y Días de la Semana",
+        "lesson_number": 3,
+        "description": "Vocabulario esencial: números, colores y días de la semana en inglés.",
+        "goals": ["Fundamentals", "Vocabulary"]
+      },
+      {
+        "name": "El Verbo \"To Be\" en Presente Simple",
+        "lesson_number": 4,
+        "description": "Comprende y utiliza el verbo \"to be\" en presente simple para descripciones básicas.",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "Pronombres Personales y Adjetivos Posesivos",
+        "lesson_number": 5,
+        "description": "Aprende los pronombres personales y cómo usar adjetivos posesivos en inglés.",
+        "goals": ["Fundamentals", "Grammar"]
+      },
+      {
+        "name": "Objetos Comunes y Lugares",
+        "lesson_number": 6,
+        "description": "Amplía tu vocabulario con objetos comunes y nombres de lugares.",
+        "goals": ["Vocabulary"]
+      },
+      {
+        "name": "Preguntas Básicas con \"What\", \"Where\", \"Who\"",
+        "lesson_number": 7,
+        "description": "Formular preguntas sencillas utilizando \"what\", \"where\" y \"who\".",
+        "goals": ["Fundamentals", "Grammar", "Other"]
+      },
+      {
+        "name": "Instrucciones Simples y Comandos",
+        "lesson_number": "8",
+        "description": "Entiende y da instrucciones y comandos sencillos en inglés.",
+        "goals": ["Fundamentals", "Other"]
+      },
+      {
+        "name": "Presente Simple de Otros Verbos",
+        "lesson_number": "9",
+        "description": "Utiliza el presente simple con verbos comunes para hablar de rutinas y hábitos.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Beginner",
+        "lesson_number": "10",
+        "description": "Repasa y practica todo lo aprendido en el nivel beginner.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "elementary",
+    "lessons": [
+      {
+        "name": "Repaso de Beginner y Expansión de Saludos",
+        "lesson_number": 1,
+        "description": "Repaso rápido de beginner y aprende saludos más informales y expresiones comunes.",
+        "goals": ["Fundamentals", "Vocabulary", "Other"]
+      },
+      {
+        "name": "Presente Continuo: Acciones en Progreso",
+        "lesson_number": 2,
+        "description": "Describe acciones que están sucediendo ahora usando el presente continuo.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Familia y Amigos: Vocabulario",
+        "lesson_number": 3,
+        "description": "Amplía tu vocabulario relacionado con la familia y las relaciones personales.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Comida y Bebida: Vocabulario y Expresiones",
+        "lesson_number": 4,
+        "description": "Aprende vocabulario sobre comida y bebida, y cómo pedir en un restaurante.",
+        "goals": ["Vocabulary", "Travel", "Other"]
+      },
+      {
+        "name": "Pasado Simple del Verbo \"To Be\"",
+        "lesson_number": 5,
+        "description": "Utiliza el pasado simple del verbo \"to be\" para hablar del pasado.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Pasado Simple de Verbos Regulares",
+        "lesson_number": 6,
+        "description": "Aprende a formar y usar el pasado simple de verbos regulares.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Mi Casa y Mi Entorno",
+        "lesson_number": 7,
+        "description": "Describe tu casa y los objetos que la componen, así como tu entorno.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Preguntas con \"When\", \"Why\", \"How\"",
+        "lesson_number": 8,
+        "description": "Formular preguntas utilizando \"when\", \"why\" y \"how\" para obtener más información.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Conectores Básicos: \"And\", \"But\", \"Or\"",
+        "lesson_number": 9,
+        "description": "Utiliza conectores básicos para unir ideas y frases.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Elementary",
+        "lesson_number": 10,
+        "description": "Repasa y practica todo lo aprendido en el nivel elementary.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "pre-intermediate",
+    "lessons": [
+      {
+        "name": "Repaso de Elementary y Ampliación de Vocabulario Cotidiano",
+        "lesson_number": 1,
+        "description": "Repaso de elementary y expansión del vocabulario para situaciones cotidianas.",
+        "goals": ["Vocabulary"]
+      },
+      {
+        "name": "Presente Perfecto: Experiencias y Resultados",
+        "lesson_number": 2,
+        "description": "Aprende a usar el presente perfecto para hablar de experiencias y resultados recientes.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Pasado Continuo: Acciones en Progreso en el Pasado",
+        "lesson_number": 3,
+        "description": "Describe acciones que estaban sucediendo en un momento específico del pasado.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Planes Futuros con \"Going To\"",
+        "lesson_number": 4,
+        "description": "Habla sobre planes e intenciones futuras utilizando \"going to\".",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Comparativos y Superlativos: Comparando Cosas",
+        "lesson_number": 5,
+        "description": "Aprende a comparar cosas usando comparativos y superlativos.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Viajes y Transporte: Vocabulario y Frases",
+        "lesson_number": 6,
+        "description": "Vocabulario útil para viajar y hablar sobre transporte.",
+        "goals": ["Vocabulary", "Travel"]
+      },
+      {
+        "name": "Hobbies e Intereses: Hablando de Tiempo Libre",
+        "lesson_number": 7,
+        "description": "Describe tus hobbies e intereses y aprende a hablar sobre el tiempo libre.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Expresar Gustos y Disgustos: \"Like\", \"Love\", \"Hate\"",
+        "lesson_number": 8,
+        "description": "Aprende a expresar tus gustos y disgustos de manera más precisa.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Dar y Pedir Indicaciones",
+        "lesson_number": 9,
+        "description": "Aprende a dar y pedir indicaciones para moverte por la ciudad.",
+        "goals": ["Travel", "Other"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Pre-intermediate",
+        "lesson_number": 10,
+        "description": "Repasa y practica todo lo aprendido en el nivel pre-intermediate.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "intermediate",
+    "lessons": [
+      {
+        "name": "Repaso de Pre-intermediate y Vocabulario Temático",
+        "lesson_number": 1,
+        "description": "Repaso de pre-intermediate y expansión de vocabulario por temas.",
+        "goals": ["Vocabulary"]
+      },
+      {
+        "name": "Futuro con \"Will\" y \"Shall\": Predicciones y Decisiones",
+        "lesson_number": 2,
+        "description": "Usa \"will\" y \"shall\" para predicciones futuras y decisiones espontáneas.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Presente Perfecto Continuo: Énfasis en la Duración",
+        "lesson_number": 3,
+        "description": "Enfócate en la duración de acciones que comenzaron en el pasado y continúan ahora con el presente perfecto continuo.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Pasado Perfecto Simple: Acciones Anteriores en el Pasado",
+        "lesson_number": 4,
+        "description": "Describe acciones que sucedieron antes de otro punto en el pasado usando el pasado perfecto simple.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Condicional Cero y Primer Condicional",
+        "lesson_number": 5,
+        "description": "Aprende a usar el condicional cero y primer condicional para situaciones reales y posibles.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Salud y Bienestar: Vocabulario y Consejos",
+        "lesson_number": 6,
+        "description": "Vocabulario relacionado con la salud y consejos para mantenerte sano.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Trabajo y Estudio: Hablando de Profesiones y Educación",
+        "lesson_number": 7,
+        "description": "Describe tu trabajo o estudios y habla sobre diferentes profesiones y sistemas educativos.",
+        "goals": ["Vocabulary", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Expresar Obligación y Permiso: \"Must\", \"Have to\", \"Can\", \"May\"",
+        "lesson_number": 8,
+        "description": "Utiliza modales para expresar obligación, necesidad y permiso.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Reported Speech: Decir lo que Otros Dijeron",
+        "lesson_number": 9,
+        "description": "Aprende a reportar lo que otras personas han dicho.",
+        "goals": ["Grammar", "Other"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Intermediate",
+        "lesson_number": 10,
+        "description": "Repasa y practica todo lo aprendido en el nivel intermediate.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "upper-intermediate",
+    "lessons": [
+      {
+        "name": "Repaso de Intermediate y Ampliación de Gramática",
+        "lesson_number": 1,
+        "description": "Repaso de intermediate y profundización en estructuras gramaticales más complejas.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Segundo y Tercer Condicional: Situaciones Hipotéticas",
+        "lesson_number": 2,
+        "description": "Aprende a usar el segundo y tercer condicional para hablar de situaciones hipotéticas e irreales.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Voz Pasiva: Énfasis en la Acción, No en el Agente",
+        "lesson_number": 3,
+        "description": "Utiliza la voz pasiva para cambiar el enfoque de la oración.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Cláusulas de Relativo: Dando Más Información",
+        "lesson_number": 4,
+        "description": "Aprende a usar cláusulas de relativo para añadir información extra a tus oraciones.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Estilo de Vida y Sociedad: Discusiones y Opiniones",
+        "lesson_number": 5,
+        "description": "Discute temas relacionados con el estilo de vida y la sociedad, expresando opiniones.",
+        "goals": ["Vocabulary", "Cultural Exploration", "Other"]
+      },
+      {
+        "name": "Tecnología y Futuro: Vocabulario y Predicciones",
+        "lesson_number": 6,
+        "description": "Vocabulario sobre tecnología y cómo hablar sobre el futuro de la tecnología.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Conectores Avanzados: \"Although\", \"Despite\", \"However\"",
+        "lesson_number": 7,
+        "description": "Utiliza conectores avanzados para expresar contraste y concesión.",
+        "goals": ["Grammar"]
+      },
+      {
+        "name": "Inversión en Oraciones Condicionales y Preguntas",
+        "lesson_number": 8,
+        "description": "Aprende a invertir el orden de las palabras en condicionales y preguntas para un estilo más formal.",
+        "goals": ["Grammar", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Phrasal Verbs Comunes y su Uso",
+        "lesson_number": 9,
+        "description": "Amplía tu conocimiento de phrasal verbs comunes y cómo utilizarlos correctamente.",
+        "goals": ["Vocabulary", "Other"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Upper-intermediate",
+        "lesson_number": 10,
+        "description": "Repasa y practica todo lo aprendido en el nivel upper-intermediate.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "advanced",
+    "lessons": [
+      {
+        "name": "Repaso de Upper-intermediate y Estilo Formal e Informal",
+        "lesson_number": 1,
+        "description": "Repaso de upper-intermediate y diferenciación entre estilo formal e informal en inglés.",
+        "goals": ["Other", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Discurso Directo e Indirecto Avanzado",
+        "lesson_number": 2,
+        "description": "Profundiza en el discurso directo e indirecto, incluyendo casos complejos y excepciones.",
+        "goals": ["Grammar", "Business Communication", "Academic Study"]
+      },
+      {
+        "name": "Uso Avanzado de Tiempos Verbales",
+        "lesson_number": 3,
+        "description": "Domina el uso preciso de todos los tiempos verbales en contextos complejos.",
+        "goals": ["Grammar", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Modal Verbs de Deducción y Especulación",
+        "lesson_number": 4,
+        "description": "Aprende a usar modal verbs para expresar deducción y especulación sobre el presente y el pasado.",
+        "goals": ["Grammar", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Cultura y Costumbres Inglesas",
+        "lesson_number": 5,
+        "description": "Explora aspectos de la cultura y costumbres de países de habla inglesa.",
+        "goals": ["Cultural Exploration"]
+      },
+      {
+        "name": "Literatura y Cine en Inglés",
+        "lesson_number": 6,
+        "description": "Introducción a la literatura y el cine en inglés para mejorar la comprensión y el vocabulario.",
+        "goals": ["Cultural Exploration", "Vocabulary", "Academic Study"]
+      },
+      {
+        "name": "Argumentación y Debate: Expresando Puntos de Vista Complejos",
+        "lesson_number": 7,
+        "description": "Desarrolla habilidades para argumentar y debatir, expresando puntos de vista complejos y matizados.",
+        "goals": ["Business Communication", "Academic Study", "Other"]
+      },
+      {
+        "name": "Writing Formal y Académico",
+        "lesson_number": 8,
+        "description": "Mejora tus habilidades de escritura formal y académica en inglés.",
+        "goals": ["Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Idioms y Expresiones Idiomáticas Avanzadas",
+        "lesson_number": 9,
+        "description": "Amplía tu repertorio de idioms y expresiones idiomáticas avanzadas para un inglés más natural.",
+        "goals": ["Vocabulary", "Other", "Cultural Exploration"]
+      },
+      {
+        "name": "Repaso y Práctica del Nivel Advanced",
+        "lesson_number": 10,
+        "description": "Repasa y practica todo lo aprendido en el nivel advanced.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  },
+  {
+    "level": "proficiency",
+    "lessons": [
+      {
+        "name": "Repaso de Advanced y Perfeccionamiento Lingüístico",
+        "lesson_number": 1,
+        "description": "Repaso de advanced y enfoque en el perfeccionamiento de la precisión y fluidez lingüística.",
+        "goals": ["Fundamentals", "Academic Study", "Business Communication"]
+      },
+      {
+        "name": "Análisis Lingüístico y Estilístico",
+        "lesson_number": 2,
+        "description": "Desarrolla habilidades para analizar el lenguaje en profundidad, incluyendo aspectos estilísticos.",
+        "goals": ["Academic Study", "Other"]
+      },
+      {
+        "name": "Traducción e Interpretación Avanzada",
+        "lesson_number": 3,
+        "description": "Práctica de traducción e interpretación de textos complejos y variados.",
+        "goals": ["Academic Study", "Business Communication", "Other"]
+      },
+      {
+        "name": "Inglés en Contextos Profesionales Específicos",
+        "lesson_number": 4,
+        "description": "Explora el inglés utilizado en diferentes contextos profesionales especializados.",
+        "goals": ["Business Communication", "Academic Study", "Other"]
+      },
+      {
+        "name": "Comunicación Intercultural Avanzada",
+        "lesson_number": 5,
+        "description": "Desarrolla una comprensión profunda de la comunicación intercultural y la competencia comunicativa.",
+        "goals": ["Cultural Exploration", "Business Communication", "Other"]
+      },
+      {
+        "name": "Creatividad y Expresión Personal en Inglés",
+        "lesson_number": 6,
+        "description": "Fomenta la creatividad y la expresión personal a través del inglés, incluyendo escritura creativa y oral.",
+        "goals": ["Other", "Cultural Exploration"]
+      },
+      {
+        "name": "Comprensión Auditiva Avanzada: Acentos y Dialectos",
+        "lesson_number": 7,
+        "description": "Mejora la comprensión auditiva con exposición a diversos acentos y dialectos del inglés.",
+        "goals": ["Other", "Academic Study", "Cultural Exploration"]
+      },
+      {
+        "name": "Lectura Crítica y Análisis de Textos Complejos",
+        "lesson_number": 8,
+        "description": "Desarrolla habilidades de lectura crítica y análisis de textos académicos y literarios complejos.",
+        "goals": ["Academic Study", "Other"]
+      },
+      {
+        "name": "Presentaciones Orales Avanzadas y Retórica",
+        "lesson_number": 9,
+        "description": "Perfecciona las habilidades de presentación oral, incluyendo técnicas de retórica y persuasión.",
+        "goals": ["Business Communication", "Academic Study", "Other"]
+      },
+      {
+        "name": "Repaso Final y Evaluación del Nivel Proficiency",
+        "lesson_number": 10,
+        "description": "Repaso final de todos los aspectos del nivel proficiency y evaluación completa.",
+        "goals": ["Fundamentals"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,124 @@
+{
+    "language_code": "en",
+    "country_code": "US",
+    "lesson_number": 2,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "data": [
+        {
+            "text": "Good morning",
+            "audio_file_name": "good_morning.mp3"
+        },
+        {
+            "text": "Good afternoon",
+            "audio_file_name": "good_afternoon.mp3"
+        },
+        {
+            "text": "Good evening",
+            "audio_file_name": "good_evening.mp3"
+        },
+        {
+            "text": "Good night",
+            "audio_file_name": "good_night.mp3"
+        },
+        {
+            "text": "Hello",
+            "audio_file_name": "hello.mp3"
+        },
+        {
+            "text": "Hi",
+            "audio_file_name": "hi.mp3"
+        },
+        {
+            "text": "Hey",
+            "audio_file_name": "hey.mp3"
+        },
+        {
+            "text": "What's up?",
+            "audio_file_name": "whats_up.mp3"
+        },
+        {
+            "text": "Hello, my name is John. What's your name?",
+            "audio_file_name": "intro_1a.mp3"
+        },
+        {
+            "text": "Hi John, I'm Maria. Nice to meet you.",
+            "audio_file_name": "intro_1b.mp3"
+        },
+        {
+            "text": "Nice to meet you too, Maria.",
+            "audio_file_name": "intro_1c.mp3"
+        },
+        {
+            "text": "Hi Sarah, how are you?",
+            "audio_file_name": "howareyou_1a.mp3"
+        },
+        {
+            "text": "I'm fine, thank you. And you?",
+            "audio_file_name": "howareyou_1b.mp3"
+        },
+        {
+            "text": "I'm good, thanks.",
+            "audio_file_name": "howareyou_1c.mp3"
+        },
+        {
+            "text": "Goodbye",
+            "audio_file_name": "goodbye.mp3"
+        },
+        {
+            "text": "Bye",
+            "audio_file_name": "bye.mp3"
+        },
+        {
+            "text": "See you later",
+            "audio_file_name": "see_you_later.mp3"
+        },
+        {
+            "text": "Have a nice day",
+            "audio_file_name": "have_a_nice_day.mp3"
+        },
+        {
+            "text": "Good morning! My name is David. What's your name?",
+            "audio_file_name": "full_conv_1a.mp3"
+        },
+        {
+            "text": "Good morning, David. I'm Laura. Nice to meet you.",
+            "audio_file_name": "full_conv_1b.mp3"
+        },
+        {
+            "text": "Nice to meet you too, Laura. How are you today?",
+            "audio_file_name": "full_conv_1c.mp3"
+        },
+        {
+            "text": "I'm fine, thank you. And you?",
+            "audio_file_name": "full_conv_1d.mp3"
+        },
+        {
+            "text": "I'm good, thanks. Have a nice day!",
+            "audio_file_name": "full_conv_1e.mp3"
+        },
+        {
+            "text": "You too. Goodbye!",
+            "audio_file_name": "full_conv_1f.mp3"
+        },
+        {
+            "text": "Hello, my name is...",
+            "audio_file_name": "ex_hello_my_name.mp3"
+        },
+        {
+            "text": "Nice to meet you",
+            "audio_file_name": "ex_nice_to_meet.mp3"
+        },
+        {
+            "text": "How are you today?",
+            "audio_file_name": "ex_how_are_you.mp3"
+        },
+        {
+            "text": "I'm fine, thank you",
+            "audio_file_name": "ex_im_fine.mp3"
+        },
+        {
+            "text": "See you later",
+            "audio_file_name": "ex_see_you_later.mp3"
+        }
+    ]
+}

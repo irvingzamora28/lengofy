@@ -106,10 +106,16 @@
     "auth_layout": {
         "dashboard": "Dashboard",
         "profile": "Profile",
+        "settings": "Settings",
         "logout": "Logout",
         "logout_guest": "Logout Guest",
         "light_mode": "Light Mode",
-        "dark_mode": "Dark Mode"
+        "dark_mode": "Dark Mode",
+        "home": "Home",
+        "games": "Games",
+        "stats": "Stats",
+        "leaderboard": "Leaderboard",
+        "lessons": "Lessons"
     },
     "public_layout": {
         "dashboard": "Dashboard",

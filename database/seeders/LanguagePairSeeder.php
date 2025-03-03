@@ -15,6 +15,7 @@ class LanguagePairSeeder extends Seeder
         // Create language pairs for initial supported combinations
         $supportedPairs = [
             ['source' => 'en', 'target' => 'de', 'active' => true, 'rules' => ['gender_options' => ['der', 'die', 'das']]],
+            ['source' => 'en', 'target' => 'es', 'active' => true, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],
             ['source' => 'es', 'target' => 'de', 'active' => true, 'rules' => ['gender_options' => ['der', 'die', 'das']]],
             ['source' => 'de', 'target' => 'en', 'active' => false, 'rules' => ['gender_options' => []]],
             ['source' => 'de', 'target' => 'es', 'active' => false, 'rules' => ['gender_options' => ['el', 'la', 'los', 'las']]],

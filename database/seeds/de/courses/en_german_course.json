@@ -1,0 +1,481 @@
+[
+    {
+        "level": "beginner",
+        "lessons": [
+            {
+                "name": "German Alphabet and Pronunciation",
+                "lesson_number": 1,
+                "description": "Learn the German alphabet, including umlauts and the \"ß\", and basic pronunciation rules.",
+                "goals": ["Fundamentals", "Vocabulary", "Other"]
+            },
+            {
+                "name": "Greetings and Introductions in German",
+                "lesson_number": 2,
+                "description": "Learn formal and informal greetings and how to introduce yourself and others in German.",
+                "goals": ["Fundamentals", "Vocabulary", "Travel"]
+            },
+            {
+                "name": "Numbers, Colors, and Days of the Week in German",
+                "lesson_number": 3,
+                "description": "Essential vocabulary: numbers, colors, days of the week, and months in German.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Basic German Grammar: Nouns and Articles",
+                "lesson_number": 4,
+                "description": "Introduction to German nouns, genders (der, die, das), and articles (definite and indefinite).",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "The Verb \"Sein\" (To Be) in Present Tense",
+                "lesson_number": 5,
+                "description": "Learn the conjugation of the verb \"sein\" (to be) in the present tense and basic uses.",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Personal Pronouns and Basic Sentence Structure",
+                "lesson_number": 6,
+                "description": "Learn German personal pronouns and how to form simple sentences in German (subject-verb-object).",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Basic Questions in German",
+                "lesson_number": 7,
+                "description": "Learn how to ask basic questions in German using question words (Wer, Was, Wo, Wann, Warum, Wie).",
+                "goals": ["Fundamentals", "Grammar", "Travel"]
+            },
+            {
+                "name": "Vocabulary: Family and Home in German",
+                "lesson_number": 8,
+                "description": "Expand your vocabulary with words related to family members and parts of the home in German.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "Simple Imperatives in German",
+                "lesson_number": 9,
+                "description": "Learn how to give simple commands and instructions in German using the imperative form.",
+                "goals": ["Grammar", "Travel", "Other"]
+            },
+            {
+                "name": "Beginner German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the beginner German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "elementary",
+        "lessons": [
+            {
+                "name": "Review of Beginner and Expanded Greetings/Farewells",
+                "lesson_number": 1,
+                "description": "Review beginner concepts and learn more diverse greetings, farewells, and polite phrases in German.",
+                "goals": ["Fundamentals", "Vocabulary", "Travel"]
+            },
+            {
+                "name": "Regular Verb Conjugation in Present Tense",
+                "lesson_number": 2,
+                "description": "Learn the conjugation patterns of regular German verbs in the present tense.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Accusative Case: Direct Objects",
+                "lesson_number": 3,
+                "description": "Introduction to the accusative case and how it affects articles and pronouns for direct objects.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Dative Case: Indirect Objects",
+                "lesson_number": 4,
+                "description": "Introduction to the dative case and how it affects articles and pronouns for indirect objects.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Food and Drink in German",
+                "lesson_number": 5,
+                "description": "Expand your vocabulary related to food and drinks, and learn how to order in a restaurant in German.",
+                "goals": ["Vocabulary", "Travel"]
+            },
+            {
+                "name": "Modal Verbs: \"Können\" and \"Müssen\" (Can/Must)",
+                "lesson_number": 6,
+                "description": "Introduction to the modal verbs \"können\" (can) and \"müssen\" (must) and their uses.",
+                "goals": ["Grammar", "Other"]
+            },
+            {
+                "name": "Prepositions of Place with Dative and Accusative",
+                "lesson_number": 7,
+                "description": "Learn prepositions of place and when to use the dative or accusative case with them.",
+                "goals": ["Grammar", "Travel"]
+            },
+            {
+                "name": "Describing People in German",
+                "lesson_number": 8,
+                "description": "Learn vocabulary to describe people's appearance and basic personality traits in German.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "Past Tense: \"Perfekt\" with \"Haben\"",
+                "lesson_number": 9,
+                "description": "Introduction to the \"Perfekt\" (present perfect) tense using the auxiliary verb \"haben\".",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Elementary German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the elementary German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "pre-intermediate",
+        "lessons": [
+            {
+                "name": "Review of Elementary and Daily Routines in German",
+                "lesson_number": 1,
+                "description": "Review elementary concepts and learn vocabulary to talk about daily routines and schedules in German.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Irregular Verb Conjugation in Present Tense",
+                "lesson_number": 2,
+                "description": "Learn the conjugation patterns of common irregular German verbs in the present tense.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Genitive Case: Possession",
+                "lesson_number": 3,
+                "description": "Introduction to the genitive case and how it indicates possession in German.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Two-Way Prepositions (Wechselpräpositionen)",
+                "lesson_number": 4,
+                "description": "Learn two-way prepositions and understand when to use the dative or accusative case with them based on motion or location.",
+                "goals": ["Grammar", "Travel"]
+            },
+            {
+                "name": "Vocabulary: Hobbies and Free Time Activities in German",
+                "lesson_number": 5,
+                "description": "Expand your vocabulary related to hobbies and leisure activities in German.",
+                "goals": ["Vocabulary", "Other", "Cultural Exploration"]
+            },
+            {
+                "name": "Modal Verbs: \"Wollen\" and \"Sollen\" (Want/Should)",
+                "lesson_number": 6,
+                "description": "Introduction to the modal verbs \"wollen\" (want) and \"sollen\" (should) and their uses.",
+                "goals": ["Grammar", "Other"]
+            },
+            {
+                "name": "Past Tense: \"Perfekt\" with \"Sein\"",
+                "lesson_number": 7,
+                "description": "Learn the \"Perfekt\" (present perfect) tense using the auxiliary verb \"sein\" for verbs of motion and change of state.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Comparative and Superlative Adjectives",
+                "lesson_number": 8,
+                "description": "Learn how to form and use comparative and superlative adjectives in German to compare things.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Asking for and Giving Directions in German",
+                "lesson_number": 9,
+                "description": "Practice asking for and giving directions in German using appropriate vocabulary and phrases.",
+                "goals": ["Travel", "Other"]
+            },
+            {
+                "name": "Pre-intermediate German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the pre-intermediate German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "intermediate",
+        "lessons": [
+            {
+                "name": "Review of Pre-intermediate and Thematic Vocabulary Expansion",
+                "lesson_number": 1,
+                "description": "Review pre-intermediate concepts and expand thematic vocabulary in various areas of daily life in German.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Past Tense: \"Präteritum\" (Simple Past)",
+                "lesson_number": 2,
+                "description": "Introduction to the \"Präteritum\" (simple past) tense and its usage, especially for \"sein\" and \"haben\" and modal verbs.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Relative Clauses in Nominative and Accusative",
+                "lesson_number": 3,
+                "description": "Learn how to form relative clauses in the nominative and accusative cases to provide more information.",
+                "goals": ["Grammar", "Academic Study"]
+            },
+            {
+                "name": "Future Tense: \"Futur I\"",
+                "lesson_number": 4,
+                "description": "Introduction to the \"Futur I\" (future tense) and how to express future actions and plans in German.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Travel and Accommodation in German (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary related to travel, accommodation, and booking arrangements in German.",
+                "goals": ["Vocabulary", "Travel"]
+            },
+            {
+                "name": "Modal Verbs in Past Tense (\"Präteritum\")",
+                "lesson_number": 6,
+                "description": "Learn how to use modal verbs in the \"Präteritum\" (simple past) tense to express past abilities, obligations, etc.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Adjective Endings: All Cases and Genders",
+                "lesson_number": 7,
+                "description": "Master adjective endings in all four cases (nominative, accusative, dative, genitive) and for all genders and noun types.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Work and Study in German",
+                "lesson_number": 8,
+                "description": "Expand your vocabulary related to work environments, professions, and academic studies in German.",
+                "goals": [
+                    "Vocabulary",
+                    "Business Communication",
+                    "Academic Study"
+                ]
+            },
+            {
+                "name": "\"Wenn\" and \"Falls\" Clauses (Conditional Sentences)",
+                "lesson_number": 9,
+                "description": "Introduction to conditional sentences using \"wenn\" and \"falls\" (if) and their structure in German.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Intermediate German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the intermediate German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "upper-intermediate",
+        "lessons": [
+            {
+                "name": "Review of Intermediate and Complex Grammar Structures",
+                "lesson_number": 1,
+                "description": "Review intermediate concepts and introduce more complex grammatical structures and sentence constructions in German.",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Relative Clauses in Dative and Genitive",
+                "lesson_number": 2,
+                "description": "Learn how to form relative clauses in the dative and genitive cases for more complex sentence structures.",
+                "goals": ["Grammar", "Academic Study"]
+            },
+            {
+                "name": "Passive Voice in Present and Past Tense",
+                "lesson_number": 3,
+                "description": "Learn how to use the passive voice (Passiv) in both present and past tenses in German.",
+                "goals": ["Grammar", "Academic Study"]
+            },
+            {
+                "name": "Subjunctive Mood II (Konjunktiv II): Hypothetical Situations",
+                "lesson_number": 4,
+                "description": "Introduction to the Subjunctive Mood II (Konjunktiv II) for expressing hypothetical situations and polite requests.",
+                "goals": ["Grammar", "Other"]
+            },
+            {
+                "name": "Vocabulary: Business and Finance in German (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary related to business, finance, and economics in German for professional contexts.",
+                "goals": ["Vocabulary", "Business Communication"]
+            },
+            {
+                "name": "\"Damit\" and \"Um...zu\" Clauses (Purpose Clauses)",
+                "lesson_number": 6,
+                "description": "Learn how to form purpose clauses using \"damit\" and \"um...zu\" to express the purpose of an action.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Prepositions with Genitive Case",
+                "lesson_number": 7,
+                "description": "Learn common prepositions that always take the genitive case and practice their usage.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Technology and Innovation in German (Advanced)",
+                "lesson_number": 8,
+                "description": "Expand and refine your vocabulary related to technology, innovation, and digital topics in German.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "Reported Speech (Indirect Speech) in German",
+                "lesson_number": 9,
+                "description": "Learn how to use reported speech (indirect speech - Indirekte Rede) to report what others have said in German.",
+                "goals": ["Grammar", "Business Communication"]
+            },
+            {
+                "name": "Upper-intermediate German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the upper-intermediate German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "advanced",
+        "lessons": [
+            {
+                "name": "Review of Upper-intermediate and Formal German",
+                "lesson_number": 1,
+                "description": "Review upper-intermediate concepts and focus on formal German language usage, including register and style.",
+                "goals": [
+                    "Fundamentals",
+                    "Business Communication",
+                    "Academic Study"
+                ]
+            },
+            {
+                "name": "Subjunctive Mood I (Konjunktiv I): Indirect Speech in Detail",
+                "lesson_number": 2,
+                "description": "Deepen your understanding of Subjunctive Mood I (Konjunktiv I) and its specific use in indirect speech.",
+                "goals": ["Grammar", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Noun-Verb-Verbindungen (Noun-Verb Collocations)",
+                "lesson_number": 3,
+                "description": "Learn common and important noun-verb collocations (Noun-Verb-Verbindungen) to enhance fluency and natural German expression.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "\"Obwohl\", \"Trotzdem\", \"Dennoch\" (Contrast Connectors)",
+                "lesson_number": 4,
+                "description": "Master the use of advanced connectors like \"obwohl,\" \"trotzdem,\" and \"dennoch\" (although, nevertheless) to express contrast.",
+                "goals": ["Grammar", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Vocabulary: Current Events and Global Issues in German (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary for discussing current events, global issues, and political topics in German.",
+                "goals": [
+                    "Vocabulary",
+                    "Cultural Exploration",
+                    "Academic Study"
+                ]
+            },
+            {
+                "name": "\"Indirekte Fragen\" (Indirect Questions)",
+                "lesson_number": 6,
+                "description": "Learn how to formulate indirect questions (Indirekte Fragen) for a more polite and formal style of asking questions.",
+                "goals": ["Grammar", "Business Communication", "Academic Study"]
+            },
+            {
+                "name": "Sentence Adverbs and Modal Particles",
+                "lesson_number": 7,
+                "description": "Introduction to sentence adverbs (Satzadverbien) and modal particles (Modalpartikeln) and their subtle effects on meaning.",
+                "goals": ["Grammar", "Other"]
+            },
+            {
+                "name": "Vocabulary: Academic and Professional Writing in German",
+                "lesson_number": 8,
+                "description": "Develop specialized vocabulary for academic and professional writing in German, including essay and report writing.",
+                "goals": [
+                    "Vocabulary",
+                    "Academic Study",
+                    "Business Communication"
+                ]
+            },
+            {
+                "name": "German Idioms and Figurative Language",
+                "lesson_number": 9,
+                "description": "Explore and learn common German idioms and figurative language to understand and use more nuanced and idiomatic German.",
+                "goals": ["Vocabulary", "Cultural Exploration", "Other"]
+            },
+            {
+                "name": "Advanced German Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the advanced German level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "proficiency",
+        "lessons": [
+            {
+                "name": "Review of Advanced and Linguistic Refinement in German",
+                "lesson_number": 1,
+                "description": "Review advanced concepts and focus on linguistic refinement, precision, and stylistic nuance in German.",
+                "goals": [
+                    "Fundamentals",
+                    "Academic Study",
+                    "Business Communication"
+                ]
+            },
+            {
+                "name": "German Phonetics and Advanced Pronunciation Practice",
+                "lesson_number": 2,
+                "description": "Deepen your understanding of German phonetics and practice advanced pronunciation, including regional variations.",
+                "goals": ["Other", "Cultural Exploration"]
+            },
+            {
+                "name": "Advanced German Text Analysis and Interpretation",
+                "lesson_number": 3,
+                "description": "Develop advanced skills in German text analysis and interpretation of complex literary and academic texts.",
+                "goals": ["Academic Study", "Other"]
+            },
+            {
+                "name": "German for Specific Professional Purposes (Business, Legal, Medical)",
+                "lesson_number": 4,
+                "description": "Explore specialized German vocabulary and communication styles for specific professional fields (business, legal, medical).",
+                "goals": ["Business Communication", "Academic Study", "Other"]
+            },
+            {
+                "name": "German Cultural Studies and Intercultural Communication",
+                "lesson_number": 5,
+                "description": "Study aspects of German culture, history, and society and develop intercultural communication competence.",
+                "goals": [
+                    "Cultural Exploration",
+                    "Business Communication",
+                    "Other"
+                ]
+            },
+            {
+                "name": "Creative Writing and Stylistics in German",
+                "lesson_number": 6,
+                "description": "Engage in creative writing exercises and explore German stylistics to enhance personal expression in German.",
+                "goals": ["Other", "Cultural Exploration"]
+            },
+            {
+                "name": "Advanced German Listening Comprehension: Authentic Materials",
+                "lesson_number": 7,
+                "description": "Improve advanced listening comprehension skills using authentic German materials (news, podcasts, lectures, films).",
+                "goals": ["Other", "Academic Study", "Cultural Exploration"]
+            },
+            {
+                "name": "German Rhetoric and Presentation Skills (Advanced)",
+                "lesson_number": 8,
+                "description": "Refine German rhetoric and presentation skills for persuasive and effective communication in formal settings.",
+                "goals": ["Business Communication", "Academic Study", "Other"]
+            },
+            {
+                "name": "Translation and Interpretation German-English (Advanced)",
+                "lesson_number": 9,
+                "description": "Develop advanced translation and interpretation skills between German and English with complex texts and contexts.",
+                "goals": ["Other", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Proficiency German Level Final Review and Assessment",
+                "lesson_number": 10,
+                "description": "Final review of all aspects of the proficiency German level and comprehensive assessment.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    }
+]

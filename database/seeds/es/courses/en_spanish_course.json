@@ -1,0 +1,481 @@
+[
+    {
+        "level": "beginner",
+        "lessons": [
+            {
+                "name": "Spanish Alphabet and Pronunciation",
+                "lesson_number": 1,
+                "description": "Learn the Spanish alphabet and basic pronunciation rules, including vowel and consonant sounds.",
+                "goals": ["Fundamentals", "Vocabulary", "Other"]
+            },
+            {
+                "name": "Greetings and Introductions in Spanish",
+                "lesson_number": 2,
+                "description": "Learn formal and informal greetings and how to introduce yourself and others in Spanish.",
+                "goals": ["Fundamentals", "Vocabulary", "Travel"]
+            },
+            {
+                "name": "Numbers, Colors, and Days of the Week in Spanish",
+                "lesson_number": 3,
+                "description": "Essential vocabulary: numbers, colors, days of the week, and months in Spanish.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Basic Spanish Grammar: Nouns and Articles",
+                "lesson_number": 4,
+                "description": "Introduction to Spanish nouns, gender (masculine and feminine), and articles (definite and indefinite).",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "The Verb \"Ser\" (To Be) in Present Tense",
+                "lesson_number": 5,
+                "description": "Learn the conjugation of the verb \"ser\" (to be - permanent characteristics) in the present tense and basic uses.",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Personal Pronouns and Basic Sentence Structure",
+                "lesson_number": 6,
+                "description": "Learn Spanish personal pronouns and how to form simple sentences (subject-verb-object).",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Basic Questions in Spanish",
+                "lesson_number": 7,
+                "description": "Learn how to ask basic questions using question words (Quién, Qué, Dónde, Cuándo, Por qué, Cómo).",
+                "goals": ["Fundamentals", "Grammar", "Travel"]
+            },
+            {
+                "name": "Vocabulary: Family and Home in Spanish",
+                "lesson_number": 8,
+                "description": "Expand your vocabulary with words related to family members and parts of the home.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "Simple Commands (Informal Tú)",
+                "lesson_number": 9,
+                "description": "Learn how to give simple commands and instructions using the informal \"tú\" form.",
+                "goals": ["Grammar", "Travel", "Other"]
+            },
+            {
+                "name": "Beginner Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the beginner Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "elementary",
+        "lessons": [
+            {
+                "name": "Review of Beginner and Expanded Greetings/Farewells",
+                "lesson_number": 1,
+                "description": "Review beginner concepts and learn more diverse greetings, farewells, and polite phrases.",
+                "goals": ["Fundamentals", "Vocabulary", "Travel"]
+            },
+            {
+                "name": "Regular -AR Verb Conjugation in Present Tense",
+                "lesson_number": 2,
+                "description": "Learn the conjugation patterns of regular -AR verbs in the present tense.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Regular -ER and -IR Verb Conjugation",
+                "lesson_number": 3,
+                "description": "Learn the conjugation patterns of regular -ER and -IR verbs in the present tense.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "The Verb \"Estar\" (To Be) in Present Tense",
+                "lesson_number": 4,
+                "description": "Learn the conjugation of \"estar\" (to be - temporary states and location) and its uses.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Food and Drink in Spanish",
+                "lesson_number": 5,
+                "description": "Expand your vocabulary related to food and drinks, and learn how to order in a restaurant.",
+                "goals": ["Vocabulary", "Travel"]
+            },
+            {
+                "name": "Adjectives: Agreement and Placement",
+                "lesson_number": 6,
+                "description": "Learn how to use adjectives, including agreement in gender and number with nouns.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Direct Object Pronouns",
+                "lesson_number": 7,
+                "description": "Introduction to direct object pronouns (me, te, lo, la, nos, os, los, las).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Describing People in Spanish",
+                "lesson_number": 8,
+                "description": "Learn vocabulary to describe people's appearance and basic personality traits.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+                "name": "Present Progressive Tense (Estar + Gerund)",
+                "lesson_number": 9,
+                "description": "Learn how to form the present progressive tense to describe actions happening now.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Elementary Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the elementary Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+       {
+        "level": "pre-intermediate",
+        "lessons": [
+            {
+                "name": "Review of Elementary and Daily Routines",
+                "lesson_number": 1,
+                "description": "Review elementary concepts and learn vocabulary to talk about daily routines and schedules.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Stem-Changing Verbs in Present Tense",
+                "lesson_number": 2,
+                "description": "Learn the conjugation patterns of common stem-changing verbs (e.g., e-ie, o-ue, e-i).",
+                "goals": ["Grammar"]
+            },
+           {
+                "name": "Reflexive Verbs and Pronouns",
+                "lesson_number": 3,
+                "description": "Introduction to reflexive verbs and reflexive pronouns (me, te, se, nos, os, se).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Indirect Object Pronouns",
+                "lesson_number": 4,
+                "description": "Learn how to use indirect object pronouns (me, te, le, nos, os, les).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Hobbies and Free Time Activities",
+                "lesson_number": 5,
+                "description": "Expand your vocabulary related to hobbies and leisure activities.",
+                "goals": ["Vocabulary", "Other", "Cultural Exploration"]
+            },
+            {
+                "name": "The Preterite Tense of Regular Verbs",
+                "lesson_number": 6,
+                "description": "Introduction to the preterite tense (past simple) for regular -AR, -ER, and -IR verbs.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Comparatives and Superlatives",
+                "lesson_number": 7,
+                "description": "Learn how to form and use comparative and superlative structures.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "The Verb \"Gustar\" and Similar Verbs",
+                "lesson_number": 8,
+                "description": "Learn how to use \"gustar\" and other verbs that function similarly (e.g., encantar, interesar).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Asking for and Giving Directions",
+                "lesson_number": 9,
+                "description": "Practice asking for and giving directions using appropriate vocabulary and phrases.",
+                "goals": ["Travel", "Other"]
+            },
+            {
+                "name": "Pre-intermediate Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the pre-intermediate Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+    {
+        "level": "intermediate",
+        "lessons": [
+            {
+                "name": "Review of Pre-intermediate and Thematic Vocabulary Expansion",
+                "lesson_number": 1,
+                "description": "Review pre-intermediate concepts and expand thematic vocabulary in various areas of daily life.",
+                "goals": ["Fundamentals", "Vocabulary"]
+            },
+            {
+                "name": "Preterite Tense of Irregular Verbs",
+                "lesson_number": 2,
+                "description": "Learn the conjugation of common irregular verbs in the preterite tense.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Imperfect Tense: Uses and Conjugation",
+                "lesson_number": 3,
+                "description": "Introduction to the imperfect tense (past habitual actions, descriptions).",
+                "goals": ["Grammar", "Academic Study"]
+            },
+            {
+                "name": "Preterite vs. Imperfect: Contrasting Past Tenses",
+                "lesson_number": 4,
+                "description": "Learn when to use the preterite and imperfect tenses based on context.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Travel and Accommodation (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary related to travel, accommodation, and booking arrangements.",
+                "goals": ["Vocabulary", "Travel"]
+            },
+            {
+              "name": "Double Object Pronouns",
+              "lesson_number": 6,
+              "description": "Learn to combine direct and indirect object pronouns in the same sentence. Focus on the placement and order of these pronouns, including the use of 'se' when 'le' or 'les' is followed by 'lo', 'la', 'los', or 'las'.",
+              "goals": ["Grammar"]
+            },
+            {
+                "name": "Formal Commands (Usted/Ustedes)",
+                "lesson_number": 7,
+                "description": "Learn how to form and use formal commands (using the subjunctive mood).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Work and Study in Spanish",
+                "lesson_number": 8,
+                "description": "Expand your vocabulary related to work environments, professions, and academic studies.",
+                "goals": [
+                    "Vocabulary",
+                    "Business Communication",
+                    "Academic Study"
+                ]
+            },
+            {
+                "name": "Introduction to the Subjunctive Mood (Present)",
+                "lesson_number": 9,
+                "description": "Learn the basic concepts and uses of the present subjunctive (doubt, desire, uncertainty).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Intermediate Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the intermediate Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+     {
+        "level": "upper-intermediate",
+        "lessons": [
+            {
+                "name": "Review of Intermediate and Complex Grammar Structures",
+                "lesson_number": 1,
+                "description": "Review intermediate concepts and introduce more complex grammatical structures and sentence constructions.",
+                "goals": ["Fundamentals", "Grammar"]
+            },
+            {
+                "name": "Subjunctive with Conjunctions (e.g., para que, antes de que)",
+                "lesson_number": 2,
+                "description": "Learn how to use the subjunctive after specific conjunctions.",
+                "goals": ["Grammar", "Academic Study"]
+            },
+            {
+                "name": "Future Tense: Regular and Irregular Verbs",
+                "lesson_number": 3,
+                "description": "Learn how to form and use the future tense to talk about future actions.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Conditional Tense: Regular and Irregular Verbs",
+                "lesson_number": 4,
+                "description": "Learn how to form and use the conditional tense to talk about hypothetical situations.",
+                "goals": ["Grammar", "Other"]
+            },
+             {
+                "name": "Vocabulary: Business and Finance (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary related to business, finance, and economics for professional contexts.",
+                "goals": ["Vocabulary", "Business Communication"]
+            },
+            {
+                "name": "Subjunctive with Impersonal Expressions",
+                "lesson_number": 6,
+                "description": "Learn how to use the subjunctive with impersonal expressions (e.g., es importante que).",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Past Subjunctive (Imperfect Subjunctive)",
+                "lesson_number": 7,
+                "description": "Introduction to the past subjunctive and its uses.",
+                "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Technology and Innovation in Spanish (Advanced)",
+                "lesson_number": 8,
+                "description": "Expand and refine your vocabulary related to technology, innovation, and digital topics.",
+                "goals": ["Vocabulary", "Other"]
+            },
+            {
+              "name": "Passive Voice",
+              "lesson_number": 9,
+              "description": "Learn how to use the passive voice (ser + past participle) in Spanish.",
+              "goals": ["Grammar"]
+            },
+            {
+                "name": "Upper-intermediate Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the upper-intermediate Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+        {
+        "level": "advanced",
+        "lessons": [
+             {
+                "name": "Review of Upper-intermediate and Formal Spanish",
+                "lesson_number": 1,
+                "description": "Review upper-intermediate concepts and focus on formal Spanish language usage, including register and style.",
+                "goals": [
+                    "Fundamentals",
+                    "Business Communication",
+                    "Academic Study"
+                ]
+            },
+            {
+                "name": "Present Perfect Subjunctive",
+                "lesson_number": 2,
+                "description": "Learn how to use the present perfect subjunctive.",
+                "goals": ["Grammar", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Past Perfect Subjunctive (Pluperfect Subjunctive)",
+                "lesson_number": 3,
+                "description": "Learn how to use the past perfect subjunctive.",
+                "goals": ["Grammar", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Conditional Perfect",
+                "lesson_number": 4,
+                "description": "Learn how to form and use the conditional perfect to talk about hypothetical situations in the past.",
+                 "goals": ["Grammar"]
+            },
+            {
+                "name": "Vocabulary: Current Events and Global Issues (Advanced)",
+                "lesson_number": 5,
+                "description": "Expand and refine your vocabulary for discussing current events, global issues, and political topics.",
+                "goals": [
+                    "Vocabulary",
+                    "Cultural Exploration",
+                    "Academic Study"
+                ]
+            },
+             {
+                "name": "Si Clauses (Conditional Sentences)",
+                "lesson_number": 6,
+                "description": "Master the use of all types of conditional sentences (si clauses).",
+                "goals": ["Grammar", "Business Communication", "Academic Study"]
+            },
+           {
+                "name": "Reported Speech (Indirect Speech)",
+                "lesson_number": 7,
+                "description": "Learn how to use reported speech to report what others have said, including tense changes.",
+                "goals": ["Grammar", "Business Communication", "Academic Study"]
+            },
+           {
+                "name": "Vocabulary: Academic and Professional Writing",
+                "lesson_number": 8,
+                "description": "Develop specialized vocabulary for academic and professional writing, including essay and report writing.",
+                "goals": [
+                    "Vocabulary",
+                    "Academic Study",
+                    "Business Communication"
+                ]
+            },
+             {
+                "name": "Spanish Idioms and Figurative Language",
+                "lesson_number": 9,
+                "description": "Explore and learn common Spanish idioms and figurative language.",
+                "goals": ["Vocabulary", "Cultural Exploration", "Other"]
+            },
+            {
+                "name": "Advanced Spanish Level Review",
+                "lesson_number": 10,
+                "description": "Review of all topics covered in the advanced Spanish level.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    },
+        {
+        "level": "proficiency",
+        "lessons": [
+            {
+                "name": "Review of Advanced and Linguistic Refinement",
+                "lesson_number": 1,
+                "description": "Review advanced concepts and focus on linguistic refinement, precision, and stylistic nuance.",
+                "goals": [
+                    "Fundamentals",
+                    "Academic Study",
+                    "Business Communication"
+                ]
+            },
+           {
+                "name": "Spanish Phonetics and Advanced Pronunciation Practice",
+                "lesson_number": 2,
+                "description": "Deepen your understanding of Spanish phonetics and practice advanced pronunciation, including regional variations.",
+                "goals": ["Other", "Cultural Exploration"]
+            },
+            {
+                "name": "Advanced Text Analysis and Interpretation",
+                "lesson_number": 3,
+                "description": "Develop advanced skills in text analysis and interpretation of complex literary and academic texts.",
+                "goals": ["Academic Study", "Other"]
+            },
+           {
+                "name": "Spanish for Specific Professional Purposes (Business, Legal, Medical)",
+                "lesson_number": 4,
+                "description": "Explore specialized Spanish vocabulary and communication styles for specific professional fields.",
+                "goals": ["Business Communication", "Academic Study", "Other"]
+            },
+            {
+                "name": "Spanish Cultural Studies and Intercultural Communication",
+                "lesson_number": 5,
+                "description": "Study aspects of Hispanic culture, history, and society and develop intercultural communication competence.",
+                "goals": [
+                    "Cultural Exploration",
+                    "Business Communication",
+                    "Other"
+                ]
+            },
+            {
+                "name": "Creative Writing and Stylistics in Spanish",
+                "lesson_number": 6,
+                "description": "Engage in creative writing exercises and explore Spanish stylistics to enhance personal expression.",
+                "goals": ["Other", "Cultural Exploration"]
+            },
+           {
+                "name": "Advanced Listening Comprehension: Authentic Materials",
+                "lesson_number": 7,
+                "description": "Improve advanced listening comprehension skills using authentic Spanish materials (news, podcasts, lectures, films).",
+                "goals": ["Other", "Academic Study", "Cultural Exploration"]
+            },
+           {
+                "name": "Spanish Rhetoric and Presentation Skills (Advanced)",
+                "lesson_number": 8,
+                "description": "Refine Spanish rhetoric and presentation skills for persuasive and effective communication in formal settings.",
+                "goals": ["Business Communication", "Academic Study", "Other"]
+            },
+           {
+                "name": "Translation and Interpretation Spanish-English (Advanced)",
+                "lesson_number": 9,
+                "description": "Develop advanced translation and interpretation skills between Spanish and English with complex texts and contexts.",
+                "goals": ["Other", "Academic Study", "Business Communication"]
+            },
+            {
+                "name": "Proficiency Spanish Level Final Review and Assessment",
+                "lesson_number": 10,
+                "description": "Final review of all aspects of the proficiency Spanish level and comprehensive assessment.",
+                "goals": ["Fundamentals"]
+            }
+        ]
+    }
+]

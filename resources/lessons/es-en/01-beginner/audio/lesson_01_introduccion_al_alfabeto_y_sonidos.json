@@ -1,0 +1,136 @@
+{
+    "language_code": "en",
+    "country_code": "US",
+    "lesson_number": 1,
+    "voice_id": "EXAVITQu4vr4xnSDxMaL",
+    "data": [
+        {
+            "text": "Welcome to your first English lesson!",
+            "audio_file_name": "welcome.mp3"
+        },
+        {
+            "text": "cat",
+            "audio_file_name": "cat.mp3"
+        },
+        {
+            "text": "cake",
+            "audio_file_name": "cake.mp3"
+        },
+        {
+            "text": "bed",
+            "audio_file_name": "bed.mp3"
+        },
+        {
+            "text": "see",
+            "audio_file_name": "see.mp3"
+        },
+        {
+            "text": "sit",
+            "audio_file_name": "sit.mp3"
+        },
+        {
+            "text": "like",
+            "audio_file_name": "like.mp3"
+        },
+        {
+            "text": "hot",
+            "audio_file_name": "hot.mp3"
+        },
+        {
+            "text": "go",
+            "audio_file_name": "go.mp3"
+        },
+        {
+            "text": "cup",
+            "audio_file_name": "cup.mp3"
+        },
+        {
+            "text": "blue",
+            "audio_file_name": "blue.mp3"
+        },
+        {
+            "text": "the",
+            "audio_file_name": "the.mp3"
+        },
+        {
+            "text": "think",
+            "audio_file_name": "think.mp3"
+        },
+        {
+            "text": "three",
+            "audio_file_name": "three.mp3"
+        },
+        {
+            "text": "house",
+            "audio_file_name": "house.mp3"
+        },
+        {
+            "text": "hello",
+            "audio_file_name": "hello.mp3"
+        },
+        {
+            "text": "red",
+            "audio_file_name": "red.mp3"
+        },
+        {
+            "text": "car",
+            "audio_file_name": "car.mp3"
+        },
+        {
+            "text": "job",
+            "audio_file_name": "job.mp3"
+        },
+        {
+            "text": "jump",
+            "audio_file_name": "jump.mp3"
+        },
+        {
+            "text": "ship",
+            "audio_file_name": "ship.mp3"
+        },
+        {
+            "text": "fish",
+            "audio_file_name": "fish.mp3"
+        },
+        {
+            "text": "chair",
+            "audio_file_name": "chair.mp3"
+        },
+        {
+            "text": "church",
+            "audio_file_name": "church.mp3"
+        },
+        {
+            "text": "phone",
+            "audio_file_name": "phone.mp3"
+        },
+        {
+            "text": "photo",
+            "audio_file_name": "photo.mp3"
+        },
+        {
+            "text": "Hello, my name is John. Nice to meet you.",
+            "audio_file_name": "hello_name.mp3"
+        },
+        {
+            "text": "How are you? I am fine, thank you.",
+            "audio_file_name": "how_are_you.mp3"
+        },
+        {
+            "text": "Where are you from? I am from Spain.",
+            "audio_file_name": "where_from.mp3"
+        },
+        {
+            "text": "Do you speak English? Yes, a little.",
+            "audio_file_name": "speak_english.mp3"
+        },
+        {
+            "text": "Goodbye! See you later.",
+            "audio_file_name": "goodbye.mp3"
+        },
+        {
+            "text": "yellow",
+            "audio_file_name": "yellow.mp3"
+        }
+    ]
+}

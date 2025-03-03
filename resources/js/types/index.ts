@@ -11,6 +11,17 @@ export interface Translations {
         [subKey: string]: string;
     };
 }
+
+export interface Lesson {
+    filename: string;
+    path: string;
+    title: string;
+    lesson_number: number;
+    level: string;
+    topics: string[];
+    completed: boolean;
+}
+
 export interface User {
     id: number;
     name: string;

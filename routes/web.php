@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Middleware\EnsurePlayerInGame;
@@ -14,6 +15,7 @@ use App\Models\Game;
 use App\Models\GenderDuelGame;
 use App\Models\MemoryTranslationGame;
 use App\Services\LanguageService;
+use App\Services\LessonService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -137,7 +139,9 @@ Route::middleware(['guest'])->group(function () {
     })->name('games.gender-duel.invite');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function (LessonService $lessonService) {
+    $user = auth()->user();
+    $lessons = $lessonService->getLessonsForUser($user);
     $scores = Score::with(['user', 'game'])->orderBy('highest_score', 'desc')
         ->orderBy('total_points', 'desc')
         ->orderBy('winning_streak', 'desc')
@@ -162,6 +166,7 @@ Route::get('/dashboard', function () {
                 ] : null
             ])
         ],
+        'lessons' => $lessons,
         'flash' => [
             'error' => session('error'),
             'success' => session('success'),
@@ -211,6 +216,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
     });
+
+    // Lesson routes
+    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/lessons/progress', [LessonController::class, 'progress'])->name('lessons.progress');
+    Route::get('/lessons/search', [LessonController::class, 'search'])->name('lessons.search');
+    Route::get('/lessons/{level}/{lesson_number}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::post('/lessons/{level}/{lesson_number}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
 });
 
 // Admin routes

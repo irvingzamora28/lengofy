@@ -12,6 +12,8 @@
         "@headlessui/react": "^2.0.0",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@tailwindcss/typography": "^0.5.16",
+        "@types/js-yaml": "^4.0.9",
         "@types/lodash": "^4.17.14",
         "@types/node": "^18.13.0",
         "@types/react": "^18.0.28",
@@ -34,10 +36,14 @@
         "dotenv": "^16.4.7",
         "framer-motion": "^11.13.1",
         "i18next": "^24.2.0",
+        "js-yaml": "^4.1.0",
         "laravel-echo": "^1.17.0",
+        "markdown-to-jsx": "^7.7.3",
+        "pitchy": "^4.1.0",
         "pusher-js": "^8.4.0-rc2",
         "react-hot-toast": "^2.5.1",
         "react-i18next": "^15.2.0",
+        "react-tooltip": "^5.28.0",
         "ws": "^8.18.0"
     }
 }

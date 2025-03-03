@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\LanguagePair;
 use App\Models\UserSetting;
+use App\Models\LessonProgress;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -91,6 +92,11 @@ class User extends Authenticatable
     public function scores()
     {
         return $this->hasMany(Score::class);
+    }
+
+    public function lessonProgress(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(LessonProgress::class);
     }
 
     public function toArray()
