@@ -15,7 +15,7 @@ class GoogleGeminiService implements AIServiceInterface
     {
         $this->apiKey = env('GOOGLE_GEMINI_API_KEY');
         $this->model = env('GOOGLE_GEMINI_MODEL', 'gemini-pro');
-        
+
         if (!$this->apiKey) {
             throw new Exception('Google Gemini API key is not set in .env file');
         }
@@ -31,8 +31,8 @@ class GoogleGeminiService implements AIServiceInterface
     public function generateContent(string $prompt, array $options = []): string
     {
         $model = $options['model'] ?? $this->model;
-        $temperature = $options['temperature'] ?? 0.7;
-        $maxTokens = $options['max_tokens'] ?? 2000;
+        $temperature = $options['temperature'] ?? 0.5;
+        $maxTokens = $options['max_tokens'] ?? 8000;
 
         try {
             $response = $this->client->post("models/{$model}:generateContent", [
