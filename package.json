@@ -33,6 +33,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "chart.js": "^4.4.8",
         "dotenv": "^16.4.7",
         "framer-motion": "^11.13.1",
         "i18next": "^24.2.0",

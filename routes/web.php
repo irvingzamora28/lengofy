@@ -238,8 +238,18 @@ Route::prefix('leng-admon')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::post('/logout', [App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'logout'])
             ->name('logout');
+        
+        // Analytics routes
         Route::get('/feature-analytics', [App\Http\Controllers\Admin\FeatureAnalyticsController::class, 'index'])
             ->name('feature-analytics');
+        Route::get('/page-analytics', [App\Http\Controllers\Admin\PageAnalyticsController::class, 'index'])
+            ->name('page-analytics');
+        
+        // Users routes
+        Route::get('/users', [App\Http\Controllers\Admin\UsersController::class, 'index'])
+            ->name('users');
+        Route::get('/users/{user}', [App\Http\Controllers\Admin\UsersController::class, 'show'])
+            ->name('users.show');
     });
 });
 
