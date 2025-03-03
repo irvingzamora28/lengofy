@@ -9,6 +9,10 @@ import Mnemonic from "./Mnemonic";
 import TextToSpeechPlayer from "../UI/TextToSpeechPlayer";
 import Table from "./Table";
 import TableBody from "./TableBody";
+import ConversationBox from "./ConversationBox";
+import DialogueLine from "./DialogueLine";
+import AudioExercise from "./AudioExercise";
+import AudioItem from "./AudioItem";
 
 interface LessonViewerProps {
     content: string;
@@ -112,6 +116,18 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                         },
                         TextToSpeechPlayer: {
                             component: TextToSpeechPlayer,
+                        },
+                        ConversationBox: {
+                            component: ConversationBox,
+                        },
+                        DialogueLine: {
+                            component: DialogueLine,
+                        },
+                        AudioExercise: {
+                            component: AudioExercise,
+                        },
+                        AudioItem: {
+                            component: AudioItem,
                         },
                         SentenceBreakdown,
                         Part,
