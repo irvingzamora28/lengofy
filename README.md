@@ -239,6 +239,10 @@ Add to github secrets:
 - WEBSOCKET_GAME_ENDPOINT
 - SERVER_NAME
 
+Make sure to allow port 6001 on VPS
+Make sure to allow port 22 on VPS
+Make sure to add VPS SSH key on Github secrets
+
 VPS_HOST: VPS IP address
 VPS_USERNAME: VPS username
 VPS_SSH_KEY: SSH key for VPS (Without passphrase)
