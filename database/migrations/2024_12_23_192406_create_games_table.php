@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->json('supported_language_pairs')->nullable();
             $table->timestamps();
         });
     }
