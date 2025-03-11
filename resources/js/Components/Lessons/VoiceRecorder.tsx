@@ -61,8 +61,8 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
     // Calculate accuracy between spoken text and target text
     const calculateAccuracy = (spoken: string, target: string) => {
-        const spokenWords = spoken.toLowerCase().split(/\s+/);
-        const targetWords = target.toLowerCase().split(/\s+/);
+        const spokenWords = spoken.toLowerCase().replace(/[^\w\s]|_/g, "").split(/\s+/);
+        const targetWords = target.toLowerCase().replace(/[^\w\s]|_/g, "").split(/\s+/);
         const matches = spokenWords.filter((word, index) => targetWords[index] === word).length;
         return matches / targetWords.length;
       };
