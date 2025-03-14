@@ -29,29 +29,26 @@ Lengofy is an innovative language learning platform designed to make language ac
 - **Backend**: Laravel (PHP)
 - **Frontend**: React/TypeScript
 - **Database**: MySQL
-- **Real-time Communication**: Laravel Reverb
+- **Real-time Communication**: Bun
 - **Authentication**: Laravel Breeze
 - **Package Manager**: Bun
 - **Testing**: PHPUnit
 
 ## Real-time Communication Architecture
 
-### Laravel Reverb
-Laravel Reverb is used for:
+### Bun Server Websocket
+Bun Server Websocket is used for:
 - Game management (creation, ending)
 - Sending notifications
 - Handling system-level messages
 - Broadcasting game-related events
-
-### WebSocket Server
-The WebSocket server is dedicated to:
 - Real-time game interactions
 - Synchronizing player moves
 - Managing in-game state
 - Providing instant feedback during gameplay
 
 #### Communication Flow
-1. **Laravel Reverb**: Handles high-level game events and notifications
+1. **Bun Server Websocket**: Handles high-level game events and notifications
 2. **WebSocket Server**: Manages real-time, low-latency game interactions
 
 This architecture ensures smooth, responsive, and synchronized gameplay across multiple players.
@@ -147,17 +144,7 @@ php artisan serve
 bun run dev
 ```
 
-### 3. WebSocket Server (Laravel Reverb)
-```bash
-php artisan reverb:start
-```
-
-### 4. Queue Listener
-```bash
-php artisan queue:listen
-```
-
-### 5. WebSocket Client
+### 3. WebSocket Client
 ```bash
 bun run ws
 ```
@@ -180,7 +167,10 @@ tmux select-pane -t 1
 tmux send-keys 'bun run dev' C-m
 
 tmux select-pane -t 2
-tmux send-keys 'php artisan reverb:start' C-m
+tmux send-keys 'bun run ws' C-m
+
+# Attach to the session
+tmux attach-session -t lengofy
 ```
 
 ## Testing Setup
