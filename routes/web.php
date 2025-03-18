@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
-use App\Http\Controllers\WordPuzzleGameController;
+use App\Http\Controllers\WordSearchPuzzleGameController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -209,16 +209,17 @@ Route::middleware('auth')->group(function () {
         });
 
         // Word Puzzle Routes
-        Route::prefix('word-puzzle')->name('games.word-puzzle.')->group(function () {
-            Route::get('/', [WordPuzzleGameController::class, 'lobby'])->name('lobby');
-            Route::post('/create', [WordPuzzleGameController::class, 'create'])->name('create');
-            Route::post('/validate-word', [WordPuzzleGameController::class, 'validateWord'])->name('validate-word');
-            Route::post('/found-word', [WordPuzzleGameController::class, 'storeFoundWord']);
-            Route::post('/{wordPuzzleGame}/join', [WordPuzzleGameController::class, 'join'])->name('join');
-            Route::get('/{wordPuzzleGame}/join-from-iWordPuzzleGameController', [MemoryTranslationGameController::class, 'joinFromInvite'])->name('join-from-invite');
-            Route::post('/{wordPuzzleGame}/join', [WordPuzzleGameController::class, 'join'])->name('join');
-            Route::post('/{wordPuzzleGame}/ready', [WordPuzzleGameController::class, 'ready'])->name('ready');
-            Route::delete('/{wordPuzzleGame}/leave', [WordPuzzleGameController::class, 'leave'])->name('leave');
+        Route::prefix('word-search-puzzle')->name('games.word-search-puzzle.')->group(function () {
+            Route::get('/', [WordSearchPuzzleGameController::class, 'lobby'])->name('lobby');
+            Route::post('/create', [WordSearchPuzzleGameController::class, 'create'])->name('create');
+            Route::post('/validate-word', [WordSearchPuzzleGameController::class, 'validateWord'])->name('validate-word');
+            Route::post('/found-word', [WordSearchPuzzleGameController::class, 'storeFoundWord']);
+            Route::post('/{WordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
+            Route::get('/{WordSearchPuzzleGame}/join-from-iWordSearchPuzzleGameController', [MemoryTranslationGameController::class, 'joinFromInvite'])->name('join-from-invite');
+            Route::post('/{WordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
+            Route::post('/{WordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
+            Route::delete('/{WordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
+            Route::get('/practice', [WordSearchPuzzleGameController::class, 'practice'])->name('practice');
         });
     });
 
@@ -275,8 +276,12 @@ Route::prefix('games')->group(function () {
         ->name('games.memory-translation.show');
 
     Route::get('/gender-duel/{genderDuelGame:id}', [GenderDuelGameController::class, 'show'])
-        ->middleware(EnsurePlayerInGame::class)
-        ->name('games.gender-duel.show');
+    ->middleware(EnsurePlayerInGame::class)
+    ->name('games.gender-duel.show');
+
+    Route::get('/word-search-puzzle/{wordSearchPuzzleGame:id}', [WordSearchPuzzleGameController::class, 'show'])
+    ->middleware(EnsurePlayerInGame::class)
+    ->name('games.word-search-puzzle.show');
 });
 
 // Guest user routes

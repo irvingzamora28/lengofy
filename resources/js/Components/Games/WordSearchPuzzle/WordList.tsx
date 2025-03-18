@@ -11,11 +11,11 @@ const WordList: FC<WordListProps> = ({ words }) => {
     return (
         <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
             <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-                {t('games.word_puzzle.found_words')}
+                {t('games.word_search_puzzle.found_words')}
             </h3>
             {words.length === 0 ? (
                 <p className="text-gray-500 dark:text-gray-400 text-center py-4">
-                    {t('games.word_puzzle.no_words_yet')}
+                    {t('games.word_search_puzzle.no_words_yet')}
                 </p>
             ) : (
                 <div className="grid grid-cols-2 gap-2">

@@ -300,7 +300,7 @@
             "create_room": "Create Room"
         }
     },
-    "word_puzzle": {
+    "word_search_puzzle": {
         "lobby": "Word Puzzle Lobby",
         "game_room_title": "Word Puzzle Room",
         "active_games": "Active Word Puzzle Games",

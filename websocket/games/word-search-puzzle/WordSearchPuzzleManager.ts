@@ -1,11 +1,11 @@
 import { ServerWebSocket } from "bun";
 import { BaseGameManager } from "../../core/BaseGameManager";
 import { BaseGameMessage } from "../../core/types";
-import { WordPuzzleGameMessage, WordPuzzleGameState } from "./types";
+import { WordSearchPuzzleGameMessage, WordSearchPuzzleGameState } from "./types";
 
-export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
+export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGameState> {
     constructor(lobbyConnections: Set<ServerWebSocket>) {
-        super('word_puzzle', lobbyConnections);
+        super('word_search_puzzle', lobbyConnections);
     }
 
     handleMessage(ws: ServerWebSocket, message: BaseGameMessage): void {
@@ -13,20 +13,20 @@ export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
         console.log('Received message:', type, 'for game:', gameId);
 
         switch (type) {
-            case 'join_word_puzzle_game':
+            case 'join_word_search_puzzle_game':
             case 'player_joined':
-                this.handleJoinGame(ws, message as WordPuzzleGameMessage);
+                this.handleJoinGame(ws, message as WordSearchPuzzleGameMessage);
                 break;
-            case "word_puzzle_game_created":
-                this.handleGameCreated(message as WordPuzzleGameMessage);
+            case "word_search_puzzle_game_created":
+                this.handleGameCreated(message as WordSearchPuzzleGameMessage);
                 break;
-            case 'word_puzzle_leave_game':
+            case 'word_search_puzzle_leave_game':
                 this.handleLeaveGame(ws, gameId, userId!);
                 break;
-            case 'word_puzzle_player_ready':
-                this.handlePlayerReady(message as WordPuzzleGameMessage);
+            case 'word_search_puzzle_player_ready':
+                this.handlePlayerReady(message as WordSearchPuzzleGameMessage);
                 break;
-            case 'word_puzzle_game_end':
+            case 'word_search_puzzle_game_end':
                 this.handleGameEnd(gameId);
                 break;
         }
@@ -42,14 +42,14 @@ export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
         }
     }
 
-    private handleGameCreated(message: WordPuzzleGameMessage): void {
+    private handleGameCreated(message: WordSearchPuzzleGameMessage): void {
         this.broadcastToLobby({
-            type: 'word_puzzle_game_created',
+            type: 'word_search_puzzle_game_created',
             game: message.game
         });
     }
 
-    private handleJoinGame(ws: ServerWebSocket, message: WordPuzzleGameMessage): void {
+    private handleJoinGame(ws: ServerWebSocket, message: WordSearchPuzzleGameMessage): void {
         const gameId = message.gameId;
         if (!this.rooms.has(gameId)) {
             console.log('Creating new game room:', gameId);
@@ -104,7 +104,7 @@ export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
                 (state.max_players > 1 && state.players.length === 1)) {
                 this.handleGameEnd(gameId);
                 this.broadcast(room, {
-                    type: 'word_puzzle_game_ended',
+                    type: 'word_search_puzzle_game_ended',
                     gameId,
                     data: { reason: 'not_enough_players' }
                 });
@@ -119,7 +119,7 @@ export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
         }
     }
 
-    private handlePlayerReady(message: WordPuzzleGameMessage): void {
+    private handlePlayerReady(message: WordSearchPuzzleGameMessage): void {
         const gameId = message.gameId;
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
@@ -127,7 +127,7 @@ export class WordPuzzleManager extends BaseGameManager<WordPuzzleGameState> {
         if (!state || !room) return;
 
         this.broadcast(room, {
-            type: "word_puzzle_player_ready",
+            type: "word_search_puzzle_player_ready",
             gameId: gameId,
             userId: message.userId,
             data: message.data

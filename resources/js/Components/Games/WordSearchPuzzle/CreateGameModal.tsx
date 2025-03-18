@@ -17,7 +17,7 @@ const CreateGameModal: FC<CreateGameModalProps> = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('word-puzzle.create'), {
+        post(route('word-search-puzzle.create'), {
             onSuccess: () => onClose(),
         });
     };
@@ -26,7 +26,7 @@ const CreateGameModal: FC<CreateGameModalProps> = ({ isOpen, onClose }) => {
         <Modal show={isOpen} onClose={onClose}>
             <form onSubmit={handleSubmit} className="p-6">
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    {t('games.word_puzzle.create_game')}
+                    {t('games.word_search_puzzle.create_game')}
                 </h2>
 
                 <div className="mt-6">

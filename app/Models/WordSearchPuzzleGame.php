@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class WordPuzzleGame extends Model
+class WordSearchPuzzleGame extends Model
 {
     protected $fillable = [
         'creator_id',
@@ -30,16 +30,14 @@ class WordPuzzleGame extends Model
         return $this->belongsTo(LanguagePair::class);
     }
 
-    public function players(): BelongsToMany
+    public function players(): HasMany
     {
-        return $this->belongsToMany(User::class, 'word_puzzle_players')
-            ->withPivot(['score', 'is_ready'])
-            ->withTimestamps();
+        return $this->hasMany(WordSearchPuzzlePlayer::class, 'word_search_puzzle_game_id');
     }
 
     public function foundWords(): HasMany
     {
-        return $this->hasMany(WordPuzzleFoundWord::class, 'word_puzzle_game_id');
+        return $this->hasMany(WordSearchPuzzleFoundWord::class, 'word_search_puzzle_game_id');
     }
 
     public function creator(): BelongsTo

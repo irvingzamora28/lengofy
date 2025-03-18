@@ -2,32 +2,32 @@ import { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import GameBoard from '@/Components/Games/WordPuzzle/GameBoard';
-import PlayerList from '@/Components/Games/WordPuzzle/PlayerList';
-import WordList from '@/Components/Games/WordPuzzle/WordList';
+import GameBoard from '@/Components/Games/WordSearchPuzzle/GameBoard';
+import PlayerList from '@/Components/Games/WordSearchPuzzle/PlayerList';
+import WordList from '@/Components/Games/WordSearchPuzzle/WordList';
 import Timer from '@/Components/Games/Timer';
 import { useWebSocket } from '@/Hooks/useWebSocket';
-import { WordPuzzleGame, WordPuzzleGameState } from '@/types/games';
+import { WordSearchPuzzleGame, WordSearchPuzzleGameState } from '@/types/games';
 
 interface Props {
-    game: WordPuzzleGame;
+    game: WordSearchPuzzleGame;
     isHost: boolean;
     currentPlayer: any;
 }
 
 export default function Show({ game, isHost, currentPlayer }: Props) {
     const { t } = useTranslation();
-    const [gameState, setGameState] = useState<WordPuzzleGameState | null>(null);
+    const [gameState, setGameState] = useState<WordSearchPuzzleGameState | null>(null);
     const [inputWord, setInputWord] = useState('');
     const ws = useWebSocket();
 
     useEffect(() => {
         if (ws) {
             ws.send(JSON.stringify({
-                type: 'join_word_puzzle_game',
+                type: 'join_word_search_puzzle_game',
                 gameId: game.id,
                 userId: currentPlayer.id,
-                gameType: 'word_puzzle',
+                gameType: 'word_search_puzzle',
                 data: {
                     player_id: currentPlayer.id,
                     language_name: game.language_name,
@@ -60,7 +60,7 @@ export default function Show({ game, isHost, currentPlayer }: Props) {
 
     return (
         <AuthenticatedLayout>
-            <Head title={t('games.word_puzzle.game_title')} />
+            <Head title={t('games.word_search_puzzle.game_title')} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->enum('memory_translation_difficulty', ['easy', 'medium', 'hard'])
                 ->default('medium')
                 ->nullable();
-            $table->enum('word_puzzle_difficulty', ['easy', 'medium', 'hard'])
+            $table->enum('word_search_puzzle_difficulty', ['easy', 'medium', 'hard'])
                 ->default('medium')
                 ->nullable();
 

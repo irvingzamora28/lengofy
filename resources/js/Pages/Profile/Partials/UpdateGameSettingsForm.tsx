@@ -17,7 +17,7 @@ export default function UpdateGameSettingsForm({
         gender_duel_difficulty: user.gender_duel_difficulty || 'medium',
         gender_duel_sound: user.gender_duel_sound ?? true,
         gender_duel_timer: user.gender_duel_timer ?? true,
-        word_puzzle_difficulty: user.word_puzzle_difficulty || 'medium',
+        word_search_puzzle_difficulty: user.word_search_puzzle_difficulty || 'medium',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -125,18 +125,18 @@ export default function UpdateGameSettingsForm({
                     </div>
 
                     <div>
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Word Puzzle Settings</h3>
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Word Search Puzzle Settings</h3>
                         <div>
                             <label
-                                htmlFor="word_puzzle_difficulty"
+                                htmlFor="word_search_puzzle_difficulty"
                                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                             >
                                 Difficulty
                             </label>
                             <select
-                                id="word_puzzle_difficulty"
-                                value={data.word_puzzle_difficulty}
-                                onChange={(e) => setData('word_puzzle_difficulty', e.target.value)}
+                                id="word_search_puzzle_difficulty"
+                                value={data.word_search_puzzle_difficulty}
+                                onChange={(e) => setData('word_search_puzzle_difficulty', e.target.value)}
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 dark:bg-gray-800 dark:border-gray-700"
                             >
                                 <option value="easy">Easy</option>

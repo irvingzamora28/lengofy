@@ -48,7 +48,7 @@ const GameBoard: FC<GameBoardProps> = ({
                     onChange={(e) => setInputWord(e.target.value)}
                     className="w-full p-4 text-xl text-center border rounded-lg
                              dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder={t('games.word_puzzle.enter_word')}
+                    placeholder={t('games.word_search_puzzle.enter_word')}
                     disabled={disabled}
                 />
                 <div className="flex gap-4">
@@ -59,7 +59,7 @@ const GameBoard: FC<GameBoardProps> = ({
                                  disabled:cursor-not-allowed"
                         disabled={disabled || !inputWord.trim()}
                     >
-                        {t('games.word_puzzle.submit_word')}
+                        {t('games.word_search_puzzle.submit_word')}
                     </button>
                     <button
                         type="button"

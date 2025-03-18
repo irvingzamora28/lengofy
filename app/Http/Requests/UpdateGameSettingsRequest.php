@@ -24,7 +24,7 @@ class UpdateGameSettingsRequest extends FormRequest
             'gender_duel_sound' => 'sometimes|boolean',
             'gender_duel_timer' => 'sometimes|boolean',
             'memory_translation_difficulty' => 'sometimes|in:easy,medium,hard',
-            'word_puzzle_difficulty' => 'sometimes|in:easy,medium,hard',
+            'word_search_puzzle_difficulty' => 'sometimes|in:easy,medium,hard',
         ];
     }
 }

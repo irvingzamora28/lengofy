@@ -17,7 +17,7 @@ class UserSetting extends Model
         'gender_duel_timer',
         'preferred_language',
         'memory_translation_difficulty',
-        'word_puzzle_difficulty',
+        'word_search_puzzle_difficulty',
         'dark_mode',
         'timezone',
         'additional_settings'
@@ -54,7 +54,7 @@ class UserSetting extends Model
                 'gender_duel_difficulty' => 'medium',
                 'gender_duel_sound' => true,
                 'gender_duel_timer' => true,
-                'word_puzzle_difficulty' => 'medium',
+                'word_search_puzzle_difficulty' => 'medium',
             ]
         );
 
@@ -64,7 +64,7 @@ class UserSetting extends Model
             'gender_duel_sound',
             'gender_duel_timer',
             'preferred_language',
-            'word_puzzle_difficulty',
+            'word_search_puzzle_difficulty',
             'dark_mode',
             'timezone'
         ];
@@ -125,7 +125,7 @@ class UserSetting extends Model
                 'gender_duel_sound' => true,
                 'gender_duel_timer' => true,
                 'memory_translation_difficulty' => 'medium',
-                'word_puzzle_difficulty' => 'medium',
+                'word_search_puzzle_difficulty' => 'medium',
             ]
         );
 

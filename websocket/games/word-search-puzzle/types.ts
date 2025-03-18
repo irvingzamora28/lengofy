@@ -1,19 +1,19 @@
 import { BaseGameState, BaseGameMessage } from '../../core/types';
 
-export interface WordPuzzleGameState extends BaseGameState {
+export interface WordSearchPuzzleGameState extends BaseGameState {
     id: string;
     status: 'waiting' | 'in_progress' | 'completed';
-    players: WordPuzzlePlayer[];
+    players: WordSearchPuzzlePlayer[];
     words_found: Map<number, Set<string>>;
     round_time: number;
     round_start_time: number | null;
     hostId: number;
     max_players: number;
     category: string;
-    winner?: WordPuzzlePlayer | null;
+    winner?: WordSearchPuzzlePlayer | null;
 }
 
-export interface WordPuzzlePlayer {
+export interface WordSearchPuzzlePlayer {
     id: number;
     user_id: number;
     player_name: string;
@@ -22,16 +22,16 @@ export interface WordPuzzlePlayer {
     is_host: boolean;
 }
 
-export interface WordPuzzleGameMessage extends BaseGameMessage {
+export interface WordSearchPuzzleGameMessage extends BaseGameMessage {
     type: string;
     gameId: string;
-    wordPuzzleGameId?: string;
+    WordSearchPuzzleGameId?: string;
     gameType?: string;
     userId: number;
     data?: {
         player_id?: number;
         word?: string;
-        players?: WordPuzzlePlayer[];
+        players?: WordSearchPuzzlePlayer[];
         language_name?: string;
         max_players?: number;
     };

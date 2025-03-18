@@ -26,7 +26,7 @@ class GameSeeder extends Seeder
             ],
             [
                 'name' => 'Word Puzzle',
-                'slug' => 'word-puzzle',
+                'slug' => 'word-search-puzzle',
                 'supported_language_pairs' => null, // Available for all language pairs
             ],
         ];
