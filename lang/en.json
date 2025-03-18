@@ -328,6 +328,7 @@
         "game_over": "Game Over",
         "restart_game": "Restart Game",
         "starting_in": "Starting in",
+        "words_found": "Words Found",
         "status": {
             "waiting": "Waiting",
             "in_progress": "In Progress",

@@ -2,13 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import GameBoard from '@/Components/Games/WordSearchPuzzle/GameBoard';
-import PlayerList from '@/Components/Games/WordSearchPuzzle/PlayerList';
-import WordList from '@/Components/Games/WordSearchPuzzle/WordList';
-import CircularTimer from '@/Components/Games/CircularTimer';
-import { WordSearchPuzzleGame, WordSearchPuzzleGameState } from '@/types/games';
+import { WordSearchPuzzleGame } from '@/types/games';
 import toast from 'react-hot-toast';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
+import { IoPersonAddSharp } from 'react-icons/io5';
+import { FaUserPlus } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
+import GameArea from '@/Components/WordSearchPuzzle/GameArea';
+import GameInfo from '@/Components/WordSearchPuzzle/GameInfo';
+import PlayersInfo from '@/Components/WordSearchPuzzle/PlayersInfo';
+import axios from 'axios';
 
 interface Props {
     auth: any;
@@ -18,21 +21,101 @@ interface Props {
 }
 
 export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCreated }: Props) {
-    // Initialize the game state with a proper Map for words_found
+    const { t: trans } = useTranslation();
+    const wsRef = useRef<WebSocket | null>(null);
+    const [showExitConfirmation, setShowExitConfirmation] = useState(false);
+    const [selectedCells, setSelectedCells] = useState<{ x: number; y: number }[]>([]);
+    const [isDragging, setIsDragging] = useState(false);
+
+    // Add the handleShare function
+    const handleShare = async () => {
+        const url = new URL(window.location.href);
+        const baseUrl = `${url.protocol}//${url.host}${url.pathname}`;
+        const shareTitle = `Join my Word Search Puzzle Game!`;
+        const shareText = `Hey! Join me for a game of Word Search Puzzle on Lengofy!`;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: baseUrl,
+                });
+            } else {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+            // Fallback to clipboard
+            try {
+                await navigator.clipboard.writeText(baseUrl);
+                toast.success(trans('Game link copied to clipboard!'));
+            } catch (err) {
+                toast.error(trans('Failed to share or copy link'));
+            }
+        }
+    };
+
+    const fetchWords = async () => {
+        try {
+            const response = await axios.get(route('games.word-search-puzzle.get-words'), {
+                params: {
+                    difficulty: gameState.difficulty,
+                    category: gameState.category?.id,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching words:', error);
+            return [];
+        }
+    };
+
+    const handleRestartGame = async () => {
+        const newWords = await fetchWords();
+        console.log('New words fetched:', newWords);
+
+        if (wsRef.current) {
+            wsRef.current.send(JSON.stringify({
+                type: 'restart_word_search_puzzle_game',
+                gameId: gameState.id,
+                gameType: 'word_search_puzzle',
+                data: {
+                    words: newWords,
+                    players: gameState.players,
+                    language_name: gameState.language_name,
+                    category: gameState.category,
+                    hostId: gameState.hostId
+                }
+            }));
+        }
+    };
+
+    // Game state
     const [gameState, setGameState] = useState({
         ...word_search_puzzle_game,
         words_found: new Map(
             word_search_puzzle_game.words_found
-            ? Object.entries(word_search_puzzle_game.words_found)
-            : [[auth.user.id, new Set()]]
-        )
+                ? Object.entries(word_search_puzzle_game.words_found)
+                : [[auth.user.id, new Set()]]
+        ),
+        grid: word_search_puzzle_game.current_letters || [],
     });
-    const [inputWord, setInputWord] = useState('');
-    const wsRef = useRef<WebSocket | null>(null);
-    const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-    const { t: trans } = useTranslation();
 
-    const currentPlayer = gameState.players.find(player => player.user_id === auth.user.id);
+    const currentPlayer = gameState.players.find(p => p.user_id === auth.user.id);
+
+    // Grid size based on difficulty
+    const gridSize = gameState.difficulty === 'easy' ? 10 : gameState.difficulty === 'medium' ? 15 : 30;
+
+    // Dynamic cell size based on grid size
+    const getCellSizeClass = () => {
+        switch (gridSize) {
+            case 10: return 'h-10 w-10';
+            case 15: return 'h-6 w-6 md:h-9 md:w-9';
+            default: return 'h-6 w-6';
+        }
+    };
 
     useEffect(() => {
         const ws = new WebSocket(wsEndpoint);
@@ -41,7 +124,6 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         ws.onopen = () => {
             console.log('Connected to Word Search Puzzle game WebSocket');
 
-            // Join the game room
             ws.send(JSON.stringify({
                 type: 'join_word_search_puzzle_game',
                 gameId: word_search_puzzle_game.id,
@@ -54,9 +136,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 }
             }));
 
-            // If this is a newly created game, broadcast it to the lobby
             if (justCreated) {
-                console.log('Broadcasting new word search puzzle game to lobby');
                 ws.send(JSON.stringify({
                     type: 'word_search_puzzle_game_created',
                     gameId: word_search_puzzle_game.id,
@@ -64,18 +144,8 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 }));
             }
 
-            // For practice games, mark player as ready immediately
             if (word_search_puzzle_game.max_players === 1) {
-                ws.send(JSON.stringify({
-                    type: 'player_ready',
-                    gameId: gameState.id,
-                    gameType: 'word_search_puzzle',
-                    userId: auth.user.id,
-                    data: {
-                        player_id: currentPlayer?.id,
-                        user_id: auth.user.id
-                    }
-                }));
+                handleReady();
             }
         };
 
@@ -175,25 +245,58 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         router.delete(route(`games.word-search-puzzle.leave`, `${gameState.id}`));
     };
 
-    const handleSubmitWord = () => {
-        if (!inputWord.trim()) return;
+    const handleCellMouseDown = (x: number, y: number) => {
+        if (gameState.status !== 'in_progress' || gameState.current_turn !== auth.user.id) return;
 
-        wsRef.current?.send(JSON.stringify({
-            type: 'submit_word',
-            gameId: gameState.id,
-            userId: auth.user.id,
-            data: { word: inputWord.trim() }
-        }));
+        setIsDragging(true);
+        setSelectedCells([{ x, y }]);
+    };
 
-        setInputWord('');
+    const handleCellMouseEnter = (x: number, y: number) => {
+        if (!isDragging) return;
+
+        const lastCell = selectedCells[selectedCells.length - 1];
+        if (isValidSelection(lastCell, { x, y })) {
+            setSelectedCells([...selectedCells, { x, y }]);
+        }
+    };
+
+    const handleCellMouseUp = () => {
+        if (!isDragging) return;
+
+        setIsDragging(false);
+        const selectedWord = getWordFromSelectedCells();
+        if (selectedWord) {
+            wsRef.current?.send(JSON.stringify({
+                type: 'word_search_puzzle_word_found',
+                gameId: gameState.id,
+                userId: auth.user.id,
+                data: {
+                    word: selectedWord,
+                    cells: selectedCells
+                }
+            }));
+        }
+        setSelectedCells([]);
+    };
+
+    const isValidSelection = (last: { x: number; y: number }, current: { x: number; y: number }) => {
+        // Implement logic to ensure selection is straight line (horizontal, vertical, or diagonal)
+        // Return true if valid, false otherwise
+        return true; // Placeholder
+    };
+
+    const getWordFromSelectedCells = () => {
+        // Implement logic to get word from selected cells
+        return selectedCells.map(cell => gameState.grid[cell.x][cell.y]).join('');
     };
 
     const handleReady = () => {
         wsRef.current?.send(JSON.stringify({
             type: 'player_ready',
             gameId: gameState.id,
-            userId: auth.user.id,
             gameType: 'word_search_puzzle',
+            userId: auth.user.id,
             data: {
                 player_id: currentPlayer?.id,
                 user_id: auth.user.id
@@ -202,39 +305,58 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout
+            header={
+                <div className="flex justify-between items-center">
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        {trans('Word Search Puzzle Game')}
+                    </h2>
+                    <div className="flex gap-2">
+                        {gameState.status === 'waiting' && (
+                            <button
+                                onClick={handleShare}
+                                className="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                            >
+                                <IoPersonAddSharp className="mr-2 md:hidden" />
+                                <FaUserPlus className="mr-2 hidden md:block" />
+                                <span className="hidden md:inline">{trans('generals.invite_friends')}</span>
+                                <span className="md:hidden">{trans('generals.invite')}</span>
+                            </button>
+                        )}
+                        <button
+                            onClick={() => setShowExitConfirmation(true)}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                        >
+                            <MdClose size={24} />
+                        </button>
+                    </div>
+                </div>
+            }
+        >
             <Head title={trans('games.word_search_puzzle.game_title')} />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg p-6">
-                        {gameState?.status === 'in_progress' && (
-                            <CircularTimer
-                                timeLeft={Math.max(0, gameState.round_time - (Date.now() / 1000 - gameState.round_start_time))}
-                                totalTime={gameState.round_time}
-                            />
-                        )}
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="md:col-span-2">
-                                <GameBoard
-                                    letters={gameState?.current_letters || []}
-                                    onSubmit={handleSubmitWord}
-                                    inputWord={inputWord}
-                                    setInputWord={setInputWord}
-                                    disabled={gameState?.status !== 'in_progress'}
-                                />
-                            </div>
-
-                            <div>
-                                <PlayerList
-                                    players={gameState?.players || []}
-                                    currentPlayerId={currentPlayer?.id}
+            <div className="py-0 sm:py-12 bg-gray-100 dark:bg-gray-900">
+                <div className="w-full md:w-11/12 mx-auto px-0 sm:px-6 lg:px-8">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-2 sm:p-6 text-gray-900 dark:text-gray-100">
+                            <div className="flex flex-col space-y-4">
+                                <GameInfo game={gameState} currentPlayer={currentPlayer} />
+                                <GameArea
+                                    game={gameState}
+                                    selectedCells={selectedCells}
+                                    isCurrentPlayerReady={currentPlayer?.is_ready || false}
                                     onReady={handleReady}
-                                    gameStatus={gameState?.status}
+                                    currentUserId={auth.user.id}
+                                    onRestart={handleRestartGame}
+                                    handleCellMouseDown={handleCellMouseDown}
+                                    handleCellMouseEnter={handleCellMouseEnter}
+                                    handleCellMouseUp={handleCellMouseUp}
+                                    gridSize={gridSize}
+                                    getCellSizeClass={getCellSizeClass}
                                 />
-                                <WordList
-                                    words={Array.from(gameState.words_found.get(auth.user.id) || new Set())}
+                                <PlayersInfo
+                                    players={gameState.players}
+                                    currentUserId={auth.user.id}
                                 />
                             </div>
                         </div>
@@ -242,7 +364,6 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 </div>
             </div>
 
-            {/* Confirmation Modal */}
             {showExitConfirmation && (
                 <ConfirmationExitModal
                     onLeave={leaveGame}
