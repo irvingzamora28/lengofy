@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from 'react-i18next';
-import { FaClock, FaTrophy } from 'react-icons/fa';
+import { FaClock, FaTrophy, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface Props {
     difficulty: 'easy' | 'medium' | 'hard';
@@ -51,6 +51,7 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
     const [score, setScore] = useState(0);
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
+    const [showTranslations, setShowTranslations] = useState(false);
 
     // Directions for word placement
     const directions = [
@@ -287,6 +288,10 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
         );
     }, [grid, cellSizeClass]);
 
+    const toggleTranslations = () => {
+        setShowTranslations(!showTranslations);
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -305,9 +310,18 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
                             <div className="text-lg font-medium text-gray-800 dark:text-gray-200">
                                 {trans('word_search_puzzle.score')}: {score}/{words.length}
                             </div>
-                            <div className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
-                                <FaClock className="mr-2 text-blue-500" />
-                                Time: {formatTime(timeElapsed)}
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={toggleTranslations}
+                                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                                >
+                                    {showTranslations ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+                                    {showTranslations ? trans('Hide Translations') : trans('Show Translations')}
+                                </button>
+                                <div className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
+                                    <FaClock className="mr-2 text-blue-500" />
+                                    Time: {formatTime(timeElapsed)}
+                                </div>
                             </div>
                         </div>
 
@@ -344,23 +358,25 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
                                     </div>
                                 ))}
                             </div>
-                            <div>
-                                <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                    English
-                                </h3>
-                                {words.map((word) => (
-                                    <div
-                                        key={`translation-${word.id}`}
-                                        className={`p-2 ${
-                                            word.found
-                                                ? 'line-through text-green-600 dark:text-green-400'
-                                                : 'text-gray-700 dark:text-gray-300'
-                                        }`}
-                                    >
-                                        {word.translation}
-                                    </div>
-                                ))}
-                            </div>
+                            {showTranslations && (
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
+                                        English
+                                    </h3>
+                                    {words.map((word) => (
+                                        <div
+                                            key={`translation-${word.id}`}
+                                            className={`p-2 ${
+                                                word.found
+                                                    ? 'line-through text-green-600 dark:text-green-400'
+                                                    : 'text-gray-700 dark:text-gray-300'
+                                            }`}
+                                        >
+                                            {word.translation}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         {/* Completion Message */}
