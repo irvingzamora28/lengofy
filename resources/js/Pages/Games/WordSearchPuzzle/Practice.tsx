@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from 'react-i18next';
@@ -29,13 +29,13 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
     const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 30;
 
     // Dynamic cell size based on grid size for better design
-    const cellSizeClass = useMemo(() => {
+    const getCellSizeClass = () => {
         switch (gridSize) {
             case 10: return 'h-10 w-10'; // 40px for 10x10
             case 15: return 'h-9 w-9';   // 36px for 15x15
             default: return 'h-6 w-6';   // 24px for 30x30
         }
-    }, [gridSize]);
+    };
 
     const [words, setWords] = useState<Word[]>([
         { id: 1, word: 'CASA', translation: 'HOUSE', found: false },
@@ -261,32 +261,6 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
         }
     };
 
-    // Memoize grid rendering to prevent unnecessary re-renders
-    const memoizedGrid = useMemo(() => {
-        return grid.map((row, i) =>
-            row.map((cell, j) => (
-                <div
-                    key={`${i}-${j}`}
-                    className={`
-                        border border-gray-200 dark:border-gray-700
-                        flex items-center justify-center
-                        text-sm font-medium
-                        select-none cursor-pointer
-                        transition-colors duration-150
-                        hover:bg-gray-100 dark:hover:bg-gray-700
-                        ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800' : ''}
-                        ${cell.isFound ? 'bg-green-200 dark:bg-green-800' : ''}
-                        ${cellSizeClass}
-                    `}
-                    onMouseDown={() => handleCellMouseDown(i, j)}
-                    onMouseEnter={() => handleCellMouseEnter(i, j)}
-                    onMouseUp={handleCellMouseUp}
-                >
-                    {cell.letter}
-                </div>
-            ))
-        );
-    }, [grid, cellSizeClass]);
 
     const toggleTranslations = () => {
         setShowTranslations(!showTranslations);
@@ -331,11 +305,33 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
                                 className="grid gap-0 mx-auto"
                                 style={{
                                     gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-                                    maxWidth: gridSize === 10 ? '400px' : gridSize === 15 ? '540px' : '720px', // Adjusted max-width
+                                    maxWidth: gridSize === 10 ? '400px' : gridSize === 15 ? '540px' : '720px',
                                     width: '100%',
                                 }}
                             >
-                                {memoizedGrid}
+                                {grid.map((row, i) =>
+                                    row.map((cell, j) => (
+                                        <div
+                                            key={`${i}-${j}`}
+                                            className={`
+                                                border border-gray-200 dark:border-gray-700
+                                                flex items-center justify-center
+                                                text-sm font-medium
+                                                select-none cursor-pointer
+                                                transition-colors duration-150
+                                                hover:bg-gray-100 dark:hover:bg-gray-700
+                                                ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800' : ''}
+                                                ${cell.isFound ? 'bg-green-200 dark:bg-green-800' : ''}
+                                                ${getCellSizeClass()}
+                                            `}
+                                            onMouseDown={() => handleCellMouseDown(i, j)}
+                                            onMouseEnter={() => handleCellMouseEnter(i, j)}
+                                            onMouseUp={handleCellMouseUp}
+                                        >
+                                            {cell.letter}
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         </div>
 
