@@ -138,7 +138,7 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
         }
 
         setGrid(newGrid);
-    }, [gridSize, words]);
+    }, [gridSize]);
 
     // Timer logic
     useEffect(() => {
