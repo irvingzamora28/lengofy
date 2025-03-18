@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Head, router } from "@inertiajs/react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from 'react-i18next';
-import { FaClock, FaTrophy, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { MdClose } from 'react-icons/md';
+import { FaClock, FaTrophy, FaEye, FaEyeSlash, FaStar } from 'react-icons/fa';
+import { MdClose, MdGamepad } from 'react-icons/md';
+import { motion, AnimatePresence } from 'framer-motion';
 import matchSound from "@/assets/audio/correct-match.mp3";
+
 
 const playSound = (() => {
     const audio = new Audio(matchSound);
@@ -301,142 +303,217 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
             leaveGame();
         };
 
-    return (
-        <AuthenticatedLayout
-                    header={
-                        <div className="flex justify-between items-center w-full">
-                            <div className="flex items-center">
-                                <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
-                                    Word Search Puzzle Game
-                                </h2>
-                            </div>
-                            <div className="absolute top-4 right-4 flex gap-2">
-                                <button
-                                    onClick={handleExitClick}
-                                    className="flex items-center justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200"
-                                    title="Exit"
-                                >
-                                    <MdClose className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                                </button>
-                            </div>
-                        </div>
-                    }
-                >
-            <Head title="Memory Translation Game Practice" />
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        {/* Score and Timer */}
-                        <div className="mb-6 flex items-center justify-between">
-                            <div className="text-lg font-medium text-gray-800 dark:text-gray-200">
-                                {trans('word_search_puzzle.game_info.score')}: {score}/{words.length}
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
-                                    <FaClock className="mr-2 text-blue-500" />
-                                    {trans('word_search_puzzle.game_info.time')}: : {formatTime(timeElapsed)}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Responsive Grid Container */}
-                        <div className="w-full max-w-full overflow-auto md:max-h-[80vh] sm:max-h-[60vh]">
-                            <div
-                                className="grid gap-0 mx-auto"
-                                style={{
-                                    gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-                                    maxWidth: gridSize === 10 ? '400px' : gridSize === 15 ? '540px' : '720px',
-                                    width: '100%',
-                                }}
-                            >
-                                {grid.map((row, i) =>
-                                    row.map((cell, j) => (
-                                        <div
-                                            key={`${i}-${j}`}
-                                            className={`
-                                                border border-gray-200 dark:border-gray-700
-                                                flex items-center justify-center
-                                                text-sm font-medium
-                                                select-none cursor-pointer
-                                                transition-colors duration-150
-                                                hover:bg-gray-100 dark:hover:bg-gray-700
-                                                ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800' : ''}
-                                                ${cell.isFound ? 'bg-green-200 dark:bg-green-800' : ''}
-                                                ${getCellSizeClass()}
-                                            `}
-                                            onMouseDown={() => handleCellMouseDown(i, j)}
-                                            onMouseEnter={() => handleCellMouseEnter(i, j)}
-                                            onMouseUp={handleCellMouseUp}
-                                        >
-                                            {cell.letter}
-                                        </div>
-                                    ))
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Word List */}
-                        <div className="grid grid-cols-2 gap-4 mt-6">
-                            <div>
-                                <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                {trans('word_search_puzzle.game_info.words')}
-                                </h3>
-                                {words.map((word) => (
-                                    <div
-                                        key={`translation-${word.id}`}
-                                        className={`p-2 ${
-                                            word.found
-                                                ? 'line-through text-green-600 dark:text-green-400'
-                                                : 'text-gray-700 dark:text-gray-300'
-                                        }`}
-                                    >
-                                        {word.translation}
-                                    </div>
-                                ))}
-                            </div>
-                            {showTranslations && (
-                                <div>
-                                    <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                    {trans('word_search_puzzle.game_info.translation')}
-                                    </h3>
-                                    {words.map((word) => (
-                                        <div
-                                            key={`word-${word.id}`}
-                                            className={`p-2 ${
-                                                word.found
-                                                    ? 'line-through text-green-600 dark:text-green-400'
-                                                    : 'text-gray-700 dark:text-gray-300'
-                                            }`}
-                                        >
-                                            {word.word}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Show/Hide Translations Button */}
-                        <div className="flex items-center gap-4">
-                            <button
-                                onClick={toggleTranslations}
-                                className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
-                            >
-                                {showTranslations ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                                {showTranslations ? trans('word_search_puzzle.game_info.hide_translation') : trans('word_search_puzzle.game_info.show_translation')}
-                            </button>
-                        </div>
-
-                        {/* Completion Message */}
-                        {isGameFinished && (
-                            <div className="mt-6 text-center text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center justify-center">
-                                <FaTrophy className="mr-2 text-yellow-500" />
-                                {trans('word_search_puzzle.game_info.congratulations')} {' '}
-                                {formatTime(timeElapsed)}!
-                            </div>
-                        )}
-                    </div>
+        return (
+          <AuthenticatedLayout
+            header={
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-between items-center w-full"
+              >
+                <div className="flex items-center">
+                  <MdGamepad className="w-6 h-6 text-indigo-500 dark:text-indigo-400" />
+                  <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
+                    Word Search Puzzle Game
+                  </h2>
                 </div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="absolute top-4 right-4"
+                >
+                  <button
+                    onClick={handleExitClick}
+                    className="flex items-center justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200 shadow-md"
+                    title="Exit"
+                  >
+                    <MdClose className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                  </button>
+                </motion.div>
+              </motion.div>
+            }
+          >
+            <Head title="Word Search Puzzle Game" />
+            <div className="py-8">
+              <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="bg-white dark:bg-gray-800 overflow-hidden shadow-lg sm:rounded-lg p-6 border border-gray-200 dark:border-gray-700"
+                >
+                  {/* Game Stats Bar */}
+                  <div className="mb-6 flex flex-wrap gap-4 items-center justify-between bg-gray-50 dark:bg-gray-900 p-4 rounded-lg shadow-inner">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-md"
+                    >
+                      <FaStar className="mr-2 text-yellow-300" />
+                      <span className="font-bold">{trans('word_search_puzzle.game_info.score')}: {score}/{words.length}</span>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg shadow-md"
+                    >
+                      <FaClock className="mr-2 text-gray-100" />
+                      <span className="font-bold">{trans('word_search_puzzle.game_info.time')}: {formatTime(timeElapsed)}</span>
+                    </motion.div>
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row gap-6">
+                    {/* Puzzle Grid Container */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="lg:w-2/3 w-full"
+                    >
+                      <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md mb-4">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200 border-b pb-2 border-gray-200 dark:border-gray-700">
+                          {trans('word_search_puzzle.game_info.puzzle')}
+                        </h3>
+                        <div className="w-full overflow-auto max-h-[60vh] md:max-h-[70vh] p-2">
+                          <div
+                            className="grid gap-1 mx-auto"
+                            style={{
+                              gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
+                              maxWidth: gridSize === 10 ? '450px' : gridSize === 15 ? '540px' : '720px',
+                              width: '100%',
+                            }}
+                          >
+                            {grid.map((row, i) =>
+                              row.map((cell, j) => (
+                                <motion.div
+                                  key={`${i}-${j}`}
+                                  whileHover={{ scale: 1.1 }}
+                                  className={`
+                                    border border-gray-200 dark:border-gray-700
+                                    flex items-center justify-center
+                                    text-sm font-bold
+                                    select-none cursor-pointer
+                                    transition-all duration-150
+                                    rounded-md
+                                    ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800 shadow-md' : 'bg-gray-50 dark:bg-gray-800'}
+                                    ${cell.isFound ? 'bg-green-200 dark:bg-green-800 shadow-md' : ''}
+                                    ${getCellSizeClass()}
+                                  `}
+                                  onMouseDown={() => handleCellMouseDown(i, j)}
+                                  onMouseEnter={() => handleCellMouseEnter(i, j)}
+                                  onMouseUp={handleCellMouseUp}
+                                >
+                                  {cell.letter}
+                                </motion.div>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Word Lists */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="lg:w-1/3 w-full"
+                    >
+                      <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md mb-4">
+                        <div className="flex justify-between items-center border-b pb-2 border-gray-200 dark:border-gray-700 mb-4">
+                          <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">
+                            {trans('word_search_puzzle.game_info.words')}
+                          </h3>
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={toggleTranslations}
+                            className="flex items-center gap-2 px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition-colors text-sm shadow-md"
+                          >
+                            {showTranslations ? <FaEyeSlash className="w-3 h-3" /> : <FaEye className="w-3 h-3" />}
+                            {showTranslations ? trans('word_search_puzzle.game_info.hide_translation') : trans('word_search_puzzle.game_info.show_translation')}
+                          </motion.button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          <div>
+                            <h4 className="text-md font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                              {trans('word_search_puzzle.game_info.translation')}
+                            </h4>
+                            <div className="space-y-1 max-h-[40vh] overflow-y-auto">
+                              {words.map((word) => (
+                                <motion.div
+                                  key={`translation-${word.id}`}
+                                  whileHover={{ x: 3 }}
+                                  className={`p-2 rounded-md ${
+                                    word.found
+                                      ? 'line-through bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                                      : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+                                  }`}
+                                >
+                                  {word.translation}
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <AnimatePresence>
+                            {showTranslations && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                              >
+                                <h4 className="text-md font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                  {trans('word_search_puzzle.game_info.words')}
+                                </h4>
+                                <div className="space-y-1 max-h-[40vh] overflow-y-auto">
+                                  {words.map((word) => (
+                                    <motion.div
+                                      key={`word-${word.id}`}
+                                      whileHover={{ x: 3 }}
+                                      className={`p-2 rounded-md ${
+                                        word.found
+                                          ? 'line-through bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                                          : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
+                                      }`}
+                                    >
+                                      {word.word}
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Completion Message */}
+                  <AnimatePresence>
+                    {isGameFinished && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="mt-6 text-center p-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-lg"
+                      >
+                        <motion.div
+                          animate={{ rotate: [0, 10, -10, 10, 0] }}
+                          transition={{ duration: 0.5, repeat: 3 }}
+                          className="text-2xl font-bold text-white flex items-center justify-center"
+                        >
+                          <FaTrophy className="mr-3 text-yellow-300 text-4xl" />
+                          <div>
+                            <div>{trans('word_search_puzzle.game_info.congratulations')}!</div>
+                            <div className="text-lg font-normal mt-1">Time: {formatTime(timeElapsed)}</div>
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
             </div>
-        </AuthenticatedLayout>
-    );
-}
+          </AuthenticatedLayout>
+        );
+    };
