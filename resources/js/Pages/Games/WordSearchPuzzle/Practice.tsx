@@ -5,8 +5,18 @@ import { useTranslation } from 'react-i18next';
 import { FaClock, FaTrophy, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface Props {
+    auth: {
+        user: {
+            language_pair_id: number;
+        };
+    };
     difficulty: 'easy' | 'medium' | 'hard';
     category: number;
+    words: {
+        id: number;
+        word: string;
+        translation: string;
+    }[];
 }
 
 interface Word {
@@ -22,8 +32,13 @@ interface GridCell {
     isFound: boolean;
 }
 
-export default function WordSearchPuzzlePractice({ difficulty, category }: Props) {
+export default function WordSearchPuzzlePractice({ auth, difficulty, category, words: initialWords }: Props) {
     const { t: trans } = useTranslation();
+
+    useEffect(() => {
+        console.log("Words: ", initialWords);
+
+    }, []);
 
     // Grid size based on difficulty
     const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 30;
@@ -37,13 +52,12 @@ export default function WordSearchPuzzlePractice({ difficulty, category }: Props
         }
     };
 
-    const [words, setWords] = useState<Word[]>([
-        { id: 1, word: 'CASA', translation: 'HOUSE', found: false },
-        { id: 2, word: 'COCHE', translation: 'CAR', found: false },
-        { id: 3, word: 'PERRO', translation: 'DOG', found: false },
-        { id: 4, word: 'GATO', translation: 'CAT', found: false },
-        { id: 5, word: 'LIBRO', translation: 'BOOK', found: false },
-    ]);
+    const [words, setWords] = useState<Word[]>(
+        initialWords.map(word => ({
+            ...word,
+            found: false
+        }))
+    );
 
     const [grid, setGrid] = useState<GridCell[][]>([]);
     const [selectionStart, setSelectionStart] = useState<{ x: number; y: number } | null>(null);

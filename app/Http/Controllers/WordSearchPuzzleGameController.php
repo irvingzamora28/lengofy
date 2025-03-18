@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\LanguagePair;
 use App\Models\WordSearchPuzzleGame;
+use App\Services\NounService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WordSearchPuzzleGameController extends Controller
 {
+
+    public function __construct(
+        private NounService $nounService,
+    ) {
+    }
     public function lobby()
     {
         $user = auth()->user();
@@ -117,9 +124,27 @@ class WordSearchPuzzleGameController extends Controller
             'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()),
         ]);
 
+        $amountOfWords = match ($validated['difficulty']) {
+            'easy' => 5,
+            'medium' => 8,
+            'hard' => 12,
+        };
+
+        $user = auth()->user();
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
+        $words = $this->nounService->getNouns(
+            languageId: $languagePair->target_language_id,
+            translationLanguageId: $languagePair->source_language_id,
+            categoryId: $validated['category'],
+            totalRounds: $amountOfWords
+        );
+
+
         return Inertia::render('Games/WordSearchPuzzle/Practice', [
+            'words' => $words,
             'difficulty' => $validated['difficulty'],
             'category' => $validated['category'],
+            'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
     }
 }
