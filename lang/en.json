@@ -333,6 +333,18 @@
             "in_progress": "In Progress",
             "completed": "Completed"
         },
+        "game_info": {
+            "status": "Status",
+            "category": "Category",
+            "difficulty": "Difficulty",
+            "words": "Words",
+            "translation": "Translation",
+            "time": "Time",
+            "score": "Score",
+            "show_translation": "Show Translation",
+            "hide_translation": "Hide Translation",
+            "congratulations": "Congratulations! 🎉 You found all the words in"
+        },
         "modal_difficulty": {
             "title": "Select Difficulty",
             "easy": "Easy",

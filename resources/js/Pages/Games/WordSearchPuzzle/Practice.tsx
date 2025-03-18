@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Head } from '@inertiajs/react';
+import { Head, router } from "@inertiajs/react";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from 'react-i18next';
 import { FaClock, FaTrophy, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 
 interface Props {
     auth: {
@@ -280,28 +281,48 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         setShowTranslations(!showTranslations);
     };
 
+    const leaveGame = () => {
+            router.visit(route("dashboard"));
+        };
+
+        const handleExitClick = () => {
+            leaveGame();
+        };
+
     return (
         <AuthenticatedLayout
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {trans('word_search_puzzle.practice_mode')}
-                </h2>
-            }
-        >
-            <Head title={trans('word_search_puzzle.practice_mode')} />
-
+                    header={
+                        <div className="flex justify-between items-center w-full">
+                            <div className="flex items-center">
+                                <h2 className="ml-3 font-extrabold text-2xl text-indigo-700 dark:text-indigo-300">
+                                    Word Search Puzzle Game
+                                </h2>
+                            </div>
+                            <div className="absolute top-4 right-4 flex gap-2">
+                                <button
+                                    onClick={handleExitClick}
+                                    className="flex items-center justify-center p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200"
+                                    title="Exit"
+                                >
+                                    <MdClose className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                                </button>
+                            </div>
+                        </div>
+                    }
+                >
+            <Head title="Memory Translation Game Practice" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                         {/* Score and Timer */}
                         <div className="mb-6 flex items-center justify-between">
                             <div className="text-lg font-medium text-gray-800 dark:text-gray-200">
-                                {trans('word_search_puzzle.score')}: {score}/{words.length}
+                                {trans('word_search_puzzle.game_info.score')}: {score}/{words.length}
                             </div>
                             <div className="flex items-center gap-4">
                                 <div className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
                                     <FaClock className="mr-2 text-blue-500" />
-                                    Time: {formatTime(timeElapsed)}
+                                    {trans('word_search_puzzle.game_info.time')}: : {formatTime(timeElapsed)}
                                 </div>
                             </div>
                         </div>
@@ -346,7 +367,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                         <div className="grid grid-cols-2 gap-4 mt-6">
                             <div>
                                 <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                    Words
+                                {trans('word_search_puzzle.game_info.words')}
                                 </h3>
                                 {words.map((word) => (
                                     <div
@@ -364,7 +385,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                             {showTranslations && (
                                 <div>
                                     <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                        Translation
+                                    {trans('word_search_puzzle.game_info.translation')}
                                     </h3>
                                     {words.map((word) => (
                                         <div
@@ -389,7 +410,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                 className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
                             >
                                 {showTranslations ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                                {showTranslations ? trans('Hide Translation') : trans('Show Translation')}
+                                {showTranslations ? trans('word_search_puzzle.game_info.hide_translation') : trans('word_search_puzzle.game_info.show_translation')}
                             </button>
                         </div>
 
@@ -397,7 +418,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                         {isGameFinished && (
                             <div className="mt-6 text-center text-xl font-semibold text-gray-800 dark:text-gray-200 flex items-center justify-center">
                                 <FaTrophy className="mr-2 text-yellow-500" />
-                                {trans('word_search_puzzle.congratulations')} You found all the words in{' '}
+                                {trans('word_search_puzzle.game_info.congratulations')} {' '}
                                 {formatTime(timeElapsed)}!
                             </div>
                         )}
