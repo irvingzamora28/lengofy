@@ -9,4 +9,5 @@ export const GAME_THUMBNAILS: Record<string, string> = {
 export const GAME_DESCRIPTIONS: Record<string, string> = {
     'gender-duel': 'Master German noun genders through an exciting dueling game!',
     'memory-translation': 'Test your German vocabulary with fun memory games! Match cards to find the hidden translations and challenge your memory.',
+    'word-puzzle': 'Challenge your friends in a fast-paced word puzzle game!',
 };

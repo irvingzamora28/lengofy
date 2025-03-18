@@ -1,6 +1,6 @@
 import { ServerWebSocket } from "bun";
 
-export type GameType = 'gender_duel' | 'word_puzzle' | 'memory_translation';
+export type GameType = 'gender_duel' | 'memory_translation' | 'word_puzzle';
 
 export interface BaseGameState {
     id: string;

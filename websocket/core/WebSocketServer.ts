@@ -2,6 +2,7 @@ import { ServerWebSocket } from "bun";
 import { GameType, GameManager, BaseGameState } from './types';
 import { GenderDuelManager } from '../games/gender-duel/GenderDuelManager';
 import { MemoryTranslationManager } from '../games/memory-translation/MemoryTranslationManager';
+import { WordPuzzleManager } from '../games/word-puzzle/WordPuzzleManager';
 
 export class WebSocketServer {
     private gameManagers: Map<GameType, GameManager<BaseGameState>>;
@@ -14,10 +15,12 @@ export class WebSocketServer {
         // Initialize lobby connections for each game type
         this.lobbyConnections.set('gender_duel', new Set());
         this.lobbyConnections.set('memory_translation', new Set());
+        this.lobbyConnections.set('word_puzzle', new Set());
 
         // Initialize game managers with their respective lobby connections
         this.gameManagers.set('gender_duel', new GenderDuelManager(this.lobbyConnections.get('gender_duel')!));
         this.gameManagers.set('memory_translation', new MemoryTranslationManager(this.lobbyConnections.get('memory_translation')!));
+        this.gameManagers.set('word_puzzle', new WordPuzzleManager(this.lobbyConnections.get('word_puzzle')!));
     }
 
     getWebSocketConfig() {

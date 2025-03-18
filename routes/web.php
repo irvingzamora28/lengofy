@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\WordPuzzleGameController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -206,6 +207,19 @@ Route::middleware('auth')->group(function () {
             Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
             Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
         });
+
+        // Word Puzzle Routes
+        Route::prefix('word-puzzle')->name('games.word-puzzle.')->group(function () {
+            Route::get('/', [WordPuzzleGameController::class, 'lobby'])->name('lobby');
+            Route::post('/create', [WordPuzzleGameController::class, 'create'])->name('create');
+            Route::post('/validate-word', [WordPuzzleGameController::class, 'validateWord'])->name('validate-word');
+            Route::post('/found-word', [WordPuzzleGameController::class, 'storeFoundWord']);
+            Route::post('/{wordPuzzleGame}/join', [WordPuzzleGameController::class, 'join'])->name('join');
+            Route::get('/{wordPuzzleGame}/join-from-iWordPuzzleGameController', [MemoryTranslationGameController::class, 'joinFromInvite'])->name('join-from-invite');
+            Route::post('/{wordPuzzleGame}/join', [WordPuzzleGameController::class, 'join'])->name('join');
+            Route::post('/{wordPuzzleGame}/ready', [WordPuzzleGameController::class, 'ready'])->name('ready');
+            Route::delete('/{wordPuzzleGame}/leave', [WordPuzzleGameController::class, 'leave'])->name('leave');
+        });
     });
 
     // Score routes
@@ -223,6 +237,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/lessons/search', [LessonController::class, 'search'])->name('lessons.search');
     Route::get('/lessons/{level}/{lesson_number}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('/lessons/{level}/{lesson_number}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
+
 });
 
 // Admin routes
@@ -238,13 +253,13 @@ Route::prefix('leng-admon')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::post('/logout', [App\Http\Controllers\Admin\Auth\AdminAuthController::class, 'logout'])
             ->name('logout');
-        
+
         // Analytics routes
         Route::get('/feature-analytics', [App\Http\Controllers\Admin\FeatureAnalyticsController::class, 'index'])
             ->name('feature-analytics');
         Route::get('/page-analytics', [App\Http\Controllers\Admin\PageAnalyticsController::class, 'index'])
             ->name('page-analytics');
-        
+
         // Users routes
         Route::get('/users', [App\Http\Controllers\Admin\UsersController::class, 'index'])
             ->name('users');

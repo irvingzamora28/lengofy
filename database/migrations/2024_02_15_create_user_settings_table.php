@@ -11,36 +11,39 @@ return new class extends Migration
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                  ->constrained()
-                  ->onDelete('cascade');
+                ->constrained()
+                ->onDelete('cascade');
 
             // Game-specific settings
             $table->enum('gender_duel_difficulty', ['easy', 'medium', 'hard'])
-                  ->default('medium')
-                  ->nullable();
+                ->default('medium')
+                ->nullable();
             $table->boolean('gender_duel_sound')
-                  ->default(true)
-                  ->nullable();
+                ->default(true)
+                ->nullable();
             $table->boolean('gender_duel_timer')
-                  ->default(true)
-                  ->nullable();
+                ->default(true)
+                ->nullable();
 
             $table->enum('memory_translation_difficulty', ['easy', 'medium', 'hard'])
-                  ->default('medium')
-                  ->nullable();
+                ->default('medium')
+                ->nullable();
+            $table->enum('word_puzzle_difficulty', ['easy', 'medium', 'hard'])
+                ->default('medium')
+                ->nullable();
 
             // Global user settings
             $table->string('preferred_language')
-                  ->nullable();
+                ->nullable();
             $table->boolean('dark_mode')
-                  ->default(false)
-                  ->nullable();
+                ->default(false)
+                ->nullable();
             $table->string('timezone')
-                  ->nullable();
+                ->nullable();
 
             // Flexible JSON for future/rare settings
             $table->json('additional_settings')
-                  ->nullable();
+                ->nullable();
 
             $table->timestamps();
 

@@ -89,6 +89,11 @@ class User extends Authenticatable
         return $this->userSetting?->gender_duel_timer ?? true;
     }
 
+    public function getWordPuzzleDifficultyAttribute()
+    {
+        return $this->userSetting?->word_puzzle_difficulty ?? 'medium';
+    }
+
     public function scores()
     {
         return $this->hasMany(Score::class);
@@ -106,6 +111,7 @@ class User extends Authenticatable
         $attributes['gender_duel_difficulty'] = $this->gender_duel_difficulty;
         $attributes['gender_duel_sound'] = $this->gender_duel_sound;
         $attributes['gender_duel_timer'] = $this->gender_duel_timer;
+        $attributes['word_puzzle_difficulty'] = $this->word_puzzle_difficulty;
 
         return $attributes;
     }
@@ -118,6 +124,7 @@ class User extends Authenticatable
                 'gender_duel_difficulty' => 'medium',
                 'gender_duel_sound' => true,
                 'gender_duel_timer' => true,
+                'word_puzzle_difficulty' => 'medium',
             ]);
         });
     }

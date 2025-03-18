@@ -24,6 +24,11 @@ class GameSeeder extends Seeder
                 'slug' => 'gender-duel',
                 'supported_language_pairs' => ['en-de', 'es-de'], // Only available when target is German and source is English or Spanish
             ],
+            [
+                'name' => 'Word Puzzle',
+                'slug' => 'word-puzzle',
+                'supported_language_pairs' => null, // Available for all language pairs
+            ],
         ];
 
         foreach ($games as $game) {
