@@ -4,6 +4,17 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from 'react-i18next';
 import { FaClock, FaTrophy, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
+import matchSound from "@/assets/audio/correct-match.mp3";
+
+const playSound = (() => {
+    const audio = new Audio(matchSound);
+    return () => {
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+            // Ignore errors from browsers blocking autoplay
+        });
+    };
+})();
 
 interface Props {
     auth: {
@@ -260,6 +271,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         );
 
         if (wordIndex !== -1) {
+            playSound(); // Play sound when word is found
             setWords((prevWords) => {
                 const newWords = [...prevWords];
                 newWords[wordIndex] = { ...newWords[wordIndex], found: true };
