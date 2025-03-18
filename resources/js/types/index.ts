@@ -155,3 +155,25 @@ export interface MemoryTranslationGameState {
     category: string;
     winner: MemoryTranslationGamePlayer | null;
 }
+
+
+export interface WordSearchPuzzleGame {
+    id: number;
+    status: 'waiting' | 'in_progress' | 'completed';
+    players: WordSearchPuzzlePlayer[];
+    current_letters: string[];
+    round_time: number;
+    round_start_time: number;
+    max_players: number;
+    language_name: string;
+    words_found: { [key: string]: string[] } | null; // From backend it comes as an object
+}
+
+export interface WordSearchPuzzlePlayer {
+    id: number;
+    user_id: number;
+    player_name: string;
+    score: number;
+    is_ready: boolean;
+    is_host: boolean;
+}

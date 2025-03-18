@@ -6,48 +6,90 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\MemoryTranslationGame;
 use App\Models\GenderDuelGame;
+use App\Models\WordSearchPuzzleGame;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsurePlayerInGame
 {
     /**
+     * Game configurations for easy addition of new games
+     */
+    private const GAME_CONFIGS = [
+        'memory-translation' => [
+            'model' => MemoryTranslationGame::class,
+            'route_param' => 'memoryTranslationGame',
+        ],
+        'word-search-puzzle' => [
+            'model' => WordSearchPuzzleGame::class,
+            'route_param' => 'wordSearchPuzzleGame',
+        ],
+        'gender-duel' => [
+            'model' => GenderDuelGame::class,
+            'route_param' => 'genderDuelGame',
+        ],
+    ];
+
+    /**
      * Handle an incoming request.
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $routeName = $request->route()->getName();
-        $gameType = str_contains($routeName, 'memory-translation') ? 'memory-translation' : 'gender-duel';
-        
-        // Get game model from route parameters
-        if ($gameType === 'memory-translation') {
-            $game = $request->route('memoryTranslationGame');
-            if (!$game instanceof MemoryTranslationGame) {
-                abort(404);
-            }
-        } else {
-            $game = $request->route('genderDuelGame');
-            if (!$game instanceof GenderDuelGame) {
-                abort(404);
-            }
+        $gameType = $this->determineGameType($request);
+        $config = self::GAME_CONFIGS[$gameType];
+
+        $game = $request->route($config['route_param']);
+
+        // Check game instance type
+        if (!($game instanceof $config['model'])) {
+            abort(404);
         }
 
         // If user is not logged in, redirect to invite page
         if (!auth()->check()) {
-            return redirect()->route("games.{$gameType}.invite", [
-                $gameType === 'memory-translation' ? 'memoryTranslationGame' : 'genderDuelGame' => $game->id
-            ]);
+            return $this->redirectToInvite($gameType, $config['route_param'], $game);
         }
 
         // Check if logged-in user is in game
-        $isInGame = $game->players()->where('user_id', auth()->id())->exists();
-        
-        if (!$isInGame) {
-            // Redirect to join-from-invite route
-            return redirect()->route("games.{$gameType}.join-from-invite", [
-                $gameType === 'memory-translation' ? 'memoryTranslationGame' : 'genderDuelGame' => $game->id
-            ]);
+        if (!$game->players()->where('user_id', auth()->id())->exists()) {
+            return $this->redirectToJoinFromInvite($gameType, $config['route_param'], $game);
         }
 
         return $next($request);
+    }
+
+    /**
+     * Determine the game type from the route name
+     */
+    private function determineGameType(Request $request): string
+    {
+        $routeName = $request->route()->getName();
+
+        foreach (array_keys(self::GAME_CONFIGS) as $gameType) {
+            if (str_contains($routeName, $gameType)) {
+                return $gameType;
+            }
+        }
+
+        return 'gender-duel'; // Default fallback
+    }
+
+    /**
+     * Generate redirect response to invite page
+     */
+    private function redirectToInvite(string $gameType, string $routeParam, $game): Response
+    {
+        return redirect()->route("games.{$gameType}.invite", [
+            $routeParam => $game->id
+        ]);
+    }
+
+    /**
+     * Generate redirect response to join from invite page
+     */
+    private function redirectToJoinFromInvite(string $gameType, string $routeParam, $game): Response
+    {
+        return redirect()->route("games.{$gameType}.join-from-invite", [
+            $routeParam => $game->id
+        ]);
     }
 }

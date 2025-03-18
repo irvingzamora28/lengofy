@@ -75,21 +75,38 @@ class WordSearchPuzzleGameController extends Controller
         ]);
 
         return redirect()->route('games.word-search-puzzle.show', [
-            'WordSearchPuzzleGame' => $game,
+            'wordSearchPuzzleGame' => $game,
             'justCreated' => true,
         ]);
     }
 
-    public function show(WordSearchPuzzleGame $WordSearchPuzzleGame, Request $request)
+    public function show(WordSearchPuzzleGame $wordSearchPuzzleGame, Request $request)
     {
-        $WordSearchPuzzleGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+        $wordSearchPuzzleGame->load(['players', 'languagePair.sourceLanguage', 'languagePair.targetLanguage']);
+
+        $amountOfWords = match ($wordSearchPuzzleGame->difficulty) {
+            'easy' => 5,
+            'medium' => 8,
+            'hard' => 12,
+        };
+
+        // Get words for the game
+        $words = $this->nounService->getNouns(
+            languageId: $wordSearchPuzzleGame->languagePair->target_language_id,
+            translationLanguageId: $wordSearchPuzzleGame->languagePair->source_language_id,
+            categoryId: $wordSearchPuzzleGame->category_id,
+            totalRounds: $amountOfWords,
+        );
+
+        // Refresh the game instance to get the latest state
+        $wordSearchPuzzleGame->refresh();
 
         return Inertia::render('Games/WordSearchPuzzle/Show', [
             'justCreated' => $request->boolean('justCreated', false),
             'word_search_puzzle_game' => [
-                'id' => $WordSearchPuzzleGame->id,
-                'status' => $WordSearchPuzzleGame->status,
-                'players' => $WordSearchPuzzleGame->players->map(fn($player) => [
+                'id' => $wordSearchPuzzleGame->id,
+                'status' => $wordSearchPuzzleGame->status,
+                'players' => $wordSearchPuzzleGame->players->map(fn($player) => [
                     'id' => $player->id,
                     'user_id' => $player->user_id,
                     'player_name' => $player->player_name,
@@ -97,21 +114,22 @@ class WordSearchPuzzleGameController extends Controller
                     'is_ready' => $player->is_ready,
                     'is_host' => $player->is_host,
                 ]),
-                'max_players' => $WordSearchPuzzleGame->max_players,
-                'difficulty' => $WordSearchPuzzleGame->difficulty,
-                'category_id' => $WordSearchPuzzleGame->category_id,
+                'max_players' => $wordSearchPuzzleGame->max_players,
+                'difficulty' => $wordSearchPuzzleGame->difficulty,
+                'category_id' => $wordSearchPuzzleGame->category_id,
                 'language_pair' => [
                     'source_language' => [
-                        'id' => $WordSearchPuzzleGame->languagePair->sourceLanguage->id,
-                        'code' => $WordSearchPuzzleGame->languagePair->sourceLanguage->code,
-                        'name' => $WordSearchPuzzleGame->languagePair->sourceLanguage->name,
+                        'id' => $wordSearchPuzzleGame->languagePair->sourceLanguage->id,
+                        'code' => $wordSearchPuzzleGame->languagePair->sourceLanguage->code,
+                        'name' => $wordSearchPuzzleGame->languagePair->sourceLanguage->name,
                     ],
                     'target_language' => [
-                        'id' => $WordSearchPuzzleGame->languagePair->targetLanguage->id,
-                        'code' => $WordSearchPuzzleGame->languagePair->targetLanguage->code,
-                        'name' => $WordSearchPuzzleGame->languagePair->targetLanguage->name,
+                        'id' => $wordSearchPuzzleGame->languagePair->targetLanguage->id,
+                        'code' => $wordSearchPuzzleGame->languagePair->targetLanguage->code,
+                        'name' => $wordSearchPuzzleGame->languagePair->targetLanguage->name,
                     ],
                 ],
+                'words' => $words,
             ],
             'wsEndpoint' => config('websocket.game_endpoint'),
         ]);
