@@ -61,7 +61,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
     const getCellSizeClass = () => {
         switch (gridSize) {
             case 10: return 'h-10 w-10'; // 40px for 10x10
-            case 15: return 'h-9 w-9';   // 36px for 15x15
+            case 15: return 'h-6 w-6 md:h-9 md:w-9';   // 36px for 15x15
             default: return 'h-6 w-6';   // 24px for 30x30
         }
     };
@@ -374,7 +374,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                         </h3>
                         <div className="w-full overflow-auto max-h-[60vh] md:max-h-[70vh] p-2">
                           <div
-                            className="grid gap-1 mx-auto"
+                            className="grid mx-auto"
                             style={{
                               gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
                               maxWidth: gridSize === 10 ? '450px' : gridSize === 15 ? '540px' : '720px',
@@ -392,7 +392,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                     text-sm font-bold
                                     select-none cursor-pointer
                                     transition-all duration-150
-                                    rounded-md
                                     ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800 shadow-md' : 'bg-gray-50 dark:bg-gray-800'}
                                     ${cell.isFound ? 'bg-green-200 dark:bg-green-800 shadow-md' : ''}
                                     ${getCellSizeClass()}
