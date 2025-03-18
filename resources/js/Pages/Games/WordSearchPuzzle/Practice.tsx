@@ -299,13 +299,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                 {trans('word_search_puzzle.score')}: {score}/{words.length}
                             </div>
                             <div className="flex items-center gap-4">
-                                <button
-                                    onClick={toggleTranslations}
-                                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
-                                >
-                                    {showTranslations ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                                    {showTranslations ? trans('Hide Translations') : trans('Show Translations')}
-                                </button>
                                 <div className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
                                     <FaClock className="mr-2 text-blue-500" />
                                     Time: {formatTime(timeElapsed)}
@@ -353,40 +346,51 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                         <div className="grid grid-cols-2 gap-4 mt-6">
                             <div>
                                 <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                    Spanish
+                                    Words
                                 </h3>
                                 {words.map((word) => (
                                     <div
-                                        key={`word-${word.id}`}
+                                        key={`translation-${word.id}`}
                                         className={`p-2 ${
                                             word.found
                                                 ? 'line-through text-green-600 dark:text-green-400'
                                                 : 'text-gray-700 dark:text-gray-300'
                                         }`}
                                     >
-                                        {word.word}
+                                        {word.translation}
                                     </div>
                                 ))}
                             </div>
                             {showTranslations && (
                                 <div>
                                     <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-                                        English
+                                        Translation
                                     </h3>
                                     {words.map((word) => (
                                         <div
-                                            key={`translation-${word.id}`}
+                                            key={`word-${word.id}`}
                                             className={`p-2 ${
                                                 word.found
                                                     ? 'line-through text-green-600 dark:text-green-400'
                                                     : 'text-gray-700 dark:text-gray-300'
                                             }`}
                                         >
-                                            {word.translation}
+                                            {word.word}
                                         </div>
                                     ))}
                                 </div>
                             )}
+                        </div>
+
+                        {/* Show/Hide Translations Button */}
+                        <div className="flex items-center gap-4">
+                            <button
+                                onClick={toggleTranslations}
+                                className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors"
+                            >
+                                {showTranslations ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+                                {showTranslations ? trans('Hide Translation') : trans('Show Translation')}
+                            </button>
                         </div>
 
                         {/* Completion Message */}
