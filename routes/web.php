@@ -214,11 +214,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/create', [WordSearchPuzzleGameController::class, 'create'])->name('create');
             Route::post('/validate-word', [WordSearchPuzzleGameController::class, 'validateWord'])->name('validate-word');
             Route::post('/found-word', [WordSearchPuzzleGameController::class, 'storeFoundWord']);
-            Route::post('/{WordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
-            Route::get('/{WordSearchPuzzleGame}/join-from-iWordSearchPuzzleGameController', [MemoryTranslationGameController::class, 'joinFromInvite'])->name('join-from-invite');
-            Route::post('/{WordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
-            Route::post('/{WordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
-            Route::delete('/{WordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
+            Route::post('{wordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
+            Route::get('/{wordSearchPuzzleGame}/join-from-invite', [WordSearchPuzzleGameController::class, 'joinFromInvite'])->name('join-from-invite');
+            Route::post('{wordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
+            Route::delete('{wordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
             Route::get('/practice', [WordSearchPuzzleGameController::class, 'practice'])->name('practice');
         });
     });

@@ -237,7 +237,7 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                                                         </div>
 
                                                         <Link
-                                                            href={route('games.word-search-puzzle.join', game.id)}
+                                                            href={`/games/word-search-puzzle/${game.id}/join`}
                                                             method="post"
                                                             as="button"
                                                             className="w-full bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white font-bold py-2 sm:py-3 rounded-lg transition-colors flex items-center justify-center text-sm sm:text-base"

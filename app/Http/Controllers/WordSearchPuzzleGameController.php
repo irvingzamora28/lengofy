@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\LanguagePair;
 use App\Models\WordSearchPuzzleGame;
 use App\Services\NounService;
+use App\Services\WordSearchPuzzleGameService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,8 +15,8 @@ class WordSearchPuzzleGameController extends Controller
 
     public function __construct(
         private NounService $nounService,
-    ) {
-    }
+        private WordSearchPuzzleGameService $wordSearchPuzzleGameService
+    ) {}
     public function lobby()
     {
         $user = auth()->user();
@@ -164,5 +165,39 @@ class WordSearchPuzzleGameController extends Controller
             'category' => $validated['category'],
             'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
+    }
+
+    public function join(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        return $this->handleJoinGame($wordSearchPuzzleGame);
+    }
+
+    public function joinFromInvite(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        return $this->handleJoinGame($wordSearchPuzzleGame);
+    }
+
+    private function handleJoinGame(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        $user = auth()->user();
+
+        if ($wordSearchPuzzleGame->language_pair_id !== $user->language_pair_id) {
+            return back()->with('error', 'You can only join games that match your selected language pair.');
+        }
+
+        if ($wordSearchPuzzleGame->players()->count() >= $wordSearchPuzzleGame->max_players) {
+            return back()->with('error', 'This game is full.');
+        }
+
+        if ($wordSearchPuzzleGame->players()->where('user_id', $user->id)->exists()) {
+            return back()->with('error', 'You are already in this game.');
+        }
+
+        try {
+            $this->wordSearchPuzzleGameService->joinGame($wordSearchPuzzleGame, $user);
+            return redirect()->route('games.word-search-puzzle.show', $wordSearchPuzzleGame);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }
