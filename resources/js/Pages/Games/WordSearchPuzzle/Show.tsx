@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { WordSearchPuzzleGame } from '@/types/games';
+import { WordSearchPuzzleGame } from '@/types';
 import toast from 'react-hot-toast';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 import { IoPersonAddSharp } from 'react-icons/io5';
@@ -121,22 +121,27 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         const ws = new WebSocket(wsEndpoint);
         wsRef.current = ws;
 
-        ws.onopen = () => {
-            console.log('Connected to Word Search Puzzle game WebSocket');
+        ws.onopen = async () => {
+            console.log('Connected to Word Search Puzzle game WebSocket about to join the game room');
 
+            // Join the game room
             ws.send(JSON.stringify({
                 type: 'join_word_search_puzzle_game',
                 gameId: word_search_puzzle_game.id,
                 userId: auth.user.id,
                 gameType: 'word_search_puzzle',
                 data: {
-                    player_id: currentPlayer?.id,
-                    language_name: word_search_puzzle_game.language_name,
-                    max_players: word_search_puzzle_game.max_players,
+                    words: word_search_puzzle_game.words,
+                    players: word_search_puzzle_game.players,
+                    source_language: word_search_puzzle_game.source_language,
+                    target_language: word_search_puzzle_game.target_language,
+                    max_players: word_search_puzzle_game.max_players
                 }
             }));
 
+            // If this is a newly created game, broadcast it to the lobby
             if (justCreated) {
+                console.log('Broadcasting new word search puzzle game to lobby');
                 ws.send(JSON.stringify({
                     type: 'word_search_puzzle_game_created',
                     gameId: word_search_puzzle_game.id,

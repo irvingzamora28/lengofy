@@ -9,7 +9,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
     }
 
     handleMessage(ws: ServerWebSocket, message: BaseGameMessage): void {
-        const { type, gameId, userId } = message;
+        const { type, gameId, userId, data } = message;
         console.log('Received message:', type, 'for game:', gameId);
 
         switch (type) {
@@ -59,7 +59,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 status: "waiting",
                 players: (message.data?.players || []).map(player => ({
                     ...player,
-                    score: 0
+                    score: 0,
                 })),
                 words_found: new Map(),
                 round_time: 180,

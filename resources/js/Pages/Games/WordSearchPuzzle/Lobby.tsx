@@ -39,7 +39,7 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
         wsRef.current = ws;
 
         ws.onopen = () => {
-            console.log('Connected to Word Puzzle lobby WebSocket');
+            console.log('Connected to Word Search Puzzle lobby WebSocket');
             ws.send(JSON.stringify({
                 type: 'join_lobby',
                 gameType: 'word_search_puzzle',
@@ -49,18 +49,19 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            console.log('Word Puzzle WebSocket message received:', data);
+            console.log('Word Search Puzzle WebSocket message received:', data);
 
             if (data.type === 'word_search_puzzle_game_created') {
-                console.log('New word puzzle game created:', data.game);
+                console.log('New word search puzzle game created:', data.game);
                 setGames(prevGames => {
+                    // Check if game already exists
                     if (prevGames.some(g => g.id === data.game.id)) {
                         return prevGames;
                     }
                     return [...prevGames, data.game];
                 });
             } else if (data.type === 'word_search_puzzle_game_ended') {
-                console.log('Word puzzle game ended:', data);
+                console.log('Word search puzzle game ended:', data);
                 setGames(prevGames => prevGames.filter(game => game.id !== data.gameId));
             }
         };

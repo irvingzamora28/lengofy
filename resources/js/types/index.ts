@@ -166,6 +166,9 @@ export interface WordSearchPuzzleGame {
     round_start_time: number;
     max_players: number;
     language_name: string;
+    source_language: Language;
+    target_language: Language;
+    language_pair_id: number;
     words_found: { [key: string]: string[] } | null; // From backend it comes as an object
 }
 

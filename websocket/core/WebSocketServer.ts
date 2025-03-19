@@ -81,6 +81,12 @@ export class WebSocketServer {
                 if (gameManager) {
                     gameManager.handleMessage(ws, data);
                 }
+            } else if (data.type.includes('word_search_puzzle') || data.gameType === 'word_search_puzzle') {
+                console.log("It's a word search puzzle message");
+                const gameManager = this.gameManagers.get('word_search_puzzle');
+                if (gameManager) {
+                    gameManager.handleMessage(ws, data);
+                }
             }
 
             // Handle player-related messages

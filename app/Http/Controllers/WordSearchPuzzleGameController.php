@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\LanguagePair;
 use App\Models\WordSearchPuzzleGame;
+use App\Services\LanguageService;
 use App\Services\NounService;
 use App\Services\WordSearchPuzzleGameService;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class WordSearchPuzzleGameController extends Controller
 
     public function __construct(
         private NounService $nounService,
-        private WordSearchPuzzleGameService $wordSearchPuzzleGameService
+        private WordSearchPuzzleGameService $wordSearchPuzzleGameService,
+        private LanguageService $languageService,
     ) {}
     public function lobby()
     {
@@ -36,11 +38,13 @@ class WordSearchPuzzleGameController extends Controller
                             'id' => $WordSearchPuzzleGame->languagePair->source_language_id,
                             'code' => $WordSearchPuzzleGame->languagePair->sourceLanguage->code,
                             'name' => $WordSearchPuzzleGame->languagePair->sourceLanguage->name,
+                            'flag' => $this->languageService->getFlag($WordSearchPuzzleGame->languagePair->sourceLanguage->code),
                         ],
                         'target_language' => [
                             'id' => $WordSearchPuzzleGame->languagePair->target_language_id,
                             'code' => $WordSearchPuzzleGame->languagePair->targetLanguage->code,
                             'name' => $WordSearchPuzzleGame->languagePair->targetLanguage->name,
+                            'flag' => $this->languageService->getFlag($WordSearchPuzzleGame->languagePair->targetLanguage->code),
                         ],
                         'difficulty' => $WordSearchPuzzleGame->difficulty,
                         'category_id' => $WordSearchPuzzleGame->category_id,
@@ -118,17 +122,17 @@ class WordSearchPuzzleGameController extends Controller
                 'max_players' => $wordSearchPuzzleGame->max_players,
                 'difficulty' => $wordSearchPuzzleGame->difficulty,
                 'category_id' => $wordSearchPuzzleGame->category_id,
-                'language_pair' => [
-                    'source_language' => [
-                        'id' => $wordSearchPuzzleGame->languagePair->sourceLanguage->id,
-                        'code' => $wordSearchPuzzleGame->languagePair->sourceLanguage->code,
-                        'name' => $wordSearchPuzzleGame->languagePair->sourceLanguage->name,
-                    ],
-                    'target_language' => [
-                        'id' => $wordSearchPuzzleGame->languagePair->targetLanguage->id,
-                        'code' => $wordSearchPuzzleGame->languagePair->targetLanguage->code,
-                        'name' => $wordSearchPuzzleGame->languagePair->targetLanguage->name,
-                    ],
+                'source_language' => [
+                    'id' => $wordSearchPuzzleGame->languagePair->sourceLanguage->id,
+                    'code' => $wordSearchPuzzleGame->languagePair->sourceLanguage->code,
+                    'name' => $wordSearchPuzzleGame->languagePair->sourceLanguage->name,
+                    'flag' => $this->languageService->getFlag($wordSearchPuzzleGame->languagePair->sourceLanguage->code),
+                ],
+                'target_language' => [
+                    'id' => $wordSearchPuzzleGame->languagePair->targetLanguage->id,
+                    'code' => $wordSearchPuzzleGame->languagePair->targetLanguage->code,
+                    'name' => $wordSearchPuzzleGame->languagePair->targetLanguage->name,
+                    'flag' => $this->languageService->getFlag($wordSearchPuzzleGame->languagePair->targetLanguage->code),
                 ],
                 'words' => $words,
             ],
