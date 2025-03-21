@@ -55,14 +55,14 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
     }, []);
 
     // Grid size based on difficulty
-    const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 30;
+    const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 20;
 
     // Dynamic cell size based on grid size for better design
     const getCellSizeClass = () => {
         switch (gridSize) {
             case 10: return 'h-10 w-10'; // 40px for 10x10
-            case 15: return 'h-6 w-6 md:h-9 md:w-9';   // 36px for 15x15
-            default: return 'h-6 w-6';   // 24px for 30x30
+            case 15: return 'h-6 w-6 md:h-9 md:w-9'; // 24px md:36px for 15x15
+            default: return 'h-4 w-4 md:h-9 md:w-9'; // 16px md:36px for 20x20
         }
     };
 
@@ -372,12 +372,12 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                         <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200 border-b pb-2 border-gray-200 dark:border-gray-700">
                           {trans('word_search_puzzle.game_info.puzzle')}
                         </h3>
-                        <div className="w-full overflow-auto max-h-[60vh] md:max-h-[70vh] p-2">
+                        <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2">
                           <div
                             className="grid mx-auto"
                             style={{
                               gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-                              maxWidth: gridSize === 10 ? '450px' : gridSize === 15 ? '540px' : '720px',
+                              maxWidth: gridSize === 10 ? '400px' : gridSize === 15 ? '540px' : '720px',
                               width: '100%',
                             }}
                           >
