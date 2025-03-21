@@ -204,4 +204,10 @@ class WordSearchPuzzleGameController extends Controller
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+    public function leave(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        $this->wordSearchPuzzleGameService->leaveGame($wordSearchPuzzleGame, auth()->user());
+        return redirect()->route('games.word-search-puzzle.lobby');
+    }
 }

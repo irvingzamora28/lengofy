@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\WordSearchPuzzleGameStatus;
 use App\Models\User;
 use App\Models\WordSearchPuzzleGame;
 use Illuminate\Database\Eloquent\Model;
@@ -70,6 +71,20 @@ class WordSearchPuzzleGameService
     }
 
     /**
+     * Ends a Memory Translation game.
+     *
+     * @param Model $game The game to end.
+     */
+    public function endGame(Model $game): void
+    {
+        if (!$game instanceof WordSearchPuzzleGame) {
+            throw new \InvalidArgumentException('Invalid game type');
+        }
+
+        $game->update(['status' => WordSearchPuzzleGameStatus::ENDED]);
+    }
+
+    /**
      * Handles a player leaving the game.
      *
      * @param WordSearchPuzzleGame $game The game.
@@ -78,15 +93,25 @@ class WordSearchPuzzleGameService
      */
     public function leaveGame(WordSearchPuzzleGame $game, User $user): bool
     {
-        $this->removePlayer($game, $user);
-
-        // If game was in progress and not enough players, end it
-        if ($game->status === 'in_progress' && $game->players()->count() < 2) {
-            $game->update(['status' => 'completed']);
-            return true;
+        if (!$game instanceof WordSearchPuzzleGame) {
+            throw new \InvalidArgumentException('Invalid game type');
         }
 
-        return false;
+        // Logic for a user leaving the game
+        $this->removePlayer($game, $user);
+
+        // Check if the game should end
+        if ($game->players()->count() === 0) {
+            $this->endGame($game);
+            return true; // Game has ended
+        }
+        // If game was in progress and not enough players, end it
+        else if ($game->status === WordSearchPuzzleGameStatus::IN_PROGRESS && $game->players()->count() < 2) {
+            $this->endGame($game);
+            return true; // Game has ended
+        }
+
+        return false; // Game is still ongoing
     }
 
     /**
