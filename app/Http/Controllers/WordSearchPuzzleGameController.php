@@ -205,6 +205,16 @@ class WordSearchPuzzleGameController extends Controller
         }
     }
 
+    public function ready(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        try {
+            $this->wordSearchPuzzleGameService->markPlayerReady($wordSearchPuzzleGame, auth()->id());
+            return to_route('games.word-search-puzzle.show', $wordSearchPuzzleGame);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
     public function leave(WordSearchPuzzleGame $wordSearchPuzzleGame)
     {
         $this->wordSearchPuzzleGameService->leaveGame($wordSearchPuzzleGame, auth()->user());

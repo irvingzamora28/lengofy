@@ -131,8 +131,15 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
 
+        console.log("GameId: ", gameId);
+        console.log("State: ", state);
+        console.log("Room: ", room);
+
         if (!state || !room) return;
 
+        console.log('Player ready:', message.data?.player_id, 'in game:', gameId);
+
+        // First broadcast the player ready message to all clients
         this.broadcast(room, {
             type: "word_search_puzzle_player_ready",
             gameId: gameId,
@@ -140,6 +147,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             data: message.data
         });
 
+        // Then update the game state
         state.players = state.players.map(player => {
             if (player.id === message.data?.player_id || player.user_id === message.userId) {
                 return { ...player, is_ready: true };
@@ -151,6 +159,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             (state.players.length >= 2 && state.players.every(player => player.is_ready));
 
         if (allReady && state.status === 'waiting') {
+            console.log('All players ready, starting game:', gameId);
             this.handleStart(gameId);
         } else {
             this.setState(gameId, state);

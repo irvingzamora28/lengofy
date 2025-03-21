@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { WordSearchPuzzleGame } from '@/types';
+import { WordSearchPuzzleGame, WordSearchPuzzleGameState } from '@/types';
 import toast from 'react-hot-toast';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 import { IoPersonAddSharp } from 'react-icons/io5';
@@ -212,6 +212,15 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                             setShowExitConfirmation(false);
                         }
 
+                        if (data.data.status === 'waiting' && prevState.status === 'completed') {
+                            // Reset states when game is restarted
+
+                        }
+
+                        if (data.data.status === 'completed') {
+                            handleGameCompletion(data.data);
+                        }
+
                         if (data.data.players && data.data.players.length === 0) {
                             router.visit('/games/word-search-puzzle');
                             return prevState;
@@ -263,6 +272,15 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         setSelectedCells([{ x, y }]);
     };
 
+    const handleGameCompletion = async (data: WordSearchPuzzleGameState) => {
+        const currentPlayer = data.players.find(player => player.user_id === auth.user.id);
+        if (!currentPlayer) {
+            console.error('Current player not found:', auth.user.id);
+            return;
+        }
+        // Calculate scores
+    };
+
     const handleCellMouseEnter = (x: number, y: number) => {
         if (!isDragging) return;
 
@@ -303,16 +321,27 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     const handleReady = () => {
-        wsRef.current?.send(JSON.stringify({
-            type: 'player_ready',
-            gameId: gameState.id,
-            gameType: 'word_search_puzzle',
-            userId: auth.user.id,
-            data: {
-                player_id: currentPlayer?.id,
-                user_id: auth.user.id
+        router.post(route(`games.word-search-puzzle.ready`, `${gameState.id}`), {}, {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                console.log("Sending ready message");
+
+                if (wsRef.current?.readyState === WebSocket.OPEN) {
+                    console.log("WebSocket is open, sending ready message");
+                    wsRef.current.send(JSON.stringify({
+                        type: 'word_search_puzzle_player_ready',
+                        gameId: gameState.id,
+                        gameType: 'word_search_puzzle',
+                        userId: auth.user.id,
+                        data: {
+                            player_id: currentPlayer?.id,
+                            user_id: auth.user.id
+                        }
+                    }));
+                }
             }
-        }));
+        });
     };
 
     return (

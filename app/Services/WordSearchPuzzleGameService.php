@@ -61,15 +61,23 @@ class WordSearchPuzzleGameService
      */
     public function markPlayerReady(WordSearchPuzzleGame $game, int $userId): void
     {
+        if (!$game instanceof WordSearchPuzzleGame) {
+            throw new \InvalidArgumentException('Invalid game type');
+        }
+
         $player = $game->players()->where('user_id', $userId)->first();
 
         if (!$player) {
-            throw new \Exception('Player not found in game');
+            throw new \Exception('Player not found in this game');
         }
 
         $player->update(['is_ready' => true]);
-    }
 
+        // Check if all players are ready to start the game
+        if ($game->players()->where('is_ready', false)->doesntExist()) {
+            $game->update(['status' => WordSearchPuzzleGameStatus::IN_PROGRESS]);
+        }
+    }
     /**
      * Ends a Memory Translation game.
      *

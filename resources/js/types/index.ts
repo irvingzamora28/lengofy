@@ -156,6 +156,18 @@ export interface MemoryTranslationGameState {
     winner: MemoryTranslationGamePlayer | null;
 }
 
+export interface WordSearchPuzzleGameState {
+    id: string;
+    status: 'waiting' | 'in_progress' | 'completed';
+    players: WordSearchPuzzlePlayer[];
+    words_found: Map<number, Set<string>>;
+    round_time: number;
+    round_start_time: number | null;
+    hostId: number;
+    max_players: number;
+    category: string;
+    winner?: WordSearchPuzzlePlayer | null;
+}
 
 export interface WordSearchPuzzleGame {
     id: number;
