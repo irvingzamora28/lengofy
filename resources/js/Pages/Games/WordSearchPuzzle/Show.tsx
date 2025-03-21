@@ -132,7 +132,13 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 gameType: 'word_search_puzzle',
                 data: {
                     words: word_search_puzzle_game.words,
-                    players: word_search_puzzle_game.players,
+                    players: [{
+                        id: auth.user.id,
+                        user_id: auth.user.id,
+                        player_name: auth.user.name,
+                        name: auth.user.name,
+                        ...word_search_puzzle_game.players.find(p => p.user_id === auth.user.id)
+                    }],
                     source_language: word_search_puzzle_game.source_language,
                     target_language: word_search_puzzle_game.target_language,
                     max_players: word_search_puzzle_game.max_players
@@ -360,6 +366,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                                     getCellSizeClass={getCellSizeClass}
                                 />
                                 <PlayersInfo
+                                    status={gameState.status}
                                     players={gameState.players}
                                     currentUserId={auth.user.id}
                                 />

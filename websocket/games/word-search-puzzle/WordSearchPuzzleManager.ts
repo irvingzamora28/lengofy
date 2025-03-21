@@ -59,7 +59,9 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 status: "waiting",
                 players: (message.data?.players || []).map(player => ({
                     ...player,
+                    player_name: player.player_name || player.name, // Ensure player_name is set
                     score: 0,
+                    words_found: new Set()
                 })),
                 words_found: new Map(),
                 round_time: 180,
@@ -82,7 +84,12 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 if (!playerExists && message.data?.players) {
                     const newPlayer = message.data.players.find(p => p.user_id === message.userId);
                     if (newPlayer) {
-                        state.players.push(newPlayer);
+                        state.players.push({
+                            ...newPlayer,
+                            player_name: newPlayer.player_name || newPlayer.name, // Ensure player_name is set
+                            score: 0,
+                            words_found: new Set()
+                        });
                     }
                 }
 
