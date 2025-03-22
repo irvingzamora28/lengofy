@@ -326,9 +326,19 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             .join('');
     };
 
-    const handleReady = () => {
-        const initialGrid = generateGrid(word_search_puzzle_game.words, gridSize);
-        console.log('Generated initial grid:', initialGrid); // Debug log
+    const handleReady = async () => {
+        let initialGrid;
+        let wordsToUse = word_search_puzzle_game.words;
+
+        // Only the host should generate new words and grid
+        if (auth.user.id === gameState.hostId) {
+            // If we don't have words yet, fetch them
+            if (!wordsToUse || wordsToUse.length === 0) {
+                wordsToUse = await fetchWords();
+            }
+            initialGrid = generateGrid(wordsToUse, gridSize);
+            console.log('Host generated initial grid and words:', { grid: initialGrid, words: wordsToUse });
+        }
 
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
@@ -339,13 +349,16 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 data: {
                     player_id: currentPlayer?.id,
                     user_id: auth.user.id,
-                    grid: initialGrid
+                    grid: initialGrid,
+                    words: wordsToUse,
+                    is_host: auth.user.id === gameState.hostId
                 }
             }));
         }
 
         router.post(route(`games.word-search-puzzle.ready`, `${gameState.id}`), {
-            grid: initialGrid
+            grid: initialGrid,
+            words: wordsToUse
         }, {
             preserveScroll: true,
             preserveState: true

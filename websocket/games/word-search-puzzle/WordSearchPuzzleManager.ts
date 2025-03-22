@@ -139,21 +139,30 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         if (!state || !room) return;
 
         console.log('Player ready:', message.data?.player_id, 'in game:', gameId);
-        console.log('Received grid:', message.data?.grid); // Debug log
+
+        // Update the game state with the grid and words from the host
+        if (message.data?.is_host) {
+            if (message.data?.grid && (!state.grid || state.grid.length === 0)) {
+                state.grid = message.data.grid;
+                console.log('Setting initial grid from host:', state.grid);
+            }
+            if (message.data?.words && (!state.words || state.words.length === 0)) {
+                state.words = message.data.words;
+                console.log('Setting initial words from host:', state.words);
+            }
+        }
 
         // First broadcast the player ready message to all clients
         this.broadcast(room, {
             type: "word_search_puzzle_player_ready",
             gameId: gameId,
             userId: message.userId,
-            data: message.data
+            data: {
+                ...message.data,
+                grid: state.grid,
+                words: state.words
+            }
         });
-
-        // Update the game state with the grid from the first ready player
-        if (message.data?.grid && (!state.grid || state.grid.length === 0)) {
-            state.grid = message.data.grid;
-            console.log('Setting initial grid:', state.grid); // Debug log
-        }
 
         // Then update the game state
         state.players = state.players.map(player => {
@@ -256,13 +265,18 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         const room = this.getRoom(gameId);
 
         if (state && room) {
-            console.log('Broadcasting state with grid:', state.grid); // Debug log
+            console.log('Broadcasting state with grid and words:', {
+                grid: state.grid,
+                words: state.words
+            });
+
             this.broadcast(room, {
                 type: 'word_search_puzzle_game_state_updated',
                 gameId,
                 data: {
                     ...state,
-                    grid: state.grid, // Explicitly include the grid
+                    grid: state.grid,
+                    words: state.words
                 }
             });
         }
