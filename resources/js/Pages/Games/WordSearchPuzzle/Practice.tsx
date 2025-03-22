@@ -26,7 +26,7 @@ const playSound = (() => {
     };
 })();
 
-interface Props {
+interface WordSearchPuzzlePracticeProps {
     auth: {
         user: {
             language_pair_id: number;
@@ -41,13 +41,12 @@ interface Props {
     }[];
 }
 
-export default function WordSearchPuzzlePractice({ auth, difficulty, category, words: initialWords }: Props) {
+export default function WordSearchPuzzlePractice({ auth, difficulty, category, words: initialWords }: WordSearchPuzzlePracticeProps) {
     const { t: trans } = useTranslation();
     const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 30;
 
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
-    const [showTranslations, setShowTranslations] = useState(false);
 
     const { grid, words, score, handleWordSelected } = useWordSearchPuzzle({
         initialWords,
@@ -78,10 +77,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
             case 15: return 'h-6 w-6 md:h-9 md:w-9';
             default: return 'h-6 w-6';
         }
-    };
-
-    const toggleTranslations = () => {
-        setShowTranslations(!showTranslations);
     };
 
     const leaveGame = () => {
