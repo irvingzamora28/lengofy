@@ -49,10 +49,16 @@ interface GridCell {
 export default function WordSearchPuzzlePractice({ auth, difficulty, category, words: initialWords }: Props) {
     const { t: trans } = useTranslation();
 
-    useEffect(() => {
-        console.log("Words: ", initialWords);
+    // Initialize words state with found property
+    const [words, setWords] = useState<Word[]>(
+        initialWords.map(word => ({
+            ...word,
+            found: false
+        }))
+    );
 
-    }, []);
+    const [grid, setGrid] = useState<GridCell[][]>([]);
+    const [isGridInitialized, setIsGridInitialized] = useState(false);
 
     // Grid size based on difficulty
     const gridSize = difficulty === 'easy' ? 10 : difficulty === 'medium' ? 15 : 20;
@@ -66,21 +72,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         }
     };
 
-    const [words, setWords] = useState<Word[]>(
-        initialWords.map(word => ({
-            ...word,
-            found: false
-        }))
-    );
-
-    const [grid, setGrid] = useState<GridCell[][]>([]);
-    const [selectionStart, setSelectionStart] = useState<{ x: number; y: number } | null>(null);
-    const [selectionEnd, setSelectionEnd] = useState<{ x: number; y: number } | null>(null);
-    const [score, setScore] = useState(0);
-    const [timeElapsed, setTimeElapsed] = useState(0);
-    const [isGameFinished, setIsGameFinished] = useState(false);
-    const [showTranslations, setShowTranslations] = useState(false);
-
     // Directions for word placement
     const directions = [
         { dx: 0, dy: 1 },  // right
@@ -93,9 +84,9 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         { dx: -1, dy: -1 }, // diagonal left-up
     ];
 
-    // Initialize grid and place words
+    // Initialize grid only once
     useEffect(() => {
-        if (!words.length) return; // Don't initialize if words aren't loaded yet
+        if (isGridInitialized || !words.length) return;
 
         const newGrid: GridCell[][] = Array.from({ length: gridSize }, () =>
             Array.from({ length: gridSize }, () => ({
@@ -105,6 +96,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
             }))
         );
 
+        // Place words in the grid
         words.forEach((word) => {
             let placed = false;
             let attempts = 0;
@@ -169,7 +161,15 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         }
 
         setGrid(newGrid);
-    }, [words, gridSize]); // Add words to the dependency array
+        setIsGridInitialized(true);
+    }, [isGridInitialized, gridSize]); // Remove words from dependencies
+
+    const [selectionStart, setSelectionStart] = useState<{ x: number; y: number } | null>(null);
+    const [selectionEnd, setSelectionEnd] = useState<{ x: number; y: number } | null>(null);
+    const [score, setScore] = useState(0);
+    const [timeElapsed, setTimeElapsed] = useState(0);
+    const [isGameFinished, setIsGameFinished] = useState(false);
+    const [showTranslations, setShowTranslations] = useState(false);
 
     // Timer logic
     useEffect(() => {
@@ -276,16 +276,25 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
 
         if (wordIndex !== -1) {
             playSound();
+
+            // Update words state
             setWords(prevWords => {
                 const newWords = [...prevWords];
                 newWords[wordIndex] = { ...newWords[wordIndex], found: true };
                 return newWords;
             });
+
             setScore(prev => prev + 1);
+
+            // Update grid state
             setGrid(prevGrid => {
                 const newGrid = prevGrid.map(row => row.map(cell => ({ ...cell })));
                 selectedCells.forEach(({ x, y }) => {
-                    newGrid[x][y].isFound = true;
+                    newGrid[x][y] = {
+                        ...newGrid[x][y],
+                        isFound: true,
+                        isSelected: false
+                    };
                 });
                 return newGrid;
             });
