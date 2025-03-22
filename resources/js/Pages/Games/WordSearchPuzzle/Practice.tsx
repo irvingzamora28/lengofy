@@ -369,9 +369,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                       className="lg:w-2/3 w-full"
                     >
                       <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md mb-4">
-                        <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200 border-b pb-2 border-gray-200 dark:border-gray-700">
-                          {trans('word_search_puzzle.game_info.puzzle')}
-                        </h3>
                         <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2">
                           <div
                             className="grid mx-auto"
@@ -390,6 +387,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                     border border-gray-200 dark:border-gray-700
                                     flex items-center justify-center
                                     text-sm font-bold
+                                    text-slate-700 dark:text-slate-200
                                     select-none cursor-pointer
                                     transition-all duration-150
                                     ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800 shadow-md' : 'bg-gray-50 dark:bg-gray-800'}
@@ -437,7 +435,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                             <h4 className="text-md font-semibold mb-2 text-gray-700 dark:text-gray-300">
                               {trans('word_search_puzzle.game_info.translation')}
                             </h4>
-                            <div className="space-y-1 max-h-[40vh] overflow-y-auto">
+                            <div className="space-y-1 max-h-[40vh]">
                               {words.map((word) => (
                                 <motion.div
                                   key={`translation-${word.id}`}
@@ -464,7 +462,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                 <h4 className="text-md font-semibold mb-2 text-gray-700 dark:text-gray-300">
                                   {trans('word_search_puzzle.game_info.words')}
                                 </h4>
-                                <div className="space-y-1 max-h-[40vh] overflow-y-auto">
+                                <div className="space-y-1 max-h-[40vh]">
                                   {words.map((word) => (
                                     <motion.div
                                       key={`word-${word.id}`}
