@@ -162,7 +162,7 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
             <Head title={trans('word_search_puzzle.lobby')} />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-gradient-to-br from-yellow-50 to-orange-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-3 sm:p-6">
                             {/* Game Lobby Section */}
                             <div className="bg-white dark:bg-gray-700 shadow-xl rounded-xl overflow-hidden">
@@ -196,10 +196,18 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="p-4 sm:p-6">
-                                    {filteredGames.length > 0 ? (
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {filteredGames.length === 0 ? (
+                                    <div className="text-center py-8 sm:py-12 px-4 sm:px-6">
+                                        <FaBook className="mx-auto w-12 h-12 sm:w-16 sm:h-16 text-gray-400 dark:text-gray-500 mb-3 sm:mb-4" />
+                                        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-2 sm:mb-4">
+                                        {trans('word_search_puzzle.no_active_games')}
+                                        </p>
+                                        <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                                        {trans('word_search_puzzle.be_the_first')}
+                                        </p>
+                                    </div>
+                                    ) : (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 p-3 sm:p-6">
                                             {filteredGames.map((game) => (
                                                 <div
                                                     key={game.id}
@@ -249,14 +257,7 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                                                 </div>
                                             ))}
                                         </div>
-                                    ) : (
-                                        <div className="text-center py-8">
-                                            <p className="text-gray-500 dark:text-gray-400">
-                                                {trans('word_search_puzzle.no_active_games')}
-                                            </p>
-                                        </div>
                                     )}
-                                </div>
                             </div>
                         </div>
                     </div>
