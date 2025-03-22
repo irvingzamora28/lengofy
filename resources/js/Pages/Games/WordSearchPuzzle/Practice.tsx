@@ -6,7 +6,7 @@ import { FaClock, FaTrophy, FaEye, FaEyeSlash, FaStar } from 'react-icons/fa';
 import { MdClose, MdGamepad } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import matchSound from "@/assets/audio/correct-match.mp3";
-
+import LettersGrid from '@/Components/WordSearchPuzzle/LettersGrid';
 
 const playSound = (() => {
     const audio = new Audio(matchSound);
@@ -95,6 +95,8 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
 
     // Initialize grid and place words
     useEffect(() => {
+        if (!words.length) return; // Don't initialize if words aren't loaded yet
+
         const newGrid: GridCell[][] = Array.from({ length: gridSize }, () =>
             Array.from({ length: gridSize }, () => ({
                 letter: '',
@@ -167,7 +169,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         }
 
         setGrid(newGrid);
-    }, [gridSize]);
+    }, [words, gridSize]); // Add words to the dependency array
 
     // Timer logic
     useEffect(() => {
@@ -266,22 +268,22 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
         setSelectionEnd(null);
     };
 
-    const checkWord = (selectedWord: string, selectedCells: { x: number; y: number }[]) => {
+    const handleWordSelected = (selectedWord: string, selectedCells: { x: number; y: number }[]) => {
         const reversedWord = selectedWord.split('').reverse().join('');
         const wordIndex = words.findIndex(
             (w) => (w.word === selectedWord || w.word === reversedWord) && !w.found
         );
 
         if (wordIndex !== -1) {
-            playSound(); // Play sound when word is found
-            setWords((prevWords) => {
+            playSound();
+            setWords(prevWords => {
                 const newWords = [...prevWords];
                 newWords[wordIndex] = { ...newWords[wordIndex], found: true };
                 return newWords;
             });
-            setScore((prev) => prev + 1);
-            setGrid((prevGrid) => {
-                const newGrid = prevGrid.map((row) => row.map((cell) => ({ ...cell })));
+            setScore(prev => prev + 1);
+            setGrid(prevGrid => {
+                const newGrid = prevGrid.map(row => row.map(cell => ({ ...cell })));
                 selectedCells.forEach(({ x, y }) => {
                     newGrid[x][y].isFound = true;
                 });
@@ -289,7 +291,6 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
             });
         }
     };
-
 
     const toggleTranslations = () => {
         setShowTranslations(!showTranslations);
@@ -370,39 +371,12 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                     >
                       <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md mb-4">
                         <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2">
-                          <div
-                            className="grid mx-auto"
-                            style={{
-                              gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-                              maxWidth: gridSize === 10 ? '400px' : gridSize === 15 ? '540px' : '720px',
-                              width: '100%',
-                            }}
-                          >
-                            {grid.map((row, i) =>
-                              row.map((cell, j) => (
-                                <motion.div
-                                  key={`${i}-${j}`}
-                                  whileHover={{ scale: 1.1 }}
-                                  className={`
-                                    border border-gray-200 dark:border-gray-700
-                                    flex items-center justify-center
-                                    text-sm font-bold
-                                    text-slate-700 dark:text-slate-200
-                                    select-none cursor-pointer
-                                    transition-all duration-150
-                                    ${cell.isSelected ? 'bg-blue-200 dark:bg-blue-800 shadow-md' : 'bg-gray-50 dark:bg-gray-800'}
-                                    ${cell.isFound ? 'bg-green-200 dark:bg-green-800 shadow-md' : ''}
-                                    ${getCellSizeClass()}
-                                  `}
-                                  onMouseDown={() => handleCellMouseDown(i, j)}
-                                  onMouseEnter={() => handleCellMouseEnter(i, j)}
-                                  onMouseUp={handleCellMouseUp}
-                                >
-                                  {cell.letter}
-                                </motion.div>
-                              ))
-                            )}
-                          </div>
+                          <LettersGrid
+                            grid={grid}
+                            gridSize={gridSize}
+                            getCellSizeClass={getCellSizeClass}
+                            onWordSelected={handleWordSelected}
+                          />
                         </div>
                       </div>
                     </motion.div>
