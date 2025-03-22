@@ -12,6 +12,7 @@ import GameArea from '@/Components/WordSearchPuzzle/GameArea';
 import GameInfo from '@/Components/WordSearchPuzzle/GameInfo';
 import PlayersInfo from '@/Components/WordSearchPuzzle/PlayersInfo';
 import axios from 'axios';
+import { useWordSearchPuzzle } from '@/Hooks/useWordSearchPuzzle';
 
 interface Props {
     auth: any;
@@ -93,20 +94,33 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     // Game state
+    const gridSize = word_search_puzzle_game.difficulty === 'easy' ? 10 :
+                    word_search_puzzle_game.difficulty === 'medium' ? 15 : 30;
+
+    const { grid, words, score, handleWordSelected } = useWordSearchPuzzle({
+        initialWords: word_search_puzzle_game.words,
+        gridSize,
+        onWordFound: (word) => {
+            // Send word found event through WebSocket
+            wsRef.current?.send(JSON.stringify({
+                type: 'word_search_puzzle_word_found',
+                gameId: word_search_puzzle_game.id,
+                userId: auth.user.id,
+                data: {
+                    word,
+                    cells: selectedCells
+                }
+            }));
+        },
+    });
+
     const [gameState, setGameState] = useState({
         ...word_search_puzzle_game,
-        words_found: new Map(
-            word_search_puzzle_game.words_found
-                ? Object.entries(word_search_puzzle_game.words_found)
-                : [[auth.user.id, new Set()]]
-        ),
-        grid: word_search_puzzle_game.current_letters || [],
+        words_found: word_search_puzzle_game.words_found || {},
+        grid: grid, // Use the grid from the hook
     });
 
     const currentPlayer = gameState.players.find(p => p.user_id === auth.user.id);
-
-    // Grid size based on difficulty
-    const gridSize = gameState.difficulty === 'easy' ? 10 : gameState.difficulty === 'medium' ? 15 : 30;
 
     // Dynamic cell size based on grid size
     const getCellSizeClass = () => {
@@ -206,6 +220,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                             ...prevState,
                             ...data.data,
                             players: data.data.players || prevState.players,
+                            grid: data.data.current_letters || prevState.grid, // Ensure grid is updated
                         };
 
                         if (data.data.status === 'in_progress' && prevState.status === 'waiting') {
@@ -290,12 +305,17 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         }
     };
 
+    const isValidWord = (word: string): boolean => {
+        return gameState.words.some(w => w.word === word || w.translation === word);
+    };
+
     const handleCellMouseUp = () => {
         if (!isDragging) return;
 
         setIsDragging(false);
         const selectedWord = getWordFromSelectedCells();
-        if (selectedWord) {
+
+        if (selectedWord && isValidWord(selectedWord)) {
             wsRef.current?.send(JSON.stringify({
                 type: 'word_search_puzzle_word_found',
                 gameId: gameState.id,
@@ -310,14 +330,19 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     const isValidSelection = (last: { x: number; y: number }, current: { x: number; y: number }) => {
-        // Implement logic to ensure selection is straight line (horizontal, vertical, or diagonal)
-        // Return true if valid, false otherwise
-        return true; // Placeholder
+        const dx = Math.abs(current.x - last.x);
+        const dy = Math.abs(current.y - last.y);
+
+        // Allow horizontal, vertical, and diagonal selections
+        return dx <= 1 && dy <= 1;
     };
 
     const getWordFromSelectedCells = () => {
-        // Implement logic to get word from selected cells
-        return selectedCells.map(cell => gameState.grid[cell.x][cell.y]).join('');
+        if (selectedCells.length < 2) return '';
+
+        return selectedCells
+            .map(cell => gameState.grid[cell.x][cell.y])
+            .join('');
     };
 
     const handleReady = () => {
@@ -382,7 +407,10 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                             <div className="flex flex-col space-y-4">
                                 <GameInfo game={gameState} currentPlayer={currentPlayer} />
                                 <GameArea
-                                    game={gameState}
+                                    game={{
+                                        ...gameState,
+                                        grid: grid, // Use the grid from the hook
+                                    }}
                                     selectedCells={selectedCells}
                                     isCurrentPlayerReady={currentPlayer?.is_ready || false}
                                     onReady={handleReady}

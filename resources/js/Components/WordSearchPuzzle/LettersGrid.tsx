@@ -20,6 +20,10 @@ export default function LettersGrid({
     getCellSizeClass,
     onWordSelected
 }: LettersGridProps) {
+    // Add debug logging
+    console.log('LettersGrid received grid:', grid);
+    console.log('LettersGrid received gridSize:', gridSize);
+
     const [selectionStart, setSelectionStart] = useState<{ x: number; y: number } | null>(null);
     const [selectionEnd, setSelectionEnd] = useState<{ x: number; y: number } | null>(null);
     const [selectedCells, setSelectedCells] = useState<{ x: number; y: number }[]>([]);

@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { WordSearchPuzzleGame } from '@/types/games';
+import LettersGrid from './LettersGrid';
+import WordList from './WordList';
 
 interface GameAreaProps {
     game: WordSearchPuzzleGame;
@@ -31,6 +33,10 @@ export default function GameArea({
 }: GameAreaProps) {
     const { t: trans } = useTranslation();
 
+    // Add console.log to debug grid data
+    console.log('Game grid:', game.grid);
+    console.log('Grid size:', gridSize);
+
     if (game.status === 'waiting') {
         return (
             <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
@@ -47,10 +53,18 @@ export default function GameArea({
         );
     }
 
-    if (game.status === 'finished') {
+    if (game.status === 'completed') {
+        const winner = game.players.reduce((prev, current) =>
+            (prev.score > current.score) ? prev : current
+        );
+
         return (
             <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4">{trans('word_search_puzzle.game_finished')}</h3>
+                <h3 className="text-xl font-bold mb-4">
+                    {winner.user_id === currentUserId
+                        ? trans('word_search_puzzle.you_won')
+                        : trans('word_search_puzzle.winner_is', { name: winner.player_name })}
+                </h3>
                 {game.hostId === currentUserId && (
                     <button
                         onClick={onRestart}
@@ -63,43 +77,44 @@ export default function GameArea({
         );
     }
 
+    // Modified grid data formatting
+    const gridData = Array.isArray(game.grid) ? game.grid.map((row, i) =>
+        Array.isArray(row) ? row.map((cell, j) => {
+            // If cell is already an object with letter property, return it
+            if (typeof cell === 'object' && cell !== null && 'letter' in cell) {
+                return {
+                    ...cell,
+                    isSelected: selectedCells.some(sc => sc.x === i && sc.y === j),
+                };
+            }
+            // If cell is a string or other type, convert to proper format
+            return {
+                letter: String(cell || ''),
+                isSelected: selectedCells.some(sc => sc.x === i && sc.y === j),
+                isFound: false
+            };
+        }) : []
+    ) : [];
+
     return (
-        <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
-            <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200 border-b pb-2 border-gray-200 dark:border-gray-700">
-                {trans('word_search_puzzle.game_info.puzzle')}
-            </h3>
-            <div className="w-full overflow-auto max-h-[60vh] md:max-h-[70vh] p-2">
-                <div
-                    className="grid mx-auto"
-                    style={{
-                        gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-                        maxWidth: gridSize === 10 ? '450px' : gridSize === 15 ? '540px' : '720px',
-                        width: '100%',
-                    }}
-                >
-                    {game.grid.map((row, i) =>
-                        row.map((letter, j) => (
-                            <motion.div
-                                key={`${i}-${j}`}
-                                whileHover={{ scale: 1.1 }}
-                                className={`
-                                    border border-gray-200 dark:border-gray-700
-                                    flex items-center justify-center
-                                    text-sm font-bold
-                                    select-none cursor-pointer
-                                    transition-all duration-150
-                                    ${selectedCells.some(cell => cell.x === i && cell.y === j) ? 'bg-blue-200 dark:bg-blue-800 shadow-md' : 'bg-gray-50 dark:bg-gray-800'}
-                                    ${getCellSizeClass()}
-                                `}
-                                onMouseDown={() => handleCellMouseDown(i, j)}
-                                onMouseEnter={() => handleCellMouseEnter(i, j)}
-                                onMouseUp={handleCellMouseUp}
-                            >
-                                {letter}
-                            </motion.div>
-                        ))
-                    )}
+        <div className="flex flex-col lg:flex-row gap-6">
+            <div className="lg:w-2/3 w-full">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
+                    <LettersGrid
+                        grid={gridData}
+                        gridSize={gridSize}
+                        getCellSizeClass={getCellSizeClass}
+                        onWordSelected={(word, cells) => {
+                            handleCellMouseUp();
+                        }}
+                    />
                 </div>
+            </div>
+            <div className="lg:w-1/3 w-full">
+                <WordList
+                    words={game.words}
+                    foundWords={Array.from(game.words_found?.[currentUserId] || new Set())}
+                />
             </div>
         </div>
     );
