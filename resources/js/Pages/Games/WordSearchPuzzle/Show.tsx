@@ -97,11 +97,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     const gridSize = word_search_puzzle_game.difficulty === 'easy' ? 10 :
                     word_search_puzzle_game.difficulty === 'medium' ? 15 : 30;
 
-    const { grid, words, score, handleWordSelected } = useWordSearchPuzzle({
+    // Remove this as we'll use the grid from game state
+    const { words, score, handleWordSelected, generateGrid } = useWordSearchPuzzle({
         initialWords: word_search_puzzle_game.words,
         gridSize,
         onWordFound: (word) => {
-            // Send word found event through WebSocket
             wsRef.current?.send(JSON.stringify({
                 type: 'word_search_puzzle_word_found',
                 gameId: word_search_puzzle_game.id,
@@ -114,10 +114,12 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         },
     });
 
+    // Use the grid from the game state
     const [gameState, setGameState] = useState({
         ...word_search_puzzle_game,
         words_found: word_search_puzzle_game.words_found || {},
-        grid: grid, // Use the grid from the hook
+        // The initial grid should come from the server
+        grid: word_search_puzzle_game.current_letters || [],
     });
 
     const currentPlayer = gameState.players.find(p => p.user_id === auth.user.id);
@@ -215,34 +217,13 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
                 case 'word_search_puzzle_game_state_updated':
                     console.log('Game state updated:', data.data);
-                    setGameState(prevState => {
-                        const newState = {
-                            ...prevState,
-                            ...data.data,
-                            players: data.data.players || prevState.players,
-                            grid: data.data.current_letters || prevState.grid, // Ensure grid is updated
-                        };
-
-                        if (data.data.status === 'in_progress' && prevState.status === 'waiting') {
-                            setShowExitConfirmation(false);
-                        }
-
-                        if (data.data.status === 'waiting' && prevState.status === 'completed') {
-                            // Reset states when game is restarted
-
-                        }
-
-                        if (data.data.status === 'completed') {
-                            handleGameCompletion(data.data);
-                        }
-
-                        if (data.data.players && data.data.players.length === 0) {
-                            router.visit('/games/word-search-puzzle');
-                            return prevState;
-                        }
-
-                        return newState;
-                    });
+                    setGameState(prevState => ({
+                        ...prevState,
+                        ...data.data,
+                        players: data.data.players || prevState.players,
+                        grid: data.data.grid || prevState.grid, // Explicitly handle grid updates
+                        words_found: data.data.words_found || prevState.words_found,
+                    }));
                     break;
 
                 case 'score_updated':
@@ -346,26 +327,28 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     const handleReady = () => {
-        router.post(route(`games.word-search-puzzle.ready`, `${gameState.id}`), {}, {
-            preserveScroll: true,
-            preserveState: true,
-            onSuccess: () => {
-                console.log("Sending ready message");
+        const initialGrid = generateGrid(word_search_puzzle_game.words, gridSize);
+        console.log('Generated initial grid:', initialGrid); // Debug log
 
-                if (wsRef.current?.readyState === WebSocket.OPEN) {
-                    console.log("WebSocket is open, sending ready message");
-                    wsRef.current.send(JSON.stringify({
-                        type: 'word_search_puzzle_player_ready',
-                        gameId: gameState.id,
-                        gameType: 'word_search_puzzle',
-                        userId: auth.user.id,
-                        data: {
-                            player_id: currentPlayer?.id,
-                            user_id: auth.user.id
-                        }
-                    }));
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            wsRef.current.send(JSON.stringify({
+                type: 'word_search_puzzle_player_ready',
+                gameId: gameState.id,
+                gameType: 'word_search_puzzle',
+                userId: auth.user.id,
+                data: {
+                    player_id: currentPlayer?.id,
+                    user_id: auth.user.id,
+                    grid: initialGrid
                 }
-            }
+            }));
+        }
+
+        router.post(route(`games.word-search-puzzle.ready`, `${gameState.id}`), {
+            grid: initialGrid
+        }, {
+            preserveScroll: true,
+            preserveState: true
         });
     };
 
@@ -409,7 +392,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                                 <GameArea
                                     game={{
                                         ...gameState,
-                                        grid: grid, // Use the grid from the hook
+                                        grid: gameState.grid, // Use the synchronized grid from game state
                                     }}
                                     selectedCells={selectedCells}
                                     isCurrentPlayerReady={currentPlayer?.is_ready || false}

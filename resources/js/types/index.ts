@@ -156,32 +156,32 @@ export interface MemoryTranslationGameState {
     winner: MemoryTranslationGamePlayer | null;
 }
 
-export interface WordSearchPuzzleGameState {
-    id: string;
-    status: 'waiting' | 'in_progress' | 'completed';
-    players: WordSearchPuzzlePlayer[];
-    words_found: Map<number, Set<string>>;
-    round_time: number;
-    round_start_time: number | null;
-    hostId: number;
-    max_players: number;
-    category: string;
-    winner?: WordSearchPuzzlePlayer | null;
+export interface GridCell {
+    letter: string;
+    isSelected: boolean;
+    isFound: boolean;
 }
 
 export interface WordSearchPuzzleGame {
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
-    players: WordSearchPuzzlePlayer[];
-    current_letters: string[];
-    round_time: number;
-    round_start_time: number;
     max_players: number;
+    difficulty: 'easy' | 'medium' | 'hard';
     language_name: string;
     source_language: Language;
     target_language: Language;
     language_pair_id: number;
-    words_found: { [key: string]: string[] } | null; // From backend it comes as an object
+    words: {
+        id: number;
+        word: string;
+        translation: string;
+    }[];
+    players: WordSearchPuzzlePlayer[];
+    grid: GridCell[][]; // Add the grid property
+    words_found: { [key: number]: Set<string> };
+    round_time: number;
+    round_start_time: number | null;
+    category: Category;
 }
 
 export interface WordSearchPuzzlePlayer {
@@ -191,4 +191,8 @@ export interface WordSearchPuzzlePlayer {
     score: number;
     is_ready: boolean;
     is_host: boolean;
+}
+
+export interface WordSearchPuzzleGameState extends WordSearchPuzzleGame {
+    winner?: WordSearchPuzzlePlayer | null;
 }

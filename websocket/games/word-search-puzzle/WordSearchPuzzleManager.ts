@@ -40,6 +40,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         if (state) {
             console.log('Starting game:', gameId);
             state.status = "in_progress";
+            state.round_start_time = Date.now();
             this.setState(gameId, state);
             this.broadcastState(gameId);
         }
@@ -135,13 +136,10 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
 
-        console.log("GameId: ", gameId);
-        console.log("State: ", state);
-        console.log("Room: ", room);
-
         if (!state || !room) return;
 
         console.log('Player ready:', message.data?.player_id, 'in game:', gameId);
+        console.log('Received grid:', message.data?.grid); // Debug log
 
         // First broadcast the player ready message to all clients
         this.broadcast(room, {
@@ -151,6 +149,12 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             data: message.data
         });
 
+        // Update the game state with the grid from the first ready player
+        if (message.data?.grid && (!state.grid || state.grid.length === 0)) {
+            state.grid = message.data.grid;
+            console.log('Setting initial grid:', state.grid); // Debug log
+        }
+
         // Then update the game state
         state.players = state.players.map(player => {
             if (player.id === message.data?.player_id || player.user_id === message.userId) {
@@ -159,6 +163,8 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             return player;
         });
 
+        this.setState(gameId, state);
+
         const allReady = state.max_players === 1 ||
             (state.players.length >= 2 && state.players.every(player => player.is_ready));
 
@@ -166,7 +172,6 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             console.log('All players ready, starting game:', gameId);
             this.handleStart(gameId);
         } else {
-            this.setState(gameId, state);
             this.broadcastState(gameId);
         }
     }
@@ -243,6 +248,23 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 this.setState(gameId, state);
                 this.broadcastState(gameId);
             }
+        }
+    }
+
+    private broadcastState(gameId: string): void {
+        const state = this.getState(gameId);
+        const room = this.getRoom(gameId);
+
+        if (state && room) {
+            console.log('Broadcasting state with grid:', state.grid); // Debug log
+            this.broadcast(room, {
+                type: 'word_search_puzzle_game_state_updated',
+                gameId,
+                data: {
+                    ...state,
+                    grid: state.grid, // Explicitly include the grid
+                }
+            });
         }
     }
 }

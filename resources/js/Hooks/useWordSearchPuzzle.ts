@@ -35,23 +35,7 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
     const [isGridInitialized, setIsGridInitialized] = useState(false);
     const [score, setScore] = useState(0);
 
-    // Directions for word placement
-    const directions = [
-        { dx: 0, dy: 1 },  // right
-        { dx: 0, dy: -1 }, // left
-        { dx: 1, dy: 0 },  // down
-        { dx: -1, dy: 0 }, // up
-        { dx: 1, dy: 1 },  // diagonal right-down
-        { dx: 1, dy: -1 }, // diagonal right-up
-        { dx: -1, dy: 1 }, // diagonal left-down
-        { dx: -1, dy: -1 }, // diagonal left-up
-    ];
-
-    // Initialize grid
-    useEffect(() => {
-        if (isGridInitialized || !words.length) return;
-
-        // Create empty grid
+    const generateGrid = (words: Word[], gridSize: number): GridCell[][] => {
         const newGrid: GridCell[][] = Array(gridSize).fill(null).map(() =>
             Array(gridSize).fill(null).map(() => ({
                 letter: '',
@@ -60,7 +44,17 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
             }))
         );
 
-        // Place words in the grid
+        const directions = [
+            { dx: 0, dy: 1 },  // right
+            { dx: 0, dy: -1 }, // left
+            { dx: 1, dy: 0 },  // down
+            { dx: -1, dy: 0 }, // up
+            { dx: 1, dy: 1 },  // diagonal right-down
+            { dx: 1, dy: -1 }, // diagonal right-up
+            { dx: -1, dy: 1 }, // diagonal left-down
+            { dx: -1, dy: -1 }, // diagonal left-up
+        ];
+
         words.forEach((word) => {
             let placed = false;
             let attempts = 0;
@@ -71,11 +65,9 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
                 const direction = directions[Math.floor(Math.random() * directions.length)];
                 const wordLength = word.word.length;
 
-                // Calculate valid starting positions based on word length and direction
                 const startX = Math.floor(Math.random() * (gridSize - Math.abs(direction.dx * (wordLength - 1))));
                 const startY = Math.floor(Math.random() * (gridSize - Math.abs(direction.dy * (wordLength - 1))));
 
-                // Check if word can be placed at this position
                 let canPlace = true;
                 const positions: { x: number; y: number; letter: string }[] = [];
 
@@ -83,13 +75,11 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
                     const x = startX + (direction.dx * i);
                     const y = startY + (direction.dy * i);
 
-                    // Validate position is within grid bounds
                     if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) {
                         canPlace = false;
                         break;
                     }
 
-                    // Check if cell is empty or has matching letter
                     if (newGrid[x][y].letter !== '' && newGrid[x][y].letter !== word.word[i]) {
                         canPlace = false;
                         break;
@@ -111,7 +101,6 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
             }
         });
 
-        // Fill empty cells with random letters
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
                 if (newGrid[i][j].letter === '') {
@@ -120,6 +109,13 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
             }
         }
 
+        return newGrid;
+    };
+
+    useEffect(() => {
+        if (isGridInitialized || !words.length) return;
+
+        const newGrid = generateGrid(words, gridSize);
         setGrid(newGrid);
         setIsGridInitialized(true);
     }, [isGridInitialized, words.length, gridSize]);
@@ -160,5 +156,6 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
         words,
         score,
         handleWordSelected,
+        generateGrid, // Export the function as part of the hook
     };
 };
