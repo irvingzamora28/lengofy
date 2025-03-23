@@ -203,60 +203,68 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
 
-        if (!state || !room) return;
+        if (!state || !room) {
+            console.log('No state or room found for game:', gameId);
+            return;
+        }
 
         const { word, cells } = data;
 
-        // Initialize words_found for the user if it doesn't exist
+        // Initialize words_found if it doesn't exist
+        if (!state.words_found) {
+            state.words_found = {};
+        }
+
+        // Initialize user's words_found if it doesn't exist
         if (!state.words_found[userId]) {
             state.words_found[userId] = new Set();
         }
 
-        // Verify if word exists in the game's word list and hasn't been found yet
-        if (state.words.includes(word) &&
-            !Object.values(state.words_found).some(set => set.has(word))) {
+        // Check if the word exists and hasn't been found
+        const wordExists = state.words.some(w => w.word === word || w.translation === word);
+        const wordNotFound = !Object.values(state.words_found)
+            .some(set => set.has(word));
 
-            // Update player's found words
+        if (wordExists && wordNotFound) {
+            // Add word to player's found words
             state.words_found[userId].add(word);
+
+            // Update grid state to mark cells as found
+            if (!state.grid) {
+                state.grid = [];
+            }
+
+            cells.forEach(({ x, y }) => {
+                if (state.grid[x] && state.grid[x][y]) {
+                    state.grid[x][y] = {
+                        ...state.grid[x][y],
+                        isFound: true
+                    };
+                }
+            });
 
             // Update player's score
             const player = state.players.find(p => p.user_id === userId);
             if (player) {
-                player.score += 1;
+                player.score = (player.score || 0) + 1;
             }
 
-            // Broadcast the word found event
+            // Broadcast updates
             this.broadcast(room, {
                 type: 'word_search_puzzle_word_found',
                 gameId,
                 userId,
-                data: { word, cells }
+                data: {
+                    word,
+                    cells,
+                    words_found: state.words_found,
+                    grid: state.grid
+                }
             });
 
-            // Broadcast score update
-            this.broadcast(room, {
-                type: 'score_updated',
-                gameId,
-                data: { player }
-            });
-
-            // Check if game is complete (all words found)
-            const totalWordsFound = Object.values(state.words_found)
-                .reduce((total, set) => total + set.size, 0);
-
-            if (totalWordsFound === state.words.length) {
-                // Find winner(s)
-                const highestScore = Math.max(...state.players.map(p => p.score));
-                const winners = state.players.filter(p => p.score === highestScore);
-
-                state.status = 'completed';
-                state.winner = winners[0]; // In case of tie, first player wins
-
-                this.broadcastState(gameId);
-            } else {
-                this.setState(gameId, state);
-                this.broadcastState(gameId);
-            }
+            // Update game state
+            this.setState(gameId, state);
+            this.broadcastState(gameId);
         }
     }
 

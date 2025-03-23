@@ -97,30 +97,33 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     const gridSize = word_search_puzzle_game.difficulty === 'easy' ? 10 :
                     word_search_puzzle_game.difficulty === 'medium' ? 15 : 30;
 
-    // Remove this as we'll use the grid from game state
-    const { words, score, handleWordSelected, generateGrid } = useWordSearchPuzzle({
+    // Use the same hook implementation as in Practice.tsx
+    const { grid, words, score, handleWordSelected, generateGrid } = useWordSearchPuzzle({
         initialWords: word_search_puzzle_game.words,
         gridSize,
-        onWordFound: (word) => {
-            wsRef.current?.send(JSON.stringify({
-                type: 'word_search_puzzle_word_found',
-                gameId: word_search_puzzle_game.id,
-                userId: auth.user.id,
-                data: {
-                    word,
-                    cells: selectedCells
-                }
-            }));
+        onWordFound: (word, cells) => {
+            console.log('Word found about to send to server:', word, 'Cells:', cells);
+
+            if (wsRef.current?.readyState === WebSocket.OPEN) {
+                wsRef.current.send(JSON.stringify({
+                    type: 'word_search_puzzle_word_found',
+                    gameId: gameState.id,
+                    userId: auth.user.id,
+                    data: {
+                        word,
+                        cells
+                    }
+                }));
+            }
         },
     });
 
-    // Use the grid from the game state
-    const [gameState, setGameState] = useState({
+    // Initialize gameState using the grid from useWordSearchPuzzle
+    const [gameState, setGameState] = useState(() => ({
         ...word_search_puzzle_game,
         words_found: word_search_puzzle_game.words_found || {},
-        // The initial grid should come from the server
-        grid: word_search_puzzle_game.current_letters || [],
-    });
+        grid: grid
+    }));
 
     const currentPlayer = gameState.players.find(p => p.user_id === auth.user.id);
 
@@ -195,14 +198,45 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 case 'word_search_puzzle_word_found':
                     if (data.userId !== auth.user.id) {
                         // Update word list for other players
-                        setGameState(prev => ({
-                            ...prev,
-                            words_found: new Map(prev.words_found).set(
-                                data.userId,
-                                new Set([...(prev.words_found.get(data.userId) || []), data.data.word])
-                            )
-                        }));
+                        setGameState(prev => {
+                            const prevWordsFound = prev.words_found || {};
+
+                            // Debug the current state
+                            console.log('Previous words_found:', prevWordsFound);
+                            console.log('Current user words:', prevWordsFound[data.userId]);
+
+                            // Ensure we have an array to work with
+                            const currentUserWords = Array.isArray(prevWordsFound[data.userId])
+                                ? prevWordsFound[data.userId]
+                                : [];
+
+                            return {
+                                ...prev,
+                                words_found: {
+                                    ...prevWordsFound,
+                                    [data.userId]: [...currentUserWords, data.data.word]
+                                }
+                            };
+                        });
                     }
+
+                    // Update the grid to show found words for all players
+                    setGameState(prev => {
+                        const newGrid = JSON.parse(JSON.stringify(prev.grid));
+                        data.data.cells.forEach(({ x, y }) => {
+                            if (newGrid[x] && newGrid[x][y]) {
+                                newGrid[x][y] = {
+                                    ...newGrid[x][y],
+                                    isFound: true,
+                                    isSelected: false
+                                };
+                            }
+                        });
+                        return {
+                            ...prev,
+                            grid: newGrid
+                        };
+                    });
                     break;
 
                 case 'word_search_puzzle_player_left':
@@ -336,7 +370,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             if (!wordsToUse || wordsToUse.length === 0) {
                 wordsToUse = await fetchWords();
             }
-            initialGrid = generateGrid(wordsToUse, gridSize);
+            initialGrid = grid; // Use the grid from useWordSearchPuzzle hook
             console.log('Host generated initial grid and words:', { grid: initialGrid, words: wordsToUse });
         }
 
@@ -416,6 +450,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                                     handleCellMouseEnter={handleCellMouseEnter}
                                     handleCellMouseUp={handleCellMouseUp}
                                     gridSize={gridSize}
+                                    onWordSelected={handleWordSelected}
                                     getCellSizeClass={getCellSizeClass}
                                 />
                                 <PlayersInfo

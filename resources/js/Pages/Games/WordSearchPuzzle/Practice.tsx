@@ -51,7 +51,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
     const { grid, words, score, handleWordSelected } = useWordSearchPuzzle({
         initialWords,
         gridSize,
-        onWordFound: playSound,
+        onWordFound: () => playSound(), // Simply play sound, ignoring the parameters
     });
 
     // Timer logic

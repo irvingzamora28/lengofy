@@ -15,6 +15,7 @@ interface GameAreaProps {
     handleCellMouseEnter: (i: number, j: number) => void;
     handleCellMouseUp: () => void;
     gridSize: number;
+    onWordSelected: (selectedWord: string, selectedCells: { x: number; y: number }[]) => void
     getCellSizeClass: () => string;
 }
 
@@ -29,7 +30,8 @@ export default function GameArea({
     handleCellMouseEnter,
     handleCellMouseUp,
     gridSize,
-    getCellSizeClass
+    getCellSizeClass,
+    onWordSelected,
 }: GameAreaProps) {
     const { t: trans } = useTranslation();
 
@@ -104,16 +106,13 @@ export default function GameArea({
                         grid={gridData}
                         gridSize={gridSize}
                         getCellSizeClass={getCellSizeClass}
-                        onWordSelected={(word, cells) => {
-                            handleCellMouseUp();
-                        }}
+                        onWordSelected={onWordSelected}
                     />
                 </div>
             </div>
             <div className="lg:w-1/3 w-full">
                 <WordList
                     words={game.words}
-                    foundWords={Array.from(game.words_found?.[currentUserId] || new Set())}
                 />
             </div>
         </div>

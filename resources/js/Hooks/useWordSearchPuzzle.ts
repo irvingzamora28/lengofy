@@ -20,7 +20,7 @@ interface UseWordSearchPuzzleProps {
         translation: string;
     }[];
     gridSize: number;
-    onWordFound?: () => void;
+    onWordFound?: (word: string, cells: { x: number; y: number }[]) => void;
 }
 
 export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: UseWordSearchPuzzleProps) => {
@@ -127,7 +127,9 @@ export const useWordSearchPuzzle = ({ initialWords, gridSize, onWordFound }: Use
         );
 
         if (wordIndex !== -1) {
-            onWordFound?.();
+            // Call onWordFound with the found word and cells
+            console.log('Word found:', words[wordIndex].word, selectedCells);
+            onWordFound?.(words[wordIndex].word, selectedCells);
 
             setWords(prevWords => {
                 const newWords = [...prevWords];
