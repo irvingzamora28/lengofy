@@ -27,6 +27,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
     const [selectedCells, setSelectedCells] = useState<{ x: number; y: number }[]>([]);
     const [isDragging, setIsDragging] = useState(false);
+    const [currentWords, setCurrentWords] = useState(word_search_puzzle_game.words);
 
     // Add the handleShare function
     const handleShare = async () => {
@@ -87,7 +88,8 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     players: gameState.players,
                     language_name: gameState.language_name,
                     category: gameState.category,
-                    hostId: gameState.hostId
+                    hostId: gameState.hostId,
+                    seed: gameState.id.toString() // Include the seed for grid generation
                 }
             }));
         }
@@ -98,12 +100,38 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     word_search_puzzle_game.difficulty === 'medium' ? 15 : 30;
 
     // Use the same hook implementation as in Practice.tsx
-    const { grid, words, score, handleWordSelected, generateGrid } = useWordSearchPuzzle({
-        initialWords: word_search_puzzle_game.words,
+    const { grid, words, score, handleWordSelected, generateGrid, updateWordsAndReset } = useWordSearchPuzzle({
+        initialWords: currentWords, // Use currentWords instead of word_search_puzzle_game.words
         gridSize,
+        seed: word_search_puzzle_game.id.toString(), // Use game ID as seed
         onWordFound: (word, cells) => {
             console.log('Word found about to send to server:', word, 'Cells:', cells);
 
+            // Update local state first
+            setGameState(prev => {
+                const prevWordsFound = prev.words_found || {};
+                const currentUserWords = Array.isArray(prevWordsFound[auth.user.id])
+                    ? prevWordsFound[auth.user.id]
+                    : [];
+
+                return {
+                    ...prev,
+                    words_found: {
+                        ...prevWordsFound,
+                        [auth.user.id]: [...currentUserWords, word]
+                    },
+                    grid: prev.grid.map((row, i) =>
+                        row.map((cell, j) => {
+                            if (cells.some(pos => pos.x === i && pos.y === j)) {
+                                return { ...cell, isFound: true, isSelected: false };
+                            }
+                            return cell;
+                        })
+                    )
+                };
+            });
+
+            // Then broadcast to other players
             if (wsRef.current?.readyState === WebSocket.OPEN) {
                 wsRef.current.send(JSON.stringify({
                     type: 'word_search_puzzle_word_found',
@@ -185,6 +213,10 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
             switch (data.type) {
                 case 'player_ready':
+                    if (data.data.is_host && data.data.words && auth.user.id !== gameState.hostId) {
+                        // Update words only when host sends the initial words
+                        updateWordsAndReset(data.data.words);
+                    }
                     setGameState(prev => ({
                         ...prev,
                         players: prev.players.map(player =>
@@ -251,6 +283,10 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
                 case 'word_search_puzzle_game_state_updated':
                     console.log('Game state updated:', data.data);
+                    // Update words if player is not host
+                    if (auth.user.id !== gameState.hostId && data.data.words) {
+                        setCurrentWords(data.data.words);
+                    }
                     setGameState(prevState => ({
                         ...prevState,
                         ...data.data,
@@ -267,6 +303,22 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                             p.id === data.data.player.id
                                 ? { ...p, score: data.data.player.score }
                                 : p
+                        )
+                    }));
+                    break;
+
+                case 'word_search_puzzle_player_ready':
+                    if (data.data.is_host && auth.user.id !== gameState.hostId) {
+                        // Update words when host sends them in the ready message
+                        console.log('Updating words from host:', data.data.words);
+                        updateWordsAndReset(data.data.words);
+                    }
+                    setGameState(prev => ({
+                        ...prev,
+                        players: prev.players.map(player =>
+                            player.id === data.data.player_id || player.user_id === data.data.user_id
+                                ? { ...player, is_ready: true }
+                                : player
                         )
                     }));
                     break;
@@ -398,6 +450,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             preserveState: true
         });
     };
+
+    useEffect(() => {
+        console.log('Grid generated with seed:', word_search_puzzle_game.id.toString());
+        console.log('Grid layout:', grid);
+    }, [grid]);
 
     return (
         <AuthenticatedLayout
