@@ -57,7 +57,7 @@ export default function PlayersInfo({ status, players, currentUserId }: Props) {
                                         {trans("word_search_puzzle.words_found")}
                                     </div>
                                     <div className="font-semibold text-gray-900 dark:text-gray-100">
-                                        {Array.from(player.words_found || new Set()).length}
+                                        {player.score || 0}
                                     </div>
                                 </div>
                             </div>

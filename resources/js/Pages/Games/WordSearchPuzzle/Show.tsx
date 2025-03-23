@@ -114,8 +114,16 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     ? prevWordsFound[auth.user.id]
                     : [];
 
+                // Update the player's score in the game state
+                const updatedPlayers = prev.players.map(player =>
+                    player.user_id === auth.user.id
+                        ? { ...player, score: (player.score || 0) + 1 }
+                        : player
+                );
+
                 return {
                     ...prev,
+                    players: updatedPlayers,
                     words_found: {
                         ...prevWordsFound,
                         [auth.user.id]: [...currentUserWords, word]
@@ -229,21 +237,23 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
                 case 'word_search_puzzle_word_found':
                     if (data.userId !== auth.user.id) {
-                        // Update word list for other players
+                        // Update word list and score for other players
                         setGameState(prev => {
                             const prevWordsFound = prev.words_found || {};
-
-                            // Debug the current state
-                            console.log('Previous words_found:', prevWordsFound);
-                            console.log('Current user words:', prevWordsFound[data.userId]);
-
-                            // Ensure we have an array to work with
                             const currentUserWords = Array.isArray(prevWordsFound[data.userId])
                                 ? prevWordsFound[data.userId]
                                 : [];
 
+                            // Update the player's score
+                            const updatedPlayers = prev.players.map(player =>
+                                player.user_id === data.userId
+                                    ? { ...player, score: (player.score || 0) + 1 }
+                                    : player
+                            );
+
                             return {
                                 ...prev,
+                                players: updatedPlayers,
                                 words_found: {
                                     ...prevWordsFound,
                                     [data.userId]: [...currentUserWords, data.data.word]
