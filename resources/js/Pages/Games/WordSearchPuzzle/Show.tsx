@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
@@ -6,13 +6,16 @@ import { WordSearchPuzzleGame, WordSearchPuzzleGameState } from '@/types';
 import toast from 'react-hot-toast';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 import { IoPersonAddSharp } from 'react-icons/io5';
-import { FaUserPlus } from 'react-icons/fa';
+import { FaUserPlus, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
 import GameArea from '@/Components/WordSearchPuzzle/GameArea';
 import GameInfo from '@/Components/WordSearchPuzzle/GameInfo';
 import PlayersInfo from '@/Components/WordSearchPuzzle/PlayersInfo';
 import axios from 'axios';
 import { useWordSearchPuzzle } from '@/Hooks/useWordSearchPuzzle';
+import matchSound from "@/assets/audio/word-found.mp3";
+import { motion } from 'framer-motion';
+import SoundToggle from '@/Components/WordSearchPuzzle/SoundToggle';
 
 interface Props {
     auth: any;
@@ -28,6 +31,33 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     const [selectedCells, setSelectedCells] = useState<{ x: number; y: number }[]>([]);
     const [isDragging, setIsDragging] = useState(false);
     const [currentWords, setCurrentWords] = useState(word_search_puzzle_game.words);
+    const [isMuted, setIsMuted] = useState(() => {
+        // Check localStorage for saved preference
+        return localStorage.getItem('wordSearchMuted') === 'true';
+    });
+
+    const audioRef = useRef(new Audio(matchSound));
+
+
+    // Save mute preference when it changes
+    useEffect(() => {
+        localStorage.setItem('wordSearchMuted', isMuted.toString());
+    }, [isMuted]);
+
+    const playSound = useCallback(() => {
+        if (!isMuted) {
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        audioRef.current.currentTime = 0;
+                    })
+                    .catch(error => {
+                        console.log("Audio playback failed:", error);
+                    });
+            }
+        }
+    }, [isMuted]);
 
     // Add the handleShare function
     const handleShare = async () => {
@@ -105,6 +135,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         gridSize,
         seed: word_search_puzzle_game.id.toString(), // Use game ID as seed
         onWordFound: (word, cells) => {
+            playSound(); // Play sound for the finder
             console.log('Word found about to send to server:', word, 'Cells:', cells);
 
             // Update local state first
@@ -237,6 +268,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
                 case 'word_search_puzzle_word_found':
                     if (data.userId !== auth.user.id) {
+                        playSound(); // Play sound for other players
                         // Update word list and score for other players
                         setGameState(prev => {
                             const prevWordsFound = prev.words_found || {};
@@ -485,12 +517,18 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                                 <span className="md:hidden">{trans('generals.invite')}</span>
                             </button>
                         )}
-                        <button
-                            onClick={() => setShowExitConfirmation(true)}
-                            className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                        >
-                            <MdClose size={24} />
-                        </button>
+                        <div className="flex items-center gap-2">
+                            <SoundToggle
+                                isMuted={isMuted}
+                                onToggle={() => setIsMuted(!isMuted)}
+                            />
+                            <button
+                                onClick={() => setShowExitConfirmation(true)}
+                                className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                            >
+                                <MdClose size={24} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             }

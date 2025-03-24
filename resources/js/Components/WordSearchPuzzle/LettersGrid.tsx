@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface GridCell {
@@ -85,6 +85,18 @@ export default function LettersGrid({
         setSelectedCells([]);
     };
 
+    useEffect(() => {
+        const handleTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+        };
+
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+        return () => {
+            document.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, []);
+
     return (
         <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2">
             <div
@@ -116,7 +128,6 @@ export default function LettersGrid({
                             onMouseUp={handleCellMouseUp}
                             onTouchStart={() => handleCellMouseDown(i, j)}
                             onTouchMove={(e) => {
-                                e.preventDefault();
                                 const touch = e.touches[0];
                                 const element = document.elementFromPoint(touch.clientX, touch.clientY);
                                 const cellElement = element?.closest('[data-cell-coords]');
