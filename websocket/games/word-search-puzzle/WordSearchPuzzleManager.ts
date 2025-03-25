@@ -32,6 +32,9 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             case 'word_search_puzzle_word_found':
                 this.handleWordFound(message as WordSearchPuzzleGameMessage);
                 break;
+            case 'restart_word_search_puzzle_game':
+                this.handleGameRestart(message as WordSearchPuzzleGameMessage);
+                break;
         }
     }
 
@@ -142,11 +145,11 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
 
         // Update the game state with the grid and words from the host
         if (message.data?.is_host) {
-            if (message.data?.grid && (!state.grid || state.grid.length === 0)) {
+            if (message.data?.grid) {
                 state.grid = message.data.grid;
                 console.log('Setting initial grid from host:', state.grid);
             }
-            if (message.data?.words && (!state.words || state.words.length === 0)) {
+            if (message.data?.words) {
                 state.words = message.data.words;
                 console.log('Setting initial words from host:', state.words);
             }
@@ -305,6 +308,47 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                     words: state.words
                 }
             });
+        }
+    }
+
+    private handleGameRestart(message: WordSearchPuzzleGameMessage): void {
+        const { gameId, data } = message;
+        const state = this.getState(gameId);
+
+        if (state) {
+            // Reset game state but keep players
+            const newState = {
+                ...state,
+                status: 'waiting' as const,
+                current_turn: data?.hostId || state.hostId,
+                winner: null,
+                words_found: {},
+                grid: data?.grid || null, // Use the new grid from the host
+                words: data?.words || state.words,
+                players: state.players.map(player => ({
+                    ...player,
+                    score: 0,
+                    moves: 0,
+                    time: 0,
+                    is_ready: false
+                }))
+            };
+
+            this.setState(gameId, newState);
+            this.broadcastState(gameId);
+
+            // Broadcast a specific reset message
+            const room = this.getRoom(gameId);
+            if (room) {
+                this.broadcast(room, {
+                    type: 'word_search_puzzle_game_reset',
+                    gameId,
+                    data: {
+                        words: newState.words,
+                        grid: newState.grid // Include the new grid in the reset message
+                    }
+                });
+            }
         }
     }
 }

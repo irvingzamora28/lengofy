@@ -219,6 +219,7 @@ Route::middleware('auth')->group(function () {
             Route::post('{wordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
             Route::delete('{wordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
             Route::get('/practice', [WordSearchPuzzleGameController::class, 'practice'])->name('practice');
+            Route::get('/get-words', [WordSearchPuzzleGameController::class, 'getWords'])->name('get-words');
         });
     });
 

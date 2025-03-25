@@ -110,21 +110,28 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         const newWords = await fetchWords();
         console.log('New words fetched:', newWords);
 
-        if (wsRef.current) {
+        // Reset and regenerate grid with new words
+        setCurrentWords(newWords);
+        const newGrid = generateGrid(newWords); // This will generate a new grid with the new words
+
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
                 type: 'restart_word_search_puzzle_game',
                 gameId: gameState.id,
                 gameType: 'word_search_puzzle',
                 data: {
                     words: newWords,
+                    grid: newGrid, // Send the new grid
                     players: gameState.players,
                     language_name: gameState.language_name,
                     category: gameState.category,
-                    hostId: gameState.hostId,
-                    seed: gameState.id.toString() // Include the seed for grid generation
+                    hostId: gameState.hostId
                 }
             }));
         }
+
+        // Close the game over modal
+        setShowGameOverModal(false);
     };
 
     // Game state
@@ -370,6 +377,19 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 case 'word_search_puzzle_game_completed':
                     setWinners(data.data.winners);
                     setShowGameOverModal(true);
+                    break;
+
+                case 'word_search_puzzle_game_reset':
+                    // Reset all game-related states
+                    setSelectedCells([]);
+                    updateWordsAndReset(data.data.words);
+                    setGameState(prev => ({
+                        ...prev,
+                        words: data.data.words,
+                        grid: data.data.grid, // Update with the new grid
+                        status: 'waiting',
+                        words_found: {},
+                    }));
                     break;
             }
         };

@@ -205,6 +205,31 @@ class WordSearchPuzzleGameController extends Controller
         }
     }
 
+    public function getWords(Request $request)
+    {
+        $validated = $request->validate([
+            'difficulty' => 'required|in:easy,medium,hard',
+            'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()), // Allow 0 or existing category IDs
+        ]);
+
+        $amountOfWords = match ($validated['difficulty']) {
+            'easy' => 5,
+            'medium' => 8,
+            'hard' => 12,
+        };
+
+        $user = auth()->user();
+        $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
+        $words = $this->nounService->getNouns(
+            languageId: $languagePair->target_language_id,
+            translationLanguageId: $languagePair->source_language_id,
+            categoryId: $validated['category'],
+            totalRounds: $amountOfWords
+        );
+
+        return response()->json($words);
+    }
+
     public function ready(WordSearchPuzzleGame $wordSearchPuzzleGame)
     {
         try {
