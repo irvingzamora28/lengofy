@@ -171,7 +171,7 @@ export interface WordSearchPuzzleWord {
 }
 
 export interface WordSearchPuzzleGame {
-    hostId: any;
+    hostId: number;
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
     max_players: number;
@@ -182,7 +182,7 @@ export interface WordSearchPuzzleGame {
     language_pair_id: number;
     words: WordSearchPuzzleWord[];
     players: WordSearchPuzzlePlayer[];
-    grid: GridCell[][]; // Add the grid property
+    grid: GridCell[][];
     words_found: { [key: number]: Set<string> };
     round_time: number;
     round_start_time: number | null;
@@ -199,6 +199,7 @@ export interface WordSearchPuzzlePlayer {
 }
 
 export interface WordSearchPuzzleGameState extends WordSearchPuzzleGame {
+    words_found: { [key: number]: Set<string> };
     winner?: WordSearchPuzzlePlayer | null;
 }
 

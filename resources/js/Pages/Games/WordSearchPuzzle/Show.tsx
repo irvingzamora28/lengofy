@@ -17,6 +17,8 @@ import matchSound from "@/assets/audio/word-found.mp3";
 import { motion } from 'framer-motion';
 import SoundToggle from '@/Components/WordSearchPuzzle/SoundToggle';
 
+type GameStateType = WordSearchPuzzleGameState;
+
 interface Props {
     auth: any;
     word_search_puzzle_game: WordSearchPuzzleGame;
@@ -152,25 +154,28 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             console.log('Word found about to send to server:', word, 'Cells:', cells);
 
             // Update local state first
-            setGameState(prev => {
+            setGameState((prev: WordSearchPuzzleGameState) => {
                 const prevWordsFound = prev.words_found || {};
-                const currentUserWords = Array.isArray(prevWordsFound[auth.user.id])
-                    ? prevWordsFound[auth.user.id]
-                    : [];
+                const currentUserWords = prevWordsFound[auth.user.id] || new Set<string>();
 
-                // Update the player's score in the game state
+                // Create a new Set to avoid mutating the existing one
+                const updatedWordsFound = new Set(currentUserWords);
+                updatedWordsFound.add(word);
+
+                // Update the player's score
                 const updatedPlayers = prev.players.map(player =>
                     player.user_id === auth.user.id
                         ? { ...player, score: (player.score || 0) + 1 }
                         : player
                 );
 
-                return {
+                // Create new state object with proper typing
+                const newState: WordSearchPuzzleGameState = {
                     ...prev,
                     players: updatedPlayers,
                     words_found: {
                         ...prevWordsFound,
-                        [auth.user.id]: [...currentUserWords, word]
+                        [auth.user.id]: updatedWordsFound
                     },
                     grid: prev.grid.map((row, i) =>
                         row.map((cell, j) => {
@@ -181,6 +186,8 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                         })
                     )
                 };
+
+                return newState;
             });
 
             // Then broadcast to other players
@@ -199,7 +206,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     });
 
     // Initialize gameState using the grid from useWordSearchPuzzle
-    const [gameState, setGameState] = useState(() => ({
+    const [gameState, setGameState] = useState<GameStateType>(() => ({
         ...word_search_puzzle_game,
         words_found: word_search_puzzle_game.words_found || {},
         grid: grid
@@ -282,12 +289,13 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                 case 'word_search_puzzle_word_found':
                     if (data.userId !== auth.user.id) {
                         playSound(); // Play sound for other players
-                        // Update word list and score for other players
-                        setGameState(prev => {
+                        setGameState((prev: WordSearchPuzzleGameState) => {
                             const prevWordsFound = prev.words_found || {};
-                            const currentUserWords = Array.isArray(prevWordsFound[data.userId])
-                                ? prevWordsFound[data.userId]
-                                : [];
+                            const userWords = prevWordsFound[data.userId] || new Set<string>();
+
+                            // Create a new Set with the existing words plus the new word
+                            const updatedWordsFound = new Set(userWords);
+                            updatedWordsFound.add(data.data.word);
 
                             // Update the player's score
                             const updatedPlayers = prev.players.map(player =>
@@ -296,34 +304,27 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                                     : player
                             );
 
-                            return {
+                            // Create new state object with proper typing
+                            const newState: WordSearchPuzzleGameState = {
                                 ...prev,
                                 players: updatedPlayers,
                                 words_found: {
                                     ...prevWordsFound,
-                                    [data.userId]: [...currentUserWords, data.data.word]
-                                }
+                                    [data.userId]: updatedWordsFound
+                                },
+                                grid: prev.grid.map((row, i) =>
+                                    row.map((cell, j) => {
+                                        if (data.data.cells.some((pos: CellCoordinate) => pos.x === i && pos.y === j)) {
+                                            return { ...cell, isFound: true, isSelected: false };
+                                        }
+                                        return cell;
+                                    })
+                                )
                             };
+
+                            return newState;
                         });
                     }
-
-                    // Update the grid to show found words for all players
-                    setGameState(prev => {
-                        const newGrid = JSON.parse(JSON.stringify(prev.grid));
-                        data.data.cells.forEach((cell: CellCoordinate) => {
-                            if (newGrid[cell.x] && newGrid[cell.x][cell.y]) {
-                                newGrid[cell.x][cell.y] = {
-                                    ...newGrid[cell.x][cell.y],
-                                    isFound: true,
-                                    isSelected: false
-                                };
-                            }
-                        });
-                        return {
-                            ...prev,
-                            grid: newGrid
-                        };
-                    });
                     break;
 
                 case 'word_search_puzzle_player_left':
@@ -392,7 +393,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                         words: data.data.words,
                         grid: data.data.grid, // Update with the new grid
                         status: 'waiting',
-                        words_found: {},
+                        words_found: {} as { [key: number]: Set<string> }
                     }));
                     break;
             }
