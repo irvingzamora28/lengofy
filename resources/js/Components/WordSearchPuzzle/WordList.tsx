@@ -2,16 +2,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-interface Word {
-    id: number;
-    word: string;
-    translation: string;
-    found: boolean;
-}
+import { WordSearchPuzzleWord } from '@/types';
 
 interface WordListProps {
-    words: Word[];
+    words: WordSearchPuzzleWord[];
 }
 
 export default function WordList({ words }: WordListProps) {

@@ -1,5 +1,5 @@
+import { WordSearchPuzzleGame } from '@/types';
 import { useTranslation } from 'react-i18next';
-import { WordSearchPuzzleGame } from '@/types/games';
 import { FaFlagCheckered, FaHourglassHalf, FaPlay } from 'react-icons/fa';
 
 interface GameInfoProps {

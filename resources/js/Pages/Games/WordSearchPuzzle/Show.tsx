@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { WordSearchPuzzleGame, WordSearchPuzzleGameState } from '@/types';
+import { WordSearchPuzzleGame, WordSearchPuzzleGameState, CellCoordinate } from '@/types';
 import toast from 'react-hot-toast';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 import { IoPersonAddSharp } from 'react-icons/io5';
@@ -28,7 +28,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     const { t: trans } = useTranslation();
     const wsRef = useRef<WebSocket | null>(null);
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-    const [selectedCells, setSelectedCells] = useState<{ x: number; y: number }[]>([]);
+    const [selectedCells, setSelectedCells] = useState<CellCoordinate[]>([]);
     const [isDragging, setIsDragging] = useState(false);
     const [currentWords, setCurrentWords] = useState(word_search_puzzle_game.words);
     const [isMuted, setIsMuted] = useState(() => {
@@ -99,7 +99,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     category: gameState.category?.id,
                 },
             });
-            return response.data;
+            // Add found property to each word
+            return response.data.map((word: any) => ({
+                ...word,
+                found: false
+            }));
         } catch (error) {
             console.error('Error fetching words:', error);
             return [];
@@ -112,7 +116,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
         // Reset and regenerate grid with new words
         setCurrentWords(newWords);
-        const newGrid = generateGrid(newWords); // This will generate a new grid with the new words
+        const newGrid = generateGrid(newWords, gridSize); // This will generate a new grid with the new words
 
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
@@ -306,10 +310,10 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     // Update the grid to show found words for all players
                     setGameState(prev => {
                         const newGrid = JSON.parse(JSON.stringify(prev.grid));
-                        data.data.cells.forEach(({ x, y }) => {
-                            if (newGrid[x] && newGrid[x][y]) {
-                                newGrid[x][y] = {
-                                    ...newGrid[x][y],
+                        data.data.cells.forEach((cell: CellCoordinate) => {
+                            if (newGrid[cell.x] && newGrid[cell.x][cell.y]) {
+                                newGrid[cell.x][cell.y] = {
+                                    ...newGrid[cell.x][cell.y],
                                     isFound: true,
                                     isSelected: false
                                 };
@@ -417,7 +421,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
     };
 
     const handleCellMouseDown = (x: number, y: number) => {
-        if (gameState.status !== 'in_progress' || gameState.current_turn !== auth.user.id) return;
+        if (gameState.status !== 'in_progress') return;
 
         setIsDragging(true);
         setSelectedCells([{ x, y }]);
@@ -465,7 +469,7 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         setSelectedCells([]);
     };
 
-    const isValidSelection = (last: { x: number; y: number }, current: { x: number; y: number }) => {
+    const isValidSelection = (last: CellCoordinate, current: CellCoordinate) => {
         const dx = Math.abs(current.x - last.x);
         const dy = Math.abs(current.y - last.y);
 

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { WordSearchPuzzleGame } from '@/types/games';
+import  { WordSearchPuzzleGame } from '@/types';
 import LettersGrid from './LettersGrid';
 import WordList from './WordList';
 

@@ -33,6 +33,7 @@ export interface User {
     language_pair?: LanguagePair;
     gender_duel_difficulty?: 'easy' | 'medium' | 'hard';
     memory_translation_difficulty?: 'easy' | 'medium' | 'hard';
+    word_search_puzzle_difficulty?: 'easy' | 'medium' | 'hard';
 }
 
 export interface Category {
@@ -162,7 +163,15 @@ export interface GridCell {
     isFound: boolean;
 }
 
+export interface WordSearchPuzzleWord {
+    id: number;
+    word: string;
+    translation: string;
+    found?: boolean; // Make found optional since it's a runtime property
+}
+
 export interface WordSearchPuzzleGame {
+    hostId: any;
     id: number;
     status: 'waiting' | 'in_progress' | 'completed';
     max_players: number;
@@ -171,11 +180,7 @@ export interface WordSearchPuzzleGame {
     source_language: Language;
     target_language: Language;
     language_pair_id: number;
-    words: {
-        id: number;
-        word: string;
-        translation: string;
-    }[];
+    words: WordSearchPuzzleWord[];
     players: WordSearchPuzzlePlayer[];
     grid: GridCell[][]; // Add the grid property
     words_found: { [key: number]: Set<string> };
@@ -195,4 +200,9 @@ export interface WordSearchPuzzlePlayer {
 
 export interface WordSearchPuzzleGameState extends WordSearchPuzzleGame {
     winner?: WordSearchPuzzlePlayer | null;
+}
+
+export interface CellCoordinate {
+    x: number;
+    y: number;
 }
