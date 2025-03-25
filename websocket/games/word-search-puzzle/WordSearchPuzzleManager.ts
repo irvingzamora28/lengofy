@@ -210,26 +210,21 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
 
         const { word, cells } = data;
 
-        // Initialize words_found if it doesn't exist
         if (!state.words_found) {
             state.words_found = {};
         }
 
-        // Initialize user's words_found if it doesn't exist
         if (!state.words_found[userId]) {
             state.words_found[userId] = new Set();
         }
 
-        // Check if the word exists and hasn't been found
         const wordExists = state.words.some(w => w.word === word || w.translation === word);
         const wordNotFound = !Object.values(state.words_found)
             .some(set => set.has(word));
 
         if (wordExists && wordNotFound) {
-            // Add word to player's found words
             state.words_found[userId].add(word);
 
-            // Update grid state to mark cells as found
             if (!state.grid) {
                 state.grid = [];
             }
@@ -243,13 +238,37 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 }
             });
 
-            // Update player's score
             const player = state.players.find(p => p.user_id === userId);
             if (player) {
                 player.score = (player.score || 0) + 1;
             }
 
-            // Broadcast updates
+            // Check if all words have been found
+            const totalWordsFound = Object.values(state.words_found)
+                .reduce((total, userWords) => total + userWords.size, 0);
+
+            if (totalWordsFound >= state.words.length) {
+                // Find winner(s)
+                const highestScore = Math.max(...state.players.map(p => p.score || 0));
+                const winners = state.players.filter(p => (p.score || 0) === highestScore);
+
+                state.status = 'completed';
+                state.winner = winners.length === 1 ? winners[0].user_id : null; // null for tie
+
+                // Broadcast game completion
+                this.broadcast(room, {
+                    type: 'word_search_puzzle_game_completed',
+                    gameId,
+                    data: {
+                        winners: winners.map(w => ({
+                            user_id: w.user_id,
+                            player_name: w.player_name,
+                            score: w.score
+                        }))
+                    }
+                });
+            }
+
             this.broadcast(room, {
                 type: 'word_search_puzzle_word_found',
                 gameId,
@@ -262,7 +281,6 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
                 }
             });
 
-            // Update game state
             this.setState(gameId, state);
             this.broadcastState(gameId);
         }

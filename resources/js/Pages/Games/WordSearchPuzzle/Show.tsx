@@ -35,6 +35,8 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
         // Check localStorage for saved preference
         return localStorage.getItem('wordSearchMuted') === 'true';
     });
+    const [showGameOverModal, setShowGameOverModal] = useState(false);
+    const [winners, setWinners] = useState<Array<{user_id: number, player_name: string, score: number}>>([]);
 
     const audioRef = useRef(new Audio(matchSound));
 
@@ -364,6 +366,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                         )
                     }));
                     break;
+
+                case 'word_search_puzzle_game_completed':
+                    setWinners(data.data.winners);
+                    setShowGameOverModal(true);
+                    break;
             }
         };
 
@@ -574,6 +581,53 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                     onLeave={leaveGame}
                     onCancel={() => setShowExitConfirmation(false)}
                 />
+            )}
+
+            {showGameOverModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full">
+                        <h2 className="text-2xl font-bold mb-4 text-center dark:text-white">
+                            {trans('word_search_puzzle.game_over')}
+                        </h2>
+
+                        <div className="mb-6">
+                            {winners.length === 1 ? (
+                                <p className="text-center text-lg dark:text-white">
+                                    {trans('generals.games.winner_announcement', { name: winners[0].player_name })}
+                                </p>
+                            ) : (
+                                <p className="text-center text-lg dark:text-white">
+                                    {trans('generals.games.tie')}
+                                </p>
+                            )}
+
+                            <div className="mt-4">
+                                {winners.map((winner, index) => (
+                                    <div key={winner.user_id} className="text-center dark:text-white">
+                                        {winner.player_name}: {winner.score} {trans('word_search_puzzle.points')}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex justify-center gap-4">
+                            {gameState.hostId === auth.user.id && (
+                                <button
+                                    onClick={handleRestartGame}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                                >
+                                    {trans('word_search_puzzle.restart_game')}
+                                </button>
+                            )}
+                            <button
+                                onClick={() => setShowGameOverModal(false)}
+                                className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+                            >
+                                {trans('generals.close')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </AuthenticatedLayout>
     );
