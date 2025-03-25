@@ -492,11 +492,10 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
 
         // Only the host should generate new words and grid
         if (auth.user.id === gameState.hostId) {
-            // If we don't have words yet, fetch them
             if (!wordsToUse || wordsToUse.length === 0) {
                 wordsToUse = await fetchWords();
             }
-            initialGrid = grid; // Use the grid from useWordSearchPuzzle hook
+            initialGrid = grid;
             console.log('Host generated initial grid and words:', { grid: initialGrid, words: wordsToUse });
         }
 
@@ -516,9 +515,24 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             }));
         }
 
+        // Convert grid and words to serializable format
+        const serializableGrid = initialGrid?.map(row =>
+            row.map(cell => ({
+                letter: cell.letter,
+                isFound: cell.isFound || false,
+                isSelected: cell.isSelected || false
+            }))
+        );
+
+        const serializableWords = wordsToUse?.map(word => ({
+            word: word.word,
+            translation: word.translation,
+        }));
+
+        // Send to server
         router.post(route(`games.word-search-puzzle.ready`, `${gameState.id}`), {
-            grid: initialGrid,
-            words: wordsToUse
+            grid: serializableGrid ? JSON.stringify(serializableGrid) : null,
+            words: serializableWords ? JSON.stringify(serializableWords) : null
         }, {
             preserveScroll: true,
             preserveState: true
