@@ -91,7 +91,7 @@ class WordSearchPuzzleGameController extends Controller
 
         $amountOfWords = match ($wordSearchPuzzleGame->difficulty) {
             'easy' => 5,
-            'medium' => 2,
+            'medium' => 8,
             'hard' => 12,
         };
 
