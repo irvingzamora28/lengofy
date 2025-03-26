@@ -226,6 +226,8 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
             .some(set => set.has(word));
 
         if (wordExists && wordNotFound) {
+            // Set the game state's word status found to true
+            state.words = state.words.map(w => w.word === word ? { ...w, found: true } : w);
             state.words_found[userId].add(word);
 
             if (!state.grid) {

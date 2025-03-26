@@ -22,6 +22,7 @@ export interface WordSearchPuzzleGameState extends BaseGameState {
         id: number;
         word: string;
         translation: string;
+        found?: boolean;
     }[];
     words_found: { [key: number]: Set<string> };
     grid: GridCell[][]; // Add the grid property
