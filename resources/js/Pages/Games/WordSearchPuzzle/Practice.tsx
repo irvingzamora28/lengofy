@@ -153,7 +153,7 @@ export default function WordSearchPuzzlePractice({ auth, difficulty, category, w
                                 className="lg:w-2/3 w-full"
                             >
                                 <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md mb-4">
-                                    <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2">
+                                    <div className="w-full overflow-auto max-h-[60vh] md:max-h-[80vh] p-2 touch-pan-y">
                                         <LettersGrid
                                             grid={grid}
                                             gridSize={gridSize}

@@ -101,7 +101,7 @@ export default function GameArea({
     return (
         <div className="flex flex-col lg:flex-row gap-6">
             <div className="lg:w-2/3 w-full">
-                <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
+                <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md touch-pan-y">
                     <LettersGrid
                         grid={gridData}
                         gridSize={gridSize}

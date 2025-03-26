@@ -86,8 +86,13 @@ export default function LettersGrid({
     };
 
     useEffect(() => {
+        // Only prevent default touch behavior when touching the grid itself
         const handleTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
+            // Check if the touch is within the grid
+            const target = e.target as HTMLElement;
+            if (target.closest('[data-cell-coords]')) {
+                e.preventDefault();
+            }
         };
 
         document.addEventListener('touchmove', handleTouchMove, { passive: false });
