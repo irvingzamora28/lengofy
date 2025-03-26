@@ -156,11 +156,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
             // Update local state first
             setGameState((prev: WordSearchPuzzleGameState) => {
                 const prevWordsFound = prev.words_found || {};
-                const currentUserWords = prevWordsFound[auth.user.id] || new Set<string>();
+                // Convert the Set to Array if it exists, otherwise create empty array
+                const currentUserWords = Array.from(prevWordsFound[auth.user.id] || []);
 
-                // Create a new Set to avoid mutating the existing one
-                const updatedWordsFound = new Set(currentUserWords);
-                updatedWordsFound.add(word);
+                // Create a new Set from the array
+                const updatedWordsFound = new Set([...currentUserWords, word]);
 
                 // Update the player's score
                 const updatedPlayers = prev.players.map(player =>
@@ -291,11 +291,11 @@ export default function Show({ auth, word_search_puzzle_game, wsEndpoint, justCr
                         playSound(); // Play sound for other players
                         setGameState((prev: WordSearchPuzzleGameState) => {
                             const prevWordsFound = prev.words_found || {};
-                            const userWords = prevWordsFound[data.userId] || new Set<string>();
+                            // Ensure we're working with an array before creating a Set
+                            const userWords = Array.from(prevWordsFound[data.userId] || []);
 
                             // Create a new Set with the existing words plus the new word
-                            const updatedWordsFound = new Set(userWords);
-                            updatedWordsFound.add(data.data.word);
+                            const updatedWordsFound = new Set([...userWords, data.data.word]);
 
                             // Update the player's score
                             const updatedPlayers = prev.players.map(player =>
