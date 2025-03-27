@@ -10,7 +10,11 @@ const TableRow: React.FC<TableRowProps> = ({ children }) => {
 	// If there's only one cell, apply colspan=2
 	if (cells.length === 1 && React.isValidElement<HTMLTableCellElement>(cells[0])) {
 		return (
-            <tr className="hover:bg-gray-300 dark:hover:bg-blue-900 dark:hover:text-indigo-200 even:bg-gray-100 odd:bg-white dark:even:bg-indigo-700 dark:odd:bg-indigo-600 dark:text-indigo-50">
+            <tr className="hover:bg-gray-200 dark:hover:bg-gray-700
+                even:bg-gray-50 odd:bg-white
+                dark:even:bg-gray-700/80 dark:odd:bg-gray-600/80
+                dark:text-gray-200
+                transition-colors duration-200">
 				{React.cloneElement(cells[0] as React.ReactElement<HTMLTableCellElement>, {
 					colSpan: 2,
 					className: `${cells[0].props.className || ""} text-center font-semibold`,
@@ -18,7 +22,15 @@ const TableRow: React.FC<TableRowProps> = ({ children }) => {
 			</tr>
 		);
 	} else {
-        return <tr className="hover:bg-gray-300 dark:hover:bg-blue-900 dark:hover:text-indigo-200 even:bg-gray-100 odd:bg-white dark:even:bg-indigo-700 dark:odd:bg-indigo-600 dark:text-indigo-50">{children}</tr>;
+        return (
+            <tr className="hover:bg-gray-200 dark:hover:bg-gray-700
+                even:bg-gray-50 odd:bg-white
+                dark:even:bg-gray-700/80 dark:odd:bg-gray-600/80
+                dark:text-gray-200
+                transition-colors duration-200">
+                {children}
+            </tr>
+        );
     }
 };
 

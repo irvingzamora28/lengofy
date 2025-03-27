@@ -421,7 +421,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
       <div className="flex items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-900/50 p-2 rounded-lg">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <RiSoundModuleFill className="text-xl flex-shrink-0 text-indigo-500 dark:text-indigo-400" />
-          <p className="text-base font-medium text-slate-900 dark:text-slate-100 truncate">{text}</p>
+          <span className="text-base font-medium text-slate-900 dark:text-slate-100 truncate">{text}</span>
         </div>
         {isSpeechSupported && (
 
@@ -661,7 +661,7 @@ const VoiceRecorder = ({ text, nativeAudio, language = 'de-DE' }: RecordPromptPr
 
     {error && (
         <div className="p-2.5 bg-red-50 dark:bg-red-900/20 rounded-lg">
-        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <span className="text-sm text-red-600 dark:text-red-400">{error}</span>
         </div>
   )}
     </div>
