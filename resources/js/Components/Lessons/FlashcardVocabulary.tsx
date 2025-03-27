@@ -40,10 +40,14 @@ const FlashcardVocabulary: React.FC<FlashcardVocabularyProps> = ({ item }) => {
 					dark: "bg-blue-600/30 text-blue-300"
 				};
 			case "neut":
-			default:
-				return {
+                return {
 					light: "bg-green-50 text-green-700",
 					dark: "bg-green-600/30 text-green-300"
+				};
+			default:
+				return {
+					light: "bg-gray-50 text-gray-700",
+					dark: "bg-gray-600/30 text-gray-300"
 				};
 		}
 	})();
@@ -62,6 +66,7 @@ const FlashcardVocabulary: React.FC<FlashcardVocabularyProps> = ({ item }) => {
             <span className="hidden dark:bg-rose-600/30"></span>
             <span className="hidden dark:bg-blue-600/30"></span>
             <span className="hidden dark:bg-green-600/30"></span>
+            <span className="hidden dark:bg-gray-600/30"></span>
 			{/* Front of the card */}
 			<div
 				className={`w-full h-full flex flex-col justify-around p-6 items-center text-center
