@@ -50,8 +50,12 @@ class PageAnalyticsService
 
         try {
             // Check if log file exists and is readable
-            if (!File::exists($this->accessLogPath) || !File::isReadable($this->accessLogPath)) {
-                Log::warning('Nginx access log not found or not readable: ' . $this->accessLogPath);
+            if (!File::exists($this->accessLogPath)) {
+                Log::warning('Nginx access log not found: ' . $this->accessLogPath);
+                return $this->getFallbackData($days);
+            }
+            if (!File::isReadable($this->accessLogPath)) {
+                Log::warning('Nginx access log not readable: ' . $this->accessLogPath);
                 return $this->getFallbackData($days);
             }
 
@@ -79,19 +83,23 @@ class PageAnalyticsService
                 while (($line = fgets($handle)) !== false) {
                     // Parse log line using regex for common Nginx log formats
                     // This handles both the default Nginx format and common variations
-                    if (preg_match('/^(\S+) (?:\S+) (?:\S+) \[(.*?)\] "(?:(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) +)?(.*?)(?: +(HTTP\/[0-9.]+)|)" (\d{3}) (\d+|-) (?:"(.*?)" )?(?:"(.*?)")?/', $line, $matches)) {
+                    if (preg_match('/^(\S+) - \S+ \[(.*?)\] "(?:(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH))? ?([^"]*)" (\d{3}) (\d+|-) "([^"]*)" "([^"]*)"/', $line, $matches)) {
                         $ip = $matches[1];
                         $dateStr = $matches[2];
                         $method = $matches[3];
-                        $path = $matches[4];
-                        $protocol = $matches[5];
-                        $statusCode = (int)$matches[6];
-                        $bytes = (int)$matches[7];
-                        $referer = $matches[8];
-                        $userAgent = $matches[9];
+                        $path = explode(' ', $matches[4])[0]; // Get just the path part
+                        $statusCode = (int)$matches[5];
+                        $bytes = $matches[6] !== '-' ? (int)$matches[6] : 0;
+                        $referer = $matches[7] !== '-' ? $matches[7] : '';
+                        $userAgent = $matches[8];
 
-                        // Parse the date
-                        $date = Carbon::createFromFormat('d/M/Y:H:i:s +0000', $dateStr);
+                        // Parse the date (update the format to match Nginx's default format)
+                        try {
+                            $date = Carbon::createFromFormat('d/M/Y:H:i:s O', $dateStr);
+                        } catch (\Exception $e) {
+                            Log::warning("Failed to parse date: $dateStr");
+                            continue;
+                        }
 
                         // Skip if before cutoff date
                         if ($date->lt($cutoffDate)) {
