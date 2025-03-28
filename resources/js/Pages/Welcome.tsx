@@ -409,6 +409,7 @@ export default function Welcome() {
                         show={showLanguageModal}
                         onClose={() => setShowLanguageModal(false)}
                         languagePairs={languagePairs}
+                        redirectRoute="games.gender-duel.practice"
                     />
                 )}
             </AnimatePresence>
