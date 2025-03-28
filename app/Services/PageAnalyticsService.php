@@ -29,8 +29,8 @@ class PageAnalyticsService
      */
     public function __construct()
     {
-        // Default Nginx log path - adjust based on your server configuration
-        $this->accessLogPath = config('analytics.nginx_log_path', '/var/log/nginx/access.log');
+        // Use storage path for logs
+        $this->accessLogPath = storage_path('logs/nginx/access.log');
     }
 
     /**
@@ -247,10 +247,10 @@ class PageAnalyticsService
             $dateStr = $date->format('M j');
             $viewCount = rand(10, 50);
             $visitorCount = rand(5, 25);
-            
+
             $totalViews += $viewCount;
             $totalVisitors += $visitorCount;
-            
+
             $dailyViews[] = [
                 'date' => $dateStr,
                 'count' => $viewCount
@@ -299,14 +299,14 @@ class PageAnalyticsService
         $remainingVisits = $totalViews;
         $routeKeys = array_keys($possibleRoutes);
         shuffle($routeKeys);
-        
+
         foreach (array_slice($routeKeys, 0, 10) as $index => $route) {
-            $visitors = $index === 0 ? 
+            $visitors = $index === 0 ?
                 floor($remainingVisits * 0.4) : // 40% to the top page
                 floor($remainingVisits * (0.6 / 9)); // Remaining 60% distributed among other pages
-            
+
             $remainingVisits -= $visitors;
-            
+
             $topPages[] = [
                 'path' => $route,
                 'visitors' => max(1, $visitors)
@@ -321,18 +321,18 @@ class PageAnalyticsService
             'medium.com', 'quora.com', 'wikipedia.org', 'amazon.com',
             't.co', 'pinterest.com', 'tumblr.com', 'wordpress.com'
         ];
-        
+
         $referrers = [];
         $remainingVisitors = floor($totalVisitors * 0.6); // Assume 60% came from referrers
         shuffle($possibleReferrers);
-        
+
         foreach (array_slice($possibleReferrers, 0, 5) as $index => $referrer) {
-            $visitors = $index === 0 ? 
+            $visitors = $index === 0 ?
                 floor($remainingVisitors * 0.5) : // 50% from top referrer
                 floor($remainingVisitors * (0.5 / 4)); // Remaining 50% distributed among other referrers
-            
+
             $remainingVisitors -= $visitors;
-            
+
             $referrers[] = [
                 'source' => $referrer,
                 'visitors' => max(1, $visitors)
@@ -402,7 +402,7 @@ class PageAnalyticsService
         $data = $this->parseAccessLogs();
         return $data['referrers'];
     }
-    
+
     /**
      * Check if the Nginx log file is accessible
      *
@@ -416,24 +416,24 @@ class PageAnalyticsService
             'message' => '',
             'using_fallback' => true
         ];
-        
+
         if (!File::exists($this->accessLogPath)) {
             $result['message'] = 'Log file does not exist. Please check the NGINX_LOG_PATH in your .env file.';
             return $result;
         }
-        
+
         if (!File::isReadable($this->accessLogPath)) {
             $result['message'] = 'Log file exists but is not readable. Please check file permissions.';
             return $result;
         }
-        
+
         // Try to read the first line of the file
         try {
             $handle = fopen($this->accessLogPath, 'r');
             if ($handle) {
                 $line = fgets($handle);
                 fclose($handle);
-                
+
                 if ($line) {
                     $result['accessible'] = true;
                     $result['using_fallback'] = false;
@@ -447,7 +447,7 @@ class PageAnalyticsService
         } catch (\Exception $e) {
             $result['message'] = 'Error accessing log file: ' . $e->getMessage();
         }
-        
+
         return $result;
     }
 }

@@ -27,6 +27,7 @@ services:
       - .:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt:ro # Mount SSL certificates
+      - nginx_logs:/var/log/nginx
     ports:
       - "80:80"  # Map container's port 80 to host's port 80
       - "443:443"  # Expose HTTPS port
@@ -52,6 +53,7 @@ services:
       - lengofy-network
 
 volumes:
+  nginx_logs:
   dbdata:
 
 networks:

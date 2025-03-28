@@ -41,6 +41,11 @@ jobs:
           script: |
             cd /var/www/html
 
+            # Create nginx logs directory in storage
+            mkdir -p storage/logs/nginx
+            sudo chown -R www-data:www-data storage/logs/nginx
+            sudo chmod -R 755 storage/logs/nginx
+
             # Copy .env.example to .env if it doesn't exist
             if [ ! -f .env ]; then
               echo "Creating .env file from .env.example"
@@ -72,6 +77,9 @@ jobs:
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml build --no-cache
             docker compose -f docker-compose.prod.yml up -d
+
+            # Additional step to ensure log permissions
+            docker exec lengofy-nginx chmod 644 /var/log/nginx/access.log
 
             # Wait for containers to be ready
             sleep 20
