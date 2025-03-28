@@ -60,20 +60,20 @@ jobs:
             # Setup log rotation if not already configured
             if [ ! -f /etc/logrotate.d/nginx-lengofy ]; then
               sudo tee /etc/logrotate.d/nginx-lengofy > /dev/null << 'EOL'
-"/var/www/html/storage/logs/nginx\*.log \{
-    daily
-    missingok
-    rotate 14
-    compress
-    delaycompress
-    notifempty
-    create 0644 www-data www-data
-    sharedscripts
-    postrotate
-        [ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
-    endscript
-\}"
-EOL
+            "/var/www/html/storage/logs/nginx/*.log \{
+                daily
+                missingok
+                rotate 14
+                compress
+                delaycompress
+                notifempty
+                create 0644 www-data www-data
+                sharedscripts
+                postrotate
+                    [ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+                endscript
+            }"
+            EOL
             fi
 
             # Copy .env.example to .env if it doesn't exist
