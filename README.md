@@ -256,6 +256,7 @@ git push origin main
 ## TODO
  -Remove this emoji: "  кабел"
 - Fix Expected type 'object' in EnsurePlayerInGame
+- Fix practice memory translation game
 
 ## License
 
