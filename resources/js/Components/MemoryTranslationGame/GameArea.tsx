@@ -41,7 +41,7 @@ const Card = ({ cardData, isFlipped, isMatched, onClick }: CardProps) => {
                 ${isFlipped ? 'rotate-y-180' : 'rotate-y-0'}
             `}>
                 {isFlipped && (
-                    <div className="text-[8px] sm:text-xs text-white text-center p-1 break-words">
+                    <div className="text-[8px] sm:text-xl text-white text-center p-1 break-words">
                         {cardData.id.includes('word') && <p>{cardData.gender}</p>}
                         <p>{cardData.word}</p>
                         {cardData.emoji && <p>{cardData.emoji}</p>}
