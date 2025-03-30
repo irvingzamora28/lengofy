@@ -109,6 +109,7 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
     }, [cards]);
 
     const flipCard = (cardId: string) => {
+        // If this card is already matched or flipped, do nothing
         if (
             matchedPairs.includes(cards.find((card) => card.id === cardId)?.pairId || "") ||
             flippedCards.some((card) => card.id === cardId)
@@ -116,6 +117,46 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
             return;
         }
 
+        // Clear any existing timeout
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            setTimeoutId(null);
+        }
+
+        // If there are two cards flipped or cards waiting to be flipped down,
+        // immediately flip them back down before processing the new card
+        if (flippedCards.length === 2 || cardsToFlipDown.length > 0) {
+            // First, flip down any previously flipped cards
+            setCards((prevCards) =>
+                prevCards.map((card) => {
+                    if (flippedCards.some(fc => fc.id === card.id) || cardsToFlipDown.includes(card.id)) {
+                        return { ...card, isFlipped: false };
+                    }
+                    return card;
+                })
+            );
+
+            // Then reset the tracking states
+            setFlippedCards([]);
+            setCardsToFlipDown([]);
+
+            // Finally, flip the new card
+            setTimeout(() => {
+                setCards((prevCards) =>
+                    prevCards.map((card) =>
+                        card.id === cardId ? { ...card, isFlipped: true } : card
+                    )
+                );
+                const selectedCard = cards.find((card) => card.id === cardId);
+                if (selectedCard) {
+                    setFlippedCards([selectedCard]);
+                }
+            }, 100); // Small delay to ensure previous cards flip down first
+
+            return;
+        }
+
+        // Normal card flip logic for first or second card
         const newCards = cards.map((card) =>
             card.id === cardId ? { ...card, isFlipped: true } : card
         );
@@ -136,22 +177,6 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
             setMoves((prev) => prev + 1);
             const [firstFlippedCard] = flippedCards;
 
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-                setTimeoutId(null);
-            }
-
-            if (cardsToFlipDown.length > 0) {
-                setCards((prevCards) =>
-                    prevCards.map((card) =>
-                        cardsToFlipDown.includes(card.id) ? { ...card, isFlipped: false } : card
-                    )
-                );
-                setCardsToFlipDown([]);
-                setFlippedCards([selectedCard]);
-                return;
-            }
-
             // Add both cards to flippedCards before checking for a match
             setFlippedCards((prev) => [...prev, selectedCard]);
 
@@ -161,13 +186,11 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
                 setMatchedPairs((prevPairs) => [...prevPairs, selectedCard.pairId]);
                 playSound(correctSound);
 
-                // Delay clearing flippedCards to show both cards in the preview
                 const newTimeoutId = setTimeout(() => {
                     setFlippedCards([]);
-                }, 1000); // 1000ms delay
+                }, 1000);
                 setTimeoutId(newTimeoutId);
 
-                // Check if game is complete
                 if (matchedPairs.length + 1 === nouns.length) {
                     setGameEndTime(Date.now());
                     setIsGameOver(true);
@@ -175,9 +198,7 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
             } else {
                 // No match
                 playSound(incorrectSound);
-                setCardsToFlipDown([firstFlippedCard.id, selectedCard.id]);
 
-                // Delay clearing flippedCards to show both cards in the preview
                 const newTimeoutId = setTimeout(() => {
                     setCards((prevCards) =>
                         prevCards.map((card) =>
@@ -186,9 +207,8 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
                                 : card
                         )
                     );
-                    setCardsToFlipDown([]);
                     setFlippedCards([]);
-                }, 1000); // 1000ms delay
+                }, 1000);
                 setTimeoutId(newTimeoutId);
             }
         } else {
