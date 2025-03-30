@@ -85,7 +85,22 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
     const [cardsToFlipDown, setCardsToFlipDown] = useState<string[]>([]);
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
     const [cardPositions, setCardPositions] = useState<Map<string, DOMRect>>(new Map());
+    const [isMobile, setIsMobile] = useState(false);
     const { t: trans } = useTranslation();
+
+    // Detect mobile screen size
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkIfMobile();
+        window.addEventListener('resize', checkIfMobile);
+
+        return () => {
+            window.removeEventListener('resize', checkIfMobile);
+        };
+    }, []);
 
     useEffect(() => {
         const initializedCards = createCardPairs(nouns).sort(() => Math.random() - 0.5);
@@ -366,6 +381,27 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
         );
     }
 
+    // Determine grid columns based on difficulty and screen size
+    const getGridColumns = () => {
+        if (difficulty === "hard") return "grid-cols-6 md:grid-cols-8";
+        if (difficulty === "medium") return "grid-cols-5 md:grid-cols-8";
+        return "grid-cols-4 md:grid-cols-5"; // Easy
+    };
+
+
+    // Helper function to get card size class based on difficulty and device
+    const getCardSizeClass = () => {
+        if (difficulty === "hard") return "h-14 w-14 md:h-24 md:w-24 text-xs";
+        if (difficulty === "medium") return "h-16 w-16 md:h-24 md:w-24 text-sm";
+        return "h-20 w-20 text-2xl md:h-32 md:w-32 md:text-3xl"; // Easy
+    };
+
+    const getGapClass = () => {
+        if (difficulty === "hard") return "gap-2 md:gap-4";
+        if (difficulty === "medium") return "gap-4 md:gap-4";
+        return "gap-6 md:gap-8"; // Easy
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -394,7 +430,7 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
             <div className="hidden md:grid-cols-5"></div>
             <div className="hidden grid-cols-4"></div>
             <div className="flex w-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black">
-                <div className="flex w-full pb-10 flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
+                <div className="flex w-full pb-10 flex-col items-center min-h-screen bg-gray-100 dark:bg-gray-800">
                     <PreviewCards
                         cards={flippedCards.map((card) => ({
                             id: card.id,
@@ -405,17 +441,13 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
                         cardPositions={cardPositions}
                     />
                     <div
-                        className={`grid grid-cols-${
-                            difficulty === "hard" ? 5 : difficulty === "medium" ? 5 : 4
-                        } md:grid-cols-${
-                            difficulty === "hard" ? 8 : difficulty === "medium" ? 5 : 4
-                        } gap-4 p-4 rounded-lg w-full max-w-4xl mx-auto mb-10`}
+                        className={`grid ${getGridColumns()} ${getGapClass()} p-2 md:p-4 rounded-lg w-full max-w-4xl mx-auto mb-10`}
                     >
                         {cards.map((card) => (
                             <button
                                 key={card.id}
                                 data-card-id={card.id}
-                                className={`flex items-center justify-center rounded-lg shadow-lg p-4 h-16 md:h-24 transition duration-150 ease-in-out transform hover:scale-105 ${
+                                className={`flex items-center justify-center rounded-lg shadow-md p-1 md:p-4 ${getCardSizeClass()} transition duration-150 ease-in-out transform hover:scale-105 ${
                                     card.isFlipped || matchedPairs.includes(card.pairId)
                                         ? "bg-indigo-600 dark:bg-indigo-800"
                                         : "bg-indigo-400 dark:bg-indigo-500"
@@ -430,22 +462,22 @@ const MemoryTranslationGamePractice: React.FC<MemoryTranslationGamePracticeProps
                                 {card.isFlipped || matchedPairs.includes(card.pairId) ? (
                                     <div className="flex flex-col items-center justify-center text-lg font-semibold text-white">
 
-                                        <span className="text-lg md:text-2xl">{(card.id.includes("word-" + card.id.split("-")[1])) ? `${card.gender} ` : ""} {card.text}</span>
-                                        <span className="text-lg md:text-2xl">
-                                            {card.emoji && <span className="text-2xl">{card.emoji}</span>}
-                                        </span>
-                                    </div>
+                                    <span className="text-sm md:text-2xl">{(card.id.includes("word-" + card.id.split("-")[1])) ? `${card.gender} ` : ""} {card.text}</span>
+                                    <span className="text-sm md:text-2xl">
+                                        {card.emoji && <span className="text-sm md:text-2xl">{card.emoji}</span>}
+                                    </span>
+                                </div>
                                 ) : (
-                                    <div className="text-gray-200 text-lg font-semibold">
-                                        {trans("memory_translation.flip")}
+                                    <div className="text-gray-200 text-xs md:text-lg font-semibold">
+                                        {isMobile ? "" : trans("memory_translation.flip")}
                                     </div>
                                 )}
                             </button>
                         ))}
                     </div>
-                    <div className="fixed bottom-0 left-0 right-0 p-4 bg-gray-800 shadow-md">
-                        <p className="text-center text-xl text-white">
-                            {trans("memory_translation.score")}: {score}
+                    <div className="fixed bottom-0 left-0 right-0 p-2 md:p-4 bg-gray-800 shadow-md">
+                        <p className="text-center text-3xl md:text-xl text-white">
+                            {trans("memory_translation.score")}: {score} | {trans("memory_translation.moves")}: {moves}
                         </p>
                     </div>
                 </div>
