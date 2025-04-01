@@ -12,6 +12,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame, User } from '@/types';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
+import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
 
 interface Props {
   auth: {
@@ -261,6 +262,9 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
           </div>
         </div>
       </div>
+
+      {/* Add Mobile Dashboard Links */}
+      <MobileDashboardLinks />
 
       {/* Difficulty Selection Modal */}
       {showDifficultyModal && (
