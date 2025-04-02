@@ -32,7 +32,8 @@
             "winner_announcement": "{{name}} gewinnt!",
             "loser_announcement": "{{name}} verliert!",
             "tie": "Unentschieden!",
-            "tie_with_players": "Unentschieden zwischen Spielern {{players}}!"
+            "tie_with_players": "Unentschieden zwischen Spielern {{players}}!",
+            "change_category": "Kategorie ändern"
         },
         "modal_exit": {
             "title": "Spiel verlassen?",
@@ -203,6 +204,7 @@
             "select_word_category": "Wortkategorie auswählen",
             "choose": "Auswählen",
             "for_words_from_every_category": "für Wörter aus jeder Kategorie",
+            "start": "Starten",
             "start_practice": "Übung beginnen",
             "create_room": "Raum erstellen"
         }

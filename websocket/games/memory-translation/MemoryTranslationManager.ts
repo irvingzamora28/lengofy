@@ -334,7 +334,7 @@ export class MemoryTranslationManager extends BaseGameManager<MemoryTranslationG
             // Clean up game resources after a delay
             setTimeout(() => {
                 this.cleanupCompletely(gameId);
-            }, 60000); // 1 minute delay
+            }, 300000); // 5 minute delay
         }
     }
 

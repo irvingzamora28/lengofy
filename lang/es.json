@@ -32,7 +32,8 @@
             "winner_announcement": "{{name}} gana!",
             "loser_announcement": "{{name}} pierde!",
             "tie": "Empate!",
-            "tie_with_players": "Empate entre jugadores {{players}}!"
+            "tie_with_players": "Empate entre jugadores {{players}}!",
+            "change_category": "Cambiar Categoría"
         },
         "modal_game_exit": {
             "title": "¿Deseas Abandonar el Juego?",
@@ -203,6 +204,7 @@
             "select_word_category": "Selecciona la Categoría de la Palabra",
             "choose": "Elegir",
             "for_words_from_every_category": "para palabras de cada categoría",
+            "start": "Comenzar",
             "start_practice": "Empezar la Práctica",
             "create_room": "Crear Sala"
         }

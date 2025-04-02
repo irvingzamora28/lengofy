@@ -61,6 +61,7 @@ interface MemoryTranslationGameAreaProps {
     onReady: () => void;
     currentUserId: number;
     onRestart?: () => void;
+    onChangeCategory?: () => void;
 }
 
 export default function GameArea({
@@ -72,6 +73,7 @@ export default function GameArea({
     onReady,
     currentUserId,
     onRestart,
+    onChangeCategory,
 }: MemoryTranslationGameAreaProps) {
     const { t: trans } = useTranslation();
     const [cardPositions, setCardPositions] = useState<Map<string, DOMRect>>(new Map());
@@ -140,13 +142,25 @@ export default function GameArea({
                     <div className="text-gray-600 dark:text-gray-400">
                         {trans("generals.games.final_score")}: {playersWithMaxScore[0].score}
                     </div>
-                    {onRestart && currentUserId === game.hostId && (
-                        <PrimaryButton
-                            onClick={onRestart}
-                            className="mt-4 bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 px-6 py-2 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
-                        >
-                            {trans("memory_translation.restart_game")}
-                        </PrimaryButton>
+                    {currentUserId === game.hostId && (
+                        <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                            {onRestart && (
+                                <PrimaryButton
+                                    onClick={onRestart}
+                                    className="bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 px-6 py-2 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                                >
+                                    {trans("memory_translation.restart_game")}
+                                </PrimaryButton>
+                            )}
+                            {onChangeCategory && (
+                                <PrimaryButton
+                                    onClick={onChangeCategory}
+                                    className="bg-purple-500 hover:bg-purple-600 dark:bg-purple-600 dark:hover:bg-purple-500 px-6 py-2 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105"
+                                >
+                                    {trans("generals.games.change_category")}
+                                </PrimaryButton>
+                            )}
+                        </div>
                     )}
                 </div>
             </div>

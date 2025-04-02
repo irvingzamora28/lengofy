@@ -13,6 +13,7 @@ import incorrectMatchSound from "@/assets/audio/incorrect-match.mp3";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
+import DifficultyModal from '@/Components/Games/DifficultyModal';
 import toast from 'react-hot-toast';
 
 interface Props extends PageProps {
@@ -60,6 +61,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
     const [moves, setMoves] = useState(0);
     const wsRef = useRef<WebSocket | null>(null);
     const [showExitConfirmation, setShowExitConfirmation] = useState(false);
+    const [showDifficultyModal, setShowDifficultyModal] = useState(false);
     const { t: trans } = useTranslation();
     const timerRef = useRef<number>(0);
     const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -524,6 +526,7 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                                     onReady={markReady}
                                     currentUserId={auth.user.id}
                                     onRestart={handleRestartGame}
+                                    onChangeCategory={() => setShowDifficultyModal(true)}
                                 />
                                 <PlayersInfo
                                     status={gameState.status}
@@ -543,6 +546,22 @@ export default function Show({ auth, memory_translation_game, wsEndpoint, justCr
                     onCancel={() => setShowExitConfirmation(false)}
                 />
             )}
+
+            {/* Difficulty Modal */}
+            <DifficultyModal
+                showDifficultyModal={showDifficultyModal}
+                setShowDifficultyModal={setShowDifficultyModal}
+                selectedDifficulty={selectedDifficulty}
+                setSelectedDifficulty={setSelectedDifficulty}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                startGame={handleRestartGame}
+                easyText={trans('memory_translation.modal_difficulty.easy_text')}
+                mediumText={trans('memory_translation.modal_difficulty.medium_text')}
+                hardText={trans('memory_translation.modal_difficulty.hard_text')}
+                gameType="multiPlayer"
+                isRestart={true}
+            />
         </AuthenticatedLayout>
     );
 }

@@ -20,6 +20,7 @@ interface DifficultyModalProps {
     easyText: string;
     mediumText: string;
     hardText: string;
+    isRestart?: boolean;
 }
 
 export default function DifficultyModal({
@@ -29,6 +30,7 @@ export default function DifficultyModal({
     setSelectedDifficulty,
     selectedCategory,
     setSelectedCategory,
+    isRestart = false,
     startGame,
     gameType = 'multiPlayer',
     onDifficultyChange,
@@ -122,12 +124,19 @@ export default function DifficultyModal({
 
                 <div className="mt-6">
                     <button
-                        onClick={startGame}
+                        onClick={() => {
+                            startGame();
+                            setShowDifficultyModal(false);
+                        }}
                         className="bg-green-500 hover:bg-green-600 dark:bg-green-600
                                  dark:hover:bg-green-700 text-white font-bold py-2 px-6
                                  rounded-lg transition-colors duration-200"
                     >
-                        {gameType === 'singlePlayer' ? trans('gender_duel.modal_difficulty.start_practice') : trans('gender_duel.modal_difficulty.create_room')}
+                        {gameType === 'singlePlayer'
+                            ? trans('gender_duel.modal_difficulty.start_practice')
+                            : isRestart
+                                ? trans('gender_duel.modal_difficulty.start')
+                                : trans('gender_duel.modal_difficulty.create_room')}
                     </button>
                 </div>
             </div>
