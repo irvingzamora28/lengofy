@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { describe, test, expect, vi, beforeEach } from 'vitest';
 import Show from '../../../Pages/MemoryTranslationGame/Show';
 import { MemoryTranslationGame } from '@/types';
-import axios from 'axios';
+import axios, { AxiosStatic } from 'axios';
 
 // Mock dependencies
 vi.mock('@inertiajs/react', () => ({
@@ -16,8 +16,10 @@ vi.mock('@inertiajs/react', () => ({
   }
 }));
 
+import type { Mock } from 'vitest';
+
 vi.mock('axios');
-const mockedAxios = axios as unknown as { get: typeof vi.fn };
+const mockedAxios = axios as unknown as { get: Mock<typeof axios.get> };
 
 vi.mock('@/Layouts/AuthenticatedLayout', () => ({
   __esModule: true,
@@ -104,18 +106,39 @@ describe('Show Component', () => {
       { id: '1-translation', word: 'manzana', translation: 'apple', gender: 'la', emoji: '🍎' },
     ],
     players: [
-      { id: 1, user_id: 1, player_name: 'Player 1', score: 10, is_ready: true, moves: 5, time: 60 },
-      { id: 2, user_id: 2, player_name: 'Player 2', score: 5, is_ready: true, moves: 7, time: 90 },
+      {
+        id: 1,
+        user_id: 1,
+        player_name: 'Player 1',
+        score: 10,
+        is_ready: true,
+        moves: 5,
+        time: 60,
+        memory_translation_game_id: 1,
+        is_host: true
+      },
+      {
+        id: 2,
+        user_id: 2,
+        player_name: 'Player 2',
+        score: 5,
+        is_ready: true,
+        moves: 7,
+        time: 90,
+        memory_translation_game_id: 1,
+        is_host: false
+      }
     ],
     hostId: 1,
     current_turn: 1,
     max_players: 2,
     difficulty: 'medium',
     language_name: 'Spanish',
-    source_language: { id: 1, name: 'English', code: 'en' },
-    target_language: { id: 2, name: 'Spanish', code: 'es' },
+    source_language: { id: 1, name: 'English', code: 'en', flag: '🇺🇸' },
+    target_language: { id: 2, name: 'Spanish', code: 'es', flag: '🇪🇸' },
     category: { id: 1, key: 'food' },
-    winner: { user_id: 1, player_name: 'Player 1' },
+    language_pair_id: 1,
+    winner: { user_id: 1, player_name: 'Player 1', memory_translation_game_id: 1, moves: 5, time: 60, is_ready: true, is_host: true, id: 1, score: 10 },
   };
 
   const defaultProps = {
@@ -178,6 +201,16 @@ describe('Show Component', () => {
   });
 
   test('fetches new words and restarts game when start game button is clicked', async () => {
+    // Setup axios mock response
+    const mockResponse = {
+      data: [
+        { id: 1, word: 'apple', translation: 'manzana', gender: 'la', emoji: '🍎' },
+        { id: 2, word: 'banana', translation: 'plátano', gender: 'el', emoji: '🍌' },
+      ]
+    };
+
+    mockedAxios.get.mockResolvedValue(mockResponse);
+
     render(<Show {...defaultProps} />);
 
     // Open the modal
@@ -187,17 +220,24 @@ describe('Show Component', () => {
     fireEvent.change(screen.getByTestId('difficulty-select'), { target: { value: 'hard' } });
     fireEvent.change(screen.getByTestId('category-select'), { target: { value: '1' } });
 
-    // Click start game
-    fireEvent.click(screen.getByTestId('start-game-btn'));
+    // Click start game and wait for async operations
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('start-game-btn'));
+      // Wait for all promises to resolve
+      await Promise.resolve();
+    });
 
-    // Verify axios was called with the correct parameters
+    // Wait for axios call to complete
     await waitFor(() => {
-      expect(mockedAxios.get).toHaveBeenCalledWith(expect.any(String), {
-        params: {
-          difficulty: 'hard',
-          category: 1,
-        },
-      });
+      expect(mockedAxios.get).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          params: {
+            difficulty: 'hard',
+            category: 1,
+          },
+        })
+      );
     });
   });
 
@@ -210,7 +250,7 @@ describe('Show Component', () => {
     const difficultyModal = screen.getByTestId('difficulty-modal');
 
     // Verify initial values match the game's current settings
-    expect(screen.getByTestId('difficulty-select').value).toBe('medium');
-    expect(screen.getByTestId('category-select').value).toBe('1');
+    expect((screen.getByTestId('difficulty-select') as HTMLSelectElement).value).toBe('medium');
+    expect((screen.getByTestId('category-select') as HTMLSelectElement).value).toBe('1');
   });
 });

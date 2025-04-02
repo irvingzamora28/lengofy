@@ -73,15 +73,18 @@ export interface GenderDuelAnswer {
     correctAnswer: 'der' | 'die' | 'das' | 'el' | 'la';
 }
 
-export interface GenderDuelGamePlayer {
+interface BaseGamePlayer {
     id: number;
-    gender_duel_game_id: number;
     user_id?: number;
     guest_id?: string;
     player_name: string;
     score: number;
     is_ready: boolean;
     is_host: boolean;
+}
+
+export interface GenderDuelGamePlayer extends BaseGamePlayer {
+    gender_duel_game_id: number;
 }
 
 export interface GenderDuelGameState {
@@ -129,19 +132,14 @@ export interface MemoryTranslationGame {
     language_pair_id: number;
     words: Noun[];
     players: MemoryTranslationGamePlayer[];
+    winner: MemoryTranslationGamePlayer | null;
     category: Category;
 }
 
-export interface MemoryTranslationGamePlayer {
-    id: number;
+export interface MemoryTranslationGamePlayer extends BaseGamePlayer {
     memory_translation_game_id: number;
-    user_id: number;
-    player_name: string;
-    score: number;
     moves: number;
     time: number;
-    is_ready: boolean;
-    is_host: boolean;
 }
 
 export interface MemoryTranslationGameState {

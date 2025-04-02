@@ -47,6 +47,7 @@ describe('GameArea Component', () => {
     target_language: { id: 2, name: 'Spanish', code: 'es', flag: 'es' },
     category: { id: 1, key: 'food' },
     language_pair_id: 1,
+    winner: null,
   };
 
   const defaultProps = {
