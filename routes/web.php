@@ -181,6 +181,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/game-settings/{redirectRoute?}', [ProfileController::class, 'updateGameSettings'])
         ->name('profile.game-settings.update');
+        
+    // Feedback route
+    Route::post('/feedback', [\App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store');
 
     // Game routes
     Route::prefix('games')->middleware(['auth', 'verified'])->group(function () {
@@ -260,6 +263,12 @@ Route::prefix('leng-admon')->name('admin.')->group(function () {
             ->name('feature-analytics');
         Route::get('/page-analytics', [App\Http\Controllers\Admin\PageAnalyticsController::class, 'index'])
             ->name('page-analytics');
+        Route::get('/feedback-analytics', [App\Http\Controllers\Admin\FeedbackAnalyticsController::class, 'index'])
+            ->name('feedback-analytics');
+        Route::get('/feedback-analytics/{feedback}', [App\Http\Controllers\Admin\FeedbackAnalyticsController::class, 'show'])
+            ->name('feedback-analytics.show');
+        Route::patch('/feedback-analytics/{feedback}/status', [App\Http\Controllers\Admin\FeedbackAnalyticsController::class, 'updateStatus'])
+            ->name('feedback-analytics.update-status');
 
         // Users routes
         Route::get('/users', [App\Http\Controllers\Admin\UsersController::class, 'index'])

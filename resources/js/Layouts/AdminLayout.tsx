@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import { FiMenu, FiX, FiBarChart2, FiUsers, FiPieChart, FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FiMenu, FiX, FiBarChart2, FiUsers, FiPieChart, FiChevronDown, FiChevronRight, FiMessageSquare } from 'react-icons/fi';
 
 export default function AdminLayout({ children }: PropsWithChildren) {
     const { auth } = usePage<PageProps>().props;
@@ -111,6 +111,13 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                                         >
                                             <FiBarChart2 className="mr-3 h-5 w-5 text-gray-500 dark:text-gray-400" />
                                             Page Analytics
+                                        </Link>
+                                        <Link
+                                            href={route('admin.feedback-analytics')}
+                                            className="flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        >
+                                            <FiMessageSquare className="mr-3 h-5 w-5 text-gray-500 dark:text-gray-400" />
+                                            Feedback Analytics
                                         </Link>
                                     </div>
                                 )}

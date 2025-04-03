@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { User } from '@/types';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
+import FeedbackButton from '@/Components/Feedback/FeedbackButton';
 
 interface PageProps {
     auth: {
@@ -38,7 +39,20 @@ export default function Authenticated({
             toast.error(flash.error);
         }
         if (flash?.success) {
-            toast.success(flash.success);
+            // Check if the success message is a feedback submission
+            const successMessage = flash.success === 'feedback_submitted'
+                ? trans('feedback.success')
+                : flash.success;
+
+            toast.success(successMessage, {
+                duration: 4000, // Show toast for 4 seconds
+                position: 'top-center',
+                style: {
+                    background: '#10B981',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                },
+            });
         }
     }, [flash]);
 
@@ -64,7 +78,8 @@ export default function Authenticated({
                             </div>
                         </div>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
+                        <div className="hidden sm:ms-6 sm:flex sm:items-center space-x-4">
+                            <FeedbackButton user={user} />
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -126,6 +141,9 @@ export default function Authenticated({
                         </div>
 
                         <div className="-me-2 flex items-center sm:hidden">
+                            <div className="mr-2">
+                                <FeedbackButton user={user} isMobile={true} />
+                            </div>
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
@@ -219,6 +237,7 @@ export default function Authenticated({
                             >
                                 {user?.is_guest ? trans('auth_layout.logout_guest') : trans('auth_layout.logout')}
                             </ResponsiveNavLink>
+
                         </div>
                     </div>
                 </div>
