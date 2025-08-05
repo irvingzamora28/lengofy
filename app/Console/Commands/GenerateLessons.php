@@ -80,23 +80,23 @@ class GenerateLessons extends Command
 
             // Read the course JSON
             $courseJson = json_decode(File::get($courseJsonPath), true);
-            
+
             if (!$courseJson) {
                 $this->error("Invalid course JSON file. Error: " . json_last_error_msg());
                 return 1;
             }
-            
+
             // If no specific lesson number is provided, generate all lessons
             if (!$lessonNumber) {
                 $lessonNumbers = $this->getAllLessonNumbers($courseJson);
-                
+
                 if (empty($lessonNumbers)) {
                     $this->error("No lessons found in the course JSON file.");
                     return 1;
                 }
-                
+
                 $this->info("Generating " . count($lessonNumbers) . " lessons...");
-                
+
                 foreach ($lessonNumbers as $number) {
                     $this->generateLesson($lessonGenerator, $courseJsonPath, $number, $structureOnly, $mdxOnly, $audioOnly);
                 }
@@ -127,8 +127,8 @@ class GenerateLessons extends Command
      * @param bool $audioOnly Generate only the audio JSON file from an existing MDX
      */
     protected function generateLesson(
-        LessonGeneratorService $lessonGenerator, 
-        string $courseJsonPath, 
+        LessonGeneratorService $lessonGenerator,
+        string $courseJsonPath,
         int $lessonNumber,
         bool $structureOnly,
         bool $mdxOnly,
@@ -150,13 +150,13 @@ class GenerateLessons extends Command
                 $sourceLanguage = $this->option('source_language');
                 $targetLanguage = $this->option('target_language');
                 $structurePath = storage_path("app/lessons/{$sourceLanguage}-{$targetLanguage}/01-beginner/lesson_{$lessonNumber}_structure.json");
-                
+
                 if (!File::exists($structurePath)) {
                     $this->error("Lesson structure file not found: $structurePath");
                     return;
                 }
             }
-            
+
             $this->info("Generating MDX file...");
             $mdxPath = $lessonGenerator->generateLessonMdx($structurePath);
             $this->info("MDX file generated: $mdxPath");
@@ -168,19 +168,24 @@ class GenerateLessons extends Command
                 // If audio_only is specified, find the existing MDX file
                 $sourceLanguage = $this->option('source_language');
                 $targetLanguage = $this->option('target_language');
-                
+
                 // Find the MDX file by pattern
-                $mdxPattern = resource_path("lessons/{$sourceLanguage}-{$targetLanguage}/01-beginner/lesson_{$lessonNumber}_*.mdx");
+                $lessonNumberStr = str_pad($lessonNumber, 2, '0', STR_PAD_LEFT);
+                $mdxPattern = resource_path("lessons/{$sourceLanguage}-{$targetLanguage}/01-beginner/lesson_{$lessonNumberStr}_*.mdx");
+                // resources/lessons/en-de/01-beginner/lesson_04_lesson-4-basic-german-grammar-nouns-and-articles.mdx
+                $this->info("MDX pattern: $mdxPattern");
                 $mdxFiles = glob($mdxPattern);
-                
+
                 if (empty($mdxFiles)) {
                     $this->error("MDX file not found for lesson #$lessonNumber");
                     return;
                 }
-                
+
+                $this->info("Found MDX file: " . $mdxFiles[0]);
+
                 $mdxPath = $mdxFiles[0];
             }
-            
+
             $this->info("Generating audio JSON...");
             $audioJsonPath = $lessonGenerator->generateAudioJson($mdxPath);
             $this->info("Audio JSON generated: $audioJsonPath");
@@ -196,7 +201,7 @@ class GenerateLessons extends Command
     protected function getAllLessonNumbers(array $courseJson): array
     {
         $lessonNumbers = [];
-        
+
         foreach ($courseJson as $level) {
             if (isset($level['lessons']) && is_array($level['lessons'])) {
                 foreach ($level['lessons'] as $lesson) {
@@ -206,7 +211,7 @@ class GenerateLessons extends Command
                 }
             }
         }
-        
+
         sort($lessonNumbers);
         return $lessonNumbers;
     }
