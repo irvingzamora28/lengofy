@@ -1,0 +1,154 @@
+[
+    {
+        "text": "Mann",
+        "audio_file_name": "der_mann.mp3"
+    },
+    {
+        "text": "Hund",
+        "audio_file_name": "der_hund.mp3"
+    },
+    {
+        "text": "Tisch",
+        "audio_file_name": "der_tisch.mp3"
+    },
+    {
+        "text": "Frau",
+        "audio_file_name": "die_frau.mp3"
+    },
+    {
+        "text": "Katze",
+        "audio_file_name": "die_katze.mp3"
+    },
+    {
+        "text": "Lampe",
+        "audio_file_name": "die_lampe.mp3"
+    },
+    {
+        "text": "Kind",
+        "audio_file_name": "das_kind.mp3"
+    },
+    {
+        "text": "Buch",
+        "audio_file_name": "das_buch.mp3"
+    },
+    {
+        "text": "Haus",
+        "audio_file_name": "das_haus.mp3"
+    },
+    {
+        "text": "der Mann ... der Hund ... der Tisch ... die Frau ... die Katze ... die Lampe ... das Kind ... das Buch ... das Haus",
+        "audio_file_name": "example_sentence_gender.mp3"
+    },
+    {
+        "text": "der Mann ... die Frau ... das Kind ... die Bücher",
+        "audio_file_name": "der_die_das.mp3"
+    },
+    {
+        "text": "der Stuhl",
+        "audio_file_name": "der_stuhl.mp3"
+    },
+    {
+        "text": "die Lampe",
+        "audio_file_name": "die_lampe.mp3"
+    },
+    {
+        "text": "das Fenster",
+        "audio_file_name": "das_fenster.mp3"
+    },
+    {
+        "text": "die Autos",
+        "audio_file_name": "die_autos.mp3"
+    },
+    {
+        "text": "der Baum",
+        "audio_file_name": "der_baum.mp3"
+    },
+    {
+        "text": "die Katze",
+        "audio_file_name": "die_katze.mp3"
+    },
+    {
+        "text": "das Auto",
+        "audio_file_name": "das_auto.mp3"
+    },
+    {
+        "text": "die Blumen",
+        "audio_file_name": "die_blumen.mp3"
+    },
+    {
+        "text": "der Apfel",
+        "audio_file_name": "der_apfel.mp3"
+    },
+    {
+        "text": "die Sonne",
+        "audio_file_name": "die_sonne.mp3"
+    },
+    {
+        "text": "das Buch",
+        "audio_file_name": "das_buch.mp3"
+    },
+    {
+        "text": "die Kinder",
+        "audio_file_name": "die_kinder.mp3"
+    },
+    {
+        "text": "Das ist ein Mann.",
+        "audio_file_name": "ein_mann.mp3"
+    },
+    {
+        "text": "Das ist eine Frau.",
+        "audio_file_name": "eine_frau.mp3"
+    },
+    {
+        "text": "Das ist ein Buch.",
+        "audio_file_name": "ein_buch.mp3"
+    },
+    {
+        "text": "Das ist eine Katze.",
+        "audio_file_name": "eine_katze.mp3"
+    },
+    {
+        "text": "Das ist ein Tisch.",
+        "audio_file_name": "ein_tisch.mp3"
+    },
+    {
+        "text": "Das ist eine Tür.",
+        "audio_file_name": "eine_tuer.mp3"
+    },
+    {
+        "text": "Das ist ein Haus.",
+        "audio_file_name": "ein_haus.mp3"
+    },
+    {
+        "text": "Das ist eine Lampe.",
+        "audio_file_name": "eine_lampe.mp3"
+    },
+    {
+        "text": "Das ist eine schöne Blume.",
+        "audio_file_name": "das_ist_eine_schoene_blume.mp3"
+    },
+    {
+        "text": "Ein Apfel",
+        "audio_file_name": "ein_apfel.mp3"
+    },
+    {
+        "text": "Eine Orange",
+        "audio_file_name": "eine_orange.mp3"
+    },
+    {
+        "text": "Ein Auto",
+        "audio_file_name": "ein_auto.mp3"
+    },
+    {
+        "text": "Eine Straße",
+        "audio_file_name": "eine_strasse.mp3"
+    },
+    {
+        "text": "Ein Kind",
+        "audio_file_name": "ein_kind.mp3"
+    },
+    {
+        "text": "Eine Frage",
+        "audio_file_name": "eine_frage.mp3"
+    }
+]
