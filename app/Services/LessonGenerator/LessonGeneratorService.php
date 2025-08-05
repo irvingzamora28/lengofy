@@ -452,39 +452,170 @@ class LessonGeneratorService
             $lessonNumber = (int) $matches[1];
         }
 
-        // Create the audio JSON prompt
-        $prompt = $this->createAudioJsonPrompt($mdxContent, $this->targetLanguage, $lessonNumber);
-
-        // Generate the audio JSON using AI
-        $audioJson = $this->aiService->generateContent($prompt);
-
-        // Clean the response to ensure it's valid JSON
-        $audioJson = $this->cleanJsonResponse($audioJson);
-
-        // Ensure the generated content is valid JSON
-        $audioStructure = json_decode($audioJson, true);
-        if (!$audioStructure) {
-            $jsonError = json_last_error_msg();
-            $excerpt = substr($audioJson, 0, 500) . (strlen($audioJson) > 500 ? '...' : '');
-            throw new Exception("Generated audio JSON is not valid JSON. Error: $jsonError. Content excerpt: \n$excerpt");
+        // Parse the MDX content into sections
+        $sections = $this->parseMdxIntoSections($mdxContent);
+        
+        // Process each section to generate audio JSON entries
+        $audioEntries = [];
+        
+        foreach ($sections as $index => $section) {
+            // Skip sections without TextToSpeechPlayer components
+            if (!preg_match('/<TextToSpeechPlayer\s/', $section)) {
+                continue;
+            }
+            
+            // Create the audio JSON prompt for this section
+            $prompt = $this->createAudioJsonPrompt($section, $this->targetLanguage, $lessonNumber);
+            
+            // Generate the audio JSON for this section using AI
+            $sectionAudioJson = $this->aiService->generateContent($prompt);
+            
+            // Clean the response to ensure it's valid JSON
+            $sectionAudioJson = $this->cleanJsonResponse($sectionAudioJson);
+            
+            // Decode the section's audio JSON
+            $sectionAudioEntries = json_decode($sectionAudioJson, true);
+            
+            // Check if the section's audio JSON is valid
+            if (!$sectionAudioEntries) {
+                $jsonError = json_last_error_msg();
+                $excerpt = substr($sectionAudioJson, 0, 200) . (strlen($sectionAudioJson) > 200 ? '...' : '');
+                // Log the error but continue processing other sections
+                error_log("Section $index generated invalid JSON. Error: $jsonError. Content excerpt: \n$excerpt");
+                continue;
+            }
+            
+            // If the section returned a single object instead of an array, convert it to an array
+            if (isset($sectionAudioEntries['text'])) {
+                $sectionAudioEntries = [$sectionAudioEntries];
+            }
+            
+            // Add the section's audio entries to the main array
+            foreach ($sectionAudioEntries as $entry) {
+                if (isset($entry['text']) && isset($entry['audio_file_name'])) {
+                    $audioEntries[] = $entry;
+                }
+            }
         }
-
+        
+        // If no valid audio entries were generated, try the original approach as fallback
+        if (empty($audioEntries)) {
+            // Create the audio JSON prompt for the entire content
+            $prompt = $this->createAudioJsonPrompt($mdxContent, $this->targetLanguage, $lessonNumber);
+            
+            // Generate the audio JSON using AI
+            $audioJson = $this->aiService->generateContent($prompt);
+            
+            // Clean the response to ensure it's valid JSON
+            $audioJson = $this->cleanJsonResponse($audioJson);
+            
+            // Decode the audio JSON
+            $audioEntries = json_decode($audioJson, true);
+            
+            // Ensure the generated content is valid JSON
+            if (!$audioEntries) {
+                $jsonError = json_last_error_msg();
+                $excerpt = substr($audioJson, 0, 500) . (strlen($audioJson) > 500 ? '...' : '');
+                throw new Exception("Generated audio JSON is not valid JSON. Error: $jsonError. Content excerpt: \n$excerpt");
+            }
+            
+            // If the result is a single object instead of an array, convert it to an array
+            if (isset($audioEntries['text'])) {
+                $audioEntries = [$audioEntries];
+            }
+        }
+        
         // Get the directory and filename from the MDX file path
         $pathInfo = pathinfo($mdxFilePath);
         $directory = $pathInfo['dirname'];
         $filename = $pathInfo['filename'];
-
+        
         // Create the audio directory if it doesn't exist
         $audioDir = "$directory/audio";
         if (!File::exists($audioDir)) {
             File::makeDirectory($audioDir, 0755, true);
         }
-
+        
         // Save the audio JSON
         $outputPath = "$audioDir/{$filename}.json";
-        File::put($outputPath, json_encode($audioStructure, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-
+        File::put($outputPath, json_encode($audioEntries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        
         return $outputPath;
+    }
+
+    /**
+     * Parse MDX content into sections for better processing
+     *
+     * @param string $mdxContent The MDX content to parse
+     * @return array Array of MDX content sections
+     */
+    protected function parseMdxIntoSections(string $mdxContent): array
+    {
+        // Remove the frontmatter
+        $mdxContent = preg_replace('/^---[\s\S]*?---/m', '', $mdxContent);
+        
+        // Split by headers (## or ###)
+        $sections = preg_split('/(^#{2,3}\s+.*$)/m', $mdxContent, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        
+        // If no sections were found, treat the whole content as one section
+        if (count($sections) <= 1) {
+            return [$mdxContent];
+        }
+        
+        // Combine headers with their content
+        $combinedSections = [];
+        $currentSection = '';
+        
+        foreach ($sections as $section) {
+            // If this is a header, start a new section
+            if (preg_match('/^#{2,3}\s+.*$/m', $section)) {
+                // If we have content in the current section, add it to the combined sections
+                if (!empty($currentSection)) {
+                    $combinedSections[] = $currentSection;
+                }
+                $currentSection = $section;
+            } else {
+                // This is content, add it to the current section
+                $currentSection .= $section;
+            }
+        }
+        
+        // Add the last section
+        if (!empty($currentSection)) {
+            $combinedSections[] = $currentSection;
+        }
+        
+        // Further split large sections by TextToSpeechPlayer components
+        $finalSections = [];
+        foreach ($combinedSections as $section) {
+            // If the section has multiple TextToSpeechPlayer components, split it
+            $textToSpeechCount = substr_count($section, '<TextToSpeechPlayer');
+            
+            if ($textToSpeechCount > 1) {
+                // Split by TextToSpeechPlayer, keeping the component with the content before it
+                $parts = preg_split('/(?=<TextToSpeechPlayer)/i', $section);
+                
+                // The first part might not have a TextToSpeechPlayer component
+                if (!empty($parts[0]) && !preg_match('/<TextToSpeechPlayer/i', $parts[0])) {
+                    // Skip parts without TextToSpeechPlayer or combine with the next part
+                    if (isset($parts[1])) {
+                        $parts[1] = $parts[0] . $parts[1];
+                    }
+                    array_shift($parts);
+                }
+                
+                foreach ($parts as $part) {
+                    if (!empty(trim($part))) {
+                        $finalSections[] = $part;
+                    }
+                }
+            } else {
+                // Keep the section as is
+                $finalSections[] = $section;
+            }
+        }
+        
+        return $finalSections;
     }
 
     /**
@@ -684,7 +815,7 @@ class LessonGeneratorService
 
 
     PROMPT;
-        }
+    }
 
     /**
      * Create a prompt for generating the audio JSON
