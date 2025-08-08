@@ -1,0 +1,82 @@
+[
+    {
+        "text": "Wer?",
+        "audio_file_name": "wer.mp3"
+    },
+    {
+        "text": "Was?",
+        "audio_file_name": "was.mp3"
+    },
+    {
+        "text": "Wo?",
+        "audio_file_name": "wo.mp3"
+    },
+    {
+        "text": "Wann?",
+        "audio_file_name": "wann.mp3"
+    },
+    {
+        "text": "Warum?",
+        "audio_file_name": "warum.mp3"
+    },
+    {
+        "text": "Wie?",
+        "audio_file_name": "wie.mp3"
+    },
+    {
+        "text": "Welcher?",
+        "audio_file_name": "welcher.mp3"
+    },
+    {
+        "text": "Wer bist du?",
+        "audio_file_name": "wer_bist_du.mp3"
+    },
+    {
+        "text": "Was machst du?",
+        "audio_file_name": "was_machst_du.mp3"
+    },
+    {
+        "text": "Wo wohnst du?",
+        "audio_file_name": "wo_wohnst_du.mp3"
+    },
+    {
+        "text": "Wann kommst du?",
+        "audio_file_name": "wann_kommst_du.mp3"
+    },
+    {
+        "text": "Warum lernst du Deutsch?",
+        "audio_file_name": "warum_lernst_du.mp3"
+    },
+    {
+        "text": "Wie geht es dir?",
+        "audio_file_name": "wie_geht_es_dir.mp3"
+    },
+    {
+        "text": "Wer ist verantwortlich?",
+        "audio_file_name": "wer_is_verantwortlich.mp3"
+    },
+    {
+        "text": "Wann fährt der Zug ab?",
+        "audio_file_name": "wann_fahrt_der_zug_ab.mp3"
+    },
+    {
+        "text": "Wo ist das nächste Hotel?",
+        "audio_file_name": "wo_ist_das_nächst_hotel.mp3"
+    },
+    {
+        "text": "Warum hat der Flug Verspätung?",
+        "audio_file_name": "warum_hat_der_flug_verspa.mp3"
+    },
+    {
+        "text": "Wie viel kostet ein Ticket?",
+        "audio_file_name": "wie_viel_kostet_ein_ticket.mp3"
+    },
+    {
+        "text": "Wie komme ich zum Flughafen?",
+        "audio_file_name": "wie_komme_ich_zum_flughafen.mp3"
+    },
+    {
+        "text": "Was ist im Preis enthalten?",
+        "audio_file_name": "was_ist_im_preis_enthalten.mp3"
+    }
+]
