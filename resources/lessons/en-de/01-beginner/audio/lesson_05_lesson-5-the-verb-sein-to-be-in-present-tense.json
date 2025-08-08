@@ -1,0 +1,66 @@
+[
+    {
+        "text": "Ich bin Lehrerin.",
+        "audio_file_name": "sein_ich_bin.mp3"
+    },
+    {
+        "text": "Du bist müde.",
+        "audio_file_name": "sein_du_bist.mp3"
+    },
+    {
+        "text": "Er ist glücklich.",
+        "audio_file_name": "sein_er_ist.mp3"
+    },
+    {
+        "text": "Wir sind bereit.",
+        "audio_file_name": "sein_wir_sind.mp3"
+    },
+    {
+        "text": "Ihr seid spät.",
+        "audio_file_name": "sein_ihr_seid.mp3"
+    },
+    {
+        "text": "Sind Sie fertig?",
+        "audio_file_name": "sein_Sie_sind.mp3"
+    },
+    {
+        "text": "Sie sind Lehrer.",
+        "audio_file_name": "sein_sie_sind.mp3"
+    },
+    {
+        "text": "Er ist mein Freund.",
+        "audio_file_name": "er_ist_mein_freund.mp3"
+    },
+    {
+        "text": "Das Buch ist neu.",
+        "audio_file_name": "das_buch_ist_neu.mp3"
+    },
+    {
+        "text": "Sie ist Lehrerin.",
+        "audio_file_name": "sie_ist_lehrerin.mp3"
+    },
+    {
+        "text": "Wir sind Studenten.",
+        "audio_file_name": "wir_sind_studenten.mp3"
+    },
+    {
+        "text": "Das Haus ist groß.",
+        "audio_file_name": "das_haus_ist_gross.mp3"
+    },
+    {
+        "text": "Der Stuhl ist leer.",
+        "audio_file_name": "der_stuhl_ist_leer.mp3"
+    },
+    {
+        "text": "Ich bin müde.",
+        "audio_file_name": "ich_bin_muede.mp3"
+    },
+    {
+        "text": "Du bist krank ... Das Wetter ist schlecht ... Sie ist Ärztin ... Ich bin Student ... Ich bin in Berlin ... Ihr seid zu Hause ... Das Buch ist auf dem Tisch.",
+        "audio_file_name": "sein_examples.mp3"
+    },
+    {
+        "text": "Ich bin ... Du bist ... Er ist ... Sie ist ... Es ist ... Wir sind ... Ihr seid ... sie sind ... Sie sind",
+        "audio_file_name": "sein_conjugation.mp3"
+    }
+]
