@@ -1,0 +1,54 @@
+[
+    {
+        "text": "Komm! ... Kommt! ... Kommen Sie! ... Geh! ... Geht! ... Gehen Sie! ... Gehen wir! ... Iss! ... Nehmt Platz! ... Mach die Tür zu! ... Macht die Tür zu! ... Machen Sie das Licht aus! ... Sei leise! ... Seien Sie leise! ... Komm hier! ... Gib mir das Buch! ... Hör zu! ... Setz dich! ... Setzt euch! ... Mach bitte das Fenster auf! ... Kommen Sie bitte mit!",
+        "audio_file_name": "imperatives.mp3"
+    },
+    {
+        "text": "Hilf mir! ... Helfen Sie mir!",
+        "audio_file_name": "hilf_mir.mp3"
+    },
+    {
+        "text": "Ruf ein Taxi! ... Rufen Sie ein Taxi!",
+        "audio_file_name": "ruf_ein_taxi.mp3"
+    },
+    {
+        "text": "Halt hier an! ... Halten Sie hier an!",
+        "audio_file_name": "halt_hier_an.mp3"
+    },
+    {
+        "text": "Zeig mir die Speisekarte! ... Zeigen Sie mir die Speisekarte!",
+        "audio_file_name": "zeig_mir_speisekarte.mp3"
+    },
+    {
+        "text": "Mach die Tür auf! ... Machen Sie die Tür auf!",
+        "audio_file_name": "mach_die_tuer_auf.mp3"
+    },
+    {
+        "text": "Warte hier! ... Warten Sie hier!",
+        "audio_file_name": "warte_hier.mp3"
+    },
+    {
+        "text": "Fahr mich zum Flughafen! ... Fahren Sie mich zum Flughafen!",
+        "audio_file_name": "fahr_mich_zum_flughafen.mp3"
+    },
+    {
+        "text": "Komm! ... Kommt! ... Kommen Sie!",
+        "audio_file_name": "kommen_sie.mp3"
+    },
+    {
+        "text": "Geh! ... Geht! ... Gehen Sie!",
+        "audio_file_name": "gehen_sie.mp3"
+    },
+    {
+        "text": "Iss! ... Esst! ... Essen Sie!",
+        "audio_file_name": "essen_sie.mp3"
+    },
+    {
+        "text": "Lies! ... Lest! ... Lesen Sie!",
+        "audio_file_name": "lesen_sie.mp3"
+    },
+    {
+        "text": "Mach! ... Macht! ... Machen Sie!",
+        "audio_file_name": "machen_sie.mp3"
+    }
+]
