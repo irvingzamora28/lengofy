@@ -1,0 +1,62 @@
+[
+    {
+        "text": "ich bin",
+        "audio_file_name": "sein.mp3"
+    },
+    {
+        "text": "ich habe",
+        "audio_file_name": "haben.mp3"
+    },
+    {
+        "text": "ich gehe",
+        "audio_file_name": "gehen.mp3"
+    },
+    {
+        "text": "ich esse",
+        "audio_file_name": "essen.mp3"
+    },
+    {
+        "text": "ich trinke",
+        "audio_file_name": "trinken.mp3"
+    },
+    {
+        "text": "ich heiße",
+        "audio_file_name": "heissen.mp3"
+    },
+    {
+        "text": "ich spreche",
+        "audio_file_name": "sprechen.mp3"
+    },
+    {
+        "text": "Ich bin hier.",
+        "audio_file_name": "ich_bin_hier.mp3"
+    },
+    {
+        "text": "Du bist nett.",
+        "audio_file_name": "du_bist_nett.mp3"
+    },
+    {
+        "text": "Er ist Lehrer.",
+        "audio_file_name": "er_ist_lehrer.mp3"
+    },
+    {
+        "text": "Sie ist hier.",
+        "audio_file_name": "sie_ist_hier.mp3"
+    },
+    {
+        "text": "Es ist neu.",
+        "audio_file_name": "es_ist_neu.mp3"
+    },
+    {
+        "text": "Wir sind bereit.",
+        "audio_file_name": "wir_sind_bereit.mp3"
+    },
+    {
+        "text": "Ihr seid pünktlich.",
+        "audio_file_name": "ihr_seid_puenktlich.mp3"
+    },
+    {
+        "text": "Sie sind hier.",
+        "audio_file_name": "Sie_sind_hier.mp3"
+    }
+]
