@@ -1,0 +1,94 @@
+[
+    {
+        "text": "Hallo! Wie geht's?",
+        "audio_file_name": "hallo.mp3"
+    },
+    {
+        "text": "Danke für deine Hilfe.",
+        "audio_file_name": "danke.mp3"
+    },
+    {
+        "text": "Bitte, nimm Platz.",
+        "audio_file_name": "bitte.mp3"
+    },
+    {
+        "text": "Ja, gern.",
+        "audio_file_name": "ja.mp3"
+    },
+    {
+        "text": "Nein, danke.",
+        "audio_file_name": "nein.mp3"
+    },
+    {
+        "text": "Entschuldigung, wo ist die Toilette?",
+        "audio_file_name": "entschuldigung.mp3"
+    },
+    {
+        "text": "Tschüss! Bis morgen.",
+        "audio_file_name": "tschuss.mp3"
+    },
+    {
+        "text": "Ich lerne Deutsch ... Du spielst Gitarre ... Er macht Hausaufgaben ... Wir arbeiten zusammen ... Ihr lest das Buch ... Sie haben Zeit ... Ich bin müde ... Du isst ein Brot",
+        "audio_file_name": "ich_lerne_deutsch.mp3"
+    },
+    {
+        "text": "Guten Morgen",
+        "audio_file_name": "guten_morgen.mp3"
+    },
+    {
+        "text": "Guten Tag",
+        "audio_file_name": "guten_tag.mp3"
+    },
+    {
+        "text": "Guten Abend",
+        "audio_file_name": "guten_abend.mp3"
+    },
+    {
+        "text": "Auf Wiedersehen",
+        "audio_file_name": "auf_wiedersehen.mp3"
+    },
+    {
+        "text": "Danke",
+        "audio_file_name": "danke.mp3"
+    },
+    {
+        "text": "Bitte",
+        "audio_file_name": "bitte.mp3"
+    },
+    {
+        "text": "Ja",
+        "audio_file_name": "ja.mp3"
+    },
+    {
+        "text": "Nein",
+        "audio_file_name": "nein.mp3"
+    },
+    {
+        "text": "Guten Morgen",
+        "audio_file_name": "guten_morgen.mp3"
+    },
+    {
+        "text": "Guten Tag",
+        "audio_file_name": "guten_tag.mp3"
+    },
+    {
+        "text": "Guten Abend",
+        "audio_file_name": "guten_abend.mp3"
+    },
+    {
+        "text": "Auf Wiedersehen",
+        "audio_file_name": "auf_wiedersehen.mp3"
+    },
+    {
+        "text": "Danke schön",
+        "audio_file_name": "danke_schoen.mp3"
+    },
+    {
+        "text": "Entschuldigung",
+        "audio_file_name": "entschuldigung.mp3"
+    },
+    {
+        "text": "Sprechen Sie Englisch?",
+        "audio_file_name": "sprechen_sie_englisch.mp3"
+    }
+]
