@@ -1,0 +1,70 @@
+[
+    {
+        "text": "Die Mutter ist zu Hause",
+        "audio_file_name": "die_mutter_ist_zu_hause.mp3"
+    },
+    {
+        "text": "Der Vater liest die Zeitung",
+        "audio_file_name": "der_vater_liest_die_zeitung.mp3"
+    },
+    {
+        "text": "Meine Schwester studiert",
+        "audio_file_name": "meine_schwester_studiert.mp3"
+    },
+    {
+        "text": "Sein Bruder arbeitet hier",
+        "audio_file_name": "sein_bruder_arbeitet_hier.mp3"
+    },
+    {
+        "text": "Die Großmutter backt Kuchen",
+        "audio_file_name": "die_grossmutter_backt_kuchen.mp3"
+    },
+    {
+        "text": "Der Opa erzählt Geschichten",
+        "audio_file_name": "der_opa_erschaet_geschichten.mp3"
+    },
+    {
+        "text": "Meine Cousine wohnt nebenan",
+        "audio_file_name": "meine_cousine_wohnt_nebenan.mp3"
+    },
+    {
+        "text": "Die Küche ist groß",
+        "audio_file_name": "die_kueche_ist_gross.mp3"
+    },
+    {
+        "text": "Das Wohnzimmer ist gemütlich",
+        "audio_file_name": "das_wohnzimmer_ist_gemutlich.mp3"
+    },
+    {
+        "text": "Mein Schlafzimmer ist hell",
+        "audio_file_name": "mein_schlafzimmer_ist_hell.mp3"
+    },
+    {
+        "text": "Das Badezimmer ist sauber",
+        "audio_file_name": "das_badezimmer_ist_sauber.mp3"
+    },
+    {
+        "text": "Der Garten hat viele Blumen",
+        "audio_file_name": "der_garten_hat_viele_blumen.mp3"
+    },
+    {
+        "text": "Im Esszimmer essen wir zusammen",
+        "audio_file_name": "im_esszimmer_essen_wir_zusammen.mp3"
+    },
+    {
+        "text": "Der Flur ist schmal",
+        "audio_file_name": "der_flur_ist_schmal.mp3"
+    },
+    {
+        "text": "Der Balkon hat einen Tisch",
+        "audio_file_name": "der_balkon_hat_einen_tisch.mp3"
+    },
+    {
+        "text": "Die Mutter... Der Vater... Die Eltern... Die Schwester... Der Bruder... Die Oma... Der Opa... Die Tante... Der Onkel... Die Cousine... Die Schwiegermutter... Der Schwager... Die Schwägerin... Der Enkel... Die Enkelin... Der Ehemann... Die Ehefrau...",
+        "audio_file_name": "family.mp3"
+    },
+    {
+        "text": "Das Haus... Die Wohnung... Die Küche... Das Wohnzimmer... Das Schlafzimmer... Das Badezimmer... Der Garten... Der Balkon... Der Flur... Der Keller... Der Dachboden... Die Möbel...",
+        "audio_file_name": "home.mp3"
+    }
+]
