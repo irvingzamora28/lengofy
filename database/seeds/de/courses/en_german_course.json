@@ -6,49 +6,57 @@
                 "name": "German Alphabet and Pronunciation",
                 "lesson_number": 1,
                 "description": "Learn the German alphabet, including umlauts and the \"ß\", and basic pronunciation rules.",
-                "goals": ["Fundamentals", "Vocabulary", "Other"]
+                "goals": ["Fundamentals", "Vocabulary", "Other"],
+                "special_notes": " DO NOT Introduce the topic of articles in this lesson."
             },
             {
                 "name": "Greetings and Introductions in German",
                 "lesson_number": 2,
                 "description": "Learn formal and informal greetings and how to introduce yourself and others in German.",
-                "goals": ["Fundamentals", "Vocabulary", "Travel"]
+                "goals": ["Fundamentals", "Vocabulary", "Travel"],
+                "special_notes": " DO NOT Introduce the topic of articles in this lesson."
             },
             {
                 "name": "Numbers, Colors, and Days of the Week in German",
                 "lesson_number": 3,
                 "description": "Essential vocabulary: numbers, colors, days of the week, and months in German.",
-                "goals": ["Fundamentals", "Vocabulary"]
+                "goals": ["Fundamentals", "Vocabulary"],
+                "special_notes": " DO NOT Introduce the topic of articles in this lesson."
             },
             {
                 "name": "Basic German Grammar: Nouns and Articles",
                 "lesson_number": 4,
                 "description": "Introduction to German nouns, genders (der, die, das), and articles (definite and indefinite).",
-                "goals": ["Fundamentals", "Grammar"]
+                "goals": ["Fundamentals", "Grammar"],
+                "special_notes": " DO NOT Introduce advanced topics like cases (nominative, accusative, dative, and genitive) in this lesson."
             },
             {
                 "name": "The Verb \"Sein\" (To Be) in Present Tense",
                 "lesson_number": 5,
                 "description": "Learn the conjugation of the verb \"sein\" (to be) in the present tense and basic uses.",
-                "goals": ["Fundamentals", "Grammar"]
+                "goals": ["Fundamentals", "Grammar"],
+                "special_notes": " DO NOT Introduce advanced topics like cases (nominative, accusative, dative, and genitive) in this lesson."
             },
             {
                 "name": "Personal Pronouns and Basic Sentence Structure",
                 "lesson_number": 6,
                 "description": "Learn German personal pronouns and how to form simple sentences in German (subject-verb-object).",
-                "goals": ["Fundamentals", "Grammar"]
+                "goals": ["Fundamentals", "Grammar"],
+                "special_notes": " DO NOT Introduce advanced topics like cases (nominative, accusative, dative, and genitive) in this lesson."
             },
             {
                 "name": "Basic Questions in German",
                 "lesson_number": 7,
                 "description": "Learn how to ask basic questions in German using question words (Wer, Was, Wo, Wann, Warum, Wie).",
-                "goals": ["Fundamentals", "Grammar", "Travel"]
+                "goals": ["Fundamentals", "Grammar", "Travel"],
+                "special_notes": " DO NOT Introduce advanced topics like cases (nominative, accusative, dative, and genitive) in this lesson."
             },
             {
                 "name": "Vocabulary: Family and Home in German",
                 "lesson_number": 8,
                 "description": "Expand your vocabulary with words related to family members and parts of the home in German.",
-                "goals": ["Vocabulary", "Other"]
+                "goals": ["Vocabulary", "Other"],
+                "special_notes": " DO NOT Introduce advanced topics like cases (nominative, accusative, dative, and genitive) in this lesson."
             },
             {
                 "name": "Simple Imperatives in German",
