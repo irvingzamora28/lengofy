@@ -128,31 +128,31 @@ PROMPT;
 
     Here is an example of the vocabulary in MDX format generated with the words: jirafa, huevo, guerra, cielo, año. The source language is english and the target language is spanish. The properties: word, translation, exampleSentence, exampleTranslation, gender, challenge:
     vocabulary:
-        - word: "jirafa"
+        - word: "La jirafa"
         translation: "giraffe"
         exampleSentence: "La jirafa tiene un cuello largo."
         exampleTranslation: "The giraffe has a long neck."
         gender: "fem"
         challenge: "The 'j' is pronounced like an English 'h'."
-        - word: "huevo"
+        - word: "El huevo"
         translation: "egg"
         exampleSentence: "Quiero un huevo frito."
         exampleTranslation: "I want a fried egg."
         gender: "masc"
         challenge: "Remember that 'h' is always silent."
-        - word: "guerra"
+        - word: "La guerra"
         translation: "war"
         exampleSentence: "La guerra no es la solución."
         exampleTranslation: "War is not the solution."
         gender: "fem"
         challenge: "'G' before 'u' and 'e' can be tricky."
-        - word: "cielo"
+        - word: "El cielo"
         translation: "sky"
         exampleSentence: "El cielo es azul."
         exampleTranslation: "The sky is blue."
         gender: "masc"
         challenge: "'C' before 'i' and 'e' sounds like 'th' in Spain and 's' in Latin America."
-        - word: "año"
+        - word: "El año"
         translation: "year"
         exampleSentence: "Cada año vamos a la playa."
         exampleTranslation: "Every year we go to the beach."
@@ -165,6 +165,7 @@ PROMPT;
     The vocabulary will be in the target language $targetLanguageName and the source language is $sourceLanguageName, that means the word will be in $targetLanguageName and the translation will be in $sourceLanguageName, the exampleSentence will be in $targetLanguageName and the exampleTranslation will be in $sourceLanguageName (Which might or might not be different from the example).
     Do not include text about what you did, your thought process or any other messages,
     just the generated content in MDX format.
+    Make sure to include the gender of the word in the vocabulary (If it applies, for example der, die das, el, la, los, las, etc.).
     Also omit the title of the lesson and the title of the section.
 
     PROMPT;
