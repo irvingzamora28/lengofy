@@ -330,8 +330,8 @@ Not appropriate for:
 
 Format:
 <ConversationBox title="At the Restaurant">
-  <DialogueLine speaker="Waiter" audio="path/to/audio.mp3">¿Puedo tomar su orden?</DialogueLine>
-  <DialogueLine speaker="Customer" audio="path/to/audio2.mp3">Sí, quisiera una ensalada por favor.</DialogueLine>
+  <DialogueLine speaker="Waiter" audio="path/to/audio.mp3" text="¿Puedo tomar su orden?" translation="Can I take your order?"></DialogueLine>
+  <DialogueLine speaker="Customer" audio="path/to/audio2.mp3" text="Sí, quisiera una ensalada por favor." translation="Yes, I would like a salad, please."></DialogueLine>
   <!-- Additional dialogue lines -->
 </ConversationBox>
 
