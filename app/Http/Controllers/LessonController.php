@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use App\Models\LessonProgress;
+use App\Models\Exercise;
 use App\Services\LessonService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -35,6 +36,81 @@ class LessonController extends Controller
         return Inertia::render('Lessons/Index', [
             'lessons' => $lessons
         ]);
+    }
+
+    /**
+     * Return the list of exercises for a lesson (summary, without heavy data payloads).
+     */
+    public function exercises($level, $lesson_number)
+    {
+        $user = auth()->user();
+        $languagePair = $user->languagePair;
+
+        $lesson = \DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id)
+            ->where('lesson_number', $lesson_number)
+            ->first();
+
+        if (!$lesson) {
+            return response()->json(['message' => 'Lesson not found'], 404);
+        }
+
+        $items = \DB::table('exercises')
+            ->join('exercise_types', 'exercises.exercise_type_id', '=', 'exercise_types.id')
+            ->where('exercises.lesson_id', $lesson->id)
+            ->where('exercises.is_active', true)
+            ->orderBy('exercises.order')
+            ->select([
+                'exercises.id',
+                'exercises.title',
+                'exercises.instructions',
+                'exercises.order',
+                'exercise_types.name as type',
+            ])
+            ->get();
+
+        return response()->json($items);
+    }
+
+    /**
+     * Return a specific exercise with its data payload.
+     */
+    public function showExercise($level, $lesson_number, $exerciseId)
+    {
+        $user = auth()->user();
+        $languagePair = $user->languagePair;
+
+        $lesson = \DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id)
+            ->where('lesson_number', $lesson_number)
+            ->first();
+
+        if (!$lesson) {
+            return response()->json(['message' => 'Lesson not found'], 404);
+        }
+
+        $exercise = \DB::table('exercises')
+            ->join('exercise_types', 'exercises.exercise_type_id', '=', 'exercise_types.id')
+            ->where('exercises.id', $exerciseId)
+            ->where('exercises.lesson_id', $lesson->id)
+            ->select([
+                'exercises.id',
+                'exercises.title',
+                'exercises.instructions',
+                'exercises.order',
+                'exercises.data',
+                'exercise_types.name as type',
+            ])
+            ->first();
+
+        if (!$exercise) {
+            return response()->json(['message' => 'Exercise not found'], 404);
+        }
+
+        // Decode JSON data field
+        $exercise->data = json_decode($exercise->data, true);
+
+        return response()->json($exercise);
     }
 
     public function show($level, $lesson_number)

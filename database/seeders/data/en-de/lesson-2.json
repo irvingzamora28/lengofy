@@ -1,0 +1,119 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Greetings and Phrases",
+      "instructions": "Match each German phrase with its English meaning. (Regional notes included)",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "Guten Morgen", "right": "Good morning" },
+          { "left": "Guten Tag", "right": "Good day/afternoon" },
+          { "left": "Guten Abend", "right": "Good evening" },
+          { "left": "Hallo", "right": "Hello (general)" },
+          { "left": "Tschüss", "right": "Goodbye" },
+          { "left": "Servus", "right": "Hello (Southern Germany/Austria)" },
+          { "left": "Moin", "right": "Hello (Northern Germany)" },
+          { "left": "Grüß Gott", "right": "Greetings (Southern Germany/Austria)" },
+          { "left": "Wie geht's?", "right": "How's it going?" },
+          { "left": "Wie geht es dir?", "right": "How are you? (informal)" },
+          { "left": "Wie geht es Ihnen?", "right": "How are you? (formal)" },
+          { "left": "Ich heiße ...", "right": "I am called ..." },
+          { "left": "Mein Name ist ...", "right": "My name is ..." },
+          { "left": "Ich bin ...", "right": "I am ..." },
+          { "left": "Das ist ...", "right": "This is ..." },
+          { "left": "Freut mich!", "right": "Pleased to meet you!" },
+          { "left": "Sehr erfreut!", "right": "Very pleased to meet you!" },
+          { "left": "Entschuldigung", "right": "Excuse me" },
+          { "left": "Sprechen Sie Englisch?", "right": "Do you speak English?" },
+          { "left": "Ich verstehe das nicht.", "right": "I don't understand that." },
+          { "left": "Könnten Sie das bitte wiederholen?", "right": "Could you please repeat that?" },
+          { "left": "Ich hätte gern ...", "right": "I would like ..." }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Choose the Right Greeting or Phrase",
+      "instructions": "Select the best option for each situation or sentence.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "08:30, meeting a client for the first time (formal).",
+            "choices": [
+              { "text": "Guten Morgen", "correct": true },
+              { "text": "Hallo", "correct": false },
+              { "text": "Na?", "correct": false }
+            ],
+            "explanation": "Use a formal time-of-day greeting in the morning."
+          },
+          {
+            "prompt": "19:00, greeting a group of friends.",
+            "choices": [
+              { "text": "Guten Abend", "correct": true },
+              { "text": "Guten Tag", "correct": false },
+              { "text": "Guten Morgen", "correct": false }
+            ],
+            "explanation": "Evening greeting is appropriate for 19:00."
+          },
+          {
+            "prompt": "Choose the correct time-of-day greeting for 11:30 (borderline late morning).",
+            "choices": [
+              { "text": "Guten Tag", "correct": true },
+              { "text": "Guten Morgen", "correct": false },
+              { "text": "Guten Abend", "correct": false }
+            ],
+            "explanation": "Around late morning to evening, Guten Tag is common."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Complete the Phrases",
+      "instructions": "Fill in the missing word. Some blanks may have multiple correct answers.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "Wie ____ es dir?", "blanks": [ { "answer": "geht" } ], "explanation": "Wie geht es dir?" },
+          { "text": "Wie ____ du?", "blanks": [ { "answers": ["heißt", "heisst"] } ], "explanation": "Wie heißt du?" },
+          { "text": "Mein Name ____ Anna.", "blanks": [ { "answer": "ist" } ] },
+          { "text": "Das ____ mein Freund.", "blanks": [ { "answer": "ist" } ], "hint": "The subject is singular, so the verb should be singular as well." },
+          { "text": "Ich ____ das nicht.", "blanks": [ { "answer": "verstehe" } ], "hint": "I don't understand that." },
+          { "text": "Entschuldigung, ____ ist die Toilette?", "blanks": [ { "answer": "wo" } ], "hint": "Where is the toilet?" },
+          { "text": "____ Sie Englisch?", "blanks": [ { "answers": ["Sprechen", "sprechen"] } ], "hint": "Do you speak English?" },
+          { "text": "____ mich!", "blanks": [ { "answer": "Freut" } ], "hint": "Introductions/greetings context: polite acknowledgement (\"Pleased to meet you\"), not a command." },
+          { "text": "Sehr ____!", "blanks": [ { "answer": "erfreut" } ], "hint": "Pleased to meet you!" },
+          { "text": "____ ist mein Freund, Peter.", "blanks": [ { "answers": ["Das", "Dies"] } ], "hint": "Introducing a friend, singular subject." }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order the Sentence",
+      "instructions": "Arrange the tokens to form the sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "Ich heiße Maria.", "tokens": ["heiße", "Ich", "Maria", "."], "explanation": "Verb second." },
+          { "target": "Mein Name ist Thomas.", "tokens": ["ist", "Mein", "Name", "Thomas", "."] },
+          { "target": "Das ist mein Freund, Peter.", "tokens": ["ist", "Das", "mein", "Freund", ",", "Peter", "."] },
+          { "target": "Guten Morgen, Herr Schmidt!", "tokens": ["Morgen", ",", "Herr", "Schmidt", "!", "Guten"] },
+          { "target": "Wie geht es dir?", "tokens": ["es", "Wie", "geht", "dir", "?"] }
+        ],
+        "shuffleTokens": true
+      }
+    }
+  ]
+}

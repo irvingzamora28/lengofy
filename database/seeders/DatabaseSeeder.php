@@ -20,10 +20,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             LanguageSeeder::class,
+            ExerciseTypeSeeder::class,
             LanguagePairSeeder::class,
             CategorySeeder::class,
             NounSeeder::class,
             GameSeeder::class,
+            Lesson02ExercisesSeeder::class,
         ]);
     }
 }
