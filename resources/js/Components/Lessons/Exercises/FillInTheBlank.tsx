@@ -183,11 +183,11 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
   // Reset hint visibility when the sentence changes and focus the first editable blank
   useEffect(() => {
     setHintOpen(false);
-    // Clear refs to avoid stale nodes
-    inputRefs.current = [];
-    // Focus first incorrect or empty blank on sentence load
-    const raf = requestAnimationFrame(() => {
-      const blanks = (correctMap[currentOrigIdx] || []).length;
+    // Focus first incorrect or empty blank on sentence load. Retry until refs exist.
+    let cancelled = false;
+    const tryFocus = () => {
+      if (cancelled) return;
+      const blanks = blanksCount; // use current sentence blanks count
       let targetIdx = 0;
       for (let i = 0; i < blanks; i++) {
         if (!(correctMap[currentOrigIdx]?.[i])) {
@@ -195,10 +195,19 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
           break;
         }
       }
-      inputRefs.current[targetIdx]?.focus();
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [currentOrigIdx]);
+      const el = inputRefs.current[targetIdx];
+      if (el) {
+        el.focus();
+      } else {
+        // Wait for the inputs to mount and refs to populate
+        requestAnimationFrame(tryFocus);
+      }
+    };
+    requestAnimationFrame(tryFocus);
+    return () => {
+      cancelled = true;
+    };
+  }, [currentOrigIdx, blanksCount, correctMap]);
 
   // Ensure autofocus on initial mount as well
   useEffect(() => {
