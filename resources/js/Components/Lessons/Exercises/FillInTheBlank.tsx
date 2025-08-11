@@ -374,42 +374,42 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
       ref={rootRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={"space-y-4 " + (className ?? "")}
+      className={"space-y-4 p-3 sm:p-4 " + (className ?? "")}
     >
       {(title || instructions) && (
         <div className="space-y-1">
           {title && (
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
+            <h3 className="text-lg sm:text-xl font-semibold leading-tight text-gray-900 dark:text-gray-100">{title}</h3>
           )}
           {instructions && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">{instructions}</p>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{instructions}</p>
           )}
         </div>
       )}
 
       {/* Progress */}
       <div>
-        <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-          <span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0 text-sm text-gray-600 dark:text-gray-400">
+          <span className="leading-none">
             Sentence {current + 1} of {totalSentences}
           </span>
-          <span>
+          <span className="leading-none">
             Correct blanks: {correctBlanks}/{totalBlanks}
           </span>
         </div>
-        <div className="mt-2 h-2 rounded bg-gray-200 dark:bg-gray-700 overflow-hidden">
+        <div className="mt-2 h-1 sm:h-2 rounded bg-gray-200 dark:bg-gray-700 overflow-hidden">
           <div
-            className="h-2 bg-green-500"
+            className="h-full bg-green-500"
             style={{ width: `${(correctBlanks / Math.max(totalBlanks, 1)) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Card */}
-      <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 sm:p-4">
         <div className="text-base font-medium text-gray-900 dark:text-gray-100">
           {/* Render sentence with input boxes */}
-          <span className="flex flex-wrap items-center gap-2">
+          <span className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {parts.map((part, idx) => (
               <React.Fragment key={idx}>
                 <span>{part}</span>
@@ -423,7 +423,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
                     onChange={(e) => onInputChange(idx, e.target.value)}
                     onKeyDown={handleInputKeyDown(idx)}
                     className={
-                      "w-28 sm:w-36 md:w-44 rounded-md border px-2 py-1 text-sm focus:outline-none focus:ring-2 " +
+                      "min-w-0 w-24 sm:w-32 md:w-44 rounded-md border px-2 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 " +
                       (thisCorrect[idx]
                         ? "border-green-500 focus:ring-green-400"
                         : thisCorrect[idx] === false && (inputs[currentOrigIdx]?.[idx] ?? "").length > 0
@@ -444,7 +444,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
             <span className={(s.hint ? "" : "invisible ") + "text-xs text-gray-500 dark:text-gray-400"}>Need a hint?</span>
             <button
               type="button"
-              className={(s.hint ? "inline-flex" : "invisible inline-flex") + " items-center p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"}
+              className={(s.hint ? "inline-flex" : "invisible inline-flex") + " items-center p-2 sm:p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"}
               title="Show/Hide hint (Ctrl+/)"
               aria-label="Toggle hint"
               aria-disabled={!s.hint}
@@ -473,21 +473,21 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
         </div>
 
         {/* Controls - 3 column grid to prevent layout shifts */}
-        <div className="mt-6 grid grid-cols-3 items-center gap-2">
+        <div className="mt-6 grid grid-cols-3 items-center gap-1 sm:gap-2">
           <div className="justify-self-start">
             <button
               type="button"
-              className={(current > 0 ? "opacity-100" : "opacity-0 pointer-events-none") + " inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}
+              className={(current > 0 ? "opacity-100" : "opacity-0 pointer-events-none") + " inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 rounded-md border border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap"}
               onClick={goPrev}
             >
               <FiChevronLeft /> Prev
             </button>
           </div>
 
-          <div className="justify-self-center flex items-center gap-2">
+          <div className="justify-self-center flex items-center gap-1.5 sm:gap-2">
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 rounded-md border border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap"
               onClick={reset}
             >
               <FiRefreshCw /> Reset
@@ -495,7 +495,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
             <button
               type="button"
               title="Enter"
-              className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 rounded-md border border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap"
               onClick={check}
             >
               Check
@@ -505,7 +505,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
           <div className="justify-self-end">
             <button
               type="button"
-              className={(isLast ? "opacity-0 pointer-events-none" : "opacity-100") + " inline-flex items-center gap-2 px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}
+              className={(isLast ? "opacity-0 pointer-events-none" : "opacity-100") + " inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-2 rounded-md border border-gray-300 dark:border-gray-700 text-xs sm:text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 whitespace-nowrap"}
               onClick={goNext}
             >
               Next <FiChevronRight />
