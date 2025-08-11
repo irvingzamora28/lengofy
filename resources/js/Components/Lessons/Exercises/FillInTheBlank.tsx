@@ -92,15 +92,6 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
   const inputRefs = useRef<HTMLInputElement[]>([]);
   // Track if last action was a check to enable auto-advance feedback
   const lastCheckedRef = useRef<{ at: number; sentenceIdx: number } | null>(null);
-  // Simple touch detection to decide when to show desktop-only hints and shortcuts
-  const isTouch = useMemo(() => {
-    if (typeof window === "undefined") return false;
-    try {
-      return window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-    } catch {
-      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-  }, []);
 
   useEffect(() => {
     const idxs = sentences.map((_, i) => i);
@@ -235,8 +226,8 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
         tag === "textarea" ||
         (target && (target as HTMLElement).isContentEditable);
 
-      // Sentence navigation: Ctrl/Cmd + ArrowLeft/ArrowRight (desktop only)
-      if (!isTouch && (e.ctrlKey || e.metaKey) && (e.key === "ArrowRight" || e.key === "ArrowLeft")) {
+      // Sentence navigation: Ctrl/Cmd + ArrowLeft/ArrowRight
+      if ((e.ctrlKey || e.metaKey) && (e.key === "ArrowRight" || e.key === "ArrowLeft")) {
         e.preventDefault();
         if (e.key === "ArrowRight") {
           if (current < totalSentences - 1) goNext();
@@ -267,7 +258,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [current, totalSentences, isTouch, isHovered, currentOrigIdx, sentences]);
+  }, [current, totalSentences, isHovered, currentOrigIdx, sentences]);
 
   // Cleanup any remaining timers on unmount
   useEffect(() => {
@@ -445,7 +436,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
             <button
               type="button"
               className={(s.hint ? "inline-flex" : "invisible inline-flex") + " items-center p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"}
-              title={!isTouch ? "Show/Hide hint (Ctrl+/)" : "Show/Hide hint"}
+              title="Show/Hide hint (Ctrl+/)"
               aria-label="Toggle hint"
               aria-disabled={!s.hint}
               onClick={() => s.hint && setHintOpen((v) => !v)}
@@ -513,9 +504,8 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
           </div>
         </div>
 
-        {/* Desktop-only shortcuts hint */}
-        {!isTouch && (
-          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 flex flex-wrap items-center gap-3">
+        {/* Desktop-only shortcuts hint (responsive: hidden on small screens) */}
+          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 hidden md:flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-1">
               <span className="px-1.5 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-white/60 dark:bg-gray-800/50">Enter</span>
               <span>Check</span>
@@ -541,7 +531,6 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
               </span>
             )}
           </div>
-        )}
       </div>
     </div>
   );
