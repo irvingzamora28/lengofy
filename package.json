@@ -50,6 +50,7 @@
         "i18next": "^24.2.0",
         "js-yaml": "^4.1.0",
         "laravel-echo": "^1.17.0",
+        "lucide-react": "^0.539.0",
         "markdown-to-jsx": "^7.7.3",
         "pitchy": "^4.1.0",
         "pusher-js": "^8.4.0-rc2",
