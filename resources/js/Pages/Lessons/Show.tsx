@@ -340,20 +340,6 @@ export default function Show({
 
                         {selectedExerciseId !== null && (
                             <div className="mt-6">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <h4 className="text-md font-semibold text-gray-900 dark:text-gray-100">
-                                            {selectedExercise?.title || "Exercise"}
-                                        </h4>
-                                        {selectedExercise?.instructions && (
-                                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                {selectedExercise.instructions}
-                                            </p>
-                                        )}
-                                    </div>
-                                    {/* Placeholder for future controls (reset, etc.) */}
-                                </div>
-
                                 {exerciseLoading && !selectedExercise ? (
                                     <div className="mt-4 text-gray-600 dark:text-gray-400">Loading…</div>
                                 ) : exerciseError ? (
