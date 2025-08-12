@@ -42,13 +42,20 @@ const Matching: React.FC<MatchingProps> = ({
     // Assign stable IDs based on original index so correctness is easy to compute
     type Item = { id: number; text: string };
 
+    // Randomly sample up to 10 pairs from the provided list, so each session is different
+    const sampledPairs = useMemo(() => {
+        if (!pairs || pairs.length <= 10) return pairs;
+        // Shuffle a shallow copy, then take first 10
+        return shuffleArray(pairs).slice(0, 10);
+    }, [pairs]);
+
     const baseLeft: Item[] = useMemo(
-        () => pairs.map((p, i) => ({ id: i, text: p.left })),
-        [pairs]
+        () => sampledPairs.map((p, i) => ({ id: i, text: p.left })),
+        [sampledPairs]
     );
     const baseRight: Item[] = useMemo(
-        () => pairs.map((p, i) => ({ id: i, text: p.right })),
-        [pairs]
+        () => sampledPairs.map((p, i) => ({ id: i, text: p.right })),
+        [sampledPairs]
     );
 
     const [leftItems, setLeftItems] = useState<Item[]>([]);
@@ -79,7 +86,7 @@ const Matching: React.FC<MatchingProps> = ({
         setStartTime(Date.now());
     }, [baseLeft, baseRight, shuffle]);
 
-    const total = pairs.length;
+    const total = sampledPairs.length;
     const completed = matches.size === total;
     const correctCount = Array.from(matches.values()).filter((m) => m.correct).length;
 
