@@ -157,13 +157,13 @@ const Matching: React.FC<MatchingProps> = ({
     };
 
     return (
-        <div className={`space-y-4 ${className}`}>
-            <div className="flex items-start justify-between gap-4">
-                <div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">{instructions}</p>
+        <div className={`space-y-4 pb-24 md:pb-0 ${className}`}>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <div className="min-w-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 break-words">{title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 break-words">{instructions}</p>
                 </div>
-                <div className="flex items-center gap-3 text-sm">
+                <div className="mt-1 sm:mt-0 flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm sm:justify-end">
                     <span className="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200">
                         Matched: {matches.size}/{total}
                     </span>
@@ -175,7 +175,7 @@ const Matching: React.FC<MatchingProps> = ({
                     </span>
                     <button
                         onClick={reset}
-                        className="ml-2 inline-flex items-center px-3 py-1.5 rounded-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-100 transition"
+                        className="ml-0 sm:ml-2 inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-100 transition"
                     >
                         Reset
                     </button>
@@ -217,8 +217,8 @@ const Matching: React.FC<MatchingProps> = ({
                     </div>
                 </div>
 
-                {/* Right column */}
-                <div>
+                {/* Right column (desktop/tablet) */}
+                <div className="hidden md:block">
                     <h4 className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">English</h4>
                     <div className="space-y-2">
                         {rightItems.map((item) => {
@@ -243,6 +243,48 @@ const Matching: React.FC<MatchingProps> = ({
                                     <span>{item.text}</span>
                                     {isUsed && (
                                         <span className={`ml-3 text-xs px-2 py-0.5 rounded-full border ${isCorrect ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-200 dark:border-green-700" : "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-200 dark:border-rose-700"}`}>
+                                            {isCorrect ? "✓" : "✗"}
+                                        </span>
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile sticky right-options scroller */}
+            <div className="md:hidden fixed inset-x-0 bottom-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-gray-900/80">
+                <div className="px-3 pt-2">
+                    <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-xs font-medium text-gray-600 dark:text-gray-300">English options</h4>
+                        <span className="text-[11px] text-gray-500 dark:text-gray-400">Tap to match →</span>
+                    </div>
+                </div>
+                <div className="px-3 pb-3 overflow-x-auto">
+                    <div className="flex gap-2 min-w-full">
+                        {rightItems.map((item) => {
+                            const isUsed = usedRight.has(item.id);
+                            const isSelected = selectedRight === item.id;
+                            const leftMatch = Array.from(matches.entries()).find(([, v]) => v.rightId === item.id);
+                            const isCorrect = leftMatch?.[1].correct;
+                            return (
+                                <button
+                                    key={`R-m-${item.id}`}
+                                    type="button"
+                                    disabled={isUsed}
+                                    onClick={() => handleSelectRight(item.id)}
+                                    className={`shrink-0 px-3 py-2 rounded-md border text-sm transition
+                                        ${isUsed
+                                            ? "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 text-gray-400 cursor-not-allowed"
+                                            : isSelected
+                                                ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-400 text-blue-800 dark:text-blue-200"
+                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"}
+                                    `}
+                                >
+                                    <span className="whitespace-nowrap">{item.text}</span>
+                                    {isUsed && (
+                                        <span className={`ml-2 text-[10px] px-1.5 py-0.5 rounded-full border ${isCorrect ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-200 dark:border-green-700" : "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-200 dark:border-rose-700"}`}>
                                             {isCorrect ? "✓" : "✗"}
                                         </span>
                                     )}
