@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FiCheck, FiX, FiChevronLeft, FiChevronRight, FiRefreshCw } from "react-icons/fi";
+import AutoAdvanceCountdown from "@/Components/Common/AutoAdvanceCountdown";
 
 export type Choice = {
   text: string;
@@ -56,6 +57,9 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
   className,
 }) => {
   const startTimeRef = useRef<number>(Date.now());
+  // Auto-advance: external reusable component
+  const [autoActive, setAutoActive] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Prepare question order
   const [questionOrder, setQuestionOrder] = useState<number[]>([]);
@@ -84,6 +88,8 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
     setCorrectMap({});
     setMistakes(0);
     startTimeRef.current = Date.now();
+    // stop any pending auto-advance
+    setAutoActive(false);
   }, [questions, shuffleQuestions, shuffleChoices]);
 
   const progress = useMemo(() => {
@@ -123,6 +129,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
   const currentQIndex = questionOrder[current] ?? 0;
   const q = questions[currentQIndex];
   const cOrder = choiceOrders[currentQIndex] || [];
+  
 
   const handleSelect = (displayedChoiceIdx: number) => {
     // Prevent changing answer once selected for clean scoring
@@ -135,10 +142,18 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
     const isCorrect = !!choice?.correct;
     setCorrectMap((prev) => ({ ...prev, [currentQIndex]: isCorrect }));
     if (!isCorrect) setMistakes((m) => m + 1);
+    // Start auto-advance if not last question
+    if (current < total - 1) setAutoActive(true);
   };
 
-  const goPrev = () => setCurrent((i) => Math.max(0, i - 1));
-  const goNext = () => setCurrent((i) => Math.min(total - 1, i + 1));
+  const goPrev = () => {
+    setAutoActive(false);
+    setCurrent((i) => Math.max(0, i - 1));
+  };
+  const goNext = () => {
+    setAutoActive(false);
+    setCurrent((i) => Math.min(total - 1, i + 1));
+  };
 
   const reset = () => {
     // Re-initialize by toggling dependencies (questions refs remain the same)
@@ -155,13 +170,17 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
     setCorrectMap({});
     setMistakes(0);
     startTimeRef.current = Date.now();
+    setAutoActive(false);
   };
 
   const answeredThis = selected[currentQIndex] !== undefined && selected[currentQIndex] !== null;
   const isLast = current === total - 1;
 
   return (
-    <div className={"space-y-4 " + (className ?? "")}> 
+    <div
+      className={"space-y-4 " + (className ?? "")}
+      ref={containerRef}
+    > 
       {(title || instructions) && (
         <div className="space-y-1">
           {title && (
@@ -192,7 +211,17 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
       </div>
 
       {/* Card */}
-      <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div className="relative rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+        <AutoAdvanceCountdown
+          seconds={3}
+          active={autoActive}
+          onFinish={() => {
+            setAutoActive(false);
+            goNext();
+          }}
+          onCancel={() => setAutoActive(false)}
+          containerRef={containerRef as React.RefObject<HTMLElement>}
+        />
         <div className="text-base font-medium text-gray-900 dark:text-gray-100">{q.prompt}</div>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
           {cOrder.map((choiceIdx, idx) => {
