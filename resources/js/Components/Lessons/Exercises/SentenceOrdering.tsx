@@ -1,5 +1,23 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { FiChevronLeft, FiChevronRight, FiRefreshCw, FiArrowLeft, FiArrowRight, FiCheck, FiX } from "react-icons/fi";
+import {
+  DndContext,
+  closestCenter,
+  type DragEndEvent,
+  useSensor,
+  useSensors,
+  MouseSensor,
+  TouchSensor,
+  KeyboardSensor,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  rectSortingStrategy,
+  useSortable,
+  arrayMove,
+  sortableKeyboardCoordinates,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { FiChevronLeft, FiChevronRight, FiRefreshCw, FiCheck, FiX } from "react-icons/fi";
 
 export type SentenceOrderingItem = {
   target: string;
@@ -85,6 +103,8 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({
   const [mistakes, setMistakes] = useState(0);
   const [current, setCurrent] = useState(0);
 
+  // Using dnd-kit for drag-and-drop within the arranged zone
+
   useEffect(() => {
     const initAvail: Record<number, number[]> = {};
     const initArr: Record<number, number[]> = {};
@@ -158,23 +178,9 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({
     });
   };
 
-  const moveLeft = (idx: number) => {
-    setArranged((prev) => {
-      const cur = prev[current] ? [...prev[current]] : [];
-      if (idx <= 0) return prev;
-      [cur[idx - 1], cur[idx]] = [cur[idx], cur[idx - 1]];
-      return { ...prev, [current]: cur };
-    });
-  };
+  // (left/right move handlers removed in favor of drag-and-drop)
 
-  const moveRight = (idx: number) => {
-    setArranged((prev) => {
-      const cur = prev[current] ? [...prev[current]] : [];
-      if (idx >= cur.length - 1) return prev;
-      [cur[idx], cur[idx + 1]] = [cur[idx + 1], cur[idx]];
-      return { ...prev, [current]: cur };
-    });
-  };
+  // (native HTML5 drag handlers removed; dnd-kit handles reordering)
 
   const resetTokens = () => {
     setArranged((prev) => ({ ...prev, [current]: [] }));
@@ -208,6 +214,61 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({
 
   const correctThis = !!correctMap[current];
   const item = items[current];
+
+  // dnd-kit sensors: enable mouse + touch + keyboard dragging
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      // no options needed for mouse
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 120, tolerance: 8 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // Sortable token component for arranged tokens
+  const SortableToken: React.FC<{ id: number; text: string; onRemove: () => void }> = ({ id, text, onRemove }) => {
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+    const style: React.CSSProperties = {
+      transform: CSS.Transform.toString(transform),
+      transition,
+      opacity: isDragging ? 0.7 : 1,
+    };
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        className="inline-flex items-center gap-1 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-2 py-1 shadow-sm cursor-grab touch-none"
+        {...attributes}
+        {...listeners}
+      >
+        <span className="select-none text-gray-900 dark:text-gray-100">{text}</span>
+        <button
+          type="button"
+          className="p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30"
+          onClick={onRemove}
+          title="Remove"
+        >
+          <FiX />
+        </button>
+      </div>
+    );
+  };
+
+  const handleDndEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    setArranged((prev) => {
+      const cur = prev[current] ? [...prev[current]] : [];
+      const oldIndex = cur.indexOf(active.id as number);
+      const newIndex = cur.indexOf(over.id as number);
+      if (oldIndex === -1 || newIndex === -1) return prev;
+      const reordered = arrayMove(cur, oldIndex, newIndex);
+      return { ...prev, [current]: reordered };
+    });
+  };
 
   return (
     <div className={"space-y-4 " + (className ?? "")}> 
@@ -244,47 +305,26 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({
       <div className={"rounded-lg border p-4 " + (correctThis ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-gray-200 dark:border-gray-700") }>
         {/* Arranged area */}
         <div className="text-sm text-gray-600 dark:text-gray-400">Arrange tokens to form a sentence:</div>
-        <div className="mt-2 min-h-[56px] rounded-md border border-dashed border-gray-300 dark:border-gray-700 p-2 flex flex-wrap gap-2 bg-white/50 dark:bg-gray-800/40">
-          {curArr.length === 0 && (
-            <span className="text-gray-400 text-sm">Click tokens below to add them here</span>
-          )}
-          {curArr.map((id, idx) => {
-            const tok = tokenObjs[current].find((o) => o.id === id)!;
-            return (
-              <div key={id} className="inline-flex items-center gap-1 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-2 py-1 shadow-sm">
-                <span className="text-gray-900 dark:text-gray-100">{tok.text}</span>
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-                    onClick={() => moveLeft(idx)}
-                    disabled={idx === 0}
-                    title="Move left"
-                  >
-                    <FiArrowLeft />
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-                    onClick={() => moveRight(idx)}
-                    disabled={idx === curArr.length - 1}
-                    title="Move right"
-                  >
-                    <FiArrowRight />
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30"
-                    onClick={() => removeToken(id, idx)}
-                    title="Remove"
-                  >
-                    <FiX />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDndEnd}>
+          <SortableContext items={curArr} strategy={rectSortingStrategy}>
+            <div className="mt-2 min-h-[56px] rounded-md border border-dashed border-gray-300 dark:border-gray-700 p-2 flex flex-wrap gap-2 bg-white/50 dark:bg-gray-800/40">
+              {curArr.length === 0 && (
+                <span className="text-gray-400 text-sm">Click tokens below to add them here</span>
+              )}
+              {curArr.map((id, idx) => {
+                const tok = tokenObjs[current].find((o) => o.id === id)!;
+                return (
+                  <SortableToken
+                    key={id}
+                    id={id}
+                    text={tok.text}
+                    onRemove={() => removeToken(id, idx)}
+                  />
+                );
+              })}
+            </div>
+          </SortableContext>
+        </DndContext>
 
         {/* Available tokens */}
         <div className="mt-4">
