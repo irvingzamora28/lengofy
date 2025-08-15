@@ -1,0 +1,145 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Numbers, Colors, and Days",
+      "instructions": "Match each German word with its English meaning.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "eins", "right": "one" },
+          { "left": "zwei", "right": "two" },
+          { "left": "drei", "right": "three" },
+          { "left": "vier", "right": "four" },
+          { "left": "fünf", "right": "five" },
+          { "left": "sechs", "right": "six" },
+          { "left": "sieben", "right": "seven" },
+          { "left": "acht", "right": "eight" },
+          { "left": "neun", "right": "nine" },
+          { "left": "zehn", "right": "ten" },
+
+          { "left": "rot", "right": "red" },
+          { "left": "blau", "right": "blue" },
+          { "left": "grün", "right": "green" },
+          { "left": "gelb", "right": "yellow" },
+          { "left": "schwarz", "right": "black" },
+          { "left": "weiß", "right": "white" },
+          { "left": "grau", "right": "gray" },
+          { "left": "braun", "right": "brown" },
+          { "left": "lila", "right": "purple" },
+          { "left": "orange", "right": "orange" },
+
+          { "left": "Montag", "right": "Monday" },
+          { "left": "Dienstag", "right": "Tuesday" },
+          { "left": "Mittwoch", "right": "Wednesday" },
+          { "left": "Donnerstag", "right": "Thursday" },
+          { "left": "Freitag", "right": "Friday" },
+          { "left": "Samstag", "right": "Saturday" },
+          { "left": "Sonntag", "right": "Sunday" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Numbers, Colors, and Days: Multiple Choice",
+      "instructions": "Select the best option for each question.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "How do you say 21 in German?",
+            "choices": [
+              { "text": "Einundzwanzig", "correct": true },
+              { "text": "Zwanzigeins", "correct": false },
+              { "text": "Einzwanzig", "correct": false }
+            ],
+            "explanation": "In German, say the ones digit first, then 'und', then the tens: ein + und + zwanzig."
+          },
+          {
+            "prompt": "Which word means 'Wednesday'?",
+            "choices": [
+              { "text": "Mittwoch", "correct": true },
+              { "text": "Dienstag", "correct": false },
+              { "text": "Donnerstag", "correct": false }
+            ],
+            "explanation": "Mittwoch = Wednesday."
+          },
+          {
+            "prompt": "Der Himmel ist _____. (The sky is ____.)",
+            "choices": [
+              { "text": "blau", "correct": true },
+              { "text": "braun", "correct": false },
+              { "text": "grau", "correct": false }
+            ],
+            "explanation": "Common collocation: Der Himmel ist blau."
+          },
+          {
+            "prompt": "Which is the correct German for 17?",
+            "choices": [
+              { "text": "Siebzehn", "correct": true },
+              { "text": "Siebenzehn", "correct": false },
+              { "text": "Sechszehn", "correct": false }
+            ],
+            "explanation": "Note the irregular form: 'siebzehn' (not 'siebenzehn')."
+          },
+          {
+            "prompt": "What comes after 'Montag'?",
+            "choices": [
+              { "text": "Dienstag", "correct": true },
+              { "text": "Sonntag", "correct": false },
+              { "text": "Freitag", "correct": false }
+            ],
+            "explanation": "Monday → Tuesday: Montag → Dienstag."
+          },
+          {
+            "prompt": "Choose the correct form for 35 in German.",
+            "choices": [
+              { "text": "Fünfunddreißig", "correct": true },
+              { "text": "Dreißigfünf", "correct": false },
+              { "text": "Fünf und Dreißig", "correct": false }
+            ],
+            "explanation": "Compound numbers are written together: fünf + und + dreißig."
+          },
+          {
+            "prompt": "Which color is 'green' in German?",
+            "choices": [
+              { "text": "grün", "correct": true },
+              { "text": "grau", "correct": false },
+              { "text": "braun", "correct": false }
+            ],
+            "explanation": "grün = green, grau = gray, braun = brown."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Fill in the Blank: Numbers, Colors, Days",
+      "instructions": "Type the correct German word to complete each sentence.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "Ich habe ____ Katzen.", "blanks": [ { "answer": "zwei" } ], "hint": "Number: two." },
+          { "text": "Der Himmel ist _____.", "blanks": [ { "answers": ["blau", "Blau"] } ] },
+          { "text": "Am ____ gehe ich ins Kino.", "blanks": [ { "answers": ["Freitag", "freitag"] } ] },
+          { "text": "Sie zählt bis _____.", "blanks": [ { "answers": ["zehn", "Zehn"] } ] },
+          { "text": "Die Rose ist _____.", "blanks": [ { "answers": ["rot", "Rot"] } ] },
+          { "text": "Wir sehen ____ Sterne.", "blanks": [ { "answer": "sieben" } ] },
+          { "text": "Es kostet ____ Euro.", "blanks": [ { "answer": "acht" } ] },
+          { "text": "____ ist der erste Tag der Woche.", "blanks": [ { "answers": ["Montag", "montag"] } ] },
+          { "text": "Das Gras ist _____.", "blanks": [ { "answers": ["grün", "Grün", "gruen", "Gruen"] } ], "hint": "Contains an umlaut (ü)." },
+          { "text": "Ich habe ____ Freunde.", "blanks": [ { "answer": "neun" } ] }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    }
+  ]
+}
