@@ -1,0 +1,147 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Sein Sentences and Meanings",
+      "instructions": "Match each German sentence with its English meaning.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "Ich bin müde.", "right": "I am tired." },
+          { "left": "Du bist glücklich.", "right": "You are happy." },
+          { "left": "Er ist Lehrer.", "right": "He is a teacher." },
+          { "left": "Wir sind hier.", "right": "We are here." },
+          { "left": "Ihr seid pünktlich.", "right": "You (pl.) are punctual." },
+          { "left": "Sie sind Studenten.", "right": "They are students." },
+          { "left": "Das Buch ist neu.", "right": "The book is new." },
+          { "left": "Bist du bereit?", "right": "Are you ready?" },
+          { "left": "Sind Sie fertig?", "right": "Are you (formal) ready?" },
+          { "left": "Es ist spät.", "right": "It is late." }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Conjugation of 'sein' (Present)",
+      "instructions": "Select the best option for each question.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "Choose the correct form: Ich ___ müde.",
+            "choices": [
+              { "text": "bin", "correct": true },
+              { "text": "bist", "correct": false },
+              { "text": "ist", "correct": false }
+            ],
+            "explanation": "ich → bin"
+          },
+          {
+            "prompt": "Choose the correct form: Du ___ glücklich.",
+            "choices": [
+              { "text": "bist", "correct": true },
+              { "text": "bin", "correct": false },
+              { "text": "ist", "correct": false }
+            ],
+            "explanation": "du → bist"
+          },
+          {
+            "prompt": "Choose the correct form: Ihr ___ pünktlich.",
+            "choices": [
+              { "text": "seid", "correct": true },
+              { "text": "sind", "correct": false },
+              { "text": "ist", "correct": false }
+            ],
+            "explanation": "ihr → seid"
+          },
+          {
+            "prompt": "Formal 'you' uses which form of 'sein' in the present tense? (Sie ___)",
+            "choices": [
+              { "text": "sind", "correct": true },
+              { "text": "seid", "correct": false },
+              { "text": "ist", "correct": false }
+            ],
+            "explanation": "Sie (formal) → sind"
+          },
+          {
+            "prompt": "Select the correct sentence for 'We are ready.'",
+            "choices": [
+              { "text": "Wir sind bereit.", "correct": true },
+              { "text": "Wir seid bereit.", "correct": false },
+              { "text": "Wir ist bereit.", "correct": false }
+            ],
+            "explanation": "wir → sind"
+          },
+          {
+            "prompt": "Which question is correctly capitalized and conjugated (formal)?",
+            "choices": [
+              { "text": "Sind Sie aus Deutschland?", "correct": true },
+              { "text": "Sind sie aus Deutschland?", "correct": false },
+              { "text": "Seid Sie aus Deutschland?", "correct": false }
+            ],
+            "explanation": "Formal 'Sie' is capitalized and uses 'sind'."
+          },
+          {
+            "prompt": "Pick the correct copula sentence (sein + adjective).",
+            "choices": [
+              { "text": "Das Haus ist groß.", "correct": true },
+              { "text": "Das Haus sind groß.", "correct": false },
+              { "text": "Das Haus bist groß.", "correct": false }
+            ],
+            "explanation": "Haus is singular → ist"
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Fill in the Blank: Forms of 'sein'",
+      "instructions": "Type the correct present-tense form of 'sein' (bin/bist/ist/sind/seid) to complete each sentence.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "Ich ___ müde.", "blanks": [ { "answers": ["bin", "Bin"] } ] },
+          { "text": "Du ___ glücklich.", "blanks": [ { "answers": ["bist", "Bist"] } ] },
+          { "text": "Er ___ Lehrer.", "blanks": [ { "answers": ["ist", "Ist"] } ] },
+          { "text": "Wir ___ hier.", "blanks": [ { "answers": ["sind", "Sind"] } ] },
+          { "text": "Ihr ___ pünktlich.", "blanks": [ { "answers": ["seid", "Seid"] } ] },
+          { "text": "Sie ___ Studenten.", "blanks": [ { "answers": ["sind", "Sind"] } ], "hint": "They (plural)." },
+          { "text": "___ Sie fertig?", "blanks": [ { "answers": ["Sind", "sind"] } ], "hint": "Formal 'you'." },
+          { "text": "Das Buch ___ neu.", "blanks": [ { "answers": ["ist", "Ist"] } ] },
+          { "text": "Es ___ spät.", "blanks": [ { "answers": ["ist", "Ist"] } ] },
+          { "text": "Ich ___ in Berlin.", "blanks": [ { "answers": ["bin", "Bin"] } ] }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order the Sentence: Sein in Context",
+      "instructions": "Arrange the tokens to form the correct sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "Ich bin müde.", "tokens": ["müde", "Ich", "bin", "."], "explanation": "ich → bin" },
+          { "target": "Du bist glücklich.", "tokens": ["bist", "Du", "glücklich", "."], "explanation": "du → bist" },
+          { "target": "Er ist Lehrer.", "tokens": ["Lehrer", "ist", "Er", "."], "explanation": "Predicate noun without article in professions." },
+          { "target": "Wir sind bereit.", "tokens": ["bereit", "Wir", "sind", "."], "explanation": "wir → sind" },
+          { "target": "Ihr seid pünktlich.", "tokens": ["seid", "pünktlich", "Ihr", "."], "explanation": "ihr → seid" },
+          { "target": "Sie sind Studenten.", "tokens": ["sind", "Sie", "Studenten", "."], "explanation": "they (Sie lowercase in running text) → sind" },
+          { "target": "Sind Sie fertig?", "tokens": ["Sie", "fertig", "Sind", "?"], "explanation": "Formal 'Sie' capitalized; V2 inversion in questions." },
+          { "target": "Das Buch ist neu.", "tokens": ["neu", "Das", "Buch", "ist", "."] },
+          { "target": "Es ist spät.", "tokens": ["ist", "spät", "Es", "."] }
+        ],
+        "shuffleTokens": true
+      }
+    }
+  ]
+}
