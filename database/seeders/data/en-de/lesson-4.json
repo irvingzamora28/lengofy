@@ -1,0 +1,151 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Nouns with Correct Articles and Meanings",
+      "instructions": "Match each German article+noun with its English meaning.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "der Mann", "right": "the man" },
+          { "left": "die Frau", "right": "the woman" },
+          { "left": "das Kind", "right": "the child" },
+          { "left": "der Tisch", "right": "the table" },
+          { "left": "die Lampe", "right": "the lamp" },
+          { "left": "das Haus", "right": "the house" },
+          { "left": "das Buch", "right": "the book" },
+          { "left": "die Katze", "right": "the cat" },
+          { "left": "die Bücher", "right": "the books (plural)" },
+          { "left": "der Hund", "right": "the dog" },
+
+          { "left": "ein Mann", "right": "a man" },
+          { "left": "eine Frau", "right": "a woman" },
+          { "left": "ein Kind", "right": "a child" },
+          { "left": "ein Buch", "right": "a book" },
+          { "left": "eine Tür", "right": "a door" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Articles and Genders: Multiple Choice",
+      "instructions": "Select the best option for each question.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "Which definite article matches 'Mann'?",
+            "choices": [
+              { "text": "der", "correct": true },
+              { "text": "die", "correct": false },
+              { "text": "das", "correct": false }
+            ],
+            "explanation": "Mann is masculine → der Mann."
+          },
+          {
+            "prompt": "Choose the correct indefinite article: ___ Frau (a woman).",
+            "choices": [
+              { "text": "eine", "correct": true },
+              { "text": "ein", "correct": false },
+              { "text": "einen", "correct": false }
+            ],
+            "explanation": "Frau is feminine → eine Frau."
+          },
+          {
+            "prompt": "Which is the correct pair for a neuter noun?",
+            "choices": [
+              { "text": "das Kind", "correct": true },
+              { "text": "der Kind", "correct": false },
+              { "text": "die Kind", "correct": false }
+            ],
+            "explanation": "Kind is neuter → das Kind."
+          },
+          {
+            "prompt": "Select the correct English meaning: 'die Bücher'.",
+            "choices": [
+              { "text": "the books", "correct": true },
+              { "text": "the book", "correct": false },
+              { "text": "a book", "correct": false }
+            ],
+            "explanation": "Plural nouns use 'die' → 'the books'."
+          },
+          {
+            "prompt": "Complete the sentence: Das ist ___ Buch. (That is a book.)",
+            "choices": [
+              { "text": "ein", "correct": true },
+              { "text": "eine", "correct": false },
+              { "text": "der", "correct": false }
+            ],
+            "explanation": "Buch is neuter → ein Buch."
+          },
+          {
+            "prompt": "Which is correct in nominative?",
+            "choices": [
+              { "text": "Der Tisch ist neu.", "correct": true },
+              { "text": "Die Tisch ist neu.", "correct": false },
+              { "text": "Das Tisch ist neu.", "correct": false }
+            ],
+            "explanation": "Tisch is masculine → der Tisch."
+          },
+          {
+            "prompt": "Pick the correct accusative form: I have a pen — Ich habe __ Stift.",
+            "choices": [
+              { "text": "einen", "correct": true },
+              { "text": "ein", "correct": false },
+              { "text": "eine", "correct": false }
+            ],
+            "explanation": "Stift is masculine; after 'habe' (accusative), it's 'einen Stift' (as referenced in the lesson)."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Fill in the Blank: Articles with Nouns",
+      "instructions": "Type the correct article (der/die/das/ein/eine/einen) to complete each sentence.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "___ Mann ist groß.", "blanks": [ { "answers": ["Der", "der"] } ] },
+          { "text": "Die Frau liest ___ Buch.", "blanks": [ { "answers": ["ein", "Ein"] } ] },
+          { "text": "___ Kind spielt im Garten.", "blanks": [ { "answers": ["Das", "das"] } ] },
+          { "text": "Ich habe ___ Stift.", "blanks": [ { "answers": ["einen", "Einen"] } ], "hint": "Accusative masculine." },
+          { "text": "Das ist ___ Tür.", "blanks": [ { "answers": ["eine", "Eine"] } ] },
+          { "text": "___ Haus ist sehr alt.", "blanks": [ { "answers": ["Das", "das"] } ] },
+          { "text": "Sie hat ___ Katze.", "blanks": [ { "answers": ["eine", "Eine"] } ] },
+          { "text": "Wir sehen ___ Katze.", "blanks": [ { "answers": ["die", "Die"] } ] },
+          { "text": "___ Tisch ist aus Holz.", "blanks": [ { "answers": ["Der", "der"] } ] },
+          { "text": "Das ist ___ Mann.", "blanks": [ { "answers": ["ein", "Ein"] } ] }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order the Sentence: Articles and Nouns",
+      "instructions": "Arrange the tokens to form the correct sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "Der Tisch ist neu.", "tokens": ["Tisch", "ist", "Der", "neu", "."], "explanation": "Nominative masculine with predicate adjective." },
+          { "target": "Die Tür ist offen.", "tokens": ["Die", "Tür", "ist", "offen", "."] },
+          { "target": "Das Haus ist groß.", "tokens": ["Das", "Haus", "ist", "groß", "."] },
+          { "target": "Die Bücher sind interessant.", "tokens": ["Bücher", "Die", "sind", "interessant", "."] },
+          { "target": "Ich habe einen Stift.", "tokens": ["Stift", "Ich", "einen", "habe", "."], "explanation": "Accusative masculine: einen Stift." },
+          { "target": "Sie liest ein Buch.", "tokens": ["ein", "Buch", "Sie", "liest", "."] },
+          { "target": "Der Hund bellt laut.", "tokens": ["bellt", "Der", "Hund", "laut", "."] }
+        ],
+        "shuffleTokens": true
+      }
+    }
+  ]
+}
