@@ -151,6 +151,8 @@ class LessonController extends Controller
             'lesson_number' => $lesson_number,
             'title' => $lessonData->title,
             'content' => $lessonData->content,
+            // Provide target language special characters for exercises (e.g., FillInTheBlank)
+            'specialCharacters' => $languagePair->targetLanguage->special_characters ?? [],
             'progress' => $progress->only(['completed', 'completed_at']),
             'navigation' => [
                 'previous' => $previousLesson ? [

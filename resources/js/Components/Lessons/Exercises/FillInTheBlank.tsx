@@ -50,6 +50,8 @@ interface FillInTheBlankProps {
   showExplanation?: boolean;
   onComplete?: (result: FIBResult) => void;
   className?: string;
+  // Optional list of special characters to help typing in the target language
+  specialCharacters?: string[];
 }
 
 const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
@@ -62,6 +64,7 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
   showExplanation = true,
   onComplete,
   className,
+  specialCharacters = [],
 }) => {
   const startTimeRef = useRef<number>(Date.now());
   // Root ref to scope global key handling to this component
@@ -90,6 +93,8 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
   const [hintOpen, setHintOpen] = useState(false);
   // Refs to inputs in the current sentence for focus management
   const inputRefs = useRef<HTMLInputElement[]>([]);
+  // Track which blank input is focused to insert special characters at caret
+  const [focusedBlankIdx, setFocusedBlankIdx] = useState<number | null>(null);
   // Track if last action was a check to enable auto-advance feedback
   const lastCheckedRef = useRef<{ at: number; sentenceIdx: number } | null>(null);
 
@@ -288,6 +293,31 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
     });
   };
 
+  // Insert a character into the currently focused input at caret position
+  const insertChar = (ch: string) => {
+    if (focusedBlankIdx == null) return;
+    const idx = focusedBlankIdx;
+    const input = inputRefs.current[idx];
+    const currentVal = inputs[currentOrigIdx]?.[idx] ?? "";
+    if (!input) {
+      // Fallback: append at end
+      onInputChange(idx, currentVal + ch);
+      return;
+    }
+    const start = input.selectionStart ?? currentVal.length;
+    const end = input.selectionEnd ?? currentVal.length;
+    const next = currentVal.slice(0, start) + ch + currentVal.slice(end);
+    onInputChange(idx, next);
+    // Restore caret just after inserted char on next frame
+    requestAnimationFrame(() => {
+      input.focus();
+      const pos = start + ch.length;
+      try {
+        input.setSelectionRange(pos, pos);
+      } catch {}
+    });
+  };
+
   const check = () => {
     // Build list of acceptable answers per blank (combine answers[] and answer)
     const acceptable: string[][] = (s.blanks?.map((b) => {
@@ -446,6 +476,8 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
                         value={inputs[currentOrigIdx]?.[idx] ?? ""}
                         onChange={(e) => onInputChange(idx, e.target.value)}
                         onKeyDown={handleInputKeyDown(idx)}
+                        onFocus={() => setFocusedBlankIdx(idx)}
+                        onClick={() => setFocusedBlankIdx(idx)}
                         className={
                           "inline-block min-w-0 w-28 sm:w-32 md:w-40 lg:w-48 px-2 sm:px-3 py-2 sm:py-2.5 text-sm sm:text-base font-medium rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-opacity-20 " +
                           (thisCorrect[idx]
@@ -462,6 +494,26 @@ const FillInTheBlank: React.FC<FillInTheBlankProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Special Characters Toolbar */}
+          {specialCharacters.length > 0 && (
+            <div className="mb-3 sm:mb-4">
+              <div className="flex flex-wrap items-center gap-2">
+                {specialCharacters.map((ch, i) => (
+                  <button
+                    key={`${ch}-${i}`}
+                    type="button"
+                    className="px-2.5 py-1.5 text-sm rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    onClick={() => insertChar(ch)}
+                    title={`Insert ${ch}`}
+                    aria-label={`Insert character ${ch}`}
+                  >
+                    {ch}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Hint Section - Fixed height to prevent layout shifts */}
           <div className="mb-2 sm:mb-3 h-16 sm:h-16 overflow-hidden">

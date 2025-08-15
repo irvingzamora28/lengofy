@@ -55,6 +55,8 @@ interface Props extends PageProps {
         previous: NavigationItem | null;
         next: NavigationItem | null;
     };
+    // Characters palette for the target language
+    specialCharacters?: string[];
 }
 
 export default function Show({
@@ -65,6 +67,7 @@ export default function Show({
     lesson_number,
     progress,
     navigation,
+    specialCharacters = [],
 }: Props) {
     const [lessonContent, setLessonContent] = useState("");
     const [vocabulary, setVocabulary] = useState<VocabularyItem[]>([]);
@@ -198,6 +201,7 @@ export default function Show({
                         shuffleSentences={selectedExercise.data?.shuffleSentences ?? false}
                         caseSensitive={selectedExercise.data?.caseSensitive ?? false}
                         trimWhitespace={selectedExercise.data?.trimWhitespace ?? true}
+                        specialCharacters={specialCharacters}
                         onComplete={(res) => {
                             console.log("Fill-in-the-blank completed:", res);
                         }}
