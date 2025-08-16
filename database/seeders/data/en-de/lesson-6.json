@@ -1,0 +1,138 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Personal Pronouns (German ↔ English)",
+      "instructions": "Match each German pronoun with its English equivalent.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "ich", "right": "I" },
+          { "left": "du", "right": "you (informal singular)" },
+          { "left": "er", "right": "he" },
+          { "left": "sie", "right": "she / they (context)" },
+          { "left": "es", "right": "it" },
+          { "left": "wir", "right": "we" },
+          { "left": "ihr", "right": "you (informal plural)" },
+          { "left": "Sie", "right": "you (formal)" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Fill in the Blank: Pronouns in Simple Sentences",
+      "instructions": "Type the correct missing word (pronoun or verb) to complete each basic sentence.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "__ bin Lehrerin.", "blanks": [ { "answers": ["Ich", "ich"] } ], "hint": "First person singular." },
+          { "text": "__ bist aus Spanien.", "blanks": [ { "answers": ["Du", "du"] } ] },
+          { "text": "Er __ müde.", "blanks": [ { "answers": ["ist", "Ist"] } ] },
+          { "text": "__ sind in Berlin.", "blanks": [ { "answers": ["Wir", "wir"] } ] },
+          { "text": "Ihr __ laut.", "blanks": [ { "answers": ["seid", "Seid"] } ] },
+          { "text": "__ sind freundlich.", "blanks": [ { "answers": ["Sie", "sie"] } ], "hint": "Formal 'you' or plural 'they' fit by context." },
+          { "text": "Wie __ du? — Ich heiße Anna.", "blanks": [ { "answers": ["heißt", "Heißt"] } ] },
+          { "text": "Wir __ aus Kanada.", "blanks": [ { "answers": ["kommen", "Kommen"] } ] },
+          { "text": "Ich __ in München.", "blanks": [ { "answers": ["wohne", "Wohne"] } ] },
+          { "text": "__ sprechen Deutsch.", "blanks": [ { "answers": ["Wir", "wir"] } ] }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "verb-conjugation",
+      "title": "Conjugation Slot: Pronouns + Present Tense",
+      "instructions": "Spin to get a subject and type the correct conjugated form for the shown verb.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "items": [
+          {
+            "verb": "sein",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "bin",
+              "du": "bist",
+              "er/sie/es": "ist",
+              "wir": "sind",
+              "ihr": "seid",
+              "sie (they)": "sind",
+              "Sie": "sind"
+            }
+          },
+          {
+            "verb": "haben",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "habe",
+              "du": "hast",
+              "er/sie/es": "hat",
+              "wir": "haben",
+              "ihr": "habt",
+              "sie (they)": "haben",
+              "Sie": "haben"
+            }
+          },
+          {
+            "verb": "kommen",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "komme",
+              "du": "kommst",
+              "er/sie/es": "kommt",
+              "wir": "kommen",
+              "ihr": "kommt",
+              "sie (they)": "kommen",
+              "Sie": "kommen"
+            }
+          },
+          {
+            "verb": "wohnen",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "wohne",
+              "du": "wohnst",
+              "er/sie/es": "wohnt",
+              "wir": "wohnen",
+              "ihr": "wohnt",
+              "sie (they)": "wohnen",
+              "Sie": "wohnen"
+            }
+          },
+          {
+            "verb": "heißen",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "heiße",
+              "du": "heißt",
+              "er/sie/es": "heißt",
+              "wir": "heißen",
+              "ihr": "heißt",
+              "sie (they)": "heißen",
+              "Sie": "heißen"
+            }
+          },
+          {
+            "verb": "sprechen",
+            "tense": "Präsens",
+            "forms": {
+              "ich": "spreche",
+              "du": "sprichst",
+              "er/sie/es": "spricht",
+              "wir": "sprechen",
+              "ihr": "sprecht",
+              "sie (they)": "sprechen",
+              "Sie": "sprechen"
+            }
+          }
+        ],
+        "subjects": ["ich", "du", "er/sie/es", "wir", "ihr", "sie (they)", "Sie"]
+      }
+    }
+  ]
+}
