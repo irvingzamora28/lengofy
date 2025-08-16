@@ -50,6 +50,8 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
 
   // Reel animation state
   const reelRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
   const rafId = useRef<number | null>(null);
   const [reelItems, setReelItems] = useState<string[]>([]);
   const [reelOffset, setReelOffset] = useState(0); // px offset from top
@@ -161,8 +163,61 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
 
   const canCheck = !!currentVerb && !!landedSubject && answer.trim().length > 0;
 
+  // Scoped keyboard shortcuts (like FillInTheBlank)
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const handler = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const within = !!(rootRef.current && target && rootRef.current.contains(target));
+      if (!within && !isHovered) return;
+
+      // Don't hijack typing in other editable fields
+      const tag = (target?.tagName || '').toLowerCase();
+      const isEditable = tag === 'input' || tag === 'textarea' || (target && (target as HTMLElement).isContentEditable);
+
+      // Enter: check (or spin if nothing landed yet)
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!spinning && canCheck) {
+          checkAnswer();
+        } else if (!spinning && !landedSubject) {
+          startSpin();
+        }
+        return;
+      }
+
+      // Ctrl/Cmd + ArrowDown: Spin subject
+      if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!spinning) startSpin();
+        return;
+      }
+
+      // Ctrl/Cmd + ArrowRight: Next verb
+      if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (!spinning) nextRound();
+        return;
+      }
+
+      // Esc: clear input
+      if (e.key === 'Escape') {
+        if (isEditable) e.preventDefault();
+        setAnswer('');
+        inputRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [isHovered, canCheck, spinning, landedSubject]);
+
   return (
-    <div className={"w-full max-w-xl mx-auto p-4 rounded-lg border border-gray-200 bg-white shadow-sm " + (className || '')}>
+    <div
+      ref={rootRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={"w-full p-4 sm:p-6 rounded-lg border border-gray-200 bg-white shadow-sm " + (className || '')}
+    >
       <div className="flex items-center justify-between mb-3">
         <div className="text-sm text-gray-500">Verb</div>
         <div className="text-lg font-semibold">{currentVerb?.verb}</div>
@@ -254,17 +309,32 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
         </div>
       )}
 
-      {/* Subject reference guide */}
-      <div className="mt-6">
-        <details className="text-sm text-gray-600">
-          <summary className="cursor-pointer select-none font-medium text-gray-700">Subjects reference</summary>
-          <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {subjectCycle.map((s) => (
-              <div key={s} className="px-2 py-1 rounded border text-center bg-white">{s}</div>
-            ))}
+      {/* Keyboard Shortcuts Footer */}
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 bg-gray-50 hidden lg:block mt-4 rounded-md">
+        <div className="flex flex-wrap items-center gap-6 text-xs text-gray-500">
+          <div className="flex items-center gap-1.5">
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">Enter</kbd>
+            <span>Check answer</span>
           </div>
-        </details>
+          <div className="flex items-center gap-1.5">
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">Ctrl</kbd>
+            <span>+</span>
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">↓</kbd>
+            <span>Spin subject</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">Ctrl</kbd>
+            <span>+</span>
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">→</kbd>
+            <span>Next verb</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <kbd className="px-2 py-1 bg-white border border-gray-300 rounded font-mono font-medium">Esc</kbd>
+            <span>Clear input</span>
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };
