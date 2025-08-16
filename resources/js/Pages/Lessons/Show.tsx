@@ -13,6 +13,7 @@ import Matching from "@/Components/Lessons/Exercises/Matching";
 import MultipleChoice from "@/Components/Lessons/Exercises/MultipleChoice";
 import FillInTheBlank from "@/Components/Lessons/Exercises/FillInTheBlank";
 import SentenceOrdering from "@/Components/Lessons/Exercises/SentenceOrdering";
+import VerbConjugationSlot from "@/Components/Lessons/Exercises/VerbConjugationSlot";
 
 interface NavigationItem {
     title: string;
@@ -216,6 +217,16 @@ export default function Show({
                         shuffleTokens={selectedExercise.data?.shuffleTokens ?? true}
                         onComplete={(res) => {
                             console.log("Sentence-ordering completed:", res);
+                        }}
+                    />
+                );
+            case "verb-conjugation":
+                return (
+                    <VerbConjugationSlot
+                        items={selectedExercise.data?.items || []}
+                        subjects={selectedExercise.data?.subjects}
+                        onRoundComplete={(res) => {
+                            console.log("Verb-conjugation round:", res);
                         }}
                     />
                 );
