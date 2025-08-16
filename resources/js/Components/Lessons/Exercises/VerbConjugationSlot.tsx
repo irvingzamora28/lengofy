@@ -43,10 +43,18 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
   const [currentVerb, setCurrentVerb] = useState<ConjugationEntry | null>(null);
   const [spinning, setSpinning] = useState(false);
   const [landedSubject, setLandedSubject] = useState<string | null>(null);
-  const [displaySubject, setDisplaySubject] = useState<string | null>(null); // for animation cycling
+  const [displaySubject, setDisplaySubject] = useState<string | null>(null); // current visible subject when not spinning
   const [answer, setAnswer] = useState('');
   const [result, setResult] = useState<null | { correct: boolean; expected: string }>(null);
-  const spinTimer = useRef<number | null>(null);
+  const spinTimer = useRef<number | null>(null); // legacy, no longer used for rAF spinner
+
+  // Reel animation state
+  const reelRef = useRef<HTMLDivElement | null>(null);
+  const rafId = useRef<number | null>(null);
+  const [reelItems, setReelItems] = useState<string[]>([]);
+  const [reelOffset, setReelOffset] = useState(0); // px offset from top
+  const ITEM_HEIGHT = 56; // px per subject row
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   // Determine the subject set: use provided list, otherwise infer from all items' form keys (stable order)
   const subjectCycle = useMemo(() => {
@@ -73,6 +81,7 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
   useEffect(() => {
     return () => {
       if (spinTimer.current) window.clearInterval(spinTimer.current);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, []);
 
@@ -83,51 +92,44 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
     setLandedSubject(null);
     setSpinning(true);
 
-    let idx = 0;
-    const interval = 80; // ms per tick
-    const total = spinDurationMs;
-    let elapsed = 0;
+    // Build a long reel sequence and choose a final subject to land on
+    const available = subjectCycle.filter((s) => currentVerb.forms[s] !== undefined);
+    const finalSubject = pickRandom(available);
+    const cycles = Math.max(6, Math.ceil(spinDurationMs / 200)); // number of full cycles for visual length
+    const base = Array.from({ length: cycles }, () => available).flat();
+    const sequence = [...base, finalSubject];
+    setReelItems(sequence);
+    setReelOffset(0);
 
-    // accelerate then decelerate feel (simple easing by varying interval length)
-    let currentInterval = interval;
+    // rAF animation with easing
+    const totalDistance = (sequence.length - 1) * ITEM_HEIGHT;
+    const start = performance.now();
 
-    spinTimer.current = window.setInterval(() => {
-      // cycle subject visually
-      setDisplaySubject(subjectCycle[idx % subjectCycle.length]);
-      idx++;
-      elapsed += currentInterval;
-
-      // ease towards end by increasing interval
-      if (elapsed > total * 0.6) {
-        currentInterval = Math.min(currentInterval + 20, 220);
-        if (spinTimer.current) {
-          window.clearInterval(spinTimer.current);
-          spinTimer.current = window.setInterval(() => {
-            setDisplaySubject(subjectCycle[idx % subjectCycle.length]);
-            idx++;
-            elapsed += currentInterval;
-            if (elapsed >= total) {
-              if (spinTimer.current) window.clearInterval(spinTimer.current);
-              // land on a random subject from list that exists in forms
-              const available = subjectCycle.filter((s) => currentVerb.forms[s] !== undefined);
-              const finalSubject = pickRandom(available);
-              setDisplaySubject(finalSubject);
-              setLandedSubject(finalSubject);
-              setSpinning(false);
-            }
-          }, currentInterval);
-        }
-      }
-
-      if (elapsed >= total) {
-        if (spinTimer.current) window.clearInterval(spinTimer.current);
-        const available = subjectCycle.filter((s) => currentVerb.forms[s] !== undefined);
-        const finalSubject = pickRandom(available);
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / spinDurationMs);
+      const eased = easeOutCubic(t);
+      const offset = eased * totalDistance;
+      setReelOffset(offset);
+      if (t < 1) {
+        rafId.current = requestAnimationFrame(step);
+      } else {
+        // Snap to exact end
+        setReelOffset(totalDistance);
         setDisplaySubject(finalSubject);
         setLandedSubject(finalSubject);
         setSpinning(false);
+        // Collapse reel to just the result and reset offset so the word is visible
+        setTimeout(() => {
+          setReelItems([finalSubject]);
+          setReelOffset(0);
+          // Focus input for quick typing
+          inputRef.current?.focus();
+        }, 50);
       }
-    }, currentInterval);
+    };
+    rafId.current = requestAnimationFrame(step);
   };
 
   const checkAnswer = () => {
@@ -153,6 +155,8 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
     setResult(null);
     setLandedSubject(null);
     setDisplaySubject(subjectCycle[0]);
+    setReelItems([]);
+    setReelOffset(0);
   };
 
   const canCheck = !!currentVerb && !!landedSubject && answer.trim().length > 0;
@@ -167,58 +171,74 @@ export const VerbConjugationSlot: React.FC<VerbConjugationSlotProps> = ({
         )}
       </div>
 
-      {/* Slot display */}
-      <div className="relative overflow-hidden rounded-lg border bg-gray-50">
-        <div className="flex items-center justify-center h-20 text-2xl font-bold tracking-wide">
-          {displaySubject ?? '—'}
+      {/* Sentence row: [ Subject Reel ] [ Answer Input ] */}
+      <div className="mt-3 flex items-center gap-2 sm:gap-3 flex-nowrap">
+        {/* Subject reel */}
+        <div className="relative overflow-hidden rounded-md border bg-gray-50 h-14 w-28 sm:w-40 shrink-0">
+          {/* Top/Bottom mask for slot feel */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-white/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-white/80 to-transparent z-10" />
+          <div
+            ref={reelRef}
+            className="will-change-transform"
+            style={{ transform: `translateY(-${reelOffset}px)`, transition: spinning ? 'none' : 'transform 150ms ease-out' }}
+          >
+            {(reelItems.length > 0 ? reelItems : [displaySubject ?? '—']).map((s, i) => (
+              <div key={i} className="h-14 flex items-center justify-center text-lg sm:text-2xl font-bold tracking-wide px-2 text-center truncate">{s}</div>
+            ))}
+          </div>
+          {/* Center marker line */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 m-auto w-full h-0.5 bg-indigo-200/60" />
         </div>
-        <div className="absolute inset-0 pointer-events-none border-y-4 border-transparent" />
-      </div>
 
-      <div className="flex gap-2 mt-4">
-        <button
-          type="button"
-          onClick={startSpin}
-          disabled={spinning}
-          className={`px-4 py-2 rounded-md text-white ${spinning ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}
-        >
-          {spinning ? 'Spinning…' : 'Spin Subject'}
-        </button>
-
-        <button
-          type="button"
-          onClick={nextRound}
-          disabled={spinning}
-          className={`px-4 py-2 rounded-md border ${spinning ? 'bg-white text-gray-400 border-gray-200' : 'bg-white hover:bg-gray-50'}`}
-        >
-          Next Verb
-        </button>
-      </div>
-
-      {/* Answer input */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-700 mb-1">Your conjugation</label>
+        {/* Answer input inline to form a sentence */}
         <input
           type="text"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
           disabled={!landedSubject || spinning}
           placeholder={landedSubject ? `Type the form for "${landedSubject}"` : 'Spin to get a subject'}
-          className="w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-base sm:text-lg py-2"
+          ref={inputRef}
         />
-        <div className="text-xs text-gray-500 mt-1">Exact match (case-insensitive, accent-insensitive)</div>
       </div>
 
-      <div className="mt-3 flex gap-2">
-        <button
-          type="button"
-          onClick={checkAnswer}
-          disabled={!canCheck || spinning}
-          className={`px-4 py-2 rounded-md text-white ${canCheck && !spinning ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-gray-400'}`}
-        >
-          Check
-        </button>
+      {/* Hint under the sentence row */}
+      <div className="text-xs text-gray-500 mt-1">Exact match (case-insensitive, accent-insensitive)</div>
+
+      {/* Compact toolbar */}
+      <div className="mt-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={startSpin}
+            disabled={spinning}
+            className={`px-3 py-1.5 rounded-md text-sm text-white ${spinning ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+          >
+            {spinning ? 'Spinning…' : 'Spin'}
+          </button>
+          <button
+            type="button"
+            onClick={nextRound}
+            disabled={spinning}
+            className={`px-3 py-1.5 rounded-md text-sm border ${spinning ? 'bg-white text-gray-400 border-gray-200' : 'bg-white hover:bg-gray-50'}`}
+          >
+            Next
+          </button>
+        </div>
+        <div className="flex items-center">
+          <button
+            type="button"
+            onClick={checkAnswer}
+            disabled={!canCheck || spinning}
+            className={`px-3 py-1.5 rounded-md text-sm text-white ${canCheck && !spinning ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-gray-400'}`}
+          >
+            Check
+          </button>
+        </div>
       </div>
+
+      {/* End toolbar */}
 
       {/* Feedback */}
       {result && (
