@@ -240,6 +240,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/lessons/progress', [LessonController::class, 'progress'])->name('lessons.progress');
     Route::get('/lessons/search', [LessonController::class, 'search'])->name('lessons.search');
     Route::get('/lessons/{level}/{lesson_number}', [LessonController::class, 'show'])->name('lessons.show');
+    // Dedicated practice page (Exercises UI)
+    Route::get('/lessons/{level}/{lesson_number}/practice', [LessonController::class, 'practice'])
+        ->name('lessons.practice');
     // Lesson exercises API
     Route::get('/lessons/{level}/{lesson_number}/exercises', [LessonController::class, 'exercises'])->name('lessons.exercises.index');
     Route::get('/lessons/{level}/{lesson_number}/exercises/{exercise}', [LessonController::class, 'showExercise'])->name('lessons.exercises.show');

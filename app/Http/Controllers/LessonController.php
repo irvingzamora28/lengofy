@@ -167,6 +167,62 @@ class LessonController extends Controller
         ]);
     }
 
+    /**
+     * Dedicated practice page for a lesson (Exercises UI only)
+     */
+    public function practice($level, $lesson_number)
+    {
+        $user = auth()->user();
+        $languagePair = $user->languagePair;
+
+        $lessonData = DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id)
+            ->where('lesson_number', $lesson_number)
+            ->first();
+
+        if (!$lessonData) {
+            abort(404);
+        }
+
+        // For header navigation consistency
+        $allLessons = DB::table('lessons')
+            ->where('language_pair_id', $languagePair->id)
+            ->where('level', $lessonData->level)
+            ->get();
+        $currentIndex = array_search($lesson_number, array_column($allLessons->toArray(), 'lesson_number'));
+        $previousLesson = $currentIndex > 0 ? $allLessons[$currentIndex - 1] : null;
+        $nextLesson = $currentIndex < count($allLessons) - 1 ? $allLessons[$currentIndex + 1] : null;
+
+        $progress = LessonProgress::firstOrCreate(
+            [
+                'user_id' => auth()->id(),
+                'language_pair_id' => $languagePair->id,
+                'level' => $level,
+                'lesson_number' => $lesson_number,
+            ]
+        );
+
+        return Inertia::render('Lessons/Practice', [
+            'languagePairName' => $languagePair->sourceLanguage->name . ' → ' . $languagePair->targetLanguage->name,
+            'level' => $lessonData->level,
+            'lesson_number' => $lesson_number,
+            'title' => $lessonData->title,
+            // Provide target language special characters for exercises
+            'specialCharacters' => $languagePair->targetLanguage->special_characters ?? [],
+            'progress' => $progress->only(['completed', 'completed_at']),
+            'navigation' => [
+                'previous' => $previousLesson ? [
+                    'title' => $previousLesson->title,
+                    'lesson_number' => $previousLesson->lesson_number,
+                ] : null,
+                'next' => $nextLesson ? [
+                    'title' => $nextLesson->title,
+                    'lesson_number' => $nextLesson->lesson_number,
+                ] : null,
+            ],
+        ]);
+    }
+
     public function markComplete(string $level, int $lesson_number)
     {
         $validator = Validator::make(
