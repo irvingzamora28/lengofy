@@ -157,7 +157,7 @@ const Matching: React.FC<MatchingProps> = ({
     };
 
     return (
-        <div className={`space-y-4 pb-24 md:pb-0 ${className}`}>
+        <div className={`relative space-y-4 pb-24 md:pb-0 ${className}`}>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                 <div className="min-w-0">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 break-words">{title}</h3>
@@ -253,8 +253,8 @@ const Matching: React.FC<MatchingProps> = ({
                 </div>
             </div>
 
-            {/* Mobile sticky right-options scroller */}
-            <div className="md:hidden fixed inset-x-0 bottom-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-gray-900/80">
+            {/* Mobile options scroller (scoped to component) */}
+            <div className="md:hidden absolute inset-x-0 bottom-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-gray-900/80">
                 <div className="px-3 pt-2">
                     <div className="flex items-center justify-between mb-2">
                         <h4 className="text-xs font-medium text-gray-600 dark:text-gray-300">English options</h4>
