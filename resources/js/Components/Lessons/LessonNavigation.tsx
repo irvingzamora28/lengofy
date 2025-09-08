@@ -22,16 +22,18 @@ const LessonNavigation: React.FC<LessonNavigationProps> = ({
     isCompleted
 }) => {
     return (
-        <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
-            <div className="flex items-center justify-between">
-                <div className="flex-1">
+        <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div className="flex items-center justify-between gap-2 overflow-hidden px-1">
+                {/* Previous */}
+                <div className="min-w-0 flex-1 basis-0">
                     {previous && (
                         <Link
                             href={`/lessons/${level}/${previous.lesson_number}`}
-                            className="group flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                            aria-label={`Go to previous lesson: ${previous.title}`}
+                            className="group inline-flex max-w-full items-center text-sm font-medium text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
                         >
                             <svg
-                                className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                className="mr-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
@@ -42,16 +44,18 @@ const LessonNavigation: React.FC<LessonNavigationProps> = ({
                                     clipRule="evenodd"
                                 />
                             </svg>
-                            {previous.title}
+                            <span className="truncate block w-full">{previous.title}</span>
                         </Link>
                     )}
                 </div>
 
-                <div className="flex-1 text-center">
+                {/* Complete button */}
+                <div className="shrink-0">
                     <button
                         onClick={onComplete}
                         disabled={isCompleted}
-                        className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm ${
+                        aria-label={isCompleted ? 'Lesson completed' : 'Mark lesson as complete'}
+                        className={`inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm ${
                             isCompleted
                                 ? 'bg-green-600 text-white cursor-default'
                                 : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -79,15 +83,17 @@ const LessonNavigation: React.FC<LessonNavigationProps> = ({
                     </button>
                 </div>
 
-                <div className="flex-1 text-right">
+                {/* Next */}
+                <div className="min-w-0 flex-1 basis-0 text-right">
                     {next && (
                         <Link
                             href={`/lessons/${level}/${next.lesson_number}`}
-                            className="group flex items-center justify-end text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                            aria-label={`Go to next lesson: ${next.title}`}
+                            className="group inline-flex max-w-full items-center justify-end text-sm font-medium text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
                         >
-                            {next.title}
+                            <span className="truncate block w-full text-right">{next.title}</span>
                             <svg
-                                className="ml-3 h-5 w-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                className="ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
