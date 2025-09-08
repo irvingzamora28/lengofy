@@ -336,7 +336,7 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({
                 <button
                   key={id}
                   type="button"
-                  className="rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-2 py-1 shadow-sm hover:shadow"
+                  className="rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-2 py-1 shadow-sm hover:shadow text-gray-800 dark:text-gray-100"
                   onClick={() => addToken(id)}
                 >
                   {tok.text}

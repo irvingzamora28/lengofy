@@ -202,7 +202,7 @@ const Matching: React.FC<MatchingProps> = ({
                                             ? "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 text-gray-400 cursor-not-allowed"
                                             : isSelected
                                                 ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-400 text-blue-800 dark:text-blue-200"
-                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"}
+                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"}
                                     `}
                                 >
                                     <span>{item.text}</span>
@@ -237,7 +237,7 @@ const Matching: React.FC<MatchingProps> = ({
                                             ? "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 text-gray-400 cursor-not-allowed"
                                             : isSelected
                                                 ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-400 text-blue-800 dark:text-blue-200"
-                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"}
+                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"}
                                     `}
                                 >
                                     <span>{item.text}</span>
@@ -279,7 +279,7 @@ const Matching: React.FC<MatchingProps> = ({
                                             ? "bg-gray-100 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 text-gray-400 cursor-not-allowed"
                                             : isSelected
                                                 ? "bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-400 text-blue-800 dark:text-blue-200"
-                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"}
+                                                : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"}
                                     `}
                                 >
                                     <span className="whitespace-nowrap">{item.text}</span>
