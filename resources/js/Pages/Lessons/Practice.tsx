@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Head, Link } from "@inertiajs/react";
-import { FiBook } from "react-icons/fi";
-import { FaPuzzlePiece } from "react-icons/fa";
+import { FiBook, FiLink, FiList, FiEdit3 } from "react-icons/fi";
+import { FaPuzzlePiece, FaLanguage } from "react-icons/fa";
+import { MdFormatListNumbered } from "react-icons/md";
 import LessonQuickAccessMobile from "@/Components/Lessons/LessonQuickAccessMobile";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import LessonNavigation from "@/Components/Lessons/LessonNavigation";
@@ -43,6 +44,23 @@ interface Props extends PageProps {
   };
   specialCharacters?: string[];
 }
+
+const getExerciseIcon = (type: string) => {
+  switch (type) {
+    case "matching":
+      return <FiLink className="h-6 w-6" />;
+    case "multiple-choice":
+      return <FiList className="h-6 w-6" />;
+    case "fill-in-the-blank":
+      return <FiEdit3 className="h-6 w-6" />;
+    case "sentence-ordering":
+      return <MdFormatListNumbered className="h-6 w-6" />;
+    case "verb-conjugation":
+      return <FaLanguage className="h-6 w-6" />;
+    default:
+      return <FaPuzzlePiece className="h-6 w-6" />;
+  }
+};
 
 export default function Practice({
   title,
@@ -242,38 +260,75 @@ export default function Practice({
             ) : exercisesError ? (
               <div className="text-red-600 dark:text-red-400">{exercisesError}</div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {exercises.map((ex) => {
-                  const isActive = selectedExerciseId === ex.id;
-                  return (
-                    <button
-                      key={ex.id}
-                      onClick={() => selectExercise(ex.id)}
-                      className={
-                        "text-left rounded-lg border transition-shadow p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 " +
-                        (isActive
-                          ? "border-primary-500 shadow"
-                          : "border-gray-200 dark:border-gray-700 hover:shadow")
-                      }
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-700 px-2 py-1 font-medium text-gray-700 dark:text-gray-300">
-                          {ex.type}
-                        </span>
-                        {isActive && (
-                          <span className="text-primary-600 text-xs">Selected</span>
+              <>
+                {/* Mobile: grid of square icon buttons */}
+                <div className="sm:hidden -mx-1">
+                  <div className="grid grid-cols-8 gap-1 px-1">
+                    {exercises.map((ex, idx) => {
+                      const isActive = selectedExerciseId === ex.id;
+                      return (
+                        <button
+                          key={ex.id}
+                          onClick={() => selectExercise(ex.id)}
+                          className={
+                            "relative aspect-square rounded-md border flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 " +
+                            (isActive
+                              ? "bg-primary-600 text-white border-primary-600"
+                              : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700")
+                          }
+                          aria-pressed={isActive}
+                          aria-label={`Select exercise ${idx + 1}: ${ex.title}`}
+                          title={ex.title}
+                        >
+                          <div className={"flex items-center justify-center " + (isActive ? "text-white" : "text-gray-600 dark:text-gray-300")}>
+                            {/* smaller icon for compact UI */}
+                            {(() => {
+                              const icon = getExerciseIcon(ex.type);
+                              // override size via Tailwind classes on wrapper
+                              return <div className="[&>*]:h-5 [&>*]:w-5">{icon}</div>;
+                            })()}
+                          </div>
+                          <span className={"absolute top-1 right-1 text-[10px] leading-none px-1 rounded " + (isActive ? "text-white/90" : "text-gray-500 dark:text-gray-300/80")}>{idx + 1}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Desktop/Tablet: existing grid of cards */}
+                <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  {exercises.map((ex) => {
+                    const isActive = selectedExerciseId === ex.id;
+                    return (
+                      <button
+                        key={ex.id}
+                        onClick={() => selectExercise(ex.id)}
+                        className={
+                          "text-left rounded-lg border transition-shadow p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 " +
+                          (isActive
+                            ? "border-primary-500 shadow"
+                            : "border-gray-200 dark:border-gray-700 hover:shadow")
+                        }
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-700 px-2 py-1 font-medium text-gray-700 dark:text-gray-300">
+                            {ex.type}
+                          </span>
+                          {isActive && (
+                            <span className="text-primary-600 text-xs">Selected</span>
+                          )}
+                        </div>
+                        <h4 className="mt-2 font-semibold text-gray-900 dark:text-gray-100">{ex.title}</h4>
+                        {ex.instructions && (
+                          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+                            {ex.instructions}
+                          </p>
                         )}
-                      </div>
-                      <h4 className="mt-2 font-semibold text-gray-900 dark:text-gray-100">{ex.title}</h4>
-                      {ex.instructions && (
-                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
-                          {ex.instructions}
-                        </p>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
             )}
 
             {selectedExerciseId !== null && (
