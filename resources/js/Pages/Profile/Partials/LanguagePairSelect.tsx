@@ -44,7 +44,7 @@ export default function LanguagePairSelect({
             <div className="mt-1 relative">
                 <Select
                     id="language_pair_id"
-                    className="block w-full pl-10 pr-10"
+                    className="block w-full pl-10 pr-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-primary-500 focus:border-primary-500"
                     value={currentValue}
                     onChange={(e) => onChange(e.target.value)}
                     required
@@ -58,7 +58,7 @@ export default function LanguagePairSelect({
             </div>
 
             {/* Helper Text */}
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 {currentPair
                     ? getHelperText(currentPair.sourceLanguage.code, currentPair.sourceLanguage.name, currentPair.targetLanguage.name)
                     : helperLanguagePairSelectText[currentValue]

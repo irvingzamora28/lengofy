@@ -52,7 +52,7 @@ export default function UpdateGameSettingsForm({
                                     id="gender_duel_difficulty"
                                     value={data.gender_duel_difficulty}
                                     onChange={(e) => setData('gender_duel_difficulty', e.target.value)}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 dark:bg-gray-800 dark:border-gray-700"
+                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-50 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 dark:border-gray-700"
                                 >
                                     <option value="easy">Easy</option>
                                     <option value="medium">Medium</option>
@@ -137,7 +137,7 @@ export default function UpdateGameSettingsForm({
                                 id="word_search_puzzle_difficulty"
                                 value={data.word_search_puzzle_difficulty}
                                 onChange={(e) => setData('word_search_puzzle_difficulty', e.target.value)}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 dark:bg-gray-800 dark:border-gray-700"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-50 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 dark:border-gray-700"
                             >
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>

@@ -95,7 +95,7 @@ export default function UpdateProfileInformation({
                                         href={route('verification.send')}
                                         method="post"
                                         as="button"
-                                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                        className="underline text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800"
                                     >
                                         Click here to re-send the verification email.
                                     </Link>
@@ -128,7 +128,7 @@ export default function UpdateProfileInformation({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Saved.</p>
                     </Transition>
                 </div>
             </form>
