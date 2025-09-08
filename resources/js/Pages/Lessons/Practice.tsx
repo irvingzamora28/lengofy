@@ -249,7 +249,7 @@ export default function Practice({
         current="practice"
       />
 
-      <div className="py-12">
+      <div className="py-0 sm:py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
@@ -345,7 +345,7 @@ export default function Practice({
           </div>
 
           {/* Navigation footer */}
-          <div className="mt-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+          <div className="mt-6 mb-16 sm:mb-0 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
             <LessonNavigation
               previous={navigation.previous}
               next={navigation.next}
