@@ -1,0 +1,113 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Articles to Nouns (Singular)",
+      "instructions": "Match each Spanish noun with its correct definite article (singular).",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "___ libro", "right": "el" },
+          { "left": "___ mesa", "right": "la" },
+          { "left": "___ problema", "right": "el" },
+          { "left": "___ canción", "right": "la" },
+          { "left": "___ mapa", "right": "el" },
+          { "left": "___ mano", "right": "la" },
+          { "left": "___ agua (fría)", "right": "el" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Choose the Correct Article",
+      "instructions": "Select the correct definite article.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "___ casas (houses)",
+            "choices": [
+              { "text": "las", "correct": true },
+              { "text": "los", "correct": false },
+              { "text": "la", "correct": false }
+            ],
+            "explanation": "Feminine plural → las casas."
+          },
+          {
+            "prompt": "___ perros (dogs)",
+            "choices": [
+              { "text": "los", "correct": true },
+              { "text": "las", "correct": false },
+              { "text": "el", "correct": false }
+            ],
+            "explanation": "Masculine plural → los perros."
+          },
+          {
+            "prompt": "___ águila (hermosa)",
+            "choices": [
+              { "text": "el", "correct": true },
+              { "text": "la", "correct": false },
+              { "text": "los", "correct": false }
+            ],
+            "explanation": "Feminine noun with stressed 'a' takes 'el' in singular; adjective stays feminine: el águila hermosa."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Complete with the Correct Article (Definite/Indefinite)",
+      "instructions": "Fill in the missing article.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "___ problema es difícil.", "blanks": [ { "answer": "El" } ], "explanation": "'problema' is masculine (Greek origin)." },
+          { "text": "Quiero ___ manzana.", "blanks": [ { "answer": "una" } ], "explanation": "Indefinite feminine singular." },
+          { "text": "Hay ___ mapas en la clase.", "blanks": [ { "answer": "unos" } ], "explanation": "Indefinite masculine plural." },
+          { "text": "___ aguas claras.", "blanks": [ { "answer": "Las" } ], "explanation": "Plural feminine → las aguas (no special 'el' rule in plural)." }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order with Agreement (Plural & Adjectives)",
+      "instructions": "Arrange the tokens to form a grammatically correct sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "Los coches rojos.", "tokens": ["coches", "rojos", "Los", "."], "explanation": "Article + noun + adjective (masc. plural)." },
+          { "target": "Las camisas blancas.", "tokens": ["Las", "camisas", "blancas", "."], "explanation": "Feminine plural agreement." },
+          { "target": "Unos árboles altos.", "tokens": ["árboles", "Unos", "altos", "."], "explanation": "Indefinite article plural + noun + adjective." }
+        ],
+        "shuffleTokens": true
+      }
+    },
+    {
+      "type": "matching",
+      "title": "Match: Article Type to Example",
+      "instructions": "Match each description to a correct example.",
+      "order": 5,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "Definite masc. singular", "right": "el libro" },
+          { "left": "Definite fem. plural", "right": "las casas" },
+          { "left": "Indefinite fem. singular", "right": "una mesa" },
+          { "left": "Indefinite masc. plural", "right": "unos cuadernos" },
+          { "left": "Indefinite fem. plural", "right": "unas flores" }
+        ],
+        "shuffle": true
+      }
+    }
+  ]
+}

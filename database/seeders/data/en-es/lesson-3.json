@@ -1,0 +1,118 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Numbers 1–10 (ES ⇄ EN)",
+      "instructions": "Match each Spanish number with its English meaning.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "uno", "right": "one" },
+          { "left": "dos", "right": "two" },
+          { "left": "tres", "right": "three" },
+          { "left": "cuatro", "right": "four" },
+          { "left": "cinco", "right": "five" },
+          { "left": "seis", "right": "six" },
+          { "left": "siete", "right": "seven" },
+          { "left": "ocho", "right": "eight" },
+          { "left": "nueve", "right": "nine" },
+          { "left": "diez", "right": "ten" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Choose the Right Color",
+      "instructions": "Select the best option for each context.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "Banana color",
+            "choices": [
+              { "text": "amarillo", "correct": true },
+              { "text": "azul", "correct": false },
+              { "text": "negro", "correct": false }
+            ],
+            "explanation": "Bananas are typically yellow (amarillo)."
+          },
+          {
+            "prompt": "The sky on a sunny day",
+            "choices": [
+              { "text": "azul", "correct": true },
+              { "text": "rojo", "correct": false },
+              { "text": "marrón", "correct": false }
+            ],
+            "explanation": "The sky is blue (azul)."
+          },
+          {
+            "prompt": "Coal color",
+            "choices": [
+              { "text": "negro", "correct": true },
+              { "text": "verde", "correct": false },
+              { "text": "blanco", "correct": false }
+            ],
+            "explanation": "Coal is black (negro)."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Complete the Days of the Week",
+      "instructions": "Fill in the missing word.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "Lunes, martes, ______, jueves...", "blanks": [ { "answer": "miércoles" } ], "explanation": "Days in order: lunes, martes, miércoles, jueves." },
+          { "text": "Hoy es ______. (Friday)", "blanks": [ { "answer": "viernes" } ], "explanation": "Translate Friday → viernes." },
+          { "text": "El fin de semana: sábado y ______.", "blanks": [ { "answer": "domingo" } ], "explanation": "Weekend days: sábado y domingo." }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order the Sentence (Colors & Days)",
+      "instructions": "Arrange the tokens to form the sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "El coche es rojo.", "tokens": ["coche", "rojo", "es", "El", "."], "explanation": "Basic SVO with ser + adjective." },
+          { "target": "Hoy es lunes.", "tokens": ["Hoy", "es", "lunes", "."], "explanation": "Time/date with ser." },
+          { "target": "Tengo tres libros.", "tokens": ["libros", "tres", "Tengo", "."], "explanation": "Number before noun (tres libros)." }
+        ],
+        "shuffleTokens": true
+      }
+    },
+    {
+      "type": "matching",
+      "title": "Match: Colors (ES ⇄ EN)",
+      "instructions": "Match each color with its English meaning.",
+      "order": 5,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "rojo", "right": "red" },
+          { "left": "azul", "right": "blue" },
+          { "left": "verde", "right": "green" },
+          { "left": "amarillo", "right": "yellow" },
+          { "left": "negro", "right": "black" },
+          { "left": "blanco", "right": "white" },
+          { "left": "marrón", "right": "brown" },
+          { "left": "gris", "right": "gray" }
+        ],
+        "shuffle": true
+      }
+    }
+  ]
+}

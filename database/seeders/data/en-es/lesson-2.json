@@ -1,0 +1,96 @@
+{
+  "exercises": [
+    {
+      "type": "matching",
+      "title": "Match: Greetings and Phrases (ES ⇄ EN)",
+      "instructions": "Match each Spanish phrase with its English meaning.",
+      "order": 1,
+      "is_active": true,
+      "data": {
+        "pairs": [
+          { "left": "Hola", "right": "Hello" },
+          { "left": "Adiós", "right": "Goodbye" },
+          { "left": "Buenos días", "right": "Good morning" },
+          { "left": "Buenas tardes", "right": "Good afternoon" },
+          { "left": "Buenas noches", "right": "Good evening / Good night" },
+          { "left": "¿Cómo estás?", "right": "How are you? (informal)" },
+          { "left": "¿Cómo está?", "right": "How are you? (formal)" }
+        ],
+        "shuffle": true
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Choose the Right Greeting",
+      "instructions": "Select the best option for each situation.",
+      "order": 2,
+      "is_active": true,
+      "data": {
+        "questions": [
+          {
+            "prompt": "08:30, meeting a client (formal)",
+            "choices": [
+              { "text": "Buenos días", "correct": true },
+              { "text": "Hola", "correct": false },
+              { "text": "Buenas noches", "correct": false }
+            ],
+            "explanation": "Use a morning and more formal greeting."
+          },
+          {
+            "prompt": "Leaving a friend after lunch",
+            "choices": [
+              { "text": "Adiós", "correct": true },
+              { "text": "Buenas noches", "correct": false },
+              { "text": "¿Cómo está?", "correct": false }
+            ],
+            "explanation": "'Adiós' works any time of day for goodbye."
+          },
+          {
+            "prompt": "Greeting classmates right after 2pm",
+            "choices": [
+              { "text": "Buenas tardes", "correct": true },
+              { "text": "Buenos días", "correct": false },
+              { "text": "Buenas noches", "correct": false }
+            ],
+            "explanation": "Use 'Buenas tardes' for afternoon."
+          }
+        ],
+        "shuffleQuestions": true,
+        "shuffleChoices": true
+      }
+    },
+    {
+      "type": "fill-in-the-blank",
+      "title": "Complete the Greetings",
+      "instructions": "Fill in the missing word.",
+      "order": 3,
+      "is_active": true,
+      "data": {
+        "sentences": [
+          { "text": "¿Cómo ____? (informal)", "blanks": [ { "answer": "estás" } ], "explanation": "Informal second person singular." },
+          { "text": "Buenas ____", "blanks": [ { "answer": "tardes" } ], "explanation": "Use 'tardes' for afternoon." },
+          { "text": "Buenas ____", "blanks": [ { "answer": "noches" } ], "explanation": "Use 'noches' for evening/night." },
+          { "text": "Buenos ____", "blanks": [ { "answer": "días" } ], "explanation": "Use 'días' in the morning." }
+        ],
+        "shuffleSentences": false,
+        "caseSensitive": false,
+        "trimWhitespace": true
+      }
+    },
+    {
+      "type": "sentence-ordering",
+      "title": "Order the Introduction",
+      "instructions": "Arrange the tokens to form the sentence.",
+      "order": 4,
+      "is_active": true,
+      "data": {
+        "items": [
+          { "target": "Me llamo Ana.", "tokens": ["llamo", "Me", "Ana", "."], "explanation": "'Me llamo' + name." },
+          { "target": "Mucho gusto.", "tokens": ["gusto", "Mucho", "."], "explanation": "Fixed expression: 'Mucho gusto.'" },
+          { "target": "¿Cómo te llamas?", "tokens": ["Cómo", "¿", "te", "llamas", "?"], "explanation": "Question order: ¿Cómo + te llamas?" }
+        ],
+        "shuffleTokens": true
+      }
+    }
+  ]
+}
