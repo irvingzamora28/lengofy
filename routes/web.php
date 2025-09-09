@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
+use App\Http\Controllers\VerbConjugationSlotGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
@@ -14,6 +15,7 @@ use App\Models\LanguagePair;
 use App\Models\Score;
 use App\Models\Game;
 use App\Models\GenderDuelGame;
+use App\Models\VerbConjugationSlotGame;
 use App\Models\MemoryTranslationGame;
 use App\Services\LanguageService;
 use App\Services\LessonService;
@@ -87,6 +89,33 @@ Route::middleware(['guest'])->group(function () {
         ]);
     })->name('gender-duel.play');
 
+    Route::get('/verb-conjugation-slot', function (LanguageService $languageService) {
+        $locale = app()->getLocale();
+        return Inertia::render('VerbConjugationSlotGame/Landing', [
+            'languagePairs' => LanguagePair::where('is_active', true)
+                ->with(['sourceLanguage', 'targetLanguage'])
+                ->get()
+                ->mapWithKeys(function ($pair) use ($languageService) {
+                    return [
+                        $pair->id => [
+                            'id' => $pair->id,
+                            'sourceLanguage' => [
+                                'code' => $pair->sourceLanguage->code,
+                                'name' => $pair->sourceLanguage->name,
+                                'flag' => $languageService->getFlag($pair->sourceLanguage->code),
+                            ],
+                            'targetLanguage' => [
+                                'code' => $pair->targetLanguage->code,
+                                'name' => $pair->targetLanguage->name,
+                                'flag' => $languageService->getFlag($pair->targetLanguage->code),
+                            ],
+                        ],
+                    ];
+                })->all(),
+            'locale' => $locale
+        ]);
+    })->name('verb-conjugation-slot.play');
+
     Route::get('/memory-translation', function (LanguageService $languageService) {
         $locale = app()->getLocale();
         return Inertia::render('MemoryTranslationGame/Landing', [
@@ -138,6 +167,18 @@ Route::middleware(['guest'])->group(function () {
             'languagePairId' => $game->language_pair_id,
         ]);
     })->name('games.gender-duel.invite');
+
+    Route::get('/games/verb-conjugation-slot/{verbConjugationSlotGame}/invite', function ($verbConjugationSlotGame) {
+        $game = VerbConjugationSlotGame::findOrFail($verbConjugationSlotGame);
+        return Inertia::render('Games/GuestInvitation', [
+            'gameName' => 'Verb Conjugation Slot Machine',
+            'gameRoute' => 'games.verb-conjugation-slot.join-from-invite',
+            'gameId' => $game->id,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'languagePairId' => $game->language_pair_id,
+        ]);
+    })->name('games.verb-conjugation-slot.invite');
 });
 
 Route::get('/dashboard', function (LessonService $lessonService) {
@@ -181,7 +222,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/game-settings/{redirectRoute?}', [ProfileController::class, 'updateGameSettings'])
         ->name('profile.game-settings.update');
-        
+
     // Feedback route
     Route::post('/feedback', [\App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store');
 
@@ -291,12 +332,16 @@ Route::prefix('games')->group(function () {
         ->name('games.memory-translation.show');
 
     Route::get('/gender-duel/{genderDuelGame:id}', [GenderDuelGameController::class, 'show'])
-    ->middleware(EnsurePlayerInGame::class)
-    ->name('games.gender-duel.show');
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.gender-duel.show');
 
     Route::get('/word-search-puzzle/{wordSearchPuzzleGame:id}', [WordSearchPuzzleGameController::class, 'show'])
-    ->middleware(EnsurePlayerInGame::class)
-    ->name('games.word-search-puzzle.show');
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.word-search-puzzle.show');
+
+    Route::get('/verb-conjugation-slot/{verbConjugationSlotGame:id}', [VerbConjugationSlotGameController::class, 'show'])
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.verb-conjugation-slot.show');
 });
 
 // Guest user routes
