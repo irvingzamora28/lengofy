@@ -11,26 +11,26 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class ImportVerbs extends Command
+class ImportConjugations extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'verbs:import {language : Language code (e.g., de, es, en)} {dir : Directory containing pronouns.json, tenses.json, verbs.json, conjugations.json}';
+    protected $signature = 'conjugations:import {language : Language code (e.g., de, es, en)}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import pronouns, tenses, verbs and conjugations for a language from JSON files';
+    protected $description = 'Import conjugations (and required pronouns, tenses, verbs) for a language from JSON files';
 
     public function handle(): int
     {
         $langCode = (string) $this->argument('language');
-        $dir = rtrim((string) $this->argument('dir'), DIRECTORY_SEPARATOR);
+        $dir = base_path('database/seeds/verbs/' . $langCode . '/conjugations');
 
         if (!is_dir($dir)) {
             $this->error("Directory not found: {$dir}");
@@ -57,7 +57,7 @@ class ImportVerbs extends Command
             return self::FAILURE;
         }
 
-        $this->info("Importing language '{$language->name}' ({$language->code}) from {$dir} ...");
+        $this->info("Importing conjugations for '{$language->name}' ({$language->code}) from fixed directory: {$dir} ...");
 
         $pronouns = $this->readJson($paths['pronouns']);
         $tenses = $this->readJson($paths['tenses']);

@@ -1,15 +1,15 @@
-# Verbs Import Command
+# Conjugations Import Command
 
-This document describes how to import pronouns, tenses, verbs, and conjugations using the Artisan command added for Issue #25.
+This document describes how to import pronouns, tenses, verbs, and conjugations using the Artisan command.
 
 ## Usage
 
 ```bash
-php artisan verbs:import {language} {dir}
+php artisan conjugations:import {language}
 ```
 
 - `language`: the language code, e.g., `de`, `es`, `en` (must exist in `languages` table)
-- `dir`: directory path that contains four JSON files:
+- Directory is inferred as: `database/seeds/verbs/{language}/conjugations/` and must contain:
   - `pronouns.json`
   - `tenses.json`
   - `verbs.json`
@@ -18,9 +18,9 @@ php artisan verbs:import {language} {dir}
 Example:
 
 ```bash
-php artisan verbs:import de database/seeds/verbs/de
-php artisan verbs:import es database/seeds/verbs/es
-php artisan verbs:import en database/seeds/verbs/en
+php artisan conjugations:import de
+php artisan conjugations:import es
+php artisan conjugations:import en
 ```
 
 The importer will:
