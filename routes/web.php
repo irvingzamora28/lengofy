@@ -265,6 +265,18 @@ Route::middleware('auth')->group(function () {
             Route::get('/practice', [WordSearchPuzzleGameController::class, 'practice'])->name('practice');
             Route::get('/get-words', [WordSearchPuzzleGameController::class, 'getWords'])->name('get-words');
         });
+
+        // Verb Conjugation Slot Machine routes
+        Route::prefix('verb-conjugation-slot')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
+            Route::get('/', [VerbConjugationSlotGameController::class, 'lobby'])->name('games.verb-conjugation-slot.lobby');
+            Route::post('/', [VerbConjugationSlotGameController::class, 'create'])->name('games.verb-conjugation-slot.create');
+            Route::get('/practice', [VerbConjugationSlotGameController::class, 'practice'])->name('games.verb-conjugation-slot.practice');
+            Route::get('/get-prompts', [VerbConjugationSlotGameController::class, 'getPrompts'])->name('games.verb-conjugation-slot.get-prompts');
+            Route::get('/{verbConjugationSlotGame}/join-from-invite', [VerbConjugationSlotGameController::class, 'joinFromInvite'])->name('games.verb-conjugation-slot.join-from-invite');
+            Route::post('/{verbConjugationSlotGame}/join', [VerbConjugationSlotGameController::class, 'join'])->name('games.verb-conjugation-slot.join');
+            Route::post('/{verbConjugationSlotGame}/ready', [VerbConjugationSlotGameController::class, 'ready'])->name('games.verb-conjugation-slot.ready');
+            Route::delete('/{verbConjugationSlotGame}/leave', [VerbConjugationSlotGameController::class, 'leave'])->name('games.verb-conjugation-slot.leave');
+        });
     });
 
     // Score routes
