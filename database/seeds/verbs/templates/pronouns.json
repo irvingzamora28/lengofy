@@ -1,0 +1,20 @@
+[
+  {
+    "language": "de",
+    "code": "ich",
+    "display": "ich",
+    "person": 1,
+    "number": "sg",
+    "is_polite": false,
+    "order_index": 0
+  },
+  {
+    "language": "de",
+    "code": "du",
+    "display": "du",
+    "person": 2,
+    "number": "sg",
+    "is_polite": false,
+    "order_index": 1
+  }
+]
