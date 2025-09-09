@@ -1,0 +1,6 @@
+[
+  { "language": "de", "code": "de.pres.ind",  "name": "Präsens",  "is_compound": false, "order_index": 0 },
+  { "language": "de", "code": "de.perf.ind",  "name": "Perfekt",  "is_compound": true,  "order_index": 1 },
+  { "language": "de", "code": "de.praet.ind", "name": "Präteritum", "is_compound": false, "order_index": 2 },
+  { "language": "de", "code": "de.fut.ind", "name": "Futur", "is_compound": false, "order_index": 3 }
+]

@@ -1,0 +1,10 @@
+[
+  { "language": "es", "code": "yo",       "display": "yo",       "person": 1, "number": "sg", "is_polite": false, "order_index": 0 },
+  { "language": "es", "code": "tú",       "display": "tú",       "person": 2, "number": "sg", "is_polite": false, "order_index": 1 },
+  { "language": "es", "code": "él",       "display": "él",       "person": 3, "number": "sg", "is_polite": false, "order_index": 2 },
+  { "language": "es", "code": "ella",     "display": "ella",     "person": 3, "number": "sg", "is_polite": false, "order_index": 3 },
+  { "language": "es", "code": "nosotros", "display": "nosotros", "person": 1, "number": "pl", "is_polite": false, "order_index": 4 },
+  { "language": "es", "code": "ellos",    "display": "ellos",    "person": 3, "number": "pl", "is_polite": false, "order_index": 5 },
+  { "language": "es", "code": "ustedes",  "display": "ustedes",  "person": 3, "number": "pl", "is_polite": false, "order_index": 6 },
+  { "language": "es", "code": "usted",    "display": "usted",    "person": 3, "number": "sg", "is_polite": true,  "order_index": 7 }
+]

@@ -1,0 +1,6 @@
+[
+  { "language": "es", "code": "es.pres.ind", "name": "Presente",              "is_compound": false, "order_index": 0 },
+  { "language": "es", "code": "es.perf.ind", "name": "Pretérito perfecto",   "is_compound": true,  "order_index": 1 },
+  { "language": "es", "code": "es.pret.ind", "name": "Pretérito indefinido", "is_compound": false, "order_index": 2 },
+  { "language": "es", "code": "es.fut.ind",  "name": "Futuro",                "is_compound": false, "order_index": 3 }
+]
