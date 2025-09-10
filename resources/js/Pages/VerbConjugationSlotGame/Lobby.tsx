@@ -4,6 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { FaFlag, FaGlobe, FaPlay, FaUsers, FaDumbbell } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface Player {
   id: number;
@@ -38,6 +39,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const wsRef = useRef<WebSocket | null>(null);
+  const { t: trans } = useTranslation();
 
   useEffect(() => {
     const ws = new WebSocket(wsEndpoint);
@@ -80,7 +82,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
   };
 
   return (
-    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Verb Conjugation Slot Lobby</h2>}>
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.lobby')}</h2>}>
       <div className="py-10">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden shadow sm:rounded-lg">
@@ -88,22 +90,22 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
               <div className="flex flex-col sm:flex-row justify-between gap-3">
                 <div>
                   <h3 className="text-2xl font-bold flex items-center gap-2">
-                    <FaGlobe className="text-indigo-600" /> Active Games
+                    <FaGlobe className="text-indigo-600" /> {trans('verb_conjugation_slot.active_games_plural')}
                   </h3>
-                  <p className="text-sm text-gray-600">Join a room or create your own.</p>
+                  <p className="text-sm text-gray-600">{trans('verb_conjugation_slot.connect_learn_challenge')}</p>
                 </div>
                 <div className="flex gap-3">
                   <button onClick={openCreateRoom} className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded inline-flex items-center">
-                    <FaPlay className="mr-2" /> Create Room
+                    <FaPlay className="mr-2" /> {trans('verb_conjugation_slot.btn_create_new_room')}
                   </button>
                   <button onClick={openPractice} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded inline-flex items-center">
-                    <FaDumbbell className="mr-2" /> Practice Alone
+                    <FaDumbbell className="mr-2" /> {trans('verb_conjugation_slot.btn_practice_alone')}
                   </button>
                 </div>
               </div>
 
               {games.length === 0 ? (
-                <div className="text-center py-10 text-gray-600">No active games yet. Be the first!</div>
+                <div className="text-center py-10 text-gray-600">{trans('verb_conjugation_slot.no_active_games')}</div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                   {games.map((game) => (
@@ -134,7 +136,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
                         as="button"
                         className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded inline-flex items-center justify-center"
                       >
-                        <FaPlay className="mr-2" /> Join Game
+                        <FaPlay className="mr-2" /> {trans('verb_conjugation_slot.btn_join_game')}
                       </Link>
                     </div>
                   ))}
@@ -157,9 +159,9 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
           setSelectedCategory={setSelectedCategory}
           showCategories={false}
           startGame={startGame}
-          easyText="Simple verbs and present tense"
-          mediumText="Common tenses and verbs"
-          hardText="Broader tenses and irregular verbs"
+          easyText={trans('verb_conjugation_slot.modal_difficulty.easy_text')}
+          mediumText={trans('verb_conjugation_slot.modal_difficulty.medium_text')}
+          hardText={trans('verb_conjugation_slot.modal_difficulty.hard_text')}
           gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'}
         />
       )}

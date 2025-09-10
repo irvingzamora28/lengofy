@@ -205,3 +205,46 @@ export interface CellCoordinate {
     x: number;
     y: number;
 }
+
+// Verb Conjugation Slot Types
+export interface VerbPrompt {
+    pronoun: { id: number; code: string; display: string };
+    verb: { id: number; infinitive: string; translation?: string | null };
+    tense: { id: number; code: string; name: string };
+    expected: string;
+    normalized_expected: string;
+}
+
+export interface VerbConjugationSlotGamePlayer extends BaseGamePlayer {
+    verb_conjugation_slot_game_id?: number;
+}
+
+export interface VerbConjugationSlotGame {
+    hostId: number;
+    id: number;
+    status: 'waiting' | 'in_progress' | 'completed';
+    max_players: number;
+    total_rounds: number;
+    language_name: string;
+    source_language: Language;
+    target_language: Language;
+    language_pair_id?: number;
+    prompts: VerbPrompt[];
+    current_prompt?: VerbPrompt | null;
+    players: VerbConjugationSlotGamePlayer[];
+    category?: Category;
+}
+
+export interface VerbConjugationSlotGameState {
+    id: string | number;
+    status: 'waiting' | 'in_progress' | 'completed';
+    players: VerbConjugationSlotGamePlayer[];
+    language_name: string;
+    hostId: number;
+    max_players: number;
+    current_round: number;
+    total_rounds: number;
+    prompts: VerbPrompt[];
+    current_prompt: VerbPrompt | null;
+    last_answer: any;
+}

@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import Reel from '@/Components/VerbConjugationSlotGame/Reel';
 import CircularTimer from '@/Components/Games/CircularTimer';
+import { useTranslation } from 'react-i18next';
 
 interface VCSPrompt {
   pronoun: { id: number; code: string; display: string };
@@ -28,6 +29,7 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
   const [score, setScore] = useState(0);
   const timerRef = useRef<number | null>(null);
   const [spinTrigger, setSpinTrigger] = useState(0);
+  const { t: trans } = useTranslation();
 
   const prompt = useMemo(() => prompts[idx] ?? null, [prompts, idx]);
 
@@ -106,11 +108,11 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
   };
 
   return (
-    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Practice: Verb Conjugation Slot</h2>}>
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.practice_title')}</h2>}>
       <div className="max-w-3xl sm:max-w-5xl lg:max-w-6xl mx-auto py-8 px-4">
         <div className="flex items-center justify-between mb-4 text-sm text-gray-600 dark:text-gray-300">
-          <div>Difficulty: <span className="font-semibold">{difficulty}</span></div>
-          <div>Score: <span className="font-semibold">{score}</span></div>
+          <div>{trans('verb_conjugation_slot.game_info.difficulty')}: <span className="font-semibold">{difficulty}</span></div>
+          <div>{trans('verb_conjugation_slot.game_info.score')}: <span className="font-semibold">{score}</span></div>
           <div className="w-14 h-14">
             <CircularTimer timeLeft={remaining} totalTime={15} />
           </div>
@@ -149,32 +151,32 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
               <div className="mt-4 flex gap-2">
                 <input
                   className="border dark:border-gray-600 rounded px-3 py-2 flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
-                  placeholder="Your conjugation"
+                  placeholder={trans('verb_conjugation_slot.input_placeholder')}
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
                   autoFocus
                 />
-                <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded">Submit</button>
+                <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded">{trans('generals.submit')}</button>
               </div>
 
               {result && (
                 <div className="mt-3 text-sm">
                   {result.correct ? (
-                    <span className="text-green-700 dark:text-green-300">Correct!</span>
+                    <span className="text-green-700 dark:text-green-300">{trans('verb_conjugation_slot.game_info.result_correct')}</span>
                   ) : (
-                    <span className="text-red-700 dark:text-red-300">Wrong. Expected: {result.expected}</span>
+                    <span className="text-red-700 dark:text-red-300">{trans('verb_conjugation_slot.game_info.result_wrong_expected', { expected: result.expected })}</span>
                   )}
                 </div>
               )}
             </>
           ) : (
-            <div className="text-gray-600 dark:text-gray-300">Loading prompt...</div>
+            <div className="text-gray-600 dark:text-gray-300">{trans('verb_conjugation_slot.game_info.loading_prompt')}</div>
           )}
         </div>
 
         <div className="mt-6">
-          <button onClick={() => router.visit(route('games.verb-conjugation-slot.lobby'))} className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm">Back to Lobby</button>
+          <button onClick={() => router.visit(route('games.verb-conjugation-slot.lobby'))} className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm">{trans('verb_conjugation_slot.game_info.back_to_lobby')}</button>
         </div>
       </div>
     </AuthenticatedLayout>

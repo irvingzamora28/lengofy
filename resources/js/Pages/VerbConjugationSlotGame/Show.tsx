@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import GameArea from '@/Components/VerbConjugationSlotGame/GameArea';
+import { useTranslation } from 'react-i18next';
 
 interface Player {
   id: number;
@@ -129,16 +130,17 @@ export default function Show({ justCreated, game, wsEndpoint }: Props) {
   };
 
   const isHost = me?.user_id === game.hostId;
+  const { t: trans } = useTranslation();
 
   return (
-    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Verb Conjugation Slot</h2>}>
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.game_room_title')}</h2>}>
       <div className="max-w-5xl mx-auto py-8 px-4">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <div className="text-sm text-gray-500">{game.language_name}</div>
-            <div className="text-xs text-gray-500">Round {currentRound + 1} / {game.total_rounds}</div>
+            <div className="text-xs text-gray-500">{trans('verb_conjugation_slot.round')} {currentRound + 1} / {game.total_rounds}</div>
           </div>
-          <button onClick={leave} className="text-sm text-red-600 hover:text-red-700">Leave</button>
+          <button onClick={leave} className="text-sm text-red-600 hover:text-red-700">{trans('verb_conjugation_slot.leave')}</button>
         </div>
         <div className="mb-6">
           <GameArea
