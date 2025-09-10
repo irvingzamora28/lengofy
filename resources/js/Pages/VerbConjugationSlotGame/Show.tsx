@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import GameArea from '@/Components/VerbConjugationSlotGame/GameArea';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 interface Player {
   id: number;
@@ -59,6 +60,19 @@ export default function Show({ justCreated, game, wsEndpoint }: Props) {
     const authUser = (window as any).ziggy?.props?.auth?.user;
     return players.find(p => p.user_id === authUser?.id) || null;
   }, [players]);
+
+  // Post final score once when game completes
+  const postedRef = useRef(false);
+  useEffect(() => {
+    if (status === 'completed' && me && !postedRef.current) {
+      postedRef.current = true;
+      axios.post(route('scores.update'), {
+        user_id: me.user_id,
+        game_id: 4, // verb-conjugation-slot
+        score: me.score,
+      }).catch((e) => console.error('Failed to post multiplayer score', e));
+    }
+  }, [status, me]);
 
   useEffect(() => {
     const ws = new WebSocket(wsEndpoint);

@@ -4,6 +4,8 @@ import { router } from '@inertiajs/react';
 import Reel from '@/Components/VerbConjugationSlotGame/Reel';
 import CircularTimer from '@/Components/Games/CircularTimer';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { PageProps } from '@/types';
 
 interface VCSPrompt {
   pronoun: { id: number; code: string; display: string };
@@ -13,20 +15,22 @@ interface VCSPrompt {
   normalized_expected: string;
 }
 
-interface Props {
+interface Props extends PageProps {
   prompts: VCSPrompt[];
   difficulty: 'easy' | 'medium' | 'hard';
   category: number;
   targetLanguage: string;
 }
 
-export default function Practice({ prompts: initialPrompts, difficulty, category }: Props) {
+export default function Practice({ prompts: initialPrompts, difficulty, category, auth }: Props) {
   const [prompts, setPrompts] = useState<VCSPrompt[]>(initialPrompts || []);
   const [idx, setIdx] = useState(0);
   const [answer, setAnswer] = useState('');
   const [result, setResult] = useState<null | { correct: boolean; expected: string }>(null);
   const [remaining, setRemaining] = useState(15);
   const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
   const timerRef = useRef<number | null>(null);
   const [spinTrigger, setSpinTrigger] = useState(0);
   const { t: trans } = useTranslation();
@@ -101,10 +105,34 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
     const normalized = (answer || '').trim().toLowerCase();
     const correct = !isTimeout && normalized === (prompt.normalized_expected || '').toLowerCase();
     setResult({ correct, expected: prompt.expected });
-    if (correct) setScore((s) => s + 1);
+    if (correct) {
+      setScore((s) => s + 1);
+      setStreak((s) => {
+        const ns = s + 1;
+        setLongestStreak((ls) => Math.max(ls, ns));
+        return ns;
+      });
+    } else {
+      setStreak(0);
+    }
     if (timerRef.current) window.clearInterval(timerRef.current);
     // move to next after short delay
     setTimeout(() => next(), 1200);
+  };
+
+  const updateAddScore = async () => {
+    try {
+      const authUser = auth?.user;
+      if (!authUser?.id) return;
+      await axios.post(route('scores.update-add-score'), {
+        user_id: authUser.id,
+        game_id: 4, // verb-conjugation-slot
+        score: score,
+        correct_streak: longestStreak,
+      });
+    } catch (e) {
+      console.error('Failed to update score', e);
+    }
   };
 
   return (
@@ -176,7 +204,7 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
         </div>
 
         <div className="mt-6">
-          <button onClick={() => router.visit(route('games.verb-conjugation-slot.lobby'))} className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm">{trans('verb_conjugation_slot.game_info.back_to_lobby')}</button>
+          <button onClick={async () => { await updateAddScore(); router.visit(route('games.verb-conjugation-slot.lobby')); }} className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm">{trans('verb_conjugation_slot.game_info.back_to_lobby')}</button>
         </div>
       </div>
     </AuthenticatedLayout>
