@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
+import GameArea from '@/Components/VerbConjugationSlotGame/GameArea';
 
 interface Player {
   id: number;
@@ -116,9 +117,10 @@ export default function Show({ justCreated, game, wsEndpoint }: Props) {
     send({ type: 'verb_conjugation_slot_start_spin', gameType: 'verb_conjugation_slot', gameId: String(game.id), userId: me.user_id });
   };
 
-  const submit = () => {
+  const submit = (val?: string) => {
     if (!me) return;
-    send({ type: 'verb_conjugation_slot_submit_conjugation', gameType: 'verb_conjugation_slot', gameId: String(game.id), userId: me.user_id, data: { userId: me.user_id, player_id: me.id, answer } });
+    const toSend = val ?? answer;
+    send({ type: 'verb_conjugation_slot_submit_conjugation', gameType: 'verb_conjugation_slot', gameId: String(game.id), userId: me.user_id, data: { userId: me.user_id, player_id: me.id, answer: toSend } });
     setAnswer('');
   };
 
@@ -138,31 +140,22 @@ export default function Show({ justCreated, game, wsEndpoint }: Props) {
           </div>
           <button onClick={leave} className="text-sm text-red-600 hover:text-red-700">Leave</button>
         </div>
-
-        <div className="bg-white border rounded p-4 mb-6">
-          <div className="text-sm text-gray-600 mb-2">Status: <span className="font-semibold">{status}</span></div>
-          {currentPrompt && (
-            <div className="text-xl">
-              <span className="mr-2">{currentPrompt.pronoun.display}</span>
-              <span className="mr-2">{currentPrompt.verb.infinitive}</span>
-              <span className="text-gray-500">({currentPrompt.tense.name})</span>
-            </div>
-          )}
-
-          <div className="mt-4 flex gap-2">
-            <input className="border rounded px-3 py-2 flex-1" placeholder="Your conjugation" value={answer} onChange={(e) => setAnswer(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') submit(); }} />
-            <button onClick={submit} className="bg-indigo-600 text-white px-4 py-2 rounded">Submit</button>
-            <button onClick={markReady} className="bg-green-600 text-white px-4 py-2 rounded">Ready</button>
-            {isHost && <button onClick={startSpin} className="bg-blue-600 text-white px-4 py-2 rounded">Start Spin</button>}
-          </div>
-
-          {lastAnswer && (
-            <div className="mt-3 text-sm">
-              Last answer: <span className={lastAnswer.correct ? 'text-green-700' : 'text-red-700'}>
-                {lastAnswer.player_name} → {lastAnswer.answer} ({lastAnswer.correct ? 'correct' : 'wrong'})
-              </span>
-            </div>
-          )}
+        <div className="mb-6">
+          <GameArea
+            status={status}
+            currentRound={currentRound}
+            totalRounds={game.total_rounds}
+            prompt={currentPrompt}
+            promptsForReels={game.prompts}
+            me={me}
+            isHost={isHost}
+            timerSeconds={15}
+            onTimerEnd={() => { /* no-op for now */ }}
+            onReady={markReady}
+            onStartSpin={startSpin}
+            onSubmitAnswer={(ans) => submit(ans)}
+            lastAnswer={lastAnswer}
+          />
         </div>
 
         <div className="bg-white border rounded p-4">

@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
+import Reel from '@/Components/VerbConjugationSlotGame/Reel';
+import CircularTimer from '@/Components/Games/CircularTimer';
 
 interface VCSPrompt {
   pronoun: { id: number; code: string; display: string };
@@ -25,8 +27,31 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
   const [remaining, setRemaining] = useState(15);
   const [score, setScore] = useState(0);
   const timerRef = useRef<number | null>(null);
+  const [spinTrigger, setSpinTrigger] = useState(0);
 
   const prompt = useMemo(() => prompts[idx] ?? null, [prompts, idx]);
+
+  // Build pools for reels from available prompts
+  const pronounPool = useMemo(
+    () => Array.from(new Map(prompts.map(p => [p.pronoun.code, p.pronoun])).values()),
+    [prompts]
+  );
+  const verbPool = useMemo(
+    () => Array.from(new Map(prompts.map(p => [p.verb.infinitive, p.verb])).values()),
+    [prompts]
+  );
+  const tensePool = useMemo(
+    () => Array.from(new Map(prompts.map(p => [p.tense.code, p.tense])).values()),
+    [prompts]
+  );
+
+  const stops = useMemo(() => {
+    if (!prompt) return { p: null as number | null, v: null as number | null, t: null as number | null };
+    const p = pronounPool.findIndex(x => x.code === prompt.pronoun.code);
+    const v = verbPool.findIndex(x => x.infinitive === prompt.verb.infinitive);
+    const t = tensePool.findIndex(x => x.code === prompt.tense.code);
+    return { p, v, t };
+  }, [prompt, pronounPool, verbPool, tensePool]);
 
   const fetchMore = async () => {
     try {
@@ -56,6 +81,8 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
 
   useEffect(() => {
     resetTimer();
+    // trigger reel spin when prompt changes
+    setSpinTrigger(x => x + 1);
     return () => { if (timerRef.current) window.clearInterval(timerRef.current); };
   }, [idx]);
 
@@ -80,25 +107,48 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
 
   return (
     <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Practice: Verb Conjugation Slot</h2>}>
-      <div className="max-w-3xl mx-auto py-8 px-4">
-        <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
+      <div className="max-w-3xl sm:max-w-5xl lg:max-w-6xl mx-auto py-8 px-4">
+        <div className="flex items-center justify-between mb-4 text-sm text-gray-600 dark:text-gray-300">
           <div>Difficulty: <span className="font-semibold">{difficulty}</span></div>
           <div>Score: <span className="font-semibold">{score}</span></div>
-          <div>Time: <span className="font-semibold">{remaining}s</span></div>
+          <div className="w-14 h-14">
+            <CircularTimer timeLeft={remaining} totalTime={15} />
+          </div>
         </div>
 
-        <div className="bg-white border rounded p-5">
+        <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded p-5 sm:p-6 lg:p-8">
           {prompt ? (
             <>
-              <div className="text-xl">
-                <span className="mr-2">{prompt.pronoun.display}</span>
-                <span className="mr-2">{prompt.verb.infinitive}</span>
-                <span className="text-gray-500">({prompt.tense.name})</span>
+              {/* Reels */}
+              <div className="mb-4 sm:flex sm:justify-center">
+                <div className="grid grid-cols-3 gap-2 sm:gap-6 lg:gap-8 sm:inline-grid">
+                  <Reel
+                    items={pronounPool}
+                    itemToLabel={(x) => x.display}
+                    stopIndex={stops.p}
+                    spinTrigger={spinTrigger}
+                    height={64}
+                  />
+                  <Reel
+                    items={verbPool}
+                    itemToLabel={(x) => x.infinitive}
+                    stopIndex={stops.v}
+                    spinTrigger={spinTrigger}
+                    height={64}
+                  />
+                  <Reel
+                    items={tensePool}
+                    itemToLabel={(x) => x.name}
+                    stopIndex={stops.t}
+                    spinTrigger={spinTrigger}
+                    height={64}
+                  />
+                </div>
               </div>
 
               <div className="mt-4 flex gap-2">
                 <input
-                  className="border rounded px-3 py-2 flex-1"
+                  className="border dark:border-gray-600 rounded px-3 py-2 flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
                   placeholder="Your conjugation"
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
@@ -111,20 +161,20 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
               {result && (
                 <div className="mt-3 text-sm">
                   {result.correct ? (
-                    <span className="text-green-700">Correct!</span>
+                    <span className="text-green-700 dark:text-green-300">Correct!</span>
                   ) : (
-                    <span className="text-red-700">Wrong. Expected: {result.expected}</span>
+                    <span className="text-red-700 dark:text-red-300">Wrong. Expected: {result.expected}</span>
                   )}
                 </div>
               )}
             </>
           ) : (
-            <div className="text-gray-600">Loading prompt...</div>
+            <div className="text-gray-600 dark:text-gray-300">Loading prompt...</div>
           )}
         </div>
 
         <div className="mt-6">
-          <button onClick={() => router.visit(route('games.verb-conjugation-slot.lobby'))} className="text-indigo-600 hover:text-indigo-800 text-sm">Back to Lobby</button>
+          <button onClick={() => router.visit(route('games.verb-conjugation-slot.lobby'))} className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm">Back to Lobby</button>
         </div>
       </div>
     </AuthenticatedLayout>
