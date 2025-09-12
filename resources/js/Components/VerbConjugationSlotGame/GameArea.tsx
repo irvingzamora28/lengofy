@@ -32,7 +32,7 @@ interface Props {
   onReady: () => void;
   onStartSpin: () => void;
   onSubmitAnswer: (answer: string) => void;
-  lastAnswer?: { player_name: string; answer: string; correct: boolean } | null;
+  lastAnswer?: { player_name: string; answer: string; correct: boolean; userId?: number; playerId?: number } | null;
 }
 
 export default function GameArea({
@@ -53,6 +53,8 @@ export default function GameArea({
   const [answer, setAnswer] = useState('');
   const [spinTrigger, setSpinTrigger] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timerSeconds);
+  const [cooldown, setCooldown] = useState(false);
+  const cooldownRef = React.useRef<number | null>(null);
   const { t: trans } = useTranslation();
 
   // Build pools for reels from provided prompts list
@@ -117,6 +119,19 @@ export default function GameArea({
     return () => clearInterval(id);
   }, [status, prompt, timeLeft]);
 
+  // Brief cooldown after a wrong submission by the local player to avoid spam
+  useEffect(() => {
+    if (!lastAnswer || !me) return;
+    if (!lastAnswer.correct && (lastAnswer.userId === me.user_id || lastAnswer.playerId === me.id)) {
+      setCooldown(true);
+      if (cooldownRef.current) window.clearTimeout(cooldownRef.current as unknown as number);
+      cooldownRef.current = window.setTimeout(() => {
+        setCooldown(false);
+        cooldownRef.current = null;
+      }, 600);
+    }
+  }, [lastAnswer, me?.user_id, me?.id]);
+
   const submit = () => {
     if (!answer.trim()) return;
     onSubmitAnswer(answer);
@@ -179,13 +194,14 @@ export default function GameArea({
             <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{trans('verb_conjugation_slot.input_hint')}</div>
             <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-2">
               <input
-                className="flex-1 min-w-0 border dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
+                className={`flex-1 min-w-0 border dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 ${cooldown ? 'opacity-60 cursor-not-allowed' : ''}`}
                 placeholder={trans('verb_conjugation_slot.input_placeholder')}
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
+                disabled={cooldown}
               />
-              <button onClick={submit} className="bg-indigo-600 text-white px-4 py-2 rounded w-full md:w-auto">{trans('generals.submit')}</button>
+              <button onClick={submit} disabled={cooldown} className={`bg-indigo-600 text-white px-4 py-2 rounded w-full md:w-auto ${cooldown ? 'opacity-60 cursor-not-allowed' : ''}`}>{trans('generals.submit')}</button>
               {/* Spin is automatic; no manual start button */}
             </div>
             {lastAnswer && (

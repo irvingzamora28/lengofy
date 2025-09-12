@@ -42,6 +42,7 @@ export interface VerbConjugationSlotGameMessage extends BaseGameMessage {
     | 'verb_conjugation_slot_start_spin'
     | 'verb_conjugation_slot_submit_conjugation'
     | 'verb_conjugation_slot_restart_game'
+    | 'verb_conjugation_slot_round_timeout'
     | 'verb_conjugation_slot_leave_game'
     | 'verb_conjugation_slot_game_end'
     // outgoing events

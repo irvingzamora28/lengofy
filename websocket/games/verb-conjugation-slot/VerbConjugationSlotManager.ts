@@ -10,6 +10,43 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
     this.transitionTimers = new Map();
   }
 
+  private handleRoundTimeout(message: VerbConjugationSlotGameMessage): void {
+    const gameId = message.gameId;
+    const room = this.getRoom(gameId);
+    const state = this.getState(gameId);
+    if (!room || !state) return;
+
+    if (!this.transitionTimers.has(gameId)) this.transitionTimers.set(gameId, new Map());
+    const timers = this.transitionTimers.get(gameId)!;
+    const existing = timers.get(state.current_round);
+    // If a transition is already scheduled (due to a correct answer), ignore timeout
+    if (existing) return;
+
+    const isLastRound = state.current_round >= state.total_rounds - 1 || state.current_round >= state.prompts.length - 1;
+    const timer = setTimeout(() => {
+      if (isLastRound) {
+        state.status = 'completed';
+        this.setState(gameId, state);
+        console.log('[VCS WS] timeout -> game completed', { gameId });
+        this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, status: state.status } } as any);
+        this.cleanup(gameId);
+      } else {
+        state.current_round += 1;
+        state.current_prompt = state.prompts[state.current_round] ?? null;
+        // Clear last answer on new round
+        state.last_answer = null;
+        this.setState(gameId, state);
+        console.log('[VCS WS] timeout -> advancing round', { current_round: state.current_round });
+        this.broadcast(room, { type: 'answer_submitted', data: null } as any);
+        this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, current_round: state.current_round, current_prompt: state.current_prompt, status: 'in_progress' } } as any);
+      }
+      timers.delete(state.current_round - 1);
+      if (timers.size === 0) this.transitionTimers.delete(gameId);
+    }, 200);
+
+    timers.set(state.current_round, timer);
+  }
+
   private handleGameEnd(message: VerbConjugationSlotGameMessage): void {
     const gameId = message.gameId;
     const room = this.getRoom(gameId);
@@ -51,6 +88,10 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
       case 'verb_conjugation_slot_submit_conjugation':
         console.log('[VCS WS] submit_conjugation', { gameId, userId: message.userId, answer: (message.data as any)?.answer });
         this.handleSubmitConjugation(message);
+        break;
+      case 'verb_conjugation_slot_round_timeout':
+        console.log('[VCS WS] round_timeout', { gameId, userId: message.userId });
+        this.handleRoundTimeout(message);
         break;
       case 'verb_conjugation_slot_restart_game':
         console.log('[VCS WS] restart_game', { gameId, userId: message.userId });
@@ -215,36 +256,40 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
     // then state update (scores etc.)
     this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players } } as any);
 
-    // progress to next round after short delay
+    // Only progress on the first correct answer. Wrong answers keep the round active.
     if (!this.transitionTimers.has(gameId)) this.transitionTimers.set(gameId, new Map());
     const timers = this.transitionTimers.get(gameId)!;
     const existing = timers.get(state.current_round);
-    if (existing) clearTimeout(existing);
+    // If a transition is already scheduled for this round, ignore further submissions
+    if (existing) {
+      return;
+    }
 
-    const isLastRound = state.current_round >= state.total_rounds - 1 || state.current_round >= state.prompts.length - 1;
+    if (correct) {
+      const isLastRound = state.current_round >= state.total_rounds - 1 || state.current_round >= state.prompts.length - 1;
+      const timer = setTimeout(() => {
+        if (isLastRound) {
+          state.status = 'completed';
+          this.setState(gameId, state);
+          console.log('[VCS WS] game completed, broadcasting and cleaning up', { gameId });
+          this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, status: state.status } } as any);
+          this.cleanup(gameId);
+        } else {
+          state.current_round += 1;
+          state.current_prompt = state.prompts[state.current_round] ?? null;
+          this.setState(gameId, state);
+          // clear last answer
+          console.log('[VCS WS] advancing round', { current_round: state.current_round });
+          this.broadcast(room, { type: 'answer_submitted', data: null } as any);
+          // send updated state
+          this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, current_round: state.current_round, current_prompt: state.current_prompt, status: 'in_progress' } } as any);
+        }
+        timers.delete(state.current_round - 1);
+        if (timers.size === 0) this.transitionTimers.delete(gameId);
+      }, 1200); // brief delay to show feedback
 
-    const timer = setTimeout(() => {
-      if (isLastRound) {
-        state.status = 'completed';
-        this.setState(gameId, state);
-        console.log('[VCS WS] game completed, broadcasting and cleaning up', { gameId });
-        this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, status: state.status } } as any);
-        this.cleanup(gameId);
-      } else {
-        state.current_round += 1;
-        state.current_prompt = state.prompts[state.current_round] ?? null;
-        this.setState(gameId, state);
-        // clear last answer
-        console.log('[VCS WS] advancing round', { current_round: state.current_round });
-        this.broadcast(room, { type: 'answer_submitted', data: null } as any);
-        // send updated state
-        this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, current_round: state.current_round, current_prompt: state.current_prompt, status: 'in_progress' } } as any);
-      }
-      timers.delete(state.current_round - 1);
-      if (timers.size === 0) this.transitionTimers.delete(gameId);
-    }, 2000);
-
-    timers.set(state.current_round, timer);
+      timers.set(state.current_round, timer);
+    }
   }
 
   private handleRestart(message: VerbConjugationSlotGameMessage): void {

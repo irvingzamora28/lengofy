@@ -280,6 +280,11 @@ export default function Show({ auth, justCreated, game, wsEndpoint }: Props) {
 
   const isHost = auth?.user?.id === game.hostId;
   const { t: trans } = useTranslation();
+  const onRoundTimerEnd = () => {
+    const userId = auth?.user?.id;
+    console.log('[VCS Show] onRoundTimerEnd -> notifying server');
+    send({ type: 'verb_conjugation_slot_round_timeout', gameType: 'verb_conjugation_slot', gameId: String(game.id), userId });
+  };
 
   return (
     <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.game_room_title')}</h2>}>
@@ -301,7 +306,7 @@ export default function Show({ auth, justCreated, game, wsEndpoint }: Props) {
             me={me}
             isHost={isHost}
             timerSeconds={15}
-            onTimerEnd={() => { /* no-op for now */ }}
+            onTimerEnd={onRoundTimerEnd}
             onReady={markReady}
             onStartSpin={startSpin}
             onSubmitAnswer={(ans) => submit(ans)}
