@@ -28,7 +28,19 @@ export default function Reel<T>({
   const totalHeight = useMemo(() => items.length * height, [items.length, height]);
 
   useEffect(() => {
-    if (stopIndex == null || items.length === 0) return;
+    if (stopIndex == null || items.length === 0) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[VCS Reel] skip spin: no stopIndex/items', { stopIndex, itemsLen: items.length });
+      }
+      return;
+    }
+    // Guard invalid index
+    if (stopIndex < 0 || stopIndex >= items.length) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('[VCS Reel] invalid stopIndex; will not spin', { stopIndex, itemsLen: items.length });
+      }
+      return;
+    }
     // Perform a spin by animating to the target item plus a few extra loops
     const loops = 3; // number of extra full scrolls
     const targetOffset = -(stopIndex * height) - (loops * totalHeight);
@@ -39,7 +51,8 @@ export default function Reel<T>({
       setTimeout(() => {
         // After animation, normalize offset to exact position (without loops)
         setSpinning(false);
-        setOffset(-(stopIndex * height));
+        const safeIndex = Math.max(0, Math.min(stopIndex, items.length - 1));
+        setOffset(-(safeIndex * height));
       }, durationMs + 50);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

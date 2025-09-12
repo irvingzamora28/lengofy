@@ -29,29 +29,39 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
       return;
     }
 
+    console.log('[VCS WS] handleMessage', { type: message.type, gameId, userId: message.userId });
+
     switch (message.type) {
       case 'verb_conjugation_slot_join_game':
+        console.log('[VCS WS] join_game received', { gameId, userId: message.userId, data: { players: message.data?.players?.length, prompts: message.data?.prompts?.length, max_players: message.data?.max_players, total_rounds: message.data?.total_rounds } });
         this.handleJoinGame(ws, message);
         break;
       case 'verb_conjugation_slot_game_created':
+        console.log('[VCS WS] game_created broadcast', { gameId });
         this.handleGameCreated(message);
         break;
       case 'verb_conjugation_slot_player_ready':
+        console.log('[VCS WS] player_ready', { gameId, userId: message.userId, data: message.data });
         this.handlePlayerReady(message);
         break;
       case 'verb_conjugation_slot_start_spin':
+        console.log('[VCS WS] start_spin', { gameId, userId: message.userId });
         this.handleStartSpin(message);
         break;
       case 'verb_conjugation_slot_submit_conjugation':
+        console.log('[VCS WS] submit_conjugation', { gameId, userId: message.userId, answer: (message.data as any)?.answer });
         this.handleSubmitConjugation(message);
         break;
       case 'verb_conjugation_slot_restart_game':
+        console.log('[VCS WS] restart_game', { gameId, userId: message.userId });
         this.handleRestart(message);
         break;
       case 'verb_conjugation_slot_leave_game':
+        console.log('[VCS WS] leave_game', { gameId, userId: message.userId });
         this.handlePlayerLeft(ws, message);
         break;
       case 'verb_conjugation_slot_game_end':
+        console.log('[VCS WS] game_end', { gameId });
         this.handleGameEnd(message);
         break;
       default:
@@ -69,6 +79,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
   private handleJoinGame(ws: ServerWebSocket, message: VerbConjugationSlotGameMessage): void {
     const gameId = message.gameId;
     if (!this.rooms.has(gameId)) {
+      console.log('[VCS WS] creating room', { gameId });
       this.rooms.set(gameId, new Set());
       this.setState(gameId, {
         id: gameId,
@@ -86,6 +97,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
 
     const room = this.rooms.get(gameId)!;
     if (!room.has(ws)) {
+      console.log('[VCS WS] adding ws to room', { gameId });
       room.add(ws);
 
       // Merge incoming player (if provided) into existing state
@@ -94,11 +106,13 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
         const incoming = message.data.players[0];
         const exists = state.players.some(p => p.user_id === incoming.user_id || p.id === incoming.id);
         if (!exists) {
+          console.log('[VCS WS] merging incoming player', { incoming });
           state.players.push(incoming);
           this.setState(gameId, state);
         }
       }
 
+      console.log('[VCS WS] broadcasting state after join', { players: this.getState(gameId)?.players?.length });
       this.broadcastState(gameId);
     }
   }
@@ -129,6 +143,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
     if (!state || !room) return;
 
     // broadcast ready
+    console.log('[VCS WS] broadcasting player_ready', { gameId, data: message.data });
     this.broadcast(room, { type: 'player_ready', data: message.data } as any);
 
     // mark player
@@ -140,12 +155,14 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
     });
 
     const allReady = state.max_players === 1 || (state.players.length >= 1 && state.players.every(p => p.is_ready));
+    console.log('[VCS WS] ready status', { allReady, status: state.status, playersReady: state.players.map(p => ({ id: p.id, user_id: p.user_id, is_ready: p.is_ready })) });
     if (allReady && state.status === 'waiting') {
       state.status = 'in_progress';
       // set first prompt
       state.current_round = 0;
       state.current_prompt = state.prompts[state.current_round] ?? null;
       this.setState(gameId, state);
+      console.log('[VCS WS] all ready -> in_progress, broadcasting state', { current_round: state.current_round });
       this.broadcastState(gameId);
     }
   }
@@ -158,6 +175,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
 
     // For now, spin selects current round prompt and echoes result
     const prompt: VCSPrompt | null = state.prompts[state.current_round] ?? null;
+    console.log('[VCS WS] spin_result', { gameId, current_round: state.current_round, prompt });
     this.broadcast(room, { type: 'spin_result', data: { prompt } } as any);
   }
 
@@ -167,13 +185,16 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
     const state = this.getState(gameId);
     if (!room || !state) return;
 
-    const expectedNorm = state.current_prompt?.normalized_expected ?? '';
+    const expectedRaw = state.current_prompt?.normalized_expected ?? '';
     const submitted = (message.data as any)?.answer ?? '';
-    const submittedNorm = (submitted ?? '').toString().trim().toLowerCase();
+    const expectedNorm = (expectedRaw ?? '').toString().normalize('NFKC').trim().toLowerCase();
+    const submittedNorm = (submitted ?? '').toString().normalize('NFKC').trim().toLowerCase();
     const correct = submittedNorm === expectedNorm;
+    console.log('[VCS WS] compare', { expectedNorm, submittedNorm, correct });
 
     // Find player record
     const player = state.players.find(p => p.user_id === (message.data as any)?.userId || p.id === (message.data as any)?.player_id);
+    console.log('[VCS WS] submit result', { correct, expectedNorm, submittedNorm, player: player ? { id: player.id, user_id: player.user_id } : null });
     if (player) {
       if (correct) player.score = (player.score || 0) + 1;
     }
@@ -206,6 +227,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
       if (isLastRound) {
         state.status = 'completed';
         this.setState(gameId, state);
+        console.log('[VCS WS] game completed, broadcasting and cleaning up', { gameId });
         this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, status: state.status } } as any);
         this.cleanup(gameId);
       } else {
@@ -213,6 +235,7 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
         state.current_prompt = state.prompts[state.current_round] ?? null;
         this.setState(gameId, state);
         // clear last answer
+        console.log('[VCS WS] advancing round', { current_round: state.current_round });
         this.broadcast(room, { type: 'answer_submitted', data: null } as any);
         // send updated state
         this.broadcast(room, { type: 'verb_conjugation_slot_game_state_updated', data: { players: state.players, current_round: state.current_round, current_prompt: state.current_prompt, status: 'in_progress' } } as any);
@@ -256,10 +279,12 @@ export class VerbConjugationSlotManager extends BaseGameManager<VerbConjugationS
   cleanup(gameId: string): void {
     super.cleanup(gameId);
     this.clearTimers(gameId);
+    console.log('[VCS WS] cleanup called', { gameId });
   }
 
   cleanupCompletely(gameId: string): void {
     this.clearTimers(gameId);
     super.cleanupCompletely(gameId);
+    console.log('[VCS WS] cleanupCompletely called', { gameId });
   }
 }

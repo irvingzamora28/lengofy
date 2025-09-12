@@ -52,6 +52,7 @@ export default function GameArea({
 }: Props) {
   const [answer, setAnswer] = useState('');
   const [spinTrigger, setSpinTrigger] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(timerSeconds);
   const { t: trans } = useTranslation();
 
   // Build pools for reels from provided prompts list
@@ -71,9 +72,23 @@ export default function GameArea({
   // Determine stop indices based on the current prompt
   const stops = useMemo(() => {
     if (!prompt) return { p: null as number | null, v: null as number | null, t: null as number | null };
-    const p = pronounPool.findIndex(x => x.code === prompt.pronoun.code);
-    const v = verbPool.findIndex(x => x.infinitive === prompt.verb.infinitive);
-    const t = tensePool.findIndex(x => x.code === prompt.tense.code);
+    let p = pronounPool.findIndex(x => x.code === prompt.pronoun.code);
+    let v = verbPool.findIndex(x => x.infinitive === prompt.verb.infinitive);
+    let t = tensePool.findIndex(x => x.code === prompt.tense.code);
+    if (p === -1 || v === -1 || t === -1) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('[VCS GameArea] stop index not found', {
+          pronounCode: prompt.pronoun.code,
+          verbInf: prompt.verb.infinitive,
+          tenseCode: prompt.tense.code,
+          pIndex: p, vIndex: v, tIndex: t,
+          pools: { pronounPool, verbPool, tensePool }
+        });
+      }
+      p = Math.max(0, p);
+      v = Math.max(0, v);
+      t = Math.max(0, t);
+    }
     return { p, v, t };
   }, [prompt, pronounPool, verbPool, tensePool]);
 
@@ -81,7 +96,26 @@ export default function GameArea({
   useEffect(() => {
     if (!prompt) return;
     setSpinTrigger(x => x + 1);
+    setTimeLeft(timerSeconds);
   }, [prompt]);
+
+  // Countdown timer: runs only in progress and when a prompt is present
+  useEffect(() => {
+    if (status !== 'in_progress' || !prompt) return;
+    if (timeLeft <= 0) return;
+    const id = setInterval(() => {
+      setTimeLeft(prev => {
+        const next = prev - 1;
+        if (next <= 0) {
+          clearInterval(id);
+          onTimerEnd && onTimerEnd();
+          return 0;
+        }
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [status, prompt, timeLeft]);
 
   const submit = () => {
     if (!answer.trim()) return;
@@ -94,7 +128,7 @@ export default function GameArea({
       <div className="flex items-center justify-between">
         <div className="text-sm text-gray-600">{trans('verb_conjugation_slot.round')} {currentRound + 1} / {totalRounds}</div>
         <div className="w-12 h-12">
-          <CircularTimer timeLeft={timerSeconds} totalTime={15} key={`${currentRound}-${spinTrigger}`} />
+          <CircularTimer timeLeft={timeLeft} totalTime={timerSeconds} key={`${currentRound}-${spinTrigger}`} />
         </div>
       </div>
 
