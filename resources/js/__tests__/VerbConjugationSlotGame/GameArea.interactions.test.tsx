@@ -25,7 +25,7 @@ describe('GameArea interactions', () => {
     const onReady = vi.fn();
     const onStartSpin = vi.fn();
 
-    render(
+    const { rerender } = render(
       <GameArea
         status="in_progress"
         currentRound={0}
@@ -49,12 +49,29 @@ describe('GameArea interactions', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSubmitAnswer).toHaveBeenCalledWith('hablo');
 
-    // Ready button
+    // In-progress UI should NOT show ready or start spin buttons anymore
+    expect(screen.queryByText('verb_conjugation_slot.i_am_ready')).toBeNull();
+    expect(screen.queryByText('verb_conjugation_slot.start_spin')).toBeNull();
+
+    // Render waiting state to verify the inline Ready button is present and clickable
+    rerender(
+      <GameArea
+        status="waiting"
+        currentRound={0}
+        totalRounds={3}
+        prompt={null}
+        promptsForReels={samplePrompts}
+        me={me}
+        isHost={true}
+        timerSeconds={15}
+        onTimerEnd={() => {}}
+        onReady={onReady}
+        onStartSpin={onStartSpin}
+        onSubmitAnswer={onSubmitAnswer}
+        lastAnswer={null}
+      />
+    );
     fireEvent.click(screen.getByText('verb_conjugation_slot.i_am_ready'));
     expect(onReady).toHaveBeenCalled();
-
-    // Host can trigger spin
-    fireEvent.click(screen.getByText('verb_conjugation_slot.start_spin'));
-    expect(onStartSpin).toHaveBeenCalled();
   });
 });
