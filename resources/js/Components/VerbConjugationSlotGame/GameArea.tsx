@@ -125,74 +125,78 @@ export default function GameArea({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-gray-600">{trans('verb_conjugation_slot.round')} {currentRound + 1} / {totalRounds}</div>
-        <div className="w-12 h-12">
-          <CircularTimer timeLeft={timeLeft} totalTime={timerSeconds} key={`${currentRound}-${spinTrigger}`} />
-        </div>
-      </div>
-
-      {/* Reels */}
-      <div className="sm:flex sm:justify-center">
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <Reel
-            items={pronounPool}
-            itemToLabel={(x) => x.display}
-            stopIndex={stops.p}
-            spinTrigger={spinTrigger}
-            height={56}
-          />
-          <Reel
-            items={verbPool}
-            itemToLabel={(x) => x.infinitive}
-            stopIndex={stops.v}
-            spinTrigger={spinTrigger}
-            height={56}
-          />
-          <Reel
-            items={tensePool}
-            itemToLabel={(x) => x.name}
-            stopIndex={stops.t}
-            spinTrigger={spinTrigger}
-            height={56}
-          />
-        </div>
-      </div>
-
-      {/* Input */}
-      <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded p-4">
-        <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{trans('verb_conjugation_slot.input_hint')}</div>
-        <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-2">
-          <input
-            className="flex-1 min-w-0 border dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
-            placeholder={trans('verb_conjugation_slot.input_placeholder')}
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
-          />
-          <button onClick={submit} className="bg-indigo-600 text-white px-4 py-2 rounded w-full md:w-auto">{trans('generals.submit')}</button>
-          <button onClick={onReady} className="bg-green-600 text-white px-4 py-2 rounded w-full md:w-auto">{trans('verb_conjugation_slot.i_am_ready')}</button>
-          {isHost && (
-            <button onClick={onStartSpin} className="bg-blue-600 text-white px-4 py-2 rounded w-full md:w-auto">{trans('verb_conjugation_slot.start_spin')}</button>
-          )}
-        </div>
-        {lastAnswer && (
-          <div className="mt-2 text-sm">
-            {trans('verb_conjugation_slot.last_answer_prefix')} <span className={lastAnswer.correct ? 'text-green-700' : 'text-red-700'}>
-              {lastAnswer.player_name} → {lastAnswer.answer} ({lastAnswer.correct ? trans('verb_conjugation_slot.correct') : trans('verb_conjugation_slot.wrong')})
-            </span>
+      {status === 'in_progress' && (
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-600">{trans('verb_conjugation_slot.round')} {currentRound + 1} / {totalRounds}</div>
+          <div className="w-12 h-12">
+            <CircularTimer timeLeft={timeLeft} totalTime={timerSeconds} key={`${currentRound}-${spinTrigger}`} />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Overlay for transitions */}
+      {/* Waiting state: inline panel (no modal) */}
       {status === 'waiting' && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-          <div className="bg-white rounded shadow p-6 text-center">
-            <div className="font-semibold mb-2">{trans('verb_conjugation_slot.waiting_for_players')}</div>
-            <button onClick={onReady} className="bg-green-600 text-white px-4 py-2 rounded">{trans('verb_conjugation_slot.i_am_ready')}</button>
-          </div>
+        <div className="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-8 shadow-lg text-center">
+          <div className="text-5xl mb-4">⏳</div>
+          <div className="text-gray-700 dark:text-gray-300 text-lg mb-6">{trans('verb_conjugation_slot.waiting_for_players')}</div>
+          <button onClick={onReady} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+            {trans('verb_conjugation_slot.i_am_ready')}
+          </button>
         </div>
+      )}
+
+      {status === 'in_progress' && (
+        <>
+          {/* Reels */}
+          <div className="sm:flex sm:justify-center">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <Reel
+                items={pronounPool}
+                itemToLabel={(x) => x.display}
+                stopIndex={stops.p}
+                spinTrigger={spinTrigger}
+                height={56}
+              />
+              <Reel
+                items={verbPool}
+                itemToLabel={(x) => x.infinitive}
+                stopIndex={stops.v}
+                spinTrigger={spinTrigger}
+                height={56}
+              />
+              <Reel
+                items={tensePool}
+                itemToLabel={(x) => x.name}
+                stopIndex={stops.t}
+                spinTrigger={spinTrigger}
+                height={56}
+              />
+            </div>
+          </div>
+
+          {/* Input */}
+          <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded p-4">
+            <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{trans('verb_conjugation_slot.input_hint')}</div>
+            <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-2">
+              <input
+                className="flex-1 min-w-0 border dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
+                placeholder={trans('verb_conjugation_slot.input_placeholder')}
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') submit(); }}
+              />
+              <button onClick={submit} className="bg-indigo-600 text-white px-4 py-2 rounded w-full md:w-auto">{trans('generals.submit')}</button>
+              {/* Spin is automatic; no manual start button */}
+            </div>
+            {lastAnswer && (
+              <div className="mt-2 text-sm">
+                {trans('verb_conjugation_slot.last_answer_prefix')} <span className={lastAnswer.correct ? 'text-green-700' : 'text-red-700'}>
+                  {lastAnswer.player_name} → {lastAnswer.answer} ({lastAnswer.correct ? trans('verb_conjugation_slot.correct') : trans('verb_conjugation_slot.wrong')})
+                </span>
+              </div>
+            )}
+          </div>
+        </>
       )}
     </div>
   );
