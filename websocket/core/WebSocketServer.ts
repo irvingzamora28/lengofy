@@ -3,6 +3,7 @@ import { GameType, GameManager, BaseGameState } from './types';
 import { GenderDuelManager } from '../games/gender-duel/GenderDuelManager';
 import { MemoryTranslationManager } from '../games/memory-translation/MemoryTranslationManager';
 import { WordSearchPuzzleManager } from '../games/word-search-puzzle/WordSearchPuzzleManager';
+import { VerbConjugationSlotManager } from '../games/verb-conjugation-slot/VerbConjugationSlotManager';
 
 export class WebSocketServer {
     private gameManagers: Map<GameType, GameManager<BaseGameState>>;
@@ -16,11 +17,13 @@ export class WebSocketServer {
         this.lobbyConnections.set('gender_duel', new Set());
         this.lobbyConnections.set('memory_translation', new Set());
         this.lobbyConnections.set('word_search_puzzle', new Set());
+        this.lobbyConnections.set('verb_conjugation_slot', new Set());
 
         // Initialize game managers with their respective lobby connections
         this.gameManagers.set('gender_duel', new GenderDuelManager(this.lobbyConnections.get('gender_duel')!));
         this.gameManagers.set('memory_translation', new MemoryTranslationManager(this.lobbyConnections.get('memory_translation')!));
         this.gameManagers.set('word_search_puzzle', new WordSearchPuzzleManager(this.lobbyConnections.get('word_search_puzzle')!));
+        this.gameManagers.set('verb_conjugation_slot', new VerbConjugationSlotManager(this.lobbyConnections.get('verb_conjugation_slot')!));
     }
 
     getWebSocketConfig() {
@@ -87,12 +90,24 @@ export class WebSocketServer {
                 if (gameManager) {
                     gameManager.handleMessage(ws, data);
                 }
+            } else if (data.type.includes('verb_conjugation_slot') || data.gameType === 'verb_conjugation_slot') {
+                console.log("It's a verb conjugation slot message");
+                const gameManager = this.gameManagers.get('verb_conjugation_slot');
+                if (gameManager) {
+                    gameManager.handleMessage(ws, data);
+                }
             }
 
             // Handle player-related messages
             if (data.type.startsWith('player_') || data.type === 'submit_answer') {
                 if (data.gameType === 'gender_duel') {
                     const gameManager = this.gameManagers.get('gender_duel');
+                    if (gameManager) {
+                        gameManager.handleMessage(ws, data);
+                        return;
+                    }
+                } else if (data.gameType === 'verb_conjugation_slot') {
+                    const gameManager = this.gameManagers.get('verb_conjugation_slot');
                     if (gameManager) {
                         gameManager.handleMessage(ws, data);
                         return;

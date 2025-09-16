@@ -1,0 +1,7 @@
+[
+  { "language": "en", "infinitive": "be",   "is_irregular": true,  "frequency_rank": 1,  "translation": null, "metadata": null },
+  { "language": "en", "infinitive": "have", "is_irregular": true,  "frequency_rank": 2,  "translation": null, "metadata": null },
+  { "language": "en", "infinitive": "do",   "is_irregular": true,  "frequency_rank": 3,  "translation": null, "metadata": null },
+  { "language": "en", "infinitive": "say",  "is_irregular": true,  "frequency_rank": 4,  "translation": null, "metadata": null },
+  { "language": "en", "infinitive": "go",   "is_irregular": true,  "frequency_rank": 5,  "translation": null, "metadata": null }
+]

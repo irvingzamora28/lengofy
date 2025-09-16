@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MemoryTranslationGame;
 use App\Models\GenderDuelGame;
 use App\Models\WordSearchPuzzleGame;
+use App\Models\VerbConjugationSlotGame;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsurePlayerInGame
@@ -26,6 +27,10 @@ class EnsurePlayerInGame
         'gender-duel' => [
             'model' => GenderDuelGame::class,
             'route_param' => 'genderDuelGame',
+        ],
+        'verb-conjugation-slot' => [
+            'model' => VerbConjugationSlotGame::class,
+            'route_param' => 'verbConjugationSlotGame',
         ],
     ];
 

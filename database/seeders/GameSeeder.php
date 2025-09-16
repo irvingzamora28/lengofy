@@ -29,6 +29,11 @@ class GameSeeder extends Seeder
                 'slug' => 'word-search-puzzle',
                 'supported_language_pairs' => null, // Available for all language pairs
             ],
+            [
+                'name' => 'Verb Conjugation Slot Machine',
+                'slug' => 'verb-conjugation-slot',
+                'supported_language_pairs' => null, // Available for all language pairs
+            ],
         ];
 
         foreach ($games as $game) {

@@ -1,0 +1,10 @@
+[
+  { "language": "en", "code": "i",       "display": "I",        "person": 1, "number": "sg", "is_polite": false, "order_index": 0 },
+  { "language": "en", "code": "you",     "display": "you",      "person": 2, "number": "sg", "is_polite": false, "order_index": 1 },
+  { "language": "en", "code": "he",      "display": "he",       "person": 3, "number": "sg", "is_polite": false, "order_index": 2 },
+  { "language": "en", "code": "she",     "display": "she",      "person": 3, "number": "sg", "is_polite": false, "order_index": 3 },
+  { "language": "en", "code": "it",      "display": "it",       "person": 3, "number": "sg", "is_polite": false, "order_index": 4 },
+  { "language": "en", "code": "we",      "display": "we",       "person": 1, "number": "pl", "is_polite": false, "order_index": 5 },
+  { "language": "en", "code": "you_pl",  "display": "you",      "person": 2, "number": "pl", "is_polite": false, "order_index": 6 },
+  { "language": "en", "code": "they",    "display": "they",     "person": 3, "number": "pl", "is_polite": false, "order_index": 7 }
+]

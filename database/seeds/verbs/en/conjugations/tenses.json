@@ -1,0 +1,6 @@
+[
+  { "language": "en", "code": "en.pres.ind", "name": "Present Simple",      "is_compound": false, "order_index": 0 },
+  { "language": "en", "code": "en.perf.ind", "name": "Present Perfect",     "is_compound": true,  "order_index": 1 },
+  { "language": "en", "code": "en.past.ind", "name": "Past Simple",         "is_compound": false, "order_index": 2 },
+  { "language": "en", "code": "en.fut.ind",  "name": "Future Simple",       "is_compound": false, "order_index": 3 }
+]

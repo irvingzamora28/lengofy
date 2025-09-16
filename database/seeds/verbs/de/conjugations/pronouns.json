@@ -1,0 +1,11 @@
+[
+  { "language": "de", "code": "ich", "display": "ich", "person": 1, "number": "sg", "is_polite": false, "order_index": 0 },
+  { "language": "de", "code": "du",  "display": "du",  "person": 2, "number": "sg", "is_polite": false, "order_index": 1 },
+  { "language": "de", "code": "er",  "display": "er",  "person": 3, "number": "sg", "is_polite": false, "order_index": 2 },
+  { "language": "de", "code": "sie", "display": "sie", "person": 3, "number": "sg", "is_polite": false, "order_index": 3 },
+  { "language": "de", "code": "es",  "display": "es",  "person": 3, "number": "sg", "is_polite": false, "order_index": 4 },
+  { "language": "de", "code": "wir", "display": "wir", "person": 1, "number": "pl", "is_polite": false, "order_index": 5 },
+  { "language": "de", "code": "ihr", "display": "ihr", "person": 2, "number": "pl", "is_polite": false, "order_index": 6 },
+  { "language": "de", "code": "sie_pl", "display": "sie", "person": 3, "number": "pl", "is_polite": false, "order_index": 7 },
+  { "language": "de", "code": "sie_pol", "display": "Sie", "person": 3, "number": "sg", "is_polite": true,  "order_index": 8 }
+]

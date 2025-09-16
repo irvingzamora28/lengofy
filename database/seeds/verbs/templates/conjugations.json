@@ -1,0 +1,20 @@
+[
+  {
+    "language": "de",
+    "infinitive": "sprechen",
+    "tense_code": "de.pres.ind",
+    "pronoun_code": "ich",
+    "form": "spreche",
+    "normalized_form": "spreche",
+    "notes": null
+  },
+  {
+    "language": "de",
+    "infinitive": "sprechen",
+    "tense_code": "de.pres.ind",
+    "pronoun_code": "du",
+    "form": "sprichst",
+    "normalized_form": "sprichst",
+    "notes": null
+  }
+]

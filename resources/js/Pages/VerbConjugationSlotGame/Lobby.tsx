@@ -1,0 +1,170 @@
+import { useEffect, useRef, useState } from 'react';
+import { Link, router } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
+import DifficultyModal from '@/Components/Games/DifficultyModal';
+import { FaFlag, FaGlobe, FaPlay, FaUsers, FaDumbbell } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+
+interface Player {
+  id: number;
+  user_id: number;
+  player_name: string;
+  score: number;
+  is_ready?: boolean;
+}
+
+interface LanguageInfo { id: number; code: string; name: string; flag: string; }
+
+interface GameCard {
+  id: number;
+  status: string;
+  players: Player[];
+  max_players: number;
+  language_name: string;
+  source_language: LanguageInfo;
+  target_language: LanguageInfo;
+}
+
+interface Props {
+  auth: { user: { id: number; language_pair_id: number } };
+  activeGames: GameCard[];
+  wsEndpoint: string;
+}
+
+export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
+  const [games, setGames] = useState<GameCard[]>(activeGames || []);
+  const [showDifficultyModal, setShowDifficultyModal] = useState(false);
+  const [isSinglePlayer, setIsSinglePlayer] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const wsRef = useRef<WebSocket | null>(null);
+  const { t: trans } = useTranslation();
+
+  useEffect(() => {
+    const ws = new WebSocket(wsEndpoint);
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ type: 'join_lobby', gameType: 'verb_conjugation_slot', userId: auth.user.id }));
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'verb_conjugation_slot_game_created') {
+        setGames((prev) => (prev.some((g) => g.id === data.game.id) ? prev : [...prev, data.game]));
+      }
+    };
+
+    return () => { try { ws.close(); } catch {} };
+  }, [wsEndpoint, auth.user.id]);
+
+  const openCreateRoom = () => { setIsSinglePlayer(false); setShowDifficultyModal(true); };
+  const openPractice = () => { setIsSinglePlayer(true); setShowDifficultyModal(true); };
+
+  const startGame = () => {
+    if (isSinglePlayer) {
+      router.visit(route('games.verb-conjugation-slot.practice'), {
+        method: 'get',
+        data: { difficulty: selectedDifficulty, category: selectedCategory },
+      });
+      setShowDifficultyModal(false);
+      return;
+    }
+
+    router.post(route('games.verb-conjugation-slot.create'), {
+      language_pair_id: auth.user.language_pair_id,
+      max_players: 8,
+      difficulty: selectedDifficulty,
+      category: selectedCategory,
+    });
+    setShowDifficultyModal(false);
+  };
+
+  return (
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.lobby')}</h2>}>
+      <div className="py-10">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden shadow sm:rounded-lg">
+            <div className="p-4">
+              <div className="flex flex-col sm:flex-row justify-between gap-3">
+                <div>
+                  <h3 className="text-2xl font-bold flex items-center gap-2">
+                    <FaGlobe className="text-indigo-600" /> {trans('verb_conjugation_slot.active_games_plural')}
+                  </h3>
+                  <p className="text-sm text-gray-600">{trans('verb_conjugation_slot.connect_learn_challenge')}</p>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={openCreateRoom} className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded inline-flex items-center">
+                    <FaPlay className="mr-2" /> {trans('verb_conjugation_slot.btn_create_new_room')}
+                  </button>
+                  <button onClick={openPractice} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded inline-flex items-center">
+                    <FaDumbbell className="mr-2" /> {trans('verb_conjugation_slot.btn_practice_alone')}
+                  </button>
+                </div>
+              </div>
+
+              {games.length === 0 ? (
+                <div className="text-center py-10 text-gray-600">{trans('verb_conjugation_slot.no_active_games')}</div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                  {games.map((game) => (
+                    <div key={game.id} className="bg-white border rounded shadow p-4 hover:shadow-md transition">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-2">
+                          <FaFlag className="text-blue-500" />
+                          <span className="font-semibold">Game #{game.id}</span>
+                        </div>
+                        <div className="flex items-center text-gray-600 text-sm">
+                          <FaUsers className="mr-1" /> {game.players.length}/{game.max_players}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-center gap-4 bg-gray-50 rounded p-3 mb-3">
+                        <div className="text-center">
+                          <span className="text-2xl">{game.source_language.flag}</span>
+                          <p className="text-xs text-gray-600 mt-1">{game.source_language.name}</p>
+                        </div>
+                        <span className="text-gray-400 text-lg">→</span>
+                        <div className="text-center">
+                          <span className="text-2xl">{game.target_language.flag}</span>
+                          <p className="text-xs text-gray-600 mt-1">{game.target_language.name}</p>
+                        </div>
+                      </div>
+                      <Link
+                        href={route('games.verb-conjugation-slot.join', { verbConjugationSlotGame: game.id })}
+                        method="post"
+                        as="button"
+                        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded inline-flex items-center justify-center"
+                      >
+                        <FaPlay className="mr-2" /> {trans('verb_conjugation_slot.btn_join_game')}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MobileDashboardLinks />
+
+      {showDifficultyModal && (
+        <DifficultyModal
+          showDifficultyModal={showDifficultyModal}
+          setShowDifficultyModal={setShowDifficultyModal}
+          selectedDifficulty={selectedDifficulty}
+          setSelectedDifficulty={setSelectedDifficulty}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          showCategories={false}
+          startGame={startGame}
+          easyText={trans('verb_conjugation_slot.modal_difficulty.easy_text')}
+          mediumText={trans('verb_conjugation_slot.modal_difficulty.medium_text')}
+          hardText={trans('verb_conjugation_slot.modal_difficulty.hard_text')}
+          gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'}
+        />
+      )}
+    </AuthenticatedLayout>
+  );
+}
