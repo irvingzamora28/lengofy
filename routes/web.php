@@ -279,6 +279,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/{verbConjugationSlotGame}/join', [VerbConjugationSlotGameController::class, 'join'])->name('games.verb-conjugation-slot.join');
             Route::post('/{verbConjugationSlotGame}/ready', [VerbConjugationSlotGameController::class, 'ready'])->name('games.verb-conjugation-slot.ready');
             Route::delete('/{verbConjugationSlotGame}/leave', [VerbConjugationSlotGameController::class, 'leave'])->name('games.verb-conjugation-slot.leave');
+            Route::post('/{verbConjugationSlotGame}/end', [VerbConjugationSlotGameController::class, 'end'])->name('games.verb-conjugation-slot.end');
         });
     });
 

@@ -11,8 +11,8 @@ export interface VCSPrompt {
 export interface VerbConjugationSlotGameState extends BaseGameState {
   status: 'waiting' | 'in_progress' | 'completed';
   players: {
-    id: number;
-    user_id: number;
+    id: string;
+    user_id: string;
     player_name: string;
     score: number;
     is_ready?: boolean;
@@ -23,14 +23,14 @@ export interface VerbConjugationSlotGameState extends BaseGameState {
   total_rounds: number;
   current_prompt: VCSPrompt | null;
   last_answer: {
-    playerId: number;
-    userId: number;
+    playerId: string;
+    userId: string;
     player_name: string;
     answer: string;
     correct: boolean;
   } | null;
   max_players: number;
-  hostId: number;
+  hostId: string;
 }
 
 export interface VerbConjugationSlotGameMessage extends BaseGameMessage {
@@ -50,16 +50,16 @@ export interface VerbConjugationSlotGameMessage extends BaseGameMessage {
     | 'answer_submitted'
     | 'verb_conjugation_slot_game_state_updated';
   gameId: string;
-  userId: number;
+  userId: string;
   game?: VerbConjugationSlotGameState;
   data?: {
-    player_id?: number;
-    user_id?: number;
+    player_id?: string;
+    user_id?: string;
     player_name?: string;
     players?: any[];
     prompts?: VCSPrompt[];
     max_players?: number;
     total_rounds?: number;
-    hostId?: number;
+    hostId?: string;
   };
 }

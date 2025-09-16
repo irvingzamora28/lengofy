@@ -34,6 +34,7 @@ class VerbConjugationSlotGameController extends Controller
                 ->map(function ($game) {
                     return [
                         'id' => $game->id,
+                        'hostId' => $game->creator_id,
                         'players' => $game->players,
                         'max_players' => $game->max_players,
                         'language_name' => "{$game->languagePair->sourceLanguage->name} → {$game->languagePair->targetLanguage->name}",
@@ -171,6 +172,18 @@ class VerbConjugationSlotGameController extends Controller
     public function leave(VerbConjugationSlotGame $verbConjugationSlotGame)
     {
         $this->gameService->leaveGame($verbConjugationSlotGame, auth()->user());
+        return redirect()->route('games.verb-conjugation-slot.lobby');
+    }
+
+    public function end(VerbConjugationSlotGame $verbConjugationSlotGame)
+    {
+        // Only the creator/host can end the game
+        if ($verbConjugationSlotGame->creator_id !== auth()->user()->id) {
+            abort(403, 'Only the game creator can end this game.');
+        }
+
+        $this->gameService->endGame($verbConjugationSlotGame);
+
         return redirect()->route('games.verb-conjugation-slot.lobby');
     }
 
