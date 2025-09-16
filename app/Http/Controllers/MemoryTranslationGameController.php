@@ -33,6 +33,7 @@ class MemoryTranslationGameController extends Controller
                 ->map(function ($memoryTranslationGame) {
                     return [
                         'id' => $memoryTranslationGame->id,
+                        'hostId' => $memoryTranslationGame->creator_id,
                         'players' => $memoryTranslationGame->players,
                         'max_players' => $memoryTranslationGame->max_players,
                         'language_name' => "{$memoryTranslationGame->languagePair->sourceLanguage->name} → {$memoryTranslationGame->languagePair->targetLanguage->name}",
@@ -232,6 +233,19 @@ class MemoryTranslationGameController extends Controller
     public function leave(MemoryTranslationGame $memoryTranslationGame)
     {
         $this->memoryTranslationGameService->leaveGame($memoryTranslationGame, auth()->user());
+        return redirect()->route('games.memory-translation.lobby');
+    }
+
+    public function end(MemoryTranslationGame $memoryTranslationGame)
+    {
+        // Only the creator/host can end the game
+        if ($memoryTranslationGame->creator_id !== auth()->user()->id) {
+            abort(403, 'Only the game creator can end this game.');
+        }
+
+        $this->memoryTranslationGameService->endGame($memoryTranslationGame);
+
+        // Redirect back to lobby; WebSocket clients will be notified by the client-side message
         return redirect()->route('games.memory-translation.lobby');
     }
 }

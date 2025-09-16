@@ -12,11 +12,13 @@ import {
   FaChartBar,
   FaGamepad,
 } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { MemoryTranslationGame, User, Score, Game, Lesson } from '@/types';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
 import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
+import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 
 interface Props {
   auth: {
@@ -39,6 +41,8 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const { t: trans } = useTranslation();
   const wsRef = useRef<WebSocket | null>(null);
+  const [showConfirmEndModal, setShowConfirmEndModal] = useState(false);
+  const [pendingEndGameId, setPendingEndGameId] = useState<number | null>(null);
 
   useEffect(() => {
     console.log("Active games: ", activeGames);
@@ -99,6 +103,46 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
       }
     };
   }, [wsEndpoint, auth.user.id]);
+
+  const handleEndGame = (gameId: number) => {
+    // Only attempt if we have a socket; server will also validate creator on HTTP
+    if (wsRef.current?.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({
+        type: 'memory_translation_game_end',
+        gameId,
+        gameType: 'memory_translation',
+        userId: auth.user.id,
+      }));
+    }
+
+    // Call backend to set status to ended
+    router.post(route('games.memory-translation.end', `${gameId}`), {}, {
+      preserveScroll: true,
+      onFinish: () => {
+        // Optimistically remove from UI
+        setGames(prev => prev.filter(g => g.id !== gameId));
+      }
+    });
+  };
+
+  // Handlers for confirmation modal to end a game
+  const openConfirmEnd = (gameId: number) => {
+    setPendingEndGameId(gameId);
+    setShowConfirmEndModal(true);
+  };
+
+  const confirmEndGame = () => {
+    if (pendingEndGameId !== null) {
+      handleEndGame(pendingEndGameId);
+    }
+    setShowConfirmEndModal(false);
+    setPendingEndGameId(null);
+  };
+
+  const cancelEndGame = () => {
+    setShowConfirmEndModal(false);
+    setPendingEndGameId(null);
+  };
 
   const startCreateRoom = () => {
     console.log("Starting create room before settings update");
@@ -236,7 +280,7 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
                         {trans('categories.' + game.category.key)}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row gap-2 justify-between items-stretch sm:items-center">
                     <Link
                       href={`/games/memory-translation/${game.id}/join`}
                       method="post"
@@ -245,6 +289,16 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
                     >
                       {trans('memory_translation.btn_join_game')}
                     </Link>
+                    {game.hostId === auth.user.id && (
+                      <button
+                        onClick={() => openConfirmEnd(game.id)}
+                        aria-label={trans('memory_translation.btn_end_game')}
+                        title={trans('memory_translation.btn_end_game')}
+                        className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                      >
+                        <MdClose size={18} />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -283,6 +337,15 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
         mediumText={trans('memory_translation.modal_difficulty.medium_text')}
         hardText={trans('memory_translation.modal_difficulty.hard_text')}
         gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
+
+      {showConfirmEndModal && (
+        <ConfirmationExitModal
+          title={trans('generals.modal_game_exit.title')}
+          message={trans('generals.modal_game_exit.message')}
+          onLeave={confirmEndGame}
+          onCancel={cancelEndGame}
+        />
+      )}
 
     </AuthenticatedLayout>
   );

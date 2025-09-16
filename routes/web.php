@@ -209,6 +209,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/{memoryTranslationGame}/join', [MemoryTranslationGameController::class, 'join'])->name('games.memory-translation.join');
             Route::post('/{memoryTranslationGame}/ready', [MemoryTranslationGameController::class, 'ready'])->name('games.memory-translation.ready');
             Route::delete('/{memoryTranslationGame}/leave', [MemoryTranslationGameController::class, 'leave'])->name('games.memory-translation.leave');
+            Route::post('/{memoryTranslationGame}/end', [MemoryTranslationGameController::class, 'end'])->name('games.memory-translation.end');
         });
 
         // Word Puzzle Routes
