@@ -31,6 +31,7 @@ class WordSearchPuzzleGameController extends Controller
                 ->map(function ($WordSearchPuzzleGame) {
                     return [
                         'id' => $WordSearchPuzzleGame->id,
+                        'hostId' => $WordSearchPuzzleGame->creator_id,
                         'players' => $WordSearchPuzzleGame->players,
                         'max_players' => $WordSearchPuzzleGame->max_players,
                         'language_name' => "{$WordSearchPuzzleGame->languagePair->sourceLanguage->name} → {$WordSearchPuzzleGame->languagePair->targetLanguage->name}",
@@ -243,6 +244,18 @@ class WordSearchPuzzleGameController extends Controller
     public function leave(WordSearchPuzzleGame $wordSearchPuzzleGame)
     {
         $this->wordSearchPuzzleGameService->leaveGame($wordSearchPuzzleGame, auth()->user());
+        return redirect()->route('games.word-search-puzzle.lobby');
+    }
+
+    public function end(WordSearchPuzzleGame $wordSearchPuzzleGame)
+    {
+        // Only the creator/host can end the game
+        if ($wordSearchPuzzleGame->creator_id !== auth()->user()->id) {
+            abort(403, 'Only the game creator can end this game.');
+        }
+
+        $this->wordSearchPuzzleGameService->endGame($wordSearchPuzzleGame);
+
         return redirect()->route('games.word-search-puzzle.lobby');
     }
 }

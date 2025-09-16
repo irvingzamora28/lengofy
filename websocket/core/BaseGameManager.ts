@@ -47,7 +47,7 @@ export abstract class BaseGameManager<T extends BaseGameState> {
         }
     }
 
-    broadcastState(gameId: string): void {
+    protected broadcastState(gameId: string): void {
         const room = this.getRoom(gameId);
         const state = this.getState(gameId);
         if (room && state) {

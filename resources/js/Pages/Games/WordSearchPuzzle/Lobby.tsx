@@ -8,11 +8,13 @@ import {
     FaFont,
     FaDumbbell,
 } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { WordSearchPuzzleGame, User } from '@/types';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
 import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
+import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 
 interface Props {
     auth: {
@@ -33,6 +35,8 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
     const [selectedCategory, setSelectedCategory] = useState<number>(0);
     const { t: trans } = useTranslation();
     const wsRef = useRef<WebSocket | null>(null);
+    const [showConfirmEndModal, setShowConfirmEndModal] = useState(false);
+    const [pendingEndGameId, setPendingEndGameId] = useState<number | null>(null);
 
     // Subscribe to game events using WebSocket
     useEffect(() => {
@@ -87,6 +91,44 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
             }
         };
     }, [wsEndpoint, auth.user.id]);
+
+    const handleEndGame = (gameId: number) => {
+        // Inform room via WebSocket
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            wsRef.current.send(JSON.stringify({
+                type: 'word_search_puzzle_game_end',
+                gameId,
+                gameType: 'word_search_puzzle',
+                userId: auth.user.id,
+            }));
+        }
+
+        // Persist on backend
+        router.post(route('games.word-search-puzzle.end', `${gameId}`), {}, {
+            preserveScroll: true,
+            onFinish: () => {
+                setGames(prev => prev.filter(g => g.id !== gameId));
+            }
+        });
+    };
+
+    const openConfirmEnd = (gameId: number) => {
+        setPendingEndGameId(gameId);
+        setShowConfirmEndModal(true);
+    };
+
+    const confirmEndGame = () => {
+        if (pendingEndGameId !== null) {
+            handleEndGame(pendingEndGameId);
+        }
+        setShowConfirmEndModal(false);
+        setPendingEndGameId(null);
+    };
+
+    const cancelEndGame = () => {
+        setShowConfirmEndModal(false);
+        setPendingEndGameId(null);
+    };
 
     const startCreateRoom = () => {
         router.post(
@@ -246,6 +288,7 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                                                             </div>
                                                         </div>
 
+                                                        <div className="flex flex-col sm:flex-row gap-2 justify-between items-stretch sm:items-center">
                                                         <Link
                                                             href={`/games/word-search-puzzle/${game.id}/join`}
                                                             method="post"
@@ -254,6 +297,17 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                                                         >
                                                             <FaPlay className="mr-2 w-4 h-4" /> {trans('word_search_puzzle.btn_join_game')}
                                                         </Link>
+                                                        {game.hostId === auth.user.id && (
+                                                            <button
+                                                                onClick={() => openConfirmEnd(game.id)}
+                                                                aria-label={trans('generals.games.btn_end_game')}
+                                                                title={trans('generals.games.btn_end_game')}
+                                                                className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                                                            >
+                                                                <MdClose size={18} />
+                                                            </button>
+                                                        )}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -281,6 +335,15 @@ export default function WordSearchPuzzleLobby({ auth, activeGames, wsEndpoint }:
                     mediumText={trans('word_search_puzzle.modal_difficulty.medium_text')}
                     hardText={trans('word_search_puzzle.modal_difficulty.hard_text')}
                     gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'}
+                />
+            )}
+
+            {showConfirmEndModal && (
+                <ConfirmationExitModal
+                    title={trans('generals.modal_game_exit.title')}
+                    message={trans('generals.modal_game_exit.message')}
+                    onLeave={confirmEndGame}
+                    onCancel={cancelEndGame}
                 />
             )}
         </AuthenticatedLayout>

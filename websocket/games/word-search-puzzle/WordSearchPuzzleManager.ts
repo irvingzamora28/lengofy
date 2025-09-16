@@ -107,7 +107,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         }
     }
 
-    private handleLeaveGame(ws: ServerWebSocket, gameId: string, userId: number): void {
+    private handleLeaveGame(ws: ServerWebSocket, gameId: string, userId: string): void {
         const room = this.getRoom(gameId);
         const state = this.getState(gameId);
 
@@ -291,7 +291,7 @@ export class WordSearchPuzzleManager extends BaseGameManager<WordSearchPuzzleGam
         }
     }
 
-    private broadcastState(gameId: string): void {
+    protected override broadcastState(gameId: string): void {
         const state = this.getState(gameId);
         const room = this.getRoom(gameId);
 

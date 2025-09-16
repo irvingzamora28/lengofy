@@ -221,8 +221,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/found-word', [WordSearchPuzzleGameController::class, 'storeFoundWord']);
             Route::post('{wordSearchPuzzleGame}/join', [WordSearchPuzzleGameController::class, 'join'])->name('join');
             Route::get('/{wordSearchPuzzleGame}/join-from-invite', [WordSearchPuzzleGameController::class, 'joinFromInvite'])->name('join-from-invite');
-            Route::post('{wordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
-            Route::delete('{wordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
+            Route::post('/{wordSearchPuzzleGame}/ready', [WordSearchPuzzleGameController::class, 'ready'])->name('ready');
+            Route::delete('/{wordSearchPuzzleGame}/leave', [WordSearchPuzzleGameController::class, 'leave'])->name('leave');
+            Route::post('/{wordSearchPuzzleGame}/end', [WordSearchPuzzleGameController::class, 'end'])->name('end');
             Route::get('/practice', [WordSearchPuzzleGameController::class, 'practice'])->name('practice');
             Route::get('/get-words', [WordSearchPuzzleGameController::class, 'getWords'])->name('get-words');
         });

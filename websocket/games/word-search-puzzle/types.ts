@@ -10,8 +10,8 @@ export interface WordSearchPuzzleGameState extends BaseGameState {
     id: string;
     status: 'waiting' | 'in_progress' | 'completed';
     players: {
-        id: number;
-        user_id: number;
+        id: string;
+        user_id: string;
         player_name: string;
         score: number;
         is_ready?: boolean;
@@ -33,9 +33,9 @@ export interface WordSearchPuzzleGameState extends BaseGameState {
         name: string;
     };
     max_players: number;
-    hostId: number;
+    hostId: string;
     winner: {
-        id: number;
+        id: string;
         player_name: string;
         score: number;
     } | null;
@@ -43,7 +43,7 @@ export interface WordSearchPuzzleGameState extends BaseGameState {
 
 export interface WordSearchPuzzlePlayer {
     id: number;
-    user_id: number;
+    user_id: string;
     player_name: string;
     score: number;
     is_ready: boolean;
@@ -53,11 +53,11 @@ export interface WordSearchPuzzlePlayer {
 export interface WordSearchPuzzleGameMessage extends BaseGameMessage {
     type: string;
     gameId: string;
-    userId?: number;
+    userId: string;
     game?: WordSearchPuzzleGameState;
     data?: {
-        player_id?: number;
-        user_id?: number;
+        player_id?: string;
+        user_id?: string;
         player_name?: string;
         players?: any[];
         words?: any[];
@@ -66,7 +66,7 @@ export interface WordSearchPuzzleGameMessage extends BaseGameMessage {
         cells?: { x: number; y: number }[];
         category?: any;
         max_players?: number;
-        hostId?: number;
+        hostId?: string;
         source_language?: string;
         target_language?: string;
     };
