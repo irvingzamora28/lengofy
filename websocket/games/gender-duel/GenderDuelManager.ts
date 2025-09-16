@@ -3,8 +3,8 @@ import { BaseGameManager } from '../../core/BaseGameManager';
 import { GenderDuelGameState, GenderDuelGameMessage } from './types';
 
 export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
-    private transitionTimers: Map<string, Map<number, NodeJS.Timeout>>;
-    private timeoutFlags: Map<string, Set<number>>;
+    protected transitionTimers: Map<string, Map<number, NodeJS.Timeout>>;
+    protected timeoutFlags: Map<string, Set<number>>;
 
     constructor(lobbyConnections: Set<ServerWebSocket>) {
         super('gender_duel', lobbyConnections);
@@ -28,6 +28,9 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
                 break;
             case "gender_duel_game_created":
                 this.handleGameCreated(message);
+                break;
+            case "gender_duel_game_end":
+                this.handleGameEnd(gameId);
                 break;
             case "submit_answer":
                 this.handleAnswer(ws, message);
@@ -128,6 +131,19 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
         }
     }
 
+    private handleGameEnd(gameId: string): void {
+        const state = this.getState(gameId);
+        if (state) {
+            state.status = 'completed';
+            this.broadcastState(gameId);
+
+            // Clean up game resources after a delay
+            setTimeout(() => {
+                this.cleanupCompletely(gameId);
+            }, 10000); // 10 second delay
+        }
+    }
+
     private handlePlayerReady(message: GenderDuelGameMessage): void {
         const gameId = message.genderDuelGameId || message.gameId;
         const state = this.getState(gameId);
@@ -182,9 +198,9 @@ export class GenderDuelManager extends BaseGameManager<GenderDuelGameState> {
         console.log("Answer is correct:", isCorrect);
 
         // Find the answering player
-        const answeringPlayer = state.players.find(p => p.user_id === Number(message.data?.userId));
+        const answeringPlayer = state.players.find(p => p.user_id === Number(message.data?.user_id));
         if (!answeringPlayer) {
-            console.log("Player not found:", message.data?.userId);
+            console.log("Player not found:", message.data?.user_id);
             return;
         }
 

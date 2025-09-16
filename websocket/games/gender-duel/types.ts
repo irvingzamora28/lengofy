@@ -21,7 +21,7 @@ export interface GenderDuelGameMessage extends BaseGameMessage {
     gameId: string;
     genderDuelGameId?: string; // For backward compatibility
     gameType?: string;
-    userId?: string;
+    userId: string;
     data?: {
         player_id?: string;
         user_id?: string;
@@ -42,7 +42,7 @@ export interface MemoryTranslationGameMessage extends BaseGameMessage {
     gameId: string;
     memoryTranslationGameId?: string;
     gameType?: string;
-    userId?: string;
+    userId: string;
     data?: {
         player_id?: string;
         user_id?: string;

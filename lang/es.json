@@ -34,7 +34,8 @@
             "loser_announcement": "{{name}} pierde!",
             "tie": "Empate!",
             "tie_with_players": "Empate entre jugadores {{players}}!",
-            "change_category": "Cambiar Categoría"
+            "change_category": "Cambiar Categoría",
+            "btn_end_game": "Terminar Juego"
         },
         "modal_game_exit": {
             "title": "¿Deseas Abandonar el Juego?",

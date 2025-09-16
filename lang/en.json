@@ -34,7 +34,8 @@
             "loser_announcement": "{{name}} loses!",
             "tie": "It's a tie!",
             "tie_with_players": "It's a tie between players {{players}}!",
-            "change_category": "Change Category"
+            "change_category": "Change Category",
+            "btn_end_game": "End Game"
         },
         "modal_game_exit": {
             "title": "Leave Game?",

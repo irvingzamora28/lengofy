@@ -192,6 +192,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [GenderDuelGameController::class, 'lobby'])->name('games.gender-duel.lobby');
             Route::post('/', [GenderDuelGameController::class, 'create'])->name('games.gender-duel.create');
             Route::get('/practice', [GenderDuelGameController::class, 'practice'])->name('games.gender-duel.practice');
+            Route::post('/{genderDuelGame}/end', [GenderDuelGameController::class, 'end'])->name('games.gender-duel.end');
             Route::get('/get-words', [GenderDuelGameController::class, 'getGenderDuelWords'])->name('games.gender-duel.get-words');
             Route::get('/{genderDuelGame}/join-from-invite', [GenderDuelGameController::class, 'joinFromInvite'])->name('games.gender-duel.join-from-invite');
             Route::post('/{genderDuelGame}/join', [GenderDuelGameController::class, 'join'])->name('games.gender-duel.join');

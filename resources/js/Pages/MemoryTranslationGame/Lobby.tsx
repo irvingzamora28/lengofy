@@ -292,8 +292,8 @@ export default function MemoryTranslationLobby({ auth, activeGames, wsEndpoint, 
                     {game.hostId === auth.user.id && (
                       <button
                         onClick={() => openConfirmEnd(game.id)}
-                        aria-label={trans('memory_translation.btn_end_game')}
-                        title={trans('memory_translation.btn_end_game')}
+                        aria-label={trans('generals.games.btn_end_game')}
+                        title={trans('generals.games.btn_end_game')}
                         className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                       >
                         <MdClose size={18} />

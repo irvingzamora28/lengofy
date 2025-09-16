@@ -33,6 +33,7 @@ class GenderDuelGameController extends Controller
                 ->map(function ($genderDuelGame) {
                     return [
                         'id' => $genderDuelGame->id,
+                        'hostId' => $genderDuelGame->creator_id,
                         'players' => $genderDuelGame->players,
                         'max_players' => $genderDuelGame->max_players,
                         'language_name' => "{$genderDuelGame->languagePair->sourceLanguage->name} → {$genderDuelGame->languagePair->targetLanguage->name}",
@@ -174,6 +175,18 @@ class GenderDuelGameController extends Controller
     public function leave(GenderDuelGame $genderDuelGame)
     {
         $this->genderDuelGameService->leaveGame($genderDuelGame, auth()->user());
+        return redirect()->route('games.gender-duel.lobby');
+    }
+
+    public function end(GenderDuelGame $genderDuelGame)
+    {
+        // Only the creator/host can end the game
+        if ($genderDuelGame->creator_id !== auth()->user()->id) {
+            abort(403, 'Only the game creator can end this game.');
+        }
+
+        $this->genderDuelGameService->endGame($genderDuelGame);
+
         return redirect()->route('games.gender-duel.lobby');
     }
 

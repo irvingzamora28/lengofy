@@ -34,7 +34,8 @@
             "loser_announcement": "{{name}} verliert!",
             "tie": "Unentschieden!",
             "tie_with_players": "Unentschieden zwischen Spielern {{players}}!",
-            "change_category": "Kategorie ändern"
+            "change_category": "Kategorie ändern",
+            "btn_end_game": "Spiel beenden"
         },
         "modal_exit": {
             "title": "Spiel verlassen?",

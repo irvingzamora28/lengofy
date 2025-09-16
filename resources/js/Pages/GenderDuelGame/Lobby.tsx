@@ -8,11 +8,13 @@ import {
   FaFlag,
   FaDumbbell,
 } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { GenderDuelGame, User } from '@/types';
 import DifficultyModal from '@/Components/Games/DifficultyModal';
 import { useTranslation } from 'react-i18next';
 import MobileDashboardLinks from '@/Components/Navigation/MobileDashboardLinks';
+import ConfirmationExitModal from '@/Components/Games/ConfirmationExitModal';
 
 interface Props {
   auth: {
@@ -33,6 +35,8 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const { t: trans } = useTranslation();
   const wsRef = useRef<WebSocket | null>(null);
+  const [showConfirmEndModal, setShowConfirmEndModal] = useState(false);
+  const [pendingEndGameId, setPendingEndGameId] = useState<number | null>(null);
 
   // Subscribe to game events using WebSocket
   useEffect(() => {
@@ -89,6 +93,42 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
       }
     };
   }, [wsEndpoint, auth.user.id]);
+
+  const handleEndGame = (gameId: number) => {
+    if (wsRef.current?.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({
+        type: 'gender_duel_game_end',
+        gameId,
+        gameType: 'gender_duel',
+        userId: auth.user.id,
+      }));
+    }
+
+    router.post(route('games.gender-duel.end', `${gameId}`), {}, {
+      preserveScroll: true,
+      onFinish: () => {
+        setGames(prev => prev.filter(g => g.id !== gameId));
+      }
+    });
+  };
+
+  const openConfirmEnd = (gameId: number) => {
+    setPendingEndGameId(gameId);
+    setShowConfirmEndModal(true);
+  };
+
+  const confirmEndGame = () => {
+    if (pendingEndGameId !== null) {
+      handleEndGame(pendingEndGameId);
+    }
+    setShowConfirmEndModal(false);
+    setPendingEndGameId(null);
+  };
+
+  const cancelEndGame = () => {
+    setShowConfirmEndModal(false);
+    setPendingEndGameId(null);
+  };
 
   const startCreateRoom = () => {
     router.post(
@@ -243,6 +283,7 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
                               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">{game.target_language.name}</p>
                             </div>
                           </div>
+                          <div className="flex flex-col sm:flex-row gap-2 justify-between items-stretch sm:items-center">
 
                           <Link
                             href={`/games/gender-duel/${game.id}/join`}
@@ -252,6 +293,17 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
                           >
                             <FaPlay className="mr-2 w-4 h-4" /> {trans('gender_duel.btn_join_game')}
                           </Link>
+                          {game.hostId === auth.user.id && (
+                            <button
+                              onClick={() => openConfirmEnd(game.id)}
+                              aria-label={trans('generals.games.btn_end_game')}
+                        title={trans('generals.games.btn_end_game')}
+                              className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                            >
+                              <MdClose size={18} />
+                            </button>
+                          )}
+                        </div>
                         </div>
                       </div>
                     ))}
@@ -280,6 +332,15 @@ export default function LanguageLobby({ auth, activeGames, wsEndpoint }: Props) 
           mediumText={trans('gender_duel.modal_difficulty.medium_text')}
           hardText={trans('gender_duel.modal_difficulty.hard_text')}
           gameType={isSinglePlayer ? 'singlePlayer' : 'multiPlayer'} />
+      )}
+
+      {showConfirmEndModal && (
+        <ConfirmationExitModal
+          title={trans('generals.modal_game_exit.title')}
+          message={trans('generals.modal_game_exit.message')}
+          onLeave={confirmEndGame}
+          onCancel={cancelEndGame}
+        />
       )}
     </AuthenticatedLayout>
   );
