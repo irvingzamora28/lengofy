@@ -44,6 +44,7 @@
     { "language": "de", "infinitive": "folgen",    "is_irregular": false, "frequency_rank": 43,  "translation": "to follow",   "metadata": null },
     { "language": "de", "infinitive": "lernen",    "is_irregular": false, "frequency_rank": 44,  "translation": "to learn",    "metadata": null },
     { "language": "de", "infinitive": "bestehen",  "is_irregular": true,  "frequency_rank": 45,  "translation": "to pass/exist","metadata": null },
+    { "language": "de", "infinitive": "vergessen", "is_irregular": true,  "frequency_rank": 46,  "translation": "to forget",    "metadata": null },
     { "language": "de", "infinitive": "verstehen", "is_irregular": true,  "frequency_rank": 46,  "translation": "to understand","metadata": null },
     { "language": "de", "infinitive": "setzen",    "is_irregular": false, "frequency_rank": 47,  "translation": "to set/put",  "metadata": null },
     { "language": "de", "infinitive": "bekommen",  "is_irregular": true,  "frequency_rank": 48,  "translation": "to get/receive","metadata": null },
