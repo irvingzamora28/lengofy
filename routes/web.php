@@ -9,6 +9,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\WordSearchPuzzleGameController;
+use App\Http\Controllers\VerbConjugationController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -305,6 +306,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/lessons/{level}/{lesson_number}/exercises/{exercise}', [LessonController::class, 'showExercise'])->name('lessons.exercises.show');
     Route::post('/lessons/{level}/{lesson_number}/complete', [LessonController::class, 'markComplete'])->name('lessons.complete');
 
+    // Verbs list (search + pagination)
+    Route::get('/verbs', [VerbConjugationController::class, 'index'])->name('verbs.index');
+
+    // Verb study page (single verb with per-tense tables)
+    Route::get('/verbs/{verb}', [VerbConjugationController::class, 'show'])->name('verbs.show');
 });
 
 // Admin routes
