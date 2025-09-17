@@ -37,6 +37,14 @@
             "change_category": "Kategorie ändern",
             "btn_end_game": "Spiel beenden"
         },
+        "verbs": {
+            "title": "Verben",
+            "search_placeholder": "Infinitiv oder Übersetzung suchen...",
+            "clear": "Zurücksetzen",
+            "infinitive": "Infinitiv",
+            "translation": "Übersetzung",
+            "view": "Ansehen"
+        },
         "modal_exit": {
             "title": "Spiel verlassen?",
             "message": "Das Spiel läuft noch. Möchten Sie es wirklich verlassen?",

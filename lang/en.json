@@ -37,6 +37,14 @@
             "change_category": "Change Category",
             "btn_end_game": "End Game"
         },
+        "verbs": {
+            "title": "Verbs",
+            "search_placeholder": "Search infinitive or translation...",
+            "clear": "Clear",
+            "infinitive": "Infinitive",
+            "translation": "Translation",
+            "view": "View"
+        },
         "modal_game_exit": {
             "title": "Leave Game?",
             "message": "The game is still in progress. Are you sure you want to leave?",

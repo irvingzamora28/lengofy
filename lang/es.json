@@ -37,6 +37,14 @@
             "change_category": "Cambiar Categoría",
             "btn_end_game": "Terminar Juego"
         },
+        "verbs": {
+            "title": "Verbos",
+            "search_placeholder": "Buscar infinitivo o traducción...",
+            "clear": "Limpiar",
+            "infinitive": "Infinitivo",
+            "translation": "Traducción",
+            "view": "Ver"
+        },
         "modal_game_exit": {
             "title": "¿Deseas Abandonar el Juego?",
             "message": "El juego sigue en progreso. ¿Estás seguro de abandonar?",

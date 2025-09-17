@@ -1,7 +1,18 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+// shadcn/ui pagination
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
+import { useTranslation } from 'react-i18next';
 
 // Basic paginator types (compatible with Laravel's paginator JSON)
 interface PaginatorLink { url: string | null; label: string; active: boolean }
@@ -30,6 +41,7 @@ interface Props {
 }
 
 export default function Index({ filters, verbs }: Props) {
+  const { t: trans } = useTranslation();
   const searchInput = useRef<HTMLInputElement>(null);
   const [q, setQ] = useState<string>(filters.q ?? '');
 
@@ -56,8 +68,8 @@ export default function Index({ filters, verbs }: Props) {
   };
 
   return (
-    <AuthenticatedLayout header={<h2 className="font-semibold text-xl leading-tight">Verbs</h2>}>
-      <Head title="Verbs" />
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl leading-tight">{trans('generals.verbs.title')}</h2>}>
+      <Head title={trans('generals.verbs.title')} />
 
       <div className="py-6">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
@@ -69,16 +81,16 @@ export default function Index({ filters, verbs }: Props) {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 type="text"
-                placeholder="Search infinitive or translation..."
+                placeholder={trans('generals.verbs.search_placeholder')}
                 className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-100"
               />
-              <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Search</button>
+              <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"><FiSearch className="w-7 h-7" /></button>
               <Link
                 href={route('verbs.index')}
-                className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                className="px-3 py-3 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 preserveState
                 replace
-              >Clear</Link>
+              >{trans('generals.verbs.clear')}</Link>
             </form>
           </div>
 
@@ -88,8 +100,8 @@ export default function Index({ filters, verbs }: Props) {
               <table className="min-w-full text-sm">
                 <thead>
                   <tr className="text-left border-b border-gray-100 dark:border-gray-800">
-                    <th className="py-2 pr-4">Infinitive</th>
-                    <th className="py-2 pr-4">Translation</th>
+                    <th className="py-2 pr-4">{trans('generals.verbs.infinitive')}</th>
+                    <th className="py-2 pr-4">{trans('generals.verbs.translation')}</th>
                     <th className="py-2"></th>
                   </tr>
                 </thead>
@@ -99,7 +111,7 @@ export default function Index({ filters, verbs }: Props) {
                       <td className="py-2 pr-4 font-medium">{v.infinitive}</td>
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{v.translation ?? ''}</td>
                       <td className="py-2 text-right">
-                        <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 hover:underline">View</Link>
+                        <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 hover:underline">{trans('generals.verbs.view')}</Link>
                       </td>
                     </tr>
                   ))}
@@ -108,36 +120,89 @@ export default function Index({ filters, verbs }: Props) {
             </div>
           </div>
 
-          {/* Pagination */}
-          <div className="flex flex-wrap gap-2 items-center">
-            {normalized.links?.map((l, i) => {
-              const raw = l.label?.toLowerCase?.() || '';
-              const isPrev = raw.includes('previous');
-              const isNext = raw.includes('next');
-              return (
-                <Link
-                  key={i}
-                  href={l.url || ''}
-                  className={`px-3 py-1 rounded border ${l.active ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
-                  preserveScroll
-                  preserveState
-                >
-                  {/* Mobile: icons for prev/next, text for others */}
-                  <span className="md:hidden">
-                    {isPrev ? (
-                      <FiChevronLeft />
-                    ) : isNext ? (
-                      <FiChevronRight />
-                    ) : (
-                      <span dangerouslySetInnerHTML={{ __html: l.label }} />
+          {/* Pagination (shadcn/ui) - compact with ellipses */}
+          <Pagination>
+            <PaginationContent>
+              {(() => {
+                const current = (normalized as any).current_page ?? 1;
+                const last = (normalized as any).last_page ?? 1;
+                const links = (normalized as any).links as PaginatorLink[] | undefined;
+                const prev = links?.find((l) => (l.label || '').toLowerCase().includes('previous'));
+                const next = links?.find((l) => (l.label || '').toLowerCase().includes('next'));
+                const urlFor = (page: number) => links?.find((l) => l.label === String(page))?.url || '#';
+
+                // Small sets: show all pages 1..last
+                if (last <= 5) {
+                  return (
+                    <>
+                      <PaginationItem>
+                        <PaginationPrevious href={prev?.url || '#'} />
+                      </PaginationItem>
+                      {Array.from({ length: last }, (_, i) => i + 1).map((p) => (
+                        <PaginationItem key={`p-${p}`}>
+                          <PaginationLink href={urlFor(p)} isActive={p === current}>
+                            {p}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      <PaginationItem>
+                        <PaginationNext href={next?.url || '#'} />
+                      </PaginationItem>
+                    </>
+                  );
+                }
+
+                // Large sets UX:
+                // - At most 4 page buttons shown (excluding Prev/Next):
+                //   Start cluster: 1, 2, 3, ..., last
+                //   Middle cluster: 1, ..., current, ..., last
+                //   End cluster: 1, ..., last-2, last-1, last
+                const items: (number | 'ellipsis')[] = [];
+                if (current <= 3) {
+                  items.push(1, 2, 3, 'ellipsis', last);
+                } else if (current >= last - 2) {
+                  items.push(1, 'ellipsis', last - 2, last - 1, last);
+                } else {
+                  items.push(1, 'ellipsis', current, 'ellipsis', last);
+                }
+
+                // De-duplicate and clamp to valid range
+                const seen = new Set<string>();
+                const compact = items.filter((v) => {
+                  if (v === 'ellipsis') return true;
+                  if (v < 1 || v > last) return false;
+                  const key = String(v);
+                  if (seen.has(key)) return false;
+                  seen.add(key);
+                  return true;
+                });
+
+                return (
+                  <>
+                    <PaginationItem>
+                      <PaginationPrevious href={prev?.url || '#'} />
+                    </PaginationItem>
+                    {compact.map((v, idx) =>
+                      v === 'ellipsis' ? (
+                        <PaginationItem key={`e-${idx}`}>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      ) : (
+                        <PaginationItem key={`p-${v}`}>
+                          <PaginationLink href={urlFor(v)} isActive={v === current}>
+                            {v}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ),
                     )}
-                  </span>
-                  {/* Desktop: always show text labels */}
-                  <span className="hidden md:inline" dangerouslySetInnerHTML={{ __html: l.label }} />
-                </Link>
-              );
-            })}
-          </div>
+                    <PaginationItem>
+                      <PaginationNext href={next?.url || '#'} />
+                    </PaginationItem>
+                  </>
+                );
+              })()}
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </AuthenticatedLayout>
