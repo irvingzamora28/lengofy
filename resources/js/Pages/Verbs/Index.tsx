@@ -68,7 +68,7 @@ export default function Index({ filters, verbs }: Props) {
   };
 
   return (
-    <AuthenticatedLayout header={<h2 className="font-semibold text-xl leading-tight">{trans('generals.verbs.title')}</h2>}>
+    <AuthenticatedLayout header={<h2 className="font-semibold text-xl leading-tight dark:text-gray-100">{trans('generals.verbs.title')}</h2>}>
       <Head title={trans('generals.verbs.title')} />
 
       <div className="py-6">
@@ -82,12 +82,12 @@ export default function Index({ filters, verbs }: Props) {
                 onChange={(e) => setQ(e.target.value)}
                 type="text"
                 placeholder={trans('generals.verbs.search_placeholder')}
-                className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-100"
+                className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder-gray-500 dark:placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100"
               />
-              <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"><FiSearch className="w-7 h-7" /></button>
+              <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"><FiSearch className="w-7 h-7" /></button>
               <Link
                 href={route('verbs.index')}
-                className="px-3 py-3 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                className="px-3 py-3 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100"
                 preserveState
                 replace
               >{trans('generals.verbs.clear')}</Link>
@@ -97,7 +97,7 @@ export default function Index({ filters, verbs }: Props) {
           {/* Table */}
           <div className="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-4 overflow-x-auto">
-              <table className="min-w-full text-sm">
+              <table className="min-w-full text-sm dark:text-gray-100">
                 <thead>
                   <tr className="text-left border-b border-gray-100 dark:border-gray-800">
                     <th className="py-2 pr-4">{trans('generals.verbs.infinitive')}</th>
@@ -107,11 +107,11 @@ export default function Index({ filters, verbs }: Props) {
                 </thead>
                 <tbody>
                   {normalized.data.map((v) => (
-                    <tr key={v.id} className="border-b border-gray-100 dark:border-gray-800">
+                    <tr key={v.id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-100">
                       <td className="py-2 pr-4 font-medium">{v.infinitive}</td>
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{v.translation ?? ''}</td>
                       <td className="py-2 text-right">
-                        <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 hover:underline">{trans('generals.verbs.view')}</Link>
+                        <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 dark:text-indigo-300 hover:underline">{trans('generals.verbs.view')}</Link>
                       </td>
                     </tr>
                   ))}
@@ -136,17 +136,17 @@ export default function Index({ filters, verbs }: Props) {
                   return (
                     <>
                       <PaginationItem>
-                        <PaginationPrevious href={prev?.url || '#'} />
+                        <PaginationPrevious href={prev?.url || '#'} className="dark:text-gray-100" />
                       </PaginationItem>
                       {Array.from({ length: last }, (_, i) => i + 1).map((p) => (
                         <PaginationItem key={`p-${p}`}>
-                          <PaginationLink href={urlFor(p)} isActive={p === current}>
+                          <PaginationLink href={urlFor(p)} isActive={p === current} className="dark:text-gray-100">
                             {p}
                           </PaginationLink>
                         </PaginationItem>
                       ))}
                       <PaginationItem>
-                        <PaginationNext href={next?.url || '#'} />
+                        <PaginationNext href={next?.url || '#'} className="dark:text-gray-100" />
                       </PaginationItem>
                     </>
                   );
@@ -180,23 +180,23 @@ export default function Index({ filters, verbs }: Props) {
                 return (
                   <>
                     <PaginationItem>
-                      <PaginationPrevious href={prev?.url || '#'} />
+                      <PaginationPrevious href={prev?.url || '#'} className="dark:text-gray-100" />
                     </PaginationItem>
                     {compact.map((v, idx) =>
                       v === 'ellipsis' ? (
                         <PaginationItem key={`e-${idx}`}>
-                          <PaginationEllipsis />
+                          <PaginationEllipsis className="dark:text-gray-100"/>
                         </PaginationItem>
                       ) : (
                         <PaginationItem key={`p-${v}`}>
-                          <PaginationLink href={urlFor(v)} isActive={v === current}>
+                          <PaginationLink href={urlFor(v)} isActive={v === current} className="dark:text-gray-100">
                             {v}
                           </PaginationLink>
                         </PaginationItem>
                       ),
                     )}
                     <PaginationItem>
-                      <PaginationNext href={next?.url || '#'} />
+                      <PaginationNext href={next?.url || '#'} className="dark:text-gray-100" />
                     </PaginationItem>
                   </>
                 );

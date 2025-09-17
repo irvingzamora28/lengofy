@@ -60,7 +60,7 @@ export default function Show({
         <AuthenticatedLayout
             header={
                 <>
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-3 dark:text-gray-100">
                     <div className="space-y-1">
                         <h1 className="text-3xl font-bold">
                             {verb.infinitive}
@@ -93,12 +93,12 @@ export default function Show({
                                 onChange={(e) => setQuery(e.target.value)}
                                 type="text"
                                 placeholder="Search another verb..."
-                                className="md:w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-100"
+                                className="md:w-64 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder-gray-500 dark:placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100"
                             />
                             <button
                                 type="submit"
                                 aria-label="Search"
-                                className="p-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 flex items-center justify-center"
+                                className="p-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 flex items-center justify-center"
                             >
                                 <FiSearch className="w-4 h-4" />
                             </button>
@@ -130,12 +130,12 @@ export default function Show({
                         onChange={(e) => setQuery(e.target.value)}
                         type="text"
                         placeholder="Search another verb..."
-                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-800 dark:text-gray-100"
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder-gray-500 dark:placeholder-gray-400 dark:bg-gray-800 dark:text-gray-100"
                     />
                     <button
                         type="submit"
                         aria-label="Search"
-                        className="p-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 flex items-center justify-center"
+                        className="p-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 flex items-center justify-center"
                     >
                         <FiSearch className="w-4 h-4" />
                     </button>
@@ -148,7 +148,7 @@ export default function Show({
             <div className="py-6">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {/* Tense cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6 md:p-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6 md:p-0 dark:text-gray-100">
                         {tenses.map((tense) => (
                             <div
                                 key={tense.id}
