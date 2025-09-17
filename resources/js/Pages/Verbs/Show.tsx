@@ -2,6 +2,8 @@ import { FormEvent, useMemo, useState } from "react";
 import { Head, Link, router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
+import { FiInfo } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 // Types matching the controller payload
 type VerbDto = {
@@ -150,12 +152,15 @@ export default function Show({
                     {/* Tense cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6 md:p-0 dark:text-gray-100">
                         {tenses.map((tense) => (
-                            <div
+                            <motion.div
                                 key={tense.id}
-                                className="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 rounded-xl border border-gray-100 dark:border-gray-700"
                             >
-                                <div className="p-4 border-b border-gray-100 dark:border-gray-800">
-                                    <h3 className="text-lg font-semibold">
+                                <div className="p-4 border-b border-gray-100 dark:border-gray-700 bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-800/20">
+                                    <h3 className="text-lg font-semibold text-indigo-800 dark:text-indigo-300">
                                         {tense.name}
                                     </h3>
                                 </div>
@@ -163,21 +168,33 @@ export default function Show({
                                     <table className="w-full text-sm">
                                         <tbody>
                                             {pronouns.map((p) => {
-                                                const form =
-                                                    conjByTensePronoun
-                                                        .get(tense.id)
-                                                        ?.get(p.id)?.form ??
-                                                    "—";
+                                                const conjugation = conjByTensePronoun.get(tense.id)?.get(p.id);
+                                                const form = conjugation?.form ?? "—";
+                                                const notes = conjugation?.notes;
+                                                const isIrregular = verb.is_irregular && form !== "—" && notes?.includes("irregular");
+
                                                 return (
                                                     <tr
                                                         key={p.id}
-                                                        className="border-b border-gray-100 dark:border-gray-800"
+                                                        className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                                                     >
-                                                        <td className="py-1 pr-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                                                        <td className="py-2 pr-3 text-gray-600 dark:text-gray-300 whitespace-nowrap font-medium">
                                                             {p.display}
                                                         </td>
-                                                        <td className="py-1 font-medium">
-                                                            {form}
+                                                        <td className="py-2 font-medium relative group">
+                                                            <div className="flex items-center">
+                                                                <span className={`${isIrregular ? 'text-amber-700 dark:text-amber-400' : ''}`}>
+                                                                    {form}
+                                                                </span>
+                                                                {notes && (
+                                                                    <div className="relative ml-2">
+                                                                        <FiInfo className="w-4 h-4 text-gray-400 dark:text-gray-500 cursor-help" />
+                                                                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-2 bg-white dark:bg-gray-700 rounded shadow-lg text-xs text-gray-700 dark:text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                                                                            {notes}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 );
@@ -185,7 +202,7 @@ export default function Show({
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
