@@ -32,6 +32,7 @@
             "final_score": "Endpunktscore",
             "winner_announcement": "{{name}} gewinnt!",
             "loser_announcement": "{{name}} verliert!",
+            "players": "Spielerinnen",
             "tie": "Unentschieden!",
             "tie_with_players": "Unentschieden zwischen Spielern {{players}}!",
             "change_category": "Kategorie ändern",

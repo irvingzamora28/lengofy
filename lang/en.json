@@ -32,6 +32,7 @@
             "final_score": "Final Score",
             "winner_announcement": "{{name}} wins!",
             "loser_announcement": "{{name}} loses!",
+            "players": "Players",
             "tie": "It's a tie!",
             "tie_with_players": "It's a tie between players {{players}}!",
             "change_category": "Change Category",

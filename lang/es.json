@@ -32,6 +32,7 @@
             "final_score": "Puntuación Final",
             "winner_announcement": "{{name}} gana!",
             "loser_announcement": "{{name}} pierde!",
+            "players": "Jugadores",
             "tie": "Empate!",
             "tie_with_players": "Empate entre jugadores {{players}}!",
             "change_category": "Cambiar Categoría",

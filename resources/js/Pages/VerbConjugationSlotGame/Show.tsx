@@ -314,13 +314,13 @@ export default function Show({ auth, justCreated, game, wsEndpoint }: Props) {
           />
         </div>
 
-        <div className="bg-white border rounded p-4">
-          <div className="font-semibold mb-2">Players</div>
+        <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 text-gray-600 dark:text-gray-200 rounded p-4">
+          <div className="font-semibold mb-2">{trans('generals.games.players')}</div>
           <ul className="space-y-1">
             {players.map(p => (
               <li key={p.id} className="flex items-center justify-between text-sm">
                 <span>{p.player_name} {p.is_ready ? '✅' : ''}</span>
-                <span className="text-gray-600">{p.score}</span>
+                <span className="text-gray-600 dark:text-gray-400">{p.score}</span>
               </li>
             ))}
           </ul>

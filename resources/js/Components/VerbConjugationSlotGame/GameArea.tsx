@@ -205,7 +205,7 @@ export default function GameArea({
               {/* Spin is automatic; no manual start button */}
             </div>
             {lastAnswer && (
-              <div className="mt-2 text-sm">
+              <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 {trans('verb_conjugation_slot.last_answer_prefix')} <span className={lastAnswer.correct ? 'text-green-700' : 'text-red-700'}>
                   {lastAnswer.player_name} → {lastAnswer.answer} ({lastAnswer.correct ? trans('verb_conjugation_slot.correct') : trans('verb_conjugation_slot.wrong')})
                 </span>
