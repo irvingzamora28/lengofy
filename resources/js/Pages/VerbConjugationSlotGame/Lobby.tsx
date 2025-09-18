@@ -128,14 +128,16 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
     <AuthenticatedLayout header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{trans('verb_conjugation_slot.lobby')}</h2>}>
       <div className="py-10">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden shadow sm:rounded-lg">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden shadow sm:rounded-lg">
             <div className="p-4">
               <div className="flex flex-col sm:flex-row justify-between gap-3">
                 <div>
-                  <h3 className="text-2xl font-bold flex items-center gap-2">
-                    <FaGlobe className="text-indigo-600" /> {trans('verb_conjugation_slot.active_games_plural')}
-                  </h3>
-                  <p className="text-sm text-gray-600">{trans('verb_conjugation_slot.connect_learn_challenge')}</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
+                    <FaGlobe className="mr-2 sm:mr-3 text-indigo-600 dark:text-indigo-400" />
+                    <span className="hidden sm:inline">{trans('verb_conjugation_slot.active_games')}</span>
+                    <span className="sm:hidden">{trans('verb_conjugation_slot.active_games_plural')}</span>
+                  </h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{trans('verb_conjugation_slot.connect_learn_challenge')}</p>
                 </div>
                 <div className="flex gap-3">
                   <button onClick={openCreateRoom} className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded inline-flex items-center">
@@ -152,25 +154,25 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                   {games.map((game) => (
-                    <div key={game.id} className="bg-white border rounded shadow p-4 hover:shadow-md transition">
+                    <div key={game.id} className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded shadow p-4 hover:shadow-md transition">
                       <div className="flex justify-between items-center mb-3">
                         <div className="flex items-center gap-2">
                           <FaFlag className="text-blue-500" />
-                          <span className="font-semibold">Game #{game.id}</span>
+                          <span className="font-semibold text-gray-800 dark:text-gray-200">Game #{game.id}</span>
                         </div>
-                        <div className="flex items-center text-gray-600 text-sm">
+                        <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm">
                           <FaUsers className="mr-1" /> {game.players.length}/{game.max_players}
                         </div>
                       </div>
-                      <div className="flex items-center justify-center gap-4 bg-gray-50 rounded p-3 mb-3">
+                      <div className="flex items-center justify-center gap-4 bg-gray-50 dark:bg-gray-700 rounded p-3 mb-3">
                         <div className="text-center">
-                          <span className="text-2xl">{game.source_language.flag}</span>
-                          <p className="text-xs text-gray-600 mt-1">{game.source_language.name}</p>
+                          <span className="text-2xl text-gray-600 dark:text-gray-200">{game.source_language.flag}</span>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{game.source_language.name}</p>
                         </div>
                         <span className="text-gray-400 text-lg">→</span>
                         <div className="text-center">
-                          <span className="text-2xl">{game.target_language.flag}</span>
-                          <p className="text-xs text-gray-600 mt-1">{game.target_language.name}</p>
+                          <span className="text-2xl text-gray-600 dark:text-gray-200">{game.target_language.flag}</span>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{game.target_language.name}</p>
                         </div>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 justify-between items-stretch sm:items-center">
@@ -178,7 +180,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
                           href={route('games.verb-conjugation-slot.join', { verbConjugationSlotGame: game.id })}
                           method="post"
                           as="button"
-                          className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded inline-flex items-center justify-center"
+                          className="w-full bg-indigo-500 dark:bg-indigo-600 hover:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-bold py-2 rounded inline-flex items-center justify-center"
                         >
                           <FaPlay className="mr-2" /> {trans('verb_conjugation_slot.btn_join_game')}
                         </Link>
@@ -187,7 +189,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
                             onClick={() => openConfirmEnd(game.id)}
                             aria-label={trans('generals.games.btn_end_game')}
                             title={trans('generals.games.btn_end_game')}
-                            className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition-colors"
+                            className="flex items-center justify-center w-full sm:w-auto px-3 py-2 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-700 transition-colors"
                           >
                             <MdClose size={18} />
                           </button>
