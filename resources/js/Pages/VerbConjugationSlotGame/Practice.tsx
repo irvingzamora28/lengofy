@@ -176,16 +176,16 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
                 </div>
               </div>
 
-              <div className="mt-4 flex gap-2">
+              <div className="mt-4 flex gap-2 flex-wrap sm:flex-nowrap">
                 <input
-                  className="border dark:border-gray-600 rounded px-3 py-2 flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
+                  className="border dark:border-gray-600 rounded px-3 py-2 flex-1 min-w-0 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
                   placeholder={trans('verb_conjugation_slot.input_placeholder')}
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
                   autoFocus
                 />
-                <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded">{trans('generals.submit')}</button>
+                <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded shrink-0 whitespace-nowrap">{trans('generals.submit')}</button>
               </div>
 
               {result && (
