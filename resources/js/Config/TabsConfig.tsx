@@ -4,6 +4,7 @@ import GameStats from '@/Components/Games/GameStats';
 import FeaturedGames from '@/Components/Games/FeaturedGames';
 import Leaderboard from '@/Components/Games/Leaderboard';
 import RecentLessons from '@/Components/Lessons/RecentLessons';
+import RecentVerbs from '@/Components/Verbs/RecentVerbs';
 import { Game, Lesson, Score } from '@/types';
 
 interface TabsConfigProps {
@@ -31,6 +32,9 @@ export const getSharedTabs = ({ games, lessons, scores, trans }: TabsConfigProps
           </div>
           <div className="overflow-hidden sm:rounded-lg">
             <RecentLessons lessons={lessons} />
+          </div>
+          <div className="overflow-hidden sm:rounded-lg mt-3">
+            <RecentVerbs />
           </div>
         </>
       )
@@ -94,6 +98,11 @@ export const getSharedDesktopContent = ({ games, lessons, scores }: TabsConfigPr
       {/* Recent Lessons */}
       <div className="overflow-hidden sm:rounded-lg mt-3 sm:mt-4">
         <RecentLessons lessons={lessons} />
+      </div>
+
+      {/* Recent Verbs */}
+      <div className="overflow-hidden sm:rounded-lg mt-3 sm:mt-4">
+        <RecentVerbs />
       </div>
     </>
   );

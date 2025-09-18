@@ -309,6 +309,9 @@ Route::middleware('auth')->group(function () {
     // Verbs list (search + pagination)
     Route::get('/verbs', [VerbConjugationController::class, 'index'])->name('verbs.index');
 
+    // Random verbs (JSON)
+    Route::get('/verbs/random', [VerbConjugationController::class, 'random'])->name('verbs.random');
+
     // Verb study page (single verb with per-tense tables)
     Route::get('/verbs/{verb}', [VerbConjugationController::class, 'show'])->name('verbs.show');
 });

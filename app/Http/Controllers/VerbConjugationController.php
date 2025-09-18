@@ -65,6 +65,44 @@ class VerbConjugationController extends Controller
             ]),
         ]);
     }
+
+    /**
+     * Return 5 random verbs for the current user's target language as JSON.
+     * Route: GET /verbs/random
+     */
+    public function random(Request $request)
+    {
+        $user = Auth::user();
+        $targetLanguageId = null;
+
+        if ($user && $user->languagePair) {
+            $targetLanguageId = $user->languagePair->target_language_id;
+        }
+
+        // Allow overriding via query for testing: ?lang_id=
+        if (!$targetLanguageId) {
+            $targetLanguageId = (int) $request->query('lang_id', 0) ?: null;
+        }
+
+        abort_unless($targetLanguageId, 404, 'Target language not determined.');
+
+        // Use RAND() for MySQL; the project uses MySQL.
+        $verbs = Verb::query()
+            ->select('id', 'infinitive', 'translation')
+            ->where('language_id', $targetLanguageId)
+            ->inRandomOrder() // translates to ORDER BY RAND() on MySQL
+            ->limit(5)
+            ->get()
+            ->map(fn ($v) => [
+                'id' => $v->id,
+                'infinitive' => $v->infinitive,
+                'translation' => $v->translation,
+            ]);
+
+        return response()->json([
+            'data' => $verbs,
+        ]);
+    }
     /**
      * Display a verb page with mini-tables per tense for the user's target language.
      *
