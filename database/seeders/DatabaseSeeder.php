@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             NounSeeder::class,
             GameSeeder::class,
             Lesson02ExercisesSeeder::class,
+            UpcomingFeaturesSeeder::class,
         ]);
     }
 }
