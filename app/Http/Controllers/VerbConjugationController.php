@@ -6,6 +6,7 @@ use App\Models\Conjugation;
 use App\Models\Pronoun;
 use App\Models\Tense;
 use App\Models\Verb;
+use App\Models\UserVerb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -53,6 +54,12 @@ class VerbConjugationController extends Controller
 
         $verbs = $query->paginate($perPage)->appends($request->query());
 
+        // Favorite map for current user
+        $favoriteIds = [];
+        if ($user) {
+            $favoriteIds = UserVerb::where('user_id', $user->id)->pluck('verb_id')->all();
+        }
+
         return Inertia::render('Verbs/Index', [
             'filters' => [
                 'q' => $q,
@@ -62,6 +69,7 @@ class VerbConjugationController extends Controller
                 'id' => $v->id,
                 'infinitive' => $v->infinitive,
                 'translation' => $v->translation,
+                'is_favorite' => in_array($v->id, $favoriteIds, true),
             ]),
         ]);
     }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -97,6 +99,20 @@ class User extends Authenticatable
     public function scores()
     {
         return $this->hasMany(Score::class);
+    }
+
+    // Favorite verbs pivot: user_verbs
+    public function favoriteVerbs(): BelongsToMany
+    {
+        return $this->belongsToMany(Verb::class, 'user_verbs')
+            ->withPivot(['priority', 'notes'])
+            ->withTimestamps();
+    }
+
+    // Direct relation to pivot entries if needed in queries
+    public function userVerbs(): HasMany
+    {
+        return $this->hasMany(UserVerb::class);
     }
 
     public function lessonProgress(): \Illuminate\Database\Eloquent\Relations\HasMany

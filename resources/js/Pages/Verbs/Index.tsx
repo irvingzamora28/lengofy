@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+import { FiHeart } from 'react-icons/fi';
 // shadcn/ui pagination
 import {
   Pagination,
@@ -31,6 +32,7 @@ interface VerbRow {
   translation?: string | null;
   is_irregular: boolean;
   frequency_rank?: number | null;
+  is_favorite?: boolean;
 }
 
 interface Props {
@@ -102,6 +104,7 @@ export default function Index({ filters, verbs }: Props) {
                   <tr className="text-left border-b border-gray-100 dark:border-gray-800">
                     <th className="py-2 pr-4">{trans('generals.verbs.infinitive')}</th>
                     <th className="py-2 pr-4">{trans('generals.verbs.translation')}</th>
+                    <th className="py-2 pr-4"></th>
                     <th className="py-2"></th>
                   </tr>
                 </thead>
@@ -110,6 +113,21 @@ export default function Index({ filters, verbs }: Props) {
                     <tr key={v.id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-100">
                       <td className="py-2 pr-4 font-medium">{v.infinitive}</td>
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{v.translation ?? ''}</td>
+                      <td className="py-2 pr-4">
+                        <button
+                          onClick={() => {
+                            if (v.is_favorite) {
+                              router.delete(route('verbs.unfavorite', v.id), { preserveScroll: true });
+                            } else {
+                              router.post(route('verbs.favorite', v.id), {}, { preserveScroll: true });
+                            }
+                          }}
+                          className={`p-2 rounded-md ${v.is_favorite ? 'text-rose-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'}`}
+                          aria-label={v.is_favorite ? 'Unfavorite' : 'Favorite'}
+                        >
+                          <FiHeart className="w-5 h-5" fill={v.is_favorite ? 'currentColor' : 'none'} />
+                        </button>
+                      </td>
                       <td className="py-2 text-right">
                         <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 dark:text-indigo-300 hover:underline">{trans('generals.verbs.view')}</Link>
                       </td>
@@ -121,6 +139,9 @@ export default function Index({ filters, verbs }: Props) {
           </div>
 
           {/* Pagination (shadcn/ui) - compact with ellipses */}
+          <div className="flex items-center justify-between">
+            <Link href={route('my-verbs.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Verbs</Link>
+          </div>
           <Pagination>
             <PaginationContent>
               {(() => {

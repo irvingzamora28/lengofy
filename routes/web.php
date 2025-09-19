@@ -10,6 +10,7 @@ use App\Http\Controllers\MemoryTranslationGameController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\WordSearchPuzzleGameController;
 use App\Http\Controllers\VerbConjugationController;
+use App\Http\Controllers\UserVerbController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -314,6 +315,13 @@ Route::middleware('auth')->group(function () {
 
     // Verb study page (single verb with per-tense tables)
     Route::get('/verbs/{verb}', [VerbConjugationController::class, 'show'])->name('verbs.show');
+
+    // My Verbs (favorites)
+    Route::get('/my-verbs', [UserVerbController::class, 'index'])->name('my-verbs.index');
+    Route::post('/verbs/{verb}/favorite', [UserVerbController::class, 'favorite'])->name('verbs.favorite');
+    Route::delete('/verbs/{verb}/favorite', [UserVerbController::class, 'unfavorite'])->name('verbs.unfavorite');
+    Route::patch('/my-verbs/{verb}', [UserVerbController::class, 'update'])->name('my-verbs.update');
+    Route::post('/my-verbs/bulk-add', [UserVerbController::class, 'bulkAdd'])->name('my-verbs.bulk-add');
 });
 
 // Admin routes
