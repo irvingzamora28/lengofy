@@ -12,6 +12,8 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\LanguagePair;
 use App\Models\UserSetting;
 use App\Models\LessonProgress;
+use App\Models\Noun;
+use App\Models\UserNoun;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -113,6 +115,20 @@ class User extends Authenticatable
     public function userVerbs(): HasMany
     {
         return $this->hasMany(UserVerb::class);
+    }
+
+    // Favorite nouns pivot: user_nouns
+    public function favoriteNouns(): BelongsToMany
+    {
+        return $this->belongsToMany(Noun::class, 'user_nouns')
+            ->withPivot(['priority', 'notes'])
+            ->withTimestamps();
+    }
+
+    // Direct relation to pivot entries for nouns
+    public function userNouns(): HasMany
+    {
+        return $this->hasMany(UserNoun::class);
     }
 
     public function lessonProgress(): \Illuminate\Database\Eloquent\Relations\HasMany

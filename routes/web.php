@@ -11,6 +11,8 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\WordSearchPuzzleGameController;
 use App\Http\Controllers\VerbConjugationController;
 use App\Http\Controllers\UserVerbController;
+use App\Http\Controllers\NounController;
+use App\Http\Controllers\UserNounController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -322,6 +324,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/verbs/{verb}/favorite', [UserVerbController::class, 'unfavorite'])->name('verbs.unfavorite');
     Route::patch('/my-verbs/{verb}', [UserVerbController::class, 'update'])->name('my-verbs.update');
     Route::post('/my-verbs/bulk-add', [UserVerbController::class, 'bulkAdd'])->name('my-verbs.bulk-add');
+
+    // Nouns list
+    Route::get('/nouns', [NounController::class, 'index'])->name('nouns.index');
+    // My Nouns (favorites)
+    Route::get('/my-nouns', [UserNounController::class, 'index'])->name('my-nouns.index');
+    Route::post('/nouns/{noun}/favorite', [UserNounController::class, 'favorite'])->name('nouns.favorite');
+    Route::delete('/nouns/{noun}/favorite', [UserNounController::class, 'unfavorite'])->name('nouns.unfavorite');
+    Route::patch('/my-nouns/{noun}', [UserNounController::class, 'update'])->name('my-nouns.update');
+    Route::post('/my-nouns/bulk-add', [UserNounController::class, 'bulkAdd'])->name('my-nouns.bulk-add');
 });
 
 // Admin routes
