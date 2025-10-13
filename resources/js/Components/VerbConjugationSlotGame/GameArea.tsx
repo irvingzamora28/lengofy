@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Reel from './Reel';
 import CircularTimer from '@/Components/Games/CircularTimer';
+import SpecialCharacterButtons from '@/Components/SpecialCharacterButtons';
 import { useTranslation } from 'react-i18next';
 
 export interface VCSPrompt {
@@ -33,6 +34,7 @@ interface Props {
   onStartSpin: () => void;
   onSubmitAnswer: (answer: string) => void;
   lastAnswer?: { player_name: string; answer: string; correct: boolean; userId?: number; playerId?: number } | null;
+  specialCharacters?: string[];
 }
 
 export default function GameArea({
@@ -49,12 +51,14 @@ export default function GameArea({
   onStartSpin,
   onSubmitAnswer,
   lastAnswer,
+  specialCharacters = [],
 }: Props) {
   const [answer, setAnswer] = useState('');
   const [spinTrigger, setSpinTrigger] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timerSeconds);
   const [cooldown, setCooldown] = useState(false);
   const cooldownRef = React.useRef<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { t: trans } = useTranslation();
 
   // Build pools for reels from provided prompts list
@@ -138,6 +142,22 @@ export default function GameArea({
     setAnswer('');
   };
 
+  const insertSpecialCharacter = (char: string) => {
+    const input = inputRef.current;
+    if (!input) return;
+
+    const start = input.selectionStart ?? answer.length;
+    const end = input.selectionEnd ?? answer.length;
+    const newAnswer = answer.substring(0, start) + char + answer.substring(end);
+    setAnswer(newAnswer);
+
+    // Set cursor position after inserted character
+    setTimeout(() => {
+      input.focus();
+      input.setSelectionRange(start + 1, start + 1);
+    }, 0);
+  };
+
   return (
     <div className="space-y-4">
       {status === 'in_progress' && (
@@ -194,6 +214,7 @@ export default function GameArea({
             <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{trans('verb_conjugation_slot.input_hint')}</div>
             <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-2">
               <input
+                ref={inputRef}
                 className={`flex-1 min-w-0 border dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 ${cooldown ? 'opacity-60 cursor-not-allowed' : ''}`}
                 placeholder={trans('verb_conjugation_slot.input_placeholder')}
                 value={answer}
@@ -204,6 +225,15 @@ export default function GameArea({
               <button onClick={submit} disabled={cooldown} className={`bg-indigo-600 text-white px-4 py-2 rounded w-full md:w-auto ${cooldown ? 'opacity-60 cursor-not-allowed' : ''}`}>{trans('generals.submit')}</button>
               {/* Spin is automatic; no manual start button */}
             </div>
+            {specialCharacters.length > 0 && (
+              <div className="mt-3">
+                <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{trans('Special characters')}:</div>
+                <SpecialCharacterButtons
+                  specialCharacters={specialCharacters}
+                  onCharacterClick={insertSpecialCharacter}
+                />
+              </div>
+            )}
             {lastAnswer && (
               <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 {trans('verb_conjugation_slot.last_answer_prefix')} <span className={lastAnswer.correct ? 'text-green-700' : 'text-red-700'}>

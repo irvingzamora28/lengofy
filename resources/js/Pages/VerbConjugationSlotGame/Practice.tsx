@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import Reel from '@/Components/VerbConjugationSlotGame/Reel';
 import CircularTimer from '@/Components/Games/CircularTimer';
+import SpecialCharacterButtons from '@/Components/SpecialCharacterButtons';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { PageProps } from '@/types';
@@ -20,9 +21,10 @@ interface Props extends PageProps {
   difficulty: 'easy' | 'medium' | 'hard';
   category: number;
   targetLanguage: string;
+  specialCharacters: string[];
 }
 
-export default function Practice({ prompts: initialPrompts, difficulty, category, auth }: Props) {
+export default function Practice({ prompts: initialPrompts, difficulty, category, auth, specialCharacters = [] }: Props) {
   const [prompts, setPrompts] = useState<VCSPrompt[]>(initialPrompts || []);
   const [idx, setIdx] = useState(0);
   const [answer, setAnswer] = useState('');
@@ -32,6 +34,7 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
   const [streak, setStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
   const timerRef = useRef<number | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [spinTrigger, setSpinTrigger] = useState(0);
   const { t: trans } = useTranslation();
 
@@ -120,6 +123,22 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
     setTimeout(() => next(), 1200);
   };
 
+  const insertSpecialCharacter = (char: string) => {
+    const input = inputRef.current;
+    if (!input) return;
+
+    const start = input.selectionStart ?? answer.length;
+    const end = input.selectionEnd ?? answer.length;
+    const newAnswer = answer.substring(0, start) + char + answer.substring(end);
+    setAnswer(newAnswer);
+
+    // Set cursor position after inserted character
+    setTimeout(() => {
+      input.focus();
+      input.setSelectionRange(start + 1, start + 1);
+    }, 0);
+  };
+
   const updateAddScore = async () => {
     try {
       const authUser = auth?.user;
@@ -176,16 +195,28 @@ export default function Practice({ prompts: initialPrompts, difficulty, category
                 </div>
               </div>
 
-              <div className="mt-4 flex gap-2 flex-wrap sm:flex-nowrap">
-                <input
-                  className="border dark:border-gray-600 rounded px-3 py-2 flex-1 min-w-0 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
-                  placeholder={trans('verb_conjugation_slot.input_placeholder')}
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
-                  autoFocus
-                />
-                <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded shrink-0 whitespace-nowrap">{trans('generals.submit')}</button>
+              <div className="mt-4">
+                <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+                  <input
+                    ref={inputRef}
+                    className="border dark:border-gray-600 rounded px-3 py-2 flex-1 min-w-0 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
+                    placeholder={trans('verb_conjugation_slot.input_placeholder')}
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
+                    autoFocus
+                  />
+                  <button onClick={() => handleSubmit()} className="bg-indigo-600 text-white px-4 py-2 rounded shrink-0 whitespace-nowrap">{trans('generals.submit')}</button>
+                </div>
+                {specialCharacters.length > 0 && (
+                  <div className="mt-3">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{trans('Special characters')}:</div>
+                    <SpecialCharacterButtons
+                      specialCharacters={specialCharacters}
+                      onCharacterClick={insertSpecialCharacter}
+                    />
+                  </div>
+                )}
               </div>
 
               {result && (

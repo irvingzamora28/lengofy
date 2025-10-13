@@ -116,6 +116,7 @@ class VerbConjugationSlotGameController extends Controller
                     'code' => $verbConjugationSlotGame->languagePair->targetLanguage->code,
                     'name' => $verbConjugationSlotGame->languagePair->targetLanguage->name,
                     'flag' => $this->languageService->getFlag($verbConjugationSlotGame->languagePair->targetLanguage->code),
+                    'special_characters' => $verbConjugationSlotGame->languagePair->targetLanguage->special_characters ?? [],
                 ],
                 'prompts' => $prompts,
                 'hostId' => $verbConjugationSlotGame->creator_id,
@@ -215,6 +216,7 @@ class VerbConjugationSlotGameController extends Controller
             'category' => $validated['category'],
             'verbListId' => $validated['verb_list_id'] ?? null,
             'targetLanguage' => $languagePair->targetLanguage->code,
+            'specialCharacters' => $languagePair->targetLanguage->special_characters ?? [],
         ]);
     }
 

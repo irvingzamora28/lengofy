@@ -15,7 +15,7 @@ interface Player {
   is_guest?: boolean;
 }
 
-interface LanguageInfo { id: number; code: string; name: string; flag: string }
+interface LanguageInfo { id: number; code: string; name: string; flag: string; special_characters?: string[] }
 
 interface VCSPrompt {
   pronoun: { id: number; code: string; display: string };
@@ -311,6 +311,7 @@ export default function Show({ auth, justCreated, game, wsEndpoint }: Props) {
             onStartSpin={startSpin}
             onSubmitAnswer={(ans) => submit(ans)}
             lastAnswer={lastAnswer}
+            specialCharacters={game.target_language.special_characters}
           />
         </div>
 
