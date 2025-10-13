@@ -76,17 +76,27 @@ class VerbService
      * Get a random prompt within difficulty constraints for the target language in the pair.
      * Returns: [pronoun, verb, tense, expected, translation]
      */
-    public function getRandomPrompt(int $languagePairId, string $difficulty): ?array
+    public function getRandomPrompt(int $languagePairId, string $difficulty, ?int $verbListId = null): ?array
     {
         $pair = LanguagePair::findOrFail($languagePairId);
         $languageId = $pair->target_language_id; // practice on target language
 
-        $verbPools = $this->getVerbPoolsByDifficulty($languageId);
+        // If a verb list is specified, use only verbs from that list
+        if ($verbListId) {
+            $verbs = \App\Models\VerbList::findOrFail($verbListId)
+                ->verbs()
+                ->where('language_id', $languageId)
+                ->get();
+        } else {
+            $verbPools = $this->getVerbPoolsByDifficulty($languageId);
+            $difficulty = in_array($difficulty, ['easy', 'medium', 'hard']) ? $difficulty : 'medium';
+            $verbs = $verbPools[$difficulty] ?? collect();
+        }
+
         $tensePools = $this->getTensePoolsByDifficulty($languageId);
         $pronouns = Pronoun::where('language_id', $languageId)->orderBy('order_index')->get();
 
         $difficulty = in_array($difficulty, ['easy', 'medium', 'hard']) ? $difficulty : 'medium';
-        $verbs = $verbPools[$difficulty] ?? collect();
         $tenses = $tensePools[$difficulty] ?? collect();
 
         if ($verbs->isEmpty() || $tenses->isEmpty() || $pronouns->isEmpty()) {

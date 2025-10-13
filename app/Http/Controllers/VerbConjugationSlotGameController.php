@@ -63,6 +63,7 @@ class VerbConjugationSlotGameController extends Controller
             'max_players' => 'required|integer|min:2|max:10',
             'difficulty' => 'required|in:easy,medium,hard',
             'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()),
+            'verb_list_id' => 'nullable|integer|exists:verb_lists,id',
         ]);
 
         $game = $this->gameService->createGame(
@@ -71,6 +72,7 @@ class VerbConjugationSlotGameController extends Controller
             $validated['max_players'],
             $validated['difficulty'],
             $validated['category'],
+            $validated['verb_list_id'] ?? null,
         );
 
         return redirect()->route('games.verb-conjugation-slot.show', [
@@ -192,13 +194,18 @@ class VerbConjugationSlotGameController extends Controller
         $validated = $request->validate([
             'difficulty' => 'required|in:easy,medium,hard',
             'category' => 'required|integer|in:0,' . implode(',', Category::pluck('id')->toArray()),
+            'verb_list_id' => 'nullable|integer|exists:verb_lists,id',
         ]);
 
         $user = auth()->user();
         $languagePair = LanguagePair::with('targetLanguage')->findOrFail($user->language_pair_id);
         $prompts = [];
         for ($i = 0; $i < 10; $i++) {
-            $p = $this->verbService->getRandomPrompt($languagePair->id, $validated['difficulty']);
+            $p = $this->verbService->getRandomPrompt(
+                $languagePair->id, 
+                $validated['difficulty'],
+                $validated['verb_list_id'] ?? null
+            );
             if ($p) { $prompts[] = $p; }
         }
 
@@ -206,6 +213,7 @@ class VerbConjugationSlotGameController extends Controller
             'prompts' => $prompts,
             'difficulty' => $validated['difficulty'],
             'category' => $validated['category'],
+            'verbListId' => $validated['verb_list_id'] ?? null,
             'targetLanguage' => $languagePair->targetLanguage->code,
         ]);
     }

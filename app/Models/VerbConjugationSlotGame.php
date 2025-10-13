@@ -27,6 +27,7 @@ class VerbConjugationSlotGame extends Model
         'creator_id',
         'difficulty',
         'category_id',
+        'verb_list_id',
     ];
 
     protected $casts = [

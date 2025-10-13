@@ -41,6 +41,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
   const [isSinglePlayer, setIsSinglePlayer] = useState(false);
   const [selectedDifficulty, setSelectedDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [selectedVerbList, setSelectedVerbList] = useState<number | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const { t: trans } = useTranslation();
   const [showConfirmEndModal, setShowConfirmEndModal] = useState(false);
@@ -109,7 +110,11 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
     if (isSinglePlayer) {
       router.visit(route('games.verb-conjugation-slot.practice'), {
         method: 'get',
-        data: { difficulty: selectedDifficulty, category: selectedCategory },
+        data: { 
+          difficulty: selectedDifficulty, 
+          category: selectedCategory,
+          verb_list_id: selectedVerbList 
+        },
       });
       setShowDifficultyModal(false);
       return;
@@ -120,6 +125,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
       max_players: 8,
       difficulty: selectedDifficulty,
       category: selectedCategory,
+      verb_list_id: selectedVerbList,
     });
     setShowDifficultyModal(false);
   };
@@ -214,6 +220,8 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
           setSelectedDifficulty={setSelectedDifficulty}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          selectedVerbList={selectedVerbList}
+          setSelectedVerbList={setSelectedVerbList}
           showCategories={false}
           startGame={startGame}
           easyText={trans('verb_conjugation_slot.modal_difficulty.easy_text')}

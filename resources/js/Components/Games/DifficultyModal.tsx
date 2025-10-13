@@ -6,6 +6,13 @@ import Select from '../Select';
 import { Category, Translations } from '@/types';
 import { useTranslation } from 'react-i18next';
 
+interface VerbList {
+    id: number;
+    name: string;
+    description: string | null;
+    items_count: number;
+}
+
 interface DifficultyModalProps {
     showDifficultyModal: boolean;
     setShowDifficultyModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +20,8 @@ interface DifficultyModalProps {
     setSelectedDifficulty: React.Dispatch<React.SetStateAction<"easy" | "medium" | "hard">>;
     selectedCategory: number;
     setSelectedCategory: React.Dispatch<React.SetStateAction<number>>;
+    selectedVerbList: number | null;
+    setSelectedVerbList: React.Dispatch<React.SetStateAction<number | null>>;
     startGame: () => void;
     gameType?: 'singlePlayer' | 'multiPlayer';
     onDifficultyChange?: () => void;
@@ -30,6 +39,8 @@ export default function DifficultyModal({
     setSelectedDifficulty,
     selectedCategory,
     setSelectedCategory,
+    selectedVerbList,
+    setSelectedVerbList,
     isRestart = false,
     startGame,
     gameType = 'multiPlayer',
@@ -40,26 +51,33 @@ export default function DifficultyModal({
     hardText
 }: DifficultyModalProps) {
     const [categories, setCategories] = useState<Category[]>([]);
+    const [verbLists, setVerbLists] = useState<VerbList[]>([]);
     const { t: trans } = useTranslation();
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get(route('categories.index'));
+                const [categoriesResponse, verbListsResponse] = await Promise.all([
+                    axios.get(route('categories.index')),
+                    axios.get(route('api.verb-lists.index'))
+                ]);
+                
                 setCategories([
                     { id: 0, key: 'all' },
-                    ...response.data.map((category: any) => ({
+                    ...categoriesResponse.data.map((category: any) => ({
                         id: category.id,
                         key: category.key
                     }))
                 ]);
+                
+                setVerbLists(verbListsResponse.data.data || []);
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
         if (showDifficultyModal) {
-            fetchCategories();
+            fetchData();
         }
     }, [showDifficultyModal]);
 
@@ -98,6 +116,37 @@ export default function DifficultyModal({
                         </div>
                     </div>
                 )}
+
+                {/* Verb List Selector */}
+                <div className="mb-6">
+                    <div className="flex flex-col items-start mb-2">
+                        <InputLabel
+                            htmlFor="select_verb_list"
+                            value={trans('Verb List (Optional)')}
+                        />
+                    </div>
+                    <div className="mt-1 relative">
+                        <Select
+                            id="select_verb_list"
+                            value={selectedVerbList ?? ''}
+                            onChange={(e) =>
+                                setSelectedVerbList(e.target.value ? parseInt(e.target.value, 10) : null)
+                            }
+                            className="block w-full pl-10 pr-10"
+                        >
+                            <option value="">{trans('All Verbs (Default)')}</option>
+                            {verbLists.map((list) => (
+                                <option key={list.id} value={list.id}>
+                                    {list.name} ({list.items_count} {trans('verbs')})
+                                </option>
+                            ))}
+                        </Select>
+                        <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
+                            {trans('Select a custom verb list to practice only those verbs, or leave empty to use all verbs.')}
+                        </p>
+                    </div>
+                </div>
+
                 <div className="space-y-4">
                     {(['easy', 'medium', 'hard'] as const).map((difficulty) => (
                         <button

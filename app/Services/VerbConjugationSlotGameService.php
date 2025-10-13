@@ -21,9 +21,9 @@ class VerbConjugationSlotGameService implements GameService
     {
     }
 
-    public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty, string $category): Model
+    public function createGame(?User $user, string $language_pair_id, int $max_players, string $difficulty, string $category, ?int $verbListId = null): Model
     {
-        return DB::transaction(function () use ($user, $language_pair_id, $max_players, $difficulty, $category) {
+        return DB::transaction(function () use ($user, $language_pair_id, $max_players, $difficulty, $category, $verbListId) {
             $game = VerbConjugationSlotGame::create([
                 'status' => VerbConjugationSlotGameStatus::WAITING,
                 'max_players' => $max_players,
@@ -32,6 +32,7 @@ class VerbConjugationSlotGameService implements GameService
                 'creator_id' => $user?->id,
                 'difficulty' => $difficulty,
                 'category_id' => $category,
+                'verb_list_id' => $verbListId,
             ]);
 
             $this->addPlayer($game, $user);
@@ -151,7 +152,11 @@ class VerbConjugationSlotGameService implements GameService
         $prompts = [];
         $tries = 0;
         while (count($prompts) < $game->total_rounds && $tries < ($game->total_rounds * 10)) {
-            $prompt = $this->verbService->getRandomPrompt((int) $game->language_pair_id, (string) $game->difficulty);
+            $prompt = $this->verbService->getRandomPrompt(
+                (int) $game->language_pair_id, 
+                (string) $game->difficulty,
+                $game->verb_list_id
+            );
             $tries++;
             if ($prompt) {
                 $prompts[] = $prompt;
