@@ -21,7 +21,7 @@ interface Props extends PageProps {
   difficulty: 'easy' | 'medium' | 'hard';
   category: number;
   targetLanguage: string;
-  specialCharacters: string[];
+  specialCharacters?: string[];
 }
 
 export default function Practice({ prompts: initialPrompts, difficulty, category, auth, specialCharacters = [] }: Props) {

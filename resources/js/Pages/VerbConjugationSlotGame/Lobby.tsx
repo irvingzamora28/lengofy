@@ -223,6 +223,7 @@ export default function Lobby({ auth, activeGames, wsEndpoint }: Props) {
           selectedVerbList={selectedVerbList}
           setSelectedVerbList={setSelectedVerbList}
           showCategories={false}
+          showVerbLists={true}
           startGame={startGame}
           easyText={trans('verb_conjugation_slot.modal_difficulty.easy_text')}
           mediumText={trans('verb_conjugation_slot.modal_difficulty.medium_text')}

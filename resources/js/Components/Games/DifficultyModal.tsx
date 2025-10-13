@@ -20,12 +20,13 @@ interface DifficultyModalProps {
     setSelectedDifficulty: React.Dispatch<React.SetStateAction<"easy" | "medium" | "hard">>;
     selectedCategory: number;
     setSelectedCategory: React.Dispatch<React.SetStateAction<number>>;
-    selectedVerbList: number | null;
-    setSelectedVerbList: React.Dispatch<React.SetStateAction<number | null>>;
+    selectedVerbList?: number | null;
+    setSelectedVerbList?: React.Dispatch<React.SetStateAction<number | null>>;
     startGame: () => void;
     gameType?: 'singlePlayer' | 'multiPlayer';
     onDifficultyChange?: () => void;
     showCategories?: boolean;
+    showVerbLists?: boolean;
     easyText: string;
     mediumText: string;
     hardText: string;
@@ -46,6 +47,7 @@ export default function DifficultyModal({
     gameType = 'multiPlayer',
     onDifficultyChange,
     showCategories = true,
+    showVerbLists = false,
     easyText,
     mediumText,
     hardText
@@ -57,20 +59,25 @@ export default function DifficultyModal({
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [categoriesResponse, verbListsResponse] = await Promise.all([
-                    axios.get(route('categories.index')),
-                    axios.get(route('api.verb-lists.index'))
-                ]);
+                const promises = [axios.get(route('categories.index'))];
+                
+                if (showVerbLists) {
+                    promises.push(axios.get(route('api.verb-lists.index')));
+                }
+                
+                const responses = await Promise.all(promises);
                 
                 setCategories([
                     { id: 0, key: 'all' },
-                    ...categoriesResponse.data.map((category: any) => ({
+                    ...responses[0].data.map((category: any) => ({
                         id: category.id,
                         key: category.key
                     }))
                 ]);
                 
-                setVerbLists(verbListsResponse.data.data || []);
+                if (showVerbLists && responses[1]) {
+                    setVerbLists(responses[1].data.data || []);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -79,7 +86,7 @@ export default function DifficultyModal({
         if (showDifficultyModal) {
             fetchData();
         }
-    }, [showDifficultyModal]);
+    }, [showDifficultyModal, showVerbLists]);
 
     return (
         <Modal show={showDifficultyModal} onClose={() => setShowDifficultyModal(false)}>
@@ -118,34 +125,36 @@ export default function DifficultyModal({
                 )}
 
                 {/* Verb List Selector */}
-                <div className="mb-6">
-                    <div className="flex flex-col items-start mb-2">
-                        <InputLabel
-                            htmlFor="select_verb_list"
-                            value={trans('Verb List (Optional)')}
-                        />
+                {showVerbLists && (
+                    <div className="mb-6">
+                        <div className="flex flex-col items-start mb-2">
+                            <InputLabel
+                                htmlFor="select_verb_list"
+                                value={trans('Verb List (Optional)')}
+                            />
+                        </div>
+                        <div className="mt-1 relative">
+                            <Select
+                                id="select_verb_list"
+                                value={selectedVerbList ?? ''}
+                                onChange={(e) =>
+                                    setSelectedVerbList?.(e.target.value ? parseInt(e.target.value, 10) : null)
+                                }
+                                className="block w-full pl-10 pr-10"
+                            >
+                                <option value="">{trans('All Verbs (Default)')}</option>
+                                {verbLists.map((list) => (
+                                    <option key={list.id} value={list.id}>
+                                        {list.name} ({list.items_count} {trans('verbs')})
+                                    </option>
+                                ))}
+                            </Select>
+                            <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                {trans('Select a custom verb list to practice only those verbs, or leave empty to use all verbs.')}
+                            </p>
+                        </div>
                     </div>
-                    <div className="mt-1 relative">
-                        <Select
-                            id="select_verb_list"
-                            value={selectedVerbList ?? ''}
-                            onChange={(e) =>
-                                setSelectedVerbList(e.target.value ? parseInt(e.target.value, 10) : null)
-                            }
-                            className="block w-full pl-10 pr-10"
-                        >
-                            <option value="">{trans('All Verbs (Default)')}</option>
-                            {verbLists.map((list) => (
-                                <option key={list.id} value={list.id}>
-                                    {list.name} ({list.items_count} {trans('verbs')})
-                                </option>
-                            ))}
-                        </Select>
-                        <p className="flex flex-col items-start mt-2 text-xs text-gray-500 dark:text-gray-400">
-                            {trans('Select a custom verb list to practice only those verbs, or leave empty to use all verbs.')}
-                        </p>
-                    </div>
-                </div>
+                )}
 
                 <div className="space-y-4">
                     {(['easy', 'medium', 'hard'] as const).map((difficulty) => (
