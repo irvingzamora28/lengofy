@@ -11,6 +11,7 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\WordSearchPuzzleGameController;
 use App\Http\Controllers\VerbConjugationController;
 use App\Http\Controllers\UserVerbController;
+use App\Http\Controllers\VerbListController;
 use App\Http\Controllers\NounController;
 use App\Http\Controllers\UserNounController;
 use App\Http\Middleware\EnsurePlayerInGame;
@@ -324,6 +325,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/verbs/{verb}/favorite', [UserVerbController::class, 'unfavorite'])->name('verbs.unfavorite');
     Route::patch('/my-verbs/{verb}', [UserVerbController::class, 'update'])->name('my-verbs.update');
     Route::post('/my-verbs/bulk-add', [UserVerbController::class, 'bulkAdd'])->name('my-verbs.bulk-add');
+
+    // Verb Lists (custom study lists)
+    Route::get('/verb-lists', [VerbListController::class, 'index'])->name('verb-lists.index');
+    Route::get('/verb-lists/create', [VerbListController::class, 'create'])->name('verb-lists.create');
+    Route::post('/verb-lists', [VerbListController::class, 'store'])->name('verb-lists.store');
+    Route::get('/verb-lists/{list}', [VerbListController::class, 'show'])->name('verb-lists.show');
+    Route::get('/verb-lists/{list}/edit', [VerbListController::class, 'edit'])->name('verb-lists.edit');
+    Route::patch('/verb-lists/{list}', [VerbListController::class, 'update'])->name('verb-lists.update');
+    Route::delete('/verb-lists/{list}', [VerbListController::class, 'destroy'])->name('verb-lists.destroy');
+    Route::post('/verb-lists/{list}/verbs', [VerbListController::class, 'addVerb'])->name('verb-lists.add-verb');
+    Route::post('/verb-lists/{list}/verbs/bulk', [VerbListController::class, 'bulkAddVerbs'])->name('verb-lists.bulk-add-verbs');
+    Route::delete('/verb-lists/{list}/verbs/{verb}', [VerbListController::class, 'removeVerb'])->name('verb-lists.remove-verb');
+    Route::patch('/verb-lists/{list}/verbs/{verb}', [VerbListController::class, 'updateVerbNotes'])->name('verb-lists.update-verb-notes');
+    
+    // API routes for verb lists
+    Route::get('/api/verb-lists', [VerbListController::class, 'apiIndex'])->name('api.verb-lists.index');
+    Route::get('/api/verbs/{verb}/lists', [VerbListController::class, 'getVerbLists'])->name('api.verbs.lists');
 
     // Nouns list
     Route::get('/nouns', [NounController::class, 'index'])->name('nouns.index');

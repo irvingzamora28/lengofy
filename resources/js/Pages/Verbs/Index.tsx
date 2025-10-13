@@ -1,8 +1,9 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiSearch, FiList } from 'react-icons/fi';
 import { FiHeart } from 'react-icons/fi';
+import AddToListModal from '@/Components/AddToListModal';
 // shadcn/ui pagination
 import {
   Pagination,
@@ -46,6 +47,8 @@ export default function Index({ filters, verbs }: Props) {
   const { t: trans } = useTranslation();
   const searchInput = useRef<HTMLInputElement>(null);
   const [q, setQ] = useState<string>(filters.q ?? '');
+  const [selectedVerbId, setSelectedVerbId] = useState<number | null>(null);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
 
   // Normalize paginator shape (support both meta/data and flattened)
   const normalized = (() => {
@@ -114,19 +117,31 @@ export default function Index({ filters, verbs }: Props) {
                       <td className="py-2 pr-4 font-medium">{v.infinitive}</td>
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{v.translation ?? ''}</td>
                       <td className="py-2 pr-4">
-                        <button
-                          onClick={() => {
-                            if (v.is_favorite) {
-                              router.delete(route('verbs.unfavorite', v.id), { preserveScroll: true });
-                            } else {
-                              router.post(route('verbs.favorite', v.id), {}, { preserveScroll: true });
-                            }
-                          }}
-                          className={`p-2 rounded-md ${v.is_favorite ? 'text-rose-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'}`}
-                          aria-label={v.is_favorite ? 'Unfavorite' : 'Favorite'}
-                        >
-                          <FiHeart className="w-5 h-5" fill={v.is_favorite ? 'currentColor' : 'none'} />
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              if (v.is_favorite) {
+                                router.delete(route('verbs.unfavorite', v.id), { preserveScroll: true });
+                              } else {
+                                router.post(route('verbs.favorite', v.id), {}, { preserveScroll: true });
+                              }
+                            }}
+                            className={`p-2 rounded-md ${v.is_favorite ? 'text-rose-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'}`}
+                            aria-label={v.is_favorite ? 'Unfavorite' : 'Favorite'}
+                          >
+                            <FiHeart className="w-5 h-5" fill={v.is_favorite ? 'currentColor' : 'none'} />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedVerbId(v.id);
+                              setIsListModalOpen(true);
+                            }}
+                            className="p-2 rounded-md text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                            aria-label="Add to list"
+                          >
+                            <FiList className="w-5 h-5" />
+                          </button>
+                        </div>
                       </td>
                       <td className="py-2 text-right">
                         <Link href={route('verbs.show', v.infinitive)} className="text-indigo-600 dark:text-indigo-300 hover:underline">{trans('generals.verbs.view')}</Link>
@@ -140,7 +155,10 @@ export default function Index({ filters, verbs }: Props) {
 
           {/* Pagination (shadcn/ui) - compact with ellipses */}
           <div className="flex items-center justify-between">
-            <Link href={route('my-verbs.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Verbs</Link>
+            <div className="flex gap-2">
+              <Link href={route('my-verbs.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Verbs</Link>
+              <Link href={route('verb-lists.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Lists</Link>
+            </div>
           </div>
           <Pagination>
             <PaginationContent>
@@ -226,6 +244,17 @@ export default function Index({ filters, verbs }: Props) {
           </Pagination>
         </div>
       </div>
+
+      {selectedVerbId && (
+        <AddToListModal
+          verbId={selectedVerbId}
+          isOpen={isListModalOpen}
+          onClose={() => {
+            setIsListModalOpen(false);
+            setSelectedVerbId(null);
+          }}
+        />
+      )}
     </AuthenticatedLayout>
   );
 }
