@@ -1,7 +1,8 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { FiSearch, FiHeart } from 'react-icons/fi';
+import { FiSearch, FiHeart, FiList } from 'react-icons/fi';
+import AddNounToListModal from '@/Components/AddNounToListModal';
 import {
   Pagination,
   PaginationContent,
@@ -38,6 +39,8 @@ interface Props {
 export default function Index({ filters, nouns }: Props) {
   const searchInput = useRef<HTMLInputElement>(null);
   const [q, setQ] = useState<string>(filters.q ?? '');
+  const [selectedNounId, setSelectedNounId] = useState<number | null>(null);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
 
   const normalized = (() => {
     const anyNouns: any = nouns;
@@ -105,19 +108,31 @@ export default function Index({ filters, nouns }: Props) {
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{n.translation ?? ''}</td>
                       <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{n.gender ?? ''}</td>
                       <td className="py-2 pr-4">
-                        <button
-                          onClick={() => {
-                            if (n.is_favorite) {
-                              router.delete(route('nouns.unfavorite', n.id), { preserveScroll: true });
-                            } else {
-                              router.post(route('nouns.favorite', n.id), {}, { preserveScroll: true });
-                            }
-                          }}
-                          className={`p-2 rounded-md ${n.is_favorite ? 'text-rose-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'}`}
-                          aria-label={n.is_favorite ? 'Unfavorite' : 'Favorite'}
-                        >
-                          <FiHeart className="w-5 h-5" fill={n.is_favorite ? 'currentColor' : 'none'} />
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              if (n.is_favorite) {
+                                router.delete(route('nouns.unfavorite', n.id), { preserveScroll: true });
+                              } else {
+                                router.post(route('nouns.favorite', n.id), {}, { preserveScroll: true });
+                              }
+                            }}
+                            className={`p-2 rounded-md ${n.is_favorite ? 'text-rose-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'}`}
+                            aria-label={n.is_favorite ? 'Unfavorite' : 'Favorite'}
+                          >
+                            <FiHeart className="w-5 h-5" fill={n.is_favorite ? 'currentColor' : 'none'} />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedNounId(n.id);
+                              setIsListModalOpen(true);
+                            }}
+                            className="p-2 rounded-md text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                            aria-label="Add to list"
+                          >
+                            <FiList className="w-5 h-5" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -128,7 +143,10 @@ export default function Index({ filters, nouns }: Props) {
 
           {/* My Nouns + Pagination */}
           <div className="flex items-center justify-between">
-            <Link href={route('my-nouns.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Nouns</Link>
+            <div className="flex gap-2">
+              <Link href={route('my-nouns.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Nouns</Link>
+              <Link href={route('noun-lists.index')} className="px-3 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">My Lists</Link>
+            </div>
           </div>
           <Pagination>
             <PaginationContent>
@@ -207,6 +225,17 @@ export default function Index({ filters, nouns }: Props) {
           </Pagination>
         </div>
       </div>
+
+      {selectedNounId && (
+        <AddNounToListModal
+          nounId={selectedNounId}
+          isOpen={isListModalOpen}
+          onClose={() => {
+            setIsListModalOpen(false);
+            setSelectedNounId(null);
+          }}
+        />
+      )}
     </AuthenticatedLayout>
   );
 }

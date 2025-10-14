@@ -14,6 +14,7 @@ use App\Http\Controllers\UserVerbController;
 use App\Http\Controllers\VerbListController;
 use App\Http\Controllers\NounController;
 use App\Http\Controllers\UserNounController;
+use App\Http\Controllers\NounListController;
 use App\Http\Middleware\EnsurePlayerInGame;
 use App\Models\FeatureCategory;
 use App\Models\LanguagePair;
@@ -351,6 +352,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/nouns/{noun}/favorite', [UserNounController::class, 'unfavorite'])->name('nouns.unfavorite');
     Route::patch('/my-nouns/{noun}', [UserNounController::class, 'update'])->name('my-nouns.update');
     Route::post('/my-nouns/bulk-add', [UserNounController::class, 'bulkAdd'])->name('my-nouns.bulk-add');
+
+    // Noun Lists (custom study lists)
+    Route::get('/noun-lists', [NounListController::class, 'index'])->name('noun-lists.index');
+    Route::get('/noun-lists/create', [NounListController::class, 'create'])->name('noun-lists.create');
+    Route::post('/noun-lists', [NounListController::class, 'store'])->name('noun-lists.store');
+    Route::get('/noun-lists/{list}', [NounListController::class, 'show'])->name('noun-lists.show');
+    Route::get('/noun-lists/{list}/edit', [NounListController::class, 'edit'])->name('noun-lists.edit');
+    Route::patch('/noun-lists/{list}', [NounListController::class, 'update'])->name('noun-lists.update');
+    Route::delete('/noun-lists/{list}', [NounListController::class, 'destroy'])->name('noun-lists.destroy');
+    Route::post('/noun-lists/{list}/nouns', [NounListController::class, 'addNoun'])->name('noun-lists.add-noun');
+    Route::post('/noun-lists/{list}/nouns/bulk', [NounListController::class, 'bulkAddNouns'])->name('noun-lists.bulk-add-nouns');
+    Route::delete('/noun-lists/{list}/nouns/{noun}', [NounListController::class, 'removeNoun'])->name('noun-lists.remove-noun');
+    Route::patch('/noun-lists/{list}/nouns/{noun}', [NounListController::class, 'updateNounNotes'])->name('noun-lists.update-noun-notes');
+    
+    // API routes for noun lists
+    Route::get('/api/noun-lists', [NounListController::class, 'apiIndex'])->name('api.noun-lists.index');
+    Route::get('/api/nouns/{noun}/lists', [NounListController::class, 'getNounLists'])->name('api.nouns.lists');
 });
 
 // Admin routes
