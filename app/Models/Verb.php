@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Verb extends Model
 {
@@ -32,5 +33,12 @@ class Verb extends Model
     public function conjugations(): HasMany
     {
         return $this->hasMany(Conjugation::class);
+    }
+
+    public function verbLists(): BelongsToMany
+    {
+        return $this->belongsToMany(VerbList::class, 'verb_list_items')
+            ->withPivot(['order_index', 'notes'])
+            ->withTimestamps();
     }
 }

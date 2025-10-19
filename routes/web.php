@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GenderDuelGameController;
+use App\Http\Controllers\DerbyGameController;
 use App\Http\Controllers\VerbConjugationSlotGameController;
 use App\Http\Controllers\GuestUserController;
 use App\Http\Controllers\CategoryController;
@@ -247,6 +248,18 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{genderDuelGame}/leave', [GenderDuelGameController::class, 'leave'])->name('games.gender-duel.leave');
         });
 
+        // Derby (Horse Race) routes
+        Route::prefix('derby')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
+            Route::get('/', [DerbyGameController::class, 'lobby'])->name('games.derby.lobby');
+            Route::post('/', [DerbyGameController::class, 'create'])->name('games.derby.create');
+            Route::get('/practice', [DerbyGameController::class, 'practice'])->name('games.derby.practice');
+            Route::post('/{derbyGame}/end', [DerbyGameController::class, 'end'])->name('games.derby.end');
+            Route::get('/{derbyGame}/join-from-invite', [DerbyGameController::class, 'joinFromInvite'])->name('games.derby.join-from-invite');
+            Route::post('/{derbyGame}/join', [DerbyGameController::class, 'join'])->name('games.derby.join');
+            Route::post('/{derbyGame}/ready', [DerbyGameController::class, 'ready'])->name('games.derby.ready');
+            Route::delete('/{derbyGame}/leave', [DerbyGameController::class, 'leave'])->name('games.derby.leave');
+        });
+
         // Memory Translation routes
         Route::prefix('memory-translation')->middleware([App\Http\Middleware\CheckGameAvailability::class])->group(function () {
             Route::get('/', [MemoryTranslationGameController::class, 'lobby'])->name('games.memory-translation.lobby');
@@ -343,6 +356,9 @@ Route::middleware('auth')->group(function () {
     // API routes for verb lists
     Route::get('/api/verb-lists', [VerbListController::class, 'apiIndex'])->name('api.verb-lists.index');
     Route::get('/api/verbs/{verb}/lists', [VerbListController::class, 'getVerbLists'])->name('api.verbs.lists');
+    
+    // API routes for tenses
+    Route::get('/api/tenses', [App\Http\Controllers\Api\TenseController::class, 'index'])->name('api.tenses.index');
 
     // Nouns list
     Route::get('/nouns', [NounController::class, 'index'])->name('nouns.index');
@@ -414,6 +430,10 @@ Route::prefix('games')->group(function () {
     Route::get('/gender-duel/{genderDuelGame:id}', [GenderDuelGameController::class, 'show'])
         ->middleware(EnsurePlayerInGame::class)
         ->name('games.gender-duel.show');
+
+    Route::get('/derby/{derbyGame:id}', [DerbyGameController::class, 'show'])
+        ->middleware(EnsurePlayerInGame::class)
+        ->name('games.derby.show');
 
     Route::get('/word-search-puzzle/{wordSearchPuzzleGame:id}', [WordSearchPuzzleGameController::class, 'show'])
         ->middleware(EnsurePlayerInGame::class)

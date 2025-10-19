@@ -13,6 +13,18 @@ interface VerbList {
     items_count: number;
 }
 
+interface TaskTypes {
+    article_gender: boolean;
+    translation: boolean;
+    verb_conjugation: boolean;
+}
+
+interface Tense {
+    id: number;
+    name: string;
+    code: string;
+}
+
 interface DifficultyModalProps {
     showDifficultyModal: boolean;
     setShowDifficultyModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,11 +34,16 @@ interface DifficultyModalProps {
     setSelectedCategory: React.Dispatch<React.SetStateAction<number>>;
     selectedVerbList?: number | null;
     setSelectedVerbList?: React.Dispatch<React.SetStateAction<number | null>>;
+    selectedTenses?: number[];
+    setSelectedTenses?: React.Dispatch<React.SetStateAction<number[]>>;
+    taskTypes?: TaskTypes;
+    setTaskTypes?: React.Dispatch<React.SetStateAction<TaskTypes>>;
     startGame: () => void;
     gameType?: 'singlePlayer' | 'multiPlayer';
     onDifficultyChange?: () => void;
     showCategories?: boolean;
     showVerbLists?: boolean;
+    showTaskTypes?: boolean;
     easyText: string;
     mediumText: string;
     hardText: string;
@@ -42,18 +59,24 @@ export default function DifficultyModal({
     setSelectedCategory,
     selectedVerbList,
     setSelectedVerbList,
+    selectedTenses,
+    setSelectedTenses,
+    taskTypes,
+    setTaskTypes,
     isRestart = false,
     startGame,
     gameType = 'multiPlayer',
     onDifficultyChange,
     showCategories = true,
     showVerbLists = false,
+    showTaskTypes = true,
     easyText,
     mediumText,
     hardText
 }: DifficultyModalProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const [verbLists, setVerbLists] = useState<VerbList[]>([]);
+    const [tenses, setTenses] = useState<Tense[]>([]);
     const { t: trans } = useTranslation();
 
     useEffect(() => {
@@ -61,8 +84,12 @@ export default function DifficultyModal({
             try {
                 const promises = [axios.get(route('categories.index'))];
                 
-                if (showVerbLists) {
+                if (showVerbLists && taskTypes?.verb_conjugation) {
                     promises.push(axios.get(route('api.verb-lists.index')));
+                }
+                
+                if (showTaskTypes) {
+                    promises.push(axios.get(route('api.tenses.index')));
                 }
                 
                 const responses = await Promise.all(promises);
@@ -75,8 +102,19 @@ export default function DifficultyModal({
                     }))
                 ]);
                 
-                if (showVerbLists && responses[1]) {
-                    setVerbLists(responses[1].data.data || []);
+                let responseIndex = 1;
+                if (showVerbLists && taskTypes?.verb_conjugation && responses[responseIndex]) {
+                    setVerbLists(responses[responseIndex].data.data || []);
+                    responseIndex++;
+                }
+                
+                if (showTaskTypes && responses[responseIndex]) {
+                    const fetchedTenses = responses[responseIndex].data || [];
+                    setTenses(fetchedTenses);
+                    // Default to ONLY the first tense each time the modal fetches tenses
+                    if (setSelectedTenses && Array.isArray(fetchedTenses) && fetchedTenses.length > 0) {
+                        setSelectedTenses([fetchedTenses[0].id]);
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -86,7 +124,26 @@ export default function DifficultyModal({
         if (showDifficultyModal) {
             fetchData();
         }
-    }, [showDifficultyModal, showVerbLists]);
+    }, [showDifficultyModal, showVerbLists, taskTypes?.verb_conjugation]);
+
+    // After tenses are loaded and the modal is open, enforce ONLY the first tense selected.
+    useEffect(() => {
+        if (!showDifficultyModal) return;
+        if (!tenses || tenses.length === 0) return;
+        if (!setSelectedTenses) return;
+        const firstId = tenses[0].id;
+        // If selection is anything other than exactly [firstId], normalize it
+        if (!selectedTenses || selectedTenses.length !== 1 || selectedTenses[0] !== firstId) {
+            setSelectedTenses([firstId]);
+        }
+    }, [showDifficultyModal, tenses, selectedTenses]);
+
+    // If verb conjugation is turned off, clear any selected verb list so it won't be sent
+    useEffect(() => {
+        if (!taskTypes?.verb_conjugation) {
+            setSelectedVerbList?.(null);
+        }
+    }, [taskTypes?.verb_conjugation]);
 
     return (
         <Modal show={showDifficultyModal} onClose={() => setShowDifficultyModal(false)}>
@@ -124,8 +181,63 @@ export default function DifficultyModal({
                     </div>
                 )}
 
-                {/* Verb List Selector */}
-                {showVerbLists && (
+                {/* Task Type Selector */}
+                {showTaskTypes && taskTypes && setTaskTypes && (
+                    <div className="mb-6">
+                        <div className="flex flex-col items-start mb-3">
+                            <InputLabel
+                                htmlFor="task_types"
+                                value="Task Types"
+                            />
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                Select which types of questions you want to practice
+                            </p>
+                        </div>
+                        <div className="space-y-3">
+                            <label className="flex items-center space-x-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={taskTypes.article_gender}
+                                    onChange={(e) => setTaskTypes({ ...taskTypes, article_gender: e.target.checked })}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Article/Gender <span className="text-xs text-gray-500">(der/die/das)</span>
+                                </span>
+                            </label>
+                            <label className="flex items-center space-x-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={taskTypes.translation}
+                                    onChange={(e) => setTaskTypes({ ...taskTypes, translation: e.target.checked })}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Translation <span className="text-xs text-gray-500">(word meaning)</span>
+                                </span>
+                            </label>
+                            <label className="flex items-center space-x-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={taskTypes.verb_conjugation}
+                                    onChange={(e) => setTaskTypes({ ...taskTypes, verb_conjugation: e.target.checked })}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Verb Conjugation <span className="text-xs text-gray-500">(tense forms)</span>
+                                </span>
+                            </label>
+                        </div>
+                        {!taskTypes.article_gender && !taskTypes.translation && !taskTypes.verb_conjugation && (
+                            <p className="mt-2 text-xs text-red-500">
+                                Please select at least one task type
+                            </p>
+                        )}
+                    </div>
+                )}
+
+                {/* Verb List Selector - Only show if verb conjugation is enabled */}
+                {showVerbLists && taskTypes?.verb_conjugation && (
                     <div className="mb-6">
                         <div className="flex flex-col items-start mb-2">
                             <InputLabel
@@ -153,6 +265,47 @@ export default function DifficultyModal({
                                 {trans('Select a custom verb list to practice only those verbs, or leave empty to use all verbs.')}
                             </p>
                         </div>
+                    </div>
+                )}
+
+                {/* Tense Selector - Only show if verb conjugation is enabled */}
+                {showTaskTypes && taskTypes?.verb_conjugation && selectedTenses && setSelectedTenses && (
+                    <div className="mb-6">
+                        <div className="flex flex-col items-start mb-3">
+                            <InputLabel
+                                htmlFor="tense_selector"
+                                value="Tenses (for Verb Conjugation)"
+                            />
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                Select which tenses to practice
+                            </p>
+                        </div>
+                        <div className="space-y-2">
+                            {tenses.map((tense) => (
+                                <label key={tense.id} className="flex items-center space-x-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedTenses.includes(tense.id)}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setSelectedTenses([...selectedTenses, tense.id]);
+                                            } else {
+                                                setSelectedTenses(selectedTenses.filter(id => id !== tense.id));
+                                            }
+                                        }}
+                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        {tense.name}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                        {selectedTenses.length === 0 && (
+                            <p className="mt-2 text-xs text-red-500">
+                                Please select at least one tense
+                            </p>
+                        )}
                     </div>
                 )}
 

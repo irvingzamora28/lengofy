@@ -1,6 +1,7 @@
 import { ServerWebSocket } from "bun";
 import { GameType, GameManager, BaseGameState } from './types';
 import { GenderDuelManager } from '../games/gender-duel/GenderDuelManager';
+import { DerbyManager } from '../games/derby/DerbyManager';
 import { MemoryTranslationManager } from '../games/memory-translation/MemoryTranslationManager';
 import { WordSearchPuzzleManager } from '../games/word-search-puzzle/WordSearchPuzzleManager';
 import { VerbConjugationSlotManager } from '../games/verb-conjugation-slot/VerbConjugationSlotManager';
@@ -15,12 +16,14 @@ export class WebSocketServer {
 
         // Initialize lobby connections for each game type
         this.lobbyConnections.set('gender_duel', new Set());
+        this.lobbyConnections.set('derby', new Set());
         this.lobbyConnections.set('memory_translation', new Set());
         this.lobbyConnections.set('word_search_puzzle', new Set());
         this.lobbyConnections.set('verb_conjugation_slot', new Set());
 
         // Initialize game managers with their respective lobby connections
         this.gameManagers.set('gender_duel', new GenderDuelManager(this.lobbyConnections.get('gender_duel')!));
+        this.gameManagers.set('derby', new DerbyManager(this.lobbyConnections.get('derby')!));
         this.gameManagers.set('memory_translation', new MemoryTranslationManager(this.lobbyConnections.get('memory_translation')!));
         this.gameManagers.set('word_search_puzzle', new WordSearchPuzzleManager(this.lobbyConnections.get('word_search_puzzle')!));
         this.gameManagers.set('verb_conjugation_slot', new VerbConjugationSlotManager(this.lobbyConnections.get('verb_conjugation_slot')!));
@@ -78,6 +81,12 @@ export class WebSocketServer {
                 if (gameManager) {
                     gameManager.handleMessage(ws, data);
                 }
+            } else if (data.type.includes('derby') || data.gameType === 'derby') {
+                console.log("It's a derby message");
+                const gameManager = this.gameManagers.get('derby');
+                if (gameManager) {
+                    gameManager.handleMessage(ws, data);
+                }
             } else if (data.type.includes('memory_translation') || data.gameType === 'memory_translation') {
                 console.log("It's a memory translation message");
                 const gameManager = this.gameManagers.get('memory_translation');
@@ -102,6 +111,12 @@ export class WebSocketServer {
             if (data.type.startsWith('player_') || data.type === 'submit_answer') {
                 if (data.gameType === 'gender_duel') {
                     const gameManager = this.gameManagers.get('gender_duel');
+                    if (gameManager) {
+                        gameManager.handleMessage(ws, data);
+                        return;
+                    }
+                } else if (data.gameType === 'derby') {
+                    const gameManager = this.gameManagers.get('derby');
                     if (gameManager) {
                         gameManager.handleMessage(ws, data);
                         return;

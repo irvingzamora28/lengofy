@@ -34,6 +34,11 @@ class GameSeeder extends Seeder
                 'slug' => 'verb-conjugation-slot',
                 'supported_language_pairs' => null, // Available for all language pairs
             ],
+            [
+                'name' => 'Derby',
+                'slug' => 'derby',
+                'supported_language_pairs' => null, // Available for all language pairs
+            ],
         ];
 
         foreach ($games as $game) {
