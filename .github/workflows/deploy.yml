@@ -112,6 +112,8 @@ jobs:
 
             # Setup SSL with Let's Encrypt if domain is configured
             if [ "${{ secrets.DOMAIN_NAME }}" != "" ]; then
+              echo "Setting up SSL for ${{ secrets.DOMAIN_NAME }}..."
+
               # Install certbot if not present
               if ! command -v certbot &> /dev/null; then
                 apt update && apt install -y certbot python3-certbot-nginx
@@ -119,13 +121,24 @@ jobs:
 
               # Generate SSL certificate if not exists
               if [ ! -f "/etc/letsencrypt/live/${{ secrets.DOMAIN_NAME }}/fullchain.pem" ]; then
+                echo "Generating SSL certificate..."
                 certbot --nginx -d ${{ secrets.DOMAIN_NAME }} --agree-tos --non-interactive --register-unsafely-without-email
+
+                # Verify certificate was created
+                if [ ! -f "/etc/letsencrypt/live/${{ secrets.DOMAIN_NAME }}/fullchain.pem" ]; then
+                  echo "❌ SSL certificate generation failed"
+                  exit 1
+                fi
               fi
 
               # Setup auto-renewal
               if [ ! -f "/etc/cron.d/certbot" ]; then
                 echo "0 12 * * * /usr/bin/certbot renew --quiet" | tee -a /etc/cron.d/certbot
               fi
+
+              echo "✅ SSL setup completed"
+            else
+              echo "⚠️ No DOMAIN_NAME configured, skipping SSL setup"
             fi
 
             # Create nginx logs directory if it doesn't exist
