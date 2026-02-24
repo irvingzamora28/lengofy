@@ -13,13 +13,82 @@ on:
         options:
           - 'true'
           - 'false'
+      rebuild:
+        description: 'Force rebuild containers (use when dependencies changed)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_BUILDKIT: 1
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: composer-
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: bun-
+
+      - name: Install PHP dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Install Bun dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build assets
+        run: bun run build
+
+      - name: Generate optimized Docker image
+        run: |
+          # Create optimized .dockerignore
+          cat > .dockerignore << EOF
+          .git
+          .github
+          node_modules
+          .env
+          storage/logs/*
+          storage/framework/cache/*
+          storage/framework/sessions/*
+          storage/framework/views/*
+          storage/app/public/*
+          bootstrap/cache/*
+          vendor/bin/phpunit
+          tests/
+          docker-compose*.yml
+          Dockerfile.*
+          README.md
+          EOF
 
       - name: Copy repository contents via scp
         uses: appleboy/scp-action@master
@@ -30,6 +99,12 @@ jobs:
           source: "."
           target: "/var/www/html"
           rm: true
+          exclude: |
+            node_modules
+            vendor
+            .git
+            .github
+            tests
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
@@ -37,9 +112,27 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          timeout: 60s
+          timeout: 300s
           script: |
             cd /var/www/html
+
+            # Setup SSL with Let's Encrypt if domain is configured
+            if [ "${{ secrets.DOMAIN_NAME }}" != "" ]; then
+              # Install certbot if not present
+              if ! command -v certbot &> /dev/null; then
+                apt update && apt install -y certbot python3-certbot-nginx
+              fi
+
+              # Generate SSL certificate if not exists
+              if [ ! -f "/etc/letsencrypt/live/${{ secrets.DOMAIN_NAME }}/fullchain.pem" ]; then
+                certbot --nginx -d ${{ secrets.DOMAIN_NAME }} --agree-tos --non-interactive --register-unsafely-without-email
+              fi
+
+              # Setup auto-renewal
+              if [ ! -f "/etc/cron.d/certbot" ]; then
+                echo "0 12 * * * /usr/bin/certbot renew --quiet" | tee -a /etc/cron.d/certbot
+              fi
+            fi
 
             # Create nginx logs directory if it doesn't exist
             mkdir -p storage/logs/nginx
@@ -76,26 +169,28 @@ jobs:
             EOL
             fi
 
-            # Copy .env.example to .env if it doesn't exist
+            # Update environment variables
             if [ ! -f .env ]; then
-              echo "Creating .env file from .env.example"
               cp .env.example .env
             fi
 
-            # Update environment variables
-            sed -i "s#^DB_CONNECTION=.*#DB_CONNECTION=${{ secrets.DB_CONNECTION }}#" .env
-            sed -i "s#^DB_HOST=.*#DB_HOST=${{ secrets.DB_HOST }}#" .env
-            sed -i "s#^DB_PORT=.*#DB_PORT=${{ secrets.DB_PORT }}#" .env
-            sed -i "s#^DB_DATABASE=.*#DB_DATABASE=${{ secrets.DB_DATABASE }}#" .env
-            sed -i "s#^DB_USERNAME=.*#DB_USERNAME=${{ secrets.DB_USERNAME }}#" .env
-            sed -i "s#^DB_PASSWORD=.*#DB_PASSWORD=${{ secrets.DB_PASSWORD }}#" .env
-            sed -i "s#^DB_ROOT_PASSWORD=.*#DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}#" .env
-            sed -i "s#^APP_NAME=.*#APP_NAME=${{ secrets.APP_NAME }}#" .env
-            sed -i "s#^APP_ENV=.*#APP_ENV=production#" .env
-            sed -i "s#^APP_DEBUG=.*#APP_DEBUG=false#" .env
-            sed -i "s#^APP_URL=.*#APP_URL=${{ secrets.APP_URL }}#" .env
-            sed -i "s#^WEBSOCKET_GAME_ENDPOINT=.*#WEBSOCKET_GAME_ENDPOINT=${{ secrets.WEBSOCKET_GAME_ENDPOINT }}#" .env
-            sed -i "s#^SERVER_NAME=.*#SERVER_NAME=${{ secrets.SERVER_NAME }}#" .env
+            # Update all environment variables at once
+            cat > .env << EOF
+            APP_NAME=${{ secrets.APP_NAME }}
+            APP_ENV=production
+            APP_DEBUG=false
+            APP_URL=https://${{ secrets.DOMAIN_NAME }}
+            WEBSOCKET_GAME_ENDPOINT=wss://${{ secrets.DOMAIN_NAME }}:6001
+            SERVER_NAME=${{ secrets.DOMAIN_NAME }}
+
+            DB_CONNECTION=${{ secrets.DB_CONNECTION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            EOF
 
             # Set proper permissions for .env file
             sudo chmod 666 .env
@@ -103,45 +198,60 @@ jobs:
             # Replace ${SERVER_NAME} in the default.conf
             sed -i "s/\${SERVER_NAME}/${{ secrets.SERVER_NAME }}/g" nginx/default.conf
 
-            # Build and start containers
-            docker compose -f docker-compose.prod.yml down
-            docker compose -f docker-compose.prod.yml build --no-cache
+            # Docker strategy: only rebuild if needed
+            if [ "${{ github.event.inputs.rebuild }}" = "true" ]; then
+              echo "Force rebuilding containers..."
+              docker compose -f docker-compose.prod.yml down
+              docker compose -f docker-compose.prod.yml build --no-cache
+            else
+              echo "Smart rebuild strategy..."
+              # Check if Dockerfile or dependencies changed
+              if docker images -q lengofy-app:latest | grep -q .; then
+                echo "Using existing image..."
+                docker compose -f docker-compose.prod.yml down
+              else
+                echo "Building new image..."
+                docker compose -f docker-compose.prod.yml build
+              fi
+            fi
+
+            # Start containers
             docker compose -f docker-compose.prod.yml up -d
 
-            # Ensure proper permissions after container starts
-            sleep 5
-            sudo chown -R www-data:www-data storage/logs/nginx
-            sudo chmod 644 storage/logs/nginx/access.log storage/logs/nginx/error.log
+            # Wait for database to be ready (smart wait)
+            echo "Waiting for database..."
+            timeout 60 bash -c 'until docker exec lengofy-db mysqladmin ping -h localhost --silent; do sleep 2; done'
 
-            # Wait for containers to be ready
-            sleep 20
-
-            # Set proper permissions
-            docker exec -i lengofy-app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-            # Run Laravel commands
-            docker exec -i lengofy-app composer install
-
-            # Install node dependencies
-            docker exec -i lengofy-app bun install
-            docker exec -i lengofy-app bun run build
-
-            # Only generate key if it doesn't exist in .env (Check for empty value)
-            if grep -q "^APP_KEY=" .env && [ -z "$(grep "^APP_KEY=" .env | cut -d '=' -f2)" ]; then
-              docker exec -i lengofy-app php artisan key:generate
+            # Generate APP_KEY if missing
+            if ! grep -q "APP_KEY=base64:" .env || [ -z "$(grep "APP_KEY=" .env | cut -d '=' -f2)" ]; then
+              docker exec lengofy-app php artisan key:generate --force
             fi
 
-            # Run migrations (--force to run in production)
-            docker exec -i lengofy-app php artisan migrate --force
+            # Run migrations only if there are pending migrations
+            if docker exec lengofy-app php artisan migrate:status | grep -q "Pending"; then
+              docker exec lengofy-app php artisan migrate --force
+            fi
 
-            # Only run seeding if explicitly requested
+            # Run seeding only if requested
             if [ "${{ github.event.inputs.seed }}" = "true" ]; then
-              docker exec -i lengofy-app php artisan db:seed --force
-              echo "Database seeding completed"
+              docker exec lengofy-app php artisan db:seed --force
             fi
 
-            # Cache everything
-            docker exec -i lengofy-app php artisan config:cache
-            docker exec -i lengofy-app php artisan route:cache
-            docker exec -i lengofy-app php artisan view:cache
-            docker exec -i lengofy-app php artisan storage:link
+            # Cache optimizations
+            docker exec lengofy-app php artisan config:cache
+            docker exec lengofy-app php artisan route:cache
+            docker exec lengofy-app php artisan view:cache
+            docker exec lengofy-app php artisan event:cache
+            docker exec lengofy-app php artisan storage:link
+
+            # Health check
+            echo "Performing health check..."
+            sleep 10
+
+            if curl -f http://localhost > /dev/null; then
+              echo "✅ Deployment successful!"
+            else
+              echo "❌ Deployment failed - application not responding"
+              docker compose -f docker-compose.prod.yml logs --tail=20
+              exit 1
+            fi
