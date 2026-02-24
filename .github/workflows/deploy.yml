@@ -206,6 +206,14 @@ jobs:
             # Replace ${SERVER_NAME} in the default.conf
             sed -i "s/\${SERVER_NAME}/${{ secrets.SERVER_NAME }}/g" nginx/default.conf
 
+            # Generate APP_KEY before starting containers
+            if ! grep -q "APP_KEY=base64:" .env || [ -z "$(grep "APP_KEY=" .env | cut -d '=' -f2)" ]; then
+              echo "Generating APP_KEY..."
+              # Generate key locally and add to .env
+              APP_KEY=$(php -r "echo 'base64:' . base64_encode(random_bytes(32));")
+              echo "APP_KEY=$APP_KEY" >> .env
+            fi
+
             # Docker strategy: only rebuild if needed
             if [ "${{ github.event.inputs.rebuild }}" = "true" ]; then
               echo "Force rebuilding containers..."

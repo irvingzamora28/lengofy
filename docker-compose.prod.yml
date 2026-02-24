@@ -16,6 +16,7 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY}
       APP_URL: https://${DOMAIN_NAME}
       WEBSOCKET_GAME_ENDPOINT: wss://${DOMAIN_NAME}:6001
       SERVER_NAME: ${DOMAIN_NAME}
