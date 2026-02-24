@@ -176,6 +176,7 @@ jobs:
             APP_URL=https://${{ secrets.DOMAIN_NAME }}
             WEBSOCKET_GAME_ENDPOINT=wss://${{ secrets.DOMAIN_NAME }}:6001
             SERVER_NAME=${{ secrets.DOMAIN_NAME }}
+            DOMAIN_NAME=${{ secrets.DOMAIN_NAME }}
 
             DB_CONNECTION=${{ secrets.DB_CONNECTION }}
             DB_HOST=${{ secrets.DB_HOST }}
@@ -209,8 +210,8 @@ jobs:
               fi
             fi
 
-            # Start containers
-            docker compose -f docker-compose.prod.yml up -d
+            # Start containers with environment file
+            docker compose -f docker-compose.prod.yml --env-file .env up -d
 
             # Wait for database to be ready (smart wait)
             echo "Waiting for database..."
