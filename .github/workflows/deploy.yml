@@ -35,6 +35,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo, pdo_mysql, zip, exif, pcntl
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
@@ -66,7 +72,7 @@ jobs:
       - name: Generate optimized Docker image
         run: |
           # Create optimized .dockerignore
-          cat > .dockerignore << EOF
+          cat > .dockerignore <<'DIEOF'
           .git
           .github
           node_modules
@@ -82,7 +88,8 @@ jobs:
           docker-compose*.yml
           Dockerfile.*
           README.md
-          EOF
+          DIEOF
+          sed -i 's/^[[:space:]]*//' .dockerignore
 
       - name: Copy repository contents via scp
         uses: appleboy/scp-action@master
@@ -95,7 +102,6 @@ jobs:
           rm: true
           exclude: |
             node_modules
-            vendor
             .git
             .github
             tests
@@ -116,13 +122,16 @@ jobs:
 
               # Install certbot if not present
               if ! command -v certbot &> /dev/null; then
-                apt update && apt install -y certbot python3-certbot-nginx
+                apt-get update && apt-get install -y certbot
               fi
 
               # Generate SSL certificate if not exists
               if [ ! -f "/etc/letsencrypt/live/${{ secrets.DOMAIN_NAME }}/fullchain.pem" ]; then
                 echo "Generating SSL certificate..."
-                certbot --nginx -d ${{ secrets.DOMAIN_NAME }} --agree-tos --non-interactive --register-unsafely-without-email
+                # Stop anything on port 80 so certbot standalone can bind
+                docker compose -f docker-compose.prod.yml down 2>/dev/null || true
+                systemctl stop nginx 2>/dev/null || true
+                certbot certonly --standalone -d ${{ secrets.DOMAIN_NAME }} --agree-tos --non-interactive --register-unsafely-without-email
 
                 # Verify certificate was created
                 if [ ! -f "/etc/letsencrypt/live/${{ secrets.DOMAIN_NAME }}/fullchain.pem" ]; then
@@ -131,9 +140,9 @@ jobs:
                 fi
               fi
 
-              # Setup auto-renewal
-              if [ ! -f "/etc/cron.d/certbot" ]; then
-                echo "0 12 * * * /usr/bin/certbot renew --quiet" | tee -a /etc/cron.d/certbot
+              # Setup auto-renewal cron (renew in standalone mode, restart nginx container after)
+              if ! crontab -l 2>/dev/null | grep -q certbot; then
+                (crontab -l 2>/dev/null; echo "0 3 * * * certbot renew --standalone --pre-hook 'docker stop lengofy-nginx || true' --post-hook 'docker start lengofy-nginx || true' --quiet") | crontab -
               fi
 
               echo "✅ SSL setup completed"
@@ -142,15 +151,8 @@ jobs:
             fi
 
             # Create nginx logs directory if it doesn't exist
-            mkdir -p storage/logs/nginx
-
-            # Only create log files if they don't exist
-            if [ ! -f storage/logs/nginx/access.log ]; then
-              touch storage/logs/nginx/access.log
-            fi
-            if [ ! -f storage/logs/nginx/error.log ]; then
-              touch storage/logs/nginx/error.log
-            fi
+            mkdir -p storage/logs/nginx storage/logs/mysql
+            touch storage/logs/nginx/access.log storage/logs/nginx/error.log
 
             # Ensure proper permissions
             sudo chown -R www-data:www-data storage/logs/nginx
@@ -159,8 +161,8 @@ jobs:
 
             # Setup log rotation if not already configured
             if [ ! -f /etc/logrotate.d/nginx-lengofy ]; then
-              sudo tee /etc/logrotate.d/nginx-lengofy > /dev/null << 'EOL'
-            "/var/www/html/storage/logs/nginx/*.log \{
+              sudo tee /etc/logrotate.d/nginx-lengofy > /dev/null <<'EOL'
+            /var/www/html/storage/logs/nginx/*.log {
                 daily
                 missingok
                 rotate 14
@@ -168,49 +170,41 @@ jobs:
                 delaycompress
                 notifempty
                 create 0644 www-data www-data
-                sharedscripts
-                postrotate
-                    [ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
-                endscript
-            }"
+            }
             EOL
             fi
 
-            # Update environment variables
-            if [ ! -f .env ]; then
-              cp .env.example .env
-            fi
-
-            # Update all environment variables at once
-            cat > .env << EOF
+            # Write .env file (no leading spaces - heredoc must be unindented)
+            cat > .env <<ENVEOF
             APP_NAME=${{ secrets.APP_NAME }}
             APP_ENV=production
             APP_DEBUG=false
             APP_URL=https://${{ secrets.DOMAIN_NAME }}
-            WEBSOCKET_GAME_ENDPOINT=wss://${{ secrets.DOMAIN_NAME }}:6001
+            WEBSOCKET_GAME_ENDPOINT=wss://${{ secrets.DOMAIN_NAME }}/ws
             SERVER_NAME=${{ secrets.DOMAIN_NAME }}
             DOMAIN_NAME=${{ secrets.DOMAIN_NAME }}
-
             DB_CONNECTION=${{ secrets.DB_CONNECTION }}
-            DB_HOST=${{ secrets.DB_HOST }}
-            DB_PORT=${{ secrets.DB_PORT }}
+            DB_HOST=db
+            DB_PORT=3306
             DB_DATABASE=${{ secrets.DB_DATABASE }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
-            EOF
+            ENVEOF
+
+            # Strip any leading whitespace from .env lines (safety net)
+            sed -i 's/^[[:space:]]*//' .env
 
             # Set proper permissions for .env file
-            sudo chmod 666 .env
+            chmod 644 .env
 
             # Replace ${SERVER_NAME} in the default.conf
-            sed -i "s/\${SERVER_NAME}/${{ secrets.SERVER_NAME }}/g" nginx/default.conf
+            sed -i "s/\${SERVER_NAME}/${{ secrets.DOMAIN_NAME }}/g" nginx/default.conf
 
-            # Generate APP_KEY before starting containers
-            if ! grep -q "APP_KEY=base64:" .env || [ -z "$(grep "APP_KEY=" .env | cut -d '=' -f2)" ]; then
+            # Generate APP_KEY before starting containers (using openssl, no PHP needed on host)
+            if ! grep -q "^APP_KEY=base64:" .env; then
               echo "Generating APP_KEY..."
-              # Generate key locally and add to .env
-              APP_KEY=$(php -r "echo 'base64:' . base64_encode(random_bytes(32));")
+              APP_KEY="base64:$(openssl rand -base64 32)"
               echo "APP_KEY=$APP_KEY" >> .env
             fi
 
@@ -221,8 +215,7 @@ jobs:
               docker compose -f docker-compose.prod.yml build --no-cache
             else
               echo "Smart rebuild strategy..."
-              # Check if Dockerfile or dependencies changed
-              if docker images -q lengofy-app:latest | grep -q .; then
+              if docker images -q lengofy-app:latest 2>/dev/null | grep -q .; then
                 echo "Using existing image..."
                 docker compose -f docker-compose.prod.yml down
               else
@@ -234,19 +227,16 @@ jobs:
             # Start containers with environment file
             docker compose -f docker-compose.prod.yml --env-file .env up -d
 
-            # Wait for database to be ready (smart wait)
+            # Wait for database to be ready
             echo "Waiting for database..."
-            timeout 60 bash -c 'until docker exec lengofy-db mysqladmin ping -h localhost --silent; do sleep 2; done'
+            timeout 90 bash -c 'until docker exec lengofy-db mysqladmin ping -h localhost --silent 2>/dev/null; do sleep 3; done'
 
-            # Generate APP_KEY if missing
-            if ! grep -q "APP_KEY=base64:" .env || [ -z "$(grep "APP_KEY=" .env | cut -d '=' -f2)" ]; then
-              docker exec lengofy-app php artisan key:generate --force
-            fi
+            # Wait for app container to be healthy
+            echo "Waiting for app container..."
+            timeout 120 bash -c 'until [ "$(docker inspect -f "{{.State.Health.Status}}" lengofy-app 2>/dev/null)" = "healthy" ]; do sleep 5; done' || echo "Warning: app health check timed out, continuing..."
 
-            # Run migrations only if there are pending migrations
-            if docker exec lengofy-app php artisan migrate:status | grep -q "Pending"; then
-              docker exec lengofy-app php artisan migrate --force
-            fi
+            # Run migrations
+            docker exec lengofy-app php artisan migrate --force || true
 
             # Run seeding only if requested
             if [ "${{ github.event.inputs.seed }}" = "true" ]; then
@@ -258,16 +248,29 @@ jobs:
             docker exec lengofy-app php artisan route:cache
             docker exec lengofy-app php artisan view:cache
             docker exec lengofy-app php artisan event:cache
-            docker exec lengofy-app php artisan storage:link
+            docker exec lengofy-app php artisan storage:link || true
 
-            # Health check
+            # Health check - wait for nginx to be up
             echo "Performing health check..."
-            sleep 10
+            sleep 15
 
-            if curl -f http://localhost > /dev/null; then
+            HEALTH_OK=false
+            for i in 1 2 3 4 5; do
+              if curl -sf -o /dev/null https://${{ secrets.DOMAIN_NAME }} || curl -sf -o /dev/null http://localhost; then
+                HEALTH_OK=true
+                break
+              fi
+              echo "Health check attempt $i failed, retrying in 10s..."
+              sleep 10
+            done
+
+            if [ "$HEALTH_OK" = "true" ]; then
               echo "✅ Deployment successful!"
             else
               echo "❌ Deployment failed - application not responding"
-              docker compose -f docker-compose.prod.yml logs --tail=20
+              echo "--- App logs ---"
+              docker compose -f docker-compose.prod.yml logs --tail=30 app
+              echo "--- Nginx logs ---"
+              docker compose -f docker-compose.prod.yml logs --tail=30 webserver
               exit 1
             fi

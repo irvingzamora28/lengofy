@@ -10,7 +10,7 @@ services:
     volumes:
       - ./storage:/var/www/html/storage
       - ./storage/logs:/var/www/html/storage/logs
-      - ./.env:/var/www/html/.env:ro
+      - ./.env:/var/www/html/.env
     networks:
       - lengofy-network
     environment:
@@ -18,7 +18,7 @@ services:
       APP_DEBUG: "false"
       APP_KEY: ${APP_KEY}
       APP_URL: https://${DOMAIN_NAME}
-      WEBSOCKET_GAME_ENDPOINT: wss://${DOMAIN_NAME}:6001
+      WEBSOCKET_GAME_ENDPOINT: wss://${DOMAIN_NAME}/ws
       SERVER_NAME: ${DOMAIN_NAME}
       DB_CONNECTION: mysql
       DB_HOST: db
@@ -27,17 +27,18 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-    ports:
-      - "6001:6001"  # Bun WebSocket port
+    expose:
+      - "6001"
     depends_on:
       db:
         condition: service_healthy
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000"]
+      test: ["CMD-SHELL", "pgrep php-fpm > /dev/null && curl -sf http://localhost:6001 > /dev/null"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5
+      start_period: 30s
 
   webserver:
     image: nginx:alpine
@@ -57,10 +58,11 @@ services:
       - lengofy-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD-SHELL", "wget --spider -qS http://localhost/ 2>&1 | grep -q '301\\|200' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 15s
 
   db:
     image: mysql:8.0

@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     unzip \
+    procps \
     libpq-dev \
     libpng-dev \
     libjpeg-dev \
