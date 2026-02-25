@@ -224,6 +224,11 @@ jobs:
               fi
             fi
 
+            # Ensure ports 80/443 are free before starting nginx container
+            docker compose -f docker-compose.prod.yml down --remove-orphans 2>/dev/null || true
+            fuser -k 80/tcp 2>/dev/null || true
+            fuser -k 443/tcp 2>/dev/null || true
+
             # Start containers with environment file
             docker compose -f docker-compose.prod.yml --env-file .env up -d
 
