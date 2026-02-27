@@ -211,20 +211,15 @@ jobs:
               echo "APP_KEY=$APP_KEY" >> .env
             fi
 
-            # Docker strategy: only rebuild if needed
+            # Docker strategy: always rebuild app image to pick up new code/assets
             if [ "${{ github.event.inputs.rebuild }}" = "true" ]; then
-              echo "Force rebuilding containers..."
+              echo "Force rebuilding containers (no cache)..."
               docker compose -f docker-compose.prod.yml down
               docker compose -f docker-compose.prod.yml build --no-cache
             else
-              echo "Smart rebuild strategy..."
-              if docker images -q lengofy-app:latest 2>/dev/null | grep -q .; then
-                echo "Using existing image..."
-                docker compose -f docker-compose.prod.yml down
-              else
-                echo "Building new image..."
-                docker compose -f docker-compose.prod.yml build
-              fi
+              echo "Rebuilding app image..."
+              docker compose -f docker-compose.prod.yml down
+              docker compose -f docker-compose.prod.yml build app
             fi
 
             # Ensure ports 80/443 are free before starting nginx container
