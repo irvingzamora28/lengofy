@@ -193,6 +193,9 @@ jobs:
             GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
             GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
             GOOGLE_REDIRECT_URI=https://${{ secrets.DOMAIN_NAME }}/auth/google/callback
+            SESSION_DRIVER=database
+            SESSION_CONNECTION=mysql
+            SESSION_LIFETIME=2880
             ENVEOF
 
             # Strip any leading whitespace from .env lines (safety net)
