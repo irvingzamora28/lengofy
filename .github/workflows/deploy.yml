@@ -196,6 +196,8 @@ jobs:
             SESSION_DRIVER=database
             SESSION_CONNECTION=mysql
             SESSION_LIFETIME=2880
+            SESSION_DOMAIN=.lengofy.club
+            SESSION_SECURE_COOKIE=true
             ENVEOF
 
             # Strip any leading whitespace from .env lines (safety net)
