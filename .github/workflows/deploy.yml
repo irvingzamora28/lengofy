@@ -196,7 +196,7 @@ jobs:
             SESSION_DRIVER=database
             SESSION_CONNECTION=mysql
             SESSION_LIFETIME=2880
-            SESSION_DOMAIN=.lengofy.club
+            SESSION_DOMAIN=.${{ secrets.DOMAIN_NAME }}
             SESSION_SECURE_COOKIE=true
             ENVEOF
 
