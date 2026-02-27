@@ -9,7 +9,7 @@ interface RecentLessonsProps {
 }
 
 export default function RecentLessons({ lessons }: RecentLessonsProps) {
-    const firstFewLessons = lessons.slice(0, 3);
+    const firstFewLessons = (lessons ?? []).slice(0, 3);
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 shadow-sm sm:rounded-lg p-2 sm:p-4">

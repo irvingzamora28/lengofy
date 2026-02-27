@@ -215,7 +215,7 @@ Route::get('/dashboard', function (LessonService $lessonService) {
                 ] : null
             ])
         ],
-        'lessons' => $lessons,
+        'lessons' => $lessons ?? [],
         'flash' => [
             'error' => session('error'),
             'success' => session('success'),
@@ -352,11 +352,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/verb-lists/{list}/verbs/bulk', [VerbListController::class, 'bulkAddVerbs'])->name('verb-lists.bulk-add-verbs');
     Route::delete('/verb-lists/{list}/verbs/{verb}', [VerbListController::class, 'removeVerb'])->name('verb-lists.remove-verb');
     Route::patch('/verb-lists/{list}/verbs/{verb}', [VerbListController::class, 'updateVerbNotes'])->name('verb-lists.update-verb-notes');
-    
+
     // API routes for verb lists
     Route::get('/api/verb-lists', [VerbListController::class, 'apiIndex'])->name('api.verb-lists.index');
     Route::get('/api/verbs/{verb}/lists', [VerbListController::class, 'getVerbLists'])->name('api.verbs.lists');
-    
+
     // API routes for tenses
     Route::get('/api/tenses', [App\Http\Controllers\Api\TenseController::class, 'index'])->name('api.tenses.index');
 
@@ -381,7 +381,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/noun-lists/{list}/nouns/bulk', [NounListController::class, 'bulkAddNouns'])->name('noun-lists.bulk-add-nouns');
     Route::delete('/noun-lists/{list}/nouns/{noun}', [NounListController::class, 'removeNoun'])->name('noun-lists.remove-noun');
     Route::patch('/noun-lists/{list}/nouns/{noun}', [NounListController::class, 'updateNounNotes'])->name('noun-lists.update-noun-notes');
-    
+
     // API routes for noun lists
     Route::get('/api/noun-lists', [NounListController::class, 'apiIndex'])->name('api.noun-lists.index');
     Route::get('/api/nouns/{noun}/lists', [NounListController::class, 'getNounLists'])->name('api.nouns.lists');
