@@ -98,7 +98,9 @@
         "remember_me": "Recordarme",
         "forgot_password": "¿Olvidaste tu contraseña?",
         "login": "Iniciar sesión",
-        "signup": "Registrarse"
+        "signup": "Registrarse",
+        "or_continue_with": "O continúa con",
+        "login_with_google": "Iniciar sesión con Google"
     },
     "register": {
         "name": "Nombre",
@@ -106,7 +108,9 @@
         "password": "Contraseña",
         "password_confirmation": "Confirmar Contraseña",
         "already_registered": "Ya registrado?",
-        "register": "Registrarse"
+        "register": "Registrarse",
+        "or_continue_with": "O continúa con",
+        "register_with_google": "Registrarse con Google"
     },
     "welcome": {
         "title": "Aprender Idiomas con Lengofy",

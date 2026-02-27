@@ -30,7 +30,7 @@ Lengofy is an innovative language learning platform designed to make language ac
 - **Frontend**: React/TypeScript
 - **Database**: MySQL
 - **Real-time Communication**: Bun
-- **Authentication**: Laravel Breeze
+- **Authentication**: Laravel Breeze + Laravel Socialite (Google OAuth)
 - **Package Manager**: Bun
 - **Testing**: PHPUnit
 
@@ -228,6 +228,8 @@ Add to github secrets:
 - APP_URL
 - WEBSOCKET_GAME_ENDPOINT
 - SERVER_NAME
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
 
 Make sure to allow port 6001 on VPS
 Make sure to allow port 22 on VPS
@@ -247,6 +249,19 @@ APP_NAME: Application name
 APP_URL: Application URL (localhost or yourdomain.com)
 WEBSOCKET_GAME_ENDPOINT: WebSocket game endpoint (e.g., wss://192.1.0.0:6001 or ws://192.1.0.0:6001)
 SERVER_NAME: Server name (e.g., localhost or yourdomain.com)
+GOOGLE_CLIENT_ID: Google OAuth client ID (from Google Cloud Console)
+GOOGLE_CLIENT_SECRET: Google OAuth client secret (from Google Cloud Console)
+
+### Google OAuth Setup
+
+1. Go to [console.cloud.google.com](https://console.cloud.google.com)
+2. Create a project → **APIs & Services** → **Credentials** → **Create OAuth 2.0 Client ID**
+3. Set the following:
+   - **Authorized JavaScript origins**: `https://yourdomain.com`
+   - **Authorized redirect URIs**: `https://yourdomain.com/auth/google/callback`
+4. Copy the **Client ID** and **Client Secret** into GitHub Secrets as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
+
+> For local development, also add `http://localhost` as an authorized origin and `http://localhost/auth/google/callback` as a redirect URI, then fill in `.env` accordingly.
 
 Push to main branch:
 ```bash

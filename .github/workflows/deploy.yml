@@ -190,6 +190,9 @@ jobs:
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+            GOOGLE_REDIRECT_URI=https://${{ secrets.DOMAIN_NAME }}/auth/google/callback
             ENVEOF
 
             # Strip any leading whitespace from .env lines (safety net)

@@ -98,7 +98,9 @@
         "remember_me": "Erinnerung",
         "forgot_password": "Passwort vergessen?",
         "login": "Anmeldung",
-        "signup": "Registrierung"
+        "signup": "Registrierung",
+        "or_continue_with": "Oder weiter mit",
+        "login_with_google": "Mit Google anmelden"
     },
     "register": {
         "name": "Name",
@@ -106,7 +108,9 @@
         "password": "Passwort",
         "password_confirmation": "Passwort bestätigen",
         "already_registered": "Bereits registriert?",
-        "register": "Registrierung"
+        "register": "Registrierung",
+        "or_continue_with": "Oder weiter mit",
+        "register_with_google": "Mit Google registrieren"
     },
     "welcome": {
         "title": "Sprachenlernen mit Lengofy",

@@ -30,6 +30,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
+        'avatar',
         'language_pair_id',
         'is_guest',
         'guest_token',

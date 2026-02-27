@@ -98,7 +98,9 @@
         "remember_me": "Remember Me",
         "forgot_password": "Forgot Password?",
         "login": "Log In",
-        "signup": "Sign Up"
+        "signup": "Sign Up",
+        "or_continue_with": "Or continue with",
+        "login_with_google": "Login with Google"
     },
     "register": {
         "name": "Name",
@@ -106,7 +108,9 @@
         "password": "Password",
         "password_confirmation": "Confirm Password",
         "already_registered": "Already registered?",
-        "register": "Register"
+        "register": "Register",
+        "or_continue_with": "Or continue with",
+        "register_with_google": "Sign up with Google"
     },
     "welcome": {
         "title": "Learn Languages with Lengofy",

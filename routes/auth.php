@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -56,4 +57,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('auth/google/redirect', [SocialAuthController::class, 'redirectToGoogle'])
+        ->name('auth.google.redirect');
+
+    Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback'])
+        ->name('auth.google.callback');
 });
