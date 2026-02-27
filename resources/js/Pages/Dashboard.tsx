@@ -16,9 +16,6 @@ interface DashboardProps extends PageProps {
 }
 
 export default function Dashboard({ scores, games, lessons, activeTab: initialActiveTab }: DashboardProps & { activeTab?: MobileTab }) {
-    // Test session persistence - small change to trigger deployment
-    console.log('Session test - Dashboard loaded at:', new Date().toISOString());
-
     const { t: trans } = useTranslation();
 
     // Check URL parameters for activeTab
