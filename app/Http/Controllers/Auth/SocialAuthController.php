@@ -33,7 +33,17 @@ class SocialAuthController extends Controller
 
     public function handleGoogleCallback()
     {
-        $googleUser = Socialite::driver('google')->user();
+        try {
+            $googleUser = Socialite::driver('google')->user();
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            // Handle invalid state - redirect back to login with error
+            return redirect()->route('login')
+                ->with('error', 'OAuth authentication failed. Please try again.');
+        } catch (\Exception $e) {
+            // Handle other OAuth errors
+            return redirect()->route('login')
+                ->with('error', 'OAuth authentication failed. Please try again.');
+        }
 
         $user = User::updateOrCreate(
             ['google_id' => $googleUser->getId()],
