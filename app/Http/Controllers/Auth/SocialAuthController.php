@@ -30,6 +30,12 @@ class SocialAuthController extends Controller
 
         Auth::login($user, remember: true);
 
+        // If user has no language pair, redirect to language selection (lessons index)
+        if (!$user->languagePair) {
+            return redirect()->route('lessons.index')
+                ->with('info', 'Please select a language pair to continue.');
+        }
+
         return redirect()->intended(route('dashboard'));
     }
 }
