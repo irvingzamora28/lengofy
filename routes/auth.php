@@ -63,6 +63,9 @@ Route::middleware('guest')->group(function () {
     Route::get('auth/google/redirect', [SocialAuthController::class, 'redirectToGoogle'])
         ->name('auth.google.redirect');
 
+    Route::get('auth/google/redirect/register', [SocialAuthController::class, 'redirectToGoogleFromRegister'])
+        ->name('auth.google.redirect.register');
+
     Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback'])
         ->name('auth.google.callback');
 });

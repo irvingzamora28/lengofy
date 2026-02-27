@@ -3,15 +3,32 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\LanguagePair;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthController extends Controller
 {
-    public function redirectToGoogle()
+    public function redirectToGoogle(Request $request)
     {
+        // Store context in session for the callback
+        $context = $request->input('context', 'login'); // 'login' or 'register'
+        Session::put('oauth_context', $context);
+
+        // If coming from register and language pair is selected, store it
+        if ($context === 'register' && $request->input('language_pair_id')) {
+            Session::put('oauth_language_pair_id', $request->input('language_pair_id'));
+        }
+
         return Socialite::driver('google')->redirect();
+    }
+
+    public function redirectToGoogleFromRegister(Request $request)
+    {
+        return $this->redirectToGoogle($request->merge(['context' => 'register']));
     }
 
     public function handleGoogleCallback()
@@ -30,10 +47,30 @@ class SocialAuthController extends Controller
 
         Auth::login($user, remember: true);
 
-        // If user has no language pair, redirect to language selection (lessons index)
+        // Handle language pair assignment based on OAuth context
+        $context = Session::pull('oauth_context', 'login');
+        $languagePairId = Session::pull('oauth_language_pair_id');
+
         if (!$user->languagePair) {
-            return redirect()->route('lessons.index')
-                ->with('info', 'Please select a language pair to continue.');
+            if ($context === 'register' && $languagePairId) {
+                // Register flow: use selected language pair
+                $languagePair = LanguagePair::find($languagePairId);
+                if ($languagePair && $languagePair->is_active) {
+                    $user->language_pair_id = $languagePair->id;
+                    $user->save();
+                }
+            } else {
+                // Login flow or fallback: default to en->es
+                $defaultPair = LanguagePair::where('is_active', true)
+                    ->whereHas('sourceLanguage', fn($q) => $q->where('code', 'en'))
+                    ->whereHas('targetLanguage', fn($q) => $q->where('code', 'es'))
+                    ->first();
+
+                if ($defaultPair) {
+                    $user->language_pair_id = $defaultPair->id;
+                    $user->save();
+                }
+            }
         }
 
         return redirect()->intended(route('dashboard'));
