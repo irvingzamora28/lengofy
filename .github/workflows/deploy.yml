@@ -196,8 +196,8 @@ jobs:
             SESSION_DRIVER=database
             SESSION_CONNECTION=mysql
             SESSION_LIFETIME=2880
-            SESSION_DOMAIN=.${{ secrets.DOMAIN_NAME }}
-            SESSION_SECURE_COOKIE=true
+            SESSION_DOMAIN=${{ secrets.DOMAIN_NAME }}
+            SESSION_SECURE_COOKIE=false
             ENVEOF
 
             # Strip any leading whitespace from .env lines (safety net)
