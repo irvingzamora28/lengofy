@@ -51,6 +51,9 @@ class SocialAuthController extends Controller
         $context = Session::pull('oauth_context', 'login');
         $languagePairId = Session::pull('oauth_language_pair_id');
 
+        // Refresh user to get latest data including language pair
+        $user->refresh();
+
         if (!$user->languagePair) {
             if ($context === 'register' && $languagePairId) {
                 // Register flow: use selected language pair
@@ -71,6 +74,9 @@ class SocialAuthController extends Controller
                     $user->save();
                 }
             }
+
+            // Refresh again to load the newly assigned language pair
+            $user->refresh();
         }
 
         return redirect()->intended(route('dashboard'));
