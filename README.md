@@ -225,6 +225,7 @@ Add to github secrets:
 - DB_PASSWORD
 - DB_ROOT_PASSWORD
 - APP_NAME
+- APP_KEY
 - APP_URL
 - WEBSOCKET_GAME_ENDPOINT
 - SERVER_NAME
@@ -246,6 +247,7 @@ DB_USERNAME: Database username
 DB_PASSWORD: Database password
 DB_ROOT_PASSWORD: Database root password
 APP_NAME: Application name
+APP_KEY: Laravel application key (run `php artisan key:generate --show` to get it)
 APP_URL: Application URL (localhost or yourdomain.com)
 WEBSOCKET_GAME_ENDPOINT: WebSocket game endpoint (e.g., wss://192.1.0.0:6001 or ws://192.1.0.0:6001)
 SERVER_NAME: Server name (e.g., localhost or yourdomain.com)

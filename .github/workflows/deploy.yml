@@ -177,6 +177,7 @@ jobs:
             # Write .env file (no leading spaces - heredoc must be unindented)
             cat > .env <<ENVEOF
             APP_NAME=${{ secrets.APP_NAME }}
+            APP_KEY=${{ secrets.APP_KEY }}
             APP_ENV=production
             APP_DEBUG=false
             APP_URL=https://${{ secrets.DOMAIN_NAME }}
@@ -206,13 +207,6 @@ jobs:
 
             # Replace ${SERVER_NAME} in the default.conf
             sed -i "s/\${SERVER_NAME}/${{ secrets.DOMAIN_NAME }}/g" nginx/default.conf
-
-            # Generate APP_KEY before starting containers (using openssl, no PHP needed on host)
-            if ! grep -q "^APP_KEY=base64:" .env; then
-              echo "Generating APP_KEY..."
-              APP_KEY="base64:$(openssl rand -base64 32)"
-              echo "APP_KEY=$APP_KEY" >> .env
-            fi
 
             # Docker strategy: always rebuild app image to pick up new code/assets
             if [ "${{ github.event.inputs.rebuild }}" = "true" ]; then
